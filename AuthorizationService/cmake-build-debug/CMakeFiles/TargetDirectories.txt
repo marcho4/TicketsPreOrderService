@@ -1,0 +1,3 @@
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/CMakeFiles/tickets_pre_order_service.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,14 @@
+# Target labels
+ nlohmann_json-populate
+# Source files and their labels
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/CMakeFiles/nlohmann_json-populate-complete.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-build.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-configure.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-install.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-mkdir.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-patch.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-test.rule
+/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-update.rule
