@@ -1,4 +1,39 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService -B /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug
--- Configuring done (0.1s)
--- Generating done (0.0s)
--- Build files have been written to: /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug
+[0/8] Performing download step (git clone) for 'nlohmann_json-populate'
+Клонирование в «nlohmann_json-src»...
+error: RPC failed; curl 92 HTTP/2 stream 5 was not closed cleanly: CANCEL (err 8)
+error: 7950 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: неожиданный конец файла
+fatal: fetch-pack: invalid index-pack output
+Клонирование в «nlohmann_json-src»...
+error: RPC failed; curl 92 HTTP/2 stream 5 was not closed cleanly: CANCEL (err 8)
+error: 6207 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: неожиданный конец файла
+fatal: fetch-pack: invalid index-pack output
+Клонирование в «nlohmann_json-src»...
+error: RPC failed; curl 92 HTTP/2 stream 5 was not closed cleanly: CANCEL (err 8)
+error: 7662 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: неожиданный конец файла
+fatal: fetch-pack: invalid index-pack output
+-- Had to git clone more than once: 3 times.
+CMake Error at nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitclone.cmake:39 (message):
+  Failed to clone repository: 'https://github.com/nlohmann/json.git'
+
+
+FAILED: nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download 
+cd /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps && /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -P /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/tmp/nlohmann_json-populate-gitclone.cmake && /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -E touch /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps/nlohmann_json-subbuild/nlohmann_json-populate-prefix/src/nlohmann_json-populate-stamp/nlohmann_json-populate-download
+ninja: build stopped: subcommand failed.
+
+CMake Error at /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/FetchContent.cmake:1662 (message):
+  Build step for nlohmann_json failed: 1
+Call Stack (most recent call first):
+  /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/FetchContent.cmake:1802:EVAL:2 (__FetchContent_directPopulate)
+  /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/FetchContent.cmake:1802 (cmake_language)
+  /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/FetchContent.cmake:2016 (FetchContent_Populate)
+  CMakeLists.txt:27 (FetchContent_MakeAvailable)
+
+
+-- Configuring incomplete, errors occurred!

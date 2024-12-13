@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../../libraries/json/include/nlohmann/json.hpp"
 #include "../../libraries/httplib.h"
+#include "../../libraries/nlohmann/json.hpp"
 
 class OrganizerRegistration {
     using json = nlohmann::json;

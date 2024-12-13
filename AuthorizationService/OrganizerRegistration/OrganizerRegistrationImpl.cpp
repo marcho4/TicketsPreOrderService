@@ -1,6 +1,5 @@
 #include "OrganizerRegistrationImpl.h"
 #include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
-#include "../../libraries/json/include/nlohmann/json.hpp"
 
 void OrganizerRegistration::HttpRegisterOrganizer(const httplib::Request& request, httplib::Response &res) {
     auto parsed = json::parse(request.body);
@@ -17,5 +16,7 @@ void OrganizerRegistration::HttpRegisterOrganizer(const httplib::Request& reques
 
 void OrganizerRegistration::RegisterOrganizer(const std::string& email, const std::string& company,
                            const std::string& tin) {
+    // кладем данные в бд
+    // отправляем заявку на становление организатором
     return;
 }
