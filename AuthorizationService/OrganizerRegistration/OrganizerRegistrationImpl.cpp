@@ -1,7 +1,7 @@
 #include "OrganizerRegistrationImpl.h"
 #include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
 
-void OrganizerRegistration::HttpRegisterOrganizer(const httplib::Request& request, httplib::Response &res) {
+void OrganizerRegistration::RegisterOrganizerRequest(const httplib::Request& request, httplib::Response &res) {
     auto parsed = json::parse(request.body);
     std::string email_ = parsed["email"];
     std::string company_ = parsed["company"];
