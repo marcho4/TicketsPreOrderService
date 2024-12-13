@@ -1,5 +1,0 @@
-// POST /api/organizer/register_user
-
-// POST /api/organizer/register_organizer
-
-// POST /api/organizer/authorize

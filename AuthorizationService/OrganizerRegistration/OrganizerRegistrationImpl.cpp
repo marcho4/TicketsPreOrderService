@@ -7,10 +7,13 @@ void OrganizerRegistration::HttpRegisterOrganizer(const httplib::Request& reques
     std::string company_ = parsed["company"];
     std::string tin_ = parsed["TIN"]; // ввод ИНН (чтобы не забыть)
     if (!AuxiliaryFunctions::isValidEmail(email_)) {
-       res.status = 400;
+        res.status = 400;
         res.set_content(R"({"status": "bad request"})", "application/json");
         return;
     }
+    std::cout << "Read data;\n";
+    std::cout << email_ << '\n' << company_ << '\n' << tin_ << '\n';
+    res.set_content("Organizer registered", "text/plain");
     RegisterOrganizer(email_, company_, company_);
 }
 
