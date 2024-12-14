@@ -1,7 +1,8 @@
 #include "OrganizerRegistrationImpl.h"
 #include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
 
-void OrganizerRegistration::RegisterOrganizerRequest(const httplib::Request& request, httplib::Response &res) {
+void OrganizerRegistration::RegisterOrganizerRequest(const httplib::Request& request,
+                                                     httplib::Response &res, Database& db) {
     auto parsed = json::parse(request.body);
     std::string email_ = parsed["email"];
     std::string company_ = parsed["company"];
@@ -14,12 +15,13 @@ void OrganizerRegistration::RegisterOrganizerRequest(const httplib::Request& req
     std::cout << "Read data;\n";
     std::cout << email_ << '\n' << company_ << '\n' << tin_ << '\n';
     res.set_content("Organizer registered", "text/plain");
-    RegisterOrganizer(email_, company_, company_);
+    RegisterOrganizer(email_, company_, company_, db);
 }
 
 void OrganizerRegistration::RegisterOrganizer(const std::string& email, const std::string& company,
-                           const std::string& tin) {
-    // кладем данные в бд
+                           const std::string& tin, Database& db) {
+    // отправляем запрос в сервис админа для подтверждения
+    // далее при одобрении высылаем логин и пароль
     // отправляем заявку на становление организатором
     return;
 }

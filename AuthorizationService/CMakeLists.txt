@@ -14,14 +14,15 @@ set(SOURCE_FILES
         UserRegistration/UserRegistrationImpl.h
         AuxiliaryFunctions/AuxiliaryFunctions.cpp
         AuxiliaryFunctions/AuxiliaryFunctions.h
+        postgres/PostgresProcessing.h
+        postgres/PostgresProcessing.cpp
 )
 
 # Найти CURL
 find_package(CURL REQUIRED)
-
 include_directories("../libraries/libpqxx/include")
-include_directories("../opt/homebrew/opt/openssl@3/include")
-include_directories("../opt/homebrew/opt/libpqxx/include")
+include_directories("/opt/homebrew/opt/openssl@3/include")
+include_directories("/opt/homebrew/opt/libpqxx/include")
 # Подключить nlohmann/json через FetchContent
 include(FetchContent)
 

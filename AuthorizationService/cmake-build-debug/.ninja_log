@@ -1,19 +1,9 @@
 # ninja log v5
-7	2582	1734121252613305086	CMakeFiles/tickets_pre_order_service.dir/main.cpp.o	cb00cbe663f8b1c2
-2	114	1734120831756155511	CMakeFiles/tickets_pre_order_service.dir/Authorization/OrganizerAuthorizationImpl.cpp.o	de92cc8085b7f61c
-0	102	1734121525359012343	build.ninja	79c3ffa0c1941bdf
-3	114	1734120831756155470	CMakeFiles/tickets_pre_order_service.dir/UserRegistration/UserRegistrationImpl.cpp.o	d257e2fa4a0f806f
-3	817	1734120832455897675	CMakeFiles/tickets_pre_order_service.dir/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o	5c3bb663b2cf6c1e
-3	2245	1734121234901131313	CMakeFiles/tickets_pre_order_service.dir/OrganizerRegistration/OrganizerRegistrationImpl.cpp.o	a494c77b8ad5922b
-2582	2697	1734121252729351938	tickets_pre_order_service	c8e405c8d47c669a
-9	2404	1734122054872252040	CMakeFiles/tickets_pre_order_service.dir/OrganizerRegistration/OrganizerRegistrationImpl.cpp.o	a494c77b8ad5922b
-8	3130	1734122055611825264	CMakeFiles/tickets_pre_order_service.dir/main.cpp.o	cb00cbe663f8b1c2
-3130	3256	1734122055747676725	tickets_pre_order_service	c8e405c8d47c669a
-2	2904	1734122833539488071	CMakeFiles/tickets_pre_order_service.dir/main.cpp.o	cb00cbe663f8b1c2
-2904	3020	1734122833664104252	tickets_pre_order_service	c8e405c8d47c669a
-2	2838	1734122874674771080	CMakeFiles/tickets_pre_order_service.dir/main.cpp.o	cb00cbe663f8b1c2
-2838	2933	1734122874778730959	tickets_pre_order_service	c8e405c8d47c669a
-2	3123	1734123036033857922	CMakeFiles/tickets_pre_order_service.dir/main.cpp.o	cb00cbe663f8b1c2
-3123	3239	1734123036152980125	tickets_pre_order_service	c8e405c8d47c669a
-2	2759	1734123147491651074	CMakeFiles/tickets_pre_order_service.dir/main.cpp.o	cb00cbe663f8b1c2
-2759	2860	1734123147597384974	tickets_pre_order_service	c8e405c8d47c669a
+2786	2821	1734162418308610473	tickets_pre_order_service	c97282348120c57c
+2	2123	1734161445003890517	CMakeFiles/tickets_pre_order_service.dir/OrganizerRegistration/OrganizerRegistrationImpl.cpp.o	6d6d1fd55739b0c4
+0	98	1734163321203407647	build.ninja	79c3ffa0c1941bdf
+8	533	1734159901493875406	CMakeFiles/tickets_pre_order_service.dir/postgres/PostgresProcessing.cpp.o	e0cce24280a201c8
+3	122	1734159835652337617	CMakeFiles/tickets_pre_order_service.dir/Authorization/OrganizerAuthorizationImpl.cpp.o	c9375e5c61973e5b
+3	876	1734159836402334042	CMakeFiles/tickets_pre_order_service.dir/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o	92f38a723523da6b
+3	2050	1734161484005508655	CMakeFiles/tickets_pre_order_service.dir/UserRegistration/UserRegistrationImpl.cpp.o	c18a9d0d674ae1b8
+2	2786	1734162418268362037	CMakeFiles/tickets_pre_order_service.dir/main.cpp.o	8b9091acf71f2697
