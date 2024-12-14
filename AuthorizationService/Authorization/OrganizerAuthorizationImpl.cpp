@@ -9,7 +9,7 @@ void AuthorizationImpl::AuthorizationRequest(const httplib::Request& req, httpli
                           "WHERE login = '" + login + "' AND password = '" + password + "';";
     pqxx::result result = db.executeQuery(request);
     if (result.empty()) {
-        res.status = 403;
+        res.status = 403; // 403 - forbidden
         res.set_content(R"({"status": "Access denied"})", "application/json");
         return;
     }

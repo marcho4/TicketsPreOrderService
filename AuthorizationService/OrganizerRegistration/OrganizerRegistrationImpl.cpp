@@ -14,7 +14,10 @@ void OrganizerRegistration::RegisterOrganizerRequest(const httplib::Request& req
     }
     std::cout << "Read data;\n";
     std::cout << email_ << '\n' << company_ << '\n' << tin_ << '\n';
-    res.set_content("Organizer registered", "text/plain");
+    json response = {
+            {"status", "waiting_approval"}
+    };
+    res.set_content(response.dump(), "application/json");
     RegisterOrganizer(email_, company_, company_, db);
 }
 
@@ -23,5 +26,26 @@ void OrganizerRegistration::RegisterOrganizer(const std::string& email, const st
     // отправляем запрос в сервис админа для подтверждения
     // далее при одобрении высылаем логин и пароль
     // отправляем заявку на становление организатором
-    return;
+    nlohmann::json json_data = {
+            {"email", email},
+            {"company", company},
+            {"TIN", tin},
+            {"status", Status::AWAITS}
+    };
+    httplib::Client admin("bla-bla-bla.com"); // пока заглушка (домен админа ну или куда мы отправляем)
+    auto result = admin.Post("register_organizer_approval", json_data.dump(), "application/json");
+}
+
+void OrganizerRegistration::OrganizerRegisterApproval(const httplib::Request& request, httplib::Response &res, Database& db) {
+    auto parsed = json::parse(request.body);
+    std::string email_ = parsed["email"];
+    std::string company_ = parsed["company"];
+    std::string tin_ = parsed["TIN"];
+    Status status = parsed["status"];
+    if (status == Status::APPROVED) {
+        //  генерируем логин пароль и закидываем в бд
+        //  отправляем http запрос в сервис уведомления для уведомления организатора
+    } else {
+        // отправить сообщение об отказе
+    }
 }

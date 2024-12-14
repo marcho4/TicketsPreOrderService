@@ -27,6 +27,10 @@ int main() {
             AuthorizationImpl::AuthorizationRequest(request, res, db);
         });
 
+        server.Post("/authorize_approval", [&db](const httplib::Request& request, httplib::Response &res) {
+            OrganizerRegistration::OrganizerRegisterApproval(request, res, db);
+        });
+
         std::cout << "Server is listening http://localhost:8081" << '\n';
         server.listen("localhost", 8081);
     } catch (const std::exception& e) {
