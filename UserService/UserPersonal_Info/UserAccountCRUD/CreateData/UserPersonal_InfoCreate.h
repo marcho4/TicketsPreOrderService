@@ -1,7 +1,7 @@
-#include "../../../libraries/httplib.h"
-#include "../../../libraries/nlohmann/json.hpp"
+#include "../../../../libraries/httplib.h"
+#include "../../../../libraries/nlohmann/json.hpp"
 #include "pqxx/pqxx"
-#include "../../postgres/PostgresProcessing.h"
+#include "../../../postgres/PostgresProcessing.h"
 
 class UserPersonal_InfoCreate {
     using json = nlohmann::json;

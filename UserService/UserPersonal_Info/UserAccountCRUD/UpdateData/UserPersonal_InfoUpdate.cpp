@@ -1,5 +1,5 @@
 #include "UserPersonal_InfoUpdate.h"
-#include "../FormatRegexHelper/ValidDataChecker.h"
+#include "../../FormatRegexHelper/ValidDataChecker.h"
 
 void UserPersonal_InfoUpdate::UserPersonalInfoUpdateRequest(const httplib::Request& req, httplib::Response& res,
                                    Database& db) {

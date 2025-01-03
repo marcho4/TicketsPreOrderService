@@ -17,7 +17,7 @@ void GetMatchHistory::GetMatchHistoryRequest(const httplib::Request& req, httpli
     } else {
         res.status = 200;
         // сделать запрос в микросервис билетов/матчей, чтобы получить информацию о матчах
-        // нужны только поля: название матча, дата, время, место проведения, номер ряда и места, цена билета
+        // нужны только поля: название матча дата, время, место проведения, номер ряда и места, цена билета
         json response_json;
         // формируем json-чик и отправляем во фронт (пока что просто пустой json)
         res.set_content(response_json.dump(), "application/json");

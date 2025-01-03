@@ -10,11 +10,12 @@ CREATE TABLE Users.UsersData (
     updated_at timestamp default CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Users.OrderHistory (
+CREATE TABLE Users.Orders (
     fan_id integer references UsersData,
-    billing_id integer,
     ticket_id integer, -- ссылка TicketService (доделаю потом)
-    status varchar(20),
-    created_at timestamp default,
-    updated_at timestamp default
+    first_team varchar(100),
+    second_team varchar(100),
+    place varchar(100),
+    date timestamp,
+    created_at timestamp default CURRENT_TIMESTAMP,
 );
