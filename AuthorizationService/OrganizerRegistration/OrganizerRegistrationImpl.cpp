@@ -6,14 +6,12 @@ void OrganizerRegistration::RegisterOrganizerRequest(const httplib::Request& req
     auto parsed = json::parse(request.body);
     std::string email_ = parsed["email"];
     std::string company_ = parsed["company"];
-    std::string tin_ = parsed["TIN"]; // ввод ИНН (чтобы не забыть)
+    std::string tin_ = parsed["tin"]; // ввод ИНН (чтобы не забыть)
     if (!AuxiliaryFunctions::isValidEmail(email_)) {
         res.status = 400;
         res.set_content(R"({"status": "bad request"})", "application/json");
         return;
     }
-    std::cout << "Read data;\n";
-    std::cout << email_ << '\n' << company_ << '\n' << tin_ << '\n';
     json response = {
             {"status", "waiting_approval"}
     };
@@ -32,8 +30,8 @@ void OrganizerRegistration::RegisterOrganizer(const std::string& email, const st
             {"TIN", tin},
             {"status", Status::AWAITS}
     };
-    httplib::Client admin("bla-bla-bla.com"); // пока заглушка (домен админа ну или куда мы отправляем)
-    auto result = admin.Post("register_organizer_approval", json_data.dump(), "application/json");
+    httplib::Client orchestrator("bla-bla-bla.com"); // пока заглушка
+    auto result = orchestrator.Post("register_organizer_approval", json_data.dump(), "application/json");
 }
 
 void OrganizerRegistration::OrganizerRegisterApproval(const httplib::Request& request, httplib::Response &res, Database& db) {
