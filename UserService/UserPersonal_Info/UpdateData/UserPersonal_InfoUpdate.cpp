@@ -1,4 +1,5 @@
 #include "UserPersonal_InfoUpdate.h"
+#include "../FormatRegexHelper/ValidDataChecker.h"
 
 void UserPersonal_InfoUpdate::UserPersonalInfoUpdateRequest(const httplib::Request& req, httplib::Response& res,
                                    Database& db) {
@@ -7,6 +8,13 @@ void UserPersonal_InfoUpdate::UserPersonalInfoUpdateRequest(const httplib::Reque
     std::string name = parsed["name"];
     std::string phone = parsed["phone"];
     std::string birthday = parsed["birthday"];
+
+    if (!DataCheker::isValidPhoneNumber(phone)) { // проверка на валидность номера телефона
+        res.status = 400;
+        res.set_content(R"({"status": "bad request", "error": "Invalid phone number"})", "application/json");
+        return;
+    }
+
     auto result = db.updateUserData(email, name, phone, birthday);
     // проверка, что хоть что-то было изменено
     if (result.affected_rows() == 0) {

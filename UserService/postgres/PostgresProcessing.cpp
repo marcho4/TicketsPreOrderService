@@ -39,8 +39,8 @@ pqxx::result Database::updateUserData(const std::string& email,
     try {
         pqxx::work txn(conn_);
         pqxx::result res = txn.exec_params(
-                "UPDATE Users.UsersData SET email = $1, name = $2, phone = $3, birthday = $4 WHERE name = $5",
-                email, name, phone, birthday, name
+                "UPDATE Users.UsersData SET email = $1, name = $2, phone = $3, birthday = $4 WHERE email = $5",
+                email, name, phone, birthday, email
         );
         std::string ans = std::to_string(res.affected_rows());
         txn.commit();
@@ -49,5 +49,35 @@ pqxx::result Database::updateUserData(const std::string& email,
         std::cerr << "Error: " << e.what() << '\n';
         pqxx::result ans;
         return ans;
+    }
+}
+
+pqxx::result Database::CreateUserData(const std::string& email,
+                                      const std::string& name, const std::string& phone, const std::string& birthday) {
+    try {
+        pqxx::work txn(conn_);
+        pqxx::result res = txn.exec_params(
+                "INSERT INTO Users.UsersData (email, name, phone, birthday) VALUES ($1, $2, $3, $4)",
+                email, name, phone, birthday
+        );
+        txn.commit();
+        return res;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << '\n';
+        pqxx::result ans;
+        return ans;
+    }
+}
+
+pqxx::result Database::executeQueryWithParams(const std::string& query, const std::string& param) {
+    try {
+        pqxx::work txn(conn_);
+        pqxx::result res = txn.exec_params(query, param);
+        txn.commit();
+        return res;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << '\n';
+        pqxx::result empty_result;
+        return empty_result;
     }
 }
