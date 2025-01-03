@@ -13,7 +13,7 @@ CREATE TABLE Users.UsersData (
 CREATE TABLE Users.OrderHistory (
     fan_id integer references UsersData,
     billing_id integer,
-    ticket_id integer,
+    ticket_id integer, -- ссылка TicketService (доделаю потом)
     status varchar(20),
     created_at timestamp default,
     updated_at timestamp default

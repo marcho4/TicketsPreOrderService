@@ -1,8 +1,8 @@
 #include <iostream>
 #include "../libraries/httplib.h"
-#include "OrganizerRegistration/OrganizerRegistrationImpl.h"
-#include "UserRegistration/UserRegistrationImpl.h"
-#include "Authorization/OrganizerAuthorizationImpl.h"
+#include "UserPersonal_Info/CreateData/UserPersonal_InfoCreate.h"
+#include "UserPersonal_Info/UpdateData/UserPersonal_InfoUpdate.h"
+#include "UserPersonal_Info/MatchHistory/GetMatchHistory.h"
 
 int main() {
     try {
@@ -10,13 +10,24 @@ int main() {
         // инициализация хоста и порта для подключения
         std::string connect = "dbname=user_personal_account host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/UserService/postgres/db_org_registr.sql");
+        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/UserService/postgres/user_personal_account.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
 
-        server.Post("/register_organizer", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/create_personal_info", [&db](const httplib::Request& request, httplib::Response &res) {
+            UserPersonal_InfoCreate userPersonalInfoCreate;
+            userPersonalInfoCreate.UserPersonalInfoCreateRequest(request, res, db);
+        });
 
+        server.Post("/update_personal_info", [&db](const httplib::Request& request, httplib::Response &res) {
+            UserPersonal_InfoUpdate userPersonalInfoUpdate;
+            userPersonalInfoUpdate.UserPersonalInfoUpdateRequest(request, res, db);
+        });
+
+        server.Get("/get_match_history", [&db](const httplib::Request& request, httplib::Response &res) {
+            GetMatchHistory getMatchHistory;
+            getMatchHistory.GetMatchHistoryRequest(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8081" << '\n';
