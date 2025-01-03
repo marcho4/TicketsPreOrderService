@@ -2,6 +2,7 @@
 #include "../libraries/httplib.h"
 #include "UserPersonal_Info/UserAccountCRUD/CreateData/UserPersonal_InfoCreate.h"
 #include "UserPersonal_Info/UserAccountCRUD/UpdateData/UserPersonal_InfoUpdate.h"
+#include "UserPersonal_Info/UserAccountCRUD/DeleteAccount/DeleteAccountImpl.h"
 #include "UserPersonal_Info/MatchHistory/GetMatchHistory.h"
 
 int main() {
@@ -31,7 +32,8 @@ int main() {
         });
 
         server.Delete("/delete_account", [&db](const httplib::Request& request, httplib::Response &res) {
-
+            AccountDeleter accountDeleter;
+            accountDeleter.DeleteAccountRequest(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8081" << '\n';
