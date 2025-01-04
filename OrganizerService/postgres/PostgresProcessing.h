@@ -29,4 +29,8 @@ public:
 
     pqxx::result executeQueryWithParams(const std::string& query, const std::string& team_home,
                                                   const std::string& team_away, const std::string& match_date);
+
+    pqxx::result updateMatch(int organizer_id, const std::string& team_home, const std::string& team_away,
+                                       const std::string& match_date, const std::string& match_time,
+                                       const std::string& stadium, const std::string& match_description);
 };

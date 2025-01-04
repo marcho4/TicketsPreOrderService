@@ -6,8 +6,8 @@ void Creator::CreateMatchRequest(const httplib::Request& req, httplib::Response&
     int organizer_id = parsed["organizer_id"];
     std::string team_home = parsed["team_home"];
     std::string team_away = parsed["team_away"];
-    std::string match_date = parsed["match_date"];
     std::string match_time = parsed["match_time"];
+    std::string match_date = parsed["match_date"];
     std::string stadium = parsed["stadium"];
     std::string match_description = parsed["match_description"];
 

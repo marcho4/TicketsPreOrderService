@@ -84,6 +84,28 @@ pqxx::result Database::createMatch(int organizer_id, const std::string& team_hom
     }
 }
 
+// надо будет заново все думать тут что-то оч кривое
+
+pqxx::result Database::updateMatch(int organizer_id, const std::string& team_home, const std::string& team_away,
+                                   const std::string& match_date, const std::string& match_time,
+                                   const std::string& stadium, const std::string& match_description) {
+    try {
+        pqxx::work txn(conn_);
+
+        pqxx::result res = txn.exec_params(
+                "UPDATE Organizers.Matches SET organizer_id = $1, team_home = $2, team_away = $3, match_date = $4, "
+                "match_time = $5, stadium = $6, match_description = $7, updated_at = CURRENT_TIMESTAMP "
+                "WHERE match_id = $8",
+                organizer_id, team_home, team_away, match_date, match_time, stadium, match_description
+        );
+        txn.commit();
+        return res;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << '\n';
+        return pqxx::result();
+    }
+}
+
 pqxx::result Database::executeQueryWithParams(const std::string& query, const std::string& param) {
     try {
         pqxx::work txn(conn_);
