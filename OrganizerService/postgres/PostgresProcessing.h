@@ -22,4 +22,11 @@ public:
                                                const std::string& email, const std::string& phone_number);
 
     pqxx::result executeQueryWithParams(const std::string& query, const std::string& param);
+
+    pqxx::result createMatch(int organizer_id, const std::string& team_home, const std::string& team_away,
+                                       const std::string& match_date, const std::string& match_time,
+                                       const std::string& stadium, const std::string& match_description);
+
+    pqxx::result executeQueryWithParams(const std::string& query, const std::string& team_home,
+                                                  const std::string& team_away, const std::string& match_date);
 };

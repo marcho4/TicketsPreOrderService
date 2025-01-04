@@ -66,10 +66,42 @@ pqxx::result Database::createOrganizerData(const std::string& organization_name,
     }
 }
 
+pqxx::result Database::createMatch(int organizer_id, const std::string& team_home, const std::string& team_away,
+                                   const std::string& match_date, const std::string& match_time,
+                                   const std::string& stadium, const std::string& match_description) {
+    try {
+        pqxx::work txn(conn_);
+        pqxx::result res = txn.exec_params(
+                "INSERT INTO Organizers.Matches (organizer_id, team_home, team_away, match_date, match_time, stadium, match_description) "
+                "VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING match_id",
+                organizer_id, team_home, team_away, match_date, match_time, stadium, match_description
+        );
+        txn.commit();
+        return res;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << '\n';
+        return pqxx::result();
+    }
+}
+
 pqxx::result Database::executeQueryWithParams(const std::string& query, const std::string& param) {
     try {
         pqxx::work txn(conn_);
         pqxx::result res = txn.exec_params(query, param);
+        txn.commit();
+        return res;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << '\n';
+        pqxx::result empty_result;
+        return empty_result;
+    }
+}
+
+pqxx::result Database::executeQueryWithParams(const std::string& query, const std::string& team_home,
+                                              const std::string& team_away, const std::string& match_date) {
+    try {
+        pqxx::work txn(conn_);
+        pqxx::result res = txn.exec_params(query, team_home, team_away, match_date);
         txn.commit();
         return res;
     } catch (const std::exception& e) {
