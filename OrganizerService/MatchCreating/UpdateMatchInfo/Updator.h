@@ -10,7 +10,7 @@ public:
     void UpdateMatchRequest(const httplib::Request& req, httplib::Response& res,
                             Database& db);
 
-    bool CheckMatchExistence(int id, Database& db);
+    bool CheckMatchExistence(int organizer_id, int match_id, Database& db);
 };
 
 

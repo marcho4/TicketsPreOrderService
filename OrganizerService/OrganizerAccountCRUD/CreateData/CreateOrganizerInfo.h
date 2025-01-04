@@ -10,6 +10,6 @@ public:
     void OrganizerPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
                                        Database& db);
 
-    bool CheckOrganizerExistence(const std::string& tin, Database& db);
+    bool CheckOrganizerExistence(int id, Database& db);
 
 };

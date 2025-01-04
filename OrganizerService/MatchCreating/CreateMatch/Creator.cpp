@@ -1,13 +1,15 @@
 #include "Creator.h"
 
+// /organizer/{id}/create_match - запрос на создание матча
+
 void Creator::CreateMatchRequest(const httplib::Request& req, httplib::Response& res,
                         Database& db) {
     auto parsed = json::parse(req.body);
     int organizer_id = parsed["organizer_id"];
     std::string team_home = parsed["team_home"];
     std::string team_away = parsed["team_away"];
-    std::string match_time = parsed["match_time"];
     std::string match_date = parsed["match_date"];
+    std::string match_time = parsed["match_time"];
     std::string stadium = parsed["stadium"];
     std::string match_description = parsed["match_description"];
 
@@ -28,8 +30,8 @@ void Creator::CreateMatchRequest(const httplib::Request& req, httplib::Response&
     return;
 }
 
-bool Creator::CheckMatchExistence(const std::string& team_home, const std::string& team_away, const std::string& match_date, Database& db) {
-    std::string query = "SELECT team_home FROM Matches.MatchData WHERE team_home = $1 AND team_away = $2 AND match_date = $3";
-    pqxx::result response = db.executeQueryWithParams(query, team_home, team_away, match_date);
+bool Creator::CheckMatchExistence(int organizer_id, const std::string& team_home, const std::string& team_away, const std::string& match_date, Database& db) {
+    std::string query = "SELECT team_home FROM Matches.MatchData WHERE team_home = $1 AND team_away = $2 AND match_date = $3 AND organizer_id = $4";
+    pqxx::result response = db.executeQueryWithParams(query, team_home, team_away, match_date, organizer_id);
     return !response.empty();
 }
