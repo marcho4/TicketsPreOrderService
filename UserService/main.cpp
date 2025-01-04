@@ -11,7 +11,7 @@ int main() {
         // инициализация хоста и порта для подключения
         std::string connect = "dbname=user_personal_account host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/UserService/postgres/user_personal_account.sql");
+        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/UserService/postgres/organizer_personal_account.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
