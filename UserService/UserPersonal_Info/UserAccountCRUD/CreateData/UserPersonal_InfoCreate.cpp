@@ -1,8 +1,11 @@
 #include "UserPersonal_InfoCreate.h"
 #include "../../FormatRegexHelper/ValidDataChecker.h"
 
+// /user/{id}/create_personal_info - запрос
+
 void UserPersonal_InfoCreate::UserPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
                                                             Database& db) {
+    int user_id = std::stoi(req.matches[1]);
     auto parsed = json::parse(req.body);
     std::string email = parsed["email"];
     std::string name = parsed["name"];
@@ -21,7 +24,7 @@ void UserPersonal_InfoCreate::UserPersonalInfoCreateRequest(const httplib::Reque
         return;
     }
 
-    if (CheckUserExistence(email, db)) { // проверка на существование пользователя
+    if (CheckUserExistence(user_id, db)) { // проверка на существование пользователя
         res.status = 409;  // не уверен насчет кода статуса, выбрал 409 - конфликт
         res.set_content(R"({"status": "conflict", "error": "User with this email already exists"})", "application/json");
         return;
@@ -32,8 +35,8 @@ void UserPersonal_InfoCreate::UserPersonalInfoCreateRequest(const httplib::Reque
     res.set_content(R"({"status": "created", "message": "User created successfully"})", "application/json");
 }
 
-bool UserPersonal_InfoCreate::CheckUserExistence(const std::string& email, Database& db) {
-    std::string query = "SELECT name FROM Users.UsersData WHERE email = $1";
-    pqxx::result response = db.executeQueryWithParams(query, email);
+bool UserPersonal_InfoCreate::CheckUserExistence(int user_id, Database& db) {
+    std::string query = "SELECT email FROM Users.UsersData WHERE user_id = $1";
+    pqxx::result response = db.executeQueryWithParams(query, user_id);
     return !response.empty();
 }

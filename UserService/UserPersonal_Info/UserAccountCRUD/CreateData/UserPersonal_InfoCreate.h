@@ -10,6 +10,6 @@ public:
     void UserPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
                                        Database& db);
 
-    bool CheckUserExistence(const std::string& email, Database& db);
+    bool CheckUserExistence(int user_id, Database& db);
 
 };

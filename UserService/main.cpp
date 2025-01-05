@@ -16,22 +16,25 @@ int main() {
         pqxx::work W(C);
         W.commit();
 
-        server.Post("/create_personal_info", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/user/{id}/create_personal_info", [&db](const httplib::Request& request, httplib::Response &res) {
+            // тут вроде все хорошо
             UserPersonal_InfoCreate userPersonalInfoCreate;
             userPersonalInfoCreate.UserPersonalInfoCreateRequest(request, res, db);
         });
 
-        server.Post("/update_personal_info", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/user/{id}/update_personal_info", [&db](const httplib::Request& request, httplib::Response &res) {
+            // тут все тоже хорошо
             UserPersonal_InfoUpdate userPersonalInfoUpdate;
             userPersonalInfoUpdate.UserPersonalInfoUpdateRequest(request, res, db);
         });
 
-        server.Get("/get_match_history", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Get("/user/{id}/get_match_history", [&db](const httplib::Request& request, httplib::Response &res) {
             GetMatchHistory getMatchHistory;
             getMatchHistory.GetMatchHistoryRequest(request, res, db);
         });
 
-        server.Delete("/delete_account", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Delete("/user/{id}/delete_account", [&db](const httplib::Request& request, httplib::Response &res) {
+            // тут логика криво описана надо доделывать
             AccountDeleter accountDeleter;
             accountDeleter.DeleteAccountRequest(request, res, db);
         });

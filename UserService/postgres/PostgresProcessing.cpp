@@ -69,10 +69,10 @@ pqxx::result Database::CreateUserData(const std::string& email,
     }
 }
 
-pqxx::result Database::executeQueryWithParams(const std::string& query, const std::string& param) {
+pqxx::result Database::executeQueryWithParams(const std::string& query, int user_id) {
     try {
         pqxx::work txn(conn_);
-        pqxx::result res = txn.exec_params(query, param);
+        pqxx::result res = txn.exec_params(query, user_id);
         txn.commit();
         return res;
     } catch (const std::exception& e) {
