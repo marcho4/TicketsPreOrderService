@@ -1,16 +1,15 @@
 #include "GetMatchHistory.h"
 
+// /user/{id}/get_match_history - запрос
+
 void GetMatchHistory::GetMatchHistoryRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
+    int user_id = std::stoi(req.matches[1]);
     auto parsed = json::parse(req.body);
     std::string email = parsed["email"];
-    std::string query_id = "SELECT user_id FROM Users.UsersData WHERE email = $1";
-    pqxx::result response = db.executeQueryWithParams(query_id, email);
-    // тут нужно как-то вытянуть из запроса id-шник
-    // иначе не понятно, какой именно пользователь запрашивает историю матчей
-    int id = response[0][0].as<int>(); // что-то такое, но потом проверю
-    // ----------------------------------------------------------------------
+
     std::string query_ticket_id = "SELECT ticket_id FROM Users.Tickets WHERE user_id = $1";
-    pqxx::result response_ticket_id = db.executeQueryWithParams(query_ticket_id, std::to_string(id));
+    pqxx::result response_ticket_id = db.executeQueryWithParams(query_ticket_id, user_id);
+
     if (response_ticket_id.empty()) {
         res.status = 200;
         res.set_content(R"({"error": "No match history. (No matches had been attended) "})", "application/json");

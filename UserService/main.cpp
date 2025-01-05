@@ -4,6 +4,7 @@
 #include "UserPersonal_Info/UserAccountCRUD/UpdateData/UserPersonal_InfoUpdate.h"
 #include "UserPersonal_Info/UserAccountCRUD/DeleteAccount/DeleteAccountImpl.h"
 #include "UserPersonal_Info/MatchHistory/GetMatchHistory.h"
+#include "UserPersonal_Info/UserAccountCRUD/GetPersonalData/GetPersonalData.h"
 
 int main() {
     try {
@@ -37,6 +38,11 @@ int main() {
             // тут логика криво описана надо доделывать
             AccountDeleter accountDeleter;
             accountDeleter.DeleteAccountRequest(request, res, db);
+        });
+
+        server.Get("/user/{id}/get_personal_info", [&db](const httplib::Request& request, httplib::Response &res) {
+            GetPersonalData getPersonalData;
+            getPersonalData.GetPersonalDataRequest(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8081" << '\n';

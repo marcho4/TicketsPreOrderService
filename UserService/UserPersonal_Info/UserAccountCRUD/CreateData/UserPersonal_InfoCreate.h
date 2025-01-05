@@ -1,3 +1,4 @@
+#pragma once
 #include "../../../../libraries/httplib.h"
 #include "../../../../libraries/nlohmann/json.hpp"
 #include "pqxx/pqxx"
