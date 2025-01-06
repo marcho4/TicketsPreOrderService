@@ -1,4 +1,4 @@
-#include "OrganizerRegistrationImpl.h"
+#include "RegistrationManager.h"
 #include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
 
 void OrganizerRegistration::RegisterOrganizerRequest(const httplib::Request& request,

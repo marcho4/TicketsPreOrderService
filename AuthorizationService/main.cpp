@@ -1,8 +1,8 @@
 #include <iostream>
 #include "../libraries/httplib.h"
-#include "OrganizerRegistration/OrganizerRegistrationImpl.h"
+#include "OrganizerRegistration/RegistrationManager.h"
 #include "UserRegistration/UserRegistrationImpl.h"
-#include "Authorization/OrganizerAuthorizationImpl.h"
+#include "Authorization/AuthorizationManager.h"
 
 int main() {
     try {
@@ -23,7 +23,11 @@ int main() {
             UserRegistration::RegisterUserRequest(request, res, db);
         });
 
-        server.Post("/authorize", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/authorize_organizer/{id}", [&db](const httplib::Request& request, httplib::Response &res) {
+            AuthorizationImpl::AuthorizationRequest(request, res, db);
+        });
+
+        server.Post("/authorize_user/{id}", [&db](const httplib::Request& request, httplib::Response &res) {
             AuthorizationImpl::AuthorizationRequest(request, res, db);
         });
 

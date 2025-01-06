@@ -1,4 +1,4 @@
-#include "OrganizerAuthorizationImpl.h"
+#include "AuthorizationManager.h"
 
 void AuthorizationImpl::AuthorizationRequest(const httplib::Request& req, httplib::Response& res,
                               Database& db) {

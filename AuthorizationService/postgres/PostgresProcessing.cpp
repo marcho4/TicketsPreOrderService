@@ -33,3 +33,17 @@ void Database::initDbFromFile(const std::string &filename) {
         std::cerr << "Error: " << e.what() << '\n';
     }
 }
+
+template<typename... Args>
+pqxx::result Database::executeQueryWithParams(const std::string &query, Args&&... args) {
+    try {
+        pqxx::work txn(conn_);
+        pqxx::result res = txn.exec_params(query, std::forward<Args>(args)...);
+        txn.commit();
+        return res;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << '\n';
+        return pqxx::result();
+    }
+}
+

@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 # Source files
 set(SOURCE_FILES
         main.cpp
-        Authorization/OrganizerAuthorizationImpl.cpp
-        Authorization/OrganizerAuthorizationImpl.h
-        OrganizerRegistration/OrganizerRegistrationImpl.cpp
-        OrganizerRegistration/OrganizerRegistrationImpl.h
+        Authorization/AuthorizationManager.cpp
+        Authorization/AuthorizationManager.h
+        OrganizerRegistration/RegistrationManager.cpp
+        OrganizerRegistration/RegistrationManager.h
         UserRegistration/UserRegistrationImpl.cpp
         UserRegistration/UserRegistrationImpl.h
         AuxiliaryFunctions/AuxiliaryFunctions.cpp
