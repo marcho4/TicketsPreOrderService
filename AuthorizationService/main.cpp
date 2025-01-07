@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../libraries/httplib.h"
-#include "OrganizerRegistration/RegistrationManager.h"
-#include "UserRegistration/UserRegistrationImpl.h"
+#include "OrganizerRegistration/RegistrationOrganizerManager.h"
+#include "UserRegistration/RegistrationUserManager.h"
 #include "Authorization/AuthorizationManager.h"
 
 int main() {
@@ -16,23 +16,19 @@ int main() {
         W.commit();
 
         server.Post("/register_organizer", [&db](const httplib::Request& request, httplib::Response &res) {
-            OrganizerRegistration::RegisterOrganizerRequest(request, res, db);
+            OrganizerRegistrationManager::RegisterOrganizerRequest(request, res, db);
         });
 
         server.Post("/register_user", [&db](const httplib::Request& request, httplib::Response &res) {
             UserRegistration::RegisterUserRequest(request, res, db);
         });
 
-        server.Post("/authorize_organizer/{id}", [&db](const httplib::Request& request, httplib::Response &res) {
-            AuthorizationImpl::AuthorizationRequest(request, res, db);
+        server.Post("/authorize/{id}", [&db](const httplib::Request& request, httplib::Response &res) {
+            AuthorizationManager::AuthorizationRequest(request, res, db);
         });
 
-        server.Post("/authorize_user/{id}", [&db](const httplib::Request& request, httplib::Response &res) {
-            AuthorizationImpl::AuthorizationRequest(request, res, db);
-        });
-
-        server.Post("/authorize_approval", [&db](const httplib::Request& request, httplib::Response &res) {
-            OrganizerRegistration::OrganizerRegisterApproval(request, res, db);
+        server.Post("/authorize_approved", [&db](const httplib::Request& request, httplib::Response &res) {
+            OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8081" << '\n';

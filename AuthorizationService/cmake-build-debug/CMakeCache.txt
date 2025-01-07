@@ -14,9 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//The directory containing a CMake configuration file for /Users/nazarzakrevskij/TicketsPreOrderService/libraries/httplib.h.
-/Users/nazarzakrevskij/TicketsPreOrderService/libraries/httplib.h_DIR:PATH=/Users/nazarzakrevskij/TicketsPreOrderService/libraries/httplib.h_DIR-NOTFOUND
-
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=CMAKE_ADDR2LINE-NOTFOUND
 
@@ -243,34 +240,29 @@ CURL_LIBRARY_DEBUG:FILEPATH=CURL_LIBRARY_DEBUG-NOTFOUND
 //Path to a library.
 CURL_LIBRARY_RELEASE:FILEPATH=/opt/homebrew/Cellar/curl/8.11.0_1/lib/libcurl.dylib
 
-//Directory under which to collect all populated content
-FETCHCONTENT_BASE_DIR:PATH=/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/_deps
-
-//Disables all attempts to download or update content and assumes
-// source dirs already exist
-FETCHCONTENT_FULLY_DISCONNECTED:BOOL=OFF
-
-//Enables QUIET option for all content population
-FETCHCONTENT_QUIET:BOOL=ON
-
-//When not empty, overrides where to find pre-populated content
-// for nlohmann_json
-FETCHCONTENT_SOURCE_DIR_NLOHMANN_JSON:PATH=
-
-//Enables UPDATE_DISCONNECTED behavior for all content population
-FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=OFF
-
-//Enables UPDATE_DISCONNECTED behavior just for population of nlohmann_json
-FETCHCONTENT_UPDATES_DISCONNECTED_NLOHMANN_JSON:BOOL=OFF
-
-//Git command line client
-GIT_EXECUTABLE:FILEPATH=/opt/homebrew/bin/git
-
 //Arguments to supply to pkg-config
 PKG_CONFIG_ARGN:STRING=
 
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/opt/homebrew/bin/pkg-config
+
+//The Set the PostgreSQL_INCLUDE_DIR cmake cache entry to the top-level
+// directory containing the PostgreSQL include directories. E.g
+// /usr/local/include/PostgreSQL/8.4 or C:/Program Files/PostgreSQL/8.4/include
+PostgreSQL_INCLUDE_DIR:PATH=/opt/homebrew/include/postgresql@14
+
+//The Set the PostgreSQL_LIBRARY_DIR cmake cache entry to the top-level
+// directory containing the PostgreSQL libraries.
+PostgreSQL_LIBRARY_DEBUG:FILEPATH=PostgreSQL_LIBRARY_DEBUG-NOTFOUND
+
+//The Set the PostgreSQL_LIBRARY_DIR cmake cache entry to the top-level
+// directory containing the PostgreSQL libraries.
+PostgreSQL_LIBRARY_RELEASE:FILEPATH=/opt/homebrew/lib/postgresql@14/libpq.dylib
+
+//The Set the PostgreSQL_INCLUDE_DIR cmake cache entry to the top-level
+// directory containing the PostgreSQL include directories. E.g
+// /usr/local/include/PostgreSQL/8.4 or C:/Program Files/PostgreSQL/8.4/include
+PostgreSQL_TYPE_INCLUDE_DIR:PATH=/opt/homebrew/include/postgresql@14/server
 
 //Value Computed by CMake
 TicketsPreOrderService_BINARY_DIR:STATIC=/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug
@@ -281,11 +273,8 @@ TicketsPreOrderService_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 TicketsPreOrderService_SOURCE_DIR:STATIC=/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService
 
-//The directory containing a CMake configuration file for httplib.
-httplib_DIR:PATH=httplib_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for nlohmann_json.
-nlohmann_json_DIR:PATH=/opt/homebrew/share/cmake/nlohmann_json
+//The directory containing a CMake configuration file for libpqxx.
+libpqxx_DIR:PATH=/usr/local/lib/cmake/libpqxx
 
 //Path to a library.
 pkgcfg_lib_PC_CURL_curl:FILEPATH=/opt/homebrew/Cellar/curl/8.11.0_1/lib/libcurl.dylib
@@ -438,10 +427,8 @@ CURL_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //Details about finding CURL
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/opt/homebrew/Cellar/curl/8.11.0_1/lib/libcurl.dylib][/opt/homebrew/Cellar/curl/8.11.0_1/include][c ][v8.11.0()]
-//Details about finding nlohmann_json
-FIND_PACKAGE_MESSAGE_DETAILS_nlohmann_json:INTERNAL=[/opt/homebrew/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake][v3.11.3(3.2.0)]
-//ADVANCED property for variable: GIT_EXECUTABLE
-GIT_EXECUTABLE-ADVANCED:INTERNAL=1
+//Details about finding PostgreSQL
+FIND_PACKAGE_MESSAGE_DETAILS_PostgreSQL:INTERNAL=[/opt/homebrew/lib/postgresql@14/libpq.dylib][/opt/homebrew/include/postgresql@14][c ][v14.15()]
 PC_CURL_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/curl/8.11.0_1/include;-I/opt/homebrew/Cellar/brotli/1.1.0/include;-I/opt/homebrew/opt/zstd/include;-I/opt/homebrew/Cellar/libssh2/1.11.1/include;-I/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;-I/opt/homebrew/Cellar/openssl@3/3.4.0/include;-I/opt/homebrew/Cellar/libnghttp2/1.64.0/include
 PC_CURL_CFLAGS_I:INTERNAL=
 PC_CURL_CFLAGS_OTHER:INTERNAL=
@@ -481,6 +468,14 @@ PC_CURL_libcurl_VERSION:INTERNAL=
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PostgreSQL_INCLUDE_DIR
+PostgreSQL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PostgreSQL_LIBRARY_DEBUG
+PostgreSQL_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PostgreSQL_LIBRARY_RELEASE
+PostgreSQL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PostgreSQL_TYPE_INCLUDE_DIR
+PostgreSQL_TYPE_INCLUDE_DIR-ADVANCED:INTERNAL=1
 __pkg_config_arguments_PC_CURL:INTERNAL=QUIET;libcurl
 __pkg_config_checked_PC_CURL:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_CURL_curl

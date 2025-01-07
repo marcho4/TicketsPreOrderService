@@ -1,9 +1,17 @@
 # ninja log v5
-5070	5242	1736069564083193216	tickets_pre_order_service	c97282348120c57c
-6	4940	1736069563765198783	CMakeFiles/tickets_pre_order_service.dir/OrganizerRegistration/OrganizerRegistrationImpl.cpp.o	6d6d1fd55739b0c4
-0	98	1736167177335715877	build.ninja	79c3ffa0c1941bdf
-3	563	1734173309574438000	CMakeFiles/tickets_pre_order_service.dir/postgres/PostgresProcessing.cpp.o	e0cce24280a201c8
-3	2584	1734173311576759800	CMakeFiles/tickets_pre_order_service.dir/Authorization/OrganizerAuthorizationImpl.cpp.o	c9375e5c61973e5b
-3	876	1734159836402334042	CMakeFiles/tickets_pre_order_service.dir/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o	92f38a723523da6b
-3	2585	1734173311576739758	CMakeFiles/tickets_pre_order_service.dir/UserRegistration/UserRegistrationImpl.cpp.o	c18a9d0d674ae1b8
-6	5070	1736069563897362153	CMakeFiles/tickets_pre_order_service.dir/main.cpp.o	8b9091acf71f2697
+2	3774	1736253373145117861	CMakeFiles/TicketsPreOrderService.dir/main.cpp.o	caacdca0abc4e637
+2	3559	1736253372927211743	CMakeFiles/TicketsPreOrderService.dir/UserRegistration/RegistrationUserManager.cpp.o	66352aef1bba20ae
+2	2871	1736253372238991228	CMakeFiles/TicketsPreOrderService.dir/Authorization/AuthorizationManager.cpp.o	4f90ccf9fd3f62f3
+2	3586	1736253372956866662	CMakeFiles/TicketsPreOrderService.dir/OrganizerRegistration/RegistrationOrganizerManager.cpp.o	fb21352c5f154dff
+3	748	1736253370122949100	CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o	a1a61c222db5dbf6
+755	1402	1736253370778404937	CMakeFiles/TicketsPreOrderService.dir/UserRegistration/PasswordGenerator/PasswordCreator.cpp.o	5378b40991f9ebb7
+1072	1104	1736253370484987516	CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/blowfish.cpp.o	8eab841e9f26e2f0
+828	1072	1736253370449690611	CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/bcrypt.cpp.o	9f0f7d185b8787ad
+3	828	1736253370203890725	CMakeFiles/TicketsPreOrderService.dir/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o	4b16ab26f4a9ab5
+0	79	1736253600728703836	build.ninja	79c3ffa0c1941bdf
+3	734	1736253601461813704	CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o	a1a61c222db5dbf6
+3	869	1736253601598458825	CMakeFiles/TicketsPreOrderService.dir/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o	4b16ab26f4a9ab5
+2	2670	1736253603392303772	CMakeFiles/TicketsPreOrderService.dir/Authorization/AuthorizationManager.cpp.o	4f90ccf9fd3f62f3
+2	3408	1736253604130135219	CMakeFiles/TicketsPreOrderService.dir/OrganizerRegistration/RegistrationOrganizerManager.cpp.o	fb21352c5f154dff
+2	3433	1736253604155834718	CMakeFiles/TicketsPreOrderService.dir/UserRegistration/RegistrationUserManager.cpp.o	66352aef1bba20ae
+2	3526	1736253604251024286	CMakeFiles/TicketsPreOrderService.dir/main.cpp.o	caacdca0abc4e637
