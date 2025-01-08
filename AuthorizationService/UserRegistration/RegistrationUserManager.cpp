@@ -3,27 +3,40 @@
 
 void UserRegistration::RegisterUserRequest(const httplib::Request& request,
                                            httplib::Response &res, Database& db) {
-    auto parsed = json::parse(request.body);
-    std::string name = parsed["name"];
-    std::string last_name = parsed["last_name"];
-    std::string email = parsed["email"];
+    try {
+        auto parsed = json::parse(request.body);
+        std::string name = parsed["name"];
+        std::string last_name = parsed["last_name"];
+        std::string email = parsed["email"];
 
-    // -----------------------------------------------------------
-    std::cout << "Прилетел запрос на регистрацию пользователя\n";
-    std::cout << "Имя: " << name << "\n";
-    std::cout << "Фамилия: " << last_name << "\n";
-    std::cout << "Почта: " << email << "\n";
-    // -----------------------------------------------------------
+        if (name.empty() || last_name.empty() || email.empty()) {
+            res.status = 400;
+            res.set_content(R"({"status": "fill every field!"})", "application/json");
+            return;
+        }
 
-    if (!AuxiliaryFunctions::isValidEmail(email) || !CheckEmailUniquenessOrExistence(email, db)) {
-        res.status = 400;
-        res.set_content(R"({"status": "email already exists or email invalid"})", "application/json");
-        return;
+        // нужно не забыть проверить на уникальность пользователя
+        if (!AuxiliaryFunctions::isValidEmail(email)) {
+            res.status = 400;
+            res.set_content(R"({"status": "email already exists or email invalid"})", "application/json");
+            return;
+        }
+
+//        RegisterUser(email, name, last_name, db);
+
+        res.status = 200;
+        res.set_content(R"({
+            "status": "User registered",
+            "name": ")" + name + R"(",
+            "last_name": ")" + last_name + R"(",
+            "email": ")" + email + R"("
+        })", "application/json");
+
+    } catch (const std::exception& e) {
+        res.status = 500;
+        res.set_content(R"({"status": "internal server error", "error": ")" + std::string(e.what()) + R"("})", "application/json");
     }
-    RegisterUser(email, name, last_name, db);
-    res.set_content(R"({"status": "User registered"})", "application/json");
 }
-
 
 void UserRegistration::RegisterUser(const std::string& email, const std::string& name,
                            const std::string& last_name, Database& db) {
