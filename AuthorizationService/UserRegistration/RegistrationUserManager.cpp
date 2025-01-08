@@ -16,7 +16,7 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
         }
 
         // нужно не забыть проверить на уникальность пользователя
-        if (!AuxiliaryFunctions::isValidEmail(email)) {
+        if (!AuxiliaryFunctions::isValidEmail(email) ) {
             res.status = 400;
             res.set_content(R"({"status": "email already exists or email invalid"})", "application/json");
             return;

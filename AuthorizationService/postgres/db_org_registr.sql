@@ -1,3 +1,5 @@
+DROP SCHEMA IF EXISTS AuthorizationService CASCADE;
+
 CREATE SCHEMA IF NOT EXISTS AuthorizationService;
 
 DROP TYPE IF EXISTS status CASCADE;

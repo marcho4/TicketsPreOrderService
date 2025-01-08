@@ -29,5 +29,7 @@ public:
         res.status = 400;
         res.set_content(json{{"status", "error"}, {"message", message}}.dump(), "application/json");
     }
+
+    static bool checkCorrectnessTIN(const std::string& tin);
 };
 

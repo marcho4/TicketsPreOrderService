@@ -9,19 +9,27 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
         std::string email = parsed.at("email").get<std::string>();
         std::string company = parsed.at("company").get<std::string>();
         std::string tin = parsed.at("tin").get<std::string>();
-
+        if (email.empty() || company.empty() || tin.empty()) {
+            SetErrorResponse(res, "Fill all fields!");
+            return;
+        }
         if (!AuxiliaryFunctions::isValidEmail(email)) {
             SetErrorResponse(res, "Invalid email format");
             return;
         }
-        if (CheckOrganizerExistence(email, db)) {
-            SetErrorResponse(res, "Organizer already registered");
+//        if (!CheckOrganizerExistence(email, db)) {
+//            SetErrorResponse(res, "Organizer already registered");
+//            return;
+//        }
+        if (!checkCorrectnessTIN(tin)) {
+            SetErrorResponse(res, "Invalid TIN format");
             return;
         }
-
-        json response = {{"status", "waiting_approval"}};
+//        RegisterOrganizer(email, company, tin, db);
+        json response = {{"status", "Application sent to admin"}};
+        res.status = 200;
         res.set_content(response.dump(), "application/json");
-        RegisterOrganizer(email, company, tin, db);
+        return;
     } catch (const std::exception& e) {
         SetErrorResponse(res, "Invalid request format");
     }
@@ -35,7 +43,7 @@ void OrganizerRegistrationManager::RegisterOrganizer(const std::string& email, c
             {"TIN", tin},
     };
     httplib::Client orchestrator("https://orchestrator-service.com");
-    auto result = orchestrator.Post("/register_organizer_approval", json_data.dump(), "application/json");
+    //    auto result = orchestrator.Post("/register_organizer_approval", json_data.dump(), "application/json");
     // тут что-то надо намутить с оркестратором
 }
 
@@ -68,7 +76,7 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
 bool OrganizerRegistrationManager::CheckOrganizerExistence(const std::string &email, Database &db) {
     std::string query = "SELECT * FROM organizers WHERE email = $1";
     pqxx::result ans = db.executeQueryWithParams(query, email);
-    return !ans.empty();
+    return ans.empty();
 }
 
 void OrganizerRegistrationManager::NotifyOrganizer(const std::string& email, const std::string& login, const std::string& password) {
@@ -79,4 +87,15 @@ void OrganizerRegistrationManager::NotifyOrganizer(const std::string& email, con
             {"password", password}
     };
     notifier.Post("/send_credentials", payload.dump(), "application/json");
+}
+
+bool OrganizerRegistrationManager::checkCorrectnessTIN(const std::string& tin) {
+    size_t len = tin.length();
+    if (len != 12) {
+        return false;
+    }
+    bool is_valid = std::all_of(tin.begin(), tin.end(), [](const char& symbol) {
+        return std::isdigit(symbol);
+    });
+    return is_valid;
 }

@@ -31,6 +31,9 @@ int main() {
             OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
         });
 
+        server.Get("/is_working", [&db](const httplib::Request& request, httplib::Response &res) {
+            res.status = 200;
+        });
         std::cout << "Server is listening http://localhost:8081" << '\n';
         server.listen("localhost", 8081);
     } catch (const std::exception& e) {

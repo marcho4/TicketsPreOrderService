@@ -1,7 +1,7 @@
 import pytest
 import requests
 
-BASE_URL = "http://localhost:8081"  # Замените на ваш базовый URL
+BASE_URL = "http://localhost:8081"
 
 
 @pytest.mark.parametrize('data, expected_status_code, expected_status_message', [
