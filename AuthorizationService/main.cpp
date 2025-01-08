@@ -7,13 +7,13 @@
 int main() {
     try {
         httplib::Server server;
-        // инициализация хоста и порта для подключения
+//        // инициализация хоста и порта для подключения
         std::string connect = "dbname=db_org_registr host=localhost port=5432";
         Database db(connect);
         db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/postgres/db_org_registr.sql");
-        pqxx::connection C(connect);
-        pqxx::work W(C);
-        W.commit();
+        pqxx::connection connection_(connect);
+        pqxx::work worker(connection_);
+        worker.commit();
 
         server.Post("/register_organizer", [&db](const httplib::Request& request, httplib::Response &res) {
             OrganizerRegistrationManager::RegisterOrganizerRequest(request, res, db);
@@ -23,7 +23,7 @@ int main() {
             UserRegistration::RegisterUserRequest(request, res, db);
         });
 
-        server.Post("/authorize/{id}", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/authorize/:id", [&db](const httplib::Request& request, httplib::Response &res) {
             AuthorizationManager::AuthorizationRequest(request, res, db);
         });
 

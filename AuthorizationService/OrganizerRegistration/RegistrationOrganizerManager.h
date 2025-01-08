@@ -14,7 +14,7 @@ class OrganizerRegistrationManager {
     };
 
 public:
-    void RegisterOrganizerRequest(const httplib::Request& request, httplib::Response &res, Database& db);
+    static void RegisterOrganizerRequest(const httplib::Request& request, httplib::Response &res, Database& db);
 
     static void OrganizerRegisterApproval(const httplib::Request& request, httplib::Response &res, Database& db);
 

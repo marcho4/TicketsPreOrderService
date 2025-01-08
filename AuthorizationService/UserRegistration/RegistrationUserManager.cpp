@@ -7,13 +7,21 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
     std::string name = parsed["name"];
     std::string last_name = parsed["last_name"];
     std::string email = parsed["email"];
+
+    // -----------------------------------------------------------
+    std::cout << "Прилетел запрос на регистрацию пользователя\n";
+    std::cout << "Имя: " << name << "\n";
+    std::cout << "Фамилия: " << last_name << "\n";
+    std::cout << "Почта: " << email << "\n";
+    // -----------------------------------------------------------
+
     if (!AuxiliaryFunctions::isValidEmail(email) || !CheckEmailUniquenessOrExistence(email, db)) {
         res.status = 400;
         res.set_content(R"({"status": "email already exists or email invalid"})", "application/json");
         return;
     }
-    res.set_content("User registered", "text/plain");
     RegisterUser(email, name, last_name, db);
+    res.set_content(R"({"status": "User registered"})", "application/json");
 }
 
 

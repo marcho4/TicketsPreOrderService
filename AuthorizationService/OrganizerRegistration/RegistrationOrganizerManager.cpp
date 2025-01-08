@@ -47,9 +47,9 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
     std::string company = parsed.at("company").get<std::string>();
     std::string tin = parsed.at("TIN").get<std::string>();
     // из запроса нужно как-то понять подтвердили ли организатора или нет
-    Status status = Status::APPROVED; // заглушка
+//    Status status = Status::APPROVED; // заглушка
 
-    if (status == Status::APPROVED) {
+    if (true) {
         // сгенерили пароль
         LoginData data = PasswordCreator::generatePasswordAndLoginForOrganizer(company, db);
         // credentials[0] - пароль, credentials[1] - логин, credentials[2] - хэш пароля

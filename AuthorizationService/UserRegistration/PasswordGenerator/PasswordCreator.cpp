@@ -32,7 +32,7 @@ LoginData PasswordCreator::generatePasswordAndLoginForUser(const std::string& na
     return LoginData{password, generateLoginForUser(name, surname)};
 }
 
-LoginData PasswordCreator::generatePasswordAndLoginForOrganizer(const std::string& company, Database& db, int length = 16) {
+LoginData PasswordCreator::generatePasswordAndLoginForOrganizer(const std::string& company, Database& db, int length) {
     std::string password;
     password.reserve(length);
     password = generateRandomData();

@@ -1,15 +1,21 @@
 CREATE SCHEMA IF NOT EXISTS AuthorizationService;
 
+DROP TYPE IF EXISTS status CASCADE;
+
+CREATE TYPE Status AS ENUM ('ADMIN', 'ORGANIZER', 'USER');
+
+CREATE SCHEMA IF NOT EXISTS AuthorizationService;
+
 CREATE TABLE IF NOT EXISTS AuthorizationService.AuthorizationData (
-     id UUID PRIMARY KEY,
-     login varchar(50),
-     password varchar(50),
-     email varchar(50) UNIQUE,
-     status integer
+  id UUID PRIMARY KEY,
+  login VARCHAR(50),
+  password VARCHAR(50),
+  email VARCHAR(50) UNIQUE,
+  status Status
 );
 
-enum Status {
-     ADMIN = 0,
-     ORGANIZER = 1,
-     USER = 2
-};
+-- enum Status {
+--      ADMIN = 0,
+--      ORGANIZER = 1,
+--      USER = 2
+-- };
