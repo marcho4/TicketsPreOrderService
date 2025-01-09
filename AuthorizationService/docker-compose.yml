@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: nazarzakrevskij
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: db_org_registr
+    ports:
+      - "5432:5432"

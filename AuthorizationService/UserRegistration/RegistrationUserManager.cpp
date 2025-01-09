@@ -16,13 +16,13 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
         }
 
         // нужно не забыть проверить на уникальность пользователя
-        if (!AuxiliaryFunctions::isValidEmail(email) ) {
+        if (!AuxiliaryFunctions::isValidEmail(email) || !CheckEmailUniquenessOrExistence(email, db)) {
             res.status = 400;
             res.set_content(R"({"status": "email already exists or email invalid"})", "application/json");
             return;
         }
 
-//        RegisterUser(email, name, last_name, db);
+        RegisterUser(email, name, last_name, db);
 
         res.status = 200;
         res.set_content(R"({
@@ -40,15 +40,16 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
 
 void UserRegistration::RegisterUser(const std::string& email, const std::string& name,
                            const std::string& last_name, Database& db) {
-    std::string query = "INSERT INTO Users.UsersData (email, name, last_name) "
-                        "VALUES ($1, $2, $3)"; // надо будет доработать
-    db.executeQueryWithParams(query, email, name, last_name);
+//    std::string query = "INSERT INTO Users.UsersData (email, name, last_name) "
+//                        "VALUES ($1, $2, $3)"; // надо будет доработать
+//    db.executeQueryWithParams(query, email, name, last_name);
     LoginData data = PasswordCreator::generatePasswordAndLoginForUser(email, last_name, db);
     // credentials[0] - пароль, credentials[1] - логин, credentials[2] - хэш пароля
-    auto credentials = PasswordCreator::HashAndSavePassword(data, db);
-    query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email) "
-            "VALUES ($1, $2, $3)";
-    db.executeQueryWithParams(query, credentials[1], credentials[2], email); // храним хэш пароля, а не сам пароль
+    std::vector<std::string> credentials = PasswordCreator::HashAndSavePassword(data, db);
+    std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email) "
+                        "VALUES ($1, $2, $3)";
+    std::cout << "login: " << credentials[1] << ", password: " << credentials[2] << ", email: " << email << std::endl;
+    db.executeQueryWithParams(query, (std::string) credentials[1], (std::string)credentials[2], (std::string) email); // храним хэш пароля, а не сам пароль
 
     // формируем запрос для отправки в микросервис уведомлений для последующего уведомления пользователя
     nlohmann::json json_data = {
@@ -61,7 +62,7 @@ void UserRegistration::RegisterUser(const std::string& email, const std::string&
 }
 
 bool UserRegistration::CheckEmailUniquenessOrExistence(const std::string &email, Database& db) {
-    std::string query = "SELECT name FROM Users.UsersData WHERE email = $1"; // надо будет доработать
+    std::string query = "SELECT * FROM AuthorizationService.AuthorizationData WHERE email = $1"; // надо будет доработать
     pqxx::result res = db.executeQueryWithParams(query, email);
     if (!res.empty()) {
         return false;

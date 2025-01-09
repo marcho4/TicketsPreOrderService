@@ -25,7 +25,7 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
             SetErrorResponse(res, "Invalid TIN format");
             return;
         }
-//        RegisterOrganizer(email, company, tin, db);
+        RegisterOrganizer(email, company, tin, db);
         json response = {{"status", "Application sent to admin"}};
         res.status = 200;
         res.set_content(response.dump(), "application/json");
@@ -42,7 +42,7 @@ void OrganizerRegistrationManager::RegisterOrganizer(const std::string& email, c
             {"company", company},
             {"TIN", tin},
     };
-    httplib::Client orchestrator("https://orchestrator-service.com");
+//    httplib::Client orchestrator("https://orchestrator-service.com");
     //    auto result = orchestrator.Post("/register_organizer_approval", json_data.dump(), "application/json");
     // тут что-то надо намутить с оркестратором
 }
