@@ -44,35 +44,42 @@ def db_connection():
     ]
 )
 def test_authorize_user(db_connection, name, last_name, email):
-    # mock данные
+    # mock данные для регистрации
     register_data = {
         "name": name,
         "last_name": last_name,
         "email": email
     }
-    # зарегистрировали пользователя
-    response = requests.post(f"{BASE_URL}/register_user", json=register_data)
 
-    response_json = response.json()
-    assert response.status_code == 200
-    assert response_json["status"] == "User registered"
-    assert response_json["name"] == name
-    assert response_json["last_name"] == last_name
-    assert response_json["email"] == email
+    # для начала зарегистрируем пользователя
+    register_response = requests.post(f"{BASE_URL}/register_user", json=register_data)
+    register_json = register_response.json()
 
-    # теперь он попробует авторизоваться, но для начала получим его данные из базы
+    assert register_response.status_code == 200, f"Unexpected status code: {register_response.status_code}"
+    assert register_json["status"] == "User registered", f"Unexpected status: {register_json['status']}"
+    assert register_json["name"] == name, f"Unexpected name: {register_json['name']}"
+    assert register_json["last_name"] == last_name, f"Unexpected last name: {register_json['last_name']}"
+    assert register_json["email"] == email, f"Unexpected email: {register_json['email']}"
+
+    # далее получим данные пользователя из базы данных
     cursor = db_connection.cursor(cursor_factory=RealDictCursor)
-    cursor.execute("SELECT * FROM AuthorizationService.AuthorizationData WHERE email = %s", (register_data["email"],))
+    cursor.execute("SELECT * FROM AuthorizationService.AuthorizationData WHERE email = %s", (email,))
     db_result = cursor.fetchone()
 
-    login = db_result["login"] # логин пользователя
-    password = response_json["password"] # пароль пользователя
-    user_id = db_result["id"]
+    assert db_result, "User data not found in the database"
+    login = db_result["login"]
+    user_id = str(db_result["id"])
 
-    response = requests.post(f"{BASE_URL}/authorize/{user_id}", json={"login": login, "password": password})
-    assert response.status_code == 200
-    response_json = response.json()
-    assert response_json["status"] == "Access allowed"
+    # сделаем пробный запрос на авторизацию пользователя
+    auth_response = requests.post(f"{BASE_URL}/authorize/{user_id}", json={
+        "login": login,
+        "password": register_json["password"]  # предположим, пароль возвращается при регистрации
+    })
+    auth_json = auth_response.json()
 
+    assert auth_response.status_code == 200, f"Unexpected status code: {auth_response.status_code}"
+    assert auth_json["msg"] == "Success"
+    assert auth_json["data"]["id"] == user_id
+    assert auth_json["data"]["role"] in ["ADMIN", "ORGANIZER", "USER"], "Unexpected role"
 
-
+    cursor.close()

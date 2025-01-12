@@ -21,7 +21,7 @@ public:
     static void RegisterOrganizer(const std::string& email, const std::string& password,
                            const std::string& company, Database& db);
 
-    static bool CheckOrganizerExistence(const std::string& email, Database& db);
+    static bool CheckEmailUniquenessAndOrganizerExistence(const std::string& email, Database& db);
 
     static void NotifyOrganizer(const std::string& email, const std::string& login, const std::string& password);
 

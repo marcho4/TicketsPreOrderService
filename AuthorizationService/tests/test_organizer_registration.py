@@ -18,7 +18,7 @@ def check_server_availability():
 @pytest.mark.parametrize('data, expected_status_code, expected_status_message', [
     (
             {
-                "email": "nazarzakrevskii@gmail.com",
+                "email": "nazarzakrevskiiOrganizer@gmail.com",
                 "company": "Nike pro",
                 "tin": "123456789012"
             },

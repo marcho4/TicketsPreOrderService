@@ -14,22 +14,17 @@ std::string PasswordCreator::generateRandomData() {
     return str;
 }
 
-std::string PasswordCreator::generateLoginForUser(const std::string& name, const std::string& surname) {
-    std::string login = name + "." + surname + generateRandomData();
-    return login;
-}
-
 std::string PasswordCreator::generateLoginForOrganizer(const std::string& company) {
     std::string login = company + generateRandomData();
     return login;
 }
 
 LoginData PasswordCreator::generatePasswordAndLoginForUser(const std::string& name,
-                                                     const std::string& surname, Database& db, int length) {
+                                                     const std::string& email, Database& db, int length) {
     std::string password;
     password.reserve(length);
     password = generateRandomData();
-    return LoginData{password, generateLoginForUser(name, surname)};
+    return LoginData{password, email};
 }
 
 LoginData PasswordCreator::generatePasswordAndLoginForOrganizer(const std::string& company, Database& db, int length) {

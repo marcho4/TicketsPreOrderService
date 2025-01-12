@@ -12,7 +12,6 @@ services:
     image: postgres:15
     environment:
       POSTGRES_USER: nazarzakrevskij
-      POSTGRES_PASSWORD: your_password
       POSTGRES_DB: db_org_registr
     ports:
       - "5432:5432"

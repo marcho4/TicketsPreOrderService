@@ -17,16 +17,18 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
             SetErrorResponse(res, "Invalid email format");
             return;
         }
-//        if (!CheckOrganizerExistence(email, db)) {
-//            SetErrorResponse(res, "Organizer already registered");
-//            return;
-//        }
         if (!checkCorrectnessTIN(tin)) {
             SetErrorResponse(res, "Invalid TIN format");
             return;
         }
-        RegisterOrganizer(email, company, tin, db);
-        json response = {{"status", "Application sent to admin"}};
+//        if (CheckEmailUniquenessAndOrganizerExistence(email, db)) {
+//            SetErrorResponse(res, "Organizer already registered");
+//            return;
+//        }
+        RegisterOrganizer(email, company, tin, db); // короче вот тут мы должны закидывать данные в сервис
+        // админа, на подтверждение, а он в ответ будет присылать запрос подтвержден ли чел или нет
+        json response = {{"status", "Application sent to admin"}}; // пока что ничего никуда не отправляется а
+        // мы сразу генерируем логин/пароль для чувака и отдаем ему по почте
         res.status = 200;
         res.set_content(response.dump(), "application/json");
         return;
@@ -37,11 +39,11 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
 
 void OrganizerRegistrationManager::RegisterOrganizer(const std::string& email, const std::string& company,
                                                      const std::string& tin, Database& db) {
-    nlohmann::json json_data = {
-            {"email", email},
-            {"company", company},
-            {"TIN", tin},
-    };
+//    nlohmann::json json_data = {
+//            {"email", email},
+//            {"company", company},
+//            {"TIN", tin},
+//    };
 //    httplib::Client orchestrator("https://orchestrator-service.com");
     //    auto result = orchestrator.Post("/register_organizer_approval", json_data.dump(), "application/json");
     // тут что-то надо намутить с оркестратором
@@ -62,9 +64,10 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
         LoginData data = PasswordCreator::generatePasswordAndLoginForOrganizer(company, db);
         // credentials[0] - пароль, credentials[1] - логин, credentials[2] - хэш пароля
         std::vector<std::string> credentials = PasswordCreator::HashAndSavePassword(data, db);
-        std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email) "
-                "VALUES ($1, $2, $3)";
-        db.executeQueryWithParams(query, credentials[1], credentials[2], email); // храним хэш пароля, а не сам пароль
+        std::string role = "ORGANIZER";
+        std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email, status) "
+                "VALUES ($1, $2, $3, $4)";
+        db.executeQueryWithParams(query, credentials[1], credentials[2], email, role); // храним хэш пароля, а не сам пароль
 
         NotifyOrganizer(email, credentials[1], credentials[0]);
         res.set_content(json{{"status", "success"}, {"message", "Organizer approved"}}.dump(), "application/json");
@@ -73,8 +76,8 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
     }
 }
 
-bool OrganizerRegistrationManager::CheckOrganizerExistence(const std::string &email, Database &db) {
-    std::string query = "SELECT * FROM organizers WHERE email = $1";
+bool OrganizerRegistrationManager::CheckEmailUniquenessAndOrganizerExistence(const std::string &email, Database &db) {
+    std::string query = "SELECT * FROM Authorization.AuthorizationData WHERE email = $1";
     pqxx::result ans = db.executeQueryWithParams(query, email);
     return ans.empty();
 }

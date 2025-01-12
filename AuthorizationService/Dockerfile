@@ -11,11 +11,16 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /AuthorizationService
+
 COPY . .
+COPY libraries /AuthorizationService/libraries
 
 WORKDIR /AuthorizationService/cmake-build-debug
-RUN rm -rf * && cmake .. && make
+RUN rm -rf *
 
-CMD ["./main"]
+WORKDIR /AuthorizationService
+RUN cmake
+
+CMD ["./cmake-build-debug/main"]
 
 EXPOSE 8081

@@ -49,12 +49,15 @@ std::string UserRegistration::RegisterUser(const std::string& email, const std::
     std::string query = "INSERT INTO AuthorizationService.TemplateUser (email, name, surname) "
                         "VALUES ($1, $2, $3)"; // надо будет доработать
     db.executeQueryWithParams(query, email, name, last_name);
-    LoginData data = PasswordCreator::generatePasswordAndLoginForUser(email, last_name, db);
+    LoginData data = PasswordCreator::generatePasswordAndLoginForUser(name, email, db);
+    std::cout << "Password: " << data.password << ' ';
+    std::cout << "Login: " << data.login << std::endl;
     // credentials[0] - пароль, credentials[1] - логин, credentials[2] - хэш пароля
     std::vector<std::string> credentials = PasswordCreator::HashAndSavePassword(data, db);
-    query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email) "
-                        "VALUES ($1, $2, $3)";
-    db.executeQueryWithParams(query, (std::string) credentials[1], (std::string)credentials[2], (std::string) email); // храним хэш пароля, а не сам пароль
+    std::string role = "USER";
+    query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email, status) "
+                        "VALUES ($1, $2, $3, $4)";
+    db.executeQueryWithParams(query, (std::string) credentials[1], (std::string)credentials[2], (std::string) email, role); // храним хэш пароля, а не сам пароль
 
     // формируем запрос для отправки в микросервис уведомлений для последующего уведомления пользователя
     nlohmann::json json_data = {

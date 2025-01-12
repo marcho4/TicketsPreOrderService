@@ -9,10 +9,11 @@ CREATE TYPE Status AS ENUM ('ADMIN', 'ORGANIZER', 'USER');
 CREATE SCHEMA IF NOT EXISTS AuthorizationService;
 
 CREATE TABLE IF NOT EXISTS AuthorizationService.AuthorizationData (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  login VARCHAR(200),
-  password VARCHAR(200),
-  email VARCHAR(200)
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    login VARCHAR(200),
+    password VARCHAR(200),
+    email VARCHAR(200),
+    status Status
 );
 
 CREATE TABLE if NOT EXISTS AuthorizationService.TemplateUser (
