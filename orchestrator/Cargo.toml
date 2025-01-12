@@ -1,0 +1,12 @@
+[package]
+name = "orchestrator"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = "1.43.0"
+actix-web = "4.9.0"
+env_logger = "0.11.6"
+reqwest = "0.12.12"
+serde = { version = "1.0.217", features = ["derive"] }
+actix-cors = "0.7.0"
