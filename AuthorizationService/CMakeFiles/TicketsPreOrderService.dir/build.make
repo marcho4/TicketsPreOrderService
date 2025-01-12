@@ -220,7 +220,7 @@ TicketsPreOrderService: CMakeFiles/TicketsPreOrderService.dir/UserRegistration/P
 TicketsPreOrderService: CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 TicketsPreOrderService: CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/blowfish.cpp.o
 TicketsPreOrderService: CMakeFiles/TicketsPreOrderService.dir/build.make
-TicketsPreOrderService: /opt/homebrew/Cellar/curl/8.11.0_1/lib/libcurl.dylib
+TicketsPreOrderService: /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib
 TicketsPreOrderService: /opt/homebrew/opt/openssl@3/lib/libssl.dylib
 TicketsPreOrderService: /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
 TicketsPreOrderService: /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib

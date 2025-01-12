@@ -1,17 +1,17 @@
 CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o: \
   /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/postgres/PostgresProcessing.cpp \
   /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/postgres/PostgresProcessing.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/pqxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/header-pre.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/pqxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-pre.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/version \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__assert \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__config_site \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__verbose_abort \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__availability \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/config-public-compiler.h \
+  /opt/homebrew/opt/libpqxx/include/pqxx/config-public-compiler.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/ciso646 \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/array.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/algorithm \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/cstddef \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/enable_if.h \
@@ -853,7 +853,7 @@ CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/cstdarg \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/temp_value.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/connection.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/connection.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/binary_negate.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__functional/bind.h \
@@ -884,13 +884,13 @@ CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__tree \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/ranges \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/errorhandler.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/types.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/ignore-deprecated-pre.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/ignore-deprecated-post.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/except.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/concat.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/strconv.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/errorhandler.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/types.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/ignore-deprecated-pre.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/ignore-deprecated-post.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/except.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/concat.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/strconv.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/charconv \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/chars_format.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/from_chars_integral.h \
@@ -934,11 +934,11 @@ CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/views.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/zip_view.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/istream_view.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/util.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/version.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/libpq-forward.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/zview.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/conversions.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/util.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/version.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/libpq-forward.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/zview.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/conversions.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/numeric \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/accumulate.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/adjacent_difference.h \
@@ -952,17 +952,17 @@ CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/pstl_reduce.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/transform_exclusive_scan.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/transform_inclusive_scan.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/params.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/statement_parameters.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/binarystring.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/result.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/encodings.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/params.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/statement_parameters.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/binarystring.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/result.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/encodings.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/iomanip \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/encoding_group.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/separated_list.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/encoding_group.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/separated_list.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/fcntl.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/array-composite.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/blob.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/array-composite.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/blob.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__filesystem/copy_options.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__filesystem/directory_entry.h \
@@ -981,34 +981,34 @@ CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__filesystem/u8path.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/dbtransaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/transaction_base.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/stream_query.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/gates/connection-stream_from.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/callgate.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/stream_iterator.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/transaction_focus.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/isolation.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/prepared_statement.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/row.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/field.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/composite.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/stream_query_impl.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/cursor.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/sql_cursor.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/largeobject.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/nontransaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/transaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/notification.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/pipeline.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/range.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/result_iterator.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/result_iter.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/robusttransaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/stream_from.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/stream_to.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/subtransaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/time.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/dbtransaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/transaction_base.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/stream_query.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/gates/connection-stream_from.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/callgate.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/stream_iterator.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/transaction_focus.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/isolation.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/prepared_statement.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/row.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/field.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/composite.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/stream_query_impl.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/cursor.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/sql_cursor.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/largeobject.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/nontransaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/transaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/notification.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/pipeline.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/range.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/result_iterator.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/result_iter.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/robusttransaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/stream_from.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/stream_to.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/subtransaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/time.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/chrono \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__chrono/calendar.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__chrono/convert_to_tm.h \
@@ -1025,7 +1025,7 @@ CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__chrono/year_month_day.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__chrono/year_month_weekday.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__chrono/literals.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/transactor.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/header-post.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/transactor.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/fstream

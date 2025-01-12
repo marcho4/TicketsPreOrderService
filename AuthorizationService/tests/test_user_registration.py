@@ -6,7 +6,6 @@ from requests.exceptions import RequestException
 from psycopg2.extras import RealDictCursor
 from config import BASE_URL, DATABASE_CONFIG
 
-
 @pytest.fixture(scope="module", autouse=True)
 def check_server_availability():
     """Ensure the server is running before executing tests."""
@@ -20,25 +19,19 @@ def check_server_availability():
 @pytest.mark.parametrize('data, expected_status_code, expected_status_message', [
     # тест на пустые поля
     (
-            {"name": "Nazar",
-             "last_name": "",
-             "email": "nazarzakrevski@gmail.com"},
+            {"name": "Nazar", "last_name": "", "email": "nazarzakrevski@gmail.com"},
             400,  # status code
             "fill every field!"  # response
     ),
     # корректный тест
     (
-            {"name": "Nazar",
-             "last_name": "Zakrevski",
-             "email": "nazarzakrevski@gmail.com"},
+            {"name": "Nazar", "last_name": "Zakrevski", "email": "nazarzakrevski@gmail.com"},
             200,  # status code
             "User registered"  # response
     ),
     # тест на не валидность email
     (
-            {"name": "Nazar",
-             "last_name": "Zakrevski",
-             "email": "invalid_email"},
+            {"name": "Nazar", "last_name": "Zakrevski", "email": "invalid_email"},
             400,  # status code
             "email already exists or email invalid"  # response
     ),
@@ -57,27 +50,32 @@ def test_register_user(data, expected_status_code, expected_status_message):
 @pytest.mark.parametrize('data, expected_status_code, expected_status_message', [
     # тест на пустые поля
     (
-            {"name": "Nazar",
-             "last_name": "",
-             "email": "nazarzakrevski@gmail.com"},
+            {"name": "Nazar", "last_name": "", "email": "nazarzakrevski@gmail.com"},
+            400,  # status code
+            "fill every field!"  # response
+    ),
+    (
+            {"name": "", "last_name": "", "email": ""},
             400,  # status code
             "fill every field!"  # response
     ),
     # корректный тест
     (
-            {"name": "Mark",
-             "last_name": "Dergilev",
-             "email": "markdergilev@gmail.com"},
+            {"name": "Mark", "last_name": "Dergilev", "email": "markdergilev@gmail.com"},
             200,  # status code
             "User registered"  # response
     ),
     # тест на не валидность email
     (
-            {"name": "Mark",
-             "last_name": "Dergilev",
-             "email": "markdergilev@gmail.com"},
+            {"name": "Mark", "last_name": "Dergilev", "email": "markdergilev@gmail.com"},
             400,  # status code
             "email already exists or email invalid"  # response
+    ),
+    # слишком длинные входные данные
+    (
+            {"name": "Mark" * 100, "last_name": "Dergilev" * 100, "email": "bebra@gmail.com"},
+            400,  # status code
+            "too long fields!"  # response
     ),
 ])
 def test_register_duplicate_user(data, expected_status_code, expected_status_message):

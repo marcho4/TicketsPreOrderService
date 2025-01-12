@@ -1019,20 +1019,20 @@ CMakeFiles/TicketsPreOrderService.dir/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/forward_list \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/valarray \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/any \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/pqxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/header-pre.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/config-public-compiler.h \
+  /opt/homebrew/opt/libpqxx/include/pqxx/pqxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-pre.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/config-public-compiler.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/ciso646 \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/array.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/connection.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/connection.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/ranges \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/errorhandler.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/types.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/ignore-deprecated-pre.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/ignore-deprecated-post.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/except.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/concat.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/strconv.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/errorhandler.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/types.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/ignore-deprecated-pre.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/ignore-deprecated-post.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/except.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/concat.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/strconv.hxx \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/charconv \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/chars_format.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/from_chars_integral.h \
@@ -1072,52 +1072,52 @@ CMakeFiles/TicketsPreOrderService.dir/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/views.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/zip_view.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/istream_view.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/util.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/version.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/libpq-forward.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/zview.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/conversions.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/params.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/statement_parameters.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/binarystring.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/result.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/encodings.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/encoding_group.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/separated_list.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/array-composite.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/blob.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/dbtransaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/transaction_base.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/stream_query.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/gates/connection-stream_from.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/callgate.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/stream_iterator.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/transaction_focus.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/isolation.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/prepared_statement.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/row.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/field.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/composite.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/stream_query_impl.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/cursor.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/sql_cursor.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/largeobject.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/nontransaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/transaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/notification.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/pipeline.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/range.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/result_iterator.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/result_iter.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/robusttransaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/stream_from.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/stream_to.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/subtransaction.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/time.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/transactor.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include/pqxx/internal/header-post.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/util.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/version.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/libpq-forward.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/zview.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/conversions.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/params.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/statement_parameters.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/binarystring.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/result.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/encodings.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/encoding_group.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/separated_list.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/array-composite.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/blob.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/dbtransaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/transaction_base.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/stream_query.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/gates/connection-stream_from.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/callgate.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/stream_iterator.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/transaction_focus.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/isolation.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/prepared_statement.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/row.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/field.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/composite.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/stream_query_impl.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/cursor.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/sql_cursor.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/largeobject.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/nontransaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/transaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/notification.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/pipeline.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/range.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/result_iterator.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/result_iter.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/robusttransaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/stream_from.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/stream_to.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/subtransaction.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/time.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/transactor.hxx \
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx \
   /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/OrganizerRegistration/../postgres/PostgresProcessing.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/UserRegistration/RegistrationUserManage.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/UserRegistration/RegistrationUserManager.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/UserRegistration/../../libraries/httplib.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/UserRegistration/../../libraries/nlohmann/json.hpp \
   /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/UserRegistration/../postgres/PostgresProcessing.h \

@@ -14,22 +14,28 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
             res.set_content(R"({"status": "fill every field!"})", "application/json");
             return;
         }
-
+        if (name.length() > 200 || last_name.length() > 200 || email.length() > 200) {
+            res.status = 400;
+            res.set_content(R"({"status": "too long fields!"})", "application/json");
+            return;
+        }
         // нужно не забыть проверить на уникальность пользователя
-        if (!AuxiliaryFunctions::isValidEmail(email) || !CheckEmailUniquenessOrExistence(email, db)) {
+        if (!AuxiliaryFunctions::isValidEmail(email) || !CheckEmailUniquenessOrUserExistence(email, db)) {
             res.status = 400;
             res.set_content(R"({"status": "email already exists or email invalid"})", "application/json");
             return;
         }
 
-        RegisterUser(email, name, last_name, db);
+        // временно для тестов, потом нужно будет убрать
+        std::string password = RegisterUser(email, name, last_name, db);
 
         res.status = 200;
         res.set_content(R"({
             "status": "User registered",
             "name": ")" + name + R"(",
             "last_name": ")" + last_name + R"(",
-            "email": ")" + email + R"("
+            "email": ")" + email + R"(",
+            "password": ")" + password + R"("
         })", "application/json");
 
     } catch (const std::exception& e) {
@@ -38,17 +44,16 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
     }
 }
 
-void UserRegistration::RegisterUser(const std::string& email, const std::string& name,
+std::string UserRegistration::RegisterUser(const std::string& email, const std::string& name,
                            const std::string& last_name, Database& db) {
-//    std::string query = "INSERT INTO Users.UsersData (email, name, last_name) "
-//                        "VALUES ($1, $2, $3)"; // надо будет доработать
-//    db.executeQueryWithParams(query, email, name, last_name);
+    std::string query = "INSERT INTO AuthorizationService.TemplateUser (email, name, surname) "
+                        "VALUES ($1, $2, $3)"; // надо будет доработать
+    db.executeQueryWithParams(query, email, name, last_name);
     LoginData data = PasswordCreator::generatePasswordAndLoginForUser(email, last_name, db);
     // credentials[0] - пароль, credentials[1] - логин, credentials[2] - хэш пароля
     std::vector<std::string> credentials = PasswordCreator::HashAndSavePassword(data, db);
-    std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email) "
+    query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email) "
                         "VALUES ($1, $2, $3)";
-    std::cout << "login: " << credentials[1] << ", password: " << credentials[2] << ", email: " << email << std::endl;
     db.executeQueryWithParams(query, (std::string) credentials[1], (std::string)credentials[2], (std::string) email); // храним хэш пароля, а не сам пароль
 
     // формируем запрос для отправки в микросервис уведомлений для последующего уведомления пользователя
@@ -59,11 +64,17 @@ void UserRegistration::RegisterUser(const std::string& email, const std::string&
     };
     httplib::Client email_sender("sender_domain.com"); // пока заглушка
     auto result = email_sender.Post("/send_email", json_data.dump(), "application/json");
+    return credentials[0];
 }
 
-bool UserRegistration::CheckEmailUniquenessOrExistence(const std::string &email, Database& db) {
+bool UserRegistration::CheckEmailUniquenessOrUserExistence(const std::string &email, Database& db) {
     std::string query = "SELECT * FROM AuthorizationService.AuthorizationData WHERE email = $1"; // надо будет доработать
     pqxx::result res = db.executeQueryWithParams(query, email);
+    if (!res.empty()) {
+        return false;
+    }
+    query = "SELECT * FROM AuthorizationService.TemplateUser WHERE email = $1";
+    res = db.executeQueryWithParams(query, email);
     if (!res.empty()) {
         return false;
     }

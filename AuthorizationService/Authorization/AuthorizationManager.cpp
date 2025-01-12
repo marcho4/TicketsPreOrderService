@@ -2,16 +2,18 @@
 
 void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, httplib::Response& res,
                               Database& db) {
-    int id = std::stoi(req.matches[1]);
-
+    auto user_id = req.path_params.at("id");
+    std::cout << user_id << '\n';
     auto parsed = json::parse(req.body);
     std::string login = parsed["login"];
     std::string password = parsed["password"];
     pqxx::result password_hash;
+    std::cout << login << '\n';
+    std::cout << password << '\n';
 
     try {
         std::string query = "SELECT password FROM AuthorizationService.AuthorizationData WHERE id = $1";
-        password_hash = db.executeQueryWithParams(query, id);
+        password_hash = db.executeQueryWithParams(query, user_id);
     } catch (const std::exception& e) {
         res.status = 500;
         res.set_content(R"({"status": "Server error"})", "application/json");
@@ -29,6 +31,9 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
         res.set_content(R"({"status": "Access denied"})", "application/json");
         return;
     }
+
+    res.status = 200;
+    res.set_content(R"({"status": "Access allowed"})", "application/json");
 }
 
 bool AuthorizationManager::validatePassword(const std::string& password, const std::string& hashed_password) {

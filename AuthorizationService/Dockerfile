@@ -4,18 +4,17 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     libpq-dev \
+    libcurl4-openssl-dev \
     g++ \
     python3 \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+WORKDIR /AuthorizationService
 COPY . .
 
-RUN pip3 install -r tests/requirements.txt
-
-WORKDIR /app/cmake-build-debug
-RUN cmake .. && make
+WORKDIR /AuthorizationService/cmake-build-debug
+RUN rm -rf * && cmake .. && make
 
 CMD ["./main"]
 
