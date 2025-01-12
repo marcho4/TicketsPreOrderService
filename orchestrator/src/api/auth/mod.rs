@@ -1,6 +1,6 @@
-pub mod session;
-pub mod login;
-pub mod logout;
-pub mod register;
-pub mod organizer_register;
-mod config;
+pub(crate) mod session;
+pub(crate) mod login;
+pub(crate) mod logout;
+pub(crate) mod register;
+pub(crate) mod organizer_register;
+pub mod config;
