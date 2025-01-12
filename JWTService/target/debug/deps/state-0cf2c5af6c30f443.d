@@ -1,0 +1,12 @@
+/Users/marcho/DAO_Build/jwt_microservice/target/debug/deps/libstate-0cf2c5af6c30f443.rmeta: /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/lib.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/ident_hash.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/cell.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/init.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/shim.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/type_map.rs
+
+/Users/marcho/DAO_Build/jwt_microservice/target/debug/deps/libstate-0cf2c5af6c30f443.rlib: /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/lib.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/ident_hash.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/cell.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/init.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/shim.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/type_map.rs
+
+/Users/marcho/DAO_Build/jwt_microservice/target/debug/deps/state-0cf2c5af6c30f443.d: /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/lib.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/ident_hash.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/cell.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/init.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/shim.rs /Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/type_map.rs
+
+/Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/lib.rs:
+/Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/ident_hash.rs:
+/Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/cell.rs:
+/Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/init.rs:
+/Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/shim.rs:
+/Users/marcho/.cargo/registry/src/index.crates.io-6f17d22bba15001f/state-0.6.0/src/type_map.rs:
