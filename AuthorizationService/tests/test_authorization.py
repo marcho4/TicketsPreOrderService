@@ -71,7 +71,7 @@ def test_authorize_user(db_connection, name, last_name, email):
     user_id = str(db_result["id"])
 
     # сделаем пробный запрос на авторизацию пользователя
-    auth_response = requests.post(f"{BASE_URL}/authorize/{user_id}", json={
+    auth_response = requests.post(f"{BASE_URL}/authorize", json={
         "login": login,
         "password": register_json["password"]  # предположим, пароль возвращается при регистрации
     })

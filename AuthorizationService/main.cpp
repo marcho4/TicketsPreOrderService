@@ -32,7 +32,7 @@ int main() {
             UserRegistration::RegisterUserRequest(request, res, db);
         });
 
-        server.Post("/authorize/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/authorize", [&db](const httplib::Request& request, httplib::Response &res) {
             AuthorizationManager::AuthorizationRequest(request, res, db);
         });
 
