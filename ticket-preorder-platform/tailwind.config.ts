@@ -11,10 +11,17 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
+  			background: '#F4F4F4',
+			silver: "#BDBDBD",
+			accent: "#FCA311",
+			green_accent: "#66BB6A",
+			deep_blue: "#1A237E",
+			my_black: "#121212",
+			dark_grey: "#333333",
+			white_smoke: "#F4F4F4",
   			foreground: 'hsl(var(--foreground))',
   			card: {
-  				DEFAULT: 'hsl(var(--card))',
+  				DEFAULT: '#BDBDBD',
   				foreground: 'hsl(var(--card-foreground))'
   			},
   			popover: {
@@ -32,10 +39,6 @@ const config: Config = {
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',

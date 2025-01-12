@@ -21,12 +21,13 @@ export default function AuthCard() {
     const [mode, setMode] = useState("login");
 
     // Поля для логина
-    const [email, setEmail] = useState("");
+    const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
     // Поля для регистрации (общие)
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
 
     // Поля для организатора (например)
     const [organizationName, setOrganizationName] = useState("");
@@ -84,29 +85,28 @@ export default function AuthCard() {
             case "login":
                 return (
                     <form onSubmit={handleLogin}>
-                        <CardContent className="space-y-6 pt-6 pb-8">
+                        <CardContent className="space-y-6 pt-6 pb-8 ">
                             <div className="space-y-2">
                                 <Label htmlFor="email" className="text-text">
-                                    Email
+                                    Логин
                                 </Label>
                                 <Input
                                     id="email"
-                                    type="email"
-                                    placeholder="Your email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Введите логин"
+                                    value={login}
+                                    onChange={(e) => setLogin(e.target.value)}
                                     required
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="password" className="text-text">
-                                    Password
+                                    Пароль
                                 </Label>
                                 <Input
                                     id="password"
                                     type="password"
-                                    placeholder="Your password"
+                                    placeholder="Введите пароль"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
@@ -117,7 +117,7 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-[#4CAF50]"
+                                className="w-full rounded-xl hover:bg-[#4CAF50] transition-colors duration-300"
                             >
                                 {loading ? (
                                     <div className="flex items-center gap-2">
@@ -144,20 +144,20 @@ export default function AuthCard() {
                           a8 8 0 01-8-8z"
                                             />
                                         </svg>
-                                        <span>Processing...</span>
+                                        <span>Обрабатываем...</span>
                                     </div>
                                 ) : (
-                                    "Login"
+                                    "Войти"
                                 )}
                             </Button>
                             <p className="text-sm text-center text-text">
-                                Don't have an account?{" "}
+                                Нет аккаунта?{" "}
                                 <button
                                     type="button"
                                     className="text-primary hover:underline"
                                     onClick={() => setMode("signupUser")}
                                 >
-                                    Sign up
+                                    Зарегистрироваться
                                 </button>
                             </p>
                             <Link href="#">
@@ -166,7 +166,7 @@ export default function AuthCard() {
                                     className="text-sm text-left hover:underline"
                                     onClick={() => setMode("signupOrganizer")}
                                 >
-                                    Sign up as an organizer
+                                    Зарегистрироваться как организатор
                                 </button>
                             </Link>
                         </CardFooter>
@@ -178,12 +178,12 @@ export default function AuthCard() {
                         <CardContent className="space-y-6 pt-6 pb-8">
                             <div className="space-y-2">
                                 <Label htmlFor="name" className="text-text">
-                                    Name
+                                    Имя
                                 </Label>
                                 <Input
                                     id="name"
                                     type="text"
-                                    placeholder="Your name"
+                                    placeholder="Ваше имя"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     required
@@ -192,14 +192,14 @@ export default function AuthCard() {
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="name" className="text-text">
-                                    Last name
+                                    Фамилия
                                 </Label>
                                 <Input
                                     id="name"
                                     type="text"
-                                    placeholder="Your last name"
+                                    placeholder="Ваша фамилия"
                                     value={lastName}
-                                    onChange={(e) => setName(e.target.value)}
+                                    onChange={(e) => setLastName(e.target.value)}
                                     required
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
@@ -211,7 +211,7 @@ export default function AuthCard() {
                                 <Input
                                     id="email"
                                     type="email"
-                                    placeholder="Your email"
+                                    placeholder="Ваш email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
@@ -223,18 +223,18 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-[#4CAF50]"
+                                className="w-full rounded-xl hover:bg-[#4CAF50] transition-colors duration-300"
                             >
-                                Sign Up
+                                Зарегистрироваться
                             </Button>
                             <p className="text-sm text-center text-text">
-                                Already have an account?{" "}
+                                Уже есть аккаунт?{" "}
                                 <button
                                     type="button"
                                     className="text-primary hover:underline"
                                     onClick={() => setMode("login")}
                                 >
-                                    Login
+                                    Войти
                                 </button>
                             </p>
                         </CardFooter>
@@ -246,14 +246,14 @@ export default function AuthCard() {
                         <CardContent className="space-y-6 pt-6 pb-8">
                             <div className="space-y-2">
                                 <Label htmlFor="organizationName" className="text-text">
-                                    Name of Organization
+                                    Название вашей организации
                                 </Label>
                                 <Input
                                     id="organizationName"
                                     type="text"
-                                    placeholder="Name of Organization"
+                                    placeholder="Введите название"
                                     value={organizationName}
-                                    onChange={(e) => organizationName(e.target.value)}
+                                    onChange={(e) => setOrganizationName(e.target.value)}
                                     required
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
@@ -266,7 +266,7 @@ export default function AuthCard() {
                                 <Input
                                     id="email"
                                     type="email"
-                                    placeholder="Your email"
+                                    placeholder="Введите email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
@@ -276,12 +276,12 @@ export default function AuthCard() {
 
                             <div className="space-y-2">
                                 <Label htmlFor="tin" className="text-text">
-                                    TIN
+                                    ИНН
                                 </Label>
                                 <Input
                                     id="tin"
                                     type="tin"
-                                    placeholder="Your organization's TIN"
+                                    placeholder="Введите ИНН вашей организации"
                                     value={TIN}
                                     onChange={(e) => setTIN(e.target.value)}
                                     required
@@ -293,18 +293,18 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-[#4CAF50]"
+                                className="w-full rounded-xl bg-[#121212] hover:bg-[#4CAF50] transition-colors duration-300"
                             >
-                                Sign Up as Organizer
+                                Зарегистрироваться
                             </Button>
-                            <p className="text-sm text-center text-text">
-                                Already have an account?{" "}
+                            <p className="text-sm text-center text-text transition-colors">
+                                Уже есть аккаунт?{" "}
                                 <button
                                     type="button"
                                     className="text-primary hover:underline"
                                     onClick={() => setMode("login")}
                                 >
-                                    Login
+                                    Войти
                                 </button>
                             </p>
                         </CardFooter>
@@ -316,14 +316,14 @@ export default function AuthCard() {
     };
 
     return (
-        <Card className="w-full max-w-md bg-background bg-opacity-90 rounded-3xl shadow-2xl">
+        <Card className="w-full max-w-md bg-white rounded-3xl shadow-2xl bg-opacity-90">
             <CardHeader className="space-y-1 pt-8">
                 <CardTitle className="text-3xl font-bold text-center text-text">
                     {mode === "login"
-                        ? "Login"
+                        ? "Войти"
                         : mode === "signupUser"
-                            ? "Sign Up"
-                            : "Sign Up (Organizer)"}
+                            ? "Регистрация"
+                            : "Регистрация (Организатор)"}
                 </CardTitle>
             </CardHeader>
             {renderFormContent()}

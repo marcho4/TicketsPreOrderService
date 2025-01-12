@@ -23,10 +23,12 @@ export default function RootLayout({
               backgroundSize: 'cover',
               backgroundAttachment: 'fixed'
             }}>
-        <Navigation />
-        <main className="min-h-screen pt-8">
-          {children}
-        </main>
+        <AuthProvider>
+          <Navigation />
+          <main className="min-h-screen pt-8">
+              {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   )
@@ -35,3 +37,4 @@ export default function RootLayout({
 
 
 import './globals.css'
+import {AuthProvider} from "@/providers/authProvider";
