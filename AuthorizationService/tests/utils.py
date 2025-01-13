@@ -3,12 +3,12 @@ import requests
 from config import BASE_URL, DATABASE_CONFIG
 def generate_random_valid_email():
     s = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    email = "".join(random.sample(s, 10)) + "@gmail.com"
+    email = "".join(random.choices(s, k=10)) + "@gmail.com"
     return email
 
 def generate_random_tin():
     s = "01234567890123"
-    tin = "".join(random.sample(s, 12))
+    tin = "".join(random.choices(s, k=12))
     return tin
 
 
