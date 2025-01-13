@@ -100,3 +100,23 @@ def test_authorize_organizer(db_connection, email, company, tin):
     assert auth_json["data"]["role"] in ["ADMIN", "ORGANIZER", "USER"], "Unexpected role"
 
     cursor.close()
+
+
+
+@pytest.mark.parametrize(
+    "name, last_name, email",
+    [
+        ("Tim", "Bulgakov", generate_random_valid_email()),
+        ("Maria", "Murashko", generate_random_valid_email())
+    ]
+)
+def test_invalid_authorize_user(name, last_name, email):
+    register_json = register_user_premature(name, last_name, email)
+
+    # сделаем пробный запрос на авторизацию пользователя
+    auth_response = requests.post(f"{BASE_URL}/authorize", json={
+        "login": "invalid_login",
+        "password": "invalid_password"  # предположим, пароль возвращается при регистрации
+    })
+    auth_json = auth_response.json()
+    assert auth_response.status_code == 403  # forbidden

@@ -4,6 +4,7 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
     auto parsed = json::parse(req.body);
     std::string login = parsed["login"];
     std::string password = parsed["password"];
+
     pqxx::result password_hash = getPasswordHash(login, db);
     std::string user_id = getId(login, db);
 
@@ -54,7 +55,11 @@ bool AuthorizationManager::validatePassword(const std::string& password, const s
 std::string AuthorizationManager::getId(std::string login, Database &db) {
     try {
         std::string get_id = "SELECT id FROM AuthorizationService.AuthorizationData WHERE login = $1";
-        return db.executeQueryWithParams(get_id, login)[0][0].c_str();
+        pqxx::result user_id = db.executeQueryWithParams(get_id, login);
+        if (user_id.empty()) {
+            return "";
+        }
+        return user_id[0][0].c_str();
     } catch (const std::exception& e) {
         return "";
     }
