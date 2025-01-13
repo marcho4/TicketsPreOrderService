@@ -4,21 +4,9 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
     auto parsed = json::parse(req.body);
     std::string login = parsed["login"];
     std::string password = parsed["password"];
+    pqxx::result password_hash = getPasswordHash(login, db);
+    std::string user_id = getId(login, db);
 
-    pqxx::result password_hash;
-    std::string user_id;
-
-    try {
-        std::string password_query = "SELECT password FROM AuthorizationService.AuthorizationData WHERE login = $1";
-        password_hash = db.executeQueryWithParams(password_query, login);
-
-        std::string get_id = "SELECT id FROM AuthorizationService.AuthorizationData WHERE login = $1";
-        user_id = db.executeQueryWithParams(get_id, login)[0][0].c_str();
-    } catch (const std::exception& e) {
-        res.status = 500;
-        res.set_content(R"({"msg": "Server error"})", "application/json");
-        return;
-    }
     if (password_hash.empty()) {
         res.status = 403; // 403 - forbidden
         res.set_content(R"({"msg": "Access denied"})", "application/json");
@@ -61,4 +49,23 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
 
 bool AuthorizationManager::validatePassword(const std::string& password, const std::string& hashed_password) {
     return bcrypt::validatePassword(password, hashed_password);
+}
+
+std::string AuthorizationManager::getId(std::string login, Database &db) {
+    try {
+        std::string get_id = "SELECT id FROM AuthorizationService.AuthorizationData WHERE login = $1";
+        return db.executeQueryWithParams(get_id, login)[0][0].c_str();
+    } catch (const std::exception& e) {
+        return "";
+    }
+}
+
+pqxx::result AuthorizationManager::getPasswordHash(std::string login, Database &db) {
+    try {
+        std::string password_query = "SELECT password FROM AuthorizationService.AuthorizationData WHERE login = $1";
+        pqxx::result password_hash = db.executeQueryWithParams(password_query, login);
+        return password_hash;
+    } catch (const std::exception& e) {
+        return {};
+    }
 }

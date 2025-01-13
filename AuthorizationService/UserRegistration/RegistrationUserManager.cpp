@@ -50,8 +50,7 @@ std::string UserRegistration::RegisterUser(const std::string& email, const std::
                         "VALUES ($1, $2, $3)"; // надо будет доработать
     db.executeQueryWithParams(query, email, name, last_name);
     LoginData data = PasswordCreator::generatePasswordAndLoginForUser(name, email, db);
-    std::cout << "Password: " << data.password << ' ';
-    std::cout << "Login: " << data.login << std::endl;
+
     // credentials[0] - пароль, credentials[1] - логин, credentials[2] - хэш пароля
     std::vector<std::string> credentials = PasswordCreator::HashAndSavePassword(data, db);
     std::string role = "USER";

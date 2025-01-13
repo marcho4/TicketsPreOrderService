@@ -1,3 +1,4 @@
+
 #include "RegistrationOrganizerManager.h"
 #include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
 #include "../UserRegistration/PasswordGenerator/PasswordCreator.h"
@@ -26,8 +27,45 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
 //            return;
 //        }
         RegisterOrganizer(email, company, tin, db); // короче вот тут мы должны закидывать данные в сервис
+
+
+        // пропишем мок-запрос одобрения организатора админом
+        // --------------------------------------------------------------------------------------------
+        nlohmann::json json_body = {
+                {"email", email},
+                {"tin", tin},
+                {"company", company},
+                {"status", "APPROVED"}
+        };
+        httplib::Client mock_request("http://localhost:8081");
+        auto ping = mock_request.Get("/is_working");
+        std::string password, login;
+
+        if (ping && ping->status == 200) {
+            auto req_result = mock_request.Post("/authorize_approved", json_body.dump(), "application/json");
+            if (req_result && req_result->status == 200) {
+                auto response_json = nlohmann::json::parse(req_result->body);
+
+                login = response_json["login"];
+                password = response_json["password"];
+
+                std::cout << "Approval request sent successfully\n";
+            } else {
+                std::cout << "Failed to send approval request\n";
+            }
+        } else {
+            std::cerr << "Admin service is unavailable\n";
+        }
+
+        // --------------------------------------------------------------------------------------------
+
+
         // админа, на подтверждение, а он в ответ будет присылать запрос подтвержден ли чел или нет
-        json response = {{"status", "Application sent to admin"}}; // пока что ничего никуда не отправляется а
+        json response = {
+                {"status", "Application sent to admin"},
+                {"login", login},
+                {"password", password}
+        }; // пока что ничего никуда не отправляется а
         // мы сразу генерируем логин/пароль для чувака и отдаем ему по почте
         res.status = 200;
         res.set_content(response.dump(), "application/json");
@@ -55,11 +93,9 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
     auto parsed = json::parse(request.body);
     std::string email = parsed.at("email").get<std::string>();
     std::string company = parsed.at("company").get<std::string>();
-    std::string tin = parsed.at("TIN").get<std::string>();
-    // из запроса нужно как-то понять подтвердили ли организатора или нет
-//    Status status = Status::APPROVED; // заглушка
-
-    if (true) {
+    std::string tin = parsed.at("tin").get<std::string>();
+    std::string status = parsed.at("status").get<std::string>();
+    if (status == "APPROVED") {
         // сгенерили пароль
         LoginData data = PasswordCreator::generatePasswordAndLoginForOrganizer(company, db);
         // credentials[0] - пароль, credentials[1] - логин, credentials[2] - хэш пароля
@@ -69,9 +105,17 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
                 "VALUES ($1, $2, $3, $4)";
         db.executeQueryWithParams(query, credentials[1], credentials[2], email, role); // храним хэш пароля, а не сам пароль
 
-        NotifyOrganizer(email, credentials[1], credentials[0]);
-        res.set_content(json{{"status", "success"}, {"message", "Organizer approved"}}.dump(), "application/json");
+//        NotifyOrganizer(email, credentials[1], credentials[0]);
+        res.status = 200;
+        json response_body = {
+                {"login", credentials[1]},
+                {"password", credentials[0]},
+                {"message", "Organizer approved"},
+                {"status", "success"}
+        };
+        res.set_content(response_body.dump(), "application/json");
     } else {
+        res.status = 403;
         res.set_content(json{{"status", "rejected"}, {"message", "Registration denied"}}.dump(), "application/json");
     }
 }

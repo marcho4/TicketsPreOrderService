@@ -11,4 +11,8 @@ public:
                               Database& db);
 
     static bool validatePassword(const std::string& password, const std::string& hashed_password);
+
+    static std::string getId(std::string basicString, Database &database);
+
+    static pqxx::result getPasswordHash(std::string basicString, Database &database);
 };
