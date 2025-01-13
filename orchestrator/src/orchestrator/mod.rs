@@ -1,2 +1,2 @@
 pub mod orchestrator;
-mod config;
+pub mod config;

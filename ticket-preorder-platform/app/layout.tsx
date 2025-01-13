@@ -27,6 +27,7 @@ export default function RootLayout({
           <Navigation />
           <main className="min-h-screen pt-8">
               {children}
+              <Toaster/>
           </main>
         </AuthProvider>
       </body>
@@ -38,3 +39,4 @@ export default function RootLayout({
 
 import './globals.css'
 import {AuthProvider} from "@/providers/authProvider";
+import {Toaster} from "@/components/ui/toaster";

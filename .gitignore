@@ -1,0 +1,6 @@
+/ticket-preorder-platform/node_modules/
+/ticket-preorder-platform/.next/
+/orchestrator/target/
+/JWTService/target/
+/.vscode/
+/ticket-preorder-platform/.idea/

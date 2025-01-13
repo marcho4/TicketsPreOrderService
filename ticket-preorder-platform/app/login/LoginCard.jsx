@@ -4,16 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import fetchData from "@/lib/fetchData";
 
 export default function AuthCard() {
     // Состояние, которое отвечает за текущий «режим» компонента.
@@ -30,7 +25,7 @@ export default function AuthCard() {
     const [email, setEmail] = useState("");
 
     // Поля для организатора (например)
-    const [organizationName, setOrganizationName] = useState("");
+    const [company, setCompany] = useState("");
     const [TIN, setTIN] = useState("");
 
     const [loading, setLoading] = useState(false);
@@ -40,43 +35,40 @@ export default function AuthCard() {
     // Функция логина
     const handleLogin = async (e) => {
         e.preventDefault();
-        try {
-            setLoading(true);
+        let response = await fetchData("http://localhost:8080/api/login", "POST",
+            { email, password }, setLoading)
 
-            let response = await fetch("http://localhost:8080/api/login", {
-                method: "POST",
-                body: JSON.stringify({ email, password }),
-                credentials: "include",
-                headers: { "Content-Type": "application/json" },
-            });
-
-            if (response.status === 200) {
-                // Допустим, логин успешен
-                router.push("/dashboard");
-            }
-        } catch (error) {
-            console.log("Login Error: ", error);
-        } finally {
-            setLoading(false);
+        if (response.status === 200) {
+            router.push("/dashboard");
+        } else {
+            console.log("Wrong credentials");
         }
     };
 
     // Функция регистрации обычного пользователя
     const handleSignupUser = async (e) => {
         e.preventDefault();
-        // TODO: ваша логика отправки на бэкенд
-        console.log("User sign up:", { name, lastName, email });
+        let response = await fetchData("http://localhost:8080/api/auth/register", "POST",
+            { name, lastName, email }, setLoading)
+
+        if (response.status === 200) {
+            router.push("/dashboard");
+        } else {
+            console.log("Wrong credentials");
+        }
     };
 
     // Функция регистрации организатора
     const handleSignupOrganizer = async (e) => {
         e.preventDefault();
-        // TODO: ваша логика отправки на бэкенд
-        console.log("Organizer sign up:", {
-            organizationName,
-            email,
-            TIN,
-        });
+        let response = await fetchData("http://localhost:8080/api/auth/register/organizer", "POST",
+            { company, email, TIN }, setLoading)
+
+        if (response.status === 200) {
+            router.push("/dashboard");
+        } else {
+            console.log("Wrong credentials");
+        }
     };
 
     // В зависимости от режима возвращаем нужный JSX
@@ -117,7 +109,7 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-[#4CAF50] transition-colors duration-300"
+                                className="w-full rounded-xl hover:bg-accent hover:text-my_black transition-colors duration-300"
                             >
                                 {loading ? (
                                     <div className="flex items-center gap-2">
@@ -223,7 +215,8 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-[#4CAF50] transition-colors duration-300"
+                                className="w-full rounded-xl hover:bg-accent hover:text-my_black
+                                 transition-colors duration-300"
                             >
                                 Зарегистрироваться
                             </Button>
@@ -245,15 +238,15 @@ export default function AuthCard() {
                     <form onSubmit={handleSignupOrganizer}>
                         <CardContent className="space-y-6 pt-6 pb-8">
                             <div className="space-y-2">
-                                <Label htmlFor="organizationName" className="text-text">
+                                <Label htmlFor="company" className="text-text">
                                     Название вашей организации
                                 </Label>
                                 <Input
-                                    id="organizationName"
+                                    id="company"
                                     type="text"
                                     placeholder="Введите название"
-                                    value={organizationName}
-                                    onChange={(e) => setOrganizationName(e.target.value)}
+                                    value={company}
+                                    onChange={(e) => setCompany(e.target.value)}
                                     required
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
@@ -293,7 +286,8 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl bg-[#121212] hover:bg-[#4CAF50] transition-colors duration-300"
+                                className="w-full rounded-xl bg-my_black hover:bg-accent hover:text-my_black
+                                 transition-colors duration-300"
                             >
                                 Зарегистрироваться
                             </Button>

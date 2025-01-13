@@ -6,5 +6,5 @@ RUN cargo build --release
 FROM ubuntu:latest
 WORKDIR /app
 COPY --from=builder /app/target/release/jwt_microservice /app/jwt_microservice
-EXPOSE 8002
+EXPOSE 8001
 CMD ["./jwt_microservice"]

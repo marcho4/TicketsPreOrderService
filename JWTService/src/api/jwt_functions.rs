@@ -1,6 +1,7 @@
 use jsonwebtoken::{DecodingKey, EncodingKey, Header};
 use jsonwebtoken::errors::Error;
-use crate::models::jwt_models::{Claims, JWTPayload};
+use crate::models::claims::Claims;
+use crate::models::jwt_payload::JWTPayload;
 
 const HOUR: u64 = 3600;
 
@@ -10,8 +11,9 @@ pub fn create_jwt(payload: JWTPayload) -> String {
     let key: EncodingKey = EncodingKey::from_secret(sec.as_bytes());
 
     let claims = Claims {
-        wallet: payload.wallet,
-        exp: current_timestamp + HOUR
+        id: payload.id,
+        exp: current_timestamp + HOUR,
+        role: payload.role,
     };
 
     jsonwebtoken::encode(&Header::default(), &claims, &key).unwrap()
