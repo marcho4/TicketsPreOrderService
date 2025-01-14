@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /AuthorizationService
 
 COPY . .
-COPY libraries /AuthorizationService/libraries
 
 WORKDIR /AuthorizationService/cmake-build-debug
 RUN rm -rf *

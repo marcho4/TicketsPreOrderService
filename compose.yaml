@@ -1,0 +1,34 @@
+services:
+  jwt:
+    build:
+      context: ./JWTService
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - main
+
+  orchestrator:
+    build:
+      context: ./orchestrator
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - main
+
+  auth:
+    build:
+      context: ./AuthorizationService
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    networks:
+      - main
+
+
+
+
+networks:
+  main:
+    driver: bridge
