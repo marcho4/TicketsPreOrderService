@@ -1,8 +1,8 @@
 #include <iostream>
 #include "../libraries/httplib.h"
-#include "OrganizerRegistration/RegistrationOrganizerManager.h"
-#include "UserRegistration/RegistrationUserManager.h"
-#include "Authorization/AuthorizationManager.h"
+#include "src/OrganizerRegistration/RegistrationOrganizerManager.h"
+#include "src/UserRegistration/RegistrationUserManager.h"
+#include "src/Authorization/AuthorizationManager.h"
 
 int main() {
     try {
@@ -10,7 +10,7 @@ int main() {
 //        // инициализация хоста и порта для подключения
         std::string connect = "dbname=db_org_registr host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/postgres/db_org_registr.sql");
+        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
