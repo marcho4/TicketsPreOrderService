@@ -80,9 +80,25 @@ void ProcessRequests::AddOrganizerRequest(const httplib::Request& req, httplib::
     std::string email = parsed.at("email").get<std::string>();
     std::string tin = parsed.at("tin").get<std::string>();
 
+    std::string check_existence = "SELECT * FROM Organizers.OrganizerRequests WHERE email = $1";
+    try {
+        pqxx::result data = db.executeQueryWithParams(check_existence, email);
+        if (!data.empty()) {
+            res.status = 400;
+            res.set_content(json{{"status", "error"}, {"message", "Organizer with this email already exists"}}.dump(), "application/json");
+            return;
+        }
+    } catch (const std::exception& e) {
+        res.status = 500;
+        res.set_content(json{{"status", "error"}, {"message", e.what()}}.dump(), "application/json");
+        return;
+    }
+
     std::string add_organizer = "INSERT INTO Organizers.OrganizerRequests (company, email, tin, status) VALUES ($1, $2, $3, $4)";
     try {
         db.executeQueryWithParams(add_organizer, company, email, tin, "PENDING");
+        res.status = 200;
+        res.set_content(json{{"status", "success"}, {"message", "Organizer request added"}}.dump(), "application/json");
     } catch (const std::exception& e) {
         res.status = 500;
         res.set_content(json{{"status", "error"}, {"message", e.what()}}.dump(), "application/json");

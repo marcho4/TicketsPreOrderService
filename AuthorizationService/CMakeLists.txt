@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(TicketsPreOrderService VERSION 1.0.0)
+project(AuthorizationService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_OSX_ARCHITECTURES "arm64")
@@ -36,10 +36,10 @@ include_directories("/opt/homebrew/opt/openssl@3/include")
 # Find the libraries
 find_package(CURL REQUIRED)
 # Create executable
-add_executable(TicketsPreOrderService ${SOURCE_FILES})
+add_executable(AuthorizationService ${SOURCE_FILES})
 
 # Link the libraries
-target_link_libraries(TicketsPreOrderService PRIVATE CURL::libcurl
+target_link_libraries(AuthorizationService PRIVATE CURL::libcurl
         /opt/homebrew/opt/openssl@3/lib/libssl.dylib
         /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
         /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib

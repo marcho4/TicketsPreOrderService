@@ -26,8 +26,8 @@ int main() {
             processing.AddOrganizerRequest(req, res, db);
         });
 
-        std::cout << "Server is listening http://localhost:8081" << '\n';
-        server.listen("localhost", 8081);
+        std::cout << "Server is listening http://localhost:8082" << '\n';
+        server.listen("localhost", 8082);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }
