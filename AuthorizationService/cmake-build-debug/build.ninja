@@ -56,47 +56,47 @@ build CMakeFiles/TicketsPreOrderService.dir/main.cpp.o: CXX_COMPILER__TicketsPre
   OBJECT_DIR = CMakeFiles/TicketsPreOrderService.dir
   OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir
 
-build CMakeFiles/TicketsPreOrderService.dir/Authorization/AuthorizationManager.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/Authorization/AuthorizationManager.cpp || cmake_object_order_depends_target_TicketsPreOrderService
-  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/Authorization/AuthorizationManager.cpp.o.d
+build CMakeFiles/TicketsPreOrderService.dir/src/Authorization/AuthorizationManager.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp || cmake_object_order_depends_target_TicketsPreOrderService
+  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/src/Authorization/AuthorizationManager.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
   INCLUDES = -I/opt/homebrew/Cellar/curl/8.12.0/include -I/opt/homebrew/opt/libpqxx/include -I/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include -I/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include -I/opt/homebrew/opt/openssl@3/include -isystem /opt/homebrew/Cellar/curl/8.11.1/include
   OBJECT_DIR = CMakeFiles/TicketsPreOrderService.dir
-  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/Authorization
+  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/src/Authorization
 
-build CMakeFiles/TicketsPreOrderService.dir/OrganizerRegistration/RegistrationOrganizerManager.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/OrganizerRegistration/RegistrationOrganizerManager.cpp || cmake_object_order_depends_target_TicketsPreOrderService
-  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/OrganizerRegistration/RegistrationOrganizerManager.cpp.o.d
+build CMakeFiles/TicketsPreOrderService.dir/src/OrganizerRegistration/RegistrationOrganizerManager.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/OrganizerRegistration/RegistrationOrganizerManager.cpp || cmake_object_order_depends_target_TicketsPreOrderService
+  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/src/OrganizerRegistration/RegistrationOrganizerManager.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
   INCLUDES = -I/opt/homebrew/Cellar/curl/8.12.0/include -I/opt/homebrew/opt/libpqxx/include -I/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include -I/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include -I/opt/homebrew/opt/openssl@3/include -isystem /opt/homebrew/Cellar/curl/8.11.1/include
   OBJECT_DIR = CMakeFiles/TicketsPreOrderService.dir
-  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/OrganizerRegistration
+  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/src/OrganizerRegistration
 
-build CMakeFiles/TicketsPreOrderService.dir/UserRegistration/RegistrationUserManager.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/UserRegistration/RegistrationUserManager.cpp || cmake_object_order_depends_target_TicketsPreOrderService
-  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/UserRegistration/RegistrationUserManager.cpp.o.d
+build CMakeFiles/TicketsPreOrderService.dir/src/UserRegistration/RegistrationUserManager.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/UserRegistration/RegistrationUserManager.cpp || cmake_object_order_depends_target_TicketsPreOrderService
+  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/src/UserRegistration/RegistrationUserManager.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
   INCLUDES = -I/opt/homebrew/Cellar/curl/8.12.0/include -I/opt/homebrew/opt/libpqxx/include -I/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include -I/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include -I/opt/homebrew/opt/openssl@3/include -isystem /opt/homebrew/Cellar/curl/8.11.1/include
   OBJECT_DIR = CMakeFiles/TicketsPreOrderService.dir
-  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/UserRegistration
+  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/src/UserRegistration
 
-build CMakeFiles/TicketsPreOrderService.dir/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/AuxiliaryFunctions/AuxiliaryFunctions.cpp || cmake_object_order_depends_target_TicketsPreOrderService
-  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o.d
+build CMakeFiles/TicketsPreOrderService.dir/src/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/AuxiliaryFunctions/AuxiliaryFunctions.cpp || cmake_object_order_depends_target_TicketsPreOrderService
+  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/src/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
   INCLUDES = -I/opt/homebrew/Cellar/curl/8.12.0/include -I/opt/homebrew/opt/libpqxx/include -I/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include -I/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include -I/opt/homebrew/opt/openssl@3/include -isystem /opt/homebrew/Cellar/curl/8.11.1/include
   OBJECT_DIR = CMakeFiles/TicketsPreOrderService.dir
-  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/AuxiliaryFunctions
+  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/src/AuxiliaryFunctions
 
-build CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/postgres/PostgresProcessing.cpp || cmake_object_order_depends_target_TicketsPreOrderService
-  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o.d
+build CMakeFiles/TicketsPreOrderService.dir/src/postgres/PostgresProcessing.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/postgres/PostgresProcessing.cpp || cmake_object_order_depends_target_TicketsPreOrderService
+  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/src/postgres/PostgresProcessing.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
   INCLUDES = -I/opt/homebrew/Cellar/curl/8.12.0/include -I/opt/homebrew/opt/libpqxx/include -I/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include -I/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include -I/opt/homebrew/opt/openssl@3/include -isystem /opt/homebrew/Cellar/curl/8.11.1/include
   OBJECT_DIR = CMakeFiles/TicketsPreOrderService.dir
-  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/postgres
+  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/src/postgres
 
-build CMakeFiles/TicketsPreOrderService.dir/UserRegistration/PasswordGenerator/PasswordCreator.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/UserRegistration/PasswordGenerator/PasswordCreator.cpp || cmake_object_order_depends_target_TicketsPreOrderService
-  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/UserRegistration/PasswordGenerator/PasswordCreator.cpp.o.d
+build CMakeFiles/TicketsPreOrderService.dir/src/UserRegistration/PasswordGenerator/PasswordCreator.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/UserRegistration/PasswordGenerator/PasswordCreator.cpp || cmake_object_order_depends_target_TicketsPreOrderService
+  DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/src/UserRegistration/PasswordGenerator/PasswordCreator.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
   INCLUDES = -I/opt/homebrew/Cellar/curl/8.12.0/include -I/opt/homebrew/opt/libpqxx/include -I/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include -I/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/../libraries/libpqxx/include -I/opt/homebrew/opt/openssl@3/include -isystem /opt/homebrew/Cellar/curl/8.11.1/include
   OBJECT_DIR = CMakeFiles/TicketsPreOrderService.dir
-  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/UserRegistration/PasswordGenerator
+  OBJECT_FILE_DIR = CMakeFiles/TicketsPreOrderService.dir/src/UserRegistration/PasswordGenerator
 
 build CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/bcrypt.cpp.o: CXX_COMPILER__TicketsPreOrderService_unscanned_Debug /Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/bcrypt.cpp || cmake_object_order_depends_target_TicketsPreOrderService
   DEP_FILE = CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/bcrypt.cpp.o.d
@@ -120,7 +120,7 @@ build CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrde
 #############################################
 # Link the executable TicketsPreOrderService
 
-build TicketsPreOrderService: CXX_EXECUTABLE_LINKER__TicketsPreOrderService_Debug CMakeFiles/TicketsPreOrderService.dir/main.cpp.o CMakeFiles/TicketsPreOrderService.dir/Authorization/AuthorizationManager.cpp.o CMakeFiles/TicketsPreOrderService.dir/OrganizerRegistration/RegistrationOrganizerManager.cpp.o CMakeFiles/TicketsPreOrderService.dir/UserRegistration/RegistrationUserManager.cpp.o CMakeFiles/TicketsPreOrderService.dir/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o CMakeFiles/TicketsPreOrderService.dir/postgres/PostgresProcessing.cpp.o CMakeFiles/TicketsPreOrderService.dir/UserRegistration/PasswordGenerator/PasswordCreator.cpp.o CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/bcrypt.cpp.o CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/blowfish.cpp.o | /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib /opt/homebrew/opt/openssl@3/lib/libssl.dylib /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
+build TicketsPreOrderService: CXX_EXECUTABLE_LINKER__TicketsPreOrderService_Debug CMakeFiles/TicketsPreOrderService.dir/main.cpp.o CMakeFiles/TicketsPreOrderService.dir/src/Authorization/AuthorizationManager.cpp.o CMakeFiles/TicketsPreOrderService.dir/src/OrganizerRegistration/RegistrationOrganizerManager.cpp.o CMakeFiles/TicketsPreOrderService.dir/src/UserRegistration/RegistrationUserManager.cpp.o CMakeFiles/TicketsPreOrderService.dir/src/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o CMakeFiles/TicketsPreOrderService.dir/src/postgres/PostgresProcessing.cpp.o CMakeFiles/TicketsPreOrderService.dir/src/UserRegistration/PasswordGenerator/PasswordCreator.cpp.o CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/bcrypt.cpp.o CMakeFiles/TicketsPreOrderService.dir/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/src/blowfish.cpp.o | /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib /opt/homebrew/opt/openssl@3/lib/libssl.dylib /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LINK_FLAGS = -L/usr/local/opt/libpqxx/lib
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/curl/8.12.0/lib -Wl,-rpath,/opt/homebrew/opt/libpqxx/lib  /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib  /opt/homebrew/opt/openssl@3/lib/libssl.dylib  /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib  /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib  -lpqxx

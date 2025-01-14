@@ -6,17 +6,17 @@ set(CMAKE_OSX_ARCHITECTURES "arm64")
 # Source files
 set(SOURCE_FILES
         main.cpp
-        Authorization/AuthorizationManager.cpp
-        Authorization/AuthorizationManager.h
-        OrganizerRegistration/RegistrationOrganizerManager.cpp
-        OrganizerRegistration/RegistrationOrganizerManager.h
-        UserRegistration/RegistrationUserManager.cpp
-        UserRegistration/RegistrationUserManager.h
-        AuxiliaryFunctions/AuxiliaryFunctions.cpp
-        AuxiliaryFunctions/AuxiliaryFunctions.h
-        postgres/PostgresProcessing.h
-        postgres/PostgresProcessing.cpp
-        UserRegistration/PasswordGenerator/PasswordCreator.cpp
+        src/Authorization/AuthorizationManager.cpp
+        src/Authorization/AuthorizationManager.h
+        src/OrganizerRegistration/RegistrationOrganizerManager.cpp
+        src/OrganizerRegistration/RegistrationOrganizerManager.h
+        src/UserRegistration/RegistrationUserManager.cpp
+        src/UserRegistration/RegistrationUserManager.h
+        src/AuxiliaryFunctions/AuxiliaryFunctions.cpp
+        src/AuxiliaryFunctions/AuxiliaryFunctions.h
+        src/postgres/PostgresProcessing.h
+        src/postgres/PostgresProcessing.cpp
+        src/UserRegistration/PasswordGenerator/PasswordCreator.cpp
         ../libraries/Bcrypt.cpp/src/bcrypt.cpp
         ../libraries/Bcrypt.cpp/include/bcrypt.h
         ../libraries/Bcrypt.cpp/src/blowfish.cpp
