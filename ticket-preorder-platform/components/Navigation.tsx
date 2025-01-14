@@ -40,6 +40,8 @@ const getLinksForRole = (role: UserRole) => {
       default:
           return [
               { href: '/login', label: 'Login' },
+              // для теста админа
+              { href: '/admin-home', label: 'AdminHome'},
           ];
   }
 };
