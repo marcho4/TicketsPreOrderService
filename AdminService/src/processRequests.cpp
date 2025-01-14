@@ -75,5 +75,17 @@ pqxx::result ProcessRequests::GetPersonalData(const std::string& request_id, Dat
 }
 
 void ProcessRequests::AddOrganizerRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
+    auto parsed = json::parse(req.body);
+    std::string company = parsed.at("company").get<std::string>();
+    std::string email = parsed.at("email").get<std::string>();
+    std::string tin = parsed.at("tin").get<std::string>();
 
+    std::string add_organizer = "INSERT INTO Organizers.OrganizerRequests (company, email, tin, status) VALUES ($1, $2, $3, $4)";
+    try {
+        db.executeQueryWithParams(add_organizer, company, email, tin, "PENDING");
+    } catch (const std::exception& e) {
+        res.status = 500;
+        res.set_content(json{{"status", "error"}, {"message", e.what()}}.dump(), "application/json");
+        return;
+    }
 }
