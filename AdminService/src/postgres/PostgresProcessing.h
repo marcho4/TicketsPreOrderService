@@ -36,6 +36,13 @@ public:
         return res;
     }
 
+    pqxx::result executeQueryWithParams(const std::string &query, const std::string& first, const std::string& second) {
+        pqxx::work txn(conn_);
+        pqxx::result res = txn.exec_params(pqxx::zview(query), first, second);
+        txn.commit();
+        return res;
+    }
+
     pqxx::result executeQueryWithParams(const std::string &query, std::string& id) {
         pqxx::work txn(conn_);
         pqxx::result res = txn.exec_params(pqxx::zview(query), id);
