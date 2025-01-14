@@ -1,13 +1,13 @@
 #include <iostream>
 #include "../libraries/httplib.h"
-#include "postgres/PostgresProcessing.h"
+#include "src/postgres/PostgresProcessing.h"
 
 int main() {
     try {
         httplib::Server server;
         std::string connect = "dbname=pending_organizers host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/postgres/pending_organizers.sql");
+        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/postgres/pending_organizers.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
