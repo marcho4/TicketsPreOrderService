@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../../../libraries/httplib.h"
-#include "../../../libraries/nlohmann/json.hpp"
+#include "../../libraries/httplib.h"
+#include "../../libraries/nlohmann/json.hpp"
 #include "../postgres/PostgresProcessing.h"
 #include "PasswordGenerator/PasswordCreator.h"
 

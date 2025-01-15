@@ -1,12 +1,11 @@
 #include <iostream>
-#include "../../../libraries/httplib.h"
-#include "../../../libraries/nlohmann/json.hpp"
+#include "../../libraries/httplib.h"
+#include "../../libraries/nlohmann/json.hpp"
 #include <pqxx/pqxx>
 #include "../postgres/PostgresProcessing.h"
 
 class OrganizerRegistrationManager {
     using json = nlohmann::json;
-
     enum Status {
         AWAITS = 0,
         APPROVED = 1,

@@ -1,8 +1,9 @@
-#include "../../../libraries/httplib.h"
-#include "../../../libraries/nlohmann/json.hpp"
+#include "../../libraries/httplib.h"
+#include "../../libraries/nlohmann/json.hpp"
 #include <pqxx/pqxx>
 #include "../postgres/PostgresProcessing.h"
 #include "bcrypt.h"
+
 class AuthorizationManager {
     using json = nlohmann::json;
 

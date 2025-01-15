@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../libraries/httplib.h"
+#include "libraries/httplib.h"
 #include "src/OrganizerRegistration/RegistrationOrganizerManager.h"
 #include "src/UserRegistration/RegistrationUserManager.h"
 #include "src/Authorization/AuthorizationManager.h"
