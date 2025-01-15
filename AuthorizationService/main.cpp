@@ -7,35 +7,66 @@
 int main() {
     try {
         httplib::Server server;
-//        // инициализация хоста и порта для подключения
-        std::string connect = "dbname=db_org_registr host=localhost port=5432";
-        Database db(connect);
-        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/postgres/db_org_registr.sql");
-        pqxx::connection connection_(connect);
-        pqxx::work worker(connection_);
 
-        server.Post("/register_organizer", [&db](const httplib::Request& request, httplib::Response &res) {
-            OrganizerRegistrationManager::RegisterOrganizerRequest(request, res, db);
-        });
-
-        server.Post("/register_user", [&db](const httplib::Request& request, httplib::Response &res) {
-            UserRegistration::RegisterUserRequest(request, res, db);
-        });
-
-        server.Post("/authorize", [&db](const httplib::Request& request, httplib::Response &res) {
-            AuthorizationManager::AuthorizationRequest(request, res, db);
-        });
-
-        server.Post("/authorize_approved", [&db](const httplib::Request& request, httplib::Response &res) {
-            OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
-        });
-
-        server.Get("/is_working", [&db](const httplib::Request& request, httplib::Response &res) {
+        // Обработчик preflight OPTIONS запросов
+        server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
+            res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
+            res.set_header("Access-Control-Allow-Credentials", "true");
+            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            res.set_header("Content-Type", "application/json");
             res.status = 200;
         });
 
-        std::cout << "Server is listening http://localhost:8081" << '\n';
-        server.listen("localhost", 8081);
+        // Функция для установки CORS-заголовков
+        auto set_cors_headers = [&](httplib::Response& res) {
+            res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
+            res.set_header("Access-Control-Allow-Credentials", "true");
+            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            res.set_header("Content-Type", "application/json");
+        };
+
+        // Подключение к базе данных
+        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
+        Database db(connect);
+        db.initDbFromFile("src/postgres/db_org_registr.sql");
+        pqxx::connection connection_(connect);
+        pqxx::work worker(connection_);
+
+        // Маршрут для регистрации организатора
+        server.Post("/register_organizer", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            OrganizerRegistrationManager::RegisterOrganizerRequest(request, res, db);
+        });
+
+        // Маршрут для регистрации пользователя
+        server.Post("/register_user", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            UserRegistration::RegisterUserRequest(request, res, db);
+        });
+
+        // Маршрут для авторизации
+        server.Post("/authorize", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            AuthorizationManager::AuthorizationRequest(request, res, db);
+        });
+
+        // Маршрут для подтверждения авторизации организатора
+        server.Post("/authorize_approved", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
+        });
+
+        // Маршрут для проверки работы сервера
+        server.Get("/is_working", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            res.status = 200;
+        });
+
+        std::cout << "Server is listening on 0.0.0.0:8002\n";
+        server.listen("0.0.0.0", 8002);
+
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }

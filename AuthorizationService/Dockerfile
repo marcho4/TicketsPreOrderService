@@ -21,11 +21,12 @@ RUN wget https://github.com/jtv/libpqxx/archive/refs/tags/7.7.5.tar.gz && \
     cmake --build build --target install && \
     cd .. && rm -rf libpqxx-7.7.5 7.7.5.tar.gz
 
-RUN git clone https://github.com/rg3/bcrypt.git /tmp/bcrypt && \
+    RUN git clone https://github.com/rg3/bcrypt.git /tmp/bcrypt && \
     cd /tmp/bcrypt && \
     make && \
-    make install && \
-    rm -rf /tmp/bcrypt \
+    cp bcrypt.a /usr/local/lib && \
+    cp bcrypt.h /usr/local/include && \
+    rm -rf /tmp/bcrypt
 
 # Установка рабочего каталога
 WORKDIR /app
@@ -44,4 +45,4 @@ RUN mkdir -p build && \
 CMD ["./build/AuthorizationService"]
 
 # Открытие порта
-EXPOSE 8081
+EXPOSE 8002

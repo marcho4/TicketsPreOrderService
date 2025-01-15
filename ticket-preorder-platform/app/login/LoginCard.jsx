@@ -21,12 +21,12 @@ export default function AuthCard() {
 
     // Поля для регистрации (общие)
     const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [last_name, setlast_name] = useState("");
     const [email, setEmail] = useState("");
 
     // Поля для организатора (например)
     const [company, setCompany] = useState("");
-    const [TIN, setTIN] = useState("");
+    const [tin, settin] = useState("");
 
     const [loading, setLoading] = useState(false);
 
@@ -35,8 +35,8 @@ export default function AuthCard() {
     // Функция логина
     const handleLogin = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8080/api/login", "POST",
-            { email, password }, setLoading)
+        let response = await fetchData("http://localhost:8002/authorize", "POST",
+            { login, password }, setLoading)
 
         if (response.status === 200) {
             router.push("/dashboard");
@@ -48,8 +48,8 @@ export default function AuthCard() {
     // Функция регистрации обычного пользователя
     const handleSignupUser = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8080/api/auth/register", "POST",
-            { name, lastName, email }, setLoading)
+        let response = await fetchData("http://localhost:8002/register_user", "POST",
+            { name, last_name, email }, setLoading)
 
         if (response.status === 200) {
             router.push("/dashboard");
@@ -61,8 +61,8 @@ export default function AuthCard() {
     // Функция регистрации организатора
     const handleSignupOrganizer = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8080/api/auth/register/organizer", "POST",
-            { company, email, TIN }, setLoading)
+        let response = await fetchData("http://localhost:8002/register_organizer", "POST",
+            { company, email, tin }, setLoading)
 
         if (response.status === 200) {
             router.push("/dashboard");
@@ -190,8 +190,8 @@ export default function AuthCard() {
                                     id="name"
                                     type="text"
                                     placeholder="Ваша фамилия"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    value={last_name}
+                                    onChange={(e) => setlast_name(e.target.value)}
                                     required
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
@@ -275,8 +275,8 @@ export default function AuthCard() {
                                     id="tin"
                                     type="tin"
                                     placeholder="Введите ИНН вашей организации"
-                                    value={TIN}
-                                    onChange={(e) => setTIN(e.target.value)}
+                                    value={tin}
+                                    onChange={(e) => settin(e.target.value)}
                                     required
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />

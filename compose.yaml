@@ -26,6 +26,18 @@ services:
     networks:
       - main
 
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    ports:
+      - "5432:5432"
+    networks:
+      - main
+
+
 
 
 
