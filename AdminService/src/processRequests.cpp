@@ -56,6 +56,17 @@ void ProcessRequests::ProcessOrganizerRequest(const httplib::Request& req, httpl
             {"status", "APPROVED"}
         };
         // отправить запрос в сервис авторизации на обработку
+
+        // заменим в базе данных данные
+        std::string update_query = "UPDATE Organizers.OrganizerRequests SET status = $1 WHERE request_id = $2";
+        try {
+            db.executeQueryWithParams(update_query, "APPROVED", request_id);
+        } catch (const std::exception& e) {
+            res.status = 500;
+            res.set_content(json{{"status",  "error"},
+                                 {"message", e.what()}}.dump(), "application/json");
+            return;
+        }
     } else {
         json json_body = {
             {"email", email},
@@ -93,7 +104,6 @@ void ProcessRequests::AddOrganizerRequest(const httplib::Request& req, httplib::
         res.set_content(json{{"status", "error"}, {"message", e.what()}}.dump(), "application/json");
         return;
     }
-
     std::string add_organizer = "INSERT INTO Organizers.OrganizerRequests (company, email, tin, status) VALUES ($1, $2, $3, $4)";
     try {
         db.executeQueryWithParams(add_organizer, company, email, tin, "PENDING");

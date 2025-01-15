@@ -26,6 +26,11 @@ int main() {
             processing.AddOrganizerRequest(req, res, db);
         });
 
+        server.Get("/is_working", [&](const httplib::Request& req, httplib::Response& res) {
+            res.status = 200;
+            res.set_content("Server is working", "text/plain");
+        });
+
         std::cout << "Server is listening http://localhost:8082" << '\n';
         server.listen("localhost", 8082);
     } catch (const std::exception& e) {

@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.10)
 project(AuthorizationService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_OSX_ARCHITECTURES "arm64")
 # Source files
 set(SOURCE_FILES
         main.cpp
@@ -29,7 +28,7 @@ include_directories("/opt/homebrew/opt/libpqxx/include")
 link_directories("/opt/homebrew/opt/libpqxx/lib")
 
 # Include directories
-include_directories("/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include")
+include_directories("../../libraries/Bcrypt.cpp/include")
 include_directories("../libraries/libpqxx/include")
 include_directories("/opt/homebrew/opt/openssl@3/include")
 
