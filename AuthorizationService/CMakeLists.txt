@@ -16,9 +16,9 @@ set(SOURCE_FILES
         src/postgres/PostgresProcessing.h
         src/postgres/PostgresProcessing.cpp
         src/UserRegistration/PasswordGenerator/PasswordCreator.cpp
-        ../libraries/Bcrypt.cpp/src/bcrypt.cpp
-        ../libraries/Bcrypt.cpp/include/bcrypt.h
-        ../libraries/Bcrypt.cpp/src/blowfish.cpp
+        libraries/Bcrypt.cpp/src/bcrypt.cpp
+        libraries/Bcrypt.cpp/include/bcrypt.h
+        libraries/Bcrypt.cpp/src/blowfish.cpp
 )
 
 include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
@@ -28,8 +28,8 @@ include_directories("/opt/homebrew/opt/libpqxx/include")
 link_directories("/opt/homebrew/opt/libpqxx/lib")
 
 # Include directories
-include_directories("../../libraries/Bcrypt.cpp/include")
-include_directories("../libraries/libpqxx/include")
+include_directories("libraries/Bcrypt.cpp/include")
+include_directories("libraries/libpqxx/include")
 include_directories("/opt/homebrew/opt/openssl@3/include")
 
 # Find the libraries
