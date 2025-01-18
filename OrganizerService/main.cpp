@@ -21,7 +21,7 @@ int main() {
             createOrganizerInfo.OrganizerPersonalInfoCreateRequest(request, res, db);
         });
 
-        server.Post("/update_organizer_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/update_organizer_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
             UpdateOrganizerInfo updateOrganizerInfo;
             updateOrganizerInfo.OrganizerPersonalInfoUpdateRequest(request, res, db);
         });

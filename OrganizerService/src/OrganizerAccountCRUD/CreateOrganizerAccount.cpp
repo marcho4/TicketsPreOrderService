@@ -35,11 +35,20 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
         return;
     }
     std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email, phone_number) "
-                              "VALUES ($1, $2, $3, $4)";
+                              "VALUES ($1, $2, $3, $4) RETURNING organizer_id";
     std::vector<std::string> params = {organization_name, tin, email, phone};
-    if (db.executeQueryWithParams(insert_data, params).affected_rows() == 1) {
+    pqxx::result result = db.executeQueryWithParams(insert_data, params);
+
+    if (!result.empty() && result[0]["organizer_id"].c_str()) {
+        std::string returned_id = result[0]["organizer_id"].c_str();
+        json response = {
+                {"status", "created"},
+                {"message", "User created successfully"},
+                {"organizer_id", returned_id}
+        };
+//        std::cout << returned_id << '\n';
         res.status = 201;
-        res.set_content(R"({"status": "created", "message": "User created successfully"})", "application/json");
+        res.set_content(response.dump(), "application/json");
     } else {
         res.status = 500;
         res.set_content(R"({"status": "error", "message": "Failed to insert data into the database"})", "application/json");
