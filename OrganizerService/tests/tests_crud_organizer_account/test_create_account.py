@@ -1,0 +1,57 @@
+import uuid
+
+import pytest
+import requests
+from config import BASE_URL, DATABASE_CONFIG
+import sqlite3
+import psycopg2
+from psycopg2.extras import RealDictCursor
+
+
+@pytest.fixture(scope="module")
+def db_connection():
+    """Подключение к базе данных перед выполнением тестов."""
+    conn = psycopg2.connect(
+        dbname=DATABASE_CONFIG["dbname"],
+        host=DATABASE_CONFIG["host"],
+        port=DATABASE_CONFIG["port"],
+    )
+    yield conn
+    conn.close()
+
+
+
+
+@pytest.mark.parametrize("data, expected_status_code, expected_message", [
+    # для начала зарегистрируем организатора
+    (
+            {"organization_name": "KFC",
+             "tin": "123456789012",
+             "email": "nazarzakrevski@gmail.com",
+             "phone_number": "89168700688"},
+            201,  # status code
+            "User created successfully"  # response
+    ),
+    # теперь попробуем зарегистрироваться еще раз с теми же данными
+    (
+        {"organization_name": "KFC",
+         "tin": "123456789012",
+         "email": "nazarzakrevski@gmail.com",
+         "phone_number": "89168700688"},
+        409,  # status code
+        "User with this email already exists"  # response
+    )
+])
+def test_create_account(data, expected_status_code, expected_message, db_connection):
+    organizer_id = uuid.uuid4()
+    result = requests.post(f"{BASE_URL}/create_organizer_info/{organizer_id}", json=data)
+    assert result.status_code == expected_status_code
+    result_json = result.json()
+    assert result_json["message"] == expected_message
+
+    # email = data["email"]
+    # cursor = db_connection.cursor(cursor_factory=RealDictCursor)
+    # cursor.execute("SELECT * FROM Organizers.OrganizersData WHERE email = %s", (email,))
+    # db_result = cursor.fetchone()
+    #
+    # assert db_result, "User data not found in the database"
