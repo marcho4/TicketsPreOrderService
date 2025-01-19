@@ -1,9 +1,8 @@
 import uuid
-from utils import *
+from OrganizerService.tests.utils import *
 import pytest
 import requests
-from config import BASE_URL, DATABASE_CONFIG
-import sqlite3
+from OrganizerService.tests.config import BASE_URL, DATABASE_CONFIG
 import psycopg2
 from psycopg2.extras import RealDictCursor
 

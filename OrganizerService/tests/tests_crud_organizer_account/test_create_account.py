@@ -2,10 +2,8 @@ import uuid
 
 import pytest
 import requests
-from config import BASE_URL, DATABASE_CONFIG
-import sqlite3
+from OrganizerService.tests.config import BASE_URL, DATABASE_CONFIG
 import psycopg2
-from psycopg2.extras import RealDictCursor
 
 
 @pytest.fixture(scope="module")
@@ -18,8 +16,6 @@ def db_connection():
     )
     yield conn
     conn.close()
-
-
 
 
 @pytest.mark.parametrize("data, expected_status_code, expected_message", [
