@@ -103,8 +103,8 @@ pub async fn login(data: web::Data<Orchestrator>, req_data: web::Json<LoginData>
         .finish();
 
     // 8. Возвращаем результат
-    Ok(HttpResponse::Ok().cookie(cookie).json(ApiResponse::<Jwt> {
+    Ok(HttpResponse::Ok().cookie(cookie).json(ApiResponse::<UserInfo> {
         msg: Some("Successfully authorized".to_string()),
-        data: Some(jwt),
+        data: Some(jwt_claims),
     }))
 }
