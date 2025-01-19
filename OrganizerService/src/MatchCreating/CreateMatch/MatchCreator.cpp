@@ -15,8 +15,8 @@ void MatchCreator::CreateMatchRequest(const httplib::Request& req, httplib::Resp
         return;
     }
     // проверим на то что данные существуют/не существуют в базе
-    if (!CheckOrganizerExistence(organizer_id, db) || !CheckMatchExistence(organizer_id, req.body, db)) {
-        sendError(res, 404, "Organizer or match not found");
+    if (!CheckOrganizerExistence(organizer_id, db) || CheckMatchExistence(organizer_id, req.body, db)) {
+        sendError(res, 409, "Organizer does not exists or match found");
         return;
     }
 
@@ -47,7 +47,7 @@ bool MatchCreator::CheckMatchExistence(const std::string& organizer_id, const st
     std::string team_away = parsed["team_away"];
     std::string match_date = parsed["match_date"];
 
-    std::string query = "SELECT * FROM Matches.MatchData WHERE team_home = $1 "
+    std::string query = "SELECT * FROM Organizers.Matches WHERE team_home = $1 "
                         "AND team_away = $2 AND match_date = $3 AND organizer_id = $4";
 
     std::vector<std::string> params = {team_home, team_away, match_date, organizer_id};
@@ -57,7 +57,7 @@ bool MatchCreator::CheckMatchExistence(const std::string& organizer_id, const st
 }
 
 bool MatchCreator::CheckOrganizerExistence(const std::string& organizer_id, Database& db) {
-    std::string query = "SELECT 1 FROM Organizers.OrganizerData WHERE organizer_id = $1";
+    std::string query = "SELECT * FROM Organizers.OrganizersData WHERE organizer_id = $1";
     std::vector<std::string> params = {organizer_id};
 
     pqxx::result result = db.executeQueryWithParams(query, params);

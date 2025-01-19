@@ -27,13 +27,12 @@ int main() {
         });
 
         server.Get("/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
-            std::cout << "got\n";
             GetAccountInfo::GetAccountInfoRequest(request, res, db);
         });
 
         server.Post("/organizer/:id/create_match", [&db](const httplib::Request& request, httplib::Response &res) {
-            MatchCreator createMatch;
-            createMatch.CreateMatchRequest(request, res, db);
+            MatchCreator creator;
+            creator.CreateMatchRequest(request, res, db);
         });
 
         server.Post("/organizer/:id/update_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {

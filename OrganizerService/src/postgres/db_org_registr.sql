@@ -16,13 +16,14 @@ DROP TYPE IF EXISTS MatchStatus CASCADE;
 
 CREATE TYPE MatchStatus AS ENUM ('PENDING', 'IN_PROGRESS', 'FINISHED');
 
+-- TODO: привести в формат timestamp
 CREATE TABLE Organizers.Matches (
     match_id SERIAL PRIMARY KEY,
     organizer_id UUID NOT NULL REFERENCES Organizers.OrganizersData(organizer_id),
     team_home VARCHAR(255),
     team_away VARCHAR(255),
-    match_date TIMESTAMP,
-    match_time TIMESTAMP,
+    match_date text,
+    match_time text,
     stadium VARCHAR(255),
     match_description TEXT,
     match_status MatchStatus DEFAULT 'PENDING',

@@ -41,22 +41,43 @@ def create_organizer_info(data):
              "stadium": "Camp Nou",
              "match_description": "El Clasico"},
 
-            201,  # код ответа
-            "User info updated successfully."  # ответ
+            200,  # код ответа
+            "Match created successfully"  # ответ
     ),
 ])
 def test_create_valid_event(data, new_data, expected_status_code, expected_message, db_connection):
     response = create_organizer_info(data)
-    data_json = data.json()
+    data_json = response.json()
     organizer_id = data_json["organizer_id"]
-
+    print("bebra id: ", organizer_id)
     response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data)
 
     assert response.status_code == expected_status_code
-    assert response.message == expected_message
+    assert response.json()["message"] == expected_message
 
 
-@pytest.mark.parametrize("data, new_data, expected_status_code, expected_message", [
+@pytest.mark.parametrize("new_data, expected_status_code, expected_message", [
+    (
+            # данные о матче
+            {"team_home": "FC Barcelona",
+             "team_away": "Real Madrid",
+             "match_date": "2022-12-12",
+             "match_time": "12:00",
+             "stadium": "Camp Nou",
+             "match_description": "El Clasico"},
+
+            400,  # код ответа
+            "Invalid organizer_id format"  # ответ
+    ),
+])
+def test_create_event_invalid_organizer_id(new_data, expected_status_code, expected_message, db_connection):
+    response = requests.post(f"{BASE_URL}/organizer/random_id/create_match", json=new_data)
+    assert response.status_code == expected_status_code
+    assert response.json()["message"] == expected_message
+
+
+@pytest.mark.parametrize("data, new_data, expected_status_code_1, expected_message_1, "
+                         "expected_status_code_2, expected_message_2", [
     (
             # данные для регистрации организатора
             {"organization_name": generate_random_organization(),
@@ -72,16 +93,23 @@ def test_create_valid_event(data, new_data, expected_status_code, expected_messa
              "stadium": "Camp Nou",
              "match_description": "El Clasico"},
 
-            201,  # код ответа
-            "User info updated successfully."  # ответ
+            200,  # код ответа
+            "Match created successfully",  # ответ
+            409,
+            "Organizer does not exists or match found"
     ),
 ])
-def test_create_valid_event(data, new_data, expected_status_code, expected_message, db_connection):
+def test_try_create_duplicate_event(data, new_data, expected_status_code_1, expected_message_1,
+                                    expected_status_code_2, expected_message_2, db_connection):
     response = create_organizer_info(data)
-    data_json = data.json()
+    data_json = response.json()
     organizer_id = data_json["organizer_id"]
+    response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data)
 
-    response = requests.post(f"{BASE_URL}/organizer/random_id/create_match", json=new_data)
+    assert response.status_code == expected_status_code_1
+    assert response.json()["message"] == expected_message_1
 
-    assert response.status_code == expected_status_code
-    assert response.message == expected_message
+    response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data)
+
+    assert response.status_code == expected_status_code_2
+    assert response.json()["message"] == expected_message_2

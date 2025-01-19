@@ -8,7 +8,7 @@ class MatchCreator {
 
 public:
     void CreateMatchRequest(const httplib::Request& req, httplib::Response& res,
-                                       Database& db);
+                                   Database& db);
 
     bool CheckMatchExistence(const std::string& organizer_id, const std::string& match_body, Database& db);
 
