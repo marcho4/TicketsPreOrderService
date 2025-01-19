@@ -6,32 +6,35 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
                                                             Database& db) {
     std::string organizer_id = req.get_param_value("id");
     auto parsed = json::parse(req.body);
+    const std::vector<std::string> required_fields = {"email", "organization_name", "tin", "phone_number"};
+    for (const auto& field : required_fields) {
+        if (!parsed.contains(field)) {
+            sendError(res, 400, "Missing field: " + field);
+            return;
+        }
+    }
     std::string email = parsed["email"];
     std::string organization_name = parsed["organization_name"];
     std::string tin = parsed["tin"];
     std::string phone = parsed["phone_number"];
 
     if (email.empty() || organization_name.empty() || tin.empty() || phone.empty()) {
-        res.status = 400;
-        res.set_content(R"({"status": "bad request", "error": "Empty fields"})", "application/json");
+        sendError(res, 400, "Empty fields");
         return;
     }
 
     if (!DataCheker::isValidEmailFormat(email)) { // проверка на валидность email
-        res.status = 400;
-        res.set_content(R"({"status": "bad request", "message": "Invalid email format"})", "application/json");
+        sendError(res, 400, "Invalid email format");
         return;
     }
 
     if (!DataCheker::isValidPhoneNumber(phone)) { // проверка на валидность номера телефона
-        res.status = 400;
-        res.set_content(R"({"status": "bad request", "message": "Invalid phone number"})", "application/json");
+        sendError(res, 400, "Invalid phone number");
         return;
     }
 
     if (CheckOrganizerExistence(email, db)) { // проверка на существование пользователя
-        res.status = 409;  // не уверен насчет кода статуса, выбрал 409 - конфликт
-        res.set_content(R"({"status": "conflict", "message": "User with this email already exists"})", "application/json");
+        sendError(res, 409, "User with this email already exists");
         return;
     }
     std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email, phone_number) "
@@ -46,12 +49,10 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
                 {"message", "User created successfully"},
                 {"organizer_id", returned_id}
         };
-//        std::cout << returned_id << '\n';
         res.status = 201;
         res.set_content(response.dump(), "application/json");
     } else {
-        res.status = 500;
-        res.set_content(R"({"status": "error", "message": "Failed to insert data into the database"})", "application/json");
+        sendError(res, 500, "Failed to insert data in database");
         return;
     }
 }
@@ -63,3 +64,7 @@ bool CreateOrganizerInfo::CheckOrganizerExistence(std::string& email, Database &
     return !response.empty();
 }
 
+void CreateOrganizerInfo::sendError(httplib::Response& res, int status, const std::string& message) {
+    res.status = status;
+    res.set_content(R"({"message": ")" + message + R"("})", "application/json");
+}

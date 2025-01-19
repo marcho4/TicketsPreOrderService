@@ -9,4 +9,6 @@ class UpdateOrganizerInfo {
 public:
     void OrganizerPersonalInfoUpdateRequest(const httplib::Request& req, httplib::Response& res,
                                        Database& db);
+
+    static bool CheckEmailUnique(const std::string& email, const std::string& organizer_id, Database& db);
 };

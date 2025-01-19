@@ -28,7 +28,11 @@ void UpdateOrganizerInfo::OrganizerPersonalInfoUpdateRequest(const httplib::Requ
         res.set_content(R"({"status": "bad request", "message": "Invalid email format"})", "application/json");
         return;
     }
-
+    if (CheckEmailUnique(email, organizer_id, db)) {
+        res.status = 409;
+        res.set_content(R"({"status": "conflict", "message": "User with this email already exists"})", "application/json");
+        return;
+    }
     // формируем запрос и подготовленные данные
     std::string update_query = "UPDATE Organizers.OrganizersData "
                                "SET organization_name = $1, tin = $2, email = $3, phone_number = $4, updated_at = CURRENT_TIMESTAMP "
@@ -44,4 +48,11 @@ void UpdateOrganizerInfo::OrganizerPersonalInfoUpdateRequest(const httplib::Requ
         res.status = 201;
         res.set_content(R"({"message": "User info updated successfully."})", "application/json");
     }
+}
+
+bool UpdateOrganizerInfo::CheckEmailUnique(const std::string &email, const std::string& organizer_id, Database &db) {
+    std::string check_email = "SELECT * FROM Organizers.OrganizersData WHERE email = $1 AND organizer_id != $2";
+    std::vector<std::string> data = {email, organizer_id};
+    pqxx::result response = db.executeQueryWithParams(check_email, data);
+    return !response.empty();
 }

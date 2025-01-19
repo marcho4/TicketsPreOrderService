@@ -34,20 +34,17 @@ int main() {
             MatchCreator creator;
             creator.CreateMatchRequest(request, res, db);
         });
+        // TODO: написать логику
+        server.Put("/organizer/:id/update_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
 
-        server.Post("/organizer/:id/update_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-            Updator updateMatch;
-            updateMatch.UpdateMatchRequest(request, res, db);
         });
-
+        // TODO: написать логику
         server.Post("/organizer/:id/delete_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-            Updator updateMatch; // надо заменить по готовности
-            updateMatch.UpdateMatchRequest(request, res, db);
-        });
 
+        });
+        // TODO: написать логику
         server.Post("/organizer/:id/add_tickets/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-            Updator updateMatch; // надо заменить по готовности
-            updateMatch.UpdateMatchRequest(request, res, db);
+
         });
 
         std::cout << "Server is listening http://localhost:3000" << '\n';

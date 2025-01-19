@@ -105,3 +105,52 @@ def test_update_account(data, new_data, expected_status_code, expected_message, 
         assert db_result == new_db_result
 
     cursor.close()
+
+
+@pytest.mark.parametrize("data", [
+    {"organization_name": generate_random_organization(),
+     "tin": "012345678912",
+     "email": generate_random_email(),
+     "phone_number": generate_random_phone_number()}
+])
+def test_no_changes_on_identical_data(data, db_connection):
+    response = create_organizer_info(data)
+    organizer_id = response.json()["organizer_id"]
+
+    result = requests.put(f"{BASE_URL}/update_organizer_info/{organizer_id}", json=data)
+    assert result.status_code == 201
+    result_json = result.json()
+    assert result_json["message"] == "User info updated successfully."
+
+    cursor = db_connection.cursor(cursor_factory=RealDictCursor)
+    cursor.execute("SELECT * FROM Organizers.OrganizersData WHERE organizer_id = %s", (organizer_id,))
+    db_result = cursor.fetchone()
+
+    assert db_result is not None
+    assert db_result["organization_name"] == data["organization_name"]
+    assert db_result["tin"] == data["tin"]
+    assert db_result["email"] == data["email"]
+    assert db_result["phone_number"] == data["phone_number"]
+    cursor.close()
+
+
+def test_update_with_duplicate_email(db_connection):
+    data1 = {"organization_name": generate_random_organization(),
+             "tin": "012345678912",
+             "email": generate_random_email(),
+             "phone_number": generate_random_phone_number()}
+    data2 = {"organization_name": generate_random_organization(),
+             "tin": "987654321098",
+             "email": generate_random_email(),
+             "phone_number": generate_random_phone_number()}
+
+    response1 = create_organizer_info(data1)
+    response2 = create_organizer_info(data2)
+    organizer_id2 = response2.json()["organizer_id"]
+
+    new_data = data2.copy()
+    new_data["email"] = data1["email"]
+
+    result = requests.put(f"{BASE_URL}/update_organizer_info/{organizer_id2}", json=new_data)
+    assert result.status_code == 409
+    assert result.json()["message"] == "User with this email already exists"

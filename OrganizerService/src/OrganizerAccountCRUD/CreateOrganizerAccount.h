@@ -7,9 +7,10 @@ class CreateOrganizerInfo {
     using json = nlohmann::json;
 
 public:
-    static void OrganizerPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
+    void OrganizerPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
                                        Database& db);
 
     static bool CheckOrganizerExistence(std::string& organizer_id, Database &db);
 
+    void sendError(httplib::Response& res, int status, const std::string& message);
 };
