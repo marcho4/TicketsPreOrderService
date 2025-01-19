@@ -16,8 +16,8 @@ set(SOURCE_FILES
         src/postgres/PostgresProcessing.cpp
         src/MatchCreating/AddingTickets/AddingTickets.cpp
         src/MatchCreating/AddingTickets/AddingTickets.h
-        src/MatchCreating/CreateMatch/Creator.cpp
-        src/MatchCreating/CreateMatch/Creator.h
+        src/MatchCreating/CreateMatch/MatchCreator.cpp
+        src/MatchCreating/CreateMatch/MatchCreator.h
         src/MatchCreating/UpdateMatchInfo/Updator.cpp
         src/MatchCreating/UpdateMatchInfo/Updator.h
         libraries/Bcrypt.cpp/src/bcrypt.cpp

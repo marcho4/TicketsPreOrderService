@@ -3,14 +3,18 @@
 #include "pqxx/pqxx"
 #include "../../postgres/PostgresProcessing.h"
 
-class Creator {
+class MatchCreator {
     using json = nlohmann::json;
 
 public:
     void CreateMatchRequest(const httplib::Request& req, httplib::Response& res,
                                        Database& db);
 
-    bool CheckMatchExistence(int organizer_id, const std::string& team_home, const std::string& team_away, const std::string& match_date, Database& db);
+    bool CheckMatchExistence(const std::string& organizer_id, const std::string& match_body, Database& db);
+
+    bool CheckOrganizerExistence(const std::string& organizer_id, Database& db);
+
+    void sendError(httplib::Response& res, int status, const std::string& message);
 };
 
 

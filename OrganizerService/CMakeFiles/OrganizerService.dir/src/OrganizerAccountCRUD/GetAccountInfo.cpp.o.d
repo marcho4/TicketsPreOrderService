@@ -1115,4 +1115,5 @@ CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.o: \
   /opt/homebrew/opt/libpqxx/include/pqxx/subtransaction.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/time.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/transactor.hxx \
-  /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx \
+  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/../FormatRegexHelper/ValidDataChecker.h

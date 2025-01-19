@@ -2,9 +2,9 @@
 #include "../libraries/httplib.h"
 #include "src/OrganizerAccountCRUD/CreateOrganizerAccount.h"
 #include "src/OrganizerAccountCRUD/UpdateOrganizerAccount.h"
-#include "src/MatchCreating/CreateMatch/Creator.h"
+#include "src/MatchCreating/CreateMatch/MatchCreator.h"
 #include "src/MatchCreating/UpdateMatchInfo/Updator.h"
-
+#include "src/OrganizerAccountCRUD/GetAccountInfo.h"
 
 int main() {
     try {
@@ -26,13 +26,13 @@ int main() {
             updateOrganizerInfo.OrganizerPersonalInfoUpdateRequest(request, res, db);
         });
 
-        server.Post("/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
-//            UpdateOrganizerInfo updateOrganizerInfo;
-//            updateOrganizerInfo.OrganizerPersonalInfoUpdateRequest(request, res, db);
+        server.Get("/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+            std::cout << "got\n";
+            GetAccountInfo::GetAccountInfoRequest(request, res, db);
         });
 
         server.Post("/organizer/:id/create_match", [&db](const httplib::Request& request, httplib::Response &res) {
-            Creator createMatch;
+            MatchCreator createMatch;
             createMatch.CreateMatchRequest(request, res, db);
         });
 

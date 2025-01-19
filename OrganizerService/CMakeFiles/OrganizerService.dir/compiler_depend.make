@@ -1947,8 +1947,11 @@ CMakeFiles/OrganizerService.dir/main.cpp.o: main.cpp \
   src/MatchCreating/UpdateMatchInfo/Updator.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/libraries/httplib.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/libraries/nlohmann/json.hpp \
+  libraries/httplib.h \
+  libraries/nlohmann/json.hpp \
   src/postgres/PostgresProcessing.h \
   src/OrganizerAccountCRUD/CreateOrganizerAccount.h \
+  src/OrganizerAccountCRUD/GetAccountInfo.h \
   src/OrganizerAccountCRUD/UpdateOrganizerAccount.h \
   /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/binarystring.hxx \
@@ -7539,6 +7542,7 @@ CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.o: s
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
   libraries/httplib.h \
   libraries/nlohmann/json.hpp \
+  src/FormatRegexHelper/ValidDataChecker.h \
   src/postgres/PostgresProcessing.h \
   src/OrganizerAccountCRUD/GetAccountInfo.h \
   /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx \
@@ -9749,10 +9753,6 @@ CMakeFiles/OrganizerService.dir/src/postgres/PostgresProcessing.cpp.o: src/postg
   /opt/homebrew/opt/libpqxx/include/pqxx/zview.hxx
 
 
-libraries/nlohmann/json.hpp:
-
-libraries/httplib.h:
-
 src/OrganizerAccountCRUD/GetAccountInfo.cpp:
 
 src/FormatRegexHelper/ValidDataChecker.h:
@@ -9816,6 +9816,10 @@ src/MatchCreating/AddingTickets/AddingTickets.cpp:
 /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx:
 
 src/OrganizerAccountCRUD/CreateOrganizerAccount.h:
+
+libraries/nlohmann/json.hpp:
+
+libraries/httplib.h:
 
 src/MatchCreating/UpdateMatchInfo/Updator.h:
 

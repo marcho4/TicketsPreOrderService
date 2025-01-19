@@ -6,9 +6,9 @@ class GetAccountInfo {
     using json = nlohmann::json;
 
 public:
-    void GetAccountInfoRequest(const httplib::Request& req, httplib::Response& res, Database& db);
+    static void GetAccountInfoRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
     static pqxx::result getData(const std::string& id, Database& db);
 
-    bool CheckOrganizerExistence(const std::string& id, Database& db);
+    static bool CheckOrganizerExistence(const std::string& id, Database& db);
 };

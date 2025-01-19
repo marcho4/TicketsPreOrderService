@@ -1950,8 +1950,11 @@ CMakeFiles/OrganizerService.dir/main.cpp.o
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/UpdateMatchInfo/Updator.h
  /Users/nazarzakrevskij/TicketsPreOrderService/libraries/httplib.h
  /Users/nazarzakrevskij/TicketsPreOrderService/libraries/nlohmann/json.hpp
+ /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/httplib.h
+ /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/nlohmann/json.hpp
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/postgres/PostgresProcessing.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/CreateOrganizerAccount.h
+ /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/GetAccountInfo.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/UpdateOrganizerAccount.h
  /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx
  /opt/homebrew/opt/libpqxx/include/pqxx/binarystring.hxx
@@ -7547,6 +7550,7 @@ CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/httplib.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/nlohmann/json.hpp
+ /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/FormatRegexHelper/ValidDataChecker.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/postgres/PostgresProcessing.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/GetAccountInfo.h
  /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx
