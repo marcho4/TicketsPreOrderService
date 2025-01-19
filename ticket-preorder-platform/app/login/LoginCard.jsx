@@ -38,8 +38,20 @@ export default function AuthCard() {
         try {
             let response = await fetchData("http://localhost:8000/api/auth/login", "POST",
                 { login, password }, setLoading)
+            switch (response.data.role) {
+                case "ADMIN":
+                    router.push('/admin');
+                    break;
+                case "USER":
+                    router.push('/user');
+                    break;
+                case "ORGANIZER":
+                    router.push('/organization');
+                    break;
+                default:
+                    break;
+            }
 
-            router.push('/user')
         } catch (error) {
             console.error(error);
         }
