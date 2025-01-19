@@ -17,7 +17,7 @@ const config: Config = {
 			green_accent: "#66BB6A",
 			deep_blue: "#1A237E",
 			my_black: "#121212",
-			dark_grey: "#333333",
+			'dark-grey': "#333333",
 			white_smoke: "#F4F4F4",
   			foreground: 'hsl(var(--foreground))',
   			card: {

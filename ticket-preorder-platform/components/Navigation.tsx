@@ -7,12 +7,12 @@ import { useAuth } from '@/providers/authProvider'
 import { UserRole } from '@/enums/user-role';
 
 const getLinksForRole = (role: UserRole) => {
+    const currentRole = role ?? UserRole.NotAuthorized;
 
-  const currentRole = role ?? UserRole.NotAuthorized;
-  const commonLinks = [
-      { href: '/', label: 'Home' },
-      { href: '/events', label: 'Events' },
-  ];
+    const commonLinks = [
+        { href: '/', label: 'Home' },
+        { href: '/events', label: 'Events' },
+    ];
 
   switch (role) {
       case UserRole.Admin:
@@ -39,9 +39,13 @@ const getLinksForRole = (role: UserRole) => {
       case UserRole.NotAuthorized:
       default:
           return [
+              { href: '/', label: 'Main Page' },
               { href: '/login', label: 'Login' },
               // для теста админа
-              { href: '/admin-home', label: 'AdminHome'},
+              { href: '/admin-home', label: 'Admin Dashboard'},
+              { href: '/organizer', label: 'Organizer Dashboard' },
+              { href: '/user', label: 'User Dashboard' }
+
           ];
   }
 };
