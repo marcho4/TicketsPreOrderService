@@ -1,3 +1,5 @@
+use std::env;
+use dotenv::dotenv;
 use jsonwebtoken::{DecodingKey, EncodingKey, Header};
 use jsonwebtoken::errors::Error;
 use crate::models::claims::Claims;
@@ -7,7 +9,7 @@ const HOUR: u64 = 3600;
 
 pub fn create_jwt(payload: JWTPayload) -> String {
     let current_timestamp = jsonwebtoken::get_current_timestamp();
-    let sec: String = dotenv::var("JWT").unwrap();
+    let sec = env::var("JWT").expect("JWT_SECRET must be set in .env file");
     let key: EncodingKey = EncodingKey::from_secret(sec.as_bytes());
 
     let claims = Claims {

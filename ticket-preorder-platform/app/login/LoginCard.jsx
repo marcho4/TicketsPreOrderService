@@ -35,14 +35,17 @@ export default function AuthCard() {
     // Функция логина
     const handleLogin = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8002/authorize", "POST",
-            { login, password }, setLoading)
+        try {
+            let response = await fetchData("http://localhost:8000/api/auth/login", "POST",
+                { login, password }, setLoading)
 
-        if (response.status === 200) {
-            router.push("/dashboard");
-        } else {
-            console.log("Wrong credentials");
+            router.push('/user')
+        } catch (error) {
+            console.error(error);
         }
+
+
+
     };
 
     // Функция регистрации обычного пользователя

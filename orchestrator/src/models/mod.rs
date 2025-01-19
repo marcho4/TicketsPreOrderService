@@ -5,3 +5,4 @@ pub mod organizer_registration_data;
 pub mod jwt_claims;
 pub mod roles;
 pub mod jwt;
+pub mod user_info;

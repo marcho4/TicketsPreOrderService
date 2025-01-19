@@ -4,5 +4,5 @@ use serde::{ Serialize, Deserialize };
 pub struct OrganizerRegistrationData {
     pub company: String,
     pub email: String,
-    pub TIN: String,
+    pub tin: String,
 }

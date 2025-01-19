@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils'
 import { useAuth } from '@/providers/authProvider'
 import { UserRole } from '@/enums/user-role';
 
-const getLinksForRole = (role: UserRole) => {
-    const currentRole = role ?? UserRole.NotAuthorized;
+const getLinksForRole = (role: string) => {
+    const currentRole = role;
 
     const commonLinks = [
         { href: '/', label: 'Home' },
@@ -15,21 +15,21 @@ const getLinksForRole = (role: UserRole) => {
     ];
 
   switch (role) {
-      case UserRole.Admin:
+      case "ADMIN":
           return [
               ...commonLinks,
               { href: '/dashboard', label: 'Dashboard' },
               { href: '/admin', label: 'Admin Panel' },
               { href: '/logout', label: 'Logout' },
           ];
-      case UserRole.Organizer:
+      case "ORGANIZER":
           return [
               ...commonLinks,
               { href: '/dashboard', label: 'Dashboard' },
               { href: '/create-event', label: 'Create Event' },
               { href: '/logout', label: 'Logout' },
           ];
-      case UserRole.User:
+      case "USER":
           return [
               ...commonLinks,
               { href: '/dashboard', label: 'Dashboard' },
