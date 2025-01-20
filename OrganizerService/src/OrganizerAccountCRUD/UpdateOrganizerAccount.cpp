@@ -11,6 +11,7 @@ void UpdateOrganizerInfo::OrganizerPersonalInfoUpdateRequest(const httplib::Requ
         sendError(res, 400, "Missing id parameter");
         return;
     }
+
     auto parsed = json::parse(req.body);
 
     std::string error_message;
