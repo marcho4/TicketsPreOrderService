@@ -1,5 +1,4 @@
 #include "CreateOrganizerAccount.h"
-#include "../FormatRegexHelper/ValidDataChecker.h"
 
 // /create_organizer_info/{id} - запрос
 void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
@@ -11,63 +10,65 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
         sendError(res, 400, "Missing id parameter");
         return;
     }
-    auto parsed = json::parse(req.body);
+
+    json parsed;
+    try {
+        parsed = json::parse(req.body);
+    } catch (const json::parse_error& e) {
+        sendError(res, 400, "Invalid JSON format");
+        return;
+    }
+
     const std::vector<std::string> required_fields = {"email", "organization_name", "tin", "phone_number"};
-    for (const auto& field : required_fields) {
-        if (!parsed.contains(field)) {
-            sendError(res, 400, "Missing field: " + field);
-            return;
-        }
-    }
-    std::string email = parsed["email"];
-    std::string organization_name = parsed["organization_name"];
-    std::string tin = parsed["tin"];
-    std::string phone = parsed["phone_number"];
-
-    if (email.empty() || organization_name.empty() || tin.empty() || phone.empty()) {
-        sendError(res, 400, "Empty fields");
+    if (!validateRequiredFields(parsed, required_fields, res)) {
         return;
     }
 
-    if (!DataCheker::isValidEmailFormat(email)) { // проверка на валидность email
-        sendError(res, 400, "Invalid email format");
+    OrganizerData organizer_data = OrganizerData::parseFromJson(parsed);
+
+    if (!organizer_data.Validate(res)) {
         return;
     }
 
-    if (!DataCheker::isValidPhoneNumber(phone)) { // проверка на валидность номера телефона
-        sendError(res, 400, "Invalid phone number");
-        return;
-    }
-
-    if (CheckOrganizerExistence(email, db)) { // проверка на существование пользователя
+    if (CheckOrganizerExistence(organizer_data.email, db)) { // проверка на существование пользователя
         sendError(res, 409, "User with this email already exists");
         return;
     }
     std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email, phone_number) "
                               "VALUES ($1, $2, $3, $4) RETURNING organizer_id";
-    std::vector<std::string> params = {organization_name, tin, email, phone};
+    std::vector<std::string> params = {organizer_data.organization_name, organizer_data.tin,
+                                       organizer_data.email, organizer_data.phone_number};
     pqxx::result result = db.executeQueryWithParams(insert_data, params);
 
     if (!result.empty() && result[0]["organizer_id"].c_str()) {
-        std::string returned_id = result[0]["organizer_id"].c_str();
         json response = {
                 {"status", "created"},
                 {"message", "User created successfully"},
-                {"organizer_id", returned_id}
+                {"organizer_id", result[0]["organizer_id"].as<std::string>()}
         };
         res.status = 201;
         res.set_content(response.dump(), "application/json");
     } else {
-        sendError(res, 500, "Failed to insert data in database");
-        return;
+        sendError(res, 500, "Failed to insert data into the database");
     }
 }
 
-bool CreateOrganizerInfo::CheckOrganizerExistence(std::string& email, Database &db) {
-    std::string query = "SELECT * FROM Organizers.OrganizersData WHERE email = $1";
+bool CreateOrganizerInfo::validateRequiredFields(const json& parsed, const std::vector<std::string>& required_fields,
+                                                 httplib::Response& res) {
+    for (const auto& field : required_fields) {
+        if (!parsed.contains(field)) {
+            sendError(res, 400, "Missing field: " + field);
+            return false;
+        }
+    }
+    return true;
+}
+
+bool CreateOrganizerInfo::CheckOrganizerExistence(std::string& email, Database& db) {
+    std::string query = "SELECT COUNT(*) FROM Organizers.OrganizersData WHERE email = $1";
     std::vector<std::string> params = {email};
     pqxx::result response = db.executeQueryWithParams(query, params);
-    return !response.empty();
+    return !response.empty() && response[0][0].as<int>() > 0;
 }
 
 void CreateOrganizerInfo::sendError(httplib::Response& res, int status, const std::string& message) {
