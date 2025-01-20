@@ -31,7 +31,10 @@ include_directories("libraries/Bcrypt.cpp/include")
 # Find the libraries
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
+
 find_package(PostgreSQL REQUIRED)
+
+find_package(PostgreSQL REQUIRED) 
 
 # Create executable
 add_executable(AuthorizationService ${SOURCE_FILES})
