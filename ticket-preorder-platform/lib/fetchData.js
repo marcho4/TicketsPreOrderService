@@ -7,7 +7,7 @@ export default async function fetchData(url, method, body, setIsLoading) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         });
-        return await response.json();
+        return response;
     } catch (error) {
         console.error(error);
     } finally {

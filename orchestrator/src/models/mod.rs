@@ -6,3 +6,6 @@ pub mod jwt_claims;
 pub mod roles;
 pub mod jwt;
 pub mod user_info;
+pub mod registration_user_resp;
+pub(crate) mod registration_org_resp;
+pub mod registration_err_org;

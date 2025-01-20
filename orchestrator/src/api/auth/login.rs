@@ -4,7 +4,6 @@ use actix_web::cookie::time::Duration;
 use log::info;
 use crate::models::api_response::ApiResponse;
 use crate::models::jwt::Jwt;
-use crate::models::jwt_claims::JwtClaims;
 use crate::models::login_data::LoginData;
 use crate::models::user_info::UserInfo;
 use crate::orchestrator::orchestrator::Orchestrator;

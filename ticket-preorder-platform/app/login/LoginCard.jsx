@@ -18,6 +18,7 @@ export default function AuthCard() {
     // Поля для логина
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     // Поля для регистрации (общие)
     const [name, setName] = useState("");
@@ -36,24 +37,31 @@ export default function AuthCard() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            setError(false);
             let response = await fetchData("http://localhost:8000/api/auth/login", "POST",
                 { login, password }, setLoading)
-            switch (response.data.role) {
-                case "ADMIN":
-                    router.push('/admin');
-                    break;
-                case "USER":
-                    router.push('/user');
-                    break;
-                case "ORGANIZER":
-                    router.push('/organization');
-                    break;
-                default:
-                    break;
+            console.log(response.status)
+            if (response.status === 200) {
+                let body = await response.json();
+                switch (body.data.role) {
+                    case "ADMIN":
+                        router.push('/admin');
+                        break;
+                    case "USER":
+                        router.push('/user');
+                        break;
+                    case "ORGANIZER":
+                        router.push('/organization');
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                setError(true);
             }
-
         } catch (error) {
-            console.error(error);
+            setError(true);
+            console.log("here");
         }
 
 
@@ -63,7 +71,7 @@ export default function AuthCard() {
     // Функция регистрации обычного пользователя
     const handleSignupUser = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8002/register_user", "POST",
+        let response = await fetchData("http://localhost:8000/api/auth/register/user", "POST",
             { name, last_name, email }, setLoading)
 
         if (response.status === 200) {
@@ -76,7 +84,7 @@ export default function AuthCard() {
     // Функция регистрации организатора
     const handleSignupOrganizer = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8002/register_organizer", "POST",
+        let response = await fetchData("http://localhost:8000/api/auth/register/organizer", "POST",
             { company, email, tin }, setLoading)
 
         if (response.status === 200) {
@@ -103,7 +111,7 @@ export default function AuthCard() {
                                     value={login}
                                     onChange={(e) => setLogin(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
+                                    className={"rounded-xl bg-secondary text-text placeholder:text-text/50" + (error && "border-4 border-red-500")}
                                 />
                             </div>
                             <div className="space-y-2">
@@ -117,7 +125,7 @@ export default function AuthCard() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
+                                    className={"rounded-xl bg-secondary text-text placeholder:text-text/50" + (error && "border-4 border-red-500")}
                                 />
                             </div>
                         </CardContent>
