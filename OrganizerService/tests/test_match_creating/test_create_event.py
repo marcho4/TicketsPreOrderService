@@ -36,8 +36,7 @@ def create_organizer_info(data):
             # данные о матче
             {"team_home": "FC Barcelona",
              "team_away": "Real Madrid",
-             "match_date": "2022-12-12",
-             "match_time": "12:00",
+             "match_datetime": "2025-01-19T14:23:30.123Z",
              "stadium": "Camp Nou",
              "match_description": "El Clasico"},
 
@@ -61,8 +60,7 @@ def test_create_valid_event(data, new_data, expected_status_code, expected_messa
             # данные о матче
             {"team_home": "FC Barcelona",
              "team_away": "Real Madrid",
-             "match_date": "2022-12-12",
-             "match_time": "12:00",
+             "match_datetime": "2025-01-20T14:23:30.123Z",
              "stadium": "Camp Nou",
              "match_description": "El Clasico"},
 
@@ -88,8 +86,7 @@ def test_create_event_invalid_organizer_id(new_data, expected_status_code, expec
             # данные о матче
             {"team_home": "FC Barcelona",
              "team_away": "Real Madrid",
-             "match_date": "2022-12-12",
-             "match_time": "12:00",
+             "match_datetime": "2025-01-21T14:23:30.123Z",
              "stadium": "Camp Nou",
              "match_description": "El Clasico"},
 

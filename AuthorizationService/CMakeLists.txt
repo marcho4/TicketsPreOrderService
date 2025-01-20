@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 project(AuthorizationService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
+
+# Source files
 set(SOURCE_FILES
         main.cpp
         src/Authorization/AuthorizationManager.cpp
@@ -19,26 +21,26 @@ set(SOURCE_FILES
         libraries/Bcrypt.cpp/include/bcrypt.h
         libraries/Bcrypt.cpp/src/blowfish.cpp
 )
-
-include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
-
-include_directories("/opt/homebrew/opt/libpqxx/include")
-link_directories("/opt/homebrew/opt/libpqxx/lib")
+# Пути, куда была установлена libpqxx при "make install"
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
 
 # Include directories
 include_directories("libraries/Bcrypt.cpp/include")
-include_directories("libraries/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3/include")
 
 # Find the libraries
 find_package(CURL REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(PostgreSQL REQUIRED)
+
 # Create executable
 add_executable(AuthorizationService ${SOURCE_FILES})
 
 # Link the libraries
-target_link_libraries(AuthorizationService PRIVATE CURL::libcurl
-        /opt/homebrew/opt/openssl@3/lib/libssl.dylib
-        /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
-        /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
-pqxx)
+target_link_libraries(AuthorizationService PRIVATE
+        CURL::libcurl
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        pqxx  # <-- ключевой момент
+        pq    # иногда тоже нужно явно указать
+)
