@@ -1,48 +1,43 @@
 #include "GetAccountInfo.h"
-#include "../FormatRegexHelper/ValidDataChecker.h"
 
 void GetAccountInfo::GetAccountInfoRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
     std::string organizer_id;
     if (!req.path_params.at("id").empty()) {
         organizer_id = req.path_params.at("id");
     } else {
-        res.status = 400;
-        res.set_content(R"({"message": "Missing id parameter"})", "application/json");
+        sendError(res, 400, "Missing id parameter");
         return;
     }
 
-    if (!DataCheker::isValidUUID(organizer_id)) {
-        res.status = 400;
-        res.set_content(R"({"message": "Invalid organizer_id format"})", "application/json");
+    if (organizer_id.empty() || !ValidatorGetter::validateRequest(organizer_id, res, db)) {
         return;
     }
-    std::cout << organizer_id << '\n';
-    if (!CheckOrganizerExistence(organizer_id, db)) {
-        res.status = 404;
-        res.set_content(R"({"message": "User not found"})", "application/json");
-        return;
-    }
-    pqxx::result organizer_info = getData(organizer_id, db);
-    json organizer_info_json = {
-        {"organization_name", organizer_info[0][1].as<std::string>()},
-        {"tin", organizer_info[0][2].as<std::string>()},
-        {"email", organizer_info[0][3].as<std::string>()},
-        {"phone_number", organizer_info[0][4].as<std::string>()}
-    };
+
+    json organizer_info_json = getOrganizerInfoJson(organizer_id, db);
     res.status = 200;
     res.set_content(organizer_info_json.dump(), "application/json");
 }
 
-pqxx::result GetAccountInfo::getData(const std::string& id, Database& db) {
-    std::string get_data_query = "SELECT * FROM Organizers.OrganizersData WHERE organizer_id = $1";
-    std::vector<std::string> params = {id};
-    pqxx::result result = db.executeQueryWithParams(get_data_query, params);
-    return result;
+nlohmann::json GetAccountInfo::getOrganizerInfoJson(const std::string& id, Database& db) {
+    pqxx::result organizer_info = getData(id, db);
+    if (organizer_info.empty()) {
+        throw std::runtime_error("Failed to retrieve organizer data");
+    }
+    return {
+            {"organization_name", organizer_info[0]["organization_name"].as<std::string>()},
+            {"tin", organizer_info[0]["tin"].as<std::string>()},
+            {"email", organizer_info[0]["email"].as<std::string>()},
+            {"phone_number", organizer_info[0]["phone_number"].as<std::string>()}
+    };
 }
 
-bool GetAccountInfo::CheckOrganizerExistence(const std::string& id, Database& db) {
-    std::string check_query = "SELECT * FROM Organizers.OrganizersData WHERE organizer_id = $1";
+pqxx::result GetAccountInfo::getData(const std::string& id, Database& db) {
+    static const std::string query = "SELECT organization_name, tin, email, phone_number FROM Organizers.OrganizersData WHERE organizer_id = $1";
     std::vector<std::string> params = {id};
-    pqxx::result result = db.executeQueryWithParams(check_query, params);
-    return !result.empty();
+    return db.executeQueryWithParams(query, params);
+}
+
+void GetAccountInfo::sendError(httplib::Response& res, int status, const std::string& message) {
+    res.status = status;
+    res.set_content(R"({"message": ")" + message + R"("})", "application/json");
 }
