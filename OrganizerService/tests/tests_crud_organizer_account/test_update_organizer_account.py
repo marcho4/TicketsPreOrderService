@@ -71,7 +71,7 @@ def create_organizer_info(data):
              "phone_number": generate_random_phone_number()},
 
             400,  # status code
-            "Empty fields"  # response
+            "Invalid email format"  # response
     )
 ])
 def test_update_account(data, new_data, expected_status_code, expected_message, db_connection):

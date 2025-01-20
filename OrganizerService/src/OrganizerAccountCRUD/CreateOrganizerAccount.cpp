@@ -4,7 +4,13 @@
 // /create_organizer_info/{id} - запрос
 void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
                                                             Database& db) {
-    std::string organizer_id = req.get_param_value("id");
+    std::string organizer_id;
+    if (!req.path_params.at("id").empty()) {
+        organizer_id = req.path_params.at("id");
+    } else {
+        sendError(res, 400, "Missing id parameter");
+        return;
+    }
     auto parsed = json::parse(req.body);
     const std::vector<std::string> required_fields = {"email", "organization_name", "tin", "phone_number"};
     for (const auto& field : required_fields) {

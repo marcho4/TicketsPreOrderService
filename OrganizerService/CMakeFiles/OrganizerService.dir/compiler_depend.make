@@ -1949,6 +1949,7 @@ CMakeFiles/OrganizerService.dir/main.cpp.o: main.cpp \
   /Users/nazarzakrevskij/TicketsPreOrderService/libraries/nlohmann/json.hpp \
   libraries/httplib.h \
   libraries/nlohmann/json.hpp \
+  src/FormatRegexHelper/ValidDataChecker.h \
   src/postgres/PostgresProcessing.h \
   src/OrganizerAccountCRUD/CreateOrganizerAccount.h \
   src/OrganizerAccountCRUD/GetAccountInfo.h \
@@ -9758,8 +9759,6 @@ src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp:
 
 src/OrganizerAccountCRUD/GetAccountInfo.cpp:
 
-src/FormatRegexHelper/ValidDataChecker.h:
-
 src/MatchCreating/AddingTickets/AddingTickets.h:
 
 src/MatchCreating/AddingTickets/AddingTickets.cpp:
@@ -9819,6 +9818,8 @@ src/MatchCreating/AddingTickets/AddingTickets.cpp:
 /opt/homebrew/opt/libpqxx/include/pqxx/binarystring.hxx:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx:
+
+src/FormatRegexHelper/ValidDataChecker.h:
 
 src/MatchCreating/UpdateMatchInfo/Updator.h:
 

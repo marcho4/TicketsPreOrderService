@@ -1952,6 +1952,7 @@ CMakeFiles/OrganizerService.dir/main.cpp.o
  /Users/nazarzakrevskij/TicketsPreOrderService/libraries/nlohmann/json.hpp
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/httplib.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/nlohmann/json.hpp
+ /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/FormatRegexHelper/ValidDataChecker.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/postgres/PostgresProcessing.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/CreateOrganizerAccount.h
  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/GetAccountInfo.h

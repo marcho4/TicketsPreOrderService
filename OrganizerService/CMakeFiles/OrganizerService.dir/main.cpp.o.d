@@ -1118,6 +1118,7 @@ CMakeFiles/OrganizerService.dir/main.cpp.o: \
   /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/../postgres/PostgresProcessing.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/UpdateOrganizerAccount.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/../FormatRegexHelper/ValidDataChecker.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/CreateMatch/MatchCreator.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/CreateMatch/../../../../libraries/httplib.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/CreateMatch/../../../../libraries/nlohmann/json.hpp \
