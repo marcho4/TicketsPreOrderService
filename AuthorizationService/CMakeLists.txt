@@ -31,9 +31,6 @@ include_directories("libraries/Bcrypt.cpp/include")
 # Find the libraries
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
-
-find_package(PostgreSQL REQUIRED)
-
 find_package(PostgreSQL REQUIRED) 
 
 # Create executable
@@ -41,9 +38,9 @@ add_executable(AuthorizationService ${SOURCE_FILES})
 
 # Link the libraries
 target_link_libraries(AuthorizationService PRIVATE
-        CURL::libcurl
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        pqxx  # <-- ключевой момент
-        pq    # иногда тоже нужно явно указать
+    CURL::libcurl
+    OpenSSL::SSL
+    OpenSSL::Crypto
+    pqxx  # <-- ключевой момент
+    pq    # иногда тоже нужно явно указать
 )
