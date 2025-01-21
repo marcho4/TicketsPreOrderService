@@ -34,38 +34,38 @@ int main() {
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
-        server.Post("/create_organizer_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/create_organizer_info/:id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             CreateOrganizerInfo createOrganizerInfo;
             createOrganizerInfo.OrganizerPersonalInfoCreateRequest(request, res, db);
         });
 
-        server.Put("/update_organizer_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/update_organizer_info/:id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             UpdateOrganizerInfo updateOrganizerInfo;
             updateOrganizerInfo.OrganizerPersonalInfoUpdateRequest(request, res, db);
         });
 
-        server.Get("/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Get("/get_account_info/:id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             GetAccountInfo::GetAccountInfoRequest(request, res, db);
         });
 
-        server.Post("/organizer/:id/create_match", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/organizer/:id/create_match", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             MatchCreator creator;
             creator.CreateMatchRequest(request, res, db);
         });
         // TODO: написать логику
-        server.Put("/organizer/:id/update_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/organizer/:id/update_match/:match_id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
         });
         // TODO: написать логику
-        server.Post("/organizer/:id/delete_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/organizer/:id/delete_match/:match_id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
         });
         // TODO: написать логику
-        server.Post("/organizer/:id/add_tickets/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/organizer/:id/add_tickets/:match_id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
         });
 
