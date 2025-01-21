@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../libraries/httplib.h"
+#include "libraries/httplib.h"
 #include "src/OrganizerAccountCRUD/CreateOrganizerAccount.h"
 #include "src/OrganizerAccountCRUD/UpdateOrganizerAccount.h"
 #include "src/MatchCreating/CreateMatch/MatchCreator.h"
@@ -9,8 +9,26 @@
 int main() {
     try {
         httplib::Server server;
+        // Обработчик preflight OPTIONS запросов
+        server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
+            res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
+            res.set_header("Access-Control-Allow-Credentials", "true");
+            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            res.set_header("Content-Type", "application/json");
+            res.status = 200;
+        });
+
+        // Функция для установки CORS-заголовков
+        auto set_cors_headers = [&](httplib::Response& res) {
+            res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
+            res.set_header("Access-Control-Allow-Credentials", "true");
+            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            res.set_header("Content-Type", "application/json");
+        };
         // инициализация хоста и порта для подключения
-        std::string connect = "dbname=organizer_personal_account host=localhost port=5432";
+        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/organizer_personal_account.sql");
         pqxx::connection C(connect);
@@ -47,8 +65,8 @@ int main() {
 
         });
 
-        std::cout << "Server is listening http://localhost:3000" << '\n';
-        server.listen("localhost", 3000);
+        std::cout << "Server is listening http://0.0.0.0:8004" << '\n';
+        server.listen("0.0.0.0", 8004);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }

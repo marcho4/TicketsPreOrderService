@@ -53,6 +53,16 @@ services:
     depends_on:
       - postgres
 
+  organizer:
+    build:
+      context: ./OrganizerService
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
+    networks:
+      - main
+    depends_on:
+      - postgres
 
 
 
