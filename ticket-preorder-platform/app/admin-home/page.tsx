@@ -15,7 +15,7 @@ interface Request {
 
 // Функция для fetch запросов
 const fetchRequests = async () => {
-    const response = await fetch("http://localhost:8003/api/requests", {
+    const response = await fetch("http://localhost:8003/pending_requests", {
         method: "GET",
         credentials: "include",
     });
@@ -25,11 +25,12 @@ const fetchRequests = async () => {
     }
 
     const data = await response.json();
-    return data.data || [
-        { request_id: "1", companyName: "Компания 1", email: "email1@example.com", inn: "1234567890" },
-        { request_id: "2", companyName: "Компания 2", email: "email2@example.com", inn: "0987654321" },
-        { request_id: "3", companyName: "Компания 3", email: "email3@example.com", inn: "1122334455" },
-    ];
+    return data.data 
+    // || [
+    //     { request_id: "1", companyName: "Компания 1", email: "email1@example.com", inn: "1234567890" },
+    //     { request_id: "2", companyName: "Компания 2", email: "email2@example.com", inn: "0987654321" },
+    //     { request_id: "3", companyName: "Компания 3", email: "email3@example.com", inn: "1122334455" },
+    // ];
 };
 
 let requestResource: { read: () => Request[] } | null = null;
@@ -97,7 +98,7 @@ function Loading() {
 function DataSection({ onUpdate }: { onUpdate?: () => void }) {
     const handleResponse = async (requestId: string, action: "APPROVED" | "REJECT") => {
         try {
-            const res = await fetch(`http://localhost:8003/api/requests/`, {
+            const res = await fetch(`http://localhost:8003/process_organizer`, {
                 method: "POST",
                 credentials: "include",
                 headers: { 'Content-Type': 'application/json' },
