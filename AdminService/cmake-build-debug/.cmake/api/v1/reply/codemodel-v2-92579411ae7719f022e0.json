@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "AdminService::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-AdminService-Debug-f6c642518d8d6ecab499.json",
+					"jsonFile" : "target-AdminService-Debug-53c74025ee5fb5ba5c9e.json",
 					"name" : "AdminService",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/cmake-build-debug",
-		"source" : "/Users/nazarzakrevskij/TicketsPreOrderService/AdminService"
+		"build" : "/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug",
+		"source" : "/Users/marcho/TicketsPreOrderService/AdminService"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 6
+		"minor" : 7
 	}
 }

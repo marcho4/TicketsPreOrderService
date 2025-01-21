@@ -42,6 +42,17 @@ services:
       - main
 
 
+  admin:
+    build:
+      context: ./AdminService
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    networks:
+      - main
+    depends_on:
+      - postgres
+
 
 
 
