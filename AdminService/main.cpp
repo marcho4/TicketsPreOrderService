@@ -8,9 +8,9 @@ ProcessRequests processing;
 int main() {
     try {
         httplib::Server server;
-        std::string connect = "dbname=pending_organizers host=localhost port=5432";
+        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
         Database db(connect);
-        db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/postgres/pending_organizers.sql");
+        db.initDbFromFile("src/postgres/pending_organizers.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
@@ -31,8 +31,8 @@ int main() {
             res.set_content("Server is working", "text/plain");
         });
 
-        std::cout << "Server is listening http://localhost:8082" << '\n';
-        server.listen("localhost", 8082);
+        std::cout << "Server is listening http://localhost:8003" << '\n';
+        server.listen("0.0.0.0", 8003);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }
