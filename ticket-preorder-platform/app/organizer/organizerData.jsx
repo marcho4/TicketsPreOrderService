@@ -9,7 +9,7 @@ import ErrorBoundary from "./dataBoundary";
 
 // Function to fetch organizer data
 const fetchOrganizerData = async (id) => {
-    const response = await fetch(`http://localhost:3001/get_account_info/${id}`, {
+    const response = await fetch(`http://localhost:8004/get_account_info/${id}`, {
         method: "GET",
         credentials: "include",
     });
