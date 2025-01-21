@@ -1,0 +1,39 @@
+#include "../../libraries/httplib.h"
+#include "../../libraries/nlohmann/json.hpp"
+#include "../postgres/PostgresProcessing.h"
+#include "../FormatRegexHelper/ValidDataChecker.h"
+
+class GetAccountInfo {
+    using json = nlohmann::json;
+
+public:
+    static void GetAccountInfoRequest(const httplib::Request& req, httplib::Response& res, Database& db);
+
+    static pqxx::result getData(const std::string& id, Database& db);
+
+    static void sendError(httplib::Response& res, int status, const std::string& message);
+
+    static json getOrganizerInfoJson(const std::string& id, Database& db);
+};
+
+class ValidatorGetter {
+    static bool CheckOrganizerExistence(const std::string& id, Database& db) {
+        static const std::string query = "SELECT 1 FROM Organizers.OrganizersData WHERE organizer_id = $1";
+        std::vector<std::string> params = {id};
+        pqxx::result result = db.executeQueryWithParams(query, params);
+        return !result.empty();
+    }
+
+public:
+    static bool validateRequest(const std::string& organizer_id, httplib::Response& res, Database& db) {
+        if (!DataCheker::isValidUUID(organizer_id)) {
+            GetAccountInfo::sendError(res, 400, "Invalid organizer_id format");
+            return false;
+        }
+        if (!CheckOrganizerExistence(organizer_id, db)) {
+            GetAccountInfo::sendError(res, 404, "User not found");
+            return false;
+        }
+        return true;
+    }
+};

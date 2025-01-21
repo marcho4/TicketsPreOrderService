@@ -18,15 +18,16 @@ export default function AuthCard() {
     // Поля для логина
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     // Поля для регистрации (общие)
     const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [last_name, setlast_name] = useState("");
     const [email, setEmail] = useState("");
 
     // Поля для организатора (например)
     const [company, setCompany] = useState("");
-    const [TIN, setTIN] = useState("");
+    const [tin, settin] = useState("");
 
     const [loading, setLoading] = useState(false);
 
@@ -35,21 +36,43 @@ export default function AuthCard() {
     // Функция логина
     const handleLogin = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8080/api/login", "POST",
-            { email, password }, setLoading)
-
-        if (response.status === 200) {
-            router.push("/dashboard");
-        } else {
-            console.log("Wrong credentials");
+        try {
+            setError(false);
+            let response = await fetchData("http://localhost:8000/api/auth/login", "POST",
+                { login, password }, setLoading)
+            console.log(response.status)
+            if (response.status === 200) {
+                let body = await response.json();
+                switch (body.data.role) {
+                    case "ADMIN":
+                        router.push('/admin');
+                        break;
+                    case "USER":
+                        router.push('/user');
+                        break;
+                    case "ORGANIZER":
+                        router.push('/organization');
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                setError(true);
+            }
+        } catch (error) {
+            setError(true);
+            console.log("here");
         }
+
+
+
     };
 
     // Функция регистрации обычного пользователя
     const handleSignupUser = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8080/api/auth/register", "POST",
-            { name, lastName, email }, setLoading)
+        let response = await fetchData("http://localhost:8000/api/auth/register/user", "POST",
+            { name, last_name, email }, setLoading)
 
         if (response.status === 200) {
             router.push("/dashboard");
@@ -61,8 +84,8 @@ export default function AuthCard() {
     // Функция регистрации организатора
     const handleSignupOrganizer = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8080/api/auth/register/organizer", "POST",
-            { company, email, TIN }, setLoading)
+        let response = await fetchData("http://localhost:8000/api/auth/register/organizer", "POST",
+            { company, email, tin }, setLoading)
 
         if (response.status === 200) {
             router.push("/dashboard");
@@ -88,7 +111,7 @@ export default function AuthCard() {
                                     value={login}
                                     onChange={(e) => setLogin(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
+                                    className={"rounded-xl bg-secondary text-text placeholder:text-text/50" + (error && "border-4 border-red-500")}
                                 />
                             </div>
                             <div className="space-y-2">
@@ -102,7 +125,7 @@ export default function AuthCard() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
+                                    className={"rounded-xl bg-secondary text-text placeholder:text-text/50" + (error && "border-4 border-red-500")}
                                 />
                             </div>
                         </CardContent>
@@ -190,8 +213,8 @@ export default function AuthCard() {
                                     id="name"
                                     type="text"
                                     placeholder="Ваша фамилия"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    value={last_name}
+                                    onChange={(e) => setlast_name(e.target.value)}
                                     required
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
@@ -275,8 +298,8 @@ export default function AuthCard() {
                                     id="tin"
                                     type="tin"
                                     placeholder="Введите ИНН вашей организации"
-                                    value={TIN}
-                                    onChange={(e) => setTIN(e.target.value)}
+                                    value={tin}
+                                    onChange={(e) => settin(e.target.value)}
                                     required
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />

@@ -1,21 +1,23 @@
 use actix_web::{post, web, HttpResponse, Result};
+use actix_web::cookie::{Cookie, SameSite};
+use actix_web::cookie::time::Duration;
+use log::info;
 use crate::models::api_response::ApiResponse;
 use crate::models::jwt::Jwt;
-use crate::models::jwt_claims::JwtClaims;
 use crate::models::login_data::LoginData;
+use crate::models::user_info::UserInfo;
 use crate::orchestrator::orchestrator::Orchestrator;
 
 #[post("/login")]
 pub async fn login(data: web::Data<Orchestrator>, req_data: web::Json<LoginData>) -> Result<HttpResponse> {
     // Подготовка данных
     let login_data = req_data.into_inner();
-    let req_url = format!("{}/authorize", data.config.auth_base_url);
+    let req_url = "http://auth:8002/authorize".to_string();
 
     // 1. Запрашиваем авторизацию в auth-сервисе
     let auth_response = match data.client.post(&req_url).json::<LoginData>(&login_data).send().await {
         Ok(r) => r,
         Err(e) => {
-            // Ошибка сети / подключения
             return Ok(HttpResponse::InternalServerError().json(ApiResponse::<String> {
                 msg: Some("Failed to send request to auth service".to_string()),
                 data: Some(e.to_string()),
@@ -36,7 +38,8 @@ pub async fn login(data: web::Data<Orchestrator>, req_data: web::Json<LoginData>
 
     // 3. Парсим тело ответа от сервиса авторизации
     //    Предполагаем, что в теле приходит ApiResponse<JwtClaims>
-    let auth_body = match auth_response.json::<ApiResponse<JwtClaims>>().await {
+    info!("Login successful");
+    let auth_body = match auth_response.json::<ApiResponse<UserInfo>>().await {
         Ok(json) => json,
         Err(e) => {
             return Ok(HttpResponse::InternalServerError().json(ApiResponse::<String> {
@@ -58,7 +61,7 @@ pub async fn login(data: web::Data<Orchestrator>, req_data: web::Json<LoginData>
     };
 
     // 5. Теперь генерируем JWT, отправляя jwt_claims на другой сервис (jwt-сервис)
-    let jwt_url = format!("{}/generate", data.config.jwt_base_url);
+    let jwt_url = format!("{}/jwt/generate", data.config.jwt_base_url);
     let jwt_gen_response = match data.client.post(&jwt_url).json(&jwt_claims).send().await {
         Ok(r) => r,
         Err(e) => {
@@ -92,9 +95,15 @@ pub async fn login(data: web::Data<Orchestrator>, req_data: web::Json<LoginData>
         }
     };
 
+    let cookie = Cookie::build("token", jwt.jwt.clone())
+        .path("/")
+        .max_age(Duration::seconds(3600))
+        .same_site(SameSite::Strict)
+        .finish();
+
     // 8. Возвращаем результат
-    Ok(HttpResponse::Ok().json(ApiResponse {
+    Ok(HttpResponse::Ok().cookie(cookie).json(ApiResponse::<UserInfo> {
         msg: Some("Successfully authorized".to_string()),
-        data: Some(jwt),
+        data: Some(jwt_claims),
     }))
 }

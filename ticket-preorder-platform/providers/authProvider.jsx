@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     // Функция для установки юзера и его роли по данным API
     const checkAuth = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/auth/session',
+            const response = await fetch('http://localhost:8000/api/auth/session',
                 {
                     method: 'GET',
                     credentials: 'include',

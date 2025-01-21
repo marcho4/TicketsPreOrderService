@@ -1,0 +1,3 @@
+/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug/CMakeFiles/AdminService.dir
+/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug/CMakeFiles/rebuild_cache.dir

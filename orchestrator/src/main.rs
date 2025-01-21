@@ -35,7 +35,7 @@ async fn main() -> std::io::Result<()> {
             )
     })
         .keep_alive(Duration::from_secs(75))
-        .bind(("0.0.0.0", 8080))?
+        .bind(("0.0.0.0", 8000))?
         .run()
         .await
 }
