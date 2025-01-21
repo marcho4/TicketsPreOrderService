@@ -8,12 +8,12 @@ import ErrorBoundary from "./dataBoundary";
 
 interface Request {
     request_id: string;
-    companyName: string;
+    company: string;
     email: string;
-    inn: string;
+    tin: string;
 }
 
-// Функция для fetch запросов
+// Функция для fetch запросов на регистрацию
 const fetchRequests = async () => {
     const response = await fetch("http://localhost:8003/pending_requests", {
         method: "GET",
@@ -24,13 +24,7 @@ const fetchRequests = async () => {
         throw new Error("Failed to fetch requests");
     }
 
-    const data = await response.json();
-    return data.data 
-    // || [
-    //     { request_id: "1", companyName: "Компания 1", email: "email1@example.com", inn: "1234567890" },
-    //     { request_id: "2", companyName: "Компания 2", email: "email2@example.com", inn: "0987654321" },
-    //     { request_id: "3", companyName: "Компания 3", email: "email3@example.com", inn: "1122334455" },
-    // ];
+    return await response.json();
 };
 
 let requestResource: { read: () => Request[] } | null = null;
@@ -41,7 +35,7 @@ function RequestList({ resource, onResponse }: {
     onResponse: (requestId: string, action: "APPROVED" | "REJECT") => void 
 }) {
     const requests = resource.read();
-
+    console.log(requests);
     if (!requests.length) {
         return <p className="text-center">Заявок нет.</p>;
     }
@@ -61,9 +55,9 @@ function RequestList({ resource, onResponse }: {
                 {requests.map((request) => (
                     <tr key={request.request_id}>
                         <td className="px-4 py-2">{request.request_id}</td>
-                        <td className="px-4 py-2">{request.companyName}</td>
+                        <td className="px-4 py-2">{request.company}</td>
                         <td className="px-4 py-2">{request.email}</td>
-                        <td className="px-4 py-2">{request.inn}</td>
+                        <td className="px-4 py-2">{request.tin}</td>
                         <td className="px-4 py-2 flex gap-2">
                             <Button
                                 onClick={() => onResponse(request.request_id, "APPROVED")}
