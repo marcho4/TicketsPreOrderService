@@ -4,3 +4,11 @@
 /JWTService/target/
 /.vscode/
 /ticket-preorder-platform/.idea/
+/.idea/
+/AdminService/.idea/
+/AdminService/cmake-build-debug/
+/orchestrator/.idea/
+/OrganizerService/.idea/
+/OrganizerService/cmake-build-debug/
+/OrganizerService/__pycache__/
+/ticker-preorder-platform/.idea/
