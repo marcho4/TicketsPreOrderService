@@ -1,0 +1,3 @@
+/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles/OrganizerService.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles/edit_cache.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles/rebuild_cache.dir
