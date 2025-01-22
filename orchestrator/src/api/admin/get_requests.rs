@@ -1,16 +1,16 @@
 use actix_web::{get, web, HttpResponse};
-use actix_web::web::Json;
 use crate::models::admin_request::AdminRequest;
 use crate::models::api_response::ApiResponse;
 use crate::orchestrator::orchestrator::Orchestrator;
 
 #[get("/requests")]
 pub async fn get_requests(orch: web::Data<Orchestrator>) -> HttpResponse {
-    let url = "http://localhost:8003/pending_requests";
+    let url = "http://admin:8003/pending_requests";
     let response = orch.client.get(url).send().await;
     match response {
         Ok(res) => {
-            let res_serialized = res.json::<Vec<AdminRequest>>().await;
+            let text = res.text().await.unwrap();
+            let res_serialized= serde_json::from_str::<Vec<AdminRequest>>(text.as_str());
             let serialized = match res_serialized {
                 Ok(serialized) => {serialized},
                 Err(e) => {return HttpResponse::InternalServerError().json(ApiResponse::<String> {
@@ -26,7 +26,7 @@ pub async fn get_requests(orch: web::Data<Orchestrator>) -> HttpResponse {
             )
         },
         Err(_e) => {HttpResponse::InternalServerError().json(
-            ApiResponse {
+            ApiResponse::<String> {
                 msg: Some("Error in admin service".to_string()),
                 data: None
             }

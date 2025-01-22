@@ -1,4 +1,4 @@
 pub mod auth;
 mod organizer;
-mod admin;
+pub(crate) mod admin;
 mod middleware;

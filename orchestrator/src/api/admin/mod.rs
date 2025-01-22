@@ -1,3 +1,3 @@
-mod process_request;
-mod get_requests;
-mod config;
+pub mod process_request;
+pub mod get_requests;
+pub mod config;

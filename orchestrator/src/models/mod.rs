@@ -10,4 +10,4 @@ pub mod registration_user_resp;
 pub(crate) mod registration_org_resp;
 pub mod registration_err_org;
 pub mod admin_request;
-mod request_process_info;
+pub mod request_process_info;

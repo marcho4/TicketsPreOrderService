@@ -33,6 +33,7 @@ async fn main() -> std::io::Result<()> {
             .service(
                 web::scope("/api")
                     .configure(api::auth::config::auth_config)
+                    .configure(api::admin::config::admin_config)
             )
     })
         .keep_alive(Duration::from_secs(75))
