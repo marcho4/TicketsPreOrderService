@@ -1,16 +1,8 @@
 #include "CreateOrganizerAccount.h"
 
-// /create_organizer_info/{id} - запрос
+// /create_organizer_info - запрос
 void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
-                                                            Database& db) {
-    std::string organizer_id;
-    if (!req.path_params.at("id").empty()) {
-        organizer_id = req.path_params.at("id");
-    } else {
-        sendError(res, 400, "Missing id parameter");
-        return;
-    }
-
+                                                             Database& db) {
     json parsed;
     try {
         parsed = json::parse(req.body);
@@ -19,7 +11,7 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
         return;
     }
 
-    const std::vector<std::string> required_fields = {"email", "organization_name", "tin", "phone_number"};
+    const std::vector<std::string> required_fields = {"email", "organization_name", "tin"};
     if (!validateRequiredFields(parsed, required_fields, res)) {
         return;
     }
@@ -34,10 +26,11 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
         sendError(res, 409, "User with this email already exists");
         return;
     }
-    std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email, phone_number) "
-                              "VALUES ($1, $2, $3, $4) RETURNING organizer_id";
+
+    std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email) "
+                              "VALUES ($1, $2, $3) RETURNING organizer_id";
     std::vector<std::string> params = {organizer_data.organization_name, organizer_data.tin,
-                                       organizer_data.email, organizer_data.phone_number};
+                                       organizer_data.email};
     pqxx::result result = db.executeQueryWithParams(insert_data, params);
 
     if (!result.empty() && result[0]["organizer_id"].c_str()) {
