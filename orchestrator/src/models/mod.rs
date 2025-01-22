@@ -11,3 +11,4 @@ pub(crate) mod registration_org_resp;
 pub mod registration_err_org;
 pub mod admin_request;
 pub mod request_process_info;
+pub mod organizer_info;

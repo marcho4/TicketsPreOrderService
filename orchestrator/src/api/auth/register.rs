@@ -8,7 +8,7 @@ use crate::orchestrator::orchestrator::Orchestrator;
 pub async fn register_user(
     orchestrator: web::Data<Orchestrator>,
     data: web::Json<UserRegistrationData>,
-    req: HttpRequest
+    _req: HttpRequest
 ) -> HttpResponse {
     let url = format!("{}/register_user", orchestrator.config.auth_base_url);
     let data = data.into_inner();

@@ -8,6 +8,6 @@ pub enum Status {
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RequestProcessInfo {
-    request_id: String,
-    status: Status,
+    pub request_id: String,
+    pub status: Status,
 }

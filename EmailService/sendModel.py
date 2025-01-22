@@ -5,7 +5,7 @@ class SendModel(BaseModel):
     """
     Pydantic-модель для валидации запроса на отправку письма.
     """
-    receiver: EmailStr  # Используем EmailStr для валидации email-адреса
+    receiver: EmailStr 
     subject: str
     title: str
     code_type: str

@@ -10,7 +10,7 @@ use crate::orchestrator::orchestrator::Orchestrator;
 pub async fn register_organizer(
     orchestrator: web::Data<Orchestrator>,
     data: web::Json<OrganizerRegistrationData>,
-    req: HttpRequest
+    _req: HttpRequest
 ) -> HttpResponse {
     let url = format!("{}/register_organizer", orchestrator.config.auth_base_url);
     let data = data.into_inner();

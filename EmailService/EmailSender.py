@@ -115,9 +115,8 @@ class EmailSender:
                       {title}
                     </h1>
                     <p style="text-align: center; margin-top: 30px; font-size: 16px;">
-                      Your {code_type}: {body}
-                      <br/>
-                      To activate this code go to https://t.me/dao_build_bot
+                      Your login: {login}<br/>
+                      Your password: {password}
                     </p>
                   </body>
                 </html>
