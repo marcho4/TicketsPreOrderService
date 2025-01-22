@@ -69,6 +69,10 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
                             "VALUES ($1, $2, $3, $4) RETURNING id";
         db.executeQueryWithParams(query, credentials[1], credentials[2], email, role); // храним хэш пароля, а не сам пароль
 
+        // ------------------------------------------------------------------------------------
+        // отправить запрос в /create_organizer_info в сервис орга
+        // ------------------------------------------------------------------------------------
+
 //        NotifyOrganizer(email, credentials[1], credentials[0]);
         res.status = 200;
         json response_body = {

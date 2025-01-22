@@ -37,11 +37,12 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
     }
 
     std::string role = status[0][0].c_str();
+
     std::string response_content = R"({
     "msg": "Success",
         "data": {
             "id": ")" + user_id + R"(",
-            "role": ")" + std::string(status[0][0].c_str()) + R"("
+            "role": ")" + role + R"("
         }
     })";
     res.status = 200;
