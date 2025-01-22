@@ -16,11 +16,9 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
                     data: None
                 })
             } else {
-
                 if json_body.status == Status::APPROVED {
-
+                    // add creation of the organizer
                 }
-
                 HttpResponse::Ok().json(ApiResponse::<String> {
                     msg: Some("Successfully proceed".to_string()),
                     data: Some(res.text().await.unwrap())
