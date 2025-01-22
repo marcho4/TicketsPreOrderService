@@ -8,6 +8,7 @@ use actix_cors::Cors;
 mod orchestrator;
 mod models;
 mod api;
+mod utils;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
