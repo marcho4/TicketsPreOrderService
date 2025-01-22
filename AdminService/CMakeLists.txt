@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.10)
 project(AdminService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_OSX_ARCHITECTURES "arm64")
 
 # Укажите путь к исходным файлам
 set(ADMIN_SOURCE_FILES
@@ -12,30 +11,30 @@ set(ADMIN_SOURCE_FILES
 )
 
 # Добавьте каталоги для заголовочных файлов
-include_directories(src)
-include_directories(src/postgres)
-include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-include_directories("/opt/homebrew/opt/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3../include")
-include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
+include_directories(
+    src
+    src/postgres
+    /usr/local/include
+    /usr/include
+)
 
-include_directories("/opt/homebrew/opt/libpqxx/include")
-link_directories("/opt/homebrew/opt/libpqxx/lib")
+# Подключение директорий с библиотеками
+link_directories(
+    /usr/local/lib
+    /usr/lib
+)
 
-# Include directories
-include_directories("/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include")
-include_directories("../libraries/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3/include")
-
-# Find the libraries
-find_package(CURL REQUIRED)
-# Create executable
+# Создание исполняемого файла
 add_executable(AdminService ${ADMIN_SOURCE_FILES})
+
+find_package(CURL REQUIRED)
+find_package(OpenSSL REQUIRED)
+
 target_link_libraries(AdminService
-        PRIVATE CURL::libcurl
-        /opt/homebrew/opt/openssl@3/lib/libssl.dylib
-        /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
-        /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
+        PRIVATE
         pqxx
+        pq
+        CURL::libcurl
+        OpenSSL::SSL
+        OpenSSL::Crypto
 )

@@ -21,7 +21,7 @@ RUN wget https://github.com/jtv/libpqxx/archive/refs/tags/7.7.5.tar.gz && \
     cmake --build build --target install && \
     cd .. && rm -rf libpqxx-7.7.5 7.7.5.tar.gz
 
-    RUN git clone https://github.com/rg3/bcrypt.git /tmp/bcrypt && \
+RUN git clone https://github.com/rg3/bcrypt.git /tmp/bcrypt && \
     cd /tmp/bcrypt && \
     make && \
     cp bcrypt.a /usr/local/lib && \
