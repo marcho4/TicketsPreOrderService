@@ -15,7 +15,7 @@ interface Request {
 
 // Функция для fetch запросов на регистрацию
 const fetchRequests = async () => {
-    const response = await fetch("http://localhost:8003/pending_requests", {
+    const response = await fetch("http://localhost:8000/api/admin/requests", {
         method: "GET",
         credentials: "include",
     });
@@ -24,7 +24,8 @@ const fetchRequests = async () => {
         throw new Error("Failed to fetch requests");
     }
 
-    return await response.json();
+    let body = await response.json();
+    return body.data;
 };
 
 let requestResource: { read: () => Request[] } | null = null;
@@ -32,7 +33,7 @@ let requestResource: { read: () => Request[] } | null = null;
 // Компонент для отображения данных
 function RequestList({ resource, onResponse }: { 
     resource: { read: () => Request[] }, 
-    onResponse: (requestId: string, action: "APPROVED" | "REJECT") => void 
+    onResponse: (requestId: string, action: "APPROVED" | "REJECTED") => void
 }) {
     const requests = resource.read();
     console.log(requests);
@@ -66,7 +67,7 @@ function RequestList({ resource, onResponse }: {
                                 Принять
                             </Button>
                             <Button
-                                onClick={() => onResponse(request.request_id, "REJECT")}
+                                onClick={() => onResponse(request.request_id, "REJECTED")}
                                 className="bg-red-500 hover:bg-red-600"
                             >
                                 Отклонить
@@ -92,7 +93,7 @@ function Loading() {
 function DataSection({ onUpdate }: { onUpdate?: () => void }) {
     const handleResponse = async (requestId: string, action: "APPROVED" | "REJECT") => {
         try {
-            const res = await fetch(`http://localhost:8003/process_organizer`, {
+            const res = await fetch(`http://localhost:8000/api/admin/process`, {
                 method: "POST",
                 credentials: "include",
                 headers: { 'Content-Type': 'application/json' },
