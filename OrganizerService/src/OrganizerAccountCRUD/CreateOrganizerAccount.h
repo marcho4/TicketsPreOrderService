@@ -16,8 +16,7 @@ class CreateOrganizerInfo {
         static OrganizerData parseFromJson(json& parsed) {
             return {parsed["tin"],
                     parsed["organization_name"],
-                    parsed["email"],
-                    parsed["phone_number"]};
+                    parsed["email"]};
         }
 
         bool Validate(httplib::Response& res) const {
@@ -27,10 +26,6 @@ class CreateOrganizerInfo {
             }
             if (!DataCheker::isValidEmailFormat(email)) {
                 sendError(res, 400, "Invalid email format");
-                return false;
-            }
-            if (!DataCheker::isValidPhoneNumber(phone_number)) {
-                sendError(res, 400, "Invalid phone number");
                 return false;
             }
             return true;

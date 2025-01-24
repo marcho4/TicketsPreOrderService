@@ -17,12 +17,7 @@ public:
 
     static void OrganizerRegisterApproval(const httplib::Request& request, httplib::Response &res, Database& db);
 
-    static void RegisterOrganizer(const std::string& email, const std::string& password,
-                           const std::string& company, Database& db);
-
     static bool CheckEmailUniquenessAndOrganizerExistence(const std::string& email, Database& db);
-
-    static void NotifyOrganizer(const std::string& email, const std::string& login, const std::string& password);
 
     static void SetErrorResponse(httplib::Response& res, const std::string& message) {
         res.status = 400;

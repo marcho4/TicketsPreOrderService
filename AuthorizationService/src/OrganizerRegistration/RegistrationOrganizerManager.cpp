@@ -26,7 +26,6 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
 //            SetErrorResponse(res, "Organizer already registered");
 //            return;
 //        }
-        RegisterOrganizer(email, company, tin, db); // короче вот тут мы должны закидывать данные в сервис
 
         json response = {
                 {"status", "Application sent to admin"}
@@ -37,18 +36,6 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
     } catch (const std::exception& e) {
         SetErrorResponse(res, "Invalid request format");
     }
-}
-
-void OrganizerRegistrationManager::RegisterOrganizer(const std::string& email, const std::string& company,
-                                                     const std::string& tin, Database& db) {
-    nlohmann::json json_data = {
-            {"email", email},
-            {"company", company},
-            {"TIN", tin},
-    };
-    // --------------------------------------------------------------------------------------------
-    // сюда надо впихнуть запрос в оркестратор
-    // --------------------------------------------------------------------------------------------
 }
 
 // /authorize_approved - запрос, приходит от сервиса админа в случае подтверждения
@@ -69,11 +56,6 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
                             "VALUES ($1, $2, $3, $4) RETURNING id";
         db.executeQueryWithParams(query, credentials[1], credentials[2], email, role); // храним хэш пароля, а не сам пароль
 
-        // ------------------------------------------------------------------------------------
-        // отправить запрос в /create_organizer_info в сервис орга
-        // ------------------------------------------------------------------------------------
-
-//        NotifyOrganizer(email, credentials[1], credentials[0]);
         res.status = 200;
         json response_body = {
                 {"login", credentials[1]},
@@ -92,16 +74,6 @@ bool OrganizerRegistrationManager::CheckEmailUniquenessAndOrganizerExistence(con
     std::string query = "SELECT * FROM Authorization.AuthorizationData WHERE email = $1";
     pqxx::result ans = db.executeQueryWithParams(query, email);
     return ans.empty();
-}
-
-void OrganizerRegistrationManager::NotifyOrganizer(const std::string& email, const std::string& login, const std::string& password) {
-    httplib::Client notifier("https://sender-service.com");
-    json payload = {
-            {"email", email},
-            {"login", login},
-            {"password", password}
-    };
-    notifier.Post("/send_credentials", payload.dump(), "application/json");
 }
 
 bool OrganizerRegistrationManager::checkCorrectnessTIN(const std::string& tin) {
