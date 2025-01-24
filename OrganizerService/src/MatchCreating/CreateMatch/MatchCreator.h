@@ -6,6 +6,26 @@
 class MatchCreator {
     using json = nlohmann::json;
 
+    struct MatchData {
+        std::string team_home;
+        std::string team_away;
+        std::string match_datetime;
+        std::string stadium;
+        std::string match_description;
+
+        static MatchData getDataFromRequest(json& parsed) {
+            std::string team_home = parsed["team_home"];
+            std::string team_away = parsed["team_away"];
+            std::string match_datetime_to_parse = parsed["match_datetime"];
+            std::string stadium = parsed["stadium"];
+            std::string match_description = parsed["match_description"];
+            match_datetime_to_parse = match_datetime_to_parse.substr(0, match_datetime_to_parse.find("Z"));
+            std::replace(match_datetime_to_parse.begin(), match_datetime_to_parse.end(), 'T', ' ');
+
+            return {team_home, team_away, match_datetime_to_parse, stadium, match_description};
+        }
+    };
+
 public:
     void CreateMatchRequest(const httplib::Request& req, httplib::Response& res,
                                    Database& db);

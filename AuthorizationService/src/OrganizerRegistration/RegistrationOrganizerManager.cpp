@@ -1,32 +1,19 @@
 
 #include "RegistrationOrganizerManager.h"
-#include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
 #include "../UserRegistration/PasswordGenerator/PasswordCreator.h"
 
 void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Request& request,
                                                             httplib::Response &res, Database& db) {
     try {
         auto parsed = json::parse(request.body);
-        std::string email = parsed.at("email").get<std::string>();
-        std::string company = parsed.at("company").get<std::string>();
-        std::string tin = parsed.at("tin").get<std::string>();
-        if (email.empty() || company.empty() || tin.empty()) {
-            SetErrorResponse(res, "Fill all fields!");
-            return;
-        }
-        if (!AuxiliaryFunctions::isValidEmail(email)) {
-            SetErrorResponse(res, "Invalid email format");
-            return;
-        }
-        if (!checkCorrectnessTIN(tin)) {
-            SetErrorResponse(res, "Invalid TIN format");
+
+        if (!RegistrationOrganizerValidator::Validate(parsed, res)) {
             return;
         }
 //        if (CheckEmailUniquenessAndOrganizerExistence(email, db)) {
 //            SetErrorResponse(res, "Organizer already registered");
 //            return;
 //        }
-
         json response = {
                 {"status", "Application sent to admin"}
         };
@@ -42,19 +29,18 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
 void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Request& request,
                                                              httplib::Response &res, Database& db) {
     auto parsed = json::parse(request.body);
-    std::string email = parsed.at("email").get<std::string>();
-    std::string company = parsed.at("company").get<std::string>();
-    std::string tin = parsed.at("tin").get<std::string>();
-    std::string status = parsed.at("status").get<std::string>();
-    if (status == "APPROVED") {
+    OrganizerDataWithStatus data_sent_by_admin = OrganizerDataWithStatus::getRegistrationData(parsed);
+
+    if (data_sent_by_admin.status == "APPROVED") {
         // сгенерили пароль
-        LoginData data = PasswordCreator::generatePasswordAndLoginForOrganizer(company, db);
+        LoginData data = PasswordCreator::generatePasswordAndLoginForOrganizer(data_sent_by_admin.company, db);
         // credentials[0] - пароль, credentials[1] - логин, credentials[2] - хэш пароля
+
         std::vector<std::string> credentials = PasswordCreator::HashAndSavePassword(data, db);
         std::string role = "ORGANIZER";
         std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email, status) "
                             "VALUES ($1, $2, $3, $4) RETURNING id";
-        db.executeQueryWithParams(query, credentials[1], credentials[2], email, role); // храним хэш пароля, а не сам пароль
+        db.executeQueryWithParams(query, credentials[1], credentials[2], data_sent_by_admin.email, role); // храним хэш пароля, а не сам пароль
 
         res.status = 200;
         json response_body = {
