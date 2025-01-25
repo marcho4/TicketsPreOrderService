@@ -2423,7 +2423,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/lib"
+			"value" : "alt-svc;AsynchDNS;brotli;GSS-API;HSTS;HTTP2;HTTPS-proxy;IDN;IPv6;Kerberos;Largefile;libz;MultiSSL;NTLM;SPNEGO;SSL;threadsafe;TLS-SRP;UnixSockets;zstd"
 		}
 	],
 	"kind" : "cache",
