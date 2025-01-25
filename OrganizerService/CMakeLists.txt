@@ -23,6 +23,8 @@ set(SOURCE_FILES
         libraries/Bcrypt.cpp/src/bcrypt.cpp
         libraries/Bcrypt.cpp/include/bcrypt.h
         libraries/Bcrypt.cpp/src/blowfish.cpp
+        src/MatchCreating/GetMatchInfo/GetMatchData.h
+        src/MatchCreating/GetMatchInfo/GetMatchData.cpp
 )
 
 include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")

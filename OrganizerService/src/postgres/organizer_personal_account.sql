@@ -16,7 +16,6 @@ DROP TYPE IF EXISTS MatchStatus CASCADE;
 
 CREATE TYPE MatchStatus AS ENUM ('PENDING', 'IN_PROGRESS', 'FINISHED');
 
--- TODO: привести в формат timestamp
 CREATE TABLE Organizers.Matches (
     match_id SERIAL PRIMARY KEY,
     organizer_id UUID NOT NULL REFERENCES Organizers.OrganizersData(organizer_id),

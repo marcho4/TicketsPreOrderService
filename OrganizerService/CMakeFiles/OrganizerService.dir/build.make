@@ -209,6 +209,20 @@ CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/Bcrypt.cpp/src/blowfish.cpp -o CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s
 
+CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o: CMakeFiles/OrganizerService.dir/flags.make
+CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o: src/MatchCreating/GetMatchInfo/GetMatchData.cpp
+CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o: CMakeFiles/OrganizerService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o -MF CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o.d -o CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/GetMatchInfo/GetMatchData.cpp
+
+CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/GetMatchInfo/GetMatchData.cpp > CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
+
+CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/GetMatchInfo/GetMatchData.cpp -o CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
+
 # Object files for target OrganizerService
 OrganizerService_OBJECTS = \
 "CMakeFiles/OrganizerService.dir/main.cpp.o" \
@@ -220,7 +234,8 @@ OrganizerService_OBJECTS = \
 "CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/MatchCreator.cpp.o" \
 "CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.o" \
 "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o" \
-"CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o"
+"CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o" \
+"CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o"
 
 # External object files for target OrganizerService
 OrganizerService_EXTERNAL_OBJECTS =
@@ -235,13 +250,14 @@ OrganizerService: CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/
 OrganizerService: CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.o
 OrganizerService: CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 OrganizerService: CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o
+OrganizerService: CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
 OrganizerService: CMakeFiles/OrganizerService.dir/build.make
 OrganizerService: /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib
 OrganizerService: /opt/homebrew/opt/openssl@3/lib/libssl.dylib
 OrganizerService: /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
 OrganizerService: /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
 OrganizerService: CMakeFiles/OrganizerService.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable OrganizerService"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable OrganizerService"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OrganizerService.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
