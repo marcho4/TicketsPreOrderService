@@ -2,21 +2,18 @@
 
 void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
     auto parsed = json::parse(req.body);
-    std::string login = parsed["login"];
-    std::string password = parsed["password"];
 
-    pqxx::result password_hash = getPasswordHash(login, db);
-    std::string user_id = getId(login, db);
-
-    if (password_hash.empty()) {
-        res.status = 403; // 403 - forbidden
-        res.set_content(R"({"msg": "Access denied"})", "application/json");
+    std::string user_id;
+    if (!req.path_params.at("id").empty()) {
+        user_id = req.path_params.at("id");
+    } else {
+        sendError(res, 400, "Missing id parameter");
         return;
     }
 
-    if (!validatePassword(password, password_hash[0][0].c_str())) {
-        res.status = 403;
-        res.set_content(R"({"msg": "Access denied"})", "application/json");
+    LoginData login_data = LoginData::parseFromJson(parsed);
+
+    if (!ValidateLoginData::Validate(parsed, res, db)) {
         return;
     }
 
@@ -25,23 +22,22 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
         std::string status_query = "SELECT status FROM AuthorizationService.AuthorizationData WHERE id = $1";
         status = db.executeQueryWithParams(status_query, user_id);
     } catch (const std::exception& e) {
-        res.status = 500;
-        res.set_content(R"({"msg": "Server error"})", "application/json");
+        sendError(res, 500, "Failed to get user status");
         return;
     }
 
     if (status.empty()) {
-        res.status = 403;
-        res.set_content(R"({"msg": "Access denied"})", "application/json");
+        sendError(res, 403, "Access denied");
         return;
     }
 
     std::string role = status[0][0].c_str();
+
     std::string response_content = R"({
     "msg": "Success",
         "data": {
             "id": ")" + user_id + R"(",
-            "role": ")" + std::string(status[0][0].c_str()) + R"("
+            "role": ")" + role + R"("
         }
     })";
     res.status = 200;
@@ -73,4 +69,9 @@ pqxx::result AuthorizationManager::getPasswordHash(std::string login, Database &
     } catch (const std::exception& e) {
         return {};
     }
+}
+
+void AuthorizationManager::sendError(httplib::Response& res, int status, const std::string& message) {
+    res.status = status;
+    res.set_content(R"({"message": ")" + message + R"("})", "application/json");
 }

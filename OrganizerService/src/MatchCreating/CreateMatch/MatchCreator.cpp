@@ -21,19 +21,15 @@ void MatchCreator::CreateMatchRequest(const httplib::Request& req, httplib::Resp
     }
 
     auto parsed = json::parse(req.body);
-    std::string team_home = parsed["team_home"];
-    std::string team_away = parsed["team_away"];
-    std::string match_datetime_to_parse = parsed["match_datetime"];
-    std::string stadium = parsed["stadium"];
-    std::string match_description = parsed["match_description"];
-    std::cout << match_datetime_to_parse << '\n';
-    match_datetime_to_parse = match_datetime_to_parse.substr(0, match_datetime_to_parse.find("Z"));
-    std::replace(match_datetime_to_parse.begin(), match_datetime_to_parse.end(), 'T', ' ');
+    MatchData data = MatchData::getDataFromRequest(parsed);
 
     std::string add_match_query = "INSERT INTO Organizers.Matches (organizer_id, team_home, team_away, match_datetime, "
                                   "stadium, match_description, created_at, updated_at) "
                                   "VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
-    std::vector<std::string> params = {organizer_id, team_home, team_away, match_datetime_to_parse, stadium, match_description};
+
+    std::vector<std::string> params = {organizer_id, data.team_home, data.team_away,
+                                       data.match_datetime, data.stadium, data.match_description};
+
     pqxx::result response = db.executeQueryWithParams(add_match_query, params);
     if (response.affected_rows() == 0) {
         sendError(res, 500, "Failed to create match");
