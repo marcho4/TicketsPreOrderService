@@ -27,10 +27,10 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
         return;
     }
 
-    std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email) "
-                              "VALUES ($1, $2, $3) RETURNING organizer_id";
+    std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email, phone_number) "
+                              "VALUES ($1, $2, $3, $4) RETURNING organizer_id";
     std::vector<std::string> params = {organizer_data.organization_name, organizer_data.tin,
-                                       organizer_data.email};
+                                       organizer_data.email, "+79168700688"};
     pqxx::result result = db.executeQueryWithParams(insert_data, params);
 
     if (!result.empty() && result[0]["organizer_id"].c_str()) {

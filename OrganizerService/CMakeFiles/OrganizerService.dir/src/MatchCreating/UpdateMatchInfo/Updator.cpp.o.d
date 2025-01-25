@@ -1115,4 +1115,5 @@ CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.o:
   /opt/homebrew/opt/libpqxx/include/pqxx/time.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/transactor.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/UpdateMatchInfo/../../postgres/PostgresProcessing.h
+  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/UpdateMatchInfo/../../postgres/PostgresProcessing.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/UpdateMatchInfo/../../FormatRegexHelper/ValidDataChecker.h

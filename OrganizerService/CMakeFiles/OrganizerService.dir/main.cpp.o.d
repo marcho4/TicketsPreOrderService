@@ -1127,6 +1127,7 @@ CMakeFiles/OrganizerService.dir/main.cpp.o: \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/UpdateMatchInfo/../../../../libraries/httplib.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/UpdateMatchInfo/../../../../libraries/nlohmann/json.hpp \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/UpdateMatchInfo/../../postgres/PostgresProcessing.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/UpdateMatchInfo/../../FormatRegexHelper/ValidDataChecker.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/GetAccountInfo.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/../../libraries/httplib.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/OrganizerAccountCRUD/../../libraries/nlohmann/json.hpp

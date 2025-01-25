@@ -1,4 +1,19 @@
-Cannot generate into /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService
-It was created with incompatible generator 'Unix Makefiles'
-
-Please either delete it manually or select another generation directory
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -S /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService -B /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug
+-- The C compiler identification is AppleClang 15.0.0.15000309
+-- The CXX compiler identification is AppleClang 15.0.0.15000309
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found CURL: /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib (found version "8.11.1")  
+-- Found OpenSSL: /opt/homebrew/Cellar/openssl@3/3.4.0/lib/libcrypto.dylib (found version "3.4.0")  
+-- Found PostgreSQL: /opt/homebrew/lib/postgresql@14/libpq.dylib (found version "14.15")  
+-- Configuring done (1.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug

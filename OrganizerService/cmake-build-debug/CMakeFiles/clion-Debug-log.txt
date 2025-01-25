@@ -1,4 +1,4 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -S /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService -B /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService
--- Configuring done (0.0s)
+-- Configuring done (0.1s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService

@@ -11,7 +11,6 @@ class CreateOrganizerInfo {
         std::string tin;
         std::string organization_name;
         std::string email;
-        std::string phone_number;
 
         static OrganizerData parseFromJson(json& parsed) {
             return {parsed["tin"],
@@ -20,7 +19,7 @@ class CreateOrganizerInfo {
         }
 
         bool Validate(httplib::Response& res) const {
-            if (email.empty() || organization_name.empty() || tin.empty() || phone_number.empty()) {
+            if (email.empty() || organization_name.empty() || tin.empty()) {
                 sendError(res, 400, "Empty fields");
                 return false;
             }
