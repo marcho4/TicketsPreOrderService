@@ -129,6 +129,54 @@ OrganizerService/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/build
 .PHONY : OrganizerService/fast
 
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o
+
+# target to build an object file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i
+
+# target to preprocess a source file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s
+
+# target to generate assembly for a file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o
+
+# target to build an object file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i
+
+# target to preprocess a source file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s
+
+# target to generate assembly for a file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
+
 libraries/Bcrypt.cpp/src/bcrypt.o: libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 .PHONY : libraries/Bcrypt.cpp/src/bcrypt.o
 
@@ -402,6 +450,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... OrganizerService"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.o"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.i"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.s"

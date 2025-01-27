@@ -10,19 +10,16 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
         std::string email = parsed["email"];
 
         if (name.empty() || last_name.empty() || email.empty()) {
-            res.status = 400;
-            res.set_content(R"({"status": "fill every field!"})", "application/json");
+            ErrorHandler::sendError(res, 400, "Empty fields");
             return;
         }
         if (name.length() > 200 || last_name.length() > 200 || email.length() > 200) {
-            res.status = 400;
-            res.set_content(R"({"status": "too long fields!"})", "application/json");
+            ErrorHandler::sendError(res, 400, "Too long fields");
             return;
         }
         // нужно не забыть проверить на уникальность пользователя
         if (!AuxiliaryFunctions::isValidEmail(email) || !CheckEmailUniquenessOrUserExistence(email, db)) {
-            res.status = 400;
-            res.set_content(R"({"status": "email already exists or email invalid"})", "application/json");
+            ErrorHandler::sendError(res, 400, "Invalid email format or email already exists");
             return;
         }
 

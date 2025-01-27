@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o"
+  "CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o.d"
+  "CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o"
+  "CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o.d"
   "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o"
   "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o.d"
   "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o"

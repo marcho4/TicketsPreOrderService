@@ -3,6 +3,7 @@
 #include <pqxx/pqxx>
 #include "../postgres/PostgresProcessing.h"
 #include "bcrypt.h"
+#include "../ErrorHandler.h"
 
 class AuthorizationManager {
     using json = nlohmann::json;
@@ -26,8 +27,6 @@ public:
     static std::string getId(std::string basicString, Database &database);
 
     static pqxx::result getPasswordHash(std::string basicString, Database &database);
-
-    static void sendError(httplib::Response& res, int status, const std::string& message);
 };
 
 class ValidateLoginData {
@@ -50,12 +49,12 @@ public:
         std::string user_id = AuthorizationManager::getId(login_data.login, db);
 
         if (password_hash.empty()) {
-            AuthorizationManager::sendError(res, 403, "Access denied");
+            ErrorHandler::sendError(res, 403, "Access denied");
             return false;
         }
 
         if (!AuthorizationManager::validatePassword(login_data.password, password_hash[0][0].c_str())) {
-            AuthorizationManager::sendError(res, 403, "Access denied");
+            ErrorHandler::sendError(res, 403, "Access denied");
             return false;
         }
         return true;

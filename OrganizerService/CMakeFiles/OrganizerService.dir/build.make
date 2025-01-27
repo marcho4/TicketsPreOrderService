@@ -223,6 +223,34 @@ CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/src/MatchCreating/GetMatchInfo/GetMatchData.cpp -o CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
 
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o: CMakeFiles/OrganizerService.dir/flags.make
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o: CMakeFiles/OrganizerService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o -MF CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o.d -o CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp
+
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp > CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
+
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp -o CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
+
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o: CMakeFiles/OrganizerService.dir/flags.make
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o: CMakeFiles/OrganizerService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o -MF CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o.d -o CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp
+
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp > CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
+
+CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp -o CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
+
 # Object files for target OrganizerService
 OrganizerService_OBJECTS = \
 "CMakeFiles/OrganizerService.dir/main.cpp.o" \
@@ -235,7 +263,9 @@ OrganizerService_OBJECTS = \
 "CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.o" \
 "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o" \
 "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o" \
-"CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o"
+"CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o" \
+"CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o" \
+"CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o"
 
 # External object files for target OrganizerService
 OrganizerService_EXTERNAL_OBJECTS =
@@ -251,13 +281,15 @@ OrganizerService: CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchI
 OrganizerService: CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 OrganizerService: CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o
 OrganizerService: CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
+OrganizerService: CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
+OrganizerService: CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
 OrganizerService: CMakeFiles/OrganizerService.dir/build.make
 OrganizerService: /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib
 OrganizerService: /opt/homebrew/opt/openssl@3/lib/libssl.dylib
 OrganizerService: /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
 OrganizerService: /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
 OrganizerService: CMakeFiles/OrganizerService.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable OrganizerService"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable OrganizerService"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OrganizerService.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

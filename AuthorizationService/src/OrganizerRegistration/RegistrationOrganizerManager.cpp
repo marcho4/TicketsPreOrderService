@@ -21,7 +21,7 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
         res.set_content(response.dump(), "application/json");
         return;
     } catch (const std::exception& e) {
-        SetErrorResponse(res, "Invalid request format");
+        ErrorHandler::sendError(res, "Invalid request format");
     }
 }
 

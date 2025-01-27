@@ -8,6 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp" "CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o" "gcc" "CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o.d"
+  "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp" "CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o" "gcc" "CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/Bcrypt.cpp/src/bcrypt.cpp" "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o" "gcc" "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/libraries/Bcrypt.cpp/src/blowfish.cpp" "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o" "gcc" "CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/main.cpp" "CMakeFiles/OrganizerService.dir/main.cpp.o" "gcc" "CMakeFiles/OrganizerService.dir/main.cpp.o.d"

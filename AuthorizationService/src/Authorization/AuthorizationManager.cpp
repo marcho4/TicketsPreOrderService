@@ -7,7 +7,7 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
     if (!req.path_params.at("id").empty()) {
         user_id = req.path_params.at("id");
     } else {
-        sendError(res, 400, "Missing id parameter");
+        ErrorHandler::sendError(res, 400, "Missing id parameter");
         return;
     }
 
@@ -23,12 +23,12 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
         std::vector<std::string> params = {user_id};
         status = db.executeQueryWithParams(status_query, params);
     } catch (const std::exception& e) {
-        sendError(res, 500, "Failed to get user status");
+        ErrorHandler::sendError(res, 500, "Failed to get user status");
         return;
     }
 
     if (status.empty()) {
-        sendError(res, 403, "Access denied");
+        ErrorHandler::sendError(res, 403, "Access denied");
         return;
     }
 
@@ -72,9 +72,4 @@ pqxx::result AuthorizationManager::getPasswordHash(std::string login, Database &
     } catch (const std::exception& e) {
         return {};
     }
-}
-
-void AuthorizationManager::sendError(httplib::Response& res, int status, const std::string& message) {
-    res.status = status;
-    res.set_content(R"({"message": ")" + message + R"("})", "application/json");
 }
