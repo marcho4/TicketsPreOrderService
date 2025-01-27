@@ -1,0 +1,91 @@
+services:
+  jwt:
+    build:
+      context: ./JWTService
+      dockerfile: Dockerfile
+    env_file:
+      - ./JWTService/.env
+    ports:
+      - "8001:8001"
+    networks:
+      - main
+
+  orchestrator:
+    build:
+      context: ./orchestrator
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - main
+
+  auth:
+    build:
+      context: ./AuthorizationService
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    networks:
+      - main
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    ports:
+      - "5432:5432"
+    networks:
+      - main
+
+
+  admin:
+    build:
+      context: ./AdminService
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    networks:
+      - main
+    depends_on:
+      - postgres
+
+  organizer:
+    build:
+      context: ./OrganizerService
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
+    networks:
+      - main
+    depends_on:
+      - postgres
+  
+  # zookeeper:
+  #   image: confluentinc/cp-zookeeper:latest
+  #   environment:
+  #     ZOOKEEPER_CLIENT_PORT: 2181
+  #     ZOOKEEPER_TICK_TIME: 2000
+  #   ports:
+  #     - "2181:2181"
+
+  # kafka:
+  #   image: confluentinc/cp-kafka:latest
+  #   depends_on:
+  #     - zookeeper
+  #   ports:
+  #     - "9092:9092"
+  #   environment:
+  #     KAFKA_BROKER_ID: 1
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+  #     KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+
+
+networks:
+  main:
+    driver: bridge
