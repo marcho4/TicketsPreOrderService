@@ -64,6 +64,12 @@ int main() {
             res.status = 200;
         });
 
+        server.Post("/admin/create",  [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            res.status = 200;
+        });
+
+        // admin/create {"api_key": "const", "login" : "some_login", "password": "huy"}
         std::cout << "Server is listening on 0.0.0.0:8002\n";
         server.listen("0.0.0.0", 8002);
 

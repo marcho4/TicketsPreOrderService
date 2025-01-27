@@ -22,3 +22,6 @@ CREATE TABLE if NOT EXISTS AuthorizationService.TemplateUser (
     surname TEXT,
     email TEXT
 );
+
+CREATE INDEX IF NOT EXISTS idx_hash_login ON AuthorizationService.AuthorizationData USING hash(login);
+CREATE INDEX IF NOT EXISTS idx_hash_user_id ON AuthorizationService.AuthorizationData USING hash(login);
