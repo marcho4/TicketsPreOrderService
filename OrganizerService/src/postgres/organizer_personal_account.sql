@@ -29,7 +29,7 @@ CREATE TABLE Organizers.Matches (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
---------------------------------------------------------------------------------------------------------
+------------------------------------------------triggers-----------------------------------------------------------
 
 -- создадим триггер для автоматического изменения статуса во время начала матча
 CREATE OR REPLACE FUNCTION set_match_to_in_progress()
@@ -64,7 +64,8 @@ BEFORE UPDATE ON Organizers.Matches
 FOR EACH ROW
 EXECUTE FUNCTION update_match_status_to_finished();
 
---------------------------------------------------------------------------------------------------------
+-------------------------------------------------Indices-------------------------------------------------------
+
 CREATE INDEX IF NOT EXISTS idx_hash_organizer_id ON Organizers.Matches USING hash (organizer_id);
 CREATE INDEX IF NOT EXISTS idx_hash_match_id ON Organizers.Matches USING hash (match_id);
 CREATE INDEX IF NOT EXISTS idx_hash_email ON Organizers.OrganizersData USING hash (email);

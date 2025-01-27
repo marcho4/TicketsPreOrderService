@@ -19,8 +19,7 @@ def db_connection():
 
 
 def create_organizer_info(data):
-    organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/create_organizer_info/{organizer_id}", json=data)
+    result = requests.post(f"{BASE_URL}/create_organizer_info", json=data)
     assert result.status_code == 201
     return result
 
@@ -30,8 +29,7 @@ def create_organizer_info(data):
             # данные для регистрации организатора
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
-             "email": generate_random_email(),
-             "phone_number": generate_random_phone_number()},
+             "email": generate_random_email()},
 
             # данные о матче
             {"team_home": "FC Barcelona",
@@ -47,7 +45,7 @@ def create_organizer_info(data):
 def test_create_valid_event(data, new_data, expected_status_code, expected_message, db_connection):
     response = create_organizer_info(data)
     data_json = response.json()
-    organizer_id = data_json["organizer_id"]
+    organizer_id = data_json["data"]["id"]
     print("bebra id: ", organizer_id)
     response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data)
 
@@ -80,8 +78,7 @@ def test_create_event_invalid_organizer_id(new_data, expected_status_code, expec
             # данные для регистрации организатора
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
-             "email": generate_random_email(),
-             "phone_number": generate_random_phone_number()},
+             "email": generate_random_email()},
 
             # данные о матче
             {"team_home": "FC Barcelona",
@@ -100,7 +97,7 @@ def test_try_create_duplicate_event(data, new_data, expected_status_code_1, expe
                                     expected_status_code_2, expected_message_2, db_connection):
     response = create_organizer_info(data)
     data_json = response.json()
-    organizer_id = data_json["organizer_id"]
+    organizer_id = data_json["data"]["id"]
     response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data)
 
     assert response.status_code == expected_status_code_1

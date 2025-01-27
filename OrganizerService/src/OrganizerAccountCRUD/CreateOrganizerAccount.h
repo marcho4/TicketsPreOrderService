@@ -32,7 +32,7 @@ class CreateOrganizerInfo {
     };
 
 public:
-    void OrganizerPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
+    static void OrganizerPersonalInfoCreateRequest(const httplib::Request& req, httplib::Response& res,
                                        Database& db);
 
     static bool CheckOrganizerExistence(std::string& organizer_id, Database &db);
