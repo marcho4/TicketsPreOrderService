@@ -15,6 +15,7 @@ pub async fn register_organizer(
     let url = format!("{}/register_organizer", orchestrator.config.auth_base_url);
     let data = data.into_inner();
     let response = orchestrator.client.post(&url).json(&data).send().await;
+
     let org_data: RegistrationOrgResp = match response {
         Ok(resp) => {
             if resp.status().is_success() {
@@ -49,6 +50,7 @@ pub async fn register_organizer(
     let admin_req_url = "http://admin:8003/add_organizer_request".to_string();
     let admin_resp = orchestrator.client.post(&admin_req_url)
         .json(&data).send().await;
+
     info!("admin response: {:?}", admin_resp);
 
     if !admin_resp.unwrap().status().is_success() {
