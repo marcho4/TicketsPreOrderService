@@ -5,6 +5,7 @@
 /.vscode/
 /ticket-preorder-platform/.idea/
 /.idea/
+.idea
 /AdminService/.idea/
 /AdminService/cmake-build-debug/
 /orchestrator/.idea/
