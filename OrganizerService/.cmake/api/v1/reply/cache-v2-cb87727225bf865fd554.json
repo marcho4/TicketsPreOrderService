@@ -2,45 +2,6 @@
 	"entries" : 
 	[
 		{
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"name" : "AdminService_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug"
-		},
-		{
-			"name" : "AdminService_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "AdminService_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/Users/marcho/TicketsPreOrderService/AdminService"
-		},
-		{
-========
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 			"name" : "CMAKE_ADDR2LINE",
 			"properties" : 
 			[
@@ -94,11 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug"
-========
-			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/cmake-build-debug"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
+			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -134,11 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "5"
-========
 			"value" : "8"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_COLOR_DIAGNOSTICS",
@@ -147,6 +100,22 @@
 				{
 					"name" : "HELPSTRING",
 					"value" : "Enable colored diagnostics throughout."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
+			"name" : "CMAKE_COLOR_MAKEFILE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable/Disable color output during build."
 				}
 			],
 			"type" : "BOOL",
@@ -162,11 +131,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake"
-========
 			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -178,11 +143,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cpack"
-========
 			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cpack"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -194,11 +155,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/ctest"
-========
 			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/ctest"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -213,7 +170,7 @@
 					"value" : "CXX compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "/Library/Developer/CommandLineTools/usr/bin/c++"
 		},
 		{
@@ -309,7 +266,7 @@
 					"value" : "C compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "/Library/Developer/CommandLineTools/usr/bin/cc"
 		},
 		{
@@ -409,6 +366,18 @@
 			"value" : "CMAKE_DLLTOOL-NOTFOUND"
 		},
 		{
+			"name" : "CMAKE_EDIT_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to cache edit program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/cmake/3.30.3/bin/ccmake"
+		},
+		{
 			"name" : "CMAKE_EXECUTABLE_FORMAT",
 			"properties" : 
 			[
@@ -434,7 +403,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : ""
+			"value" : "-L/usr/local/opt/libpqxx/lib"
 		},
 		{
 			"name" : "CMAKE_EXE_LINKER_FLAGS_DEBUG",
@@ -538,11 +507,7 @@
 				}
 			],
 			"type" : "STATIC",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug/CMakeFiles/pkgRedirects"
-========
-			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/cmake-build-debug/CMakeFiles/pkgRedirects"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
+			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -554,7 +519,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "Ninja"
+			"value" : "Unix Makefiles"
 		},
 		{
 			"name" : "CMAKE_GENERATOR_INSTANCE",
@@ -602,11 +567,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "/Users/marcho/TicketsPreOrderService/AdminService"
-========
 			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -657,12 +618,16 @@
 			"properties" : 
 			[
 				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Path to a program."
 				}
 			],
-			"type" : "UNINITIALIZED",
-			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja"
+			"type" : "FILEPATH",
+			"value" : "/usr/bin/make"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -678,7 +643,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : ""
+			"value" : "-L/usr/local/opt/libpqxx/lib"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS_DEBUG",
@@ -838,7 +803,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk"
+			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk"
 		},
 		{
 			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
@@ -886,11 +851,7 @@
 				}
 			],
 			"type" : "STATIC",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "AdminService"
-========
 			"value" : "OrganizerService"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_PROJECT_VERSION",
@@ -994,11 +955,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.30"
-========
 			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27"
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1014,7 +971,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : ""
+			"value" : "-L/usr/local/opt/libpqxx/lib"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS_DEBUG",
@@ -1282,7 +1239,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include"
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/include"
 		},
 		{
 			"name" : "CURL_LIBRARY_DEBUG",
@@ -1314,7 +1271,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib/libcurl.tbd"
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_CURL",
@@ -1326,9 +1283,6 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
-			"value" : "[/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib/libcurl.tbd][/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include][c ][v8.7.1()]"
-========
 			"value" : "[/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib][/opt/homebrew/Cellar/curl/8.11.1/include][c ][v8.11.1()]"
 		},
 		{
@@ -1341,7 +1295,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/cmake-build-debug"
+			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService"
 		},
 		{
 			"name" : "OrganizerService_IS_TOP_LEVEL",
@@ -1786,7 +1740,6 @@
 			],
 			"type" : "INTERNAL",
 			"value" : ""
->>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "PKG_CONFIG_ARGN",
@@ -1818,7 +1771,59 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "PKG_CONFIG_EXECUTABLE-NOTFOUND"
+			"value" : "/opt/homebrew/bin/pkg-config"
+		},
+		{
+			"name" : "__pkg_config_arguments_PC_CURL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "QUIET;libcurl"
+		},
+		{
+			"name" : "__pkg_config_checked_PC_CURL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "pkgcfg_lib_PC_CURL_curl",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib"
+		},
+		{
+			"name" : "prefix_result",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "alt-svc;AsynchDNS;brotli;GSS-API;HSTS;HTTP2;HTTPS-proxy;IDN;IPv6;Kerberos;Largefile;libz;MultiSSL;NTLM;SPNEGO;SSL;threadsafe;TLS-SRP;UnixSockets;zstd"
 		}
 	],
 	"kind" : "cache",

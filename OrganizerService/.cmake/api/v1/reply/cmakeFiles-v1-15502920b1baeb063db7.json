@@ -15,13 +15,7 @@
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeSystem.cmake.in"
 		},
 		{
-			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.27.8/CMakeSystem.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeUnixFindMake.cmake"
+			"path" : "CMakeFiles/3.27.8/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -484,8 +478,7 @@
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeCCompiler.cmake.in"
 		},
 		{
-			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.27.8/CMakeCCompiler.cmake"
+			"path" : "CMakeFiles/3.27.8/CMakeCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -923,8 +916,7 @@
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeCXXCompiler.cmake.in"
 		},
 		{
-			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
+			"path" : "CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -1062,8 +1054,7 @@
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeCCompiler.cmake.in"
 		},
 		{
-			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.27.8/CMakeCCompiler.cmake"
+			"path" : "CMakeFiles/3.27.8/CMakeCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -1161,8 +1152,7 @@
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeCXXCompiler.cmake.in"
 		},
 		{
-			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
+			"path" : "CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -1203,7 +1193,7 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/cmake-build-debug",
+		"build" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService",
 		"source" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService"
 	},
 	"version" : 
