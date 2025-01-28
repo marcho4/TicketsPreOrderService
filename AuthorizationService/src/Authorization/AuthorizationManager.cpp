@@ -3,14 +3,6 @@
 void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
     auto parsed = json::parse(req.body);
 
-    std::string user_id;
-    if (!req.path_params.at("id").empty()) {
-        user_id = req.path_params.at("id");
-    } else {
-        sendError(res, 400, "Missing id parameter");
-        return;
-    }
-
     LoginData login_data = LoginData::parseFromJson(parsed);
 
     if (!ValidateLoginData::Validate(parsed, res, db)) {
@@ -19,24 +11,26 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
 
     pqxx::result status;
     try {
-        std::string status_query = "SELECT status FROM AuthorizationService.AuthorizationData WHERE id = $1";
-        status = db.executeQueryWithParams(status_query, user_id);
+        std::string status_query = "SELECT status FROM AuthorizationService.AuthorizationData WHERE login = $1";
+        std::vector<std::string> params = {login_data.login};
+        status = db.executeQueryWithParams(status_query, params);
     } catch (const std::exception& e) {
-        sendError(res, 500, "Failed to get user status");
+        ErrorHandler::sendError(res, 500, "Failed to get user status");
         return;
     }
 
     if (status.empty()) {
-        sendError(res, 403, "Access denied");
+        ErrorHandler::sendError(res, 403, "Access denied");
         return;
     }
 
     std::string role = status[0][0].c_str();
+    std::string id = getId(login_data.login, db);
 
     std::string response_content = R"({
     "msg": "Success",
         "data": {
-            "id": ")" + user_id + R"(",
+            "id": ")" + id + R"(",
             "role": ")" + role + R"("
         }
     })";
@@ -51,7 +45,8 @@ bool AuthorizationManager::validatePassword(const std::string& password, const s
 std::string AuthorizationManager::getId(std::string login, Database &db) {
     try {
         std::string get_id = "SELECT id FROM AuthorizationService.AuthorizationData WHERE login = $1";
-        pqxx::result user_id = db.executeQueryWithParams(get_id, login);
+        std::vector<std::string> params = {login};
+        pqxx::result user_id = db.executeQueryWithParams(get_id, params);
         if (user_id.empty()) {
             return "";
         }
@@ -64,14 +59,10 @@ std::string AuthorizationManager::getId(std::string login, Database &db) {
 pqxx::result AuthorizationManager::getPasswordHash(std::string login, Database &db) {
     try {
         std::string password_query = "SELECT password FROM AuthorizationService.AuthorizationData WHERE login = $1";
-        pqxx::result password_hash = db.executeQueryWithParams(password_query, login);
+        std::vector<std::string> params = {login};
+        pqxx::result password_hash = db.executeQueryWithParams(password_query, params);
         return password_hash;
     } catch (const std::exception& e) {
         return {};
     }
-}
-
-void AuthorizationManager::sendError(httplib::Response& res, int status, const std::string& message) {
-    res.status = status;
-    res.set_content(R"({"message": ")" + message + R"("})", "application/json");
 }
