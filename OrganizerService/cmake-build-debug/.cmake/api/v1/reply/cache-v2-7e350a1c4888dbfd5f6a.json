@@ -2,6 +2,7 @@
 	"entries" : 
 	[
 		{
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"name" : "AdminService_BINARY_DIR",
 			"properties" : 
 			[
@@ -38,6 +39,8 @@
 			"value" : "/Users/marcho/TicketsPreOrderService/AdminService"
 		},
 		{
+========
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 			"name" : "CMAKE_ADDR2LINE",
 			"properties" : 
 			[
@@ -91,7 +94,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug"
+========
+			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/cmake-build-debug"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -115,7 +122,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "30"
+			"value" : "27"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -127,7 +134,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "5"
+========
+			"value" : "8"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_COLOR_DIAGNOSTICS",
@@ -151,7 +162,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake"
+========
+			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -163,7 +178,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cpack"
+========
+			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cpack"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -175,7 +194,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/ctest"
+========
+			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/ctest"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -515,7 +538,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "/Users/marcho/TicketsPreOrderService/AdminService/cmake-build-debug/CMakeFiles/pkgRedirects"
+========
+			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/cmake-build-debug/CMakeFiles/pkgRedirects"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -575,7 +602,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "/Users/marcho/TicketsPreOrderService/AdminService"
+========
+			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -855,7 +886,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "AdminService"
+========
+			"value" : "OrganizerService"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_PROJECT_VERSION",
@@ -959,7 +994,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.30"
+========
+			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27"
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1287,7 +1326,467 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:AdminService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-a11c64219d1a4b7bc21d.json
 			"value" : "[/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib/libcurl.tbd][/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include][c ][v8.7.1()]"
+========
+			"value" : "[/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib][/opt/homebrew/Cellar/curl/8.11.1/include][c ][v8.11.1()]"
+		},
+		{
+			"name" : "OrganizerService_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService/cmake-build-debug"
+		},
+		{
+			"name" : "OrganizerService_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "OrganizerService_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/OrganizerService"
+		},
+		{
+			"name" : "PC_CURL_CFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-I/opt/homebrew/Cellar/curl/8.11.1/include;-I/opt/homebrew/Cellar/brotli/1.1.0/include;-I/opt/homebrew/opt/zstd/include;-I/opt/homebrew/Cellar/libssh2/1.11.1/include;-I/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;-I/opt/homebrew/Cellar/openssl@3/3.4.0/include;-I/opt/homebrew/Cellar/libnghttp2/1.64.0/include"
+		},
+		{
+			"name" : "PC_CURL_CFLAGS_I",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_CFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_FOUND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "PC_CURL_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/include"
+		},
+		{
+			"name" : "PC_CURL_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/include;/opt/homebrew/Cellar/brotli/1.1.0/include;/opt/homebrew/opt/zstd/include;/opt/homebrew/Cellar/libssh2/1.11.1/include;/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;/opt/homebrew/Cellar/openssl@3/3.4.0/include;/opt/homebrew/Cellar/libnghttp2/1.64.0/include"
+		},
+		{
+			"name" : "PC_CURL_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/curl/8.11.1/lib;-lcurl"
+		},
+		{
+			"name" : "PC_CURL_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib"
+		},
+		{
+			"name" : "PC_CURL_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "curl"
+		},
+		{
+			"name" : "PC_CURL_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib"
+		},
+		{
+			"name" : "PC_CURL_LIBS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_LIBS_L",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_LIBS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_LIBS_PATHS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_MODULE_NAME",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "libcurl"
+		},
+		{
+			"name" : "PC_CURL_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1"
+		},
+		{
+			"name" : "PC_CURL_STATIC_CFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-I/opt/homebrew/Cellar/curl/8.11.1/include;-I/opt/homebrew/Cellar/brotli/1.1.0/include;-I/opt/homebrew/opt/zstd/include;-I/opt/homebrew/Cellar/libssh2/1.11.1/include;-I/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;-I/opt/homebrew/Cellar/openssl@3/3.4.0/include;-I/opt/homebrew/Cellar/libnghttp2/1.64.0/include;-DCURL_STATICLIB"
+		},
+		{
+			"name" : "PC_CURL_STATIC_CFLAGS_I",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_STATIC_CFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-DCURL_STATICLIB"
+		},
+		{
+			"name" : "PC_CURL_STATIC_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/include;/opt/homebrew/Cellar/brotli/1.1.0/include;/opt/homebrew/opt/zstd/include;/opt/homebrew/Cellar/libssh2/1.11.1/include;/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;/opt/homebrew/Cellar/openssl@3/3.4.0/include;/opt/homebrew/Cellar/libnghttp2/1.64.0/include"
+		},
+		{
+			"name" : "PC_CURL_STATIC_LDFLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-L/opt/homebrew/Cellar/curl/8.11.1/lib;-lcurl;-framework;CoreFoundation;-framework;CoreServices;-framework;Security;-L/opt/homebrew/Cellar/openssl@3/3.4.0/lib;-L/opt/homebrew/Cellar/libssh2/1.11.1/lib;-L/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/lib;-L/opt/homebrew/Cellar/openssl@3/3.4.0/lib;-L/opt/homebrew/Cellar/libnghttp2/1.64.0/lib;-framework;CoreFoundation;-framework;CoreServices;-framework;SystemConfiguration;-lnghttp2;-licucore;-liconv;-lz;-lssl;-lcrypto;-lssh2;-lssl;-lcrypto;-lssl;-lcrypto;-lgssapi_krb5;-lresolv;-lldap;-lz;-L/opt/homebrew/Cellar/brotli/1.1.0/lib;-lbrotlidec;-lbrotlicommon;-L/opt/homebrew/opt/zstd/lib;-lzstd;-lssh2;-L/opt/homebrew/opt/openssl@3/lib;-L/opt/homebrew/opt/openssl@3/lib;-R/opt/homebrew/opt/openssl@3/lib;-lz;-L/usr/lib;-lrtmp;-lz;-lssl;-lcrypto;-lnghttp2"
+		},
+		{
+			"name" : "PC_CURL_STATIC_LDFLAGS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-framework;CoreFoundation;-framework;CoreServices;-framework;Security;-framework;CoreFoundation;-framework;CoreServices;-framework;SystemConfiguration;-R/opt/homebrew/opt/openssl@3/lib"
+		},
+		{
+			"name" : "PC_CURL_STATIC_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_STATIC_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "curl;nghttp2;icucore;iconv;z;ssl;crypto;ssh2;ssl;crypto;ssl;crypto;gssapi_krb5;resolv;ldap;z;brotlidec;brotlicommon;zstd;ssh2;z;rtmp;z;ssl;crypto;nghttp2"
+		},
+		{
+			"name" : "PC_CURL_STATIC_LIBRARY_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib;/opt/homebrew/Cellar/openssl@3/3.4.0/lib;/opt/homebrew/Cellar/libssh2/1.11.1/lib;/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/lib;/opt/homebrew/Cellar/openssl@3/3.4.0/lib;/opt/homebrew/Cellar/libnghttp2/1.64.0/lib;/opt/homebrew/Cellar/brotli/1.1.0/lib;/opt/homebrew/opt/zstd/lib;/opt/homebrew/opt/openssl@3/lib;/opt/homebrew/opt/openssl@3/lib;/usr/lib"
+		},
+		{
+			"name" : "PC_CURL_STATIC_LIBS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_STATIC_LIBS_L",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_STATIC_LIBS_OTHER",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_STATIC_LIBS_PATHS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "8.11.1"
+		},
+		{
+			"name" : "PC_CURL_libcurl_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_libcurl_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_libcurl_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "PC_CURL_libcurl_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+>>>>>>>> Nazar_Zakrevski:OrganizerService/cmake-build-debug/.cmake/api/v1/reply/cache-v2-7e350a1c4888dbfd5f6a.json
 		},
 		{
 			"name" : "PKG_CONFIG_ARGN",
