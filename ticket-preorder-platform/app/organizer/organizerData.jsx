@@ -89,26 +89,58 @@ function DataDisplay({ resource }) {
     };
 
     return (
-        <div className="flex flex-col min-w-full bg-silver rounded-lg p-4">
-            <h1 className="text-3xl font-semibold text-gray-900 leading-tight text-left mb-8">
-                My account
+        <div className="flex flex-col min-w-full bg-[#cbf3f0] rounded-lg p-4">
+            <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left">
+                My profile
             </h1>
+            <div className="text-black/80 text-lg">
+                Manage your profile settings
+            </div>
+            <div className="h-[1px] min-w-full bg-black my-5"></div>
 
             {!isEditing && (
-                <>
-                    <div className="min-w-full text-xl">
-                        <strong>Email:</strong> {data.email}
+                <div className="flex flex-col justify-center min-w-full">
+                    <div className="text-2xl font-semibold">Basic info</div>
+
+                    <div className="flex flex-col w-full mt-8">
+                        <div id="labels" className="flex flex-col items-start gap-5">
+                            <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                <div
+                                    className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
+                                    My email
+                                </div>
+                                <input
+                                    placeholder="tin here"
+                                    className="w-2/3 text-xl rounded-lg px-4 py-2 h-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                <div
+                                    className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
+                                    My Organization's Name
+                                </div>
+                                <input
+                                    placeholder="tin here"
+                                    className="w-2/3 text-xl rounded-lg px-4 py-2 h-full border border-gray-300"
+                                />
+                            </div>
+                            <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                <div
+                                    className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
+                                    My TIN
+                                </div>
+                                <input
+                                    placeholder="tin here"
+                                    className="w-2/3 text-xl rounded-lg px-4 py-2 h-full border border-gray-300"
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className="min-w-full text-xl">
-                        <strong>Organization:</strong> {data.organization}
-                    </div>
-                    <div className="min-w-full text-xl">
-                        <strong>TIN:</strong> {data.tin}
-                    </div>
-                    <button className="bg-accent w-1/2 mt-4" onClick={handleEdit}>
+                    <button className="bg-deep_blue text-xl text-white w-full max-w-80 mt-10 p-2 rounded-lg"
+                            onClick={handleEdit}>
                         Change information
                     </button>
-                </>
+                </div>
             )}
 
             {isEditing && (
