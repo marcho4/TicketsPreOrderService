@@ -21,7 +21,7 @@ def db_connection():
 
 def create_organizer_info(data):
     organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/create_organizer_info/{organizer_id}", json=data)
+    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data)
     assert result.status_code == 201
     return result
 
@@ -30,16 +30,14 @@ def create_organizer_info(data):
     (
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
-             "email": generate_random_email(),
-             "phone_number": generate_random_phone_number()},
+             "email": generate_random_email()},
             200,
             ""
     ),
     (
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
-             "email": generate_random_email(),
-             "phone_number": generate_random_phone_number()},
+             "email": generate_random_email()},
             400,
             "Invalid organizer_id format"
     )
@@ -55,17 +53,16 @@ def test_get_account_data(data, expected_status_code, expected_message, db_conne
     cursor.close()
 
     if expected_status_code == 200:
-        result = requests.get(f"{BASE_URL}/get_account_info/{organizer_id}/", json=data)
+        result = requests.get(f"{BASE_URL}/organizer/get_account_info/{organizer_id}", json=data)
         print(organizer_id)
         assert result.status_code == expected_status_code
         result_json = result.json()
         assert result_json["organization_name"] == data["organization_name"]
         assert result_json["tin"] == data["tin"]
         assert result_json["email"] == data["email"]
-        assert result_json["phone_number"] == data["phone_number"]
     else:
         organizer_id = uuid.uuid4()
-        result = requests.get(f"{BASE_URL}/get_account_info/unknown_id", json=data)
+        result = requests.get(f"{BASE_URL}/organizer/get_account_info/unknown_id", json=data)
         assert result.status_code == expected_status_code
         result_json = result.json()
         assert result_json["message"] == expected_message

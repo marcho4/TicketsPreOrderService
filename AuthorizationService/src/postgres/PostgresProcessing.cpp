@@ -2,7 +2,6 @@
 
 Database::Database(const std::string& con) : conn_(con) { }
 
-
 void Database::initDbFromFile(const std::string &filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {

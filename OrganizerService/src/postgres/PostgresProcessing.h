@@ -11,8 +11,6 @@ public:
 
     Database(const std::string& con);
 
-    pqxx::result executeQuery(const std::string &query);
-
     void initDbFromFile(const std::string& filename);
 
     pqxx::result executeQueryWithParams(const std::string& query, std::vector<std::string>& params) {
