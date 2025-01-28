@@ -44,14 +44,14 @@ public:
         std::string tin = parsed.at("tin").get<std::string>();
 
         if (email.empty() || company.empty() || tin.empty()) {
-            ErrorHandler::sendError(res, "Fill all fields!");
+            ErrorHandler::sendError(res, 400, "Fill all fields!");
             return false;
         }
         if (!AuxiliaryFunctions::isValidEmail(email)) {
-            ErrorHandler::sendError(res, "Invalid email format");
+            ErrorHandler::sendError(res, 400, "Invalid email format");
         }
         if (!OrganizerRegistrationManager::checkCorrectnessTIN(tin)) {
-            ErrorHandler::sendError(res, "Invalid TIN format");
+            ErrorHandler::sendError(res, 400, "Invalid TIN format");
             return false;
         }
         return true;

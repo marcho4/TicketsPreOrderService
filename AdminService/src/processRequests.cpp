@@ -67,14 +67,29 @@ void ProcessRequests::ProcessOrganizerRequest(const httplib::Request& req, httpl
                                  {"message", e.what()}}.dump(), "application/json");
             return;
         }
-    } else {
+    } else if (status == "REJECTED") {
         json json_body = {
-            {"email", email},
-            {"company", company},
-            {"tin", tin},
-            {"status", "REJECTED"}
+                {"email", email},
+                {"company", company},
+                {"tin", tin},
+                {"status", "REJECTED"}
         };
-        // отправить запрос в сервис авторизации на обработку
+
+        // Обновление в БД статуса заявки
+        std::string update_query = "UPDATE Organizers.OrganizerRequests SET status = $1 WHERE request_id = $2";
+        try {
+            db.executeQueryWithParams(update_query, "REJECTED", request_id);
+        } catch (const std::exception& e) {
+            res.status = 500;
+            res.set_content(json{{"status",  "error"},
+                                 {"message", e.what()}}.dump(), "application/json");
+            return;
+        }
+
+    } else {
+        res.status = 400;
+        res.set_content(json{{"status", "error"}, {"message", "Invalid status"}}.dump(), "application/json");
+        return;
     }
     res.status = 200;
     res.set_content({"status", "Response sent to auth service"}, "application/json");

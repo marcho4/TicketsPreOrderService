@@ -34,7 +34,7 @@ int main() {
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
-        server.Post("/create_organizer_info/:id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/create_organizer_info", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             CreateOrganizerInfo createOrganizerInfo;
             createOrganizerInfo.OrganizerPersonalInfoCreateRequest(request, res, db);

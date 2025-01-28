@@ -1,6 +1,6 @@
 #include "AdminAuthorization.h"
 
-void AdminAuthorization::AuthorizeAdminRequest(httplib::Request& req, httplib::Response& res, Database& db) {
+void AdminAuthorization::AuthorizeAdminRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
     auto parsed = json::parse(req.body);
 
     std::string admin_id;

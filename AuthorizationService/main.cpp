@@ -45,7 +45,7 @@ int main() {
         // Маршрут для регистрации пользователя
         server.Post("/user/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-            UserRegistration::RegisterUserRequest(request, res, db);
+//            UserRegistration::RegisterUserRequest(request, res, db);
         });
 
         // Маршрут для авторизации
