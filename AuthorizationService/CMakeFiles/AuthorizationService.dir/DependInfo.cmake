@@ -11,6 +11,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/libraries/Bcrypt.cpp/src/bcrypt.cpp" "CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o" "gcc" "CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/libraries/Bcrypt.cpp/src/blowfish.cpp" "CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o" "gcc" "CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/main.cpp" "CMakeFiles/AuthorizationService.dir/main.cpp.o" "gcc" "CMakeFiles/AuthorizationService.dir/main.cpp.o.d"
+  "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp" "CMakeFiles/AuthorizationService.dir/src/Admin/AdminAuthorization.cpp.o" "gcc" "CMakeFiles/AuthorizationService.dir/src/Admin/AdminAuthorization.cpp.o.d"
+  "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminCreation.cpp" "CMakeFiles/AuthorizationService.dir/src/Admin/AdminCreation.cpp.o" "gcc" "CMakeFiles/AuthorizationService.dir/src/Admin/AdminCreation.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp" "CMakeFiles/AuthorizationService.dir/src/Authorization/AuthorizationManager.cpp.o" "gcc" "CMakeFiles/AuthorizationService.dir/src/Authorization/AuthorizationManager.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/AuxiliaryFunctions/AuxiliaryFunctions.cpp" "CMakeFiles/AuthorizationService.dir/src/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o" "gcc" "CMakeFiles/AuthorizationService.dir/src/AuxiliaryFunctions/AuxiliaryFunctions.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/OrganizerRegistration/RegistrationOrganizerManager.cpp" "CMakeFiles/AuthorizationService.dir/src/OrganizerRegistration/RegistrationOrganizerManager.cpp.o" "gcc" "CMakeFiles/AuthorizationService.dir/src/OrganizerRegistration/RegistrationOrganizerManager.cpp.o.d"
@@ -21,10 +23,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
 
 # Targets to which this target links which contain Fortran sources.
 set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
-  )
-
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

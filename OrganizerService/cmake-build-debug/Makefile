@@ -117,24 +117,72 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named AuthorizationService
+# Target rules for targets named OrganizerService
 
 # Build rule for target.
-AuthorizationService: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AuthorizationService
-.PHONY : AuthorizationService
+OrganizerService: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 OrganizerService
+.PHONY : OrganizerService
 
 # fast build rule for target.
-AuthorizationService/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/build
-.PHONY : AuthorizationService/fast
+OrganizerService/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/build
+.PHONY : OrganizerService/fast
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o
+
+# target to build an object file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i
+
+# target to preprocess a source file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s
+
+# target to generate assembly for a file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o
+
+# target to build an object file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i
+
+# target to preprocess a source file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
+
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s
+
+# target to generate assembly for a file
+Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
+.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
 
 libraries/Bcrypt.cpp/src/bcrypt.o: libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 .PHONY : libraries/Bcrypt.cpp/src/bcrypt.o
 
 # target to build an object file
 libraries/Bcrypt.cpp/src/bcrypt.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 .PHONY : libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 
 libraries/Bcrypt.cpp/src/bcrypt.i: libraries/Bcrypt.cpp/src/bcrypt.cpp.i
@@ -142,7 +190,7 @@ libraries/Bcrypt.cpp/src/bcrypt.i: libraries/Bcrypt.cpp/src/bcrypt.cpp.i
 
 # target to preprocess a source file
 libraries/Bcrypt.cpp/src/bcrypt.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.i
 .PHONY : libraries/Bcrypt.cpp/src/bcrypt.cpp.i
 
 libraries/Bcrypt.cpp/src/bcrypt.s: libraries/Bcrypt.cpp/src/bcrypt.cpp.s
@@ -150,7 +198,7 @@ libraries/Bcrypt.cpp/src/bcrypt.s: libraries/Bcrypt.cpp/src/bcrypt.cpp.s
 
 # target to generate assembly for a file
 libraries/Bcrypt.cpp/src/bcrypt.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.s
 .PHONY : libraries/Bcrypt.cpp/src/bcrypt.cpp.s
 
 libraries/Bcrypt.cpp/src/blowfish.o: libraries/Bcrypt.cpp/src/blowfish.cpp.o
@@ -158,7 +206,7 @@ libraries/Bcrypt.cpp/src/blowfish.o: libraries/Bcrypt.cpp/src/blowfish.cpp.o
 
 # target to build an object file
 libraries/Bcrypt.cpp/src/blowfish.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o
 .PHONY : libraries/Bcrypt.cpp/src/blowfish.cpp.o
 
 libraries/Bcrypt.cpp/src/blowfish.i: libraries/Bcrypt.cpp/src/blowfish.cpp.i
@@ -166,7 +214,7 @@ libraries/Bcrypt.cpp/src/blowfish.i: libraries/Bcrypt.cpp/src/blowfish.cpp.i
 
 # target to preprocess a source file
 libraries/Bcrypt.cpp/src/blowfish.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.i
 .PHONY : libraries/Bcrypt.cpp/src/blowfish.cpp.i
 
 libraries/Bcrypt.cpp/src/blowfish.s: libraries/Bcrypt.cpp/src/blowfish.cpp.s
@@ -174,7 +222,7 @@ libraries/Bcrypt.cpp/src/blowfish.s: libraries/Bcrypt.cpp/src/blowfish.cpp.s
 
 # target to generate assembly for a file
 libraries/Bcrypt.cpp/src/blowfish.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s
 .PHONY : libraries/Bcrypt.cpp/src/blowfish.cpp.s
 
 main.o: main.cpp.o
@@ -182,7 +230,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -190,7 +238,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -198,7 +246,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 src/MatchCreating/AddingTickets/AddingTickets.o: src/MatchCreating/AddingTickets/AddingTickets.cpp.o
@@ -206,7 +254,7 @@ src/MatchCreating/AddingTickets/AddingTickets.o: src/MatchCreating/AddingTickets
 
 # target to build an object file
 src/MatchCreating/AddingTickets/AddingTickets.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/AddingTickets/AddingTickets.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/AddingTickets/AddingTickets.cpp.o
 .PHONY : src/MatchCreating/AddingTickets/AddingTickets.cpp.o
 
 src/MatchCreating/AddingTickets/AddingTickets.i: src/MatchCreating/AddingTickets/AddingTickets.cpp.i
@@ -214,7 +262,7 @@ src/MatchCreating/AddingTickets/AddingTickets.i: src/MatchCreating/AddingTickets
 
 # target to preprocess a source file
 src/MatchCreating/AddingTickets/AddingTickets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/AddingTickets/AddingTickets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/AddingTickets/AddingTickets.cpp.i
 .PHONY : src/MatchCreating/AddingTickets/AddingTickets.cpp.i
 
 src/MatchCreating/AddingTickets/AddingTickets.s: src/MatchCreating/AddingTickets/AddingTickets.cpp.s
@@ -222,39 +270,63 @@ src/MatchCreating/AddingTickets/AddingTickets.s: src/MatchCreating/AddingTickets
 
 # target to generate assembly for a file
 src/MatchCreating/AddingTickets/AddingTickets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/AddingTickets/AddingTickets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/AddingTickets/AddingTickets.cpp.s
 .PHONY : src/MatchCreating/AddingTickets/AddingTickets.cpp.s
 
-src/MatchCreating/CreateMatch/Creator.o: src/MatchCreating/CreateMatch/Creator.cpp.o
-.PHONY : src/MatchCreating/CreateMatch/Creator.o
+src/MatchCreating/CreateMatch/MatchCreator.o: src/MatchCreating/CreateMatch/MatchCreator.cpp.o
+.PHONY : src/MatchCreating/CreateMatch/MatchCreator.o
 
 # target to build an object file
-src/MatchCreating/CreateMatch/Creator.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/CreateMatch/Creator.cpp.o
-.PHONY : src/MatchCreating/CreateMatch/Creator.cpp.o
+src/MatchCreating/CreateMatch/MatchCreator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/MatchCreator.cpp.o
+.PHONY : src/MatchCreating/CreateMatch/MatchCreator.cpp.o
 
-src/MatchCreating/CreateMatch/Creator.i: src/MatchCreating/CreateMatch/Creator.cpp.i
-.PHONY : src/MatchCreating/CreateMatch/Creator.i
+src/MatchCreating/CreateMatch/MatchCreator.i: src/MatchCreating/CreateMatch/MatchCreator.cpp.i
+.PHONY : src/MatchCreating/CreateMatch/MatchCreator.i
 
 # target to preprocess a source file
-src/MatchCreating/CreateMatch/Creator.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/CreateMatch/Creator.cpp.i
-.PHONY : src/MatchCreating/CreateMatch/Creator.cpp.i
+src/MatchCreating/CreateMatch/MatchCreator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/MatchCreator.cpp.i
+.PHONY : src/MatchCreating/CreateMatch/MatchCreator.cpp.i
 
-src/MatchCreating/CreateMatch/Creator.s: src/MatchCreating/CreateMatch/Creator.cpp.s
-.PHONY : src/MatchCreating/CreateMatch/Creator.s
+src/MatchCreating/CreateMatch/MatchCreator.s: src/MatchCreating/CreateMatch/MatchCreator.cpp.s
+.PHONY : src/MatchCreating/CreateMatch/MatchCreator.s
 
 # target to generate assembly for a file
-src/MatchCreating/CreateMatch/Creator.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/CreateMatch/Creator.cpp.s
-.PHONY : src/MatchCreating/CreateMatch/Creator.cpp.s
+src/MatchCreating/CreateMatch/MatchCreator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/MatchCreator.cpp.s
+.PHONY : src/MatchCreating/CreateMatch/MatchCreator.cpp.s
+
+src/MatchCreating/GetMatchInfo/GetMatchData.o: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
+.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.o
+
+# target to build an object file
+src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
+.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
+
+src/MatchCreating/GetMatchInfo/GetMatchData.i: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
+.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.i
+
+# target to preprocess a source file
+src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
+.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
+
+src/MatchCreating/GetMatchInfo/GetMatchData.s: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
+.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.s
+
+# target to generate assembly for a file
+src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
+.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
 
 src/MatchCreating/UpdateMatchInfo/Updator.o: src/MatchCreating/UpdateMatchInfo/Updator.cpp.o
 .PHONY : src/MatchCreating/UpdateMatchInfo/Updator.o
 
 # target to build an object file
 src/MatchCreating/UpdateMatchInfo/Updator.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.o
 .PHONY : src/MatchCreating/UpdateMatchInfo/Updator.cpp.o
 
 src/MatchCreating/UpdateMatchInfo/Updator.i: src/MatchCreating/UpdateMatchInfo/Updator.cpp.i
@@ -262,7 +334,7 @@ src/MatchCreating/UpdateMatchInfo/Updator.i: src/MatchCreating/UpdateMatchInfo/U
 
 # target to preprocess a source file
 src/MatchCreating/UpdateMatchInfo/Updator.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.i
 .PHONY : src/MatchCreating/UpdateMatchInfo/Updator.cpp.i
 
 src/MatchCreating/UpdateMatchInfo/Updator.s: src/MatchCreating/UpdateMatchInfo/Updator.cpp.s
@@ -270,7 +342,7 @@ src/MatchCreating/UpdateMatchInfo/Updator.s: src/MatchCreating/UpdateMatchInfo/U
 
 # target to generate assembly for a file
 src/MatchCreating/UpdateMatchInfo/Updator.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.s
 .PHONY : src/MatchCreating/UpdateMatchInfo/Updator.cpp.s
 
 src/OrganizerAccountCRUD/CreateOrganizerAccount.o: src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.o
@@ -278,7 +350,7 @@ src/OrganizerAccountCRUD/CreateOrganizerAccount.o: src/OrganizerAccountCRUD/Crea
 
 # target to build an object file
 src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.o
 .PHONY : src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.o
 
 src/OrganizerAccountCRUD/CreateOrganizerAccount.i: src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.i
@@ -286,7 +358,7 @@ src/OrganizerAccountCRUD/CreateOrganizerAccount.i: src/OrganizerAccountCRUD/Crea
 
 # target to preprocess a source file
 src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.i
 .PHONY : src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.i
 
 src/OrganizerAccountCRUD/CreateOrganizerAccount.s: src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.s
@@ -294,7 +366,7 @@ src/OrganizerAccountCRUD/CreateOrganizerAccount.s: src/OrganizerAccountCRUD/Crea
 
 # target to generate assembly for a file
 src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.s
 .PHONY : src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.s
 
 src/OrganizerAccountCRUD/GetAccountInfo.o: src/OrganizerAccountCRUD/GetAccountInfo.cpp.o
@@ -302,7 +374,7 @@ src/OrganizerAccountCRUD/GetAccountInfo.o: src/OrganizerAccountCRUD/GetAccountIn
 
 # target to build an object file
 src/OrganizerAccountCRUD/GetAccountInfo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.o
 .PHONY : src/OrganizerAccountCRUD/GetAccountInfo.cpp.o
 
 src/OrganizerAccountCRUD/GetAccountInfo.i: src/OrganizerAccountCRUD/GetAccountInfo.cpp.i
@@ -310,7 +382,7 @@ src/OrganizerAccountCRUD/GetAccountInfo.i: src/OrganizerAccountCRUD/GetAccountIn
 
 # target to preprocess a source file
 src/OrganizerAccountCRUD/GetAccountInfo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.i
 .PHONY : src/OrganizerAccountCRUD/GetAccountInfo.cpp.i
 
 src/OrganizerAccountCRUD/GetAccountInfo.s: src/OrganizerAccountCRUD/GetAccountInfo.cpp.s
@@ -318,7 +390,7 @@ src/OrganizerAccountCRUD/GetAccountInfo.s: src/OrganizerAccountCRUD/GetAccountIn
 
 # target to generate assembly for a file
 src/OrganizerAccountCRUD/GetAccountInfo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/GetAccountInfo.cpp.s
 .PHONY : src/OrganizerAccountCRUD/GetAccountInfo.cpp.s
 
 src/OrganizerAccountCRUD/UpdateOrganizerAccount.o: src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.o
@@ -326,7 +398,7 @@ src/OrganizerAccountCRUD/UpdateOrganizerAccount.o: src/OrganizerAccountCRUD/Upda
 
 # target to build an object file
 src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.o
 .PHONY : src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.o
 
 src/OrganizerAccountCRUD/UpdateOrganizerAccount.i: src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.i
@@ -334,7 +406,7 @@ src/OrganizerAccountCRUD/UpdateOrganizerAccount.i: src/OrganizerAccountCRUD/Upda
 
 # target to preprocess a source file
 src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.i
 .PHONY : src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.i
 
 src/OrganizerAccountCRUD/UpdateOrganizerAccount.s: src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.s
@@ -342,7 +414,7 @@ src/OrganizerAccountCRUD/UpdateOrganizerAccount.s: src/OrganizerAccountCRUD/Upda
 
 # target to generate assembly for a file
 src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.s
 .PHONY : src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp.s
 
 src/postgres/PostgresProcessing.o: src/postgres/PostgresProcessing.cpp.o
@@ -350,7 +422,7 @@ src/postgres/PostgresProcessing.o: src/postgres/PostgresProcessing.cpp.o
 
 # target to build an object file
 src/postgres/PostgresProcessing.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/postgres/PostgresProcessing.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/postgres/PostgresProcessing.cpp.o
 .PHONY : src/postgres/PostgresProcessing.cpp.o
 
 src/postgres/PostgresProcessing.i: src/postgres/PostgresProcessing.cpp.i
@@ -358,7 +430,7 @@ src/postgres/PostgresProcessing.i: src/postgres/PostgresProcessing.cpp.i
 
 # target to preprocess a source file
 src/postgres/PostgresProcessing.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/postgres/PostgresProcessing.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/postgres/PostgresProcessing.cpp.i
 .PHONY : src/postgres/PostgresProcessing.cpp.i
 
 src/postgres/PostgresProcessing.s: src/postgres/PostgresProcessing.cpp.s
@@ -366,7 +438,7 @@ src/postgres/PostgresProcessing.s: src/postgres/PostgresProcessing.cpp.s
 
 # target to generate assembly for a file
 src/postgres/PostgresProcessing.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AuthorizationService.dir/build.make CMakeFiles/AuthorizationService.dir/src/postgres/PostgresProcessing.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/postgres/PostgresProcessing.cpp.s
 .PHONY : src/postgres/PostgresProcessing.cpp.s
 
 # Help Target
@@ -377,7 +449,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... AuthorizationService"
+	@echo "... OrganizerService"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i"
+	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.o"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.i"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.s"
@@ -390,9 +468,12 @@ help:
 	@echo "... src/MatchCreating/AddingTickets/AddingTickets.o"
 	@echo "... src/MatchCreating/AddingTickets/AddingTickets.i"
 	@echo "... src/MatchCreating/AddingTickets/AddingTickets.s"
-	@echo "... src/MatchCreating/CreateMatch/Creator.o"
-	@echo "... src/MatchCreating/CreateMatch/Creator.i"
-	@echo "... src/MatchCreating/CreateMatch/Creator.s"
+	@echo "... src/MatchCreating/CreateMatch/MatchCreator.o"
+	@echo "... src/MatchCreating/CreateMatch/MatchCreator.i"
+	@echo "... src/MatchCreating/CreateMatch/MatchCreator.s"
+	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.o"
+	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.i"
+	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.s"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.o"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.i"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.s"
