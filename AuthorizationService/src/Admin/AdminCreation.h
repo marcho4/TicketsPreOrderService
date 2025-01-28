@@ -27,14 +27,14 @@ public:
 
     static bool ValidateApiKey(const std::string& api_key);
 
-    static void createAdmin(const AdminData& adminData, Database& db) {
+    static pqxx::result createAdmin(const AdminData& adminData, Database& db) {
         std::string hashedPassword = bcrypt::generateHash(adminData.password);
         std::vector<std::string> params = {adminData.login, hashedPassword, adminData.email, "ADMIN"};
 
         std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email, status) "
-                            "VALUES ($1, $2, $3, $4)";
+                            "VALUES ($1, $2, $3, $4) RETURNING id";
 
-        db.executeQueryWithParams(query, params);
+        return db.executeQueryWithParams(query, params);
     }
 };
 

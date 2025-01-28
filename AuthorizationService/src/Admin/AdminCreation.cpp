@@ -18,12 +18,17 @@ void AdminCreation::CreateAdminRequest(const httplib::Request& req, httplib::Res
     std::vector<std::string> params = {admin_data.login, hashed_password, admin_data.email, "ADMIN"};
 
     try {
-        createAdmin(admin_data, db);
+        pqxx::result response = createAdmin(admin_data, db);
+        std::string admin_id = response[0]["id"].as<std::string>();
+        json response_json = {
+            {"message", "Successfully created"},
+            {"id", admin_id}
+        };
+        res.status = 200;
+        res.set_content(response_json.dump(), "application/json");
     } catch (const std::exception& e) {
         ErrorHandler::sendError(res, 409, "User already exists");
     }
-    res.status = 200;
-    res.set_content(R"({"message": "Successfully created"})", "application/json");
 }
 
 bool AdminCreation::ValidateAdminData(const AdminCreation::json &parsed, std::vector<std::string> required_field) {

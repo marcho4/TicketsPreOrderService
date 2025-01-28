@@ -129,54 +129,6 @@ OrganizerService/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/build
 .PHONY : OrganizerService/fast
 
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o
-
-# target to build an object file
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.o
-
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i
-
-# target to preprocess a source file
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.i
-
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s
-
-# target to generate assembly for a file
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.cpp.s
-
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o
-
-# target to build an object file
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.o
-
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i
-
-# target to preprocess a source file
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.i
-
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s: Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s
-
-# target to generate assembly for a file
-Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
-.PHONY : Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.cpp.s
-
 libraries/Bcrypt.cpp/src/bcrypt.o: libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 .PHONY : libraries/Bcrypt.cpp/src/bcrypt.o
 
@@ -296,30 +248,6 @@ src/MatchCreating/CreateMatch/MatchCreator.s: src/MatchCreating/CreateMatch/Matc
 src/MatchCreating/CreateMatch/MatchCreator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/MatchCreator.cpp.s
 .PHONY : src/MatchCreating/CreateMatch/MatchCreator.cpp.s
-
-src/MatchCreating/GetMatchInfo/GetMatchData.o: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.o
-
-# target to build an object file
-src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
-
-src/MatchCreating/GetMatchInfo/GetMatchData.i: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.i
-
-# target to preprocess a source file
-src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
-
-src/MatchCreating/GetMatchInfo/GetMatchData.s: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.s
-
-# target to generate assembly for a file
-src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
 
 src/MatchCreating/UpdateMatchInfo/Updator.o: src/MatchCreating/UpdateMatchInfo/Updator.cpp.o
 .PHONY : src/MatchCreating/UpdateMatchInfo/Updator.o
@@ -450,12 +378,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... OrganizerService"
-	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.o"
-	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.i"
-	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Admin/AdminAuthorization.s"
-	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.o"
-	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.i"
-	@echo "... Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/src/Authorization/AuthorizationManager.s"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.o"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.i"
 	@echo "... libraries/Bcrypt.cpp/src/bcrypt.s"
@@ -471,9 +393,6 @@ help:
 	@echo "... src/MatchCreating/CreateMatch/MatchCreator.o"
 	@echo "... src/MatchCreating/CreateMatch/MatchCreator.i"
 	@echo "... src/MatchCreating/CreateMatch/MatchCreator.s"
-	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.o"
-	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.i"
-	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.s"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.o"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.i"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.s"
