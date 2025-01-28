@@ -12,21 +12,20 @@ int main() {
         // инициализация хоста и порта для подключения
         std::string connect = "dbname=organizer_personal_account host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("src/postgres/organizer_personal_account.sql");
+        db.initDbFromFile("../src/postgres/organizer_personal_account.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
-        server.Post("/create_organizer_info", [&db](const httplib::Request& request, httplib::Response &res) {
-            CreateOrganizerInfo createOrganizerInfo;
-            createOrganizerInfo.OrganizerPersonalInfoCreateRequest(request, res, db);
+        server.Post("/organizer/create_account", [&db](const httplib::Request& request, httplib::Response &res) {
+            CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(request, res, db);
         });
 
-        server.Put("/update_organizer_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/organizer/update_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
             UpdateOrganizerInfo updateOrganizerInfo;
             updateOrganizerInfo.OrganizerPersonalInfoUpdateRequest(request, res, db);
         });
 
-        server.Get("/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Get("/organizer/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
             GetAccountInfo::GetAccountInfoRequest(request, res, db);
         });
 

@@ -14,15 +14,15 @@ int main() {
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
-        server.Get("/pending_requests", [&](const httplib::Request& req, httplib::Response& res) {
+        server.Get("admin/pending_requests", [&](const httplib::Request& req, httplib::Response& res) {
             processing.GetOrganizersRequest(req, res, db);
         });
 
-        server.Post("/process_organizer", [&](const httplib::Request& req, httplib::Response& res) {
+        server.Post("admin/process_organizer", [&](const httplib::Request& req, httplib::Response& res) {
             processing.ProcessOrganizerRequest(req, res, db);
         });
 
-        server.Post("/add_organizer_request", [&](const httplib::Request& req, httplib::Response& res) {
+        server.Post("admin/add_organizer_request", [&](const httplib::Request& req, httplib::Response& res) {
             processing.AddOrganizerRequest(req, res, db);
         });
 

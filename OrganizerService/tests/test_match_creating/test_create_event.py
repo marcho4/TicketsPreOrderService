@@ -19,7 +19,7 @@ def db_connection():
 
 
 def create_organizer_info(data):
-    result = requests.post(f"{BASE_URL}/create_organizer_info", json=data)
+    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data)
     assert result.status_code == 201
     return result
 
