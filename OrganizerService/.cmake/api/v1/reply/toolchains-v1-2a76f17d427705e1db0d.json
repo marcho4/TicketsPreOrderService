@@ -10,13 +10,11 @@
 				{
 					"includeDirectories" : 
 					[
-						"/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include",
-						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include",
-						"/Library/Developer/CommandLineTools/usr/include"
+						"/usr/include",
+						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include"
 					],
 					"linkDirectories" : 
 					[
-						"/usr/local/opt/libpqxx/lib",
 						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib",
 						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/swift"
 					],
@@ -44,14 +42,11 @@
 				{
 					"includeDirectories" : 
 					[
-						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1",
-						"/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include",
-						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include",
-						"/Library/Developer/CommandLineTools/usr/include"
+						"/usr/include",
+						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include"
 					],
 					"linkDirectories" : 
 					[
-						"/usr/local/opt/libpqxx/lib",
 						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib",
 						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/swift"
 					],
@@ -59,10 +54,7 @@
 					[
 						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks"
 					],
-					"linkLibraries" : 
-					[
-						"c++"
-					]
+					"linkLibraries" : []
 				},
 				"path" : "/Library/Developer/CommandLineTools/usr/bin/c++",
 				"version" : "15.0.0.15000309"

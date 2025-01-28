@@ -3,14 +3,6 @@
 void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
     auto parsed = json::parse(req.body);
 
-    std::string user_id;
-    if (!req.path_params.at("id").empty()) {
-        user_id = req.path_params.at("id");
-    } else {
-        ErrorHandler::sendError(res, 400, "Missing id parameter");
-        return;
-    }
-
     LoginData login_data = LoginData::parseFromJson(parsed);
 
     if (!ValidateLoginData::Validate(parsed, res, db)) {
@@ -19,8 +11,8 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
 
     pqxx::result status;
     try {
-        std::string status_query = "SELECT status FROM AuthorizationService.AuthorizationData WHERE id = $1";
-        std::vector<std::string> params = {user_id};
+        std::string status_query = "SELECT status FROM AuthorizationService.AuthorizationData WHERE login = $1";
+        std::vector<std::string> params = {login_data.login};
         status = db.executeQueryWithParams(status_query, params);
     } catch (const std::exception& e) {
         ErrorHandler::sendError(res, 500, "Failed to get user status");
@@ -33,11 +25,12 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
     }
 
     std::string role = status[0][0].c_str();
+    std::string id = getId(login_data.login, db);
 
     std::string response_content = R"({
     "msg": "Success",
         "data": {
-            "id": ")" + user_id + R"(",
+            "id": ")" + id + R"(",
             "role": ")" + role + R"("
         }
     })";

@@ -30,7 +30,7 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
     std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email, phone_number) "
                               "VALUES ($1, $2, $3, $4) RETURNING organizer_id";
     std::vector<std::string> params = {organizer_data.organization_name, organizer_data.tin,
-                                       organizer_data.email, "+79168700688"};
+                                       organizer_data.email, "XXXXXXXXXX"};
     pqxx::result result = db.executeQueryWithParams(insert_data, params);
 
     if (!result.empty() && !result[0]["organizer_id"].is_null()) {
@@ -73,4 +73,3 @@ void CreateOrganizerInfo::sendError(httplib::Response& res, int status, const st
     res.status = status;
     res.set_content(R"({"message": ")" + message + R"("})", "application/json");
 }
-

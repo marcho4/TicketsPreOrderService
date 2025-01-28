@@ -22,7 +22,7 @@ class AdminAuthorization {
     };
 
 public:
-    static void AuthorizeAdminRequest(httplib::Request& req, httplib::Response& res, Database& db);
+    static void AuthorizeAdminRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
     static bool ValidateApiKey(const std::string& api_key);
 
