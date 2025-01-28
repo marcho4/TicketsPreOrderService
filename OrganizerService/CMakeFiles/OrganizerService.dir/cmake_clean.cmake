@@ -9,8 +9,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/OrganizerService.dir/src/MatchCreating/AddingTickets/AddingTickets.cpp.o.d"
   "CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/MatchCreator.cpp.o"
   "CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/MatchCreator.cpp.o.d"
-  "CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o"
-  "CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o.d"
   "CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.o"
   "CMakeFiles/OrganizerService.dir/src/MatchCreating/UpdateMatchInfo/Updator.cpp.o.d"
   "CMakeFiles/OrganizerService.dir/src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp.o"

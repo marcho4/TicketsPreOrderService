@@ -50,10 +50,10 @@ void ProcessRequests::ProcessOrganizerRequest(const httplib::Request& req, httpl
 
     if (status == "APPROVED") {
         json json_body = {
-            {"email", email},
-            {"company", company},
-            {"tin", tin},
-            {"status", "APPROVED"}
+                {"email", email},
+                {"company", company},
+                {"tin", tin},
+                {"status", "APPROVED"}
         };
 
         std::string update_query = "UPDATE Organizers.OrganizerRequests SET status = $1 WHERE request_id = $2";
@@ -67,10 +67,10 @@ void ProcessRequests::ProcessOrganizerRequest(const httplib::Request& req, httpl
         }
     } else if (status == "REJECTED") {
         json json_body = {
-            {"email", email},
-            {"company", company},
-            {"tin", tin},
-            {"status", "REJECTED"}
+                {"email", email},
+                {"company", company},
+                {"tin", tin},
+                {"status", "REJECTED"}
         };
 
         // Обновление в БД статуса заявки

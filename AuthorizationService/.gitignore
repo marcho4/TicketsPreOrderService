@@ -2,3 +2,11 @@ Makefile
 __init__.py
 openapi.yaml
 venv
+AuthorizationService
+build.ninja
+cmake_install.cmake
+cmake-build-debug
+.cmake
+CMakeFiles
+CMakeCache.txt
+config.ini

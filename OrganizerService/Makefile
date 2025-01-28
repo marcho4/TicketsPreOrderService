@@ -249,30 +249,6 @@ src/MatchCreating/CreateMatch/MatchCreator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/CreateMatch/MatchCreator.cpp.s
 .PHONY : src/MatchCreating/CreateMatch/MatchCreator.cpp.s
 
-src/MatchCreating/GetMatchInfo/GetMatchData.o: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.o
-
-# target to build an object file
-src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.o
-
-src/MatchCreating/GetMatchInfo/GetMatchData.i: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.i
-
-# target to preprocess a source file
-src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.i
-
-src/MatchCreating/GetMatchInfo/GetMatchData.s: src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.s
-
-# target to generate assembly for a file
-src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OrganizerService.dir/build.make CMakeFiles/OrganizerService.dir/src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
-.PHONY : src/MatchCreating/GetMatchInfo/GetMatchData.cpp.s
-
 src/MatchCreating/UpdateMatchInfo/Updator.o: src/MatchCreating/UpdateMatchInfo/Updator.cpp.o
 .PHONY : src/MatchCreating/UpdateMatchInfo/Updator.o
 
@@ -417,9 +393,6 @@ help:
 	@echo "... src/MatchCreating/CreateMatch/MatchCreator.o"
 	@echo "... src/MatchCreating/CreateMatch/MatchCreator.i"
 	@echo "... src/MatchCreating/CreateMatch/MatchCreator.s"
-	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.o"
-	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.i"
-	@echo "... src/MatchCreating/GetMatchInfo/GetMatchData.s"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.o"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.i"
 	@echo "... src/MatchCreating/UpdateMatchInfo/Updator.s"

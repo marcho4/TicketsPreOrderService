@@ -38,7 +38,7 @@ def db_connection():
 ])
 def test_create_account(data, expected_status_code, expected_message, db_connection):
     organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/create_organizer_info", json=data)
+    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data)
     assert result.status_code == expected_status_code
     result_json = result.json()
     assert result_json["message"] == expected_message
@@ -59,7 +59,7 @@ def test_create_account(data, expected_status_code, expected_message, db_connect
 ])
 def test_create_account_edge_cases(data, expected_status_code, expected_message, db_connection):
     organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/create_organizer_info", json=data)
+    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data)
     assert result.status_code == expected_status_code
     result_json = result.json()
     assert result_json["message"] == expected_message

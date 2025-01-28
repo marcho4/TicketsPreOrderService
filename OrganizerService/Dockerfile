@@ -39,7 +39,7 @@ COPY . .
 RUN mkdir -p build && \
     cd build && \
     cmake .. && \
-    make
+    make VERBOSE=1
 
 # Используем правильный исполняемый файл
 CMD ["./build/OrganizerService"]

@@ -21,7 +21,7 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
         res.set_content(response.dump(), "application/json");
         return;
     } catch (const std::exception& e) {
-        SetErrorResponse(res, "Invalid request format");
+        ErrorHandler::sendError(res, 400, "Invalid request format");
     }
 }
 
@@ -40,7 +40,8 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
         std::string role = "ORGANIZER";
         std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email, status) "
                             "VALUES ($1, $2, $3, $4) RETURNING id";
-        db.executeQueryWithParams(query, credentials[1], credentials[2], data_sent_by_admin.email, role); // храним хэш пароля, а не сам пароль
+        std::vector<std::string> params = {credentials[1], credentials[2], data_sent_by_admin.email, role};
+        db.executeQueryWithParams(query, params); // храним хэш пароля, а не сам пароль
 
         res.status = 200;
         json response_body = {
@@ -58,7 +59,8 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
 
 bool OrganizerRegistrationManager::CheckEmailUniquenessAndOrganizerExistence(const std::string &email, Database &db) {
     std::string query = "SELECT * FROM Authorization.AuthorizationData WHERE email = $1";
-    pqxx::result ans = db.executeQueryWithParams(query, email);
+    std::vector<std::string> params = {email};
+    pqxx::result ans = db.executeQueryWithParams(query, params);
     return ans.empty();
 }
 

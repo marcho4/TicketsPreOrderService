@@ -5,8 +5,9 @@ import { Suspense, useState } from "react";
 import { useAuth } from "../../providers/authProvider";
 import { createResource } from "../../lib/createResource";
 import ErrorBoundary from "./dataBoundary";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
-// Function to fetch organizer data
 const fetchOrganizerData = async (id) => {
     const response = await fetch(`http://localhost:8000/api/organizer/get/${id}`, {
         method: "GET",
@@ -31,7 +32,7 @@ let organizerResource;
 
 export default function DataSection() {
     const { user } = useAuth();
-
+    console.log(user);
     if (!organizerResource) {
         organizerResource = createResource(() => fetchOrganizerData(user));
     }
@@ -39,7 +40,7 @@ export default function DataSection() {
     return (
         <ErrorBoundary>
             <Suspense fallback={<Loading />}>
-                <DataDisplay resource={organizerResource} />
+                <DataDisplay resource={organizerResource} id={user}/>
             </Suspense>
         </ErrorBoundary>
     );
@@ -192,7 +193,6 @@ function DataDisplay({ resource }) {
     );
 }
 
-// Loading component for the fallback
 function Loading() {
     return (
         <div className="flex flex-col min-w-full bg-silver rounded-lg p-4 animate-pulse ">
@@ -206,7 +206,6 @@ function Loading() {
             </div>
             <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
             </div>
-            {/*<button className="bg-accent w-1/2">Change information</button>*/}
         </div>
     );
 }

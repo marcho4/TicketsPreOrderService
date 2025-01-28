@@ -4,6 +4,7 @@
 #include <pqxx/pqxx>
 #include "../postgres/PostgresProcessing.h"
 #include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
+#include "../ErrorHandler.h"
 
 class OrganizerRegistrationManager {
     using json = nlohmann::json;
@@ -29,11 +30,6 @@ public:
 
     static bool CheckEmailUniquenessAndOrganizerExistence(const std::string& email, Database& db);
 
-    static void SetErrorResponse(httplib::Response& res, const std::string& message) {
-        res.status = 400;
-        res.set_content(json{{"status", "error"}, {"message", message}}.dump(), "application/json");
-    }
-
     static bool checkCorrectnessTIN(const std::string& tin);
 };
 
@@ -48,14 +44,14 @@ public:
         std::string tin = parsed.at("tin").get<std::string>();
 
         if (email.empty() || company.empty() || tin.empty()) {
-            OrganizerRegistrationManager::SetErrorResponse(res, "Fill all fields!");
+            ErrorHandler::sendError(res, 400, "Fill all fields!");
             return false;
         }
         if (!AuxiliaryFunctions::isValidEmail(email)) {
-            OrganizerRegistrationManager::SetErrorResponse(res, "Invalid email format");
+            ErrorHandler::sendError(res, 400, "Invalid email format");
         }
         if (!OrganizerRegistrationManager::checkCorrectnessTIN(tin)) {
-            OrganizerRegistrationManager::SetErrorResponse(res, "Invalid TIN format");
+            ErrorHandler::sendError(res, 400, "Invalid TIN format");
             return false;
         }
         return true;

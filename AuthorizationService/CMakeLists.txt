@@ -20,6 +20,10 @@ set(SOURCE_FILES
         libraries/Bcrypt.cpp/src/bcrypt.cpp
         libraries/Bcrypt.cpp/include/bcrypt.h
         libraries/Bcrypt.cpp/src/blowfish.cpp
+        src/Admin/AdminCreation.cpp
+        src/Admin/AdminCreation.h
+        src/Admin/AdminAuthorization.cpp
+        src/Admin/AdminAuthorization.h
 )
 # Пути, куда была установлена libpqxx при "make install"
 include_directories(/usr/local/include)
