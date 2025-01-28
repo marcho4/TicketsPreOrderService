@@ -53,7 +53,7 @@ int main() {
         });
 
         // Маршрут для подтверждения авторизации организатора
-        server.Post("/authorize_approved", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/organizer/approve", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
         });

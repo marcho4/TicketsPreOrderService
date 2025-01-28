@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "AuthorizationService::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-AuthorizationService-Debug-c2c9cc3199fcd824de14.json",
+					"jsonFile" : "target-AuthorizationService-Debug-9533b85601ff26dc8790.json",
 					"name" : "AuthorizationService",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug",
-		"source" : "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService"
+		"build" : "/Users/marcho/TicketsPreOrderService/AuthorizationService/cmake-build-debug",
+		"source" : "/Users/marcho/TicketsPreOrderService/AuthorizationService"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 6
+		"minor" : 7
 	}
 }

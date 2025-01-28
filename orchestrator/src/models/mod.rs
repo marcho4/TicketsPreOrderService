@@ -12,3 +12,6 @@ pub mod registration_err_org;
 pub mod admin_request;
 pub mod request_process_info;
 pub mod organizer_info;
+pub mod org_creation_response;
+pub mod org_approve_body;
+pub mod org_approve_response;

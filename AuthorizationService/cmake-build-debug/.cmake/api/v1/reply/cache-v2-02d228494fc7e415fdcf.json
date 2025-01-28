@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug"
+			"value" : "/Users/marcho/TicketsPreOrderService/AuthorizationService/cmake-build-debug"
 		},
 		{
 			"name" : "AuthorizationService_IS_TOP_LEVEL",
@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService"
+			"value" : "/Users/marcho/TicketsPreOrderService/AuthorizationService"
 		},
 		{
 			"name" : "CMAKE_ADDR2LINE",
@@ -67,7 +67,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/ar"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar"
 		},
 		{
 			"name" : "CMAKE_BUILD_TYPE",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug"
+			"value" : "/Users/marcho/TicketsPreOrderService/AuthorizationService/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -115,7 +115,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "27"
+			"value" : "30"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -127,7 +127,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "8"
+			"value" : "5"
 		},
 		{
 			"name" : "CMAKE_COLOR_DIAGNOSTICS",
@@ -167,7 +167,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake"
+			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -179,7 +179,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cpack"
+			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cpack"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -191,7 +191,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/ctest"
+			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/ctest"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -207,7 +207,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/c++"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS",
@@ -303,7 +303,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/cc"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc"
 		},
 		{
 			"name" : "CMAKE_C_FLAGS",
@@ -427,7 +427,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "-L/usr/local/opt/libpqxx/lib"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_EXE_LINKER_FLAGS_DEBUG",
@@ -531,7 +531,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/marcho/TicketsPreOrderService/AuthorizationService/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -591,7 +591,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/nazarzakrevskij/TicketsPreOrderService/AuthorizationService"
+			"value" : "/Users/marcho/TicketsPreOrderService/AuthorizationService"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -635,7 +635,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/ld"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
 		},
 		{
 			"name" : "CMAKE_MAKE_PROGRAM",
@@ -667,7 +667,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "-L/usr/local/opt/libpqxx/lib"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS_DEBUG",
@@ -747,7 +747,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/nm"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm"
 		},
 		{
 			"name" : "CMAKE_NUMBER_OF_MAKEFILES",
@@ -791,7 +791,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/objdump"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump"
 		},
 		{
 			"name" : "CMAKE_OSX_ARCHITECTURES",
@@ -827,7 +827,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk"
 		},
 		{
 			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
@@ -951,7 +951,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/ranlib"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib"
 		},
 		{
 			"name" : "CMAKE_READELF",
@@ -979,7 +979,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27"
+			"value" : "/Users/marcho/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.30"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -995,7 +995,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "-L/usr/local/opt/libpqxx/lib"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS_DEBUG",
@@ -1187,7 +1187,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/strip"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip"
 		},
 		{
 			"name" : "CMAKE_TAPI",
@@ -1203,7 +1203,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/usr/bin/tapi"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/tapi"
 		},
 		{
 			"name" : "CMAKE_UNAME",
@@ -1263,7 +1263,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/include"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include"
 		},
 		{
 			"name" : "CURL_LIBRARY_DEBUG",
@@ -1295,7 +1295,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib"
+			"value" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/lib/libcurl.tbd"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_CURL",
@@ -1307,7 +1307,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib][/opt/homebrew/Cellar/curl/8.11.1/include][c ][v8.11.1()]"
+			"value" : "[/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/lib/libcurl.tbd][/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include][c ][v8.7.1()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL",
@@ -1319,7 +1319,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/Cellar/openssl@3/3.4.0/lib/libcrypto.dylib][/opt/homebrew/Cellar/openssl@3/3.4.0/include][c ][v3.4.0()]"
+			"value" : "[/opt/homebrew/lib/libcrypto.dylib][/opt/homebrew/include][c ][v3.3.2()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PostgreSQL",
@@ -1331,7 +1331,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/lib/postgresql@14/libpq.dylib][/opt/homebrew/include/postgresql@14][c ][v14.15()]"
+			"value" : "[/opt/homebrew/lib/postgresql@14/libpq.dylib][/opt/homebrew/include/postgresql@14][c ][v14.13()]"
 		},
 		{
 			"name" : "OPENSSL_CRYPTO_LIBRARY",
@@ -1347,7 +1347,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/lib/libcrypto.dylib"
+			"value" : "/opt/homebrew/lib/libcrypto.dylib"
 		},
 		{
 			"name" : "OPENSSL_INCLUDE_DIR",
@@ -1363,7 +1363,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/include"
+			"value" : "/opt/homebrew/include"
 		},
 		{
 			"name" : "OPENSSL_SSL_LIBRARY",
@@ -1379,427 +1379,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/lib/libssl.dylib"
-		},
-		{
-			"name" : "PC_CURL_CFLAGS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "-I/opt/homebrew/Cellar/curl/8.11.1/include;-I/opt/homebrew/Cellar/brotli/1.1.0/include;-I/opt/homebrew/opt/zstd/include;-I/opt/homebrew/Cellar/libssh2/1.11.1/include;-I/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;-I/opt/homebrew/Cellar/openssl@3/3.4.0/include;-I/opt/homebrew/Cellar/libnghttp2/1.64.0/include"
-		},
-		{
-			"name" : "PC_CURL_CFLAGS_I",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_CFLAGS_OTHER",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_FOUND",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "1"
-		},
-		{
-			"name" : "PC_CURL_INCLUDEDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/include"
-		},
-		{
-			"name" : "PC_CURL_INCLUDE_DIRS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/include;/opt/homebrew/Cellar/brotli/1.1.0/include;/opt/homebrew/opt/zstd/include;/opt/homebrew/Cellar/libssh2/1.11.1/include;/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;/opt/homebrew/Cellar/openssl@3/3.4.0/include;/opt/homebrew/Cellar/libnghttp2/1.64.0/include"
-		},
-		{
-			"name" : "PC_CURL_LDFLAGS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "-L/opt/homebrew/Cellar/curl/8.11.1/lib;-lcurl"
-		},
-		{
-			"name" : "PC_CURL_LDFLAGS_OTHER",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_LIBDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib"
-		},
-		{
-			"name" : "PC_CURL_LIBRARIES",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "curl"
-		},
-		{
-			"name" : "PC_CURL_LIBRARY_DIRS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib"
-		},
-		{
-			"name" : "PC_CURL_LIBS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_LIBS_L",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_LIBS_OTHER",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_LIBS_PATHS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_MODULE_NAME",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "libcurl"
-		},
-		{
-			"name" : "PC_CURL_PREFIX",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1"
-		},
-		{
-			"name" : "PC_CURL_STATIC_CFLAGS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "-I/opt/homebrew/Cellar/curl/8.11.1/include;-I/opt/homebrew/Cellar/brotli/1.1.0/include;-I/opt/homebrew/opt/zstd/include;-I/opt/homebrew/Cellar/libssh2/1.11.1/include;-I/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;-I/opt/homebrew/Cellar/openssl@3/3.4.0/include;-I/opt/homebrew/Cellar/libnghttp2/1.64.0/include;-DCURL_STATICLIB"
-		},
-		{
-			"name" : "PC_CURL_STATIC_CFLAGS_I",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_STATIC_CFLAGS_OTHER",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "-DCURL_STATICLIB"
-		},
-		{
-			"name" : "PC_CURL_STATIC_INCLUDE_DIRS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/include;/opt/homebrew/Cellar/brotli/1.1.0/include;/opt/homebrew/opt/zstd/include;/opt/homebrew/Cellar/libssh2/1.11.1/include;/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;/opt/homebrew/Cellar/openssl@3/3.4.0/include;/opt/homebrew/Cellar/libnghttp2/1.64.0/include"
-		},
-		{
-			"name" : "PC_CURL_STATIC_LDFLAGS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "-L/opt/homebrew/Cellar/curl/8.11.1/lib;-lcurl;-framework;CoreFoundation;-framework;CoreServices;-framework;Security;-L/opt/homebrew/Cellar/openssl@3/3.4.0/lib;-L/opt/homebrew/Cellar/libssh2/1.11.1/lib;-L/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/lib;-L/opt/homebrew/Cellar/openssl@3/3.4.0/lib;-L/opt/homebrew/Cellar/libnghttp2/1.64.0/lib;-framework;CoreFoundation;-framework;CoreServices;-framework;SystemConfiguration;-lnghttp2;-licucore;-liconv;-lz;-lssl;-lcrypto;-lssh2;-lssl;-lcrypto;-lssl;-lcrypto;-lgssapi_krb5;-lresolv;-lldap;-lz;-L/opt/homebrew/Cellar/brotli/1.1.0/lib;-lbrotlidec;-lbrotlicommon;-L/opt/homebrew/opt/zstd/lib;-lzstd;-lssh2;-L/opt/homebrew/opt/openssl@3/lib;-L/opt/homebrew/opt/openssl@3/lib;-R/opt/homebrew/opt/openssl@3/lib;-lz;-L/usr/lib;-lrtmp;-lz;-lssl;-lcrypto;-lnghttp2"
-		},
-		{
-			"name" : "PC_CURL_STATIC_LDFLAGS_OTHER",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "-framework;CoreFoundation;-framework;CoreServices;-framework;Security;-framework;CoreFoundation;-framework;CoreServices;-framework;SystemConfiguration;-R/opt/homebrew/opt/openssl@3/lib"
-		},
-		{
-			"name" : "PC_CURL_STATIC_LIBDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_STATIC_LIBRARIES",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "curl;nghttp2;icucore;iconv;z;ssl;crypto;ssh2;ssl;crypto;ssl;crypto;gssapi_krb5;resolv;ldap;z;brotlidec;brotlicommon;zstd;ssh2;z;rtmp;z;ssl;crypto;nghttp2"
-		},
-		{
-			"name" : "PC_CURL_STATIC_LIBRARY_DIRS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib;/opt/homebrew/Cellar/openssl@3/3.4.0/lib;/opt/homebrew/Cellar/libssh2/1.11.1/lib;/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/lib;/opt/homebrew/Cellar/openssl@3/3.4.0/lib;/opt/homebrew/Cellar/libnghttp2/1.64.0/lib;/opt/homebrew/Cellar/brotli/1.1.0/lib;/opt/homebrew/opt/zstd/lib;/opt/homebrew/opt/openssl@3/lib;/opt/homebrew/opt/openssl@3/lib;/usr/lib"
-		},
-		{
-			"name" : "PC_CURL_STATIC_LIBS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_STATIC_LIBS_L",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_STATIC_LIBS_OTHER",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_STATIC_LIBS_PATHS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_VERSION",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "8.11.1"
-		},
-		{
-			"name" : "PC_CURL_libcurl_INCLUDEDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_libcurl_LIBDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_libcurl_PREFIX",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "PC_CURL_libcurl_VERSION",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "/opt/homebrew/lib/libssl.dylib"
 		},
 		{
 			"name" : "PKG_CONFIG_ARGN",
@@ -1831,7 +1411,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/bin/pkg-config"
+			"value" : "PKG_CONFIG_EXECUTABLE-NOTFOUND"
 		},
 		{
 			"name" : "PostgreSQL_INCLUDE_DIR",
@@ -1907,7 +1487,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "-I/opt/homebrew/Cellar/openssl@3/3.4.0/include"
+			"value" : ""
 		},
 		{
 			"name" : "_OPENSSL_CFLAGS_I",
@@ -1943,46 +1523,10 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "1"
+			"value" : ""
 		},
 		{
 			"name" : "_OPENSSL_INCLUDEDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/include"
-		},
-		{
-			"name" : "_OPENSSL_INCLUDE_DIRS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/include"
-		},
-		{
-			"name" : "_OPENSSL_LDFLAGS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "-L/opt/homebrew/Cellar/openssl@3/3.4.0/lib;-lssl;-lcrypto"
-		},
-		{
-			"name" : "_OPENSSL_LDFLAGS_OTHER",
 			"properties" : 
 			[
 				{
@@ -2003,31 +1547,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/lib"
-		},
-		{
-			"name" : "_OPENSSL_LIBRARIES",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "ssl;crypto"
-		},
-		{
-			"name" : "_OPENSSL_LIBRARY_DIRS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/lib"
+			"value" : ""
 		},
 		{
 			"name" : "_OPENSSL_LIBS",
@@ -2087,7 +1607,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "openssl"
+			"value" : ""
 		},
 		{
 			"name" : "_OPENSSL_PREFIX",
@@ -2099,7 +1619,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0"
+			"value" : ""
 		},
 		{
 			"name" : "_OPENSSL_STATIC_CFLAGS",
@@ -2111,7 +1631,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "-I/opt/homebrew/Cellar/openssl@3/3.4.0/include"
+			"value" : ""
 		},
 		{
 			"name" : "_OPENSSL_STATIC_CFLAGS_I",
@@ -2138,42 +1658,6 @@
 			"value" : ""
 		},
 		{
-			"name" : "_OPENSSL_STATIC_INCLUDE_DIRS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/include"
-		},
-		{
-			"name" : "_OPENSSL_STATIC_LDFLAGS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "-L/opt/homebrew/Cellar/openssl@3/3.4.0/lib;-lssl;-lcrypto"
-		},
-		{
-			"name" : "_OPENSSL_STATIC_LDFLAGS_OTHER",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
 			"name" : "_OPENSSL_STATIC_LIBDIR",
 			"properties" : 
 			[
@@ -2184,30 +1668,6 @@
 			],
 			"type" : "INTERNAL",
 			"value" : ""
-		},
-		{
-			"name" : "_OPENSSL_STATIC_LIBRARIES",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "ssl;crypto"
-		},
-		{
-			"name" : "_OPENSSL_STATIC_LIBRARY_DIRS",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/lib"
 		},
 		{
 			"name" : "_OPENSSL_STATIC_LIBS",
@@ -2267,91 +1727,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "3.4.0"
-		},
-		{
-			"name" : "_OPENSSL_openssl_INCLUDEDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
 			"value" : ""
-		},
-		{
-			"name" : "_OPENSSL_openssl_LIBDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "_OPENSSL_openssl_PREFIX",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "_OPENSSL_openssl_VERSION",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "__pkg_config_arguments_PC_CURL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "QUIET;libcurl"
-		},
-		{
-			"name" : "__pkg_config_arguments__OPENSSL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "QUIET;openssl"
-		},
-		{
-			"name" : "__pkg_config_checked_PC_CURL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "1"
 		},
 		{
 			"name" : "__pkg_config_checked__OPENSSL",
@@ -2364,66 +1740,6 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "1"
-		},
-		{
-			"name" : "pkgcfg_lib_PC_CURL_curl",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib"
-		},
-		{
-			"name" : "pkgcfg_lib__OPENSSL_crypto",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/lib/libcrypto.dylib"
-		},
-		{
-			"name" : "pkgcfg_lib__OPENSSL_ssl",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/Cellar/openssl@3/3.4.0/lib/libssl.dylib"
-		},
-		{
-			"name" : "prefix_result",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "alt-svc;AsynchDNS;brotli;GSS-API;HSTS;HTTP2;HTTPS-proxy;IDN;IPv6;Kerberos;Largefile;libz;MultiSSL;NTLM;SPNEGO;SSL;threadsafe;TLS-SRP;UnixSockets;zstd"
 		}
 	],
 	"kind" : "cache",
