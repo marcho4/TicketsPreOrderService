@@ -18,7 +18,7 @@ void AdminCreation::CreateAdminRequest(const httplib::Request& req, httplib::Res
     std::vector<std::string> params = {admin_data.login, hashed_password, admin_data.email, "ADMIN"};
 
     try {
-        createAdmin(admin_data, db)
+        createAdmin(admin_data, db);
     } catch (const std::exception& e) {
         ErrorHandler::sendError(res, 409, "User already exists");
     }
