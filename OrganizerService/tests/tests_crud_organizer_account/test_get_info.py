@@ -48,7 +48,7 @@ def test_get_account_data(data, expected_status_code, expected_message, db_conne
     response = create_organizer_info(data)
     response_json = response.json()
 
-    organizer_id = response_json["organizer_id"]
+    organizer_id = response_json["data"]["id"]
     cursor = db_connection.cursor(cursor_factory=RealDictCursor)
     cursor.execute("SELECT * FROM Organizers.OrganizersData WHERE email = %s", (data["email"],))
     db_result = cursor.fetchone()

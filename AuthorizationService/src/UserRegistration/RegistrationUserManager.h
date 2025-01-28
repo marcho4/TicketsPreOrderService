@@ -3,6 +3,7 @@
 #include "../../libraries/nlohmann/json.hpp"
 #include "../postgres/PostgresProcessing.h"
 #include "PasswordGenerator/PasswordCreator.h"
+#include "../ErrorHandler.h"
 
 class UserRegistration {
     using json = nlohmann::json;

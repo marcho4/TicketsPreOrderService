@@ -23,24 +23,22 @@ def db_connection():
     (
             {"organization_name": "KFC",
              "tin": "123456789012",
-             "email": "nazarzakrevski@gmail.com",
-             "phone_number": "89168700688"},
+             "email": "nazarzakrevski@gmail.com"},
             201,  # status code
-            "User created successfully"  # response
+            "Organizer created successfully"  # response
     ),
     # теперь попробуем зарегистрироваться еще раз с теми же данными
     (
             {"organization_name": "KFC",
              "tin": "123456789012",
-             "email": "nazarzakrevski@gmail.com",
-             "phone_number": "89168700688"},
+             "email": "nazarzakrevski@gmail.com"},
             409,  # status code
             "User with this email already exists"  # response
     )
 ])
 def test_create_account(data, expected_status_code, expected_message, db_connection):
     organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/create_organizer_info/{organizer_id}", json=data)
+    result = requests.post(f"{BASE_URL}/create_organizer_info", json=data)
     assert result.status_code == expected_status_code
     result_json = result.json()
     assert result_json["message"] == expected_message
@@ -53,24 +51,15 @@ def test_create_account(data, expected_status_code, expected_message, db_connect
             "Missing field: email"  # response
     ),
     (
-            {"organization_name": "Pizza Hut",
-             "tin": "987654321098",
-             "email": "support@pizzahut.com",
-             "phone_number": "123abc"},
-            400,  # status code
-            "Invalid phone number"  # response
-    ),
-    (
             {"organization_name": "Subway",
-             "tin": "654321098765",
-             "phone_number": "89168700699"},
+             "tin": "654321098765"},
             400,  # status code
             "Missing field: email"  # response
     ),
 ])
 def test_create_account_edge_cases(data, expected_status_code, expected_message, db_connection):
     organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/create_organizer_info/{organizer_id}", json=data)
+    result = requests.post(f"{BASE_URL}/create_organizer_info", json=data)
     assert result.status_code == expected_status_code
     result_json = result.json()
     assert result_json["message"] == expected_message

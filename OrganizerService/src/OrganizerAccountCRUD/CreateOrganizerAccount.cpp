@@ -33,14 +33,19 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
                                        organizer_data.email};
     pqxx::result result = db.executeQueryWithParams(insert_data, params);
 
-    if (!result.empty() && result[0]["organizer_id"].c_str()) {
-        json response = {
-                {"status", "created"},
-                {"message", "User created successfully"},
-                {"organizer_id", result[0]["organizer_id"].as<std::string>()}
+    if (!result.empty() && !result[0]["organizer_id"].is_null()) {
+        nlohmann::json json_response = {
+            {"message", "Organizer created successfully"},
+            {"status", "created"},
+                {"data", {
+                    {"id", result[0]["organizer_id"].as<std::string>()},
+                    {"role", "ORGANIZER"}
+                }
+            }
         };
+
         res.status = 201;
-        res.set_content(response.dump(), "application/json");
+        res.set_content(json_response.dump(), "application/json");
     } else {
         sendError(res, 500, "Failed to insert data into the database");
     }
@@ -68,3 +73,4 @@ void CreateOrganizerInfo::sendError(httplib::Response& res, int status, const st
     res.status = status;
     res.set_content(R"({"message": ")" + message + R"("})", "application/json");
 }
+

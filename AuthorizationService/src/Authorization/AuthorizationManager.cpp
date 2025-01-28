@@ -7,7 +7,7 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
     if (!req.path_params.at("id").empty()) {
         user_id = req.path_params.at("id");
     } else {
-        sendError(res, 400, "Missing id parameter");
+        ErrorHandler::sendError(res, 400, "Missing id parameter");
         return;
     }
 
@@ -20,14 +20,15 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
     pqxx::result status;
     try {
         std::string status_query = "SELECT status FROM AuthorizationService.AuthorizationData WHERE id = $1";
-        status = db.executeQueryWithParams(status_query, user_id);
+        std::vector<std::string> params = {user_id};
+        status = db.executeQueryWithParams(status_query, params);
     } catch (const std::exception& e) {
-        sendError(res, 500, "Failed to get user status");
+        ErrorHandler::sendError(res, 500, "Failed to get user status");
         return;
     }
 
     if (status.empty()) {
-        sendError(res, 403, "Access denied");
+        ErrorHandler::sendError(res, 403, "Access denied");
         return;
     }
 
@@ -51,7 +52,8 @@ bool AuthorizationManager::validatePassword(const std::string& password, const s
 std::string AuthorizationManager::getId(std::string login, Database &db) {
     try {
         std::string get_id = "SELECT id FROM AuthorizationService.AuthorizationData WHERE login = $1";
-        pqxx::result user_id = db.executeQueryWithParams(get_id, login);
+        std::vector<std::string> params = {login};
+        pqxx::result user_id = db.executeQueryWithParams(get_id, params);
         if (user_id.empty()) {
             return "";
         }
@@ -64,14 +66,10 @@ std::string AuthorizationManager::getId(std::string login, Database &db) {
 pqxx::result AuthorizationManager::getPasswordHash(std::string login, Database &db) {
     try {
         std::string password_query = "SELECT password FROM AuthorizationService.AuthorizationData WHERE login = $1";
-        pqxx::result password_hash = db.executeQueryWithParams(password_query, login);
+        std::vector<std::string> params = {login};
+        pqxx::result password_hash = db.executeQueryWithParams(password_query, params);
         return password_hash;
     } catch (const std::exception& e) {
         return {};
     }
-}
-
-void AuthorizationManager::sendError(httplib::Response& res, int status, const std::string& message) {
-    res.status = status;
-    res.set_content(R"({"message": ")" + message + R"("})", "application/json");
 }

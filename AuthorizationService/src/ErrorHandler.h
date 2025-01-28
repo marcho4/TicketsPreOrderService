@@ -1,0 +1,10 @@
+#include "../../libraries/httplib.h"
+#include "../../libraries/nlohmann/json.hpp"
+
+class ErrorHandler {
+public:
+    static void sendError(httplib::Response& res, int status, const std::string& message) {
+        res.status = status;
+        res.set_content(R"({"message": ")" + message + R"("})", "application/json");
+    }
+};

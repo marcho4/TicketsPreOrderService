@@ -21,7 +21,7 @@ def db_connection():
 
 def create_organizer_info(data):
     organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/create_organizer_info/{organizer_id}", json=data)
+    result = requests.post(f"{BASE_URL}/create_organizer_info", json=data)
     assert result.status_code == 201
     return result
 
@@ -31,8 +31,7 @@ def create_organizer_info(data):
             # данные для регистрации
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
-             "email": generate_random_email(),
-             "phone_number": generate_random_phone_number()},
+             "email": generate_random_email()},
 
             # данные для обновления
             {"organization_name": generate_random_organization(),
@@ -47,8 +46,7 @@ def create_organizer_info(data):
     (
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
-             "email": generate_random_email(),
-             "phone_number": generate_random_phone_number()},
+             "email": generate_random_email()},
 
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
@@ -62,8 +60,7 @@ def create_organizer_info(data):
     (
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
-             "email": generate_random_email(),
-             "phone_number": generate_random_phone_number()},
+             "email": generate_random_email()},
 
             {"organization_name": generate_random_organization(),
              "tin": "012345678912",
@@ -79,7 +76,7 @@ def test_update_account(data, new_data, expected_status_code, expected_message, 
     data_json = data.json()
 
     # зафиксируем изначальные данные
-    organizer_id = data_json["organizer_id"]
+    organizer_id = data_json["data"]["id"]
     cursor = db_connection.cursor(cursor_factory=RealDictCursor)
     cursor.execute("SELECT * FROM Organizers.OrganizersData WHERE email = %s", (new_data["email"],))
     db_result = cursor.fetchone()
@@ -115,7 +112,8 @@ def test_update_account(data, new_data, expected_status_code, expected_message, 
 ])
 def test_no_changes_on_identical_data(data, db_connection):
     response = create_organizer_info(data)
-    organizer_id = response.json()["organizer_id"]
+    data_json = response.json()
+    organizer_id = data_json["data"]["id"]
 
     result = requests.put(f"{BASE_URL}/update_organizer_info/{organizer_id}", json=data)
     assert result.status_code == 201
@@ -146,11 +144,12 @@ def test_update_with_duplicate_email(db_connection):
 
     response1 = create_organizer_info(data1)
     response2 = create_organizer_info(data2)
-    organizer_id2 = response2.json()["organizer_id"]
+    data_json = response2.json()
+    organizer_id = data_json["data"]["id"]
 
     new_data = data2.copy()
     new_data["email"] = data1["email"]
 
-    result = requests.put(f"{BASE_URL}/update_organizer_info/{organizer_id2}", json=new_data)
+    result = requests.put(f"{BASE_URL}/update_organizer_info/{organizer_id}", json=new_data)
     assert result.status_code == 409
     assert result.json()["message"] == "User with this email already exists"

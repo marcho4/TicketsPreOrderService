@@ -3,6 +3,8 @@
 #include "src/OrganizerRegistration/RegistrationOrganizerManager.h"
 #include "src/UserRegistration/RegistrationUserManager.h"
 #include "src/Authorization/AuthorizationManager.h"
+#include "src/Admin/AdminAuthorization.h"
+#include "src/Admin/AdminCreation.h"
 
 int main() {
     try {
@@ -35,13 +37,13 @@ int main() {
         pqxx::work worker(connection_);
 
         // Маршрут для регистрации организатора
-        server.Post("/register_organizer", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/organizer/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             OrganizerRegistrationManager::RegisterOrganizerRequest(request, res, db);
         });
 
         // Маршрут для регистрации пользователя
-        server.Post("/register_user", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/user/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             UserRegistration::RegisterUserRequest(request, res, db);
         });
@@ -64,6 +66,17 @@ int main() {
             res.status = 200;
         });
 
+        server.Post("/admin/create",  [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            AdminCreation::CreateAdminRequest(request, res, db);
+        });
+
+        server.Post("/admin/authorize",  [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            AdminAuthorization::AuthorizeAdminRequest(request, res, db);
+        });
+
+        // admin/create {"api_key": "const", "login" : "some_login", "password": "huy"}
         std::cout << "Server is listening on 0.0.0.0:8002\n";
         server.listen("0.0.0.0", 8002);
 
