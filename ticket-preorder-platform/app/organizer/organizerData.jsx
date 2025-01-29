@@ -87,7 +87,7 @@ function DataDisplay({ resource }) {
     };
 
     return (
-        <div className="flex flex-col min-w-full bg-silver rounded-lg p-4 gap-5">
+        <div className="flex flex-col min-w-full bg-white rounded-lg p-4 gap-5">
             <div className="border-2 border-deep_blue/40 px-5 py-5 rounded-lg">
                 <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
                     My profile
@@ -194,8 +194,8 @@ function DataDisplay({ resource }) {
 
 function Loading() {
     return (
-        <div className="flex flex-col min-w-full bg-silver rounded-lg p-4 gap-5">
-            <div className="border-2 border-deep_blue/40 px-5 py-5 rounded-lg">
+        <div className="flex flex-col min-w-full bg-white rounded-lg p-4 gap-5">
+            <div className=" px-5 py-5 rounded-lg">
                 <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
                     My profile
                 </h1>
@@ -203,12 +203,12 @@ function Loading() {
                     Manage your profile settings
                 </div>
             </div>
-            <div className="border-2 border-deep_blue/40 px-5 py-4 rounded-lg">
+            <div className="px-5 py-4 rounded-lg">
                 <div className="flex flex-col justify-center min-w-full">
                 <div className="flex flex-row items-center justify-between mt-4">
                         <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
-                        <button className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
-                        flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300">
+                        <button disabled={true} className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
+                        flex flex-row items-center justify-start  transition-colors duration-300">
                             <Pencil className="mr-2"/> Edit
                         </button>
                     </div>
@@ -244,15 +244,19 @@ function Loading() {
 }
 
 export default function DataSection() {
-    const {user} = useAuth();
+    const {user, userRole} = useAuth();
 
     useEffect(() => {
 
     }, [user])
 
     // Пока `user` не определен, показываем загрузку
-    if (!user) {
+    if (user === undefined) {
         return <Loading/>;
+    }
+
+    if (user == null || userRole !== "ORGANIZER") {
+        return <div>You are not authorized as an organizer</div>
     }
 
     if (!organizerResource) {

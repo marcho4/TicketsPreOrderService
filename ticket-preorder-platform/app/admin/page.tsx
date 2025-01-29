@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createResource } from "@/lib/createResource";
 import ErrorBoundary from "./dataBoundary";
+import {useAuth} from "@/providers/authProvider";
+import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 interface Request {
     request_id: string;
@@ -12,6 +15,8 @@ interface Request {
     email: string;
     tin: string;
 }
+
+
 
 // Функция для fetch запросов на регистрацию
 const fetchRequests = async () => {
@@ -130,10 +135,21 @@ const AdminHome = () => {
     const handleUpdate = () => {
         forceUpdate({});
     };
+    const {user, userRole} = useAuth();
+    const router = useRouter();
+    const logout = () => {
+        try {
+            fetch('http://localhost:8000/api/auth/logout', {method: 'POST', credentials: 'include'})
+            router.push('/login')
+            window.location.reload()
+        } catch  {
+            console.error('logout failed')
+        }
+    }
 
     return (
-        <div className="max-w-screen-xl mx-auto py-10">
-            <Card className="w-full max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl bg-opacity-90">
+        <div className="max-w-screen-xl mx-auto py-10 gap-10">
+            <Card className="w-full max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl bg-opacity-90 mb-10">
                 <CardHeader className="space-y-1 pt-8">
                     <CardTitle className="text-3xl font-bold text-center">Список заявок на регистрацию</CardTitle>
                 </CardHeader>
@@ -147,6 +163,16 @@ const AdminHome = () => {
                     </div>
                 </CardContent>
             </Card>
+
+            {userRole == "ADMIN" && (
+                <Card className="w-full max-w-2xl py-5 flex flex-col mx-auto bg-white rounded-3xl items-center
+                 shadow-2xl bg-opacity-90">
+                        <Button onClick={logout} className="bg-[#333333] max-w-56 hover:bg-accent hover:text-my_black">
+                            Выйти из аккаунта
+                        </Button>
+                </Card>
+            )}
+
         </div>
     );
 };

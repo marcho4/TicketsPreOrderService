@@ -22,12 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} bg-background text-text`}
-            style={{
-              backgroundImage: 'url("/futuristic-background.jpg")',
-              backgroundSize: 'cover',
-              backgroundAttachment: 'fixed'
-            }}>
+      <body className={`${montserrat.className} bg-background text-text`}>
         <AuthProvider>
           <Navigation />
           <main className="min-h-screen pt-8">

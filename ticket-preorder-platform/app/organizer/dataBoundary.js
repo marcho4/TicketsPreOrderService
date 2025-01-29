@@ -19,8 +19,8 @@ class ErrorBoundary extends React.Component {
     render() {
         if (this.state.hasError) {
             return (
-                <div className="flex justify-center items-center h-full bg-dusty rounded-lg">
-                    <p className="text-xl text-white font-semibold">
+                <div className="flex justify-center items-center h-full bg-white rounded-lg">
+                    <p className="text-xl text-my_black text-center font-semibold">
                         Something went wrong during organizer data load: {this.state.error.message}
                     </p>
                 </div>
