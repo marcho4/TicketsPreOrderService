@@ -29,38 +29,32 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        // Подключение к базе данных
         std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
-        // Маршрут для регистрации организатора
         server.Post("/organizer/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             OrganizerRegistrationManager::RegisterOrganizerRequest(request, res, db);
         });
 
-        // Маршрут для регистрации пользователя
         server.Post("/user/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
 //            UserRegistration::RegisterUserRequest(request, res, db);
         });
 
-        // Маршрут для авторизации
         server.Post("/authorize", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             AuthorizationManager::AuthorizationRequest(request, res, db);
         });
 
-        // Маршрут для подтверждения авторизации организатора
         server.Post("/authorize_approved", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
         });
 
-        // Маршрут для проверки работы сервера
         server.Get("/is_working", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             res.status = 200;

@@ -153,6 +153,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/AdminService.dir/build.make CMakeFiles/AdminService.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/api/RequestsHandler.o: src/api/RequestsHandler.cpp.o
+.PHONY : src/api/RequestsHandler.o
+
+# target to build an object file
+src/api/RequestsHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AdminService.dir/build.make CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o
+.PHONY : src/api/RequestsHandler.cpp.o
+
+src/api/RequestsHandler.i: src/api/RequestsHandler.cpp.i
+.PHONY : src/api/RequestsHandler.i
+
+# target to preprocess a source file
+src/api/RequestsHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AdminService.dir/build.make CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.i
+.PHONY : src/api/RequestsHandler.cpp.i
+
+src/api/RequestsHandler.s: src/api/RequestsHandler.cpp.s
+.PHONY : src/api/RequestsHandler.s
+
+# target to generate assembly for a file
+src/api/RequestsHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AdminService.dir/build.make CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.s
+.PHONY : src/api/RequestsHandler.cpp.s
+
 src/postgres/PostgresProcessing.o: src/postgres/PostgresProcessing.cpp.o
 .PHONY : src/postgres/PostgresProcessing.o
 
@@ -177,30 +201,6 @@ src/postgres/PostgresProcessing.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/AdminService.dir/build.make CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.s
 .PHONY : src/postgres/PostgresProcessing.cpp.s
 
-src/processRequests.o: src/processRequests.cpp.o
-.PHONY : src/processRequests.o
-
-# target to build an object file
-src/processRequests.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AdminService.dir/build.make CMakeFiles/AdminService.dir/src/processRequests.cpp.o
-.PHONY : src/processRequests.cpp.o
-
-src/processRequests.i: src/processRequests.cpp.i
-.PHONY : src/processRequests.i
-
-# target to preprocess a source file
-src/processRequests.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AdminService.dir/build.make CMakeFiles/AdminService.dir/src/processRequests.cpp.i
-.PHONY : src/processRequests.cpp.i
-
-src/processRequests.s: src/processRequests.cpp.s
-.PHONY : src/processRequests.s
-
-# target to generate assembly for a file
-src/processRequests.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/AdminService.dir/build.make CMakeFiles/AdminService.dir/src/processRequests.cpp.s
-.PHONY : src/processRequests.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,12 +213,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/api/RequestsHandler.o"
+	@echo "... src/api/RequestsHandler.i"
+	@echo "... src/api/RequestsHandler.s"
 	@echo "... src/postgres/PostgresProcessing.o"
 	@echo "... src/postgres/PostgresProcessing.i"
 	@echo "... src/postgres/PostgresProcessing.s"
-	@echo "... src/processRequests.o"
-	@echo "... src/processRequests.i"
-	@echo "... src/processRequests.s"
 .PHONY : help
 
 

@@ -38,9 +38,10 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
 
         std::vector<std::string> credentials = PasswordCreator::HashAndSavePassword(data, db);
         std::string role = "ORGANIZER";
-        std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email, status) "
-                            "VALUES ($1, $2, $3, $4) RETURNING id";
-        std::vector<std::string> params = {credentials[1], credentials[2], data_sent_by_admin.email, role};
+        std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email, status, user_id) "
+                            "VALUES ($1, $2, $3, $4, $5) RETURNING id";
+        std::vector<std::string> params = {credentials[1], credentials[2], data_sent_by_admin.email,
+                                           role, data_sent_by_admin.user_id};
         db.executeQueryWithParams(query, params); // храним хэш пароля, а не сам пароль
 
         res.status = 200;

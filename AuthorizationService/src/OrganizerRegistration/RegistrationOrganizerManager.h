@@ -14,12 +14,14 @@ class OrganizerRegistrationManager {
         std::string company;
         std::string tin;
         std::string status;
+        std::string user_id;
 
         static OrganizerDataWithStatus getRegistrationData(json& parsed) {
             return {parsed.at("email").get<std::string>(),
                     parsed.at("company").get<std::string>(),
                     parsed.at("tin").get<std::string>(),
-                    parsed.at("status").get<std::string>()};
+                    parsed.at("status").get<std::string>(),
+                    parsed.at("user_id").get<std::string>()};
         }
     };
 
