@@ -30,17 +30,17 @@ int main() {
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
-        server.Get("admin/pending_requests", [&](const httplib::Request& req, httplib::Response& res) {
+        server.Get("/admin/pending_requests", [&](const httplib::Request& req, httplib::Response& res) {
             set_cors_headers(res);
             GetRequests::GetOrganizersRequestList(req, res, db);
         });
 
-        server.Post("admin/process_organizer", [&](const httplib::Request& req, httplib::Response& res) {
+        server.Post("/admin/process_organizer", [&](const httplib::Request& req, httplib::Response& res) {
             set_cors_headers(res);
             ProcessRequest::ProcessOrganizerRequest(req, res, db);
         });
 
-        server.Post("admin/add_organizer_request", [&](const httplib::Request& req, httplib::Response& res) {
+        server.Post("/admin/add_organizer_request", [&](const httplib::Request& req, httplib::Response& res) {
             set_cors_headers(res);
             AddRequest::AddOrganizerRequest(req, res, db);
         });

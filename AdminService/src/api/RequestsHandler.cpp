@@ -47,4 +47,6 @@ void AddRequest::AddOrganizerRequest(const httplib::Request& req, httplib::Respo
     }
 
     AddOrganizerRequestToDB(admin_data, db);
+    res.status = 200;
+    res.set_content(json{{"status", "success"}, {"message", "Organizer request added"}}.dump(), "application/json");
 }
