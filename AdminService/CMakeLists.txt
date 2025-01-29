@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 # Укажите путь к исходным файлам
 set(ADMIN_SOURCE_FILES
         main.cpp
-        src/processRequests.cpp
+        src/api/RequestsHandler.cpp
         src/postgres/PostgresProcessing.cpp
 )
 
