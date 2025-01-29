@@ -44,7 +44,7 @@ bool AuthorizationManager::validatePassword(const std::string& password, const s
 
 std::string AuthorizationManager::getId(std::string login, Database &db) {
     try {
-        std::string get_id = "SELECT id FROM AuthorizationService.AuthorizationData WHERE login = $1";
+        std::string get_id = "SELECT user_id FROM AuthorizationService.AuthorizationData WHERE login = $1";
         std::vector<std::string> params = {login};
         pqxx::result user_id = db.executeQueryWithParams(get_id, params);
         if (user_id.empty()) {

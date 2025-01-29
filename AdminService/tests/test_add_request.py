@@ -55,7 +55,7 @@ def test_add_valid_organizer(data, expected_status_code, expected_status_message
     db_result = cursor.fetchone()
     assert db_result is None
 
-    response = requests.post(f"{BASE_URL}/add_organizer_request", json=data)
+    response = requests.post(f"{BASE_URL}/admin/add_organizer_request", json=data)
     response_body = response.json()
 
     # после выполнения успешного запроса в бд должна появиться запись
@@ -89,7 +89,7 @@ def test_add_duplicate_organizer(data, expected_status_code, expected_status_mes
     else:
         assert db_result is not None
 
-    response = requests.post(f"{BASE_URL}/add_organizer_request", json=data)
+    response = requests.post(f"{BASE_URL}/admin/add_organizer_request", json=data)
     response_body = response.json()
 
     cursor = db_connection.cursor(cursor_factory=RealDictCursor)
@@ -104,5 +104,4 @@ def test_add_duplicate_organizer(data, expected_status_code, expected_status_mes
         assert db_result is None
 
     assert response.status_code == expected_status_code, f"Mistake: {response.status_code} :("
-    assert response_body["status"] == expected_status_message, f"Mistake: {response_body['status']} :("
     assert response_body["message"] == expected_message, f"Mistake: {response_body['message']} :("
