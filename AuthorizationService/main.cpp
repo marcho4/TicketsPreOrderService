@@ -31,7 +31,7 @@ int main() {
         };
 
         // Подключение к базе данных
-        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=orchestrator host=auth_postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);

@@ -1,26 +1,29 @@
+use std::path::Path;
+use config::File;
 use reqwest::Client;
 use crate::orchestrator::config::Config;
+use config::Config as RustConfig;
+use log::info;
 
 pub struct Orchestrator {
     pub client: Client, // Клиент reqwest для обращения к другим микросервисам
     pub config: Config, // Конфиг для удобной работы с оркестратором
 }
 
-// TODO: Добавить парсинг dotenv файла и заполнять конфиг из него
 impl Orchestrator {
-    pub fn new() -> Orchestrator {
+    pub fn new(config_path: &str) -> Orchestrator {
+        let conf = RustConfig::builder()
+            .add_source(File::from(Path::new(config_path)))
+            .build()
+            .expect("Failed to build config");
+
+        let config= conf.try_deserialize::<Config>()
+            .expect("Failed to deserialize Orchestrator config");
+
+        info!("Orchestrator config: {:?}", config);
         Orchestrator {
             client: Client::new(),
-            // Потом добавлю обработку .env для заполнения конфига
-            config: Config {
-                admin_url: "http://admin:8003".to_string(),
-                frontend_url: "http://localhost:3000".to_string(),
-                base_url: "http://localhost:8000".to_string(),
-                auth_base_url: "http://auth:8002".to_string(),
-                jwt_base_url: "http://jwt:8001".to_string(),
-                organizer_url: "http://organizer:8004".to_string(),
-                email_url: "".to_string(),
-            }
+            config
         }
     }
 }

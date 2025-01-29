@@ -1,12 +1,10 @@
-// components/DataSection.js
 'use client';
 
-import { Suspense, useState } from "react";
+import {Suspense, useEffect, useState} from "react";
 import { useAuth } from "../../providers/authProvider";
 import { createResource } from "../../lib/createResource";
 import ErrorBoundary from "./dataBoundary";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+
 
 const fetchOrganizerData = async (id) => {
     const response = await fetch(`http://localhost:8000/api/organizer/get/${id}`, {
@@ -30,22 +28,6 @@ const fetchOrganizerData = async (id) => {
 
 let organizerResource;
 
-export default function DataSection() {
-    const { user } = useAuth();
-    console.log(user);
-    if (!organizerResource) {
-        organizerResource = createResource(() => fetchOrganizerData(user));
-    }
-
-    return (
-        <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-                <DataDisplay resource={organizerResource} id={user}/>
-            </Suspense>
-        </ErrorBoundary>
-    );
-}
-
 function DataDisplay({ resource }) {
     const data = resource.read();
 
@@ -55,6 +37,7 @@ function DataDisplay({ resource }) {
         email: data.email,
         organization: data.organization,
         tin: data.tin,
+
     });
     const handleEdit = () => {
         setIsEditing(true);
@@ -62,6 +45,7 @@ function DataDisplay({ resource }) {
             email: data.email,
             organization: data.organization,
             tin: data.tin,
+            phone_number: data.phone_number || "",
         });
     };
     const handleChange = (e) => {
@@ -195,17 +179,70 @@ function DataDisplay({ resource }) {
 
 function Loading() {
     return (
-        <div className="flex flex-col min-w-full bg-silver rounded-lg p-4 animate-pulse ">
-            <h1 className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
+        <div className="flex flex-col min-w-full bg-[#cbf3f0] rounded-lg p-4">
+            <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left animate-pulse">
+                My profile
             </h1>
-            <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
+            <div className="text-black/80 text-lg animate-pulse">
+                Manage your profile settings
             </div>
-            <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
-            </div>
-            <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
-            </div>
-            <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
+            <div className="h-[1px] min-w-full bg-black my-5"></div>
+
+            <div className="flex flex-col justify-center min-w-full animate-pulse">
+                <div className="text-2xl font-semibold">Basic info</div>
+
+                <div className="flex flex-col w-full mt-8 animate-pulse">
+                    <div id="labels" className="flex flex-col items-start gap-5">
+                        <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                            <div
+                                className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
+                                Email
+                            </div>
+
+                        </div>
+                        <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                            <div
+                                className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
+                                Organization's Name
+                            </div>
+
+                        </div>
+                        <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                            <div
+                                className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
+                                TIN
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+    );
+}
+
+export default function DataSection() {
+    const {user} = useAuth();
+
+    useEffect(() => {
+
+    }, [user])
+
+    // Пока `user` не определен, показываем загрузку
+    if (!user) {
+        return <Loading />;
+    }
+
+    if (!organizerResource) {
+        organizerResource = createResource(() => fetchOrganizerData(user));
+    }
+
+    return (
+        <ErrorBoundary>
+            <Suspense fallback={<Loading/>}>
+                <DataDisplay resource={organizerResource} id={user}/>
+            </Suspense>
+        </ErrorBoundary>
     );
 }

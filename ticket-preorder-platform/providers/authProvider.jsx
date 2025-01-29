@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
             if (json.data) {
                 setUserRole(json.data.role);
-                setUser(json.data.user_id);
+                setUser(json.data.id);
             }
         } catch (error) {
             console.error('Auth check failed:', error);

@@ -4,32 +4,21 @@ use crate::models::api_response::ApiResponse;
 use crate::orchestrator::orchestrator::Orchestrator;
 
 #[get("/requests")]
-pub async fn get_requests(orch: web::Data<Orchestrator>) -> HttpResponse {
-    let url = "http://admin:8003/pending_requests";
-    let response = orch.client.get(url).send().await;
-    match response {
-        Ok(res) => {
-            let text = res.text().await.unwrap();
-            let res_serialized= serde_json::from_str::<Vec<AdminRequest>>(text.as_str());
-            let serialized = match res_serialized {
-                Ok(serialized) => {serialized},
-                Err(e) => {return HttpResponse::InternalServerError().json(ApiResponse::<String> {
-                    msg: Some(format!("Internal server error: {}", e)),
-                    data: None,
-                })}
-            };
-            HttpResponse::Ok().json(
-                ApiResponse::<Vec<AdminRequest>>  {
-                    msg: Some("Successfully fetched requests".to_string()),
-                    data: Some(serialized),
-                }
-            )
-        },
-        Err(_e) => {HttpResponse::InternalServerError().json(
-            ApiResponse::<String> {
-                msg: Some("Error in admin service".to_string()),
-                data: None
+pub async fn get_requests(orchestrator: web::Data<Orchestrator>) -> HttpResponse {
+    let requests = orchestrator.get_admin_requests().await;
+    if requests.is_ok() {
+        let requests = requests.unwrap();
+        HttpResponse::Ok().json(
+            ApiResponse::<Vec<AdminRequest>>  {
+                msg: Some("Successfully fetched requests".to_string()),
+                data: Some(requests),
             }
-        ) }
+        )
+    } else {
+        let err = requests.err().unwrap();
+        HttpResponse::InternalServerError().json(ApiResponse::<String> {
+            msg: Some("Error happened during the request".to_string()),
+            data: Some(err.to_string())
+        })
     }
 }

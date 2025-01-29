@@ -18,14 +18,14 @@ const getLinksForRole = (role: string) => {
       case "ADMIN":
           return [
               ...commonLinks,
+              { href: '/admin-home', label: 'Admin Panel' },
               { href: '/dashboard', label: 'Dashboard' },
-              { href: '/admin', label: 'Admin Panel' },
-              { href: '/logout', label: 'Logout' },
+              // { href: '/logout', label: 'Logout' },
           ];
       case "ORGANIZER":
           return [
               ...commonLinks,
-              { href: '/dashboard', label: 'Dashboard' },
+              { href: '/organizer', label: 'Dashboard' },
               { href: '/create-event', label: 'Create Event' },
               { href: '/logout', label: 'Logout' },
           ];
@@ -41,11 +41,8 @@ const getLinksForRole = (role: string) => {
           return [
               { href: '/', label: 'Main Page' },
               { href: '/login', label: 'Login' },
-              // для теста админа
-              { href: '/admin-home', label: 'Admin Dashboard'},
               { href: '/organizer', label: 'Organizer Dashboard' },
               { href: '/user', label: 'User Dashboard' }
-
           ];
   }
 };

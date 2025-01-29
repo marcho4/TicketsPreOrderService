@@ -4,7 +4,7 @@ use crate::orchestrator::orchestrator::Orchestrator;
 
 impl Orchestrator {
     pub async fn get_admin_requests(&self) -> Result<Vec<AdminRequest>, actix_web::Error> {
-        let url = "http://admin:8003/pending_requests";
+        let url = format!("{}/pending_requests", self.config.admin_url);
         let response = self.client.get(url).send().await;
 
         match response {

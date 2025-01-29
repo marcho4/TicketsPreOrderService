@@ -135,7 +135,7 @@ const AdminHome = () => {
         <div className="max-w-screen-xl mx-auto py-10">
             <Card className="w-full max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl bg-opacity-90">
                 <CardHeader className="space-y-1 pt-8">
-                    <CardTitle className="text-3xl font-bold text-center">Список заявок</CardTitle>
+                    <CardTitle className="text-3xl font-bold text-center">Список заявок на регистрацию</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">

@@ -4,7 +4,7 @@ use crate::orchestrator::orchestrator::Orchestrator;
 
 impl Orchestrator {
     pub async fn get_org_info(&self, id: String) -> Result<OrganizerInfo, actix_web::Error> {
-        let url = format!("http://organizer:8004/get_account_info/{}", id);
+        let url = format!("{}/get_account_info/{}", self.config.organizer_url, id);
 
         let resp = match self.client.get(&url).send().await {
             Ok(resp) => resp,

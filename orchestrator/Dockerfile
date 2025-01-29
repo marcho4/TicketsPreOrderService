@@ -23,7 +23,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
     
 # Копирование бинарника из этапа сборки
+COPY src/orchestrator/docker.toml /app/docker.toml
+COPY src/orchestrator/dev.toml /app/dev.toml
 COPY --from=builder /app/target/release/orchestrator /app/orchestrator
+
 
 EXPOSE 8000
 CMD ["./orchestrator"]

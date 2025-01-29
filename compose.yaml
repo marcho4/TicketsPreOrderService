@@ -14,6 +14,8 @@ services:
     build:
       context: ./orchestrator
       dockerfile: Dockerfile
+    environment:
+      - RUNNING_IN_DOCKER=true
     ports:
       - "8000:8000"
     networks:
@@ -28,9 +30,9 @@ services:
     networks:
       - main
     depends_on:
-      - postgres
+      - auth_postgres
 
-  postgres:
+  auth_postgres:
     image: postgres:latest
     environment:
       POSTGRES_USER: postgres
@@ -40,7 +42,17 @@ services:
       - "5432:5432"
     networks:
       - main
-
+  
+  admin_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    ports:
+      - "5435:5435"
+    networks:
+      - main
 
   admin:
     build:
@@ -51,7 +63,7 @@ services:
     networks:
       - main
     depends_on:
-      - postgres
+      - admin_postgres
 
   organizer:
     build:
@@ -62,29 +74,18 @@ services:
     networks:
       - main
     depends_on:
-      - postgres
+      - org_postgres
   
-  # zookeeper:
-  #   image: confluentinc/cp-zookeeper:latest
-  #   environment:
-  #     ZOOKEEPER_CLIENT_PORT: 2181
-  #     ZOOKEEPER_TICK_TIME: 2000
-  #   ports:
-  #     - "2181:2181"
-
-  # kafka:
-  #   image: confluentinc/cp-kafka:latest
-  #   depends_on:
-  #     - zookeeper
-  #   ports:
-  #     - "9092:9092"
-  #   environment:
-  #     KAFKA_BROKER_ID: 1
-  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-  #     KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
-
+  org_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    ports:
+      - "5434:5434"
+    networks:
+      - main
 
 networks:
   main:

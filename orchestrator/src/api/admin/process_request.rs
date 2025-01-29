@@ -1,4 +1,4 @@
-use actix_web::{post, web, HttpResponse};
+use actix_web::{post, web, Error, HttpResponse};
 use actix_web::error::{ErrorBadRequest, ErrorInternalServerError};
 use log::info;
 use serde_json::json;
@@ -15,9 +15,16 @@ use crate::orchestrator::orchestrator::Orchestrator;
 pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Data<Orchestrator>) -> HttpResponse {
     let json_body = data.into_inner();
 
-    let requests = orch.get_admin_requests().await.map_err(|e|
-        return ErrorInternalServerError(e)).unwrap();
+    // Getting requests from admin service
+    let requests = match orch.get_admin_requests().await {
+        Ok(requests) => {requests},
+        Err(e) => {return HttpResponse::InternalServerError().json(ApiResponse::<String> {
+            msg: Some("Error while getting admin requests".to_string()),
+            data: Some(e.to_string()),
+        })}
+    };
 
+    // Filtering out request with id, passed into request
     let request_info = requests.iter()
         .find(|request| request.request_id == json_body.request_id);
 
@@ -29,6 +36,7 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
     }
 
     info!("Request data: {:?}", request_info.unwrap());
+
     let url = "http://admin:8003/process_organizer".to_string();
     let response = orch.client.post(url).json(&json_body).send().await;
 
@@ -73,6 +81,7 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
             Err(_e) => { return HttpResponse::InternalServerError().json(ApiResponse::<String> {
                 msg: Some("Error while creating organizer".to_string()), data: None })}
         };
+        let org_id = data.data.id;
 
         // Approve registration
         let approve_url = "http://auth:8002/organizer/approve";
@@ -92,7 +101,8 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
         )).unwrap();
 
         match approve_response.json::<OrgApproveResponse>().await {
-            Ok(resp) => {HttpResponse::Ok().json(ApiResponse::<OrgApproveResponse> {
+            Ok(resp) => {
+                HttpResponse::Ok().json(ApiResponse::<OrgApproveResponse> {
                 msg: Some("Success".to_string()),
                 data: Some(resp)
             })},

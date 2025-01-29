@@ -1,4 +1,5 @@
 use actix_web::{post, web, HttpRequest, HttpResponse};
+use log::info;
 use crate::models::api_response::ApiResponse;
 use crate::models::organizer_registration_data::OrganizerRegistrationData;
 use crate::models::registration_err_org::RegistrationErrorOrg;
@@ -11,7 +12,7 @@ pub async fn register_organizer(
     data: web::Json<OrganizerRegistrationData>,
     _req: HttpRequest
 ) -> HttpResponse {
-    let url = format!("{}/organizer/register", orchestrator.config.auth_base_url);
+    let url = format!("{}/organizer/register", orchestrator.config.auth_url);
     let data = data.into_inner();
     let response = orchestrator.client.post(&url).json(&data).send().await;
 
@@ -51,7 +52,7 @@ pub async fn register_organizer(
     let admin_resp = orchestrator.client.post(&admin_req_url)
         .json(&data).send().await;
 
-
+    // info!("admin response: {:?}", admin_resp.unwrap().text().await);
     if !admin_resp.unwrap().status().is_success() {
         return HttpResponse::InternalServerError().json(ApiResponse::<String> {
             msg: Some("Error happened during admin request".to_string()),
