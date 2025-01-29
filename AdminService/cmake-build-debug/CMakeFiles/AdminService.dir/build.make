@@ -83,19 +83,19 @@ CMakeFiles/AdminService.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/AdminService.dir/main.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/main.cpp -o CMakeFiles/AdminService.dir/main.cpp.s
 
-CMakeFiles/AdminService.dir/src/processRequests.cpp.o: CMakeFiles/AdminService.dir/flags.make
-CMakeFiles/AdminService.dir/src/processRequests.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/processRequests.cpp
-CMakeFiles/AdminService.dir/src/processRequests.cpp.o: CMakeFiles/AdminService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AdminService.dir/src/processRequests.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/AdminService.dir/src/processRequests.cpp.o -MF CMakeFiles/AdminService.dir/src/processRequests.cpp.o.d -o CMakeFiles/AdminService.dir/src/processRequests.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/processRequests.cpp
+CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o: CMakeFiles/AdminService.dir/flags.make
+CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/api/RequestsHandler.cpp
+CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o: CMakeFiles/AdminService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o -MF CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o.d -o CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/api/RequestsHandler.cpp
 
-CMakeFiles/AdminService.dir/src/processRequests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/AdminService.dir/src/processRequests.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/processRequests.cpp > CMakeFiles/AdminService.dir/src/processRequests.cpp.i
+CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/api/RequestsHandler.cpp > CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.i
 
-CMakeFiles/AdminService.dir/src/processRequests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/AdminService.dir/src/processRequests.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/processRequests.cpp -o CMakeFiles/AdminService.dir/src/processRequests.cpp.s
+CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/api/RequestsHandler.cpp -o CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.s
 
 CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.o: CMakeFiles/AdminService.dir/flags.make
 CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/postgres/PostgresProcessing.cpp
@@ -114,14 +114,14 @@ CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.s: cmake_force
 # Object files for target AdminService
 AdminService_OBJECTS = \
 "CMakeFiles/AdminService.dir/main.cpp.o" \
-"CMakeFiles/AdminService.dir/src/processRequests.cpp.o" \
+"CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o" \
 "CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.o"
 
 # External object files for target AdminService
 AdminService_EXTERNAL_OBJECTS =
 
 AdminService: CMakeFiles/AdminService.dir/main.cpp.o
-AdminService: CMakeFiles/AdminService.dir/src/processRequests.cpp.o
+AdminService: CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o
 AdminService: CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.o
 AdminService: CMakeFiles/AdminService.dir/build.make
 AdminService: /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib

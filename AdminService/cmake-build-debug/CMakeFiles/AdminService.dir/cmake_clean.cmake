@@ -3,10 +3,10 @@ file(REMOVE_RECURSE
   "AdminService.pdb"
   "CMakeFiles/AdminService.dir/main.cpp.o"
   "CMakeFiles/AdminService.dir/main.cpp.o.d"
+  "CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o"
+  "CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o.d"
   "CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.o"
   "CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.o.d"
-  "CMakeFiles/AdminService.dir/src/processRequests.cpp.o"
-  "CMakeFiles/AdminService.dir/src/processRequests.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -9,8 +9,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/main.cpp" "CMakeFiles/AdminService.dir/main.cpp.o" "gcc" "CMakeFiles/AdminService.dir/main.cpp.o.d"
+  "/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/api/RequestsHandler.cpp" "CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o" "gcc" "CMakeFiles/AdminService.dir/src/api/RequestsHandler.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/postgres/PostgresProcessing.cpp" "CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.o" "gcc" "CMakeFiles/AdminService.dir/src/postgres/PostgresProcessing.cpp.o.d"
-  "/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/processRequests.cpp" "CMakeFiles/AdminService.dir/src/processRequests.cpp.o" "gcc" "CMakeFiles/AdminService.dir/src/processRequests.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
