@@ -1,3 +1,4 @@
+#define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <iostream>
 #include "libraries/httplib.h"
 #include "src/OrganizerRegistration/RegistrationOrganizerManager.h"
@@ -8,7 +9,7 @@
 
 int main() {
     try {
-        httplib::Server server;
+        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
 
         // Обработчик preflight OPTIONS запросов
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {

@@ -1,3 +1,4 @@
+#define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <iostream>
 #include "libraries/httplib.h"
 #include "src/postgres/PostgresProcessing.h"
@@ -7,7 +8,7 @@
 
 int main() {
     try {
-        httplib::Server server;
+        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -58,7 +59,7 @@ int main() {
 
         });
 
-        std::cout << "Server is listening http://localhost:8001" << '\n';
+        std::cout << "Server is listening https://localhost:8001" << '\n';
         server.listen("localhost", 8001);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';

@@ -1,3 +1,4 @@
+#define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <iostream>
 #include "libraries/httplib.h"
 #include "src/OrganizerAccountCRUD/CreateOrganizerAccount.h"
@@ -8,24 +9,9 @@
 
 int main() {
     try {
-        httplib::Server server;
-        server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
-            res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
-            res.set_header("Access-Control-Allow-Credentials", "true");
-            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-            res.set_header("Content-Type", "application/json");
-            res.status = 200;
-        });
-
-        auto set_cors_headers = [&](httplib::Response& res) {
-            res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
-            res.set_header("Access-Control-Allow-Credentials", "true");
-            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-            res.set_header("Content-Type", "application/json");
-        };
-        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
+        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
+        // инициализация хоста и порта для подключения
+        std::string connect = "dbname=organizer_personal_account host=localhost port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/organizer_personal_account.sql");
         pqxx::connection C(connect);
