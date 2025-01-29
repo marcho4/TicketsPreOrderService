@@ -1,5 +1,4 @@
 use actix_web::{post, web, HttpRequest, HttpResponse};
-use log::info;
 use crate::models::api_response::ApiResponse;
 use crate::models::organizer_registration_data::OrganizerRegistrationData;
 use crate::models::registration_err_org::RegistrationErrorOrg;
