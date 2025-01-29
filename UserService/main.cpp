@@ -1,22 +1,11 @@
-#define CPPHTTPLIB_OPENSSL_SUPPORT
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/rotating_file_sink.h>
 #include <iostream>
 #include "libraries/httplib.h"
 #include "src/postgres/PostgresProcessing.h"
 #include "src/api/UserAccountCRUD/CreateAccount.h"
-#include "src/api/UserAccountCRUD/UpdateAccount.h"
-#include "src/api/UserAccountCRUD/GetAccountData.h"
 
 int main() {
-
-    auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/user_service.log", 1048576 * 5, 3);
-    logger->flush_on(spdlog::level::info);
-    spdlog::set_default_logger(logger);
-    spdlog::info("Логгер успешно создан!");
-
     try {
-        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
+        httplib::Server server;
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -44,20 +33,17 @@ int main() {
 
         server.Post("/user/create_account", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-            spdlog::info("Получен запрос на создание аккаунта пользователя");
             AccountCreator::CreateUserAccountRequest(request, res, db);
         });
 
         server.Put("/user/:id/update_account", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-            spdlog::info("Получен запрос на обновление аккаунта пользователя:");
-            AccountUpdator::UpdateUserAccountRequest(request, res, db);
+
         });
 
         server.Get("/user/:id/get_account_info", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-            spdlog::info("Получен запрос на получение данных пользователя:");
-            DataProvider::GetUserAccountDataRequest(request, res, db);
+
         });
 
         server.Get("/user/:id/get_match_history", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
@@ -70,8 +56,8 @@ int main() {
 
         });
 
-        std::cout << "Server is listening https://localhost:8001" << '\n';
-        server.listen("localhost", 8001);
+        std::cout << "Server is listening http://localhost:8081" << '\n';
+        server.listen("localhost", 8081);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }
