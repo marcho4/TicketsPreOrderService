@@ -6,7 +6,7 @@
 
 int main() {
     try {
-        httplib::Server server;
+        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
         std::string connect = "dbname=pending_organizers host=localhost port=5432";
         Database db(connect);
         db.initDbFromFile("/Users/nazarzakrevskij/TicketsPreOrderService/AdminService/src/postgres/pending_organizers.sql");
