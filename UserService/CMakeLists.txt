@@ -13,6 +13,8 @@ set(SOURCE_FILES
         src/ErrorHandler.h
         src/api/MatchHistory/GetMatchHistory.cpp
         src/api/MatchHistory/GetMatchHistory.h
+        src/api/UserAccountCRUD/UpdateAccount.cpp
+        src/api/UserAccountCRUD/UpdateAccount.h
         libraries/Bcrypt.cpp/src/bcrypt.cpp
         libraries/Bcrypt.cpp/include/bcrypt.h
         libraries/Bcrypt.cpp/src/blowfish.cpp

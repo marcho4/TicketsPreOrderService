@@ -249,6 +249,30 @@ src/api/UserAccountCRUD/CreateAccount.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.s
 .PHONY : src/api/UserAccountCRUD/CreateAccount.cpp.s
 
+src/api/UserAccountCRUD/UpdateAccount.o: src/api/UserAccountCRUD/UpdateAccount.cpp.o
+.PHONY : src/api/UserAccountCRUD/UpdateAccount.o
+
+# target to build an object file
+src/api/UserAccountCRUD/UpdateAccount.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o
+.PHONY : src/api/UserAccountCRUD/UpdateAccount.cpp.o
+
+src/api/UserAccountCRUD/UpdateAccount.i: src/api/UserAccountCRUD/UpdateAccount.cpp.i
+.PHONY : src/api/UserAccountCRUD/UpdateAccount.i
+
+# target to preprocess a source file
+src/api/UserAccountCRUD/UpdateAccount.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.i
+.PHONY : src/api/UserAccountCRUD/UpdateAccount.cpp.i
+
+src/api/UserAccountCRUD/UpdateAccount.s: src/api/UserAccountCRUD/UpdateAccount.cpp.s
+.PHONY : src/api/UserAccountCRUD/UpdateAccount.s
+
+# target to generate assembly for a file
+src/api/UserAccountCRUD/UpdateAccount.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.s
+.PHONY : src/api/UserAccountCRUD/UpdateAccount.cpp.s
+
 src/postgres/PostgresProcessing.o: src/postgres/PostgresProcessing.cpp.o
 .PHONY : src/postgres/PostgresProcessing.o
 
@@ -297,6 +321,9 @@ help:
 	@echo "... src/api/UserAccountCRUD/CreateAccount.o"
 	@echo "... src/api/UserAccountCRUD/CreateAccount.i"
 	@echo "... src/api/UserAccountCRUD/CreateAccount.s"
+	@echo "... src/api/UserAccountCRUD/UpdateAccount.o"
+	@echo "... src/api/UserAccountCRUD/UpdateAccount.i"
+	@echo "... src/api/UserAccountCRUD/UpdateAccount.s"
 	@echo "... src/postgres/PostgresProcessing.o"
 	@echo "... src/postgres/PostgresProcessing.i"
 	@echo "... src/postgres/PostgresProcessing.s"
