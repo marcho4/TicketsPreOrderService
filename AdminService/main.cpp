@@ -1,9 +1,7 @@
 #include <iostream>
 #include "../libraries/httplib.h"
 #include "src/postgres/PostgresProcessing.h"
-#include "src/processRequests.h"
-
-ProcessRequests processing;
+#include "src/api/RequestsHandler.h"
 
 int main() {
     try {
@@ -32,19 +30,16 @@ int main() {
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
-        server.Get("/pending_requests", [&db, &set_cors_headers](const httplib::Request& req, httplib::Response& res) {
-            set_cors_headers(res);
-            processing.GetOrganizersRequest(req, res, db);
+        server.Get("admin/pending_requests", [&](const httplib::Request& req, httplib::Response& res) {
+            GetRequests::GetOrganizersRequestList(req, res, db);
         });
 
-        server.Post("/process_organizer", [&db, &set_cors_headers](const httplib::Request& req, httplib::Response& res) {
-            set_cors_headers(res);
-            processing.ProcessOrganizerRequest(req, res, db);
+        server.Post("admin/process_organizer", [&](const httplib::Request& req, httplib::Response& res) {
+            ProcessRequest::ProcessOrganizerRequest(req, res, db);
         });
 
-        server.Post("/add_organizer_request", [&db, &set_cors_headers](const httplib::Request& req, httplib::Response& res) {
-            set_cors_headers(res);
-            processing.AddOrganizerRequest(req, res, db);
+        server.Post("admin/add_organizer_request", [&](const httplib::Request& req, httplib::Response& res) {
+            AddRequest::AddOrganizerRequest(req, res, db);
         });
 
         server.Get("/is_working", [&db, &set_cors_headers](const httplib::Request& req, httplib::Response& res) {
