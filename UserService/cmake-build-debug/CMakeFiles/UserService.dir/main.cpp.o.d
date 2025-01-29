@@ -1118,4 +1118,6 @@ CMakeFiles/UserService.dir/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/forward_list \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/valarray \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/any \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/../../postgres/PostgresProcessing.h
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/../../postgres/PostgresProcessing.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/../../utils/ValidDataChecker.h
