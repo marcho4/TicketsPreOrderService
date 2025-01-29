@@ -42,11 +42,9 @@ void AddRequest::AddOrganizerRequest(const httplib::Request& req, httplib::Respo
     AdminData admin_data = AdminData::GetAdminDataFromRequest(req);
 
     if (CheckOrganizerExistence(admin_data, db)) {
-        ErrorHandler::sendError(res, 400, "Organizer with this email already exists");
+        ErrorHandler::sendError(res, 409, "Organizer with this email already exists");
         return;
     }
 
     AddOrganizerRequestToDB(admin_data, db);
-    res.status = 200;
-    res.set_content(json{{"status", "success"}, {"message", "Organizer request added"}}.dump(), "application/json");
 }
