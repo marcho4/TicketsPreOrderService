@@ -6,14 +6,15 @@
 class GetRequests {
     using json = nlohmann::json;
 
-    pqxx::result GetListSQL(Database& db) {
+    static pqxx::result GetListSQL(Database& db) {
         std::string query = "SELECT request_id, company, email, tin FROM Organizers.OrganizerRequests WHERE status = $1";
-        std::vector<std::string> params = {"PENDING"};
+        std::string type = "PENDING";
+        std::vector<std::string> params = {type};
         pqxx::result response = db.executeQueryWithParams(query, params);
         return response;
     }
 
-    json GetListJSON(pqxx::result& response) {
+    static json GetListJSON(pqxx::result& response) {
         json json_body = json::array();
 
         for (const auto& row : response) {
@@ -24,6 +25,7 @@ class GetRequests {
             request["tin"] = row["tin"].as<std::string>();
             json_body.push_back(request);
         }
+        return json_body;
     }
 
 public:
@@ -45,16 +47,16 @@ class AddRequest {
         }
     };
 
-    bool CheckOrganizerExistence(AdminData& admin_data, Database& db) {
-        std::string query = "SELECT * FROM Organizers.OrganizerRequests WHERE email = $2";
-        std::vector<std::string> params = { admin_data.email};
+    static bool CheckOrganizerExistence(AdminData& admin_data, Database& db) {
+        std::string query = "SELECT * FROM Organizers.OrganizerRequests WHERE email = $1";
+        std::vector<std::string> params = {admin_data.email};
 
         pqxx::result response = db.executeQueryWithParams(query, params);
 
         return !response.empty();
     }
 
-    void AddOrganizerRequestToDB(AdminData& admin_data, Database& db) {
+    static void AddOrganizerRequestToDB(AdminData& admin_data, Database& db) {
         std::string query = "INSERT INTO Organizers.OrganizerRequests (company, email, tin, status) VALUES ($1, $2, $3, $4)";
         std::vector<std::string> params = {admin_data.company, admin_data.email, admin_data.tin, "PENDING"};
 
@@ -80,13 +82,13 @@ class ProcessRequest {
         }
     };
 
-    void ApproveQuery(std::string& request_id, Database& db) {
+    static void ApproveQuery(std::string& request_id, Database& db) {
         std::string update_query = "UPDATE Organizers.OrganizerRequests SET status = $1 WHERE request_id = $2";
         std::vector<std::string> params = {"APPROVED", request_id};
         db.executeQueryWithParams(update_query, params);
     }
 
-    void RejectQuery(std::string& request_id, Database& db) {
+    static void RejectQuery(std::string& request_id, Database& db) {
         std::string update_query = "UPDATE Organizers.OrganizerRequests SET status = $1 WHERE request_id = $2";
         std::vector<std::string> params = {"REJECTED", request_id};
         db.executeQueryWithParams(update_query, params);
@@ -95,6 +97,6 @@ class ProcessRequest {
 public:
     static void ProcessOrganizerRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
-    pqxx::result GetPersonalData(const std::string& request_id, Database& db);
+    static pqxx::result GetPersonalData(const std::string& request_id, Database& db);
 };
 
