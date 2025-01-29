@@ -2001,7 +2001,78 @@ CMakeFiles/UserService.dir/main.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderSer
   /opt/homebrew/opt/libpqxx/include/pqxx/types.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/util.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/version.hxx \
-  /opt/homebrew/opt/libpqxx/include/pqxx/zview.hxx
+  /opt/homebrew/opt/libpqxx/include/pqxx/zview.hxx \
+  /opt/homebrew/opt/openssl@3/include/openssl/asn1.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/asn1err.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/async.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/asyncerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/bio.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/bioerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/bn.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/bnerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/buffer.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/buffererr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/comp.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/comperr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/conf.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/conferr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/configuration.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/conftypes.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/core.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/core_dispatch.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/crypto.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/cryptoerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/cryptoerr_legacy.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/ct.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/cterr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/dh.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/dherr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/dsa.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/dsaerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/dtls1.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/e_os2.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/e_ostime.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/ec.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/ecerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/err.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/evp.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/evperr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/hmac.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/http.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/indicator.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/lhash.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/macros.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/obj_mac.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/objects.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/objectserr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/opensslconf.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/opensslv.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/params.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/pem.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/pemerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/pkcs7.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/pkcs7err.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/prov_ssl.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/quic.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/rsa.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/rsaerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/safestack.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/sha.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/srtp.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/ssl.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/ssl2.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/ssl3.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/sslerr.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/sslerr_legacy.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/stack.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/symhacks.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/tls1.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/types.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/x509.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/x509_vfy.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/x509err.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/x509v3.h \
+  /opt/homebrew/opt/openssl@3/include/openssl/x509v3err.h
 
 CMakeFiles/UserService.dir/src/api/MatchHistory/GetMatchHistory.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/MatchHistory/GetMatchHistory.cpp
 
@@ -6402,6 +6473,88 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/MatchHistory/GetMatchHistory.cpp:
 
+/opt/homebrew/opt/openssl@3/include/openssl/x509v3err.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/x509v3.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/x509_vfy.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/x509.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/types.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/tls1.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/symhacks.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/stack.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/sslerr.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/ssl3.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/ssl2.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/ssl.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/sha.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/safestack.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/rsaerr.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/quic.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/prov_ssl.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/pem.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/params.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/objects.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/macros.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/lhash.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/evp.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/err.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/ecerr.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/e_ostime.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/dsaerr.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/dherr.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/cryptoerr.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/dtls1.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/crypto.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/core_dispatch.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/core.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/conftypes.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/configuration.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/conferr.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/conf.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/buffer.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/bio.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/asyncerr.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/asn1.h:
+
 /opt/homebrew/opt/libpqxx/include/pqxx/zview.hxx:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/types.hxx:
@@ -6413,6 +6566,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /opt/homebrew/opt/libpqxx/include/pqxx/transaction_base.hxx:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/transaction.hxx:
+
+/opt/homebrew/opt/openssl@3/include/openssl/http.h:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/time.hxx:
 
@@ -6452,9 +6607,13 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /opt/homebrew/opt/libpqxx/include/pqxx/config-public-compiler.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/dh.h:
+
 /opt/homebrew/opt/libpqxx/include/pqxx/composite.hxx:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/binarystring.hxx:
+
+/opt/homebrew/opt/openssl@3/include/openssl/srtp.h:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx:
 
@@ -6572,6 +6731,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__system_error/error_category.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/opensslconf.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/transform_view.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/take_view.h:
@@ -6646,6 +6807,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__random/discard_block_engine.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/bioerr.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__random/clamp_to_integral.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/netinet/in.h:
@@ -6673,6 +6836,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/exclusive_scan.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__mutex/tag_types.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/ec.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/temp_value.h:
 
@@ -6789,6 +6954,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /opt/homebrew/opt/libpqxx/include/pqxx/field.hxx:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/tables.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/hmac.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__charconv/from_chars_result.h:
 
@@ -6992,6 +7159,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_mach_port_t.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/comperr.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_caddr_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/mach/arm/_structs.h:
@@ -7075,6 +7244,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__utility/exception_guard.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/algorithm:
+
+/opt/homebrew/opt/openssl@3/include/openssl/pemerr.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__utility/swap.h:
 
@@ -7174,6 +7345,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/make_signed.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/evperr.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__random/knuth_b.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__verbose_abort:
@@ -7219,6 +7392,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_trivially_destructible.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_trivially_copyable.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/cterr.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_starts_with.h:
 
@@ -7301,6 +7476,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_enum.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_core_convertible.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/objectserr.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_remove_if.h:
 
@@ -7471,6 +7648,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_scoped_enum.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/uses_allocator_construction.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/dsa.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/uses_allocator.h:
 
@@ -7676,6 +7855,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__concepts/swappable.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/buffererr.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_int64_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__assert:
@@ -7702,6 +7883,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__concepts/destructible.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/cryptoerr_legacy.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/distance.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/any:
@@ -7711,6 +7894,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/postgres/PostgresProcessing.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/enable_insertable.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/bnerr.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/prev_permutation.h:
 
@@ -7754,6 +7939,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__compare/compare_weak_order_fallback.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/pkcs7.h:
+
 /opt/homebrew/opt/libpqxx/include/pqxx/range.hxx:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/indirectly_comparable.h:
@@ -7789,6 +7976,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/mergeable.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__chrono/system_clock.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/obj_mac.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_equality_comparable.h:
 
@@ -7858,6 +8047,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__bit/bit_log2.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/bn.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_abstract.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/move.h:
@@ -7884,6 +8075,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__atomic/check_memory_order.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/pkcs7err.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/ratio:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/has_virtual_destructor.h:
@@ -7901,6 +8094,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/remove_const.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__atomic/atomic_init.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/indicator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/counted.h:
 
@@ -8006,6 +8201,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/remove_copy.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/e_os2.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_unique.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/utility:
@@ -8057,6 +8254,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_replace_copy.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/add_rvalue_reference.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/ct.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_replace.h:
 
@@ -8204,6 +8403,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__compare/is_eq.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/sslerr_legacy.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityVersions.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/malloc/_malloc.h:
@@ -8299,6 +8500,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_backends/cpu_backends/transform_reduce.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_backends/cpu_backends/stable_sort.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/x509err.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_types/_uintmax_t.h:
 
@@ -8510,6 +8713,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/cpp17_iterator_concepts.h:
 
+/opt/homebrew/opt/openssl@3/include/openssl/rsa.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/partial_sort_copy.h:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/internal/statement_parameters.hxx:
@@ -8519,6 +8724,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/move_iterator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__iterator/iterator_traits.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/asn1err.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_backends/cpu_backends/for_each.h:
 
@@ -8543,6 +8750,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_sort.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_pod.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/opensslv.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/wctype.h:
 
@@ -8581,6 +8790,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__compare/compare_three_way_result.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sched.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/comp.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_compound.h:
 
@@ -8635,6 +8846,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/remove.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_specialization.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/async.h:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/errorhandler.hxx:
 
