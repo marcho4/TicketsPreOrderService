@@ -37,19 +37,16 @@ int main() {
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
-        // Маршрут для регистрации организатора
         server.Post("/organizer/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             OrganizerRegistrationManager::RegisterOrganizerRequest(request, res, db);
         });
 
-        // Маршрут для регистрации пользователя
         server.Post("/user/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             UserRegistration::RegisterUserRequest(request, res, db);
         });
 
-        // Маршрут для авторизации
         server.Post("/authorize", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             AuthorizationManager::AuthorizationRequest(request, res, db);
@@ -61,7 +58,6 @@ int main() {
             OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
         });
 
-        // Маршрут для проверки работы сервера
         server.Get("/is_working", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             res.status = 200;
