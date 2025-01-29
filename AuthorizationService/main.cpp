@@ -5,7 +5,6 @@
 #include "src/Authorization/AuthorizationManager.h"
 #include "src/Admin/AdminAuthorization.h"
 #include "src/Admin/AdminCreation.h"
-#include "src/UserRegistration/RegistrationUserManager.h"
 
 int main() {
     try {
@@ -30,8 +29,7 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        // Подключение к базе данных
-        std::string connect = "dbname=orchestrator host=auth_postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
@@ -52,8 +50,7 @@ int main() {
             AuthorizationManager::AuthorizationRequest(request, res, db);
         });
 
-        // Маршрут для подтверждения авторизации организатора
-        server.Post("/organizer/approve", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/authorize_approved", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
         });

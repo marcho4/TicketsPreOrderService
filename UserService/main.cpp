@@ -2,8 +2,6 @@
 #include "libraries/httplib.h"
 #include "src/postgres/PostgresProcessing.h"
 #include "src/api/UserAccountCRUD/CreateAccount.h"
-#include "src/api/UserAccountCRUD/UpdateAccount.h"
-#include "src/api/UserAccountCRUD/GetAccountData.h"
 
 int main() {
     try {
@@ -40,12 +38,12 @@ int main() {
 
         server.Put("/user/:id/update_account", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-            AccountUpdator::UpdateUserAccountRequest(request, res, db);
+
         });
 
         server.Get("/user/:id/get_account_info", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-            DataProvider::GetUserAccountDataRequest(request, res, db);
+
         });
 
         server.Get("/user/:id/get_match_history", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
@@ -58,8 +56,8 @@ int main() {
 
         });
 
-        std::cout << "Server is listening http://localhost:8001" << '\n';
-        server.listen("localhost", 8001);
+        std::cout << "Server is listening http://localhost:8081" << '\n';
+        server.listen("localhost", 8081);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }
