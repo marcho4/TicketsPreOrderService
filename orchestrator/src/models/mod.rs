@@ -16,3 +16,5 @@ pub mod org_creation_response;
 pub mod org_approve_body;
 pub mod org_approve_response;
 pub mod create_org_data;
+pub mod update_org_data;
+pub mod message_resp;

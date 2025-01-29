@@ -14,6 +14,7 @@ const config: Config = {
   			background: '#F4F4F4',
 			silver: "#BDBDBD",
 			accent: "#FCA311",
+			"dark-grey": "#333333",
 			green_accent: "#66BB6A",
 			deep_blue: "#22223B",
 			"moon-blue": "#4A4E69",
@@ -21,7 +22,6 @@ const config: Config = {
 			"beige": "#C9ADA7",
 			"light-beige": "#F2E9E4",
 			my_black: "#121212",
-			'dark-grey': "#333333",
 			white_smoke: "#F4F4F4",
   			foreground: 'hsl(var(--foreground))',
   			card: {

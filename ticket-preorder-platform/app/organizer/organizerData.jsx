@@ -4,6 +4,8 @@ import {Suspense, useEffect, useState} from "react";
 import { useAuth } from "../../providers/authProvider";
 import { createResource } from "../../lib/createResource";
 import ErrorBoundary from "./dataBoundary";
+import {Pencil} from "lucide-react";
+import {id} from "date-fns/locale";
 
 
 const fetchOrganizerData = async (id) => {
@@ -19,10 +21,10 @@ const fetchOrganizerData = async (id) => {
     const body = await response.json();
 
     return {
-        email: body.email,
-        tin: body.tin,
-        phone_number: body.phone_number,
-        organization: body.organization_name,
+        email: body.data.email,
+        tin: body.data.tin,
+        phone_number: body.data.phone_number,
+        organization: body.data.organization_name,
     };
 };
 
@@ -30,6 +32,7 @@ let organizerResource;
 
 function DataDisplay({ resource }) {
     const data = resource.read();
+    console.log(data);
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -45,7 +48,7 @@ function DataDisplay({ resource }) {
             email: data.email,
             organization: data.organization,
             tin: data.tin,
-            phone_number: data.phone_number || "",
+            phone_number: data.phone_number,
         });
     };
     const handleChange = (e) => {
@@ -57,7 +60,16 @@ function DataDisplay({ resource }) {
     };
     const handleSave = async () => {
         try {
-            console.log("Сохраняем данные в API (фейк-запрос):", formData);
+            let resp = await fetch(`http://localhost:8000/api/organizer/update/${id}`, {
+                method: "POST",
+                credentials: "include",
+                body: ({
+                    email: data.email,
+                    phone_number: data.phone_number,
+                    organization_name: data.organization,
+                })
+            })
+            console.log(await resp.json());
             setIsEditing(false);
         } catch (error) {
             console.error("Ошибка при сохранении:", error);
@@ -69,154 +81,163 @@ function DataDisplay({ resource }) {
             email: data.email,
             organization: data.organization,
             tin: data.tin,
+            phone_number: data.phone_number,
         });
         setIsEditing(false);
     };
 
     return (
-        <div className="flex flex-col min-w-full bg-[#cbf3f0] rounded-lg p-4">
-            <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left">
-                My profile
-            </h1>
-            <div className="text-black/80 text-lg">
-                Manage your profile settings
+        <div className="flex flex-col min-w-full bg-silver rounded-lg p-4 gap-5">
+            <div className="border-2 border-deep_blue/40 px-5 py-5 rounded-lg">
+                <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
+                    My profile
+                </h1>
+                <div className="text-black/80 text-lg px-4">
+                    Manage your profile settings
+                </div>
             </div>
-            <div className="h-[1px] min-w-full bg-black my-5"></div>
+            <div className="border-2 border-deep_blue/40 px-5 py-4 rounded-lg">
+                {!isEditing ? (
+                    <div className="flex flex-col justify-center min-w-full">
+                        <div className="flex flex-row items-center justify-between mt-4">
+                            <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
+                            <button className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
+                            flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300"
+                                    onClick={handleEdit}>
+                                <Pencil className="mr-2"/> Edit
+                            </button>
+                        </div>
 
-            {!isEditing && (
-                <div className="flex flex-col justify-center min-w-full">
-                    <div className="text-2xl font-semibold">Basic info</div>
-
-                    <div className="flex flex-col w-full mt-8">
-                        <div id="labels" className="flex flex-col items-start gap-5">
-                            <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                                <div
-                                    className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
-                                    My email
+                        <div className="flex flex-col w-full mt-8">
+                            <div id="labels" className="flex flex-col items-start gap-5">
+                                <div className="flex flex-col w-full mt-6 space-y-4">
+                                    {[
+                                        {label: "Email", value: data.email},
+                                        {label: "Organization's Name", value: data.organization},
+                                        {label: "Phone Number", value: data.phone_number},
+                                        {label: "TIN", value: data.tin},
+                                    ].map((item, index) => (
+                                        <div key={index}
+                                            className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                            <div
+                                                className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                                {item.label}
+                                            </div>
+                                            <div
+                                                className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
+                                                {item.value}
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                                <input
-                                    placeholder="tin here"
-                                    className="w-2/3 text-xl rounded-lg px-4 py-2 h-full border border-gray-300"
-                                />
-                            </div>
-                            <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                                <div
-                                    className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
-                                    My Organization's Name
-                                </div>
-                                <input
-                                    placeholder="tin here"
-                                    className="w-2/3 text-xl rounded-lg px-4 py-2 h-full border border-gray-300"
-                                />
-                            </div>
-                            <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                                <div
-                                    className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
-                                    My TIN
-                                </div>
-                                <input
-                                    placeholder="tin here"
-                                    className="w-2/3 text-xl rounded-lg px-4 py-2 h-full border border-gray-300"
-                                />
                             </div>
                         </div>
                     </div>
-                    <button className="bg-deep_blue text-xl text-white w-full max-w-80 mt-10 p-2 rounded-lg"
-                            onClick={handleEdit}>
-                        Change information
-                    </button>
-                </div>
-            )}
+                ) : (
+                    <div className="flex flex-col justify-center min-w-full">
+                        <div className="flex flex-row items-center justify-between mt-4">
+                            <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
+                            <button className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
+                            flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300"
+                                    onClick={handleEdit}>
+                                <Pencil className="mr-2"/> Edit
+                            </button>
+                        </div>
 
-            {isEditing && (
-                <>
-                    <div className="min-w-full text-xl mb-2">
-                        <label className="block font-semibold text-gray-900 mb-1">Email:</label>
-                        <input
-                            className="w-full p-2 border border-gray-300 rounded"
-                            type="text"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
+                        <div className="flex flex-col w-full mt-8">
+                            <div id="labels" className="flex flex-col items-start gap-5">
+                                <div className="flex flex-col w-full mt-6 space-y-4">
+                                    {[
+                                        {label: "Email", value: data.email},
+                                        {label: "Organization's Name", value: data.organization},
+                                        {label: "Phone Number", value: data.phone_number},
+                                    ].map((item, index) => (
+                                        <div key={index}
+                                             className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                            <div
+                                                className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                                {item.label}
+                                            </div>
+                                            <input
+                                                placeholder={item.value}
+                                                className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
+                                            </input>
+                                        </div>
+                                    ))}
+                                    <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                        <div
+                                            className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                            TIN
+                                        </div>
+                                        <div
+                                            className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
+                                            {data.tin}
+                                        </div>
+                                    </div>
+                                    <div className="flex space-x-4">
+                                        <button className="bg-accent px-4 py-2 rounded text-white" onClick={handleSave}>
+                                            Save
+                                        </button>
+                                        <button className="bg-gray-300 px-4 py-2 rounded" onClick={handleCancel}>
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="min-w-full text-xl mb-2">
-                        <label className="block font-semibold text-gray-900 mb-1">
-                            Organization:
-                        </label>
-                        <input
-                            className="w-full p-2 border border-gray-300 rounded"
-                            type="text"
-                            name="organization"
-                            value={formData.organization}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="min-w-full text-xl mb-4">
-                        <label className="block font-semibold text-gray-900 mb-1">TIN:</label>
-                        <input
-                            className="w-full p-2 border border-gray-300 rounded"
-                            type="text"
-                            name="tin"
-                            value={formData.tin}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    <div className="flex space-x-4">
-                        <button className="bg-accent px-4 py-2 rounded text-white" onClick={handleSave}>
-                            Save
-                        </button>
-                        <button className="bg-gray-300 px-4 py-2 rounded" onClick={handleCancel}>
-                            Cancel
-                        </button>
-                    </div>
-                </>
-            )}
+                )}
+            </div>
         </div>
     );
 }
 
 function Loading() {
     return (
-        <div className="flex flex-col min-w-full bg-[#cbf3f0] rounded-lg p-4">
-            <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left animate-pulse">
-                My profile
-            </h1>
-            <div className="text-black/80 text-lg animate-pulse">
-                Manage your profile settings
+        <div className="flex flex-col min-w-full bg-silver rounded-lg p-4 gap-5">
+            <div className="border-2 border-deep_blue/40 px-5 py-5 rounded-lg">
+                <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
+                    My profile
+                </h1>
+                <div className="text-black/80 text-lg px-4">
+                    Manage your profile settings
+                </div>
             </div>
-            <div className="h-[1px] min-w-full bg-black my-5"></div>
+            <div className="border-2 border-deep_blue/40 px-5 py-4 rounded-lg">
+                <div className="flex flex-col justify-center min-w-full">
+                <div className="flex flex-row items-center justify-between mt-4">
+                        <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
+                        <button className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
+                        flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300">
+                            <Pencil className="mr-2"/> Edit
+                        </button>
+                    </div>
 
-            <div className="flex flex-col justify-center min-w-full animate-pulse">
-                <div className="text-2xl font-semibold">Basic info</div>
-
-                <div className="flex flex-col w-full mt-8 animate-pulse">
-                    <div id="labels" className="flex flex-col items-start gap-5">
-                        <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                            <div
-                                className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
-                                Email
+                    <div className="flex flex-col w-full mt-8">
+                        <div id="labels" className="flex flex-col items-start gap-5">
+                            <div className="flex flex-col w-full mt-6 space-y-4">
+                                {[
+                                    {label: "Email"},
+                                    {label: "Organization's Name"},
+                                    {label: "Phone Number"},
+                                    {label: "TIN"},
+                                ].map((item, index) => (
+                                    <div key={index}
+                                         className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                        <div
+                                            className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                            {item.label}
+                                        </div>
+                                        <div
+                                            className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex
+                                            animate-pulse justify-center bg-dark-grey/40 h-full">
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-
-                        </div>
-                        <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                            <div
-                                className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
-                                Organization's Name
-                            </div>
-
-                        </div>
-                        <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                            <div
-                                className="w-1/3 text-xl  mr-2 px-4 rounded-lg bg-[#2ec4b6] h-full flex items-center">
-                                TIN
-                            </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );
@@ -231,7 +252,7 @@ export default function DataSection() {
 
     // Пока `user` не определен, показываем загрузку
     if (!user) {
-        return <Loading />;
+        return <Loading/>;
     }
 
     if (!organizerResource) {

@@ -8,14 +8,12 @@ class UpdateOrganizerInfo {
     using json = nlohmann::json;
 
     struct OrganizerData {
-        std::string tin;
         std::string organization_name;
         std::string email;
         std::string phone_number;
 
         static OrganizerData parseFromJson(json& parsed) {
-            return {parsed["tin"],
-                    parsed["organization_name"],
+            return {parsed["organization_name"],
                     parsed["email"],
                     parsed["phone_number"]};
         }
@@ -35,7 +33,7 @@ class Validator {
 
 public:
     static bool Validate(const json& parsed, std::string& message) {
-        if (parsed["tin"].empty() || parsed["organization_name"].empty() ||
+        if (parsed["organization_name"].empty() ||
             parsed["email"].empty() || parsed["phone_number"].empty()) {
             message = "Empty fields";
             return false;

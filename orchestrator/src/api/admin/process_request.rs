@@ -90,6 +90,7 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
             company: request_info.company.clone(),
             tin: request_info.tin.clone(),
             status: "APPROVED".to_string(),
+            user_id: org_id,
         };
 
         let approve_response = orch.client.post(approve_url).json(&json_body).send()

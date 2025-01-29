@@ -6,4 +6,5 @@ pub struct OrgApproveBody {
     pub(crate) company: String,
     pub(crate) tin: String,
     pub(crate) status: String,
+    pub(crate) user_id: String,
 }
