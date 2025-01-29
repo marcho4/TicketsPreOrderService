@@ -249,6 +249,30 @@ src/api/UserAccountCRUD/CreateAccount.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.s
 .PHONY : src/api/UserAccountCRUD/CreateAccount.cpp.s
 
+src/api/UserAccountCRUD/GetAccountData.o: src/api/UserAccountCRUD/GetAccountData.cpp.o
+.PHONY : src/api/UserAccountCRUD/GetAccountData.o
+
+# target to build an object file
+src/api/UserAccountCRUD/GetAccountData.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o
+.PHONY : src/api/UserAccountCRUD/GetAccountData.cpp.o
+
+src/api/UserAccountCRUD/GetAccountData.i: src/api/UserAccountCRUD/GetAccountData.cpp.i
+.PHONY : src/api/UserAccountCRUD/GetAccountData.i
+
+# target to preprocess a source file
+src/api/UserAccountCRUD/GetAccountData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.i
+.PHONY : src/api/UserAccountCRUD/GetAccountData.cpp.i
+
+src/api/UserAccountCRUD/GetAccountData.s: src/api/UserAccountCRUD/GetAccountData.cpp.s
+.PHONY : src/api/UserAccountCRUD/GetAccountData.s
+
+# target to generate assembly for a file
+src/api/UserAccountCRUD/GetAccountData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.s
+.PHONY : src/api/UserAccountCRUD/GetAccountData.cpp.s
+
 src/api/UserAccountCRUD/UpdateAccount.o: src/api/UserAccountCRUD/UpdateAccount.cpp.o
 .PHONY : src/api/UserAccountCRUD/UpdateAccount.o
 
@@ -321,6 +345,9 @@ help:
 	@echo "... src/api/UserAccountCRUD/CreateAccount.o"
 	@echo "... src/api/UserAccountCRUD/CreateAccount.i"
 	@echo "... src/api/UserAccountCRUD/CreateAccount.s"
+	@echo "... src/api/UserAccountCRUD/GetAccountData.o"
+	@echo "... src/api/UserAccountCRUD/GetAccountData.i"
+	@echo "... src/api/UserAccountCRUD/GetAccountData.s"
 	@echo "... src/api/UserAccountCRUD/UpdateAccount.o"
 	@echo "... src/api/UserAccountCRUD/UpdateAccount.i"
 	@echo "... src/api/UserAccountCRUD/UpdateAccount.s"
