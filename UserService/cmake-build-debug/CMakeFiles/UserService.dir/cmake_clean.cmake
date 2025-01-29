@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/UserService.dir/src/api/MatchHistory/GetMatchHistory.cpp.o.d"
   "CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o"
   "CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o.d"
+  "CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o"
+  "CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o.d"
   "CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o"
   "CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o.d"
   "UserService"
