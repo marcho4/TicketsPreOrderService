@@ -11,7 +11,7 @@ pub async fn register_organizer(
     data: web::Json<OrganizerRegistrationData>,
     _req: HttpRequest
 ) -> HttpResponse {
-    let url = format!("{}/register_organizer", orchestrator.config.auth_base_url);
+    let url = format!("{}/organizer/register", orchestrator.config.auth_base_url);
     let data = data.into_inner();
     let response = orchestrator.client.post(&url).json(&data).send().await;
 

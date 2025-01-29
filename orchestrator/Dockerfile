@@ -10,9 +10,7 @@ RUN cargo chef prepare --recipe-path recipe.json
 # Этап 3: Сборка зависимостей и приложения
 FROM chef AS builder
 COPY --from=planner /app/recipe.json recipe.json
-# Сборка зависимостей (кэширование)
 RUN cargo chef cook --release --recipe-path recipe.json
-# Сборка самого приложения
 COPY . .
 RUN cargo build --release --bin orchestrator
 
@@ -27,7 +25,5 @@ RUN apt-get update && \
 # Копирование бинарника из этапа сборки
 COPY --from=builder /app/target/release/orchestrator /app/orchestrator
 
-# Открытие порта
 EXPOSE 8000
-# Установка команды по умолчанию
 CMD ["./orchestrator"]

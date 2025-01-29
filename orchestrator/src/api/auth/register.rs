@@ -10,7 +10,7 @@ pub async fn register_user(
     data: web::Json<UserRegistrationData>,
     _req: HttpRequest
 ) -> HttpResponse {
-    let url = format!("{}/register_user", orchestrator.config.auth_base_url);
+    let url = format!("{}/user/register", orchestrator.config.auth_base_url);
     let data = data.into_inner();
     let response = orchestrator.client.post(&url).json(&data).send().await;
     let registration_res = match response {

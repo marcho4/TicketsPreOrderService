@@ -15,3 +15,4 @@ pub mod organizer_info;
 pub mod org_creation_response;
 pub mod org_approve_body;
 pub mod org_approve_response;
+pub mod create_org_data;

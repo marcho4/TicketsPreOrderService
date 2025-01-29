@@ -3,6 +3,7 @@ use actix_web::error::{ErrorBadRequest, ErrorInternalServerError};
 use log::info;
 use serde_json::json;
 use crate::models::api_response::ApiResponse;
+use crate::models::create_org_data::CreateOrgData;
 use crate::models::org_approve_body::OrgApproveBody;
 use crate::models::org_approve_response::OrgApproveResponse;
 use crate::models::org_creation_response::OrgCreationResponse;
@@ -18,11 +19,16 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
         return ErrorInternalServerError(e)).unwrap();
 
     let request_info = requests.iter()
-        .find(|request| request.request_id == json_body.request_id)
-        .unwrap();
+        .find(|request| request.request_id == json_body.request_id);
 
-    info!("Request data: {:?}", request_info);
+    if request_info.is_none() {
+        return HttpResponse::NotFound().json(ApiResponse::<String> {
+            msg: Some("Admin request with such ID was not found".to_string()),
+            data: None,
+        });
+    }
 
+    info!("Request data: {:?}", request_info.unwrap());
     let url = "http://admin:8003/process_organizer".to_string();
     let response = orch.client.post(url).json(&json_body).send().await;
 
@@ -44,12 +50,15 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
 
 
     if json_body.status == Status::APPROVED {
-        let org_data = OrganizerRegistrationData {
-            company: request_info.company.clone(),
+        let request_info = request_info.unwrap();
+
+        let org_data = CreateOrgData {
             email: request_info.email.clone(),
             tin: request_info.tin.clone(),
+            organization_name: request_info.company.clone(),
         };
 
+        info!("Creating organizer: {:?}", org_data);
         let create_org_url = "http://organizer:8004/create_organizer_info";
 
         let creation_resp = orch.client.post(create_org_url).json(&org_data).send().await
@@ -66,7 +75,7 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
         };
 
         // Approve registration
-        let approve_url = "http://auth:8002/organizer/approve/";
+        let approve_url = "http://auth:8002/organizer/approve";
         let json_body = OrgApproveBody {
             email: request_info.email.clone(),
             company: request_info.company.clone(),
