@@ -1116,4 +1116,25 @@ CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o: \
   /opt/homebrew/opt/libpqxx/include/pqxx/subtransaction.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/time.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/transactor.hxx \
-  /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx
+  /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx \
+  /opt/homebrew/include/spdlog/spdlog.h \
+  /opt/homebrew/include/spdlog/common.h \
+  /opt/homebrew/include/spdlog/details/null_mutex.h \
+  /opt/homebrew/include/spdlog/tweakme.h \
+  /opt/homebrew/include/spdlog/fmt/fmt.h \
+  /opt/homebrew/include/fmt/core.h /opt/homebrew/include/fmt/format.h \
+  /opt/homebrew/include/fmt/base.h \
+  /opt/homebrew/include/spdlog/details/registry.h \
+  /opt/homebrew/include/spdlog/details/periodic_worker.h \
+  /opt/homebrew/include/spdlog/details/synchronous_factory.h \
+  /opt/homebrew/include/spdlog/logger.h \
+  /opt/homebrew/include/spdlog/details/backtracer.h \
+  /opt/homebrew/include/spdlog/details/circular_q.h \
+  /opt/homebrew/include/spdlog/details/log_msg_buffer.h \
+  /opt/homebrew/include/spdlog/details/log_msg.h \
+  /opt/homebrew/include/spdlog/version.h \
+  /opt/homebrew/include/spdlog/sinks/rotating_file_sink.h \
+  /opt/homebrew/include/spdlog/details/file_helper.h \
+  /opt/homebrew/include/spdlog/sinks/base_sink.h \
+  /opt/homebrew/include/spdlog/sinks/sink.h \
+  /opt/homebrew/include/spdlog/formatter.h

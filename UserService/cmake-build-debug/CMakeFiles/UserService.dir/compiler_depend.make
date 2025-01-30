@@ -1946,6 +1946,28 @@ CMakeFiles/UserService.dir/main.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderSer
   /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/GetAccountData.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/postgres/PostgresProcessing.h \
+  /opt/homebrew/include/fmt/base.h \
+  /opt/homebrew/include/fmt/core.h \
+  /opt/homebrew/include/fmt/format.h \
+  /opt/homebrew/include/spdlog/common.h \
+  /opt/homebrew/include/spdlog/details/backtracer.h \
+  /opt/homebrew/include/spdlog/details/circular_q.h \
+  /opt/homebrew/include/spdlog/details/file_helper.h \
+  /opt/homebrew/include/spdlog/details/log_msg.h \
+  /opt/homebrew/include/spdlog/details/log_msg_buffer.h \
+  /opt/homebrew/include/spdlog/details/null_mutex.h \
+  /opt/homebrew/include/spdlog/details/periodic_worker.h \
+  /opt/homebrew/include/spdlog/details/registry.h \
+  /opt/homebrew/include/spdlog/details/synchronous_factory.h \
+  /opt/homebrew/include/spdlog/fmt/fmt.h \
+  /opt/homebrew/include/spdlog/formatter.h \
+  /opt/homebrew/include/spdlog/logger.h \
+  /opt/homebrew/include/spdlog/sinks/base_sink.h \
+  /opt/homebrew/include/spdlog/sinks/rotating_file_sink.h \
+  /opt/homebrew/include/spdlog/sinks/sink.h \
+  /opt/homebrew/include/spdlog/spdlog.h \
+  /opt/homebrew/include/spdlog/tweakme.h \
+  /opt/homebrew/include/spdlog/version.h \
   /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/binarystring.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/blob.hxx \
@@ -5378,6 +5400,28 @@ CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o: /Users/n
   /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/postgres/PostgresProcessing.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/utils/ValidDataChecker.h \
   /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.h \
+  /opt/homebrew/include/fmt/base.h \
+  /opt/homebrew/include/fmt/core.h \
+  /opt/homebrew/include/fmt/format.h \
+  /opt/homebrew/include/spdlog/common.h \
+  /opt/homebrew/include/spdlog/details/backtracer.h \
+  /opt/homebrew/include/spdlog/details/circular_q.h \
+  /opt/homebrew/include/spdlog/details/file_helper.h \
+  /opt/homebrew/include/spdlog/details/log_msg.h \
+  /opt/homebrew/include/spdlog/details/log_msg_buffer.h \
+  /opt/homebrew/include/spdlog/details/null_mutex.h \
+  /opt/homebrew/include/spdlog/details/periodic_worker.h \
+  /opt/homebrew/include/spdlog/details/registry.h \
+  /opt/homebrew/include/spdlog/details/synchronous_factory.h \
+  /opt/homebrew/include/spdlog/fmt/fmt.h \
+  /opt/homebrew/include/spdlog/formatter.h \
+  /opt/homebrew/include/spdlog/logger.h \
+  /opt/homebrew/include/spdlog/sinks/base_sink.h \
+  /opt/homebrew/include/spdlog/sinks/rotating_file_sink.h \
+  /opt/homebrew/include/spdlog/sinks/sink.h \
+  /opt/homebrew/include/spdlog/spdlog.h \
+  /opt/homebrew/include/spdlog/tweakme.h \
+  /opt/homebrew/include/spdlog/version.h \
   /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/binarystring.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/blob.hxx \
@@ -6491,8 +6535,6 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /opt/homebrew/opt/openssl@3/include/openssl/sslerr.h:
 
-/opt/homebrew/opt/openssl@3/include/openssl/ssl3.h:
-
 /opt/homebrew/opt/openssl@3/include/openssl/ssl2.h:
 
 /opt/homebrew/opt/openssl@3/include/openssl/ssl.h:
@@ -6617,6 +6659,32 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /opt/homebrew/opt/libpqxx/include/pqxx/array.hxx:
 
+/opt/homebrew/include/spdlog/spdlog.h:
+
+/opt/homebrew/include/spdlog/sinks/base_sink.h:
+
+/opt/homebrew/include/spdlog/formatter.h:
+
+/opt/homebrew/include/spdlog/fmt/fmt.h:
+
+/opt/homebrew/include/spdlog/details/synchronous_factory.h:
+
+/opt/homebrew/include/spdlog/details/log_msg_buffer.h:
+
+/opt/homebrew/include/spdlog/details/circular_q.h:
+
+/opt/homebrew/include/spdlog/details/backtracer.h:
+
+/opt/homebrew/include/spdlog/common.h:
+
+/opt/homebrew/include/fmt/format.h:
+
+/opt/homebrew/include/fmt/core.h:
+
+/opt/homebrew/opt/openssl@3/include/openssl/ssl3.h:
+
+/opt/homebrew/include/fmt/base.h:
+
 /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.h:
 
 /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/nlohmann/json.hpp:
@@ -6624,6 +6692,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/httplib.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/xlocale/_time.h:
+
+/opt/homebrew/include/spdlog/tweakme.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/xlocale/_string.h:
 
@@ -7315,6 +7385,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/remove_const_ref.h:
 
+/opt/homebrew/include/spdlog/sinks/rotating_file_sink.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/remove_all_extents.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/rank.h:
@@ -7667,6 +7739,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/destruct_n.h:
 
+/opt/homebrew/include/spdlog/sinks/sink.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/libkern/_OSByteOrder.h:
 
 /opt/homebrew/opt/libpqxx/include/pqxx/util.hxx:
@@ -7775,6 +7849,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ios/fpos.h:
 
+/opt/homebrew/include/spdlog/details/null_mutex.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/ranges_make_heap.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__fwd/tuple.h:
@@ -7796,6 +7872,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/copy_move_common.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/unique_ptr.h:
+
+/opt/homebrew/include/spdlog/logger.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__fwd/get.h:
 
@@ -7929,11 +8007,15 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__compare/strong_order.h:
 
+/opt/homebrew/include/spdlog/details/file_helper.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__compare/partial_order.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/stdlib.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/data.h:
+
+/opt/homebrew/include/spdlog/version.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__ranges/owning_view.h:
 
@@ -8461,6 +8543,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_is_partitioned.h:
 
+/opt/homebrew/include/spdlog/details/periodic_worker.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/pstl_generate.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_ino_t.h:
@@ -8558,6 +8642,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_polymorphic.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/make_heap.h:
+
+/opt/homebrew/include/spdlog/details/registry.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/move_backward.h:
 
@@ -8860,6 +8946,8 @@ CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarza
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__type_traits/is_signed.h:
 
 /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/node_blf.h:
+
+/opt/homebrew/include/spdlog/details/log_msg.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__numeric/inclusive_scan.h:
 
