@@ -1,4 +1,6 @@
 #include <iostream>
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 #include "../../../libraries/httplib.h"
 #include "../../ErrorHandler.h"
 #include "../../../libraries/nlohmann/json.hpp"
@@ -56,16 +58,19 @@ public:
 
         if (!DataCheker::isValidEmailFormat(email)) {
             ErrorHandler::sendError(response, 400, "Invalid email format");
+            spdlog::error("Пользователь {} ввел неверный формат email, отказано в обновлении профиля", user_id);
             return false;
         }
 
         if (!DataCheker::isValidPhoneNumber(phone_number)) {
             ErrorHandler::sendError(response, 400, "Invalid phone number");
+            spdlog::error("Пользователь {} ввел неверный формат номера телефона, отказано в обновлении профиля", user_id);
             return false;
         }
 
         if (!CheckUserExistence(user_id, db)) {
             ErrorHandler::sendError(response, 404, "User not found");
+            spdlog::error("Пользователь {} не найден, отказано в обновлении профиля", user_id);
             return false;
         }
 
