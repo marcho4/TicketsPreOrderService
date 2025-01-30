@@ -18,10 +18,10 @@ int main() {
 
     try {
         httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
-        // инициализация хоста и порта для подключения
-        std::string connect = "dbname=organizer_personal_account host=localhost port=5432";
+
+        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
         Database db(connect);
-        db.initDbFromFile("../src/postgres/organizer_personal_account.sql");
+        db.initDbFromFile("src/postgres/organizer_personal_account.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
