@@ -25,9 +25,9 @@ set(SOURCE_FILES
         libraries/Bcrypt.cpp/src/blowfish.cpp
         src/MatchCreating/GetMatchInfo/GetMatchData.h
         src/MatchCreating/GetMatchInfo/GetMatchData.cpp
-        ../AuthorizationService/src/Admin/AdminAuthorization.cpp
-        ../AuthorizationService/src/Admin/AdminCreation.h
-        ../AuthorizationService/src/Authorization/AuthorizationManager.cpp
+        ../AuthorizationService/src/api/Admin/AdminAuthorization.cpp
+        ../AuthorizationService/src/api/Admin/AdminCreation.h
+        ../AuthorizationService/src/api/Authorization/AuthorizationManager.cpp
         ../AuthorizationService/src/ErrorHandler.h
 )
 

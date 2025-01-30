@@ -6,24 +6,25 @@ set(CMAKE_CXX_STANDARD 17)
 # Source files
 set(SOURCE_FILES
         main.cpp
-        src/Authorization/AuthorizationManager.cpp
-        src/Authorization/AuthorizationManager.h
-        src/OrganizerRegistration/RegistrationOrganizerManager.cpp
-        src/OrganizerRegistration/RegistrationOrganizerManager.h
-        src/UserRegistration/RegistrationUserManager.cpp
-        src/UserRegistration/RegistrationUserManager.h
+        src/api/Authorization/AuthorizationManager.cpp
+        src/api/Authorization/AuthorizationManager.h
+        src/api/OrganizerRegistration/RegistrationOrganizerManager.cpp
+        src/api/OrganizerRegistration/RegistrationOrganizerManager.h
+        src/api/UserRegistration/RegistrationUserManager.cpp
+        src/api/UserRegistration/RegistrationUserManager.h
         src/AuxiliaryFunctions/AuxiliaryFunctions.cpp
         src/AuxiliaryFunctions/AuxiliaryFunctions.h
         src/postgres/PostgresProcessing.h
         src/postgres/PostgresProcessing.cpp
-        src/UserRegistration/PasswordGenerator/PasswordCreator.cpp
+        src/api/UserRegistration/PasswordGenerator/PasswordCreator.cpp
+        src/api/PasswordUpdating.h
         ../UserService/libraries/Bcrypt.cpp/src/bcrypt.cpp
         ../UserService/libraries/Bcrypt.cpp/include/bcrypt.h
         ../UserService/libraries/Bcrypt.cpp/src/blowfish.cpp
-        src/Admin/AdminCreation.cpp
-        src/Admin/AdminCreation.h
-        src/Admin/AdminAuthorization.cpp
-        src/Admin/AdminAuthorization.h
+        src/api/Admin/AdminCreation.cpp
+        src/api/Admin/AdminCreation.h
+        src/api/Admin/AdminAuthorization.cpp
+        src/api/Admin/AdminAuthorization.h
 )
 # Пути, куда была установлена libpqxx при "make install"
 include_directories(/usr/local/include)
