@@ -23,6 +23,7 @@ const config: Config = {
 			"light-beige": "#F2E9E4",
 			my_black: "#121212",
 			white_smoke: "#F4F4F4",
+			"button-secondary": "#6320EE",
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: '#BDBDBD',

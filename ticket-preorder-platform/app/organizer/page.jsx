@@ -2,6 +2,9 @@
 import MatchesSection from "./organizerEvents";
 import DataSection from "./organizerData";
 import {useAuth} from "../../providers/authProvider";
+import {Button} from "../../components/ui/button";
+import {Card} from "../../components/ui/card";
+import React from "react";
 
 
 export default function Page() {
@@ -21,8 +24,10 @@ export default function Page() {
 
 
             <div className="grid grid-cols-1 mt-10 md:grid-cols-2 gap-4 w-full px-20 items-start">
-                <MatchesSection/>
                 <DataSection/>
+                <MatchesSection/>
+
+
             </div>
 
 
