@@ -5,6 +5,8 @@
 #include "PasswordGenerator/PasswordCreator.h"
 #include "../ErrorHandler.h"
 #include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 
 class UserRegistration {
     using json = nlohmann::json;
@@ -83,6 +85,7 @@ public:
         std::vector<std::string> required_fields = {"email", "name", "last_name", "password", "login"};
         if (!checkRequiredFields(parsed, required_fields)) {
             ErrorHandler::sendError(res, 400, "Missing required fields");
+            spdlog::error("Не заполнены обязательные поля, отказано в регистрации");
             return false;
         }
 
@@ -90,16 +93,19 @@ public:
 
         if (!CheckEmailUniquenessOrUserExistence(data.email, db)) {
             ErrorHandler::sendError(res, 400, "Email already exists");
+            spdlog::error("Пользователь с таким email: {} уже существует, отказано в регистрации", data.email);
             return false;
         }
 
         if (data.name.length() > 200 || data.last_name.length() > 200 || data.email.length() > 200) {
             ErrorHandler::sendError(res, 400, "Too long fields");
+            spdlog::error("Слишком длинные поля, отказано в регистрации");
             return false;
         }
 
         if (!AuxiliaryFunctions::isValidEmail(data.email)) {
             ErrorHandler::sendError(res, 400, "Invalid email format or email already exists");
+            spdlog::error("Неверный формат email: {} или email уже существует, отказано в регистрации", data.email);
             return false ;
         }
         return true;

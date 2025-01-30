@@ -36,13 +36,14 @@ include_directories("../UserService/libraries/Bcrypt.cpp/include")
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(PostgreSQL REQUIRED)
-
+агfind_package(spdlog REQUIRED)
 # Create executable
 add_executable(AuthorizationService ${SOURCE_FILES})
 
 # Link the libraries
 target_link_libraries(AuthorizationService PRIVATE
         CURL::libcurl
+        spdlog::spdlog
         OpenSSL::SSL
         OpenSSL::Crypto
         pqxx  # <-- ключевой момент

@@ -12,6 +12,7 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
 
     RegisterUser(user_data, db);
 
+    spdlog::info("Пользователь зарегистрирован, email: {}", user_data.email);
     res.status = 200;
     res.set_content(R"({
         "status": "User registered",
@@ -36,6 +37,7 @@ void UserRegistration::RegisterUser(UserData user_data, Database& db) {
     try {
         db.executeQueryWithParams(query, user_params);
     } catch (const std::exception& e) {
+        spdlog::error("Не удалось сохранить данные пользователя");
         throw std::runtime_error("Failed to save user data");
     }
 }
@@ -46,6 +48,7 @@ pqxx::result UserRegistration::SaveLoginData(UserData& user_data, std::vector<st
     try {
         return db.executeQueryWithParams(query, params);
     } catch (const std::exception& e) {
+        spdlog::error("Не удалось сохранить данные пользователя");
         throw std::runtime_error("Failed to save user data");
     }
 }

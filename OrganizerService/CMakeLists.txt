@@ -44,11 +44,12 @@ include_directories("/opt/homebrew/opt/openssl@3/include")
 
 # Find the libraries
 find_package(CURL REQUIRED)
+find_package(find_package(spdlog REQUIRED))
 # Create executable
 add_executable(OrganizerService ${SOURCE_FILES})
 
 # Link the libraries
-target_link_libraries(OrganizerService PRIVATE CURL::libcurl
+target_link_libraries(OrganizerService PRIVATE CURL::libcurl spdlog::spdlog
         /opt/homebrew/opt/openssl@3/lib/libssl.dylib
         /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
         /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
