@@ -28,14 +28,6 @@ class PasswordUpdating {
         db.executeQueryWithParams(update_query, params);
     }
 
-    static bool LoginUniquenessVerification(const std::string& login, Database& db) {
-        std::string query = "SELECT login FROM AuthorizationService.AuthorizationData WHERE login = $1";
-        std::vector<std::string> params = {login};
-        pqxx::result response = db.executeQueryWithParams(query, params);
-
-        return response.empty();
-    }
-
 public:
     static void UpdatePasswordRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
         std::string user_id;
@@ -47,12 +39,6 @@ public:
 
         auto parsed = json::parse(req.body);
         AuthorizationData auth_data = AuthorizationData::getAuthorizationData(parsed);
-
-        if (!LoginUniquenessVerification(auth_data.login, db)) {
-            spdlog::warn("Попытка обновить пароль на уже существующий логин: {}, отказано в обновлении", auth_data.login);
-            ErrorHandler::sendError(res, 409, "Login is already taken");
-            return;
-        }
 
         std::string pass_hash = bcrypt::generateHash(auth_data.password);
         UpdateDataInDatabase(auth_data.login, pass_hash, user_id, db);
