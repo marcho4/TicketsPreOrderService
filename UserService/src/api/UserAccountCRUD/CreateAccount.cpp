@@ -5,6 +5,7 @@ void AccountCreator::CreateUserAccountRequest(const httplib::Request& req, httpl
 
     if (!CheckUserExistence(user_data, db)) {
         ErrorHandler::sendError(res, 409, "User already exists");
+        spdlog::error("Пользователь с email: {} уже существует, отказано в создании", user_data.email);
         return;
     }
 
@@ -20,10 +21,12 @@ void AccountCreator::CreateUserAccountRequest(const httplib::Request& req, httpl
                 }
             }
         };
-
+        spdlog::info("Пользователь с email: {} успешно создан, id пользователя - {}", user_data.email,
+                     result[0]["user_id"].as<std::string>());
         res.status = 201;
         res.set_content(json_response.dump(), "application/json");
     } else {
+        spdlog::error("Не удалось вставить данные в базу данных") ;
         ErrorHandler::sendError(res, 500, "Failed to insert data into the database");
     }
 }
@@ -46,6 +49,7 @@ pqxx::result AccountCreator::UserCreatingResponseToDB(const UserData& user_data,
     try {
         result = db.executeQueryWithParams(create_user, params);
     } catch (const std::exception& e) {
+        spdlog::error("Не удалось создать пользователя");
         throw std::runtime_error("Failed to create user");
     }
     return result;

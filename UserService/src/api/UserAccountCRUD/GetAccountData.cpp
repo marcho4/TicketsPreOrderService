@@ -6,17 +6,19 @@ void DataProvider::GetUserAccountDataRequest(const httplib::Request &req, httpli
     if (!req.path_params.at("id").empty()) {
         user_id = req.path_params.at("id");
     } else {
+        spdlog::error("Пропущен параметр id, отказано в получении данных аккаунта");
         ErrorHandler::sendError(res, 400, "Missing id parameter");
         return;
     }
 
     if (!CheckUserExistence(user_id, db)) {
+        spdlog::error("Пользователь с id: {} не найден", user_id);
         ErrorHandler::sendError(res, 404, "User not found");
         return;
     }
 
     json response = GetUserData(user_id, db);
-
+    spdlog::info("Данные пользователя с id: {} отправлены", user_id);
     res.status = 200;
     res.set_content(response.dump(), "application/json");
 }
@@ -48,6 +50,6 @@ nlohmann::json DataProvider::GetUserData(const std::string &id, Database &db) {
              }
         }
     };
-
+    spdlog::info("Данные пользователя с id: {} получены", id);
     return response;
 }

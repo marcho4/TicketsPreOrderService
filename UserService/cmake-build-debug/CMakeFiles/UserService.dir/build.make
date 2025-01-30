@@ -205,9 +205,11 @@ UserService: CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o
 UserService: CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o
 UserService: CMakeFiles/UserService.dir/build.make
 UserService: /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib
+UserService: /opt/homebrew/lib/libspdlog.1.15.0.dylib
 UserService: /opt/homebrew/opt/openssl@3/lib/libssl.dylib
 UserService: /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
 UserService: /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
+UserService: /opt/homebrew/lib/libfmt.11.1.1.dylib
 UserService: CMakeFiles/UserService.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable UserService"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/UserService.dir/link.txt --verbose=$(VERBOSE)
