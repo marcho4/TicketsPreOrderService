@@ -23,7 +23,7 @@ int main() {
             res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
             res.set_header("Content-Type", "application/json");
         };
-        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=orchestrator host=admin_postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/pending_organizers.sql");
         db.initDbFromFile("src/postgres/pending_organizers.sql");

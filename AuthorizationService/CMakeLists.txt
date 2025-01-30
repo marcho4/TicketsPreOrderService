@@ -17,9 +17,9 @@ set(SOURCE_FILES
         src/postgres/PostgresProcessing.h
         src/postgres/PostgresProcessing.cpp
         src/UserRegistration/PasswordGenerator/PasswordCreator.cpp
-        ../UserService/libraries/Bcrypt.cpp/src/bcrypt.cpp
-        ../UserService/libraries/Bcrypt.cpp/include/bcrypt.h
-        ../UserService/libraries/Bcrypt.cpp/src/blowfish.cpp
+        libraries/Bcrypt.cpp/src/bcrypt.cpp
+        libraries/Bcrypt.cpp/include/bcrypt.h
+        libraries/Bcrypt.cpp/src/blowfish.cpp
         src/Admin/AdminCreation.cpp
         src/Admin/AdminCreation.h
         src/Admin/AdminAuthorization.cpp
@@ -30,7 +30,7 @@ include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
 # Include directories
-include_directories("../UserService/libraries/Bcrypt.cpp/include")
+include_directories("libraries/Bcrypt.cpp/include")
 
 # Find the libraries
 find_package(CURL REQUIRED)
@@ -45,6 +45,6 @@ target_link_libraries(AuthorizationService PRIVATE
     CURL::libcurl
     OpenSSL::SSL
     OpenSSL::Crypto
-    pqxx  # <-- ключевой момент
-    pq    # иногда тоже нужно явно указать
+    pqxx
+    pq
 )

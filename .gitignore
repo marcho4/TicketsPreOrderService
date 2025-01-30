@@ -13,3 +13,13 @@
 /OrganizerService/cmake-build-debug/
 /OrganizerService/__pycache__/
 /ticker-preorder-platform/.idea/
+/UserService/.idea/
+/UserService/cmake-build-debug
+/AdminService/.idea
+/EmailService/.idea
+/orchestrator/.idea
+/OrganizerService/.idea
+/OrganizerService/CMakeFiles
+/ticket-preorder-platform/.idea
+/.cache
+.cache

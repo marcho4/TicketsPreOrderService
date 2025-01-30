@@ -29,8 +29,6 @@ services:
       - "8002:8002"
     networks:
       - main
-    depends_on:
-      - auth_postgres
 
   auth_postgres:
     image: postgres:latest
@@ -38,8 +36,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: orchestrator
-    ports:
-      - "5432:5432"
     networks:
       - main
   
@@ -49,8 +45,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: orchestrator
-    ports:
-      - "5435:5435"
     networks:
       - main
 
@@ -82,8 +76,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: orchestrator
-    ports:
-      - "5434:5434"
     networks:
       - main
 

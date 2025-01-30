@@ -46,7 +46,7 @@ pub async fn register_organizer(
     };
 
     // Send request to admin service
-    let admin_req_url = "http://admin:8003/add_organizer_request".to_string();
+    let admin_req_url = "http://admin:8003/admin/add_organizer_request".to_string();
 
     let admin_resp = orchestrator.client.post(&admin_req_url)
         .json(&data).send().await;

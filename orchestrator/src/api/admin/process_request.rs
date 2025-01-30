@@ -37,7 +37,7 @@ pub async fn process_request(data: web::Json<RequestProcessInfo>, orch: web::Dat
 
     info!("Request data: {:?}", request_info.unwrap());
 
-    let url = "http://admin:8003/process_organizer".to_string();
+    let url = "http://admin:8003/admin/process_organizer".to_string();
     let response = orch.client.post(url).json(&json_body).send().await;
 
     let _ = match response {
