@@ -1,13 +1,15 @@
-import { Button } from "../../components/ui/button";
-import { Suspense, useState } from "react";
+'use client';
+
+import {Suspense, useEffect, useState} from "react";
 import { useAuth } from "../../providers/authProvider";
 import { createResource } from "../../lib/createResource";
 import ErrorBoundary from "./dataBoundary";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import {Pencil} from "lucide-react";
+import {id} from "date-fns/locale";
+
 
 const fetchOrganizerData = async (id) => {
-    const response = await fetch(`http://localhost:8004/get_account_info/${id}`, {
+    const response = await fetch(`http://localhost:8000/api/organizer/get/${id}`, {
         method: "GET",
         credentials: "include",
     });
@@ -19,152 +21,253 @@ const fetchOrganizerData = async (id) => {
     const body = await response.json();
 
     return {
-        email: body.email,
-        tin: body.tin,
-        phone_number: body.phone_number,
-        organization: body.organization_name,
+        email: body.data.email,
+        tin: body.data.tin,
+        phone_number: body.data.phone_number,
+        organization: body.data.organization_name,
     };
 };
 
 let organizerResource;
 
-export default function DataSection() {
-    const { user } = useAuth();
-    console.log(user);
-    if (!organizerResource) {
-        organizerResource = createResource(() => fetchOrganizerData(user));
-    }
-
-    return (
-        <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-                <DataDisplay resource={organizerResource} id={user}/>
-            </Suspense>
-        </ErrorBoundary>
-    );
-}
-
 function DataDisplay({ resource }) {
     const data = resource.read();
-    const [isOpen, setIsOpen] = useState(false);
-    const [formData, setFormData] = useState(null);
+    console.log(data);
 
-    const handleDialogOpen = () => {
+    const [isEditing, setIsEditing] = useState(false);
+
+    const [formData, setFormData] = useState({
+        email: data.email,
+        organization: data.organization,
+        tin: data.tin,
+
+    });
+    const handleEdit = () => {
+        setIsEditing(true);
         setFormData({
-            email: data.email  || "",
-            organization: data.organization  || "",
-            tin: data.tin  || "",
-            phone_number: data.phone_number  || ""
+            email: data.email,
+            organization: data.organization,
+            tin: data.tin,
+            phone_number: data.phone_number,
         });
-        setIsOpen(true);
     };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const response = await fetch(`http://localhost:8004/update_account_info/${id}`, {
-            method: 'PUT',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
-
-        if (response.ok) {
-            setIsOpen(false);
-            window.location.reload();
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+    const handleSave = async () => {
+        try {
+            let resp = await fetch(`http://localhost:8000/api/organizer/update/${id}`, {
+                method: "POST",
+                credentials: "include",
+                body: ({
+                    email: data.email,
+                    phone_number: data.phone_number,
+                    organization_name: data.organization,
+                })
+            })
+            console.log(await resp.json());
+            setIsEditing(false);
+        } catch (error) {
+            console.error("Ошибка при сохранении:", error);
         }
     };
 
+    const handleCancel = () => {
+        setFormData({
+            email: data.email,
+            organization: data.organization,
+            tin: data.tin,
+            phone_number: data.phone_number,
+        });
+        setIsEditing(false);
+    };
+
     return (
-        <div className="flex flex-col min-w-full bg-silver rounded-lg p-4">
-            <h1 className="text-3xl font-semibold text-gray-900 leading-tight text-left mb-8">
-                My account
-            </h1>
-            <div className="min-w-full text-xl">
-                <strong>Email:</strong> {data.email}
+        <div className="flex flex-col min-w-full bg-white rounded-lg p-4 gap-5">
+            <div className="border-2 border-deep_blue/40 px-5 py-5 rounded-lg">
+                <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
+                    My profile
+                </h1>
+                <div className="text-black/80 text-lg px-4">
+                    Manage your profile settings
+                </div>
             </div>
-            <div className="min-w-full text-xl">
-                <strong>Organization:</strong> {data.organization}
-            </div>
-            <div className="min-w-full text-xl">
-                <strong>TIN:</strong> {data.tin}
-            </div>
-            <div className="min-w-full text-xl">
-                <strong>Phone number:</strong> {data.phone_number}
-            </div>
-            <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogTrigger asChild>
-                    <button 
-                        onClick={handleDialogOpen}
-                        className="bg-accent w-1/2 px-4 py-2 mt-4 rounded-lg text-white hover:bg-accent/90"
-                    >
-                        Change information
-                    </button>
-                </DialogTrigger>
-                {formData && (
-                    <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                            <DialogTitle>Edit Account Information</DialogTitle>
-                        </DialogHeader>
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Email</label>
-                                <Input
-                                    value={formData.email}
-                                    onChange={(e) => setFormData(prev => ({...prev, email: e.target.value}))}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Organization</label>
-                                <Input
-                                    value={formData.organization}
-                                    onChange={(e) => setFormData(prev => ({...prev, organization: e.target.value}))}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">TIN</label>
-                                <Input
-                                    value={formData.tin}
-                                    onChange={(e) => setFormData(prev => ({...prev, tin: e.target.value}))}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Phone Number</label>
-                                <Input
-                                    value={formData.phone_number}
-                                    onChange={(e) => setFormData(prev => ({...prev, phone_number: e.target.value}))}
-                                    required
-                                />
-                            </div>
-                            <button 
-                                type="submit"
-                                className="w-full bg-accent text-white rounded-lg px-4 py-2 hover:bg-accent/90"
-                            >
-                                Save Changes
+            <div className="border-2 border-deep_blue/40 px-5 py-4 rounded-lg">
+                {!isEditing ? (
+                    <div className="flex flex-col justify-center min-w-full">
+                        <div className="flex flex-row items-center justify-between mt-4">
+                            <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
+                            <button className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
+                            flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300"
+                                    onClick={handleEdit}>
+                                <Pencil className="mr-2"/> Edit
                             </button>
-                        </form>
-                    </DialogContent>
+                        </div>
+
+                        <div className="flex flex-col w-full mt-8">
+                            <div id="labels" className="flex flex-col items-start gap-5">
+                                <div className="flex flex-col w-full mt-6 space-y-4">
+                                    {[
+                                        {label: "Email", value: data.email},
+                                        {label: "Organization's Name", value: data.organization},
+                                        {label: "Phone Number", value: data.phone_number},
+                                        {label: "TIN", value: data.tin},
+                                    ].map((item, index) => (
+                                        <div key={index}
+                                            className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                            <div
+                                                className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                                {item.label}
+                                            </div>
+                                            <div
+                                                className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
+                                                {item.value}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex flex-col justify-center min-w-full">
+                        <div className="flex flex-row items-center justify-between mt-4">
+                            <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
+                            <button className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
+                            flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300"
+                                    onClick={handleEdit}>
+                                <Pencil className="mr-2"/> Edit
+                            </button>
+                        </div>
+
+                        <div className="flex flex-col w-full mt-8">
+                            <div id="labels" className="flex flex-col items-start gap-5">
+                                <div className="flex flex-col w-full mt-6 space-y-4">
+                                    {[
+                                        {label: "Email", value: data.email},
+                                        {label: "Organization's Name", value: data.organization},
+                                        {label: "Phone Number", value: data.phone_number},
+                                    ].map((item, index) => (
+                                        <div key={index}
+                                             className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                            <div
+                                                className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                                {item.label}
+                                            </div>
+                                            <input
+                                                placeholder={item.value}
+                                                className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
+                                            </input>
+                                        </div>
+                                    ))}
+                                    <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                        <div
+                                            className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                            TIN
+                                        </div>
+                                        <div
+                                            className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
+                                            {data.tin}
+                                        </div>
+                                    </div>
+                                    <div className="flex space-x-4">
+                                        <button className="bg-accent px-4 py-2 rounded text-white" onClick={handleSave}>
+                                            Save
+                                        </button>
+                                        <button className="bg-gray-300 px-4 py-2 rounded" onClick={handleCancel}>
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 )}
-            </Dialog>
+            </div>
         </div>
     );
 }
 
 function Loading() {
     return (
-        <div className="flex flex-col min-w-full bg-silver rounded-lg p-4 animate-pulse ">
-            <h1 className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
-            </h1>
-            <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
+        <div className="flex flex-col min-w-full bg-white rounded-lg p-4 gap-5">
+            <div className=" px-5 py-5 rounded-lg">
+                <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
+                    My profile
+                </h1>
+                <div className="text-black/80 text-lg px-4">
+                    Manage your profile settings
+                </div>
             </div>
-            <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
-            </div>
-            <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
-            </div>
-            <div className="text-3xl bg-dark-grey animate-pulse w-1/2 font-semibold px-8 py-4 mb-8 rounded-2xl">
+            <div className="px-5 py-4 rounded-lg">
+                <div className="flex flex-col justify-center min-w-full">
+                <div className="flex flex-row items-center justify-between mt-4">
+                        <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
+                        <button disabled={true} className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
+                        flex flex-row items-center justify-start  transition-colors duration-300">
+                            <Pencil className="mr-2"/> Edit
+                        </button>
+                    </div>
+
+                    <div className="flex flex-col w-full mt-8">
+                        <div id="labels" className="flex flex-col items-start gap-5">
+                            <div className="flex flex-col w-full mt-6 space-y-4">
+                                {[
+                                    {label: "Email"},
+                                    {label: "Organization's Name"},
+                                    {label: "Phone Number"},
+                                    {label: "TIN"},
+                                ].map((item, index) => (
+                                    <div key={index}
+                                         className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
+                                        <div
+                                            className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                            {item.label}
+                                        </div>
+                                        <div
+                                            className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex
+                                            animate-pulse justify-center bg-dark-grey/40 h-full">
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    );
+}
+
+export default function DataSection() {
+    const {user, userRole} = useAuth();
+
+    useEffect(() => {
+
+    }, [user])
+
+    // Пока `user` не определен, показываем загрузку
+    if (user === undefined) {
+        return <Loading/>;
+    }
+
+    if (user == null || userRole !== "ORGANIZER") {
+        return <div>You are not authorized as an organizer</div>
+    }
+
+    if (!organizerResource) {
+        organizerResource = createResource(() => fetchOrganizerData(user));
+    }
+
+    return (
+        <ErrorBoundary>
+            <Suspense fallback={<Loading/>}>
+                <DataDisplay resource={organizerResource} id={user}/>
+            </Suspense>
+        </ErrorBoundary>
     );
 }

@@ -9,12 +9,13 @@ use crate::orchestrator::orchestrator::Orchestrator;
 pub async fn register_organizer(
     orchestrator: web::Data<Orchestrator>,
     data: web::Json<OrganizerRegistrationData>,
-    req: HttpRequest
+    _req: HttpRequest
 ) -> HttpResponse {
-    let url = format!("{}/register_organizer", orchestrator.config.auth_base_url);
+    let url = format!("{}/organizer/register", orchestrator.config.auth_url);
     let data = data.into_inner();
     let response = orchestrator.client.post(&url).json(&data).send().await;
-    match response {
+
+    let org_data: RegistrationOrgResp = match response {
         Ok(resp) => {
             if resp.status().is_success() {
                 match resp.json::<RegistrationOrgResp>().await {
@@ -36,16 +37,30 @@ pub async fn register_organizer(
                     msg: Some("Something wrong during registration".to_string()),
                     data: Some(err_msg)
                 })
-            };
+            }
         },
         Err(e) => return HttpResponse::InternalServerError().json(ApiResponse::<String> {
             msg: Some("Error happened during request to auth service".to_string()),
             data: Some(e.to_string()),
-        }),
+        })
     };
 
-    HttpResponse::Ok().json(ApiResponse::<String> {
+    // Send request to admin service
+    let admin_req_url = "http://admin:8003/admin/add_organizer_request".to_string();
+
+    let admin_resp = orchestrator.client.post(&admin_req_url)
+        .json(&data).send().await;
+
+    // info!("admin response: {:?}", admin_resp.unwrap().text().await);
+    if !admin_resp.unwrap().status().is_success() {
+        return HttpResponse::InternalServerError().json(ApiResponse::<String> {
+            msg: Some("Error happened during admin request".to_string()),
+            data: None
+        })
+    }
+
+    HttpResponse::Ok().json(ApiResponse::<RegistrationOrgResp> {
         msg: Some("Successfully registered".to_string()),
-        data: None
+        data: Some(org_data)
     })
 }

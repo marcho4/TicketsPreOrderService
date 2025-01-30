@@ -18,14 +18,14 @@ const getLinksForRole = (role: string) => {
       case "ADMIN":
           return [
               ...commonLinks,
-              { href: '/dashboard', label: 'Dashboard' },
               { href: '/admin', label: 'Admin Panel' },
-              { href: '/logout', label: 'Logout' },
+              // { href: '/dashboard', label: 'Dashboard' },
+              // { href: '/logout', label: 'Logout' },
           ];
       case "ORGANIZER":
           return [
               ...commonLinks,
-              { href: '/dashboard', label: 'Dashboard' },
+              { href: '/organizer', label: 'Dashboard' },
               { href: '/create-event', label: 'Create Event' },
               { href: '/logout', label: 'Logout' },
           ];
@@ -39,13 +39,8 @@ const getLinksForRole = (role: string) => {
       case UserRole.NotAuthorized:
       default:
           return [
-              { href: '/', label: 'Main Page' },
+              ...commonLinks,
               { href: '/login', label: 'Login' },
-              // для теста админа
-              { href: '/admin-home', label: 'Admin Dashboard'},
-              { href: '/organizer', label: 'Organizer Dashboard' },
-              { href: '/user', label: 'User Dashboard' }
-
           ];
   }
 };
@@ -53,7 +48,8 @@ const getLinksForRole = (role: string) => {
 export function Navigation() {
   const pathname = usePathname();
   const { userRole } = useAuth();
-  
+
+
   const links = getLinksForRole(userRole);
 
   return (

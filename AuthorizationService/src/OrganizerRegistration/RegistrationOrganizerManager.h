@@ -10,20 +10,20 @@ class OrganizerRegistrationManager {
     using json = nlohmann::json;
 
     struct OrganizerDataWithStatus {
-        std::string email;
-        std::string company;
-        std::string tin;
-        std::string status;
-        std::string user_id;
+    std::string email;
+    std::string company;
+    std::string tin;
+    std::string status;
+    std::string user_id;
 
-        static OrganizerDataWithStatus getRegistrationData(json& parsed) {
-            return {parsed.at("email").get<std::string>(),
-                    parsed.at("company").get<std::string>(),
-                    parsed.at("tin").get<std::string>(),
-                    parsed.at("status").get<std::string>(),
-                    parsed.at("user_id").get<std::string>()};
-        }
-    };
+    static OrganizerDataWithStatus getRegistrationData(json& parsed) {
+        return {parsed.at("email").get<std::string>(),
+                parsed.at("company").get<std::string>(),
+                parsed.at("tin").get<std::string>(),
+                parsed.at("status").get<std::string>(),
+                parsed.at("user_id").get<std::string>()};
+    }
+};
 
 public:
     static void RegisterOrganizerRequest(const httplib::Request& request, httplib::Response &res, Database& db);

@@ -45,6 +45,6 @@ target_link_libraries(AuthorizationService PRIVATE
     CURL::libcurl
     OpenSSL::SSL
     OpenSSL::Crypto
-    pqxx  # <-- ключевой момент
-    pq    # иногда тоже нужно явно указать
+    pqxx
+    pq
 )

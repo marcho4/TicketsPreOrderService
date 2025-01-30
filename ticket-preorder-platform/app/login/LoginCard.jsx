@@ -43,6 +43,7 @@ export default function AuthCard() {
             console.log(response.status)
             if (response.status === 200) {
                 let body = await response.json();
+                window.location.reload();
                 switch (body.data.role) {
                     case "ADMIN":
                         router.push('/admin');
@@ -88,7 +89,7 @@ export default function AuthCard() {
             { company, email, tin }, setLoading)
 
         if (response.status === 200) {
-            router.push("/dashboard");
+            router.push("/");
         } else {
             console.log("Wrong credentials");
         }
@@ -132,7 +133,7 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-accent hover:text-my_black transition-colors duration-300"
+                                className="w-full rounded-xl hover:bg-accent bg-my_black hover:text-my_black transition-colors duration-300"
                             >
                                 {loading ? (
                                     <div className="flex items-center gap-2">

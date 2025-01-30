@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS AuthorizationService.AuthorizationData (
     login TEXT,
     password TEXT,
     email TEXT,
-    user_id TEXT,
-    status Status
+    status Status,
+    user_id TEXT
 );
 
 CREATE TABLE if NOT EXISTS AuthorizationService.TemplateUser (

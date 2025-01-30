@@ -10,9 +10,7 @@ RUN cargo chef prepare --recipe-path recipe.json
 # Этап 3: Сборка зависимостей и приложения
 FROM chef AS builder
 COPY --from=planner /app/recipe.json recipe.json
-# Сборка зависимостей (кэширование)
 RUN cargo chef cook --release --recipe-path recipe.json
-# Сборка самого приложения
 COPY . .
 RUN cargo build --release --bin orchestrator
 
@@ -25,9 +23,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
     
 # Копирование бинарника из этапа сборки
+COPY src/orchestrator/docker.toml /app/docker.toml
+COPY src/orchestrator/dev.toml /app/dev.toml
 COPY --from=builder /app/target/release/orchestrator /app/orchestrator
 
-# Открытие порта
+
 EXPOSE 8000
-# Установка команды по умолчанию
 CMD ["./orchestrator"]

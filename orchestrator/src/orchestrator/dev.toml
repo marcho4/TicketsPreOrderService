@@ -1,0 +1,6 @@
+main_url = "http://localhost:8000"
+jwt_url = "http://localhost:8001"
+auth_url = "http://localhost:8002"
+admin_url = "http://localhost:8003"
+organizer_url = "http://localhost:8004"
+frontend_url = "http://localhost:3000"
