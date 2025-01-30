@@ -1,5 +1,8 @@
+#define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <iostream>
-#include "libraries/httplib.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
+#include "../libraries/httplib.h"
 #include "src/OrganizerAccountCRUD/CreateOrganizerAccount.h"
 #include "src/OrganizerAccountCRUD/UpdateOrganizerAccount.h"
 #include "src/MatchCreating/CreateMatch/MatchCreator.h"
@@ -7,70 +10,58 @@
 #include "src/OrganizerAccountCRUD/GetAccountInfo.h"
 
 int main() {
-    try {
-        httplib::Server server;
-        // Обработчик preflight OPTIONS запросов
-        server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
-            res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
-            res.set_header("Access-Control-Allow-Credentials", "true");
-            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-            res.set_header("Content-Type", "application/json");
-            res.status = 200;
-        });
 
-        // Функция для установки CORS-заголовков
-        auto set_cors_headers = [&](httplib::Response& res) {
-            res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
-            res.set_header("Access-Control-Allow-Credentials", "true");
-            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-            res.set_header("Content-Type", "application/json");
-        };
+    auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/organizer_service.log", 1048576 * 5, 3);
+    logger->flush_on(spdlog::level::info);
+    spdlog::set_default_logger(logger);
+    spdlog::info("Логгер успешно создан!");
+
+    try {
+        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
         // инициализация хоста и порта для подключения
-        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=organizer_personal_account host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("src/postgres/organizer_personal_account.sql");
+        db.initDbFromFile("../src/postgres/organizer_personal_account.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
-        server.Post("/create_organizer_info", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            set_cors_headers(res);
-            CreateOrganizerInfo createOrganizerInfo;
-            createOrganizerInfo.OrganizerPersonalInfoCreateRequest(request, res, db);
+
+        server.Post("/organizer/create_account", [&db](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на создание аккаунта организатора");
+            CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(request, res, db);
         });
 
-        server.Put("/update_organizer_info/:id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            set_cors_headers(res);
+        server.Put("/organizer/update_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на обновление данных организатора");
             UpdateOrganizerInfo updateOrganizerInfo;
             updateOrganizerInfo.OrganizerPersonalInfoUpdateRequest(request, res, db);
         });
 
-        server.Get("/get_account_info/:id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            set_cors_headers(res);
+        server.Get("/organizer/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на получение данных организатора");
             GetAccountInfo::GetAccountInfoRequest(request, res, db);
         });
 
-        server.Post("/organizer/:id/create_match", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            set_cors_headers(res);
+        server.Post("/organizer/:id/create_match", [&db](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на создание матча");
             MatchCreator creator;
             creator.CreateMatchRequest(request, res, db);
         });
         // TODO: написать логику
-        server.Put("/organizer/:id/update_match/:match_id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            set_cors_headers(res);
+        server.Put("/organizer/:id/update_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
+
         });
         // TODO: написать логику
-        server.Post("/organizer/:id/delete_match/:match_id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            set_cors_headers(res);
+        server.Post("/organizer/:id/delete_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
+
         });
         // TODO: написать логику
-        server.Post("/organizer/:id/add_tickets/:match_id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            set_cors_headers(res);
+        server.Post("/organizer/:id/add_tickets/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
+
         });
 
-        std::cout << "Server is listening http://0.0.0.0:8004" << '\n';
-        server.listen("0.0.0.0", 8004);
+        std::cout << "Server is listening https://localhost:8002" << '\n';
+        server.listen("localhost", 8002);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }

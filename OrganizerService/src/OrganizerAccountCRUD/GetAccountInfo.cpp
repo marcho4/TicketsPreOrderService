@@ -5,6 +5,7 @@ void GetAccountInfo::GetAccountInfoRequest(const httplib::Request& req, httplib:
     if (!req.path_params.at("id").empty()) {
         organizer_id = req.path_params.at("id");
     } else {
+        spdlog::error("Пропущен параметр id, отказано в получении информации об организаторе");
         sendError(res, 400, "Missing id parameter");
         return;
     }
@@ -14,6 +15,7 @@ void GetAccountInfo::GetAccountInfoRequest(const httplib::Request& req, httplib:
     }
 
     json organizer_info_json = getOrganizerInfoJson(organizer_id, db);
+    spdlog::info("Информация об организаторе с organizer_id = {} успешно отправлена", organizer_id);
     res.status = 200;
     res.set_content(organizer_info_json.dump(), "application/json");
 }

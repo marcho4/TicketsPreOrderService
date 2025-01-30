@@ -17,10 +17,12 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
         json response = {
                 {"status", "Application sent to admin"}
         };
+        spdlog::info("Заявка на регистрацию организатора отправлена администратору");
         res.status = 200;
         res.set_content(response.dump(), "application/json");
         return;
     } catch (const std::exception& e) {
+        spdlog::error("Ошибка при обработке запроса на регистрацию организатора: {}", e.what());
         ErrorHandler::sendError(res, 400, "Invalid request format");
     }
 }
@@ -51,8 +53,13 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
                 {"message", "Organizer approved"},
                 {"status", "success"}
         };
+        spdlog::info("Заявка на регистрацию организатора с email: {} одобрена, организатор зарегистрирован",
+                     data_sent_by_admin.email);
+
         res.set_content(response_body.dump(), "application/json");
     } else {
+        spdlog::error("Заявка на регистрацию организатора с email: {} отклонена, отказано в регистрации",
+                      data_sent_by_admin.email);
         res.status = 403;
         res.set_content(json{{"status", "rejected"}, {"message", "Registration denied"}}.dump(), "application/json");
     }

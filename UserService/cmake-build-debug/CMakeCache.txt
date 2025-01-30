@@ -255,8 +255,14 @@ UserService_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 UserService_SOURCE_DIR:STATIC=/Users/nazarzakrevskij/TicketsPreOrderService/UserService
 
+//The directory containing a CMake configuration file for fmt.
+fmt_DIR:PATH=/opt/homebrew/lib/cmake/fmt
+
 //Path to a library.
 pkgcfg_lib_PC_CURL_curl:FILEPATH=/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib
+
+//The directory containing a CMake configuration file for spdlog.
+spdlog_DIR:PATH=/opt/homebrew/lib/cmake/spdlog
 
 
 ########################
@@ -331,6 +337,8 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Test CMAKE_HAVE_LIBC_PTHREAD
+CMAKE_HAVE_LIBC_PTHREAD:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/Users/nazarzakrevskij/TicketsPreOrderService/UserService
@@ -408,6 +416,8 @@ CURL_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //Details about finding CURL
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib][/opt/homebrew/Cellar/curl/8.11.1/include][c ][v8.11.1()]
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 PC_CURL_CFLAGS:INTERNAL=-I/opt/homebrew/Cellar/curl/8.11.1/include;-I/opt/homebrew/Cellar/brotli/1.1.0/include;-I/opt/homebrew/opt/zstd/include;-I/opt/homebrew/Cellar/libssh2/1.11.1/include;-I/opt/homebrew/Cellar/rtmpdump/2.4-20151223_3/include;-I/opt/homebrew/Cellar/openssl@3/3.4.0/include;-I/opt/homebrew/Cellar/libnghttp2/1.64.0/include
 PC_CURL_CFLAGS_I:INTERNAL=
 PC_CURL_CFLAGS_OTHER:INTERNAL=

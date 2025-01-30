@@ -5,6 +5,8 @@
 #include "../postgres/PostgresProcessing.h"
 #include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
 #include "../ErrorHandler.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 
 class OrganizerRegistrationManager {
     using json = nlohmann::json;
@@ -47,12 +49,15 @@ public:
 
         if (email.empty() || company.empty() || tin.empty()) {
             ErrorHandler::sendError(res, 400, "Fill all fields!");
+            spdlog::error("Пропущены обязательные поля, отказано в регистрации");
             return false;
         }
         if (!AuxiliaryFunctions::isValidEmail(email)) {
+            spdlog::error("Неккоректный формат email: {}, отказано в регистрации", email);
             ErrorHandler::sendError(res, 400, "Invalid email format");
         }
         if (!OrganizerRegistrationManager::checkCorrectnessTIN(tin)) {
+            spdlog::error("Неккоректный формат ИНН: {}, отказано в регистрации", tin);
             ErrorHandler::sendError(res, 400, "Invalid TIN format");
             return false;
         }

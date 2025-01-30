@@ -4,6 +4,8 @@
 #include "../../../libraries/nlohmann/json.hpp"
 #include "../../postgres/PostgresProcessing.h"
 #include "../../utils/ValidDataChecker.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 
 class DataProvider {
     using json = nlohmann::json;

@@ -8,6 +8,7 @@ void UpdateOrganizerInfo::OrganizerPersonalInfoUpdateRequest(const httplib::Requ
     if (!req.path_params.at("id").empty()) {
         organizer_id = req.path_params.at("id");
     } else {
+        spdlog::error("Не указан id организатора, отказано в обновлении");
         sendError(res, 400, "Missing id parameter");
         return;
     }
@@ -23,6 +24,7 @@ void UpdateOrganizerInfo::OrganizerPersonalInfoUpdateRequest(const httplib::Requ
     OrganizerData organizer_data = OrganizerData::parseFromJson(parsed);
 
     if (CheckEmailUnique(organizer_data.email, organizer_id, db)) {
+        spdlog::error("Пользователь с email: {} уже существует, отказано в обновлении", organizer_data.email);
         sendError(res, 409, "User with this email already exists");
         return;
     }
@@ -35,8 +37,10 @@ void UpdateOrganizerInfo::OrganizerPersonalInfoUpdateRequest(const httplib::Requ
     pqxx::result response = db.executeQueryWithParams(update_query, data);
     // проверка, что хоть что-то было изменено
     if (response.affected_rows() == 0) {
+        spdlog::error("Пользователь с id {} не найден или изменения не были внесены", organizer_id);
         sendError(res, 404, "User not found or no changes made.");
     } else {
+        spdlog::info("Данные пользователя с id {} успешно обновлены", organizer_id);
         res.status = 201;
         res.set_content(R"({"message": "User info updated successfully."})", "application/json");
     }

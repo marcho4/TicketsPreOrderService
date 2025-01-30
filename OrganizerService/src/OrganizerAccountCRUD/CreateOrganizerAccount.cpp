@@ -7,12 +7,14 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
     try {
         parsed = json::parse(req.body);
     } catch (const json::parse_error& e) {
+        spdlog::error("Не удалось распарсить JSON: {}", e.what());
         sendError(res, 400, "Invalid JSON format");
         return;
     }
 
     const std::vector<std::string> required_fields = {"email", "organization_name", "tin"};
     if (!validateRequiredFields(parsed, required_fields, res)) {
+        spdlog::error("Пропущены обязательные поля, отказано в создании");
         return;
     }
 
@@ -23,12 +25,14 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
     }
 
     if (CheckOrganizerExistence(organizer_data.email, db)) { // проверка на существование пользователя
+        spdlog::error("Пользователь с таким email уже существует, отказано в создании");
         sendError(res, 409, "User with this email already exists");
         return;
     }
 
     std::string insert_data = "INSERT INTO Organizers.OrganizersData (organization_name, tin, email, phone_number) "
                               "VALUES ($1, $2, $3, $4) RETURNING organizer_id";
+
     std::vector<std::string> params = {organizer_data.organization_name, organizer_data.tin,
                                        organizer_data.email, "XXXXXXXXXX"};
     pqxx::result result = db.executeQueryWithParams(insert_data, params);
@@ -44,9 +48,13 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
                 }
         };
 
+        spdlog::info("Организатор с email: {} успешно создан, id организатора: {}", organizer_data.email,
+                     result[0]["organizer_id"].as<std::string>());
+
         res.status = 201;
         res.set_content(json_response.dump(), "application/json");
     } else {
+        spdlog::error("Не удалось вставить данные в базу данных");
         sendError(res, 500, "Failed to insert data into the database");
     }
 }

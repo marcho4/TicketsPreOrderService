@@ -21,7 +21,7 @@ def db_connection():
 
 def create_organizer_info(data):
     organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data)
+    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data, verify=False)
     assert result.status_code == 201
     return result
 
@@ -53,7 +53,7 @@ def test_get_account_data(data, expected_status_code, expected_message, db_conne
     cursor.close()
 
     if expected_status_code == 200:
-        result = requests.get(f"{BASE_URL}/organizer/get_account_info/{organizer_id}", json=data)
+        result = requests.get(f"{BASE_URL}/organizer/get_account_info/{organizer_id}", json=data, verify=False)
         print(organizer_id)
         assert result.status_code == expected_status_code
         result_json = result.json()
@@ -62,7 +62,7 @@ def test_get_account_data(data, expected_status_code, expected_message, db_conne
         assert result_json["email"] == data["email"]
     else:
         organizer_id = uuid.uuid4()
-        result = requests.get(f"{BASE_URL}/organizer/get_account_info/unknown_id", json=data)
+        result = requests.get(f"{BASE_URL}/organizer/get_account_info/unknown_id", json=data, verify=False)
         assert result.status_code == expected_status_code
         result_json = result.json()
         assert result_json["message"] == expected_message

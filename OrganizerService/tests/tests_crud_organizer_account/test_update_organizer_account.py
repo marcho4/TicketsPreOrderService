@@ -21,7 +21,7 @@ def db_connection():
 
 def create_organizer_info(data):
     organizer_id = uuid.uuid4()
-    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data)
+    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data, verify=False)
     assert result.status_code == 201
     return result
 
@@ -82,7 +82,7 @@ def test_update_account(data, new_data, expected_status_code, expected_message, 
     db_result = cursor.fetchone()
     cursor.close()
 
-    result = requests.put(f"{BASE_URL}/organizer/update_info/{organizer_id}", json=new_data)
+    result = requests.put(f"{BASE_URL}/organizer/update_info/{organizer_id}", json=new_data, verify=False)
     assert result.status_code == expected_status_code
     result_json = result.json()
     assert result_json["message"] == expected_message
@@ -115,7 +115,7 @@ def test_no_changes_on_identical_data(data, db_connection):
     data_json = response.json()
     organizer_id = data_json["data"]["id"]
 
-    result = requests.put(f"{BASE_URL}/organizer/update_info/{organizer_id}", json=data)
+    result = requests.put(f"{BASE_URL}/organizer/update_info/{organizer_id}", json=data, verify=False)
     assert result.status_code == 201
     result_json = result.json()
     assert result_json["message"] == "User info updated successfully."
@@ -150,6 +150,6 @@ def test_update_with_duplicate_email(db_connection):
     new_data = data2.copy()
     new_data["email"] = data1["email"]
 
-    result = requests.put(f"{BASE_URL}/organizer/update_info/{organizer_id}", json=new_data)
+    result = requests.put(f"{BASE_URL}/organizer/update_info/{organizer_id}", json=new_data, verify=False)
     assert result.status_code == 409
     assert result.json()["message"] == "User with this email already exists"

@@ -1,3 +1,4 @@
+#define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <iostream>
 #include "libraries/httplib.h"
 #include "src/OrganizerRegistration/RegistrationOrganizerManager.h"
@@ -5,12 +6,18 @@
 #include "src/Authorization/AuthorizationManager.h"
 #include "src/Admin/AdminAuthorization.h"
 #include "src/Admin/AdminCreation.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 
 int main() {
-    try {
-        httplib::Server server;
+    auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/authorizations_service.log", 1048576 * 5, 3);
+    logger->flush_on(spdlog::level::info);
+    spdlog::set_default_logger(logger);
+    spdlog::info("Логгер успешно создан!");
 
-        // Обработчик preflight OPTIONS запросов
+    try {
+        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
+
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
             res.set_header("Access-Control-Allow-Credentials", "true");
@@ -20,7 +27,6 @@ int main() {
             res.status = 200;
         });
 
-        // Функция для установки CORS-заголовков
         auto set_cors_headers = [&](httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
             res.set_header("Access-Control-Allow-Credentials", "true");
@@ -70,7 +76,6 @@ int main() {
             AdminAuthorization::AuthorizeAdminRequest(request, res, db);
         });
 
-        // admin/create {"api_key": "const", "login" : "some_login", "password": "huy"}
         std::cout << "Server is listening on 0.0.0.0:8002\n";
         server.listen("0.0.0.0", 8002);
 
