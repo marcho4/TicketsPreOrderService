@@ -1,5 +1,7 @@
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <iostream>
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 #include "../libraries/httplib.h"
 #include "src/OrganizerAccountCRUD/CreateOrganizerAccount.h"
 #include "src/OrganizerAccountCRUD/UpdateOrganizerAccount.h"
@@ -8,6 +10,12 @@
 #include "src/OrganizerAccountCRUD/GetAccountInfo.h"
 
 int main() {
+
+    auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/organizer_service.log", 1048576 * 5, 3);
+    logger->flush_on(spdlog::level::info);
+    spdlog::set_default_logger(logger);
+    spdlog::info("Логгер успешно создан!");
+
     try {
         httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
         // инициализация хоста и порта для подключения
@@ -17,20 +25,25 @@ int main() {
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
+
         server.Post("/organizer/create_account", [&db](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на создание аккаунта организатора");
             CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(request, res, db);
         });
 
         server.Put("/organizer/update_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на обновление данных организатора");
             UpdateOrganizerInfo updateOrganizerInfo;
             updateOrganizerInfo.OrganizerPersonalInfoUpdateRequest(request, res, db);
         });
 
         server.Get("/organizer/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на получение данных организатора");
             GetAccountInfo::GetAccountInfoRequest(request, res, db);
         });
 
         server.Post("/organizer/:id/create_match", [&db](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на создание матча");
             MatchCreator creator;
             creator.CreateMatchRequest(request, res, db);
         });

@@ -16,11 +16,13 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
         status = db.executeQueryWithParams(status_query, params);
     } catch (const std::exception& e) {
         ErrorHandler::sendError(res, 500, "Failed to get user status");
+        spdlog::error("Не удалось получить статус пользователя");
         return;
     }
 
     if (status.empty()) {
         ErrorHandler::sendError(res, 403, "Access denied");
+        spdlog::error("Пользователь с логином {} отсутствует в БД, отказано в доступе", login_data.login);
         return;
     }
 
@@ -34,6 +36,7 @@ void AuthorizationManager::AuthorizationRequest(const httplib::Request& req, htt
             "role": ")" + role + R"("
         }
     })";
+    spdlog::info("Роль: {} успешно авторизован, id: {}", role, id);
     res.status = 200;
     res.set_content(response_content, "application/json");
 }

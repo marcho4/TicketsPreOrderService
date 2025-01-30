@@ -1,3 +1,5 @@
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 #include "../../libraries/httplib.h"
 #include "../../libraries/nlohmann/json.hpp"
 #include "../postgres/PostgresProcessing.h"
@@ -28,9 +30,11 @@ public:
     static bool validateRequest(const std::string& organizer_id, httplib::Response& res, Database& db) {
         if (!DataCheker::isValidUUID(organizer_id)) {
             GetAccountInfo::sendError(res, 400, "Invalid organizer_id format");
+            spdlog::error("Не валидный формат organizer_id, отказано в получении информации об организаторе");
             return false;
         }
         if (!CheckOrganizerExistence(organizer_id, db)) {
+            spdlog::error("Организатор с organizer_id = {} не найден", organizer_id);
             GetAccountInfo::sendError(res, 404, "User not found");
             return false;
         }

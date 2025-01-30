@@ -1,5 +1,7 @@
-#include "../../libraries/httplib.h"
-#include "../../libraries/nlohmann/json.hpp"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
+#include "../../../libraries/httplib.h"
+#include "../../../libraries/nlohmann/json.hpp"
 #include "pqxx/pqxx"
 #include "../postgres/PostgresProcessing.h"
 #include "../FormatRegexHelper/ValidDataChecker.h"
@@ -20,10 +22,12 @@ class CreateOrganizerInfo {
 
         bool Validate(httplib::Response& res) const {
             if (email.empty() || organization_name.empty() || tin.empty()) {
+                spdlog::error("Пропущены обязательные поля");
                 sendError(res, 400, "Empty fields");
                 return false;
             }
             if (!DataCheker::isValidEmailFormat(email)) {
+                spdlog::error("Неверный формат email, отказано в создании");
                 sendError(res, 400, "Invalid email format");
                 return false;
             }

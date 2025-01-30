@@ -4,6 +4,8 @@
 #include "../postgres/PostgresProcessing.h"
 #include "bcrypt.h"
 #include "../ErrorHandler.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 
 class AuthorizationManager {
     using json = nlohmann::json;
@@ -50,11 +52,13 @@ public:
 
         if (password_hash.empty()) {
             ErrorHandler::sendError(res, 403, "Access denied");
+            spdlog::error("Пользователь с логином {} отсутствует в БД, отказано в доступе", login_data.login);
             return false;
         }
 
         if (!AuthorizationManager::validatePassword(login_data.password, password_hash[0][0].c_str())) {
             ErrorHandler::sendError(res, 403, "Access denied");
+            spdlog::error("Пользователь с логином {} предоставил неверный пароль, отказано в доступе", login_data.login);
             return false;
         }
         return true;

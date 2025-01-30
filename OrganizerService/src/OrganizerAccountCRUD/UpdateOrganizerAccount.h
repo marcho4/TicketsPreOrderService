@@ -1,5 +1,7 @@
-#include "../../libraries/httplib.h"
-#include "../../libraries/nlohmann/json.hpp"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
+#include "../../../libraries/httplib.h"
+#include "../../../libraries/nlohmann/json.hpp"
 #include "pqxx/pqxx"
 #include "../postgres/PostgresProcessing.h"
 #include "../FormatRegexHelper/ValidDataChecker.h"
@@ -8,12 +10,14 @@ class UpdateOrganizerInfo {
     using json = nlohmann::json;
 
     struct OrganizerData {
+        std::string tin;
         std::string organization_name;
         std::string email;
         std::string phone_number;
 
         static OrganizerData parseFromJson(json& parsed) {
-            return {parsed["organization_name"],
+            return {parsed["tin"],
+                    parsed["organization_name"],
                     parsed["email"],
                     parsed["phone_number"]};
         }
@@ -33,16 +37,19 @@ class Validator {
 
 public:
     static bool Validate(const json& parsed, std::string& message) {
-        if (parsed["organization_name"].empty() ||
+        if (parsed["tin"].empty() || parsed["organization_name"].empty() ||
             parsed["email"].empty() || parsed["phone_number"].empty()) {
             message = "Empty fields";
+            spdlog::error("Пропущены обязательные поля, пользователю отказано в обновлении");
             return false;
         }
         if (!DataCheker::isValidPhoneNumber(parsed["phone_number"])) {
+            spdlog::error("Неверный формат номера телефона, пользователю отказано в обновлении");
             message = "Invalid phone number";
             return false;
         }
         if (!DataCheker::isValidEmailFormat(parsed["email"])) {
+            spdlog::error("Неверный формат email, пользователю отказано в обновлении");
             message = "Invalid email format";
             return false;
         }
