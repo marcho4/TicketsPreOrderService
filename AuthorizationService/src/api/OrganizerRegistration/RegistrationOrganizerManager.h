@@ -1,10 +1,10 @@
 #include <iostream>
-#include "../../../libraries/httplib.h"
-#include "../../../libraries/nlohmann/json.hpp"
+#include "../../libraries/httplib.h"
+#include "../../libraries/nlohmann/json.hpp"
 #include <pqxx/pqxx>
-#include "../../postgres/PostgresProcessing.h"
-#include "../../AuxiliaryFunctions/AuxiliaryFunctions.h"
-#include "../../ErrorHandler.h"
+#include "../postgres/PostgresProcessing.h"
+#include "../AuxiliaryFunctions/AuxiliaryFunctions.h"
+#include "../ErrorHandler.h"
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
 
