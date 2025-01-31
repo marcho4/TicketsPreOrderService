@@ -1,13 +1,15 @@
 "use client"
 
 import {useParams} from "next/navigation";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Image from "next/image";
 import {Button} from "../../../../components/ui/button";
+import {X} from "lucide-react";
 
 export default function Page(props) {
     const {match_id} = useParams();
 
+    const [modal, setModal] = useState(false);
     const [isEditing, setEditing] = useState(false);
     const [matchData, setMatchData] = useState({
         team_home: "Barcelona",
@@ -17,23 +19,48 @@ export default function Page(props) {
         description: "El Classico",
         match_status: "Not started",
     });
-
+    const [ticketsFile, setTicketsFile] = useState(null);
     const [tickets, setTickets] = useState([
-        {seat: "12", row: "45", sector: "R404", price: 2000, category: "cheap", status: "Paid"},
-        {seat: "32", row: "22", sector: "R204", price: 3000, category: "middle-class", status: "Pre-ordered"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, category: "expensive", status: "Pre-ordered"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, category: "expensive", status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 5000, category: "expensive", status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 10000, category: "expensive", status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 4500, category: "expensive", status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, category: "expensive", status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, category: "expensive", status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, category: "expensive", status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, category: "expensive", status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, category: "expensive", status: "Paid"},
+        {seat: "12", row: "45", sector: "R404", price: 2000, status: "Paid"},
+        {seat: "32", row: "22", sector: "R204", price: 3000, status: "Pre-ordered"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Pre-ordered"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 5000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 10000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 4500, status: "Paid"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
 
     ]);
 
+    useEffect(() => {
+        if (modal) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+        return () => {
+            document.body.classList.remove('overflow-hidden');
+        };
+    }, [modal]);
+
+    // Function to change tickets file
+    const handleFileChange = (e) => {
+        setTicketsFile(e.target.files[0]);
+    }
+
+    // Function to submit tickets file to an API
+    const handleSubmitTickets = (e) => {
+        e.preventDefault();
+        let formData = new FormData();
+        formData.append('file', ticketsFile);
+
+    }
+
+    // Editing function for match info
     const handleChange = (e) => {
         const {name, value} = e.target;
         setMatchData((prevData) => ({
@@ -42,16 +69,17 @@ export default function Page(props) {
         }));
     }
 
+    // Function to submit new stadium scheme
     const handleSubmit = (e) => {
         e.preventDefault();
         const file = e.target.files[0];
-        let formData = new FormData()
-        formData.append('file', file)
-
+        let formData = new FormData();
+        formData.append('file', file);
     }
 
+
     return (
-        <div className="flex flex-col items-center justify-center mx-6 gap-y-5">
+        <div className={"flex flex-col items-center justify-center mx-6 gap-y-5"}>
             {/* Title section */}
             <header className="flex flex-col w-full  mx-10 py-10  rounded-lg items-center">
                 <div className="text-2xl font-semibold  text-my_black/80">
@@ -100,9 +128,9 @@ export default function Page(props) {
                                 </label>
                                 <input
                                     id="uploadFile"
-                                    className="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4
-                                        file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50
-                                        file:text-blue-700 file:cursor-pointer hover:file:bg-blue-100 cursor-pointer
+                                    className="block w-full text-sm text-gray-900 file:mr-4 file:py-1 file:px-2
+                                        file:rounded file:border-0 file:text-sm file:font-semibold file:bg-button-darker
+                                        file:text-white file:cursor-pointer hover:file:bg-button-darker/90 cursor-pointer
                                          focus:outline-none"
                                     type="file"
                                     name="uploadFile"
@@ -114,8 +142,8 @@ export default function Page(props) {
 
                             <button
                                 type="submit"
-                                className="px-5 py-2 rounded-md bg-button-secondary hover:bg-accent text-lg lg:text-xl
-                                     hover:text-my_black text-white font-medium transition-colors">
+                                className="px-5 py-2 rounded-md bg-green_accent text-lg lg:text-xl
+                                     hover:text-my_black  font-medium transition-colors">
                                 Submit
                             </button>
                         </form>
@@ -155,17 +183,22 @@ export default function Page(props) {
                             ))}
                             <div className="items-center w-full flex flex-row justify-center gap-x-5">
                                 {isEditing && (
-                                    <Button className="bg-button-secondary hover:bg-accent text-lg lg:text-xl
-                                     hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
+                                    <Button className="bg-green_accent hover:bg-green_accent hover:text-my_black text-lg lg:text-xl
+                                     text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
                                             onClick={() => setEditing(!isEditing)}>
                                         Save changes
                                     </Button>
                                 )}
-                                <Button className="bg-button-secondary hover:bg-accent text-lg
-                                lg:text-xl hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
-                                onClick={() => setEditing(!isEditing)}>
-                                    {isEditing ? "Cancel Edit" : "Edit"}
-                                </Button>
+                                {!isEditing ? (<Button className="bg-button-darker hover:bg-accent text-lg lg:text-xl
+                                hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
+                                                        onClick={() => setEditing(!isEditing)}>
+                                    Edit
+                                </Button>) : (<Button className="bg-button-darker hover:bg-accent text-lg lg:text-xl
+                                hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
+                                                      onClick={() => {setMatchData()}}>
+                                    Cancel
+                                </Button>)}
+
                             </div>
 
                         </div>
@@ -173,14 +206,14 @@ export default function Page(props) {
                 </div>
 
                 {/* Tickets section */}
-                <div className="flex flex-col lg:flex-row max-w-full w-full p-6 gap-10">
-                    <div className="flex flex-col max-w-full w-full bg-gray-50 rounded-lg p-6">
+                <div className="flex flex-col lg:flex-row max-w-full w-full  p-6 gap-10">
+                    <div className="flex flex-col max-w-full w-full bg-gray-50 shadow-lg rounded-lg p-6">
                         <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6">
                             Tickets
                         </h1>
                         <div className="flex flex-col items-center w-full justify-center rounded-lg gap-y-10">
                             {/* Tickets */}
-                            <div className="relative max-h-96 min-w-96 w-full overflow-y-auto border border-gray-300 rounded-lg bg-white">
+                            <div className="relative max-h-96 min-w-[500px] overflow-x-auto w-full overflow-y-auto border border-gray-300 rounded-lg bg-white">
                                 <table className="table-fixed w-full">
                                     <thead className="sticky top-0 bg-gray-100 z-10">
                                     <tr className="text-left">
@@ -194,13 +227,13 @@ export default function Page(props) {
                                             Price
                                         </th>
                                         <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                                            Category
-                                        </th>
-                                        <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
                                             Sector
                                         </th>
                                         <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
                                             Status
+                                        </th>
+                                        <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                                            Actions
                                         </th>
                                     </tr>
                                     </thead>
@@ -217,14 +250,20 @@ export default function Page(props) {
                                                 {item.price}
                                             </td>
                                             <td className="px-4 py-2 border-b border-gray-200">
-                                                {item.category}
-                                            </td>
-                                            <td className="px-4 py-2 border-b border-gray-200">
                                                 {item.sector}
                                             </td>
                                             <td className="px-4 py-2 border-b border-gray-200">
                                                 {item.status}
                                             </td>
+                                            <td className="px-4 py-2 border-b border-gray-200 gap-x-2">
+                                                <Button
+                                                    disabled={item.status !== "Available"}
+                                                    className={"bg-button-darker hover:bg-accent hover:text-my_black" +
+                                                        " transition-colors duration-300 p-2 text-white  rounded-lg"}>
+                                                    Delete
+                                                </Button>
+                                            </td>
+
                                         </tr>
                                     ))}
                                     </tbody>
@@ -233,15 +272,74 @@ export default function Page(props) {
 
                             <div className="flex flex-row items-center w-full justify-end rounded-lg">
                                 <Button
-                                    className="px-5 py-2 rounded-md bg-button-secondary hover:bg-accent text-lg lg:text-xl
+                                    onClick={() => setModal(true)}
+                                    className="px-5 py-2 rounded-md bg-button-darker hover:bg-accent text-lg lg:text-xl
                                      hover:text-my_black text-white font-medium transition-colors">
                                     Add tickets
                                 </Button>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
 
+                {/* Modal window to upload tickets */}
+                <div id="background"
+                     onClick={() => setModal(!modal)}
+                     className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
+                        z-[11] cursor-pointer`}>
+                    <div
+                        id="active-modal"
+                        className="relative max-w-[350px] w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
+                        onClick={(e) => e.stopPropagation()}>
+
+                        <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"
+                            onClick={() => setModal(!modal)}/>
+
+                        <div id="modal-content" className="p-6">
+                            <div className="text-2xl font-semibold text-gray-700 mb-3">
+                                Add Tickets
+                            </div>
+                            <div>
+                                Please upload file in .csv format<br/>
+                                Example:
+                                <br/>sector; row; seat; price;
+                                <br/>110; 5; 10; 45000;
+                                <br/>127; 10; 23; 2999;
+                                <form className="max-w-md w-full  rounded-lg p-6  items-center justify-center flex flex-col">
+                                    {/* Блок с загрузкой файла */}
+                                    <div className="mb-4 items-center justify-center flex flex-col">
+                                        <label htmlFor="uploadTicketsFile"
+                                            className="block text-sm text-center font-medium text-gray-700 mb-2"
+                                        >
+                                            Upload Tickets .csv file
+                                        </label>
+                                        <input
+                                            id="uploadTicketsFile"
+                                            className="block w-full text-sm text-gray-900 file:mr-4 file:py-1 file:px-2
+                                        file:rounded file:border-0 file:text-sm file:font-semibold file:bg-button-darker
+                                        file:text-white file:cursor-pointer hover:file:bg-button-darker/90 cursor-pointer
+                                         focus:outline-none"
+                                            type="file"
+                                            name="uploadTicketsFile"
+                                            accept="text/csv"
+                                            required
+                                            multiple={false}
+                                        />
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="px-3 py-1 mt-3 rounded-md bg-green_accent   font-medium transition-colors">
+                                        Submit Tickets
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     )
