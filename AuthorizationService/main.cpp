@@ -8,6 +8,7 @@
 #include "src/api/Admin/AdminCreation.h"
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
+#include "src/api/PasswordUpdating.h"
 
 int main() {
     auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/authorizations_service.log", 1048576 * 5, 3);
@@ -80,6 +81,12 @@ int main() {
             spdlog::info("Получен запрос на авторизацию администратора");
             set_cors_headers(res);
             AdminAuthorization::AuthorizeAdminRequest(request, res, db);
+        });
+
+        server.Put("/renew_password", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на обновление пароля");
+            set_cors_headers(res);
+            PasswordUpdating::UpdatePasswordRequest(request, res, db);
         });
 
         std::cout << "Server is listening on 0.0.0.0:8002\n";
