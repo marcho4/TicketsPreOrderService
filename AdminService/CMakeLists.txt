@@ -24,6 +24,13 @@ link_directories(
     /usr/lib
 )
 
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.12.0
+)
+FetchContent_MakeAvailable(spdlog)
+
 # Создание исполняемого файла
 add_executable(AdminService ${ADMIN_SOURCE_FILES})
 
@@ -32,6 +39,7 @@ find_package(OpenSSL REQUIRED)
 
 target_link_libraries(AdminService
         PRIVATE
+        spdlog::spdlog
         pqxx
         pq
         CURL::libcurl
