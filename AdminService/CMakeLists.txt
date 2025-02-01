@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 project(AdminService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
 
 # Укажите путь к исходным файлам
 set(ADMIN_SOURCE_FILES
-        main.cpp
-        src/api/RequestsHandler.cpp
-        src/postgres/PostgresProcessing.cpp
+    main.cpp
+    src/api/RequestsHandler.cpp
+    src/postgres/PostgresProcessing.cpp
 )
 
 # Добавьте каталоги для заголовочных файлов
@@ -24,10 +24,12 @@ link_directories(
     /usr/lib
 )
 
+include(FetchContent)  # На всякий случай, если требуется явное подключение модуля
+
 FetchContent_Declare(
-        spdlog
-        GIT_REPOSITORY https://github.com/gabime/spdlog.git
-        GIT_TAG v1.12.0
+    spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog.git
+    GIT_TAG v1.12.0
 )
 FetchContent_MakeAvailable(spdlog)
 
@@ -38,11 +40,11 @@ find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 
 target_link_libraries(AdminService
-        PRIVATE
-        spdlog::spdlog
-        pqxx
-        pq
-        CURL::libcurl
-        OpenSSL::SSL
-        OpenSSL::Crypto
+    PRIVATE
+    spdlog::spdlog
+    pqxx
+    pq
+    CURL::libcurl
+    OpenSSL::SSL
+    OpenSSL::Crypto
 )

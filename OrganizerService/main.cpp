@@ -11,14 +11,14 @@
 
 int main() {
 
-    auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/organizer_service.log", 1048576 * 5, 3);
+    auto logger = spdlog::rotating_logger_mt("file_logger", "/app/logs/organizer_service.log", 1048576 * 5, 3);
     logger->flush_on(spdlog::level::info);
     spdlog::set_default_logger(logger);
     spdlog::info("Логгер успешно создан!");
 
     try {
-        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
 
+        httplib::SSLServer server("config/ssl/cert.pem", "config/ssl/key.pem");
         std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/organizer_personal_account.sql");
@@ -60,8 +60,8 @@ int main() {
 
         });
 
-        std::cout << "Server is listening https://localhost:8002" << '\n';
-        server.listen("localhost", 8002);
+        std::cout << "Server is listening https://localhost:8004" << '\n';
+        server.listen("localhost", 8004);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }

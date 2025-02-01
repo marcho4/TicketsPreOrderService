@@ -17,7 +17,7 @@ int main() {
     spdlog::info("Логгер успешно создан!");
 
     try {
-        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
+        httplib::SSLServer server("config/ssl/cert.pem", "config/ssl/key.pem");
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -36,7 +36,7 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=orchestrator host=auth_postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
@@ -51,7 +51,7 @@ int main() {
         server.Post("/user/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на регистрацию пользователя");
             set_cors_headers(res);
-//            UserRegistration::RegisterUserRequest(request, res, db);
+            UserRegistration::RegisterUserRequest(request, res, db);
         });
 
         server.Post("/authorize", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {

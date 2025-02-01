@@ -42,7 +42,7 @@ RUN mkdir -p build && \
     make VERBOSE=1
 
 # Используем правильный исполняемый файл
-CMD ["./build/OrganizerService"]
+CMD ["bash", "-c", "./build/OrganizerService"]
 
 # Открытие порта
 EXPOSE 8004

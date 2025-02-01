@@ -6,7 +6,7 @@
 
 int main() {
     try {
-        httplib::Server server;
+        httplib::SSLServer server("config/ssl/cert.pem", "config/ssl/key.pem");
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
