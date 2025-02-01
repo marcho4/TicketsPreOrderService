@@ -71,7 +71,7 @@ int main() {
         });
 
         std::cout << "Server is listening https://localhost:8001" << '\n';
-        server.listen("localhost", 8001);
+        server.listen("0.0.0.0", 8004);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }
