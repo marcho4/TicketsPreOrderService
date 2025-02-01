@@ -1,0 +1,259 @@
+openapi: 3.0.0
+info:
+  title: Tickets Pre-Order Service API
+  version: 1.0.0
+  description: API для регистрации, авторизации и управления билетами
+
+servers:
+  - url: http://localhost:8003
+    description: Локальный сервер разработки
+
+paths:
+  /organizer/register:
+    post:
+      summary: Регистрация организатора
+      description: Принимает данные организатора и регистрирует его.
+      operationId: registerOrganizer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: Электронная почта организатора
+                company:
+                  type: string
+                  description: Название компании организатора
+                TIN:
+                  type: string
+                  description: Идентификационный номер налогоплательщика (ИНН)
+              required:
+                - email
+                - company
+                - TIN
+      responses:
+        '200':
+          description: Успешная регистрация организатора
+        '400':
+          description: Неверный запрос (например, недействительный email или занятый email)
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /user/register:
+    post:
+      summary: Регистрация пользователя
+      description: Регистрация нового пользователя в системе
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Имя пользователя
+                last_name:
+                  type: string
+                  description: Фамилия пользователя
+                email:
+                  type: string
+                  format: email
+                  description: Электронная почта пользователя
+                login:
+                  type: string
+                  description: Логин пользователя
+                password:
+                    type: string
+                    description: Пароль пользователя
+              required:
+                - name
+                - last_name
+                - email
+                - login
+                - password
+      responses:
+        '200':
+          description: Успешная регистрация пользователя
+        '400':
+          description: Неверный запрос (например, недействительный email или занятый email)
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /authorize:
+    post:
+      summary: Авторизация пользователя
+      description: Аутентификация пользователя и получение JWT токена
+      operationId: authorizeUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                  format: login
+                  description: Логин пользователя
+                password:
+                  type: string
+                  format: password
+                  description: Пароль пользователя
+              required:
+                - login
+                - password
+      responses:
+        '200':
+          description: Успешная авторизация
+        '401':
+          description: Неверные учетные данные
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /admin/create:
+    post:
+      summary: Создание администратора
+      description: Создание нового администратора в системе
+      operationId: createAdmin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                api_key:
+                  type: string
+                  description: Имя администратора
+                login:
+                  type: string
+                  description: Фамилия администратора
+                password:
+                  type: string
+                  description: Электронная почта администратора
+                email:
+                  type: string
+                  description: Логин администратора
+              required:
+               - api_key
+               - login
+               - password
+               - email
+      responses:
+        '200':
+          description: Успешное создание администратора
+        '400':
+          description: Неверный запрос (например, недействительный email или занятый email)
+        '403':
+          description: Неверный ключ апи
+        '409':
+          description: Администратор с таким логином уже существует
+
+  /admin/authorize:
+    post:
+      summary: Авторизация администратора
+      description: Аутентификация администратора и получение JWT токена
+      operationId: authorizeAdmin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                api_key:
+                  type: string
+                  description: Ключ апи
+                email:
+                  type: string
+                  format: email
+                  description: Электронная почта администратора
+                login:
+                  type: string
+                  format: login
+                  description: Логин администратора
+                password:
+                  type: string
+                  format: password
+                  description: Пароль администратора
+              required:
+                - api_key
+                - email
+                - login
+                - password
+      responses:
+        '200':
+          description: Успешная авторизация
+        '403':
+          description: Неверный ключ апи или пароль
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /organizer/approve:
+    post:
+      summary: Подтверждение регистрации
+      description: Подтверждение регистрации пользователя или организатора
+      operationId: approveRegistration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: Электронная почта организатора
+                organization_name:
+                  type: string
+                  description: Название организации
+                tin:
+                  type: string
+                  description: ИНН организации
+                status:
+                  type: string
+                  description: Статус подтверждения
+              required:
+                - email
+                - organization_name
+                - tin
+                - status
+      responses:
+        '200':
+          description: Успешное подтверждение регистрации
+        '403':
+          description: Отказано в доступе
+
+  /password/change:
+    put:
+      summary: Изменение пароля
+      description: Изменение пароля пользователя или организатора
+      operationId: changePassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                  description: Логин пользователя или организатора
+                password:
+                  type: string
+                  description: Новый пароль
+              required:
+                - login
+                - password
+      responses:
+        '200':
+          description: Пароль успешно изменен
+        '400':
+          description: Неверный запрос или пользователь не найден
