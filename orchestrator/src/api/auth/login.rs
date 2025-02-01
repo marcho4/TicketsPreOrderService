@@ -61,7 +61,7 @@ pub async fn login(data: web::Data<Orchestrator>, req_data: web::Json<LoginData>
     };
 
     // 5. Теперь генерируем JWT, отправляя jwt_claims на другой сервис (jwt-сервис)
-    let jwt_url = format!("{}/jwt/generate", data.config.jwt_base_url);
+    let jwt_url = format!("{}/jwt/generate", data.config.jwt_url);
     let jwt_gen_response = match data.client.post(&jwt_url).json(&jwt_claims).send().await {
         Ok(r) => r,
         Err(e) => {

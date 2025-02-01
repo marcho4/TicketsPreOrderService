@@ -1,0 +1,6 @@
+main_url = "http://orchestrator:8000"
+jwt_url = "http://jwt:8001"
+auth_url = "http://auth:8002"
+admin_url = "http://admin:8003"
+organizer_url = "http://organizer:8004"
+frontend_url = "http://localhost:3000"

@@ -1,9 +1,14 @@
 import '@/styles/globals.css'
-import { Inter,  } from 'next/font/google'
+import { Inter, Montserrat } from 'next/font/google'
 import { Metadata } from 'next'
 import { Navigation } from '@/components/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
+
+const montserrat = Montserrat({
+    weight: ['400', '700', '600'],
+    subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: 'Ticket Preorder Platform',
@@ -17,12 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-background text-text`}
-            style={{
-              backgroundImage: 'url("/futuristic-background.jpg")',
-              backgroundSize: 'cover',
-              backgroundAttachment: 'fixed'
-            }}>
+      <body className={`${montserrat.className} bg-background text-text`}>
         <AuthProvider>
           <Navigation />
           <main className="min-h-screen pt-8">

@@ -14,6 +14,8 @@ services:
     build:
       context: ./orchestrator
       dockerfile: Dockerfile
+    environment:
+      - RUNNING_IN_DOCKER=true
     ports:
       - "8000:8000"
     networks:
@@ -27,20 +29,24 @@ services:
       - "8002:8002"
     networks:
       - main
-    depends_on:
-      - postgres
 
-  postgres:
+  auth_postgres:
     image: postgres:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: orchestrator
-    ports:
-      - "5432:5432"
     networks:
       - main
-
+  
+  admin_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    networks:
+      - main
 
   admin:
     build:
@@ -51,7 +57,7 @@ services:
     networks:
       - main
     depends_on:
-      - postgres
+      - admin_postgres
 
   organizer:
     build:
@@ -62,9 +68,16 @@ services:
     networks:
       - main
     depends_on:
-      - postgres
-
-
+      - org_postgres
+  
+  org_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    networks:
+      - main
 
 networks:
   main:

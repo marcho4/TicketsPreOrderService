@@ -30,9 +30,9 @@ void UpdateOrganizerInfo::OrganizerPersonalInfoUpdateRequest(const httplib::Requ
     }
     // формируем запрос и подготовленные данные
     std::string update_query = "UPDATE Organizers.OrganizersData "
-                               "SET organization_name = $1, tin = $2, email = $3, phone_number = $4, updated_at = CURRENT_TIMESTAMP "
-                               "WHERE organizer_id = $5";
-    std::vector<std::string> data = {organizer_data.organization_name, organizer_data.tin,
+                               "SET organization_name = $1, email = $2, phone_number = $3, updated_at = CURRENT_TIMESTAMP "
+                               "WHERE organizer_id = $4";
+    std::vector<std::string> data = {organizer_data.organization_name,
                                      organizer_data.email, organizer_data.phone_number, organizer_id};
     pqxx::result response = db.executeQueryWithParams(update_query, data);
     // проверка, что хоть что-то было изменено
