@@ -22,6 +22,7 @@ paths:
               type: object
               properties:
                 email:
+<<<<<<< HEAD
                     type: string
                     format: email
                     description: Электронная почта организатора
@@ -34,6 +35,17 @@ paths:
                     type: string
                     description: Идентификационный номер налогоплательщика (ИНН)
                     example: "123456789012"
+=======
+                  type: string
+                  format: email
+                  description: Электронная почта организатора
+                company:
+                  type: string
+                  description: Название компании организатора
+                TIN:
+                  type: string
+                  description: Идентификационный номер налогоплательщика (ИНН)
+>>>>>>> 23a005e (documentation added)
               required:
                 - email
                 - company
@@ -59,6 +71,7 @@ paths:
               type: object
               properties:
                 name:
+<<<<<<< HEAD
                     type: string
                     description: Имя пользователя
                     example: "Иван"
@@ -83,13 +96,33 @@ paths:
                     type: string
                     description: ID пользователя из сервиса пользователя
                     example: "1234567890"
+=======
+                  type: string
+                  description: Имя пользователя
+                last_name:
+                  type: string
+                  description: Фамилия пользователя
+                email:
+                  type: string
+                  format: email
+                  description: Электронная почта пользователя
+                login:
+                  type: string
+                  description: Логин пользователя
+                password:
+                    type: string
+                    description: Пароль пользователя
+>>>>>>> 23a005e (documentation added)
               required:
                 - name
                 - last_name
                 - email
                 - login
                 - password
+<<<<<<< HEAD
                 - user_id
+=======
+>>>>>>> 23a005e (documentation added)
       responses:
         '200':
           description: Успешная регистрация пользователя
@@ -111,6 +144,7 @@ paths:
               type: object
               properties:
                 login:
+<<<<<<< HEAD
                     type: string
                     format: login
                     description: Логин пользователя
@@ -118,6 +152,15 @@ paths:
                     type: string
                     format: password
                     description: Пароль пользователя
+=======
+                  type: string
+                  format: login
+                  description: Логин пользователя
+                password:
+                  type: string
+                  format: password
+                  description: Пароль пользователя
+>>>>>>> 23a005e (documentation added)
               required:
                 - login
                 - password
@@ -142,6 +185,7 @@ paths:
               type: object
               properties:
                 api_key:
+<<<<<<< HEAD
                     type: string
                     description: Имя администратора
                     example: "VERY_SECRET_KEY"
@@ -157,6 +201,19 @@ paths:
                     type: string
                     description: Логин администратора
                     example: "admin_email@gmail.com"
+=======
+                  type: string
+                  description: Имя администратора
+                login:
+                  type: string
+                  description: Фамилия администратора
+                password:
+                  type: string
+                  description: Электронная почта администратора
+                email:
+                  type: string
+                  description: Логин администратора
+>>>>>>> 23a005e (documentation added)
               required:
                - api_key
                - login
@@ -185,6 +242,7 @@ paths:
               type: object
               properties:
                 api_key:
+<<<<<<< HEAD
                     type: string
                     description: Ключ апи
                     example: "VERY_SECRET_KEY"
@@ -203,6 +261,22 @@ paths:
                     format: password
                     description: Пароль администратора
                     example: "admin228"
+=======
+                  type: string
+                  description: Ключ апи
+                email:
+                  type: string
+                  format: email
+                  description: Электронная почта администратора
+                login:
+                  type: string
+                  format: login
+                  description: Логин администратора
+                password:
+                  type: string
+                  format: password
+                  description: Пароль администратора
+>>>>>>> 23a005e (documentation added)
               required:
                 - api_key
                 - email
@@ -229,6 +303,7 @@ paths:
               type: object
               properties:
                 email:
+<<<<<<< HEAD
                     type: string
                     format: email
                     description: Электронная почта организатора
@@ -255,6 +330,25 @@ paths:
                 - tin
                 - status
                 - user_id
+=======
+                  type: string
+                  format: email
+                  description: Электронная почта организатора
+                organization_name:
+                  type: string
+                  description: Название организации
+                tin:
+                  type: string
+                  description: ИНН организации
+                status:
+                  type: string
+                  description: Статус подтверждения
+              required:
+                - email
+                - organization_name
+                - tin
+                - status
+>>>>>>> 23a005e (documentation added)
       responses:
         '200':
           description: Успешное подтверждение регистрации
