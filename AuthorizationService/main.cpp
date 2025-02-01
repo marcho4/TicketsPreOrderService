@@ -17,7 +17,7 @@ int main() {
     spdlog::info("Логгер успешно создан!");
 
     try {
-        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
+        httplib::Server server;
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -60,7 +60,7 @@ int main() {
             AuthorizationManager::AuthorizationRequest(request, res, db);
         });
 
-        server.Post("/authorize_approved", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/organizer/approve", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на подтверждение регистрации организатора");
             set_cors_headers(res);
             OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
@@ -83,14 +83,14 @@ int main() {
             AdminAuthorization::AuthorizeAdminRequest(request, res, db);
         });
 
-        server.Put("/renew_password", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на обновление пароля");
             set_cors_headers(res);
             PasswordUpdating::UpdatePasswordRequest(request, res, db);
         });
 
         std::cout << "Server is listening on 0.0.0.0:8002\n";
-        server.listen("0.0.0.0", 8002);
+        server.listen("0.0.0.0", 8003);
 
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';

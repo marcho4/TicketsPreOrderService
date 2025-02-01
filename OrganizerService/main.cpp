@@ -17,8 +17,25 @@ int main() {
     spdlog::info("Логгер успешно создан!");
 
     try {
-        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
-        // инициализация хоста и порта для подключения
+        httplib::Server server;
+
+        server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
+            res.set_header("Access-Control-Allow-Origin", "http://localhost:8002");
+            res.set_header("Access-Control-Allow-Credentials", "true");
+            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            res.set_header("Content-Type", "application/json");
+            res.status = 200;
+        });
+
+        auto set_cors_headers = [&](httplib::Response& res) {
+            res.set_header("Access-Control-Allow-Origin", "http://localhost:8002");
+            res.set_header("Access-Control-Allow-Credentials", "true");
+            res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            res.set_header("Content-Type", "application/json");
+        };
+
         std::string connect = "dbname=organizer_personal_account host=localhost port=5432";
         Database db(connect);
         db.initDbFromFile("../src/postgres/organizer_personal_account.sql");
@@ -26,18 +43,21 @@ int main() {
         pqxx::work W(C);
         W.commit();
 
-        server.Post("/organizer/create_account", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/organizer/create_account", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
             spdlog::info("Получен запрос на создание аккаунта организатора");
             CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(request, res, db);
         });
 
-        server.Put("/organizer/update_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/organizer/update_info/:id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
             spdlog::info("Получен запрос на обновление данных организатора");
             UpdateOrganizerInfo updateOrganizerInfo;
             updateOrganizerInfo.OrganizerPersonalInfoUpdateRequest(request, res, db);
         });
 
-        server.Get("/organizer/get_account_info/:id", [&db](const httplib::Request& request, httplib::Response &res) {
+        server.Get("/organizer/get_account_info/:id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
             spdlog::info("Получен запрос на получение данных организатора");
             GetAccountInfo::GetAccountInfoRequest(request, res, db);
         });
@@ -60,8 +80,8 @@ int main() {
 
         });
 
-        std::cout << "Server is listening https://localhost:8002" << '\n';
-        server.listen("localhost", 8002);
+        std::cout << "Server is listening http://localhost:8002" << '\n';
+        server.listen("0.0.0.0", 8002);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }

@@ -16,7 +16,7 @@ int main() {
     spdlog::info("Логгер успешно создан!");
 
     try {
-        httplib::SSLServer server("../../config/ssl/cert.pem", "../../config/ssl/key.pem");
+        httplib::Server server;
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");

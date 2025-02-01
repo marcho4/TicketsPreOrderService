@@ -9,9 +9,9 @@ servers:
     description: Локальный сервер разработки
 
 paths:
-  /add_organizer_request:
+  /admin/add_organizer:
     post:
-      summary: Добавить запрос на становление организатором
+      summary: Запрос на добавление организатора
       description: Принимает запрос организатора с email, компанией и ИНН.
       operationId: addOrganizerRequest
       requestBody:
@@ -40,11 +40,48 @@ paths:
       responses:
         '200':
           description: Запрос добавлен успешно
-          content:
-            text/plain:
-              example: "sucess"
         '400':
           description: Неверный запрос
-          content:
-            text/plain:
-              example: "bad request"
+
+  /admin/process_organizer:
+    post:
+      summary: Обработка запроса на добавление организатора
+      description: Принимает запрос организатора с email, компанией и ИНН и добавляет его в базу данных.
+      operationId: processOrganizerRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: email организатора
+                  example: "organizer_email@gmail.com"
+                company:
+                  type: string
+                  description: Название компании организатора
+                  example: "KFC"
+                tin:
+                  type: string
+                  description: ИНН компании организатора
+                  example: "1234567890"
+              required:
+                - email
+                - company
+                - tin
+    responses:
+        '200':
+            description: Организатор добавлен успешно
+
+  /admin/pending_requests:
+    get:
+      summary: Получение списка ожидающих запросов
+      description: Возвращает список ожидающих запросов на добавление организаторов.
+      operationId: getPendingRequests
+      responses:
+        '200':
+          description: Список запросов получен успешно
+        '400':
+          description: Неверный запрос
