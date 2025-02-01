@@ -44,7 +44,7 @@ include_directories("/opt/homebrew/opt/openssl@3/include")
 
 # Find the libraries
 find_package(CURL REQUIRED)
-find_package(find_package(spdlog REQUIRED))
+find_package(spdlog REQUIRED)
 # Create executable
 add_executable(OrganizerService ${SOURCE_FILES})
 
