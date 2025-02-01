@@ -83,7 +83,7 @@ int main() {
             AdminAuthorization::AuthorizeAdminRequest(request, res, db);
         });
 
-        server.Put("/user/:id/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на обновление пароля");
             set_cors_headers(res);
             PasswordUpdating::UpdatePasswordRequest(request, res, db);
@@ -96,7 +96,7 @@ int main() {
         });
 
         std::cout << "Server is listening on 0.0.0.0:8002\n";
-        server.listen("0.0.0.0", 8002);
+        server.listen("0.0.0.0", 8003);
 
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
