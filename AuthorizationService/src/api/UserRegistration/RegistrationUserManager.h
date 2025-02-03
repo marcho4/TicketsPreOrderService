@@ -18,13 +18,15 @@ class UserRegistration {
         std::string last_name;
         std::string password;
         std::string login;
+        std::string user_id;
 
         static UserData getUserData(json& parsed) {
             return {parsed.at("email").get<std::string>(),
                     parsed.at("name").get<std::string>(),
                     parsed.at("last_name").get<std::string>(),
                     parsed.at("password").get<std::string>(),
-                    parsed.at("login").get<std::string>()};
+                    parsed.at("login").get<std::string>(),
+                    parsed.at("user_id").get<std::string>()};
         }
     };
 
@@ -91,6 +93,18 @@ public:
 
         UserData data = UserData::getUserData(parsed);
 
+        if (data.email.empty() || data.name.empty() || data.last_name.empty() || data.password.empty() || data.login.empty()) {
+            ErrorHandler::sendError(res, 400, "fill every field!");
+            spdlog::error("Пропущены обязательные поля, отказано в регистрации");
+            return false;
+        }
+
+        if (!AuxiliaryFunctions::isValidEmail(data.email)) {
+            ErrorHandler::sendError(res, 400, "Email already exists or email invalid");
+            spdlog::error("Неверный формат email: {} или email уже существует, отказано в регистрации", data.email);
+            return false ;
+        }
+
         if (!CheckEmailUniquenessOrUserExistence(data.email, db)) {
             ErrorHandler::sendError(res, 400, "Email already exists");
             spdlog::error("Пользователь с таким email: {} уже существует, отказано в регистрации", data.email);
@@ -103,11 +117,6 @@ public:
             return false;
         }
 
-        if (!AuxiliaryFunctions::isValidEmail(data.email)) {
-            ErrorHandler::sendError(res, 400, "Invalid email format or email already exists");
-            spdlog::error("Неверный формат email: {} или email уже существует, отказано в регистрации", data.email);
-            return false ;
-        }
         return true;
     }
 };

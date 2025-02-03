@@ -27,7 +27,6 @@ void OrganizerRegistrationManager::RegisterOrganizerRequest(const httplib::Reque
     }
 }
 
-// /authorize_approved - запрос, приходит от сервиса админа в случае подтверждения
 void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Request& request,
                                                              httplib::Response &res, Database& db) {
     auto parsed = json::parse(request.body);

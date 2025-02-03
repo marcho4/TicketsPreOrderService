@@ -36,9 +36,9 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=orchestrator host=postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=db_org_registr host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("src/postgres/db_org_registr.sql");
+        db.initDbFromFile("../src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
@@ -83,13 +83,19 @@ int main() {
             AdminAuthorization::AuthorizeAdminRequest(request, res, db);
         });
 
-        server.Put("/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/user/:id/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на обновление пароля");
             set_cors_headers(res);
             PasswordUpdating::UpdatePasswordRequest(request, res, db);
         });
 
-        std::cout << "Server is listening on 0.0.0.0:8002\n";
+        server.Get("/password/recover", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на восстановление пароля");
+            set_cors_headers(res);
+//            PasswordUpdating::RecoverPasswordRequest(request, res, db);
+        });
+
+        std::cout << "Server is listening on 0.0.0.0:8003\n";
         server.listen("0.0.0.0", 8003);
 
     } catch (const std::exception& e) {

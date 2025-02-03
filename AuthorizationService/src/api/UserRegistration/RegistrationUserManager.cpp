@@ -15,7 +15,7 @@ void UserRegistration::RegisterUserRequest(const httplib::Request& request,
     spdlog::info("Пользователь зарегистрирован, email: {}", user_data.email);
     res.status = 200;
     res.set_content(R"({
-        "status": "User registered",
+        "message": "User registered",
         "name": ")" + user_data.name + R"(",
         "last_name": ")" + user_data.last_name + R"(",
         "email": ")" + user_data.email + R"("})", "application/json");
@@ -25,7 +25,7 @@ void UserRegistration::RegisterUser(UserData user_data, Database& db) {
     std::string password = user_data.password;
     std::string pass_hash = bcrypt::generateHash(password);
 
-    std::vector<std::string> params = {user_data.login, pass_hash, user_data.email};
+    std::vector<std::string> params = {user_data.login, pass_hash, user_data.email, user_data.user_id, "USER"};
 
     pqxx::result id = SaveLoginData(user_data, params, db);
 
@@ -43,8 +43,8 @@ void UserRegistration::RegisterUser(UserData user_data, Database& db) {
 }
 
 pqxx::result UserRegistration::SaveLoginData(UserData& user_data, std::vector<std::string>& params, Database& db) {
-    std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email) "
-                        "VALUES ($1, $2, $3) RETURNING id";
+    std::string query = "INSERT INTO AuthorizationService.AuthorizationData (login, password, email, user_id, status) "
+                        "VALUES ($1, $2, $3, $4, $5) RETURNING id";
     try {
         return db.executeQueryWithParams(query, params);
     } catch (const std::exception& e) {
