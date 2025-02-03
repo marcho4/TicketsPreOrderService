@@ -53,9 +53,13 @@ jobs:
           cd ${{ matrix.service }}
           python3 -m pip install --upgrade pip
 <<<<<<< HEAD
+<<<<<<< HEAD
           python3 -m pip install -r requirements.txt
 =======
 >>>>>>> 160d16c (test update password added, some fix in auth)
+=======
+          python3 -m pip install -r requirements.txt
+>>>>>>> 980bb8d (try)
 
       - name: Запуск тестов
         run: |
