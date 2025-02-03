@@ -1,41 +1,46 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 project(AdminService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_OSX_ARCHITECTURES "arm64")
 
-# Укажите путь к исходным файлам
 set(ADMIN_SOURCE_FILES
         main.cpp
         src/api/RequestsHandler.cpp
         src/postgres/PostgresProcessing.cpp
 )
 
-# Добавьте каталоги для заголовочных файлов
-include_directories(src)
-include_directories(src/postgres)
-include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-include_directories("/opt/homebrew/opt/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3../include")
-include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
+include_directories(
+        src
+        src/postgres
+        /usr/local/include
+        /usr/include
+)
 
-include_directories("/opt/homebrew/opt/libpqxx/include")
-link_directories("/opt/homebrew/opt/libpqxx/lib")
+link_directories(
+        /usr/local/lib
+        /usr/lib
+)
 
-# Include directories
-include_directories("/Users/nazarzakrevskij/TicketsPreOrderService/libraries/Bcrypt.cpp/include")
-include_directories("../libraries/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3/include")
+include(FetchContent)
 
-# Find the libraries
-find_package(CURL REQUIRED)
-# Create executable
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.12.0
+)
+FetchContent_MakeAvailable(spdlog)
+
 add_executable(AdminService ${ADMIN_SOURCE_FILES})
+
+find_package(CURL REQUIRED)
+find_package(OpenSSL REQUIRED)
+
 target_link_libraries(AdminService
-        PRIVATE CURL::libcurl
-        /opt/homebrew/opt/openssl@3/lib/libssl.dylib
-        /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
-        /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
+        PRIVATE
+        spdlog::spdlog
         pqxx
+        pq
+        CURL::libcurl
+        OpenSSL::SSL
+        OpenSSL::Crypto
 )
