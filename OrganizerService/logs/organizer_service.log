@@ -144,6 +144,9 @@
 [2025-02-02 00:30:30.560] [file_logger] [info] Получен запрос на получение данных организатора
 [2025-02-02 00:30:30.562] [file_logger] [info] Информация об организаторе с organizer_id = caebc33d-8a6c-437b-9760-9cbdd5f61060 успешно отправлена
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4706cae (test update password added, some fix in auth)
 [2025-02-03 18:47:21.467] [file_logger] [info] Логгер успешно создан!
 [2025-02-03 18:47:33.584] [file_logger] [info] Получен запрос на создание аккаунта организатора
 [2025-02-03 18:47:33.590] [file_logger] [info] Организатор с email: qptdsmwww@gmail.com успешно создан, id организатора: dce9cc78-c6ae-4a8c-acff-c4350e759872
@@ -191,7 +194,10 @@
 [2025-02-03 18:47:33.674] [file_logger] [info] Организатор с email: ejoailfpr@outlook.com успешно создан, id организатора: c3d37e54-b932-4868-95bc-8dd48f7b7355
 [2025-02-03 18:47:33.675] [file_logger] [info] Получен запрос на обновление данных организатора
 [2025-02-03 18:47:33.676] [file_logger] [error] Пользователь с email: rmfsnffn@gmail.com уже существует, отказано в обновлении
+<<<<<<< HEAD
 =======
 >>>>>>> 9a32d90 (documentation added)
 =======
 >>>>>>> 11f9e27 (test update password added, some fix in auth)
+=======
+>>>>>>> 4706cae (test update password added, some fix in auth)
