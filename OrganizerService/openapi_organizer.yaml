@@ -5,7 +5,7 @@ info:
   description: Organizer service API
 
 servers:
-  - url: http://localhost:8002
+  - url: http://localhost:8004
     description: Local development server
 
 paths:

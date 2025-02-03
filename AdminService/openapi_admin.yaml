@@ -5,7 +5,7 @@ info:
   description: API сервиса администратора
 
 servers:
-  - url: http://localhost:8082
+  - url: http://localhost:8003
     description: Локальный сервер разработки
 
 paths:

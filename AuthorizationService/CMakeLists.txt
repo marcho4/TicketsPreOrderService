@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 project(AuthorizationService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -18,59 +18,43 @@ set(SOURCE_FILES
         src/postgres/PostgresProcessing.cpp
         src/api/UserRegistration/PasswordGenerator/PasswordCreator.cpp
         src/api/PasswordUpdating.h
-        ../UserService/libraries/Bcrypt.cpp/src/bcrypt.cpp
-        ../UserService/libraries/Bcrypt.cpp/include/bcrypt.h
-        ../UserService/libraries/Bcrypt.cpp/src/blowfish.cpp
+        libraries/Bcrypt.cpp/src/bcrypt.cpp
+        libraries/Bcrypt.cpp/include/bcrypt.h
+        libraries/Bcrypt.cpp/src/blowfish.cpp
         src/api/Admin/AdminCreation.cpp
         src/api/Admin/AdminCreation.h
         src/api/Admin/AdminAuthorization.cpp
         src/api/Admin/AdminAuthorization.h
+        src/ErrorHandler.h
 )
-## Пути, куда была установлена libpqxx при "make install"
-#include_directories(/usr/local/include)
-#link_directories(/usr/local/lib)
-#
-## Include directories
-#include_directories("../UserService/libraries/Bcrypt.cpp/include")
-#
-## Find the libraries
-#find_package(CURL REQUIRED)
-#find_package(OpenSSL REQUIRED)
-#find_package(PostgreSQL REQUIRED)
-#find_package(spdlog REQUIRED)
-## Create executable
-#add_executable(AuthorizationService ${SOURCE_FILES})
-#
-## Link the libraries
-#target_link_libraries(AuthorizationService PRIVATE
-#        CURL::libcurl
-#        spdlog::spdlog
-#        OpenSSL::SSL
-#        OpenSSL::Crypto
-#        pqxx  # <-- ключевой момент
-#        pq    # иногда тоже нужно явно указать
-#)
 
-include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
-
-include_directories("/opt/homebrew/opt/libpqxx/include")
-link_directories("/opt/homebrew/opt/libpqxx/lib")
+# Пути, куда была установлена libpqxx при "make install"
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
 
 # Include directories
 include_directories("libraries/Bcrypt.cpp/include")
-include_directories("libraries/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3/include")
 
 # Find the libraries
 find_package(CURL REQUIRED)
-find_package(spdlog REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(PostgreSQL REQUIRED)
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.12.0
+)
+FetchContent_MakeAvailable(spdlog)
 # Create executable
 add_executable(AuthorizationService ${SOURCE_FILES})
 
 # Link the libraries
-target_link_libraries(AuthorizationService PRIVATE CURL::libcurl spdlog::spdlog
-        /opt/homebrew/opt/openssl@3/lib/libssl.dylib
-        /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
-        /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
-        pqxx)
+target_link_libraries(AuthorizationService PRIVATE
+        spdlog::spdlog
+        CURL::libcurl
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        pqxx
+        pq
+)

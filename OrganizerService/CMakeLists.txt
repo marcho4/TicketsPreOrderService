@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 project(OrganizerService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
-# Source files
+
+# Исходные файлы остаются теми же
 set(SOURCE_FILES
         main.cpp
         src/FormatRegexHelper/ValidDataChecker.h
@@ -25,32 +26,43 @@ set(SOURCE_FILES
         libraries/Bcrypt.cpp/src/blowfish.cpp
         src/MatchCreating/GetMatchInfo/GetMatchData.h
         src/MatchCreating/GetMatchInfo/GetMatchData.cpp
-        ../AuthorizationService/src/api/Admin/AdminAuthorization.cpp
-        ../AuthorizationService/src/api/Admin/AdminCreation.h
-        ../AuthorizationService/src/api/Authorization/AuthorizationManager.cpp
-        ../AuthorizationService/src/ErrorHandler.h
 )
 
-include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
-
-include_directories("/opt/homebrew/opt/libpqxx/include")
-link_directories("/opt/homebrew/opt/libpqxx/lib")
-
-# Include directories
+# Добавьте каталоги для заголовочных файлов
+include_directories(
+        src
+        src/postgres
+        /usr/local/include
+        /usr/include
+)
 include_directories("libraries/Bcrypt.cpp/include")
-include_directories("libraries/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3/include")
 
-# Find the libraries
+# Подключение директорий с библиотеками
+link_directories(
+        /usr/local/lib
+        /usr/lib
+)
+
+# Ищем необходимые библиотеки
 find_package(CURL REQUIRED)
-find_package(spdlog REQUIRED)
-# Create executable
+find_package(OpenSSL REQUIRED)
+find_package(PostgreSQL REQUIRED)
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.12.0
+)
+FetchContent_MakeAvailable(spdlog)
+# Создаем исполняемый файл
 add_executable(OrganizerService ${SOURCE_FILES})
 
-# Link the libraries
-target_link_libraries(OrganizerService PRIVATE CURL::libcurl spdlog::spdlog
-        /opt/homebrew/opt/openssl@3/lib/libssl.dylib
-        /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
-        /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
-        pqxx)
+target_link_libraries(OrganizerService
+        PRIVATE
+        spdlog::spdlog
+        pqxx
+        pq
+        CURL::libcurl
+        OpenSSL::SSL
+        OpenSSL::Crypto
+)

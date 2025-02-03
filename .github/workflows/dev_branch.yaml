@@ -19,6 +19,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Установка Docker Compose
+        run: |
+          sudo apt update
+          sudo apt install -y docker-compose
+
+      - name: Запуск сервисов
+        run: |
+          cd ${{ matrix.service }}
+          docker-compose up -d 
+
       - name: Установка зависимостей
         run: |
           sudo apt update
