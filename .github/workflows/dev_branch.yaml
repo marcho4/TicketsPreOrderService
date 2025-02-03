@@ -46,12 +46,15 @@ jobs:
       - name: Запуск сервисов
         run: |
 <<<<<<< HEAD
+<<<<<<< HEAD
           docker-compose up -d 
 
 =======
 >>>>>>> 160d16c (test update password added, some fix in auth)
 =======
           cd ${{ matrix.service }}
+=======
+>>>>>>> 7a9638f (fix)
           docker-compose up -d 
 
 >>>>>>> 688ea39 (using docker-compose instead of dummy build)
