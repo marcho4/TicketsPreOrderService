@@ -26,7 +26,7 @@ public:
 
     static bool validatePassword(const std::string& password, const std::string& hashed_password);
 
-    static std::string getId(std::string basicString, Database &database);
+    static std::pair<std::string, std::string> getId(std::string basicString, Database &database);
 
     static pqxx::result getPasswordHash(std::string basicString, Database &database);
 };
@@ -48,7 +48,7 @@ public:
     static bool Validate(json& parsed, httplib::Response &res, Database& db) {
         LoginData login_data = LoginData::parseFromJson(parsed);
         pqxx::result password_hash = AuthorizationManager::getPasswordHash(login_data.login, db);
-        std::string user_id = AuthorizationManager::getId(login_data.login, db);
+        auto [user_id, auth_id] = AuthorizationManager::getId(login_data.login, db);
 
         if (password_hash.empty()) {
             ErrorHandler::sendError(res, 403, "Access denied");
