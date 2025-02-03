@@ -13,9 +13,13 @@ on:
       - dev
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 160d16c (test update password added, some fix in auth)
+=======
+
+>>>>>>> 805ed89 (try)
 jobs:
   test:
     runs-on: ubuntu-latest
