@@ -26,27 +26,51 @@ set(SOURCE_FILES
         src/api/Admin/AdminAuthorization.cpp
         src/api/Admin/AdminAuthorization.h
 )
-# Пути, куда была установлена libpqxx при "make install"
-include_directories(/usr/local/include)
-link_directories(/usr/local/lib)
+## Пути, куда была установлена libpqxx при "make install"
+#include_directories(/usr/local/include)
+#link_directories(/usr/local/lib)
+#
+## Include directories
+#include_directories("../UserService/libraries/Bcrypt.cpp/include")
+#
+## Find the libraries
+#find_package(CURL REQUIRED)
+#find_package(OpenSSL REQUIRED)
+#find_package(PostgreSQL REQUIRED)
+#find_package(spdlog REQUIRED)
+## Create executable
+#add_executable(AuthorizationService ${SOURCE_FILES})
+#
+## Link the libraries
+#target_link_libraries(AuthorizationService PRIVATE
+#        CURL::libcurl
+#        spdlog::spdlog
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        pqxx  # <-- ключевой момент
+#        pq    # иногда тоже нужно явно указать
+#)
+
+include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
+link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
+
+include_directories("/opt/homebrew/opt/libpqxx/include")
+link_directories("/opt/homebrew/opt/libpqxx/lib")
 
 # Include directories
-include_directories("../UserService/libraries/Bcrypt.cpp/include")
+include_directories("libraries/Bcrypt.cpp/include")
+include_directories("libraries/libpqxx/include")
+include_directories("/opt/homebrew/opt/openssl@3/include")
 
 # Find the libraries
 find_package(CURL REQUIRED)
-find_package(OpenSSL REQUIRED)
-find_package(PostgreSQL REQUIRED)
-агfind_package(spdlog REQUIRED)
+find_package(spdlog REQUIRED)
 # Create executable
 add_executable(AuthorizationService ${SOURCE_FILES})
 
 # Link the libraries
-target_link_libraries(AuthorizationService PRIVATE
-        CURL::libcurl
-        spdlog::spdlog
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        pqxx  # <-- ключевой момент
-        pq    # иногда тоже нужно явно указать
-)
+target_link_libraries(AuthorizationService PRIVATE CURL::libcurl spdlog::spdlog
+        /opt/homebrew/opt/openssl@3/lib/libssl.dylib
+        /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
+        /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
+        pqxx)

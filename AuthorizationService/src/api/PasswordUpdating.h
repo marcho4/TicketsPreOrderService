@@ -28,8 +28,8 @@ class PasswordUpdating {
         db.executeQueryWithParams(update_query, params);
     }
 
-    static bool LoginUniquenessVerification(const std::string& login, Database& db) {
-        std::string query = "SELECT login FROM AuthorizationService.AuthorizationData WHERE login = $1";
+    static bool LoginUniquenessVerification(const std::string& login, const std::string& id, Database& db) {
+        std::string query = "SELECT login FROM AuthorizationService.AuthorizationData WHERE login = $1 AND id != $2";
         std::vector<std::string> params = {login};
         pqxx::result response = db.executeQueryWithParams(query, params);
 
@@ -39,7 +39,7 @@ class PasswordUpdating {
 public:
     static void UpdatePasswordRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
         std::string user_id;
-        if (req.path_params.at("user_id").empty()) {
+        if (req.path_params.at("id").empty()) {
             ErrorHandler::sendError(res, 400, "Missing id parameter");
         } else {
             user_id = req.path_params.at("id");
@@ -48,7 +48,9 @@ public:
         auto parsed = json::parse(req.body);
         AuthorizationData auth_data = AuthorizationData::getAuthorizationData(parsed);
 
-        if (!LoginUniquenessVerification(auth_data.login, db)) {
+        std::cout << "user_id: " << user_id << std::endl;
+
+        if (!LoginUniquenessVerification(auth_data.login, user_id, db)) {
             spdlog::warn("Попытка обновить пароль на уже существующий логин: {}, отказано в обновлении", auth_data.login);
             ErrorHandler::sendError(res, 409, "Login is already taken");
             return;

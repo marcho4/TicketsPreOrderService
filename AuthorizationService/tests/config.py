@@ -1,4 +1,4 @@
-BASE_URL = "http://localhost:8082"
+BASE_URL = "http://localhost:8003"
 
 DATABASE_CONFIG = {
     "dbname": "db_org_registr",
