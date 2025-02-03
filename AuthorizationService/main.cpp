@@ -38,7 +38,7 @@ int main() {
 
         std::string connect = "dbname=orchestrator host=auth_postgres user=postgres password=postgres port=5432";
         Database db(connect);
-        db.initDbFromFile("src/postgres/db_org_registr.sql");
+        db.initDbFromFile("../src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
@@ -83,7 +83,7 @@ int main() {
             AdminAuthorization::AuthorizeAdminRequest(request, res, db);
         });
 
-        server.Put("/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/user/:id/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на обновление пароля");
             set_cors_headers(res);
             PasswordUpdating::UpdatePasswordRequest(request, res, db);

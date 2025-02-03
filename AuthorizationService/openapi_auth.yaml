@@ -39,13 +39,21 @@ paths:
                   type: string
                   format: email
                   description: Электронная почта организатора
+                    type: string
+                    format: email
+                    description: Электронная почта организатора
+                    example: "organizer_email@gmail.com"
                 company:
-                  type: string
-                  description: Название компании организатора
+                    type: string
+                    description: Название компании организатора
+                    example: "ООО 'Рога и копыта'"
                 TIN:
                   type: string
                   description: Идентификационный номер налогоплательщика (ИНН)
 >>>>>>> 23a005e (documentation added)
+                    type: string
+                    description: Идентификационный номер налогоплательщика (ИНН)
+                    example: "123456789012"
               required:
                 - email
                 - company
@@ -99,20 +107,31 @@ paths:
 =======
                   type: string
                   description: Имя пользователя
+                    type: string
+                    description: Имя пользователя
+                    example: "Иван"
                 last_name:
-                  type: string
-                  description: Фамилия пользователя
+                    type: string
+                    description: Фамилия пользователя
+                    example: "Иванов"
                 email:
-                  type: string
-                  format: email
-                  description: Электронная почта пользователя
+                    type: string
+                    format: email
+                    description: Электронная почта пользователя
+                    example: "ivan_ivanov@gmail.com"
                 login:
-                  type: string
-                  description: Логин пользователя
+                    type: string
+                    description: Логин пользователя
+                    example: "ivan_ivanov"
                 password:
                     type: string
                     description: Пароль пользователя
 >>>>>>> 23a005e (documentation added)
+                    example: "1234567890"
+                user_id:
+                    type: string
+                    description: ID пользователя из сервиса пользователя
+                    example: "1234567890"
               required:
                 - name
                 - last_name
@@ -123,6 +142,7 @@ paths:
                 - user_id
 =======
 >>>>>>> 23a005e (documentation added)
+                - user_id
       responses:
         '200':
           description: Успешная регистрация пользователя
@@ -156,11 +176,17 @@ paths:
                   type: string
                   format: login
                   description: Логин пользователя
+                    type: string
+                    format: login
+                    description: Логин пользователя
                 password:
                   type: string
                   format: password
                   description: Пароль пользователя
 >>>>>>> 23a005e (documentation added)
+                    type: string
+                    format: password
+                    description: Пароль пользователя
               required:
                 - login
                 - password
@@ -204,16 +230,24 @@ paths:
 =======
                   type: string
                   description: Имя администратора
+                    type: string
+                    description: Имя администратора
+                    example: "VERY_SECRET_KEY"
                 login:
-                  type: string
-                  description: Фамилия администратора
+                    type: string
+                    description: Фамилия администратора
+                    example: "admin"
                 password:
-                  type: string
-                  description: Электронная почта администратора
+                    type: string
+                    description: Электронная почта администратора
+                    example: "admin228"
                 email:
                   type: string
                   description: Логин администратора
 >>>>>>> 23a005e (documentation added)
+                    type: string
+                    description: Логин администратора
+                    example: "admin_email@gmail.com"
               required:
                - api_key
                - login
@@ -264,19 +298,28 @@ paths:
 =======
                   type: string
                   description: Ключ апи
+                    type: string
+                    description: Ключ апи
+                    example: "VERY_SECRET_KEY"
                 email:
-                  type: string
-                  format: email
-                  description: Электронная почта администратора
+                    type: string
+                    format: email
+                    description: Электронная почта администратора
+                    example: "admin_email@gmail.com"
                 login:
-                  type: string
-                  format: login
-                  description: Логин администратора
+                    type: string
+                    format: login
+                    description: Логин администратора
+                    example: "admin"
                 password:
                   type: string
                   format: password
                   description: Пароль администратора
 >>>>>>> 23a005e (documentation added)
+                    type: string
+                    format: password
+                    description: Пароль администратора
+                    example: "admin228"
               required:
                 - api_key
                 - email
@@ -337,18 +380,33 @@ paths:
                 organization_name:
                   type: string
                   description: Название организации
+                    type: string
+                    format: email
+                    description: Электронная почта организатора
+                    example: "organizer_email@gmail.com"
+                company:
+                    type: string
+                    description: Название организации
+                    example: "ООО 'Рога и копыта'"
                 tin:
-                  type: string
-                  description: ИНН организации
+                    type: string
+                    description: ИНН организации
+                    example: "123456789012"
                 status:
-                  type: string
-                  description: Статус подтверждения
+                    type: string
+                    description: Статус подтверждения
+                    example: "APPROVED"
+                user_id:
+                    type: string
+                    description: ID организатора из сервиса пользователя
+                    example: "1234567890"
               required:
                 - email
-                - organization_name
+                - company
                 - tin
                 - status
 >>>>>>> 23a005e (documentation added)
+                - user_id
       responses:
         '200':
           description: Успешное подтверждение регистрации
