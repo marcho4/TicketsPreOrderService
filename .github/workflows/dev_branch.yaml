@@ -3,7 +3,7 @@ name: DevBranchTesting CI
 on:
   push:
     branches:
-      - dev
+      - Nazar_Zakrevski
   pull_request:
     branches:
       - dev
