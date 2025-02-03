@@ -120,7 +120,7 @@
 
 /*!
 @brief namespace for Niels Lohmann
-@see https://github.com/nlohmann
+@see https://.github.com/nlohmann
 @since version 1.0.0
 */
 NLOHMANN_JSON_NAMESPACE_BEGIN

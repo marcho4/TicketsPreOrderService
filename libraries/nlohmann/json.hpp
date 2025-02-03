@@ -2373,11 +2373,11 @@ JSON_HEDLEY_DIAGNOSTIC_POP
 #if !defined(JSON_SKIP_UNSUPPORTED_COMPILER_CHECK)
     #if defined(__clang__)
         #if (__clang_major__ * 10000 + __clang_minor__ * 100 + __clang_patchlevel__) < 30400
-            #error "unsupported Clang version - see https://github.com/nlohmann/json#supported-compilers"
+            #error "unsupported Clang version - see https://.github.com/nlohmann/json#supported-compilers"
         #endif
     #elif defined(__GNUC__) && !(defined(__ICC) || defined(__INTEL_COMPILER))
         #if (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) < 40800
-            #error "unsupported GCC version - see https://github.com/nlohmann/json#supported-compilers"
+            #error "unsupported GCC version - see https://.github.com/nlohmann/json#supported-compilers"
         #endif
     #endif
 #endif
@@ -3379,7 +3379,7 @@ NLOHMANN_JSON_NAMESPACE_END
 
     /*!
     @brief namespace for Niels Lohmann
-    @see https://github.com/nlohmann
+    @see https://.github.com/nlohmann
     @since version 1.0.0
     */
     NLOHMANN_JSON_NAMESPACE_BEGIN
@@ -12844,7 +12844,7 @@ namespace detail
 @brief an iterator value
 
 @note This structure could easily be a union, but MSVC currently does not allow
-unions members with complex constructors, see https://github.com/nlohmann/json/pull/105.
+unions members with complex constructors, see https://.github.com/nlohmann/json/pull/105.
 */
 template<typename BasicJsonType> struct internal_iterator
 {
@@ -12910,7 +12910,7 @@ This class implements a both iterators (iterator and const_iterator) for the
   The iterator that can be moved can be moved in both directions (i.e.
   incremented and decremented).
 @since version 1.0.0, simplified in version 2.0.9, change to bidirectional
-       iterators in version 3.0.0 (see https://github.com/nlohmann/json/issues/593)
+       iterators in version 3.0.0 (see https://.github.com/nlohmann/json/issues/593)
 */
 template<typename BasicJsonType>
 class iter_impl // NOLINT(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
@@ -13014,7 +13014,7 @@ class iter_impl // NOLINT(cppcoreguidelines-special-member-functions,hicpp-speci
     @param[in] other const iterator to copy from
     @note This copy constructor had to be defined explicitly to circumvent a bug
           occurring on msvc v19.0 compiler (VS 2015) debug build. For more
-          information refer to: https://github.com/nlohmann/json/issues/1608
+          information refer to: https://.github.com/nlohmann/json/issues/1608
     */
     iter_impl(const iter_impl<const BasicJsonType>& other) noexcept
         : m_object(other.m_object), m_it(other.m_it)
@@ -19373,7 +19373,7 @@ NLOHMANN_JSON_NAMESPACE_END
 
 /*!
 @brief namespace for Niels Lohmann
-@see https://github.com/nlohmann
+@see https://.github.com/nlohmann
 @since version 1.0.0
 */
 NLOHMANN_JSON_NAMESPACE_BEGIN
@@ -19554,7 +19554,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
 
         result["copyright"] = "(C) 2013-2023 Niels Lohmann";
         result["name"] = "JSON for Modern C++";
-        result["url"] = "https://github.com/nlohmann/json";
+        result["url"] = "https://.github.com/nlohmann/json";
         result["version"]["string"] =
             detail::concat(std::to_string(NLOHMANN_JSON_VERSION_MAJOR), '.',
                            std::to_string(NLOHMANN_JSON_VERSION_MINOR), '.',
@@ -22564,7 +22564,7 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
 
     /// Helper for insertion of an iterator
     /// @note: This uses std::distance to support GCC 4.8,
-    ///        see https://github.com/nlohmann/json/pull/1257
+    ///        see https://.github.com/nlohmann/json/pull/1257
     template<typename... Args>
     iterator insert_iterator(const_iterator pos, Args&& ... args)
     {
