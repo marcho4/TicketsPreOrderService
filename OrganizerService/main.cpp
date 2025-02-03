@@ -36,9 +36,9 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=organizer_personal_account host=localhost port=5432";
+        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
         Database db(connect);
-        db.initDbFromFile("../src/postgres/organizer_personal_account.sql");
+        db.initDbFromFile("src/postgres/organizer_personal_account.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
@@ -80,8 +80,8 @@ int main() {
 
         });
 
-        std::cout << "Server is listening http://localhost:8002" << '\n';
-        server.listen("0.0.0.0", 8002);
+        std::cout << "Server is listening http://localhost:8004" << '\n';
+        server.listen("0.0.0.0", 8004);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }

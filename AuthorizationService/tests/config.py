@@ -1,7 +1,9 @@
-BASE_URL = "http://localhost:8003"
+BASE_URL = "http://localhost:8002"
 
 DATABASE_CONFIG = {
-    "dbname": "db_org_registr",
-    "host": "localhost",
-    "port": 5432
+    "dbname": "orchestrator",
+    "host": "org_postgres",
+    "port": 5432,
+    "user": "postgres",
+    "password": "postgres"
 }

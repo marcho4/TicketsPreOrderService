@@ -102,6 +102,8 @@ def db_connection():
         dbname=DATABASE_CONFIG["dbname"],
         host=DATABASE_CONFIG["host"],
         port=DATABASE_CONFIG["port"],
+        user=DATABASE_CONFIG["user"],
+        password=DATABASE_CONFIG["password"]
     )
     yield conn
     conn.close()

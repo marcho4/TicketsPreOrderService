@@ -36,9 +36,9 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=db_org_registr host=localhost port=5432";
+        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
         Database db(connect);
-        db.initDbFromFile("../src/postgres/db_org_registr.sql");
+        db.initDbFromFile("src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
@@ -95,8 +95,8 @@ int main() {
 //            PasswordUpdating::RecoverPasswordRequest(request, res, db);
         });
 
-        std::cout << "Server is listening on 0.0.0.0:8003\n";
-        server.listen("0.0.0.0", 8003);
+        std::cout << "Server is listening on 0.0.0.0:8002\n";
+        server.listen("0.0.0.0", 8002);
 
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
