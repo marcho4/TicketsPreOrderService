@@ -1,0 +1,84 @@
+services:
+#  jwt:
+#    build:
+#      context: ./JWTService
+#      dockerfile: Dockerfile
+#    env_file:
+#      - ./JWTService/.env
+#    ports:
+#      - "8001:8001"
+#    networks:
+#      - main
+
+#  orchestrator:
+#    build:
+#      context: ./orchestrator
+#      dockerfile: Dockerfile
+#    environment:
+#      - RUNNING_IN_DOCKER=true
+#    ports:
+#      - "8000:8000"
+#    networks:
+#      - main
+
+  auth:
+    build:
+      context: ./AuthorizationService
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    networks:
+      - main
+
+  auth_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    networks:
+      - main
+
+  admin_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    networks:
+      - main
+
+  admin:
+    build:
+      context: ./AdminService
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    networks:
+      - main
+    depends_on:
+      - admin_postgres
+
+  organizer:
+    build:
+      context: ./OrganizerService
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
+    networks:
+      - main
+    depends_on:
+      - org_postgres
+
+  org_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    networks:
+      - main
+
+networks:
+  main:
+    driver: bridge
