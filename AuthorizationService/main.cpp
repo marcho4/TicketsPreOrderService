@@ -36,9 +36,13 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
+<<<<<<< HEAD
         std::string connect = "dbname=orchestrator host=auth_postgres user=postgres password=postgres port=5432";
+=======
+        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
+>>>>>>> 688ea39 (using docker-compose instead of dummy build)
         Database db(connect);
-        db.initDbFromFile("../src/postgres/db_org_registr.sql");
+        db.initDbFromFile("src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 

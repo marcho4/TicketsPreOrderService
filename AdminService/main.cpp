@@ -41,7 +41,8 @@ int main() {
             ProcessRequest::ProcessOrganizerRequest(req, res, db);
         });
 
-        server.Post("/admin/add_organizer", [&](const httplib::Request& req, httplib::Response& res) {
+        server.Post("/admin/add_organizer_request", [&](const httplib::Request& req, httplib::Response& res) {
+            set_cors_headers(res);
             AddRequest::AddOrganizerRequest(req, res, db);
         });
 

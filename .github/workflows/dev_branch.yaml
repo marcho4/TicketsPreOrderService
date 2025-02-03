@@ -35,6 +35,9 @@ jobs:
       - uses: actions/checkout@v2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 688ea39 (using docker-compose instead of dummy build)
       - name: Установка Docker Compose
         run: |
           sudo apt update
@@ -42,10 +45,16 @@ jobs:
 
       - name: Запуск сервисов
         run: |
+<<<<<<< HEAD
           docker-compose up -d 
 
 =======
 >>>>>>> 160d16c (test update password added, some fix in auth)
+=======
+          cd ${{ matrix.service }}
+          docker-compose up -d 
+
+>>>>>>> 688ea39 (using docker-compose instead of dummy build)
       - name: Установка зависимостей
         run: |
           sudo apt update
