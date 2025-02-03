@@ -26,7 +26,6 @@ jobs:
 
       - name: Запуск сервисов
         run: |
-          cd ${{ matrix.service }}
           docker-compose up -d 
 
       - name: Установка зависимостей
