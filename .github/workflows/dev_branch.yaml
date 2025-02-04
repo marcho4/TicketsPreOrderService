@@ -73,7 +73,7 @@ jobs:
           python3 -m pip install -r requirements.txt
 >>>>>>> 980bb8d (try)
 
-#      - name: Запуск тестов
-#        run: |
-#          cd ${{ matrix.service }}
-#          pytest --maxfail=1 --disable-warnings -q
+      - name: Запуск тестов
+        run: |
+          cd ${{ matrix.service }}
+          pytest --maxfail=1 --disable-warnings -q
