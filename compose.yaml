@@ -79,25 +79,32 @@ services:
     networks:
       - main
 
-  # match:
-  #   build:
-  #     context: ./MatchesService
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8005:8005"
-  #   networks:
-  #     - main
-  #   depends_on:
-  #     - match_postgres
+  match:
+    build:
+      context: ./MatchesService
+      dockerfile: /MatchesService/Dockerfile
+    ports:
+      - "8005:8005"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - main
+    depends_on:
+      - match_postgres
     
-  # match_postgres:
-  #   image: postgres:latest
-  #   environment:
-  #     POSTGRES_DB: matches_db
-  #     POSTGRES_USER: matches_user
-  #     POSTGRES_PASSWORD: matches_pass
-  #   networks:
-  #     - main
+
+  match_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: matches_db
+      POSTGRES_USER: matches_user
+      POSTGRES_PASSWORD: matches_pass
+    networks:
+      - main
+    volumes:
+      - ./MatchesService/MatchesService/Database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    
+      
 
 networks:
   main:

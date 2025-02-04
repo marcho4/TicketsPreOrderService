@@ -1,0 +1,14 @@
+2025-02-04 14:33:36.443 +00:00 [INF] Starting up the application
+2025-02-04 14:33:37.741 +00:00 [WRN] The WebRootPath was not found: /app/wwwroot. Static files may be unavailable.
+2025-02-04 14:33:37.983 +00:00 [INF] Now listening on: http://[::]:8080
+2025-02-04 14:33:37.984 +00:00 [INF] Now listening on: https://[::]:8081
+2025-02-04 14:33:37.987 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-02-04 14:33:37.987 +00:00 [INF] Hosting environment: Development
+2025-02-04 14:33:37.988 +00:00 [INF] Content root path: /app
+2025-02-04 15:42:21.351 +00:00 [INF] Starting up the application
+2025-02-04 15:42:22.049 +00:00 [WRN] The WebRootPath was not found: /app/wwwroot. Static files may be unavailable.
+2025-02-04 15:42:22.267 +00:00 [INF] Now listening on: http://[::]:8080
+2025-02-04 15:42:22.269 +00:00 [INF] Now listening on: https://[::]:8081
+2025-02-04 15:42:22.272 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-02-04 15:42:22.273 +00:00 [INF] Hosting environment: Development
+2025-02-04 15:42:22.274 +00:00 [INF] Content root path: /app
