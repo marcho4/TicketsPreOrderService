@@ -1,8 +1,8 @@
-BASE_URL = "http://localhost:8002"
+BASE_URL = "http://auth:8002"
 
 DATABASE_CONFIG = {
     "dbname": "orchestrator",
-    "host": "org_postgres",
+    "host": "auth_postgres",
     "port": 5432,
     "user": "postgres",
     "password": "postgres"
