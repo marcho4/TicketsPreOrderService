@@ -1,9 +1,9 @@
-use std::path::Path;
-use config::File;
-use reqwest::Client;
 use crate::orchestrator::config::Config;
 use config::Config as RustConfig;
+use config::File;
 use log::info;
+use reqwest::Client;
+use std::path::Path;
 
 pub struct Orchestrator {
     pub client: Client, // Клиент reqwest для обращения к другим микросервисам
