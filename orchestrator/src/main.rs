@@ -1,10 +1,10 @@
+use crate::orchestrator::orchestrator::Orchestrator;
+use actix_cors::Cors;
+use actix_web::{middleware, web, App, HttpServer};
+use dotenv::dotenv;
+use env_logger::Env;
 use std::env;
 use std::time::Duration;
-use crate::orchestrator::orchestrator::Orchestrator;
-use actix_web::{ middleware, web, App, HttpServer};
-use env_logger::Env;
-use actix_cors::Cors;
-use dotenv::dotenv;
 
 mod orchestrator;
 mod models;
@@ -17,9 +17,9 @@ async fn main() -> std::io::Result<()> {
     dotenv().ok();
     let is_docker = env::var("RUNNING_IN_DOCKER").is_ok();
 
-    let config = if is_docker { "/app/docker.toml" } else { "src/orchestrator/dev.toml" };
+    let config_path = if is_docker { "/app/docker.toml" } else { "src/orchestrator/dev.toml" };
 
-    let orchestrator = Orchestrator::new(config);
+    let orchestrator = Orchestrator::new(config_path);
 
     let state = web::Data::new(orchestrator);
     let front_url = state.config.frontend_url.clone();
