@@ -7,6 +7,7 @@ namespace MatchesService.Models
         public MatchProfile()
         {
             CreateMap<Match, MatchDto>().ReverseMap();
+            
         }
     }
 }

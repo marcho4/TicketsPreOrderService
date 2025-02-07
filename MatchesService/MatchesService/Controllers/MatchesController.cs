@@ -7,17 +7,17 @@ namespace MatchesService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class MatchController : ControllerBase
+    public class matchController : ControllerBase
     {
         private readonly IMatchService _matchService;
 
-        public MatchController(IMatchService matchService)
+        public matchController(IMatchService matchService)
         {
             _matchService = matchService;
         }
 
         [HttpPost("{organizerId}")]
-        public async Task<ActionResult<MatchDto>> CreateMatch(Guid organizerId, [FromBody] MatchDto matchDto)
+        public async Task<ActionResult<Models.Match>> CreateMatch(Guid organizerId, [FromBody] MatchCreateDto matchDto)
         {
             var createdMatch = await _matchService.CreateMatchAsync(matchDto, organizerId);
             return CreatedAtAction(nameof(GetMatch), new { matchId = createdMatch.Id }, createdMatch);
