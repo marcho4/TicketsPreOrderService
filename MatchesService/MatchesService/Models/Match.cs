@@ -1,4 +1,5 @@
 ﻿using MatchesService.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MatchesService.Models
 {

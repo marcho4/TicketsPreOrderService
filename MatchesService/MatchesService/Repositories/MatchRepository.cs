@@ -3,92 +3,81 @@ using System.Data;
 using Dapper;
 
 using MatchesService.Models;
+using MatchesService.Database;
+using Microsoft.EntityFrameworkCore;
 namespace MatchesService.Repositories
 {
     public class MatchRepository : IMatchRepository
     {
-        private readonly NpgsqlDataSource _dataSource;
+        private readonly ApplicationDbContext _context;
 
-        public MatchRepository(NpgsqlDataSource dataSource)
+        public MatchRepository(ApplicationDbContext context)
         {
-            _dataSource = dataSource;
+            _context = context;
         }
 
 
         public async Task<Match> CreateMatchAsync(Match match)
         {
-            const string sql = @"
-            INSERT INTO Matches 
-            (match_id, organizer_id, team_home, team_away, match_datetime, stadium, match_description, created_at, updated_at)
-            VALUES 
-            (@Id, @OrganizerId, @TeamHome, @TeamAway, @MatchDateTime, @Stadium, @MatchDescription, @CreatedAt, @UpdatedAt)
-            RETURNING *";
-
-            using (var connection = await _dataSource.OpenConnectionAsync())
-            {
-                return await connection.QuerySingleAsync<Match>(sql, match);
-            }
+            _context.Matches.Add(match);
+            await _context.SaveChangesAsync();
+            return match;
         }
 
         public async Task<Match> UpdateMatchAsync(Match match)
         {
-            const string sql = @"
-            UPDATE Matches SET 
-            team_home = @TeamHome, 
-            team_away = @TeamAway, 
-            match_datetime = @MatchDateTime, 
-            stadium = @Stadium, 
-            match_description = @MatchDescription, 
-            match_status = @MatchStatus,
-            updated_at = CURRENT_TIMESTAMP
-            WHERE match_id = @Id
-            RETURNING *";
-
-            using (var connection = await _dataSource.OpenConnectionAsync())
+            var existingMatch = await _context.Matches.FindAsync(match.Id);
+            if (existingMatch == null)
             {
-                return await connection.QuerySingleAsync<Match>(sql, match);
+                throw new KeyNotFoundException($"Match with ID {match.Id} not found.");
             }
+
+            // Обновляем поля
+            existingMatch.TeamHome = match.TeamHome;
+            existingMatch.TeamAway = match.TeamAway;
+            existingMatch.MatchDateTime = match.MatchDateTime;
+            existingMatch.Stadium = match.Stadium;
+            existingMatch.MatchDescription = match.MatchDescription;
+            existingMatch.MatchStatus = match.MatchStatus;
+            existingMatch.UpdatedAt = DateTime.UtcNow;
+
+            _context.Matches.Update(existingMatch);
+            await _context.SaveChangesAsync();
+
+            return existingMatch;
         }
 
         public async Task<bool> DeleteMatchAsync(Guid matchId)
         {
-            const string sql = "DELETE FROM Matches WHERE match_id = @MatchId";
-
-            using (var connection = await _dataSource.OpenConnectionAsync())
+            var match = await _context.Matches.FindAsync(matchId);
+            if (match == null)
             {
-                var rowsAffected = await connection.ExecuteAsync(sql, new { MatchId = matchId });
-                return rowsAffected > 0;
+                return false; // Матч не найден
             }
+
+            _context.Matches.Remove(match);
+            await _context.SaveChangesAsync();
+
+            return true; // Матч успешно удален
         }
 
-        public async Task<Match> GetMatchByIdAsync(Guid matchId)
+        public async Task<Match?> GetMatchByIdAsync(Guid matchId)
         {
-            const string sql = "SELECT * FROM Matches WHERE match_id = @MatchId";
-
-            using (var connection = await _dataSource.OpenConnectionAsync())
-            {
-                return await connection.QuerySingleOrDefaultAsync<Match>(sql, new { MatchId = matchId });
-            }
+            return await _context.Matches
+                .FirstOrDefaultAsync(m => m.Id == matchId);
         }
 
         public async Task<IEnumerable<Match>> GetMatchesByOrganizerIdAsync(Guid organizerId)
         {
-            const string sql = "SELECT * FROM Matches WHERE organizer_id = @OrganizerId";
-
-            using (var connection = await _dataSource.OpenConnectionAsync())
-            {
-                return await connection.QueryAsync<Match>(sql, new { OrganizerId = organizerId });
-            }
+            return await _context.Matches
+                .Where(m => m.OrganizerId == organizerId)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Match>> GetAllMatchesAsync()
         {
-            const string sql = "SELECT * FROM Matches";
-
-            using (var connection = await _dataSource.OpenConnectionAsync())
-            {
-                return await connection.QueryAsync<Match>(sql);
-            }
+            return await _context.Matches
+                .ToListAsync();
         }
     }
 }
