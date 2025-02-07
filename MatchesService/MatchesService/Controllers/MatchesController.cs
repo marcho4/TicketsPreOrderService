@@ -19,8 +19,10 @@ namespace MatchesService.Controllers
         [HttpPost("{organizerId}")]
         public async Task<ActionResult<Models.Match>> CreateMatch(Guid organizerId, [FromBody] MatchCreateDto matchDto)
         {
+
             var createdMatch = await _matchService.CreateMatchAsync(matchDto, organizerId);
             return CreatedAtAction(nameof(GetMatch), new { matchId = createdMatch.Id }, createdMatch);
+            
         }
 
         [HttpPut]

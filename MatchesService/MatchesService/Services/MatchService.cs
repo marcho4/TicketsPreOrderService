@@ -23,7 +23,7 @@ namespace MatchesService.Services
             var match = _mapper.Map<Models.Match>(matchDto);
             match.Id = Guid.NewGuid();
             match.OrganizerId = organizerId;
-            match.MatchStatus = MatchStatus.PENDING;
+            match.MatchStatus = MatchStatus.pending;
             match.CreatedAt = DateTime.UtcNow;
             match.UpdatedAt = DateTime.UtcNow;
 

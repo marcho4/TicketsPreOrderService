@@ -18,6 +18,9 @@ using MatchesService.Models;
 using Dapper;
 using Npgsql;
 using MatchesService.Enums;
+using MatchesService.Mappers;
+using MatchesService.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace MatchesService
 {
@@ -76,13 +79,12 @@ namespace MatchesService
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
 
-            NpgsqlConnection.GlobalTypeMapper.MapEnum<MatchStatus>("\"MatchStatus\"");
 
 
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(Configuration.GetConnectionString("DefaultConnection"));
-            dataSourceBuilder.MapEnum<MatchStatus>("\"MatchStatus\""); // Map your enum if needed.  Do this *before* building!
-            var dataSource = dataSourceBuilder.Build();
-            services.AddSingleton(dataSource); // Important: Register as a singleton
+            
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), o => o.MapEnum<MatchStatus>("matchstatus")));
+
 
 
 
@@ -93,10 +95,10 @@ namespace MatchesService
             services.AddAutoMapper(config => { config.AddProfile(new MatchProfile()); },Assembly.GetExecutingAssembly());
 
 
-            services.AddAutoMapper(config => { config.AddProfile(new CreateMatchProfile()); }, Assembly.GetExecutingAssembly());
-            // Внедрение зависимостей
-            services.AddScoped<IMatchRepository>(sp =>
-                new MatchRepository(sp.GetRequiredService<NpgsqlDataSource>()));
+            services.AddAutoMapper(config => { config.AddProfile(new MatchCreateDtoProfile()); }, Assembly.GetExecutingAssembly());
+
+            services.AddScoped<IMatchRepository, MatchRepository>();
+
             services.AddScoped<IMatchService, MatchService>();
 
             // Здоровье сервера
