@@ -4,3 +4,4 @@ mod auth_functional;
 pub mod responses;
 pub mod errors;
 mod jwt_functional;
+mod user_functional;

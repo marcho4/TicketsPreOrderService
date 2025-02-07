@@ -35,9 +35,9 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=user_personal_account host=localhost port=5432";
+        std::string connect = "dbname=user_personal_account host=user_postgres port=5432 user=postgres password=postgres";
         Database db(connect);
-        db.initDbFromFile("../src/postgres/user_personal_account.sql");
+        db.initDbFromFile("src/postgres/user_personal_account.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
@@ -71,7 +71,7 @@ int main() {
         });
 
         std::cout << "Server is listening https://localhost:8001" << '\n';
-        server.listen("0.0.0.0", 8004);
+        server.listen("0.0.0.0", 8001);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }
