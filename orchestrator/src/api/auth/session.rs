@@ -1,5 +1,3 @@
-use crate::models::api_response::ApiResponse;
-use crate::models::jwt::Jwt;
 use crate::models::jwt_claims::JwtClaims;
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_web::{get, web, HttpRequest, HttpResponse};
@@ -19,50 +17,26 @@ pub async fn session(req: HttpRequest, orchestrator: web::Data<Orchestrator>) ->
     };
     let cookie_value = cookie.unwrap().value().to_string();
 
-    let jwt_url = "http://jwt:8001/jwt/decode";
-    let jwt_data = Jwt { jwt: cookie_value };
-
-    let res = orchestrator.client.post(jwt_url).json(&jwt_data).send().await;
-
-    match res {
-        Ok(response) => {
-            match response.json::<ApiResponse<JwtClaims>>().await {
-                Ok(data) => {
-                    let claims = match data.data {
-                        Some(claims) => claims,
-                        None => {
-                            return generic_response::<String>(
-                                StatusCode::UNAUTHORIZED,
-                                Some("Wrong JWT".to_string()),
-                                data.msg
-                            );
-                        }
-                    };
-                    // Проверка на просроченность токена
-                    if claims.exp < Utc::now().timestamp() as isize {
-                        return generic_response::<String>(
-                            StatusCode::INTERNAL_SERVER_ERROR,
-                            Some("JWT expired".to_string()),
-                            None
-                        );
-                    };
-                    generic_response::<JwtClaims>(
-                        StatusCode::OK,
-                        Some("Success".to_string()),
-                        Some(claims)
-                    )
-                },
-                Err(e) => generic_response::<String>(
-                    StatusCode::BAD_REQUEST,
-                    Some(e.to_string()),
+    let jwt_claims = orchestrator.decode_jwt(cookie_value).await;
+    match jwt_claims {
+        Ok(jwt_claims) => {
+            if jwt_claims.exp < Utc::now().timestamp() as u64 {
+                return generic_response::<String>(
+                    StatusCode::INTERNAL_SERVER_ERROR,
+                    Some("JWT expired".to_string()),
                     None
-                )
-            }
-        },
+                );
+            };
+            generic_response::<JwtClaims>(
+                StatusCode::OK,
+                Some("Success".to_string()),
+                Some(jwt_claims)
+            )
+        }
         Err(e) => generic_response::<String>(
-            StatusCode::INTERNAL_SERVER_ERROR,
+            StatusCode::UNAUTHORIZED,
             Some(e.to_string()),
             None
-        ),
+        )
     }
 }

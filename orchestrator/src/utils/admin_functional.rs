@@ -3,7 +3,7 @@ use crate::models::organizer_registration_data::OrganizerRegistrationData;
 use crate::models::request_process_info::RequestProcessInfo;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
-use log::info;
+use log::{error, info};
 
 
 impl Orchestrator {
@@ -25,8 +25,11 @@ impl Orchestrator {
         if res.status().is_success() {
             Ok(())
         } else {
-            info!("Error in adding organizer request");
-            Err(OrchestratorError::Service("Error in adding organizer request".to_string()))
+            if res.status() == 400 {
+                return Err(OrchestratorError::Service("Email already exists".to_string()))
+            };
+            error!("{}", res.text().await?);
+            Err(OrchestratorError::Service("Error in adding organizer request.".to_string()))
         }
     }
     pub async fn get_admin_requests(&self) -> Result<Vec<AdminRequest>, OrchestratorError> {

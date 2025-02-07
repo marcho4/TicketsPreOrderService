@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     wget \
     python3 \
     python3-pip \
+    pkg-config \
     git \
+    libspdlog-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/jtv/libpqxx/archive/refs/tags/7.7.5.tar.gz && \
@@ -37,6 +39,5 @@ RUN mkdir -p build && \
     cmake .. && \
     make
 
+EXPOSE 8001
 CMD ["./build/UserService"]
-
-EXPOSE 8002

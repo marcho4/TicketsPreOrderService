@@ -1,15 +1,4 @@
 services:
-  jwt:
-    build:
-      context: ./JWTService
-      dockerfile: Dockerfile
-    env_file:
-      - ./JWTService/.env
-    ports:
-      - "8001:8001"
-    networks:
-      - main
-
   orchestrator:
     build:
       context: ./orchestrator
@@ -83,6 +72,27 @@ services:
       POSTGRES_DB: orchestrator
     networks:
       - main
+
+  user:
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - main
+    depends_on:
+      - user_postgres
+  
+  user_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: user_personal_account
+    networks:
+      - main
+
 
 networks:
   main:
