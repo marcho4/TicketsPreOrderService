@@ -1,7 +1,8 @@
+CREATE EXTENSION IF NOT EXISTS plpgsql;
 
-DROP TYPE IF EXISTS MatchStatus CASCADE;
+DROP TYPE IF EXISTS matchstatus CASCADE;
 
-CREATE TYPE MatchStatus AS ENUM ('PENDING', 'IN_PROGRESS', 'FINISHED');
+CREATE TYPE matchstatus AS ENUM ('PENDING', 'IN_PROGRESS', 'FINISHED');
 
 
 
@@ -13,7 +14,7 @@ CREATE TABLE Matches (
     match_datetime TIMESTAMP,
     stadium VARCHAR(255),
     match_description TEXT,
-    match_status MatchStatus DEFAULT 'PENDING',
+    match_status matchstatus DEFAULT 'PENDING',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

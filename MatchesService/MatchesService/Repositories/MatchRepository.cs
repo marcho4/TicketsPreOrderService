@@ -7,30 +7,24 @@ namespace MatchesService.Repositories
 {
     public class MatchRepository : IMatchRepository
     {
-        private readonly string _connectionString;
+        private readonly NpgsqlDataSource _dataSource;
 
-        public MatchRepository(string connectionString)
+        public MatchRepository(NpgsqlDataSource dataSource)
         {
-            _connectionString = connectionString;
+            _dataSource = dataSource;
         }
 
-        private async Task<IDbConnection> CreateConnectionAsync()
-        {
-            var connection = new NpgsqlConnection(_connectionString);
-            await connection.OpenAsync();
-            return connection;
-        }
 
         public async Task<Match> CreateMatchAsync(Match match)
         {
             const string sql = @"
             INSERT INTO Matches 
-            (match_id, organizer_id, team_home, team_away, match_datetime, stadium, match_description, match_status, created_at)
+            (match_id, organizer_id, team_home, team_away, match_datetime, stadium, match_description, created_at, updated_at)
             VALUES 
-            (@Id, @OrganizerId, @TeamHome, @TeamAway, @MatchDateTime, @Stadium, @MatchDescription, @MatchStatus, @CreatedAt)
+            (@Id, @OrganizerId, @TeamHome, @TeamAway, @MatchDateTime, @Stadium, @MatchDescription, @CreatedAt, @UpdatedAt)
             RETURNING *";
 
-            using (var connection = await CreateConnectionAsync())
+            using (var connection = await _dataSource.OpenConnectionAsync())
             {
                 return await connection.QuerySingleAsync<Match>(sql, match);
             }
@@ -50,7 +44,7 @@ namespace MatchesService.Repositories
             WHERE match_id = @Id
             RETURNING *";
 
-            using (var connection = await CreateConnectionAsync())
+            using (var connection = await _dataSource.OpenConnectionAsync())
             {
                 return await connection.QuerySingleAsync<Match>(sql, match);
             }
@@ -60,7 +54,7 @@ namespace MatchesService.Repositories
         {
             const string sql = "DELETE FROM Matches WHERE match_id = @MatchId";
 
-            using (var connection = await CreateConnectionAsync())
+            using (var connection = await _dataSource.OpenConnectionAsync())
             {
                 var rowsAffected = await connection.ExecuteAsync(sql, new { MatchId = matchId });
                 return rowsAffected > 0;
@@ -71,7 +65,7 @@ namespace MatchesService.Repositories
         {
             const string sql = "SELECT * FROM Matches WHERE match_id = @MatchId";
 
-            using (var connection = await CreateConnectionAsync())
+            using (var connection = await _dataSource.OpenConnectionAsync())
             {
                 return await connection.QuerySingleOrDefaultAsync<Match>(sql, new { MatchId = matchId });
             }
@@ -81,7 +75,7 @@ namespace MatchesService.Repositories
         {
             const string sql = "SELECT * FROM Matches WHERE organizer_id = @OrganizerId";
 
-            using (var connection = await CreateConnectionAsync())
+            using (var connection = await _dataSource.OpenConnectionAsync())
             {
                 return await connection.QueryAsync<Match>(sql, new { OrganizerId = organizerId });
             }
@@ -91,7 +85,7 @@ namespace MatchesService.Repositories
         {
             const string sql = "SELECT * FROM Matches";
 
-            using (var connection = await CreateConnectionAsync())
+            using (var connection = await _dataSource.OpenConnectionAsync())
             {
                 return await connection.QueryAsync<Match>(sql);
             }

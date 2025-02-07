@@ -18,15 +18,17 @@ namespace MatchesService.Services
             _mapper = mapper;
         }
 
-        public async Task<MatchDto> CreateMatchAsync(MatchDto matchDto, Guid organizerId)
+        public async Task<Models.Match> CreateMatchAsync(MatchCreateDto matchDto, Guid organizerId)
         {
             var match = _mapper.Map<Models.Match>(matchDto);
             match.Id = Guid.NewGuid();
             match.OrganizerId = organizerId;
             match.MatchStatus = MatchStatus.PENDING;
+            match.CreatedAt = DateTime.UtcNow;
+            match.UpdatedAt = DateTime.UtcNow;
 
             var createdMatch = await _matchRepository.CreateMatchAsync(match);
-            return _mapper.Map<MatchDto>(createdMatch);
+            return createdMatch;
         }
 
         public async Task<MatchDto> UpdateMatchAsync(MatchDto matchDto)

@@ -1,9 +1,11 @@
-﻿namespace MatchesService.Enums
+﻿
+
+namespace MatchesService.Enums
 {
     public enum MatchStatus
     {
         PENDING,
-        IN_PROGRESS, 
+        IN_PROGRESS,
         FINISHED
     }
 }
