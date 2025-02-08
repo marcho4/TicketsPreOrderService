@@ -314,9 +314,9 @@ export default function MatchesSection() {
     };
 
     return (
-        <div className="flex flex-col min-w-full min-h-96 rounded-2xl bg-silver">
+        <div className="flex flex-col min-w-full min-h-96 rounded-lg bg-white shadow-lg border-gray-200 border">
             {/* Заголовок и кнопка добавления */}
-            <div className="flex justify-between items-center p-4 sticky top-0 bg-silver z-10">
+            <div className="flex justify-between items-center p-4 sticky top-0 z-10">
                 <h1 className="text-3xl font-semibold text-gray-900 leading-tight">
                     My events
                 </h1>

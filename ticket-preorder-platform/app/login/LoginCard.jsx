@@ -239,7 +239,7 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-accent hover:text-my_black
+                                className="w-full rounded-xl bg-my_black hover:bg-accent hover:text-my_black
                                  transition-colors duration-300"
                             >
                                 Зарегистрироваться
@@ -341,7 +341,7 @@ export default function AuthCard() {
                         ? "Войти"
                         : mode === "signupUser"
                             ? "Регистрация"
-                            : "Регистрация (Организатор)"}
+                            : "Регистрация для организаторов"}
                 </CardTitle>
             </CardHeader>
             {renderFormContent()}

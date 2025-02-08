@@ -29,13 +29,10 @@ export const AuthProvider = ({ children }) => {
                     method: 'GET',
                     credentials: 'include',
                 });
-            // Парсим данные из API
             const json = await response.json();
-
-
             if (json.data) {
                 setUserRole(json.data.role);
-                setUser(json.data.id);
+                setUser(json.data.user_id);
             }
         } catch (error) {
             console.error('Auth check failed:', error);

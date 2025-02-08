@@ -40,3 +40,4 @@ export default function RootLayout({
 import './globals.css'
 import {AuthProvider} from "@/providers/authProvider";
 import {Toaster} from "@/components/ui/toaster";
+import Header from "@/components/header";
