@@ -24,21 +24,22 @@ namespace MatchesService.Repositories
             return match;
         }
 
-        public async Task<Match> UpdateMatchAsync(Match match)
+        public async Task<Match> UpdateMatchAsync(MatchUpdateDto match, Guid matchId)
         {
-            var existingMatch = await _context.Matches.FindAsync(match.Id);
+            var existingMatch = await _context.Matches.FindAsync(matchId);
             if (existingMatch == null)
             {
-                throw new KeyNotFoundException($"Match with ID {match.Id} not found.");
+                throw new KeyNotFoundException($"Match with ID {matchId} not found.");
             }
 
+            var matchDateTimeUtc = match.MatchDateTime.Kind != DateTimeKind.Utc
+                ? DateTime.SpecifyKind(match.MatchDateTime, DateTimeKind.Utc)
+                : match.MatchDateTime;
+
             // Обновляем поля
-            existingMatch.TeamHome = match.TeamHome;
-            existingMatch.TeamAway = match.TeamAway;
-            existingMatch.MatchDateTime = match.MatchDateTime;
+            existingMatch.MatchDateTime = matchDateTimeUtc;
             existingMatch.Stadium = match.Stadium;
             existingMatch.MatchDescription = match.MatchDescription;
-            existingMatch.MatchStatus = match.MatchStatus;
             existingMatch.UpdatedAt = DateTime.UtcNow;
 
             _context.Matches.Update(existingMatch);
@@ -61,7 +62,7 @@ namespace MatchesService.Repositories
             return true; // Матч успешно удален
         }
 
-        public async Task<Match?> GetMatchByIdAsync(Guid matchId)
+        public async Task<Match> GetMatchByIdAsync(Guid matchId)
         {
             return await _context.Matches
                 .FirstOrDefaultAsync(m => m.Id == matchId);

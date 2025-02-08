@@ -11,12 +11,12 @@ CREATE TABLE Matches (
     organizer_id UUID NOT NULL,
     team_home VARCHAR(255),
     team_away VARCHAR(255),
-    match_datetime TIMESTAMP,
+    match_datetime TIMESTAMPTZ,
     stadium VARCHAR(255),
     match_description TEXT,
     match_status matchstatus DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 ------------------------------------------------triggers-----------------------------------------------------------
