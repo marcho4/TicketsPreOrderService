@@ -1,4 +1,5 @@
 pub mod auth;
 pub(crate) mod organizer;
 pub(crate) mod admin;
-mod middleware;
+pub mod middleware;
+pub mod user;

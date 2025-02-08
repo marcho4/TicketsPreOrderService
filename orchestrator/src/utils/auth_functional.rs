@@ -1,3 +1,4 @@
+use actix_web::dev::Server;
 use crate::models::org_approve_body::OrgApproveBody;
 use crate::models::org_approve_response::OrgApproveResponse;
 use crate::models::organizer_registration_data::OrganizerRegistrationData;
@@ -7,6 +8,7 @@ use crate::orchestrator::orchestrator::Orchestrator;
 use log::{error, info};
 use crate::models::api_response::ApiResponse;
 use crate::models::login_data::LoginData;
+use crate::models::message_resp::MessageResp;
 use crate::models::registration_user_resp::RegistrationUserResp;
 use crate::models::user_info::UserInfo;
 use crate::models::user_registration_data::UserRegistrationData;
@@ -27,21 +29,21 @@ impl Orchestrator {
             Request(e.into())
         })?)
     }
-    pub async fn user_register(&self, data: &UserRegistrationData) -> Result<RegistrationUserResp, OrchestratorError> {
+    pub async fn user_register(&self, data: &UserRegistrationData) -> Result<MessageResp, OrchestratorError> {
         let url = format!("{}/user/register", self.config.auth_url);
 
         match self.client.post(url).json(&data).send().await {
             Ok(resp) => {
                 if resp.status().is_success() {
-                    match resp.json::<RegistrationUserResp>().await {
-                        Ok(resp) => {
-                            info!("Successfully created user {:?}", data.user_id);
-                            Ok(resp)
-                        }
+                    match resp.json::<MessageResp>().await {
+                        Ok(body) => {
+                            info!("Successfully created user {:?}", &body);
+                            Ok(body)
+                        },
                         Err(e) => {
                             error!("User registration error: {}", e.to_string());
                             Err(Request(e.into()))
-                        }
+                        },
                     }
                 } else {
                     Err(Service("Bad credentials. Data may be incorrect or email already exists".to_string()))
@@ -103,8 +105,4 @@ impl Orchestrator {
     }
 
     pub async fn create_admin() {}
-
-
-
-
 }

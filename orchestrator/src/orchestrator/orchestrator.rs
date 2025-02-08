@@ -8,7 +8,7 @@ use std::path::Path;
 pub struct Orchestrator {
     pub client: Client, // Клиент reqwest для обращения к другим микросервисам
     pub config: Config, // Конфиг для удобной работы с оркестратором
-    pub(crate) jwt_key: String,
+    pub jwt_key: String,
 }
 
 impl Orchestrator {
