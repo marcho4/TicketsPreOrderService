@@ -2,7 +2,7 @@
 using MatchesService.Enums;
 using MatchesService.Models;
 using MatchesService.Repositories;
-using System.Text.RegularExpressions;
+using MatchesService.Validators;
 
 
 namespace MatchesService.Services
@@ -20,6 +20,15 @@ namespace MatchesService.Services
 
         public async Task<Models.Match> CreateMatchAsync(MatchCreateDto matchDto, Guid organizerId)
         {
+            var validator = new MatchCreateDtoValidator();
+
+            var validationResult = await validator.ValidateAsync(matchDto);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = string.Join(",", validationResult.Errors.Select(e => e.ErrorMessage));
+            }
+
             var match = _mapper.Map<Models.Match>(matchDto);
             match.Id = Guid.NewGuid();
             match.OrganizerId = organizerId;
@@ -31,11 +40,10 @@ namespace MatchesService.Services
             return createdMatch;
         }
 
-        public async Task<MatchDto> UpdateMatchAsync(MatchDto matchDto)
+        public async Task<Match> UpdateMatchAsync(MatchUpdateDto matchDto, Guid matchId)
         {
-            var match = _mapper.Map<Models.Match>(matchDto);
-            var updatedMatch = await _matchRepository.UpdateMatchAsync(match);
-            return _mapper.Map<MatchDto>(updatedMatch);
+            var updatedMatch = await _matchRepository.UpdateMatchAsync(matchDto, matchId);
+            return updatedMatch;
         }
 
         public async Task<bool> DeleteMatchAsync(Guid matchId, Guid organizerId)
@@ -48,22 +56,22 @@ namespace MatchesService.Services
             return await _matchRepository.DeleteMatchAsync(matchId);
         }
 
-        public async Task<MatchDto> GetMatchByIdAsync(Guid matchId)
+        public async Task<Match> GetMatchByIdAsync(Guid matchId)
         {
             var match = await _matchRepository.GetMatchByIdAsync(matchId);
-            return _mapper.Map<MatchDto>(match);
+            return match;
         }
 
-        public async Task<IEnumerable<MatchDto>> GetMatchesByOrganizerIdAsync(Guid organizerId)
+        public async Task<IEnumerable<Match>> GetMatchesByOrganizerIdAsync(Guid organizerId)
         {
             var matches = await _matchRepository.GetMatchesByOrganizerIdAsync(organizerId);
-            return _mapper.Map<IEnumerable<MatchDto>>(matches);
+            return matches;
         }
 
-        public async Task<IEnumerable<MatchDto>> GetAllMatchesAsync()
+        public async Task<IEnumerable<Match>> GetAllMatchesAsync()
         {
             var matches = await _matchRepository.GetAllMatchesAsync();
-            return _mapper.Map<IEnumerable<MatchDto>>(matches);
+            return matches;
         }
     }
 }

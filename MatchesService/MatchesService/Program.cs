@@ -21,6 +21,8 @@ using MatchesService.Enums;
 using MatchesService.Mappers;
 using MatchesService.Database;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation.AspNetCore;
+using MatchesService.Validators;
 
 namespace MatchesService
 {
@@ -80,7 +82,10 @@ namespace MatchesService
                 });
 
 
-
+            services.AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssemblyContaining<MatchCreateDtoValidator>();
+            });
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"), o => o.MapEnum<MatchStatus>("matchstatus")));

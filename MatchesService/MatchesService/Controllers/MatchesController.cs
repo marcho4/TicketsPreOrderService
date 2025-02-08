@@ -1,4 +1,5 @@
-﻿using MatchesService.Models;
+﻿using FluentValidation;
+using MatchesService.Models;
 using MatchesService.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,45 +17,54 @@ namespace MatchesService.Controllers
             _matchService = matchService;
         }
 
-        [HttpPost("{organizerId}")]
+        [HttpPost("create_match/{organizerId}")]
         public async Task<ActionResult<Models.Match>> CreateMatch(Guid organizerId, [FromBody] MatchCreateDto matchDto)
         {
-
-            var createdMatch = await _matchService.CreateMatchAsync(matchDto, organizerId);
-            return CreatedAtAction(nameof(GetMatch), new { matchId = createdMatch.Id }, createdMatch);
-            
+            try
+            {
+                var createdMatch = await _matchService.CreateMatchAsync(matchDto, organizerId);
+                return CreatedAtAction(nameof(GetMatch), new { matchId = createdMatch.Id }, createdMatch);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Произошла внутренняя ошибка сервера");
+            }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<MatchDto>> UpdateMatch([FromBody] MatchDto matchDto)
+        [HttpPut("update_match/{matchId}")]
+        public async Task<ActionResult<Models.Match>> UpdateMatch(Guid matchId, [FromBody] MatchUpdateDto matchDto)
         {
-            var updatedMatch = await _matchService.UpdateMatchAsync(matchDto);
+            var updatedMatch = await _matchService.UpdateMatchAsync(matchDto, matchId);
             return Ok(updatedMatch);
         }
 
-        [HttpDelete("{matchId}/{organizerId}")]
+        [HttpDelete("delete_match/{matchId}/{organizerId}")]
         public async Task<IActionResult> DeleteMatch(Guid matchId, Guid organizerId)
         {
             var result = await _matchService.DeleteMatchAsync(matchId, organizerId);
             return result ? NoContent() : NotFound();
         }
 
-        [HttpGet("{matchId}")]
+        [HttpGet("get_match/{matchId}")]
         public async Task<ActionResult<MatchDto>> GetMatch(Guid matchId)
         {
             var match = await _matchService.GetMatchByIdAsync(matchId);
             return match == null ? NotFound() : Ok(match);
         }
 
-        [HttpGet("organizer/{organizerId}")]
-        public async Task<ActionResult<IEnumerable<MatchDto>>> GetMatchesByOrganizer(Guid organizerId)
+        [HttpGet("get_organizer_matches/{organizerId}")]
+        public async Task<ActionResult<IEnumerable<Models.Match>>> GetMatchesByOrganizer(Guid organizerId)
         {
             var matches = await _matchService.GetMatchesByOrganizerIdAsync(organizerId);
             return Ok(matches);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<MatchDto>>> GetAllMatches()
+        [HttpGet("get_all_matches")]
+        public async Task<ActionResult<IEnumerable<Models.Match>>> GetAllMatches()
         {
             var matches = await _matchService.GetAllMatchesAsync();
             return Ok(matches);
