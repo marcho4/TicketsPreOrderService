@@ -27,7 +27,7 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(move || {
         let json_cfg = web::JsonConfig::default()
-            .error_handler(|err, req| {
+            .error_handler(|err, _req| {
                 let err_msg = err.to_string();
                 error::InternalError::from_response(err, HttpResponse::Conflict().json(
                     ApiResponse::<String> {msg: Some(err_msg), data: None}
@@ -49,6 +49,7 @@ async fn main() -> std::io::Result<()> {
                     .configure(api::auth::config::auth_config)
                     .configure(api::admin::config::admin_config)
                     .configure(api::organizer::config::organizer_config)
+                    .configure(api::user::config::user_config)
             )
     })
         .keep_alive(Duration::from_secs(75))

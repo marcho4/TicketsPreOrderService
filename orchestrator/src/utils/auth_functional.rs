@@ -1,4 +1,3 @@
-use actix_web::dev::Server;
 use crate::models::org_approve_body::OrgApproveBody;
 use crate::models::org_approve_response::OrgApproveResponse;
 use crate::models::organizer_registration_data::OrganizerRegistrationData;
@@ -9,7 +8,6 @@ use log::{error, info};
 use crate::models::api_response::ApiResponse;
 use crate::models::login_data::LoginData;
 use crate::models::message_resp::MessageResp;
-use crate::models::registration_user_resp::RegistrationUserResp;
 use crate::models::user_info::UserInfo;
 use crate::models::user_registration_data::UserRegistrationData;
 use crate::utils::errors::OrchestratorError;

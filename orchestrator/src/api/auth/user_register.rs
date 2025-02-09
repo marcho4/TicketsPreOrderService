@@ -1,13 +1,9 @@
-use crate::models::registration_user_resp::RegistrationUserResp;
 use crate::models::user_registration_data::UserRegistrationData;
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use log::info;
-use crate::models::jwt_claims::JwtClaims;
 use crate::models::message_resp::MessageResp;
-use crate::models::roles::Role;
-use crate::models::user_info::UserInfo;
 use crate::models::user_models::{UserCreateData, UserRegistration};
 use crate::utils::errors::OrchestratorError;
 use crate::utils::responses::generic_response;
