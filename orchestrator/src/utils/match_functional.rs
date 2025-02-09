@@ -2,7 +2,7 @@ use log::{error, info};
 use reqwest::{Method};
 use serde::de::DeserializeOwned;
 use serde::{Serialize};
-use crate::models::matches::{CreateMatchData, Match, UpdateMatchData};
+use crate::models::matches::{CreateMatchData, Empty, Match, UpdateMatchData};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
 use crate::utils::errors::OrchestratorError::{Deserialize, Request, Service};
@@ -16,9 +16,9 @@ impl Orchestrator {
         let url = format!("{}/api/match/update_match/{}", self.config.matches_url, id);
         self.send_request::<Match, UpdateMatchData>(url, Some(data), Method::PUT).await
     }
-    pub async fn delete_match(&self, id: String, org_id: String) -> Result<(), OrchestratorError> {
+    pub async fn delete_match(&self, id: String, org_id: String) -> Result<Empty, OrchestratorError> {
         let url = format!("{}/api/match/delete_match/{}/{}", self.config.matches_url, id, org_id);
-        self.send_request::<(), UpdateMatchData>(url, None, Method::DELETE).await
+        self.send_request::<Empty, UpdateMatchData>(url, None, Method::DELETE).await
     }
     pub async fn get_match(&self, id: String) -> Result<Match, OrchestratorError> {
         let url = format!("{}/api/match/get_match/{}", self.config.matches_url, id);
@@ -52,7 +52,10 @@ impl Orchestrator {
             Request(e)
         })?;
         let status_code = response.status().as_u16();
-        let text = response.text().await.unwrap_or_default();
+        let mut text = response.text().await.unwrap_or("{}".to_string());
+        if text.is_empty() {
+            text = "{}".to_string();
+        }
         let err = Self::check_response(status_code, &text).await;
         if let Some(err) = err {
             return Err(err);
