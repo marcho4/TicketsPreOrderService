@@ -50,6 +50,7 @@ async fn main() -> std::io::Result<()> {
                     .configure(api::admin::config::admin_config)
                     .configure(api::organizer::config::organizer_config)
                     .configure(api::user::config::user_config)
+                    .configure(api::matches::config::cfg)
             )
     })
         .keep_alive(Duration::from_secs(75))

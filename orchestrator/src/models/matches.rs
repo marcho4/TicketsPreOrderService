@@ -7,6 +7,7 @@ use chrono::{DateTime, Utc};
 pub struct Match {
     pub id: String,
     pub organizer_id: String,
+    pub match_description: String,
     pub team_home: String,
     pub team_away: String,
     pub stadium: String,
@@ -34,3 +35,5 @@ pub struct UpdateMatchData {
     pub stadium: String,
     pub match_date_time: DateTime<Utc>,
 }
+#[derive(Deserialize)]
+pub struct Empty {}
