@@ -4,12 +4,12 @@ namespace MatchesService.Services
 {
     public interface IMatchService
     {
-        Task<Match> CreateMatchAsync(MatchCreateDto matchDto, Guid organizerId);
-        Task<Match> UpdateMatchAsync(MatchUpdateDto matchDto, Guid matchId);
+        Task<MatchDto> CreateMatchAsync(MatchCreateDto matchDto, Guid organizerId);
+        Task<MatchDto> UpdateMatchAsync(MatchUpdateDto matchDto, Guid matchId);
         Task<bool> DeleteMatchAsync(Guid matchId, Guid organizerId);
-        Task<Match> GetMatchByIdAsync(Guid matchId);
-        Task<IEnumerable<Match>> GetMatchesByOrganizerIdAsync(Guid organizerId);
-        Task<IEnumerable<Match>> GetAllMatchesAsync();
+        Task<MatchDto> GetMatchByIdAsync(Guid matchId);
+        Task<IEnumerable<MatchDto>> GetMatchesByOrganizerIdAsync(Guid organizerId);
+        Task<IEnumerable<MatchDto>> GetAllMatchesAsync();
     }
 
 }
