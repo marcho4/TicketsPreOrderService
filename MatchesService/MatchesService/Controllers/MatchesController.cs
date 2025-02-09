@@ -18,7 +18,7 @@ namespace MatchesService.Controllers
         }
 
         [HttpPost("create_match/{organizerId}")]
-        public async Task<ActionResult<Models.Match>> CreateMatch(Guid organizerId, [FromBody] MatchCreateDto matchDto)
+        public async Task<ActionResult<MatchDto>> CreateMatch(Guid organizerId, [FromBody] MatchCreateDto matchDto)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace MatchesService.Controllers
         }
 
         [HttpPut("update_match/{matchId}")]
-        public async Task<ActionResult<Models.Match>> UpdateMatch(Guid matchId, [FromBody] MatchUpdateDto matchDto)
+        public async Task<ActionResult<MatchDto>> UpdateMatch(Guid matchId, [FromBody] MatchUpdateDto matchDto)
         {
             var updatedMatch = await _matchService.UpdateMatchAsync(matchDto, matchId);
             return Ok(updatedMatch);
@@ -57,14 +57,14 @@ namespace MatchesService.Controllers
         }
 
         [HttpGet("get_organizer_matches/{organizerId}")]
-        public async Task<ActionResult<IEnumerable<Models.Match>>> GetMatchesByOrganizer(Guid organizerId)
+        public async Task<ActionResult<IEnumerable<MatchDto>>> GetMatchesByOrganizer(Guid organizerId)
         {
             var matches = await _matchService.GetMatchesByOrganizerIdAsync(organizerId);
             return Ok(matches);
         }
 
         [HttpGet("get_all_matches")]
-        public async Task<ActionResult<IEnumerable<Models.Match>>> GetAllMatches()
+        public async Task<ActionResult<IEnumerable<MatchDto>>> GetAllMatches()
         {
             var matches = await _matchService.GetAllMatchesAsync();
             return Ok(matches);

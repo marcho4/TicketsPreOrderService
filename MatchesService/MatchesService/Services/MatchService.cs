@@ -18,7 +18,7 @@ namespace MatchesService.Services
             _mapper = mapper;
         }
 
-        public async Task<Models.Match> CreateMatchAsync(MatchCreateDto matchDto, Guid organizerId)
+        public async Task<MatchDto> CreateMatchAsync(MatchCreateDto matchDto, Guid organizerId)
         {
             var validator = new MatchCreateDtoValidator();
 
@@ -37,13 +37,13 @@ namespace MatchesService.Services
             match.UpdatedAt = DateTime.UtcNow;
 
             var createdMatch = await _matchRepository.CreateMatchAsync(match);
-            return createdMatch;
+            return _mapper.Map<MatchDto>(createdMatch);
         }
 
-        public async Task<Match> UpdateMatchAsync(MatchUpdateDto matchDto, Guid matchId)
+        public async Task<MatchDto> UpdateMatchAsync(MatchUpdateDto matchDto, Guid matchId)
         {
             var updatedMatch = await _matchRepository.UpdateMatchAsync(matchDto, matchId);
-            return updatedMatch;
+            return _mapper.Map<MatchDto>(updatedMatch);
         }
 
         public async Task<bool> DeleteMatchAsync(Guid matchId, Guid organizerId)
@@ -56,22 +56,22 @@ namespace MatchesService.Services
             return await _matchRepository.DeleteMatchAsync(matchId);
         }
 
-        public async Task<Match> GetMatchByIdAsync(Guid matchId)
+        public async Task<MatchDto> GetMatchByIdAsync(Guid matchId)
         {
             var match = await _matchRepository.GetMatchByIdAsync(matchId);
-            return match;
+            return _mapper.Map<MatchDto>(match);
         }
 
-        public async Task<IEnumerable<Match>> GetMatchesByOrganizerIdAsync(Guid organizerId)
+        public async Task<IEnumerable<MatchDto>> GetMatchesByOrganizerIdAsync(Guid organizerId)
         {
             var matches = await _matchRepository.GetMatchesByOrganizerIdAsync(organizerId);
-            return matches;
+            return _mapper.Map<IEnumerable<MatchDto>>(matches);
         }
 
-        public async Task<IEnumerable<Match>> GetAllMatchesAsync()
+        public async Task<IEnumerable<MatchDto>> GetAllMatchesAsync()
         {
             var matches = await _matchRepository.GetAllMatchesAsync();
-            return matches;
+            return _mapper.Map<IEnumerable<MatchDto>>(matches);
         }
     }
 }
