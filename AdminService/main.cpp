@@ -27,7 +27,7 @@ int main() {
 
         std::string connect = "dbname=orchestrator host=admin_postgres user=postgres password=postgres port=5432";
         Database db(connect);
-        db.initDbFromFile("src/postgres/pending_organizers.sql");
+        db.initDbFromFile("src/postgres/tickets_info.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 

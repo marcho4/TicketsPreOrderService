@@ -1,0 +1,14 @@
+//
+// Created by Назар Закревский on 09.02.2025.
+//
+
+#ifndef AUTHORIZATIONSERVICE_TICKETSRESERVATION_H
+#define AUTHORIZATIONSERVICE_TICKETSRESERVATION_H
+
+
+class TicketsReservation {
+
+};
+
+
+#endif //AUTHORIZATIONSERVICE_TICKETSRESERVATION_H

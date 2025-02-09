@@ -1,0 +1,14 @@
+//
+// Created by Назар Закревский on 09.02.2025.
+//
+
+#ifndef AUTHORIZATIONSERVICE_DELETETICKETS_H
+#define AUTHORIZATIONSERVICE_DELETETICKETS_H
+
+
+class DeleteTickets {
+
+};
+
+
+#endif //AUTHORIZATIONSERVICE_DELETETICKETS_H

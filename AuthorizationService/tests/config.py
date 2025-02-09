@@ -1,4 +1,4 @@
-BASE_URL = "http://auth:8002"
+BASE_URL = "http://localhost:8002"
 
 DATABASE_CONFIG = {
     "dbname": "orchestrator",

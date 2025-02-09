@@ -1,0 +1,14 @@
+//
+// Created by Назар Закревский on 09.02.2025.
+//
+
+#ifndef AUTHORIZATIONSERVICE_CANCELRESERVATION_H
+#define AUTHORIZATIONSERVICE_CANCELRESERVATION_H
+
+
+class CancelReservation {
+
+};
+
+
+#endif //AUTHORIZATIONSERVICE_CANCELRESERVATION_H
