@@ -23,3 +23,6 @@
 /ticket-preorder-platform/.idea
 /.cache
 .cache
+docker_compose.yml
+config
+bin

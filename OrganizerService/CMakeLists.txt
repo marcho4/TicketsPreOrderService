@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 project(OrganizerService VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -47,12 +47,19 @@ link_directories(
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(PostgreSQL REQUIRED)
-
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.12.0
+)
+FetchContent_MakeAvailable(spdlog)
 # Создаем исполняемый файл
 add_executable(OrganizerService ${SOURCE_FILES})
 
 target_link_libraries(OrganizerService
         PRIVATE
+        spdlog::spdlog
         pqxx
         pq
         CURL::libcurl

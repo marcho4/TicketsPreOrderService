@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: OrganizerService API
+  version: 1.0.0
+  description: Organizer service API
+
+servers:
+  - url: http://localhost:8004
+    description: Local development server
+
+paths:
+  /organizer/create_account:
+    post:
+      summary: Create organizer account
+      description: Create organizer account with email, company name and TIN.
+      operationId: addOrganizerRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Organizer email
+                  example: "organizer_qwerty@gmail.com"
+                organization_name:
+                  type: string
+                  description: Organizer company name
+                  example: "Nike-Pro"
+                tin:
+                  type: string
+                  description: Organizer's TIN
+                  example: "111122223333"
+              required:
+                - email
+                - organization_name
+                - tin
+      responses:
+        '201':
+          description: Organizer account created
+        '400':
+          description: Bad request
+        '409':
+          description: Organizer account already exists
+  /organizer/update_info/{id}:
+    put:
+      summary: Request to update organizer info
+      description: Update organizer info with email, organization_name, TIN and phone_number
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the organizer
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: Organizer email
+                  example: "organizer_qwerty@gmail.com"
+                organization_name:
+                  type: string
+                  description: Organizer company name
+                  example: "Nike-Pro"
+                tin:
+                  type: string
+                  description: Organizer's TIN
+                  example: "111122223333"
+                phone_number:
+                  type: string
+                  description: Organizer phone number
+                  example: "+79169999999"
+              required:
+                - email
+                - organization_name
+                - tin
+                - phone_number
+      responses:
+        '200':
+          description: Organizer account updated
+        '400':
+          description: Bad request
+        '404':
+          description: Organizer account not found
+  /organizer/get_account_info/{id}:
+    get:
+      summary: Get organizer account info
+      description: Get organizer account info by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the organizer
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Organizer account info
+        '400':
+          description: Bad request
+        '404':
+          description: Organizer account not found

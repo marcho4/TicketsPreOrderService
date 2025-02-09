@@ -25,22 +25,27 @@ def db_connection():
         dbname=DATABASE_CONFIG["dbname"],
         host=DATABASE_CONFIG["host"],
         port=DATABASE_CONFIG["port"],
+        user=DATABASE_CONFIG["user"],
+        password=DATABASE_CONFIG["password"]
     )
     yield conn
     conn.close()
 
 
 @pytest.mark.parametrize(
-    "name, last_name, email",
+    "name, last_name, email, login, password, user_id",
     [
-        ("Nazar", "Zakrevski", generate_random_valid_email()),
-        ("Denis", "Pavlukhin", generate_random_valid_email()),
-        ("Mark", "Dergilev", generate_random_valid_email())
+        ("Nazar", "Zakrevski", generate_random_valid_email(), generate_random_login(), generate_random_password(),
+         generate_random_login()),
+        ("Denis", "Pavlukhin", generate_random_valid_email(), generate_random_login(), generate_random_password(),
+         generate_random_login()),
+        ("Mark", "Dergilev", generate_random_valid_email(), generate_random_login(), generate_random_password(),
+         generate_random_login())
     ]
 )
-def test_authorize_user(db_connection, name, last_name, email):
+def test_authorize_user(db_connection, name, last_name, email, login, password, user_id):
     # первоначально зарегистрируем юзера
-    register_json = register_user_premature(name, last_name, email)
+    register_json = register_user_premature(name, last_name, email, password, login, user_id)
 
     # далее получим данные пользователя из базы данных
     cursor = db_connection.cursor(cursor_factory=RealDictCursor)
@@ -48,70 +53,34 @@ def test_authorize_user(db_connection, name, last_name, email):
     db_result = cursor.fetchone()
 
     assert db_result, "User data not found in the database"
-    login = db_result["login"]
-    user_id = str(db_result["id"])
+    user_id = str(db_result["user_id"])
 
     # сделаем пробный запрос на авторизацию пользователя
     auth_response = requests.post(f"{BASE_URL}/authorize", json={
         "login": login,
-        "password": register_json["password"]  # предположим, пароль возвращается при регистрации
+        "password": password
     })
     auth_json = auth_response.json()
 
     assert auth_response.status_code == 200, f"Unexpected status code: {auth_response.status_code}"
     assert auth_json["msg"] == "Success"
-    assert auth_json["data"]["id"] == user_id
+    assert auth_json["data"]["user_id"] == user_id
     assert auth_json["data"]["role"] in ["ADMIN", "ORGANIZER", "USER"], "Unexpected role"
 
     cursor.close()
 
 
 @pytest.mark.parametrize(
-    "email, company, tin",
+    "name, last_name, email, login, password, user_id",
     [
-        (generate_random_valid_email(), "NIKE-PRO", generate_random_tin()),
-        (generate_random_valid_email(), "BEBRA-BANK", generate_random_tin()),
-        (generate_random_valid_email(), "KFC-BOSS", generate_random_tin())
+        ("Tim", "Bulgakov", generate_random_valid_email(), generate_random_login(), generate_random_password(),
+         generate_random_login()),
+        ("Alex", "Dergilev", generate_random_valid_email(), generate_random_login(), generate_random_password(),
+         generate_random_login())
     ]
 )
-def test_authorize_organizer(db_connection, email, company, tin):
-    # первоначально зарегистрируем организатора
-    register_json = register_organizer_premature(email, company, tin)
-
-    # далее получим данные пользователя из базы данных
-    cursor = db_connection.cursor(cursor_factory=RealDictCursor)
-    cursor.execute("SELECT * FROM AuthorizationService.AuthorizationData WHERE email = %s", (email,))
-    db_result = cursor.fetchone()
-
-    assert db_result, "User data not found in the database"
-    login = db_result["login"]
-    user_id = str(db_result["id"])
-
-    # сделаем пробный запрос на авторизацию пользователя
-    auth_response = requests.post(f"{BASE_URL}/authorize", json={
-        "login": login,
-        "password": register_json["password"]  # предположим, пароль возвращается при регистрации
-    })
-    auth_json = auth_response.json()
-
-    assert auth_response.status_code == 200, f"Unexpected status code: {auth_response.status_code}"
-    assert auth_json["msg"] == "Success"
-    assert auth_json["data"]["id"] == user_id
-    assert auth_json["data"]["role"] in ["ADMIN", "ORGANIZER", "USER"], "Unexpected role"
-
-    cursor.close()
-
-
-
-@pytest.mark.parametrize(
-    "name, last_name, email",
-    [
-        ("Tim", "Bulgakov", generate_random_valid_email()),
-        ("Maria", "Murashko", generate_random_valid_email())
-    ]
-)
-def test_invalid_authorize_user(name, last_name, email):
-    register_json = register_user_premature(name, last_name, email)
+def test_invalid_authorize_user(name, last_name, email, login, password, user_id):
+    register_json = register_user_premature(name, last_name, email, password, login, user_id)
 
     # сделаем пробный запрос на авторизацию пользователя
     auth_response = requests.post(f"{BASE_URL}/authorize", json={

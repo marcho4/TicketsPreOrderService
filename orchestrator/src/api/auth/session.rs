@@ -1,70 +1,42 @@
-use actix_web::{get, web, HttpRequest, HttpResponse};
-use crate::models::api_response::ApiResponse;
-use crate::models::jwt::Jwt;
-use crate::orchestrator::orchestrator::Orchestrator;
-use chrono::Utc;
 use crate::models::jwt_claims::JwtClaims;
+use crate::orchestrator::orchestrator::Orchestrator;
+use actix_web::{get, web, HttpRequest, HttpResponse};
+use actix_web::http::StatusCode;
+use chrono::Utc;
+use crate::utils::responses::generic_response;
 
 #[get("/session")]
-pub async fn session(req: HttpRequest, orch: web::Data<Orchestrator>) -> HttpResponse {
+pub async fn session(req: HttpRequest, orchestrator: web::Data<Orchestrator>) -> HttpResponse {
     let cookie = req.cookie("token");
-    if let Some(cookie) = cookie {
-        let cookie_value = cookie.value().to_string();
+    if cookie.is_none() {
+        return generic_response::<String>(
+            StatusCode::UNAUTHORIZED,
+            Some("Token not found".to_string()),
+            None
+        );
+    };
+    let cookie_value = cookie.unwrap().value().to_string();
 
-        let jwt_url = "http://jwt:8001/jwt/decode";
-        let jwt_data = Jwt {jwt: cookie_value};
-
-        let request = orch.client.post(jwt_url).json(&jwt_data);
-        let res = request.send().await;
-
-        match res {
-            Ok(response) => {
-                let data = match response.json::<ApiResponse<JwtClaims>>().await {
-                    Ok(data) => {
-                        let claims = match data.data {
-                            Some(claims) => claims,
-                            None => {
-                                return HttpResponse::Unauthorized().json(ApiResponse::<String> {
-                                    msg: Option::from("Wrong JWT".to_string()),
-                                    data: data.msg
-                                });
-                            }
-                        };
-                        claims
-                    },
-                    Err(e) => {
-                        return HttpResponse::InternalServerError().json(ApiResponse::<String> {
-                                msg: Option::from(e.to_string()),
-                                data: None}
-                        )
-                    }
-                };
-
-                // Проверка на просроченность jwt токена
-                if data.exp < Utc::now().timestamp() as isize {
-                    return HttpResponse::InternalServerError().json(ApiResponse::<String> {
-                        msg: Option::from("Your JWT has been expired".to_string()),
-                        data: None,
-                    })
-                };
-
-                HttpResponse::Ok().json(ApiResponse::<JwtClaims> {
-                    msg: Option::from("Success".to_string()),
-                    data: Option::from(data)
-                })
-
-            },
-            Err(e) => HttpResponse::InternalServerError().json(ApiResponse::<String> {
-                msg: Option::from(e.to_string()),
-                data: None
-            }),
+    let jwt_claims = orchestrator.decode_jwt(cookie_value).await;
+    match jwt_claims {
+        Ok(jwt_claims) => {
+            if jwt_claims.exp < Utc::now().timestamp() as u64 {
+                return generic_response::<String>(
+                    StatusCode::INTERNAL_SERVER_ERROR,
+                    Some("JWT expired".to_string()),
+                    None
+                );
+            };
+            generic_response::<JwtClaims>(
+                StatusCode::OK,
+                Some("Success".to_string()),
+                Some(jwt_claims)
+            )
         }
-    } else {
-        HttpResponse::Unauthorized().json(
-            ApiResponse::<String> {
-                msg: Option::from(String::from("Token Not Found")),
-                data: None
-            }
+        Err(e) => generic_response::<String>(
+            StatusCode::UNAUTHORIZED,
+            Some(e.to_string()),
+            None
         )
     }
 }

@@ -1,21 +1,14 @@
-services:
-  jwt:
-    build:
-      context: ./JWTService
-      dockerfile: Dockerfile
-    env_file:
-      - ./JWTService/.env
-    ports:
-      - "8001:8001"
-    networks:
-      - main
+version: "3.9"
 
+services:
   orchestrator:
     build:
       context: ./orchestrator
       dockerfile: Dockerfile
     environment:
       - RUNNING_IN_DOCKER=true
+    env_file:
+      - orchestrator/.env
     ports:
       - "8000:8000"
     networks:
@@ -38,7 +31,14 @@ services:
       POSTGRES_DB: orchestrator
     networks:
       - main
-  
+    volumes:
+      - auth_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+
   admin_postgres:
     image: postgres:latest
     environment:
@@ -47,6 +47,8 @@ services:
       POSTGRES_DB: orchestrator
     networks:
       - main
+    volumes:
+      - admin_postgres_data:/var/lib/postgresql/data
 
   admin:
     build:
@@ -59,6 +61,17 @@ services:
     depends_on:
       - admin_postgres
 
+  org_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    networks:
+      - main
+    volumes:
+      - org_postgres_data:/var/lib/postgresql/data
+
   organizer:
     build:
       context: ./OrganizerService
@@ -69,15 +82,28 @@ services:
       - main
     depends_on:
       - org_postgres
-  
-  org_postgres:
+
+  user_postgres:
     image: postgres:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: orchestrator
+      POSTGRES_DB: user_personal_account
     networks:
       - main
+    volumes:
+      - user_postgres_data:/var/lib/postgresql/data
+
+  user:
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - main
+    depends_on:
+      - user_postgres
 
   match:
     build:
@@ -109,3 +135,9 @@ services:
 networks:
   main:
     driver: bridge
+
+volumes:
+  auth_postgres_data:
+  admin_postgres_data:
+  org_postgres_data:
+  user_postgres_data:

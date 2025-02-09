@@ -19,7 +19,7 @@ def db_connection():
 
 
 def create_organizer_info(data):
-    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data)
+    result = requests.post(f"{BASE_URL}/organizer/create_account", json=data, verify=False)
     assert result.status_code == 201
     return result
 
@@ -47,7 +47,7 @@ def test_create_valid_event(data, new_data, expected_status_code, expected_messa
     data_json = response.json()
     organizer_id = data_json["data"]["id"]
     print("bebra id: ", organizer_id)
-    response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data)
+    response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data, verify=False)
 
     assert response.status_code == expected_status_code
     assert response.json()["message"] == expected_message
@@ -67,7 +67,7 @@ def test_create_valid_event(data, new_data, expected_status_code, expected_messa
     ),
 ])
 def test_create_event_invalid_organizer_id(new_data, expected_status_code, expected_message, db_connection):
-    response = requests.post(f"{BASE_URL}/organizer/random_id/create_match", json=new_data)
+    response = requests.post(f"{BASE_URL}/organizer/random_id/create_match", json=new_data, verify=False)
     assert response.status_code == expected_status_code
     assert response.json()["message"] == expected_message
 
@@ -98,12 +98,12 @@ def test_try_create_duplicate_event(data, new_data, expected_status_code_1, expe
     response = create_organizer_info(data)
     data_json = response.json()
     organizer_id = data_json["data"]["id"]
-    response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data)
+    response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data, verify=False)
 
     assert response.status_code == expected_status_code_1
     assert response.json()["message"] == expected_message_1
 
-    response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data)
+    response = requests.post(f"{BASE_URL}/organizer/{organizer_id}/create_match", json=new_data, verify=False)
 
     assert response.status_code == expected_status_code_2
     assert response.json()["message"] == expected_message_2

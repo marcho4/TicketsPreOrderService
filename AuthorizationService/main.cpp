@@ -1,17 +1,24 @@
+#define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <iostream>
 #include "libraries/httplib.h"
-#include "src/OrganizerRegistration/RegistrationOrganizerManager.h"
-#include "src/UserRegistration/RegistrationUserManager.h"
-#include "src/Authorization/AuthorizationManager.h"
-#include "src/Admin/AdminAuthorization.h"
-#include "src/Admin/AdminCreation.h"
-#include "src/UserRegistration/RegistrationUserManager.h"
+#include "src/api/OrganizerRegistration/RegistrationOrganizerManager.h"
+#include "src/api/UserRegistration/RegistrationUserManager.h"
+#include "src/api/Authorization/AuthorizationManager.h"
+#include "src/api/Admin/AdminAuthorization.h"
+#include "src/api/Admin/AdminCreation.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
+#include "src/api/PasswordUpdating.h"
 
 int main() {
+    auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/authorizations_service.log", 1048576 * 5, 3);
+    logger->flush_on(spdlog::level::info);
+    spdlog::set_default_logger(logger);
+    spdlog::info("Логгер успешно создан!");
+
     try {
         httplib::Server server;
 
-        // Обработчик preflight OPTIONS запросов
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
             res.set_header("Access-Control-Allow-Credentials", "true");
@@ -21,7 +28,6 @@ int main() {
             res.status = 200;
         });
 
-        // Функция для установки CORS-заголовков
         auto set_cors_headers = [&](httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
             res.set_header("Access-Control-Allow-Credentials", "true");
@@ -30,30 +36,32 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        // Подключение к базе данных
-        std::string connect = "dbname=orchestrator host=auth_postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
         server.Post("/organizer/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на регистрацию организатора");
             set_cors_headers(res);
             OrganizerRegistrationManager::RegisterOrganizerRequest(request, res, db);
         });
 
         server.Post("/user/register", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на регистрацию пользователя");
             set_cors_headers(res);
             UserRegistration::RegisterUserRequest(request, res, db);
         });
 
         server.Post("/authorize", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на авторизацию");
             set_cors_headers(res);
             AuthorizationManager::AuthorizationRequest(request, res, db);
         });
 
-        // Маршрут для подтверждения авторизации организатора
         server.Post("/organizer/approve", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на подтверждение регистрации организатора");
             set_cors_headers(res);
             OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
         });
@@ -64,16 +72,29 @@ int main() {
         });
 
         server.Post("/admin/create",  [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на создание администратора");
             set_cors_headers(res);
             AdminCreation::CreateAdminRequest(request, res, db);
         });
 
         server.Post("/admin/authorize",  [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на авторизацию администратора");
             set_cors_headers(res);
             AdminAuthorization::AuthorizeAdminRequest(request, res, db);
         });
 
-        // admin/create {"api_key": "const", "login" : "some_login", "password": "huy"}
+        server.Put("/user/:id/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на обновление пароля");
+            set_cors_headers(res);
+            PasswordUpdating::UpdatePasswordRequest(request, res, db);
+        });
+
+        server.Get("/password/recover", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            spdlog::info("Получен запрос на восстановление пароля");
+            set_cors_headers(res);
+//            PasswordUpdating::RecoverPasswordRequest(request, res, db);
+        });
+
         std::cout << "Server is listening on 0.0.0.0:8002\n";
         server.listen("0.0.0.0", 8002);
 

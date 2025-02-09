@@ -1,7 +1,7 @@
-use actix_web::{post, HttpResponse};
-use actix_web::cookie::{Cookie, Expiration, SameSite};
-use actix_web::cookie::time::OffsetDateTime;
 use crate::models::api_response::ApiResponse;
+use actix_web::cookie::time::OffsetDateTime;
+use actix_web::cookie::{Cookie, Expiration, SameSite};
+use actix_web::{post, HttpResponse};
 
 #[post("/logout")]
 pub async fn logout() -> HttpResponse {

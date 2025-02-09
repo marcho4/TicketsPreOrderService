@@ -1,5 +1,7 @@
-mod send_email;
-mod get_admin_requests;
-mod get_org_info;
-mod process_org;
-mod update_org;
+mod admin_functional;
+mod organizer_functional;
+mod auth_functional;
+pub mod responses;
+pub mod errors;
+mod jwt_functional;
+mod user_functional;

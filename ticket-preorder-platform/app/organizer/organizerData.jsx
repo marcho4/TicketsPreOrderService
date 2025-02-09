@@ -1,12 +1,12 @@
 'use client';
 
-import {Suspense, useEffect, useState} from "react";
+import React, { Suspense, useEffect, useState, useMemo } from "react";
 import { useAuth } from "../../providers/authProvider";
 import { createResource } from "../../lib/createResource";
 import ErrorBoundary from "./dataBoundary";
-import {Pencil} from "lucide-react";
-import {id} from "date-fns/locale";
-
+import { Pencil, LogOut } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { useRouter } from "next/navigation";
 
 const fetchOrganizerData = async (id) => {
     const response = await fetch(`http://localhost:8000/api/organizer/get/${id}`, {
@@ -15,7 +15,8 @@ const fetchOrganizerData = async (id) => {
     });
 
     if (!response.ok) {
-        console.log("Failed to fetch organizer data");
+        console.error("Failed to fetch organizer data");
+        throw new Error("Failed to fetch organizer data");
     }
 
     const body = await response.json();
@@ -28,29 +29,40 @@ const fetchOrganizerData = async (id) => {
     };
 };
 
-let organizerResource;
-
 function DataDisplay({ resource }) {
     const data = resource.read();
-    console.log(data);
+    const router = useRouter();
+    const { user } = useAuth();
 
     const [isEditing, setIsEditing] = useState(false);
-
     const [formData, setFormData] = useState({
         email: data.email,
-        organization: data.organization,
-        tin: data.tin,
-
+        organization_name: data.organization,
+        phone_number: data.phone_number,
     });
+
+    const logout = () => {
+        try {
+            fetch("http://localhost:8000/api/auth/logout", {
+                method: "POST",
+                credentials: "include",
+            });
+            router.push("/login");
+            window.location.reload();
+        } catch {
+            console.error("logout failed");
+        }
+    };
+
     const handleEdit = () => {
         setIsEditing(true);
         setFormData({
             email: data.email,
-            organization: data.organization,
-            tin: data.tin,
+            organization_name: data.organization,
             phone_number: data.phone_number,
         });
     };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -58,17 +70,21 @@ function DataDisplay({ resource }) {
             [name]: value,
         }));
     };
+
     const handleSave = async () => {
         try {
-            let resp = await fetch(`http://localhost:8000/api/organizer/update/${id}`, {
-                method: "POST",
-                credentials: "include",
-                body: ({
-                    email: data.email,
-                    phone_number: data.phone_number,
-                    organization_name: data.organization,
-                })
-            })
+            formData.tin = data.tin;
+            const resp = await fetch(
+                `http://localhost:8000/api/organizer/update/${user}`, // если user — объект, используйте user.id
+                {
+                    method: "POST",
+                    credentials: "include",
+                    body: JSON.stringify(formData),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
             console.log(await resp.json());
             setIsEditing(false);
         } catch (error) {
@@ -87,24 +103,36 @@ function DataDisplay({ resource }) {
     };
 
     return (
-        <div className="flex flex-col min-w-full bg-white rounded-lg p-4 gap-5">
-            <div className="border-2 border-deep_blue/40 px-5 py-5 rounded-lg">
-                <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
-                    My profile
-                </h1>
-                <div className="text-black/80 text-lg px-4">
-                    Manage your profile settings
+        <div className="flex flex-col min-w-full bg-white rounded-lg p-4 gap-5 shadow-lg border-gray-200 border">
+            {/* Заголовок и кнопка logout */}
+            <div className="flex flex-row px-5 py-5 rounded-lg justify-between">
+                <div className="flex flex-col">
+                    <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
+                        My profile
+                    </h1>
+                    <div className="text-black/80 text-lg px-4">
+                        Manage your profile settings
+                    </div>
                 </div>
+                <Button
+                    onClick={logout}
+                    className="bg-button-secondary max-w-56 py-2 hover:bg-dark-grey"
+                >
+                    <LogOut className="mr-2" /> Logout
+                </Button>
             </div>
-            <div className="border-2 border-deep_blue/40 px-5 py-4 rounded-lg">
+
+            {/* Основная информация */}
+            <div className="px-5 py-4 rounded-lg">
                 {!isEditing ? (
                     <div className="flex flex-col justify-center min-w-full">
                         <div className="flex flex-row items-center justify-between mt-4">
                             <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
-                            <button className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
-                            flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300"
-                                    onClick={handleEdit}>
-                                <Pencil className="mr-2"/> Edit
+                            <button
+                                className="bg-button-secondary text-white_smoke px-4 py-2 max-w-40 rounded-lg flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300"
+                                onClick={handleEdit}
+                            >
+                                <Pencil className="mr-2" /> Edit
                             </button>
                         </div>
 
@@ -112,19 +140,19 @@ function DataDisplay({ resource }) {
                             <div id="labels" className="flex flex-col items-start gap-5">
                                 <div className="flex flex-col w-full mt-6 space-y-4">
                                     {[
-                                        {label: "Email", value: data.email},
-                                        {label: "Organization's Name", value: data.organization},
-                                        {label: "Phone Number", value: data.phone_number},
-                                        {label: "TIN", value: data.tin},
+                                        { label: "Email", value: data.email },
+                                        { label: "Organization's Name", value: data.organization },
+                                        { label: "Phone Number", value: data.phone_number },
+                                        { label: "TIN", value: data.tin },
                                     ].map((item, index) => (
-                                        <div key={index}
-                                            className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                                            <div
-                                                className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                        <div
+                                            key={index}
+                                            className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]"
+                                        >
+                                            <div className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
                                                 {item.label}
                                             </div>
-                                            <div
-                                                className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
+                                            <div className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
                                                 {item.value}
                                             </div>
                                         </div>
@@ -134,13 +162,15 @@ function DataDisplay({ resource }) {
                         </div>
                     </div>
                 ) : (
+                    // Режим редактирования
                     <div className="flex flex-col justify-center min-w-full">
                         <div className="flex flex-row items-center justify-between mt-4">
                             <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
-                            <button className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
-                            flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300"
-                                    onClick={handleEdit}>
-                                <Pencil className="mr-2"/> Edit
+                            <button
+                                className="bg-button-secondary px-4 py-2 text-white max-w-40 rounded-lg flex flex-row items-center justify-start hover:bg-dark-grey transition-colors duration-300"
+                                onClick={handleCancel}
+                            >
+                                <Pencil className="mr-2" /> Edit
                             </button>
                         </div>
 
@@ -148,38 +178,49 @@ function DataDisplay({ resource }) {
                             <div id="labels" className="flex flex-col items-start gap-5">
                                 <div className="flex flex-col w-full mt-6 space-y-4">
                                     {[
-                                        {label: "Email", value: data.email},
-                                        {label: "Organization's Name", value: data.organization},
-                                        {label: "Phone Number", value: data.phone_number},
+                                        { label: "Email", value: data.email, name: "email" },
+                                        {
+                                            label: "Organization's Name",
+                                            value: data.organization,
+                                            name: "organization_name",
+                                        },
+                                        { label: "Phone Number", value: data.phone_number, name: "phone_number" },
                                     ].map((item, index) => (
-                                        <div key={index}
-                                             className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                                            <div
-                                                className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                        <div
+                                            key={index}
+                                            className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]"
+                                        >
+                                            <div className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
                                                 {item.label}
                                             </div>
                                             <input
-                                                placeholder={item.value}
-                                                className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
-                                            </input>
+                                                value={formData[item.name]}
+                                                name={item.name}
+                                                onChange={handleChange}
+                                                className="w-2/3 transition-colors text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center h-full text-my_black/80 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+                                            />
                                         </div>
                                     ))}
                                     <div className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                                        <div
-                                            className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                        <div className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
                                             TIN
                                         </div>
-                                        <div
-                                            className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
+                                        <div className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex justify-center bg-white h-full">
                                             {data.tin}
                                         </div>
                                     </div>
-                                    <div className="flex space-x-4">
-                                        <button className="bg-accent px-4 py-2 rounded text-white" onClick={handleSave}>
-                                            Save
-                                        </button>
-                                        <button className="bg-gray-300 px-4 py-2 rounded" onClick={handleCancel}>
+                                    <div className="flex space-x-4 px-4 justify-end">
+                                        <button
+                                            className="bg-gray-300 px-4 py-2 rounded"
+                                            onClick={handleCancel}
+                                        >
                                             Cancel
+                                        </button>
+                                        <button
+                                            className="bg-button-secondary px-4 py-2 rounded text-white"
+                                            onClick={handleSave}
+                                        >
+                                            Save
                                         </button>
                                     </div>
                                 </div>
@@ -194,22 +235,30 @@ function DataDisplay({ resource }) {
 
 function Loading() {
     return (
-        <div className="flex flex-col min-w-full bg-white rounded-lg p-4 gap-5">
-            <div className=" px-5 py-5 rounded-lg">
-                <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
-                    My profile
-                </h1>
-                <div className="text-black/80 text-lg px-4">
-                    Manage your profile settings
+        <div className="flex flex-col min-w-full bg-white rounded-lg p-4 gap-5 shadow-lg border-gray-200 border">
+            {/* Простейшая заглушка (скелет) для отображения загрузки */}
+            <div className="flex flex-row px-5 py-5 rounded-lg justify-between">
+                <div className="flex flex-col">
+                    <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
+                        My profile
+                    </h1>
+                    <div className="text-black/80 text-lg px-4">
+                        Manage your profile settings
+                    </div>
                 </div>
+                <Button className="bg-button-secondary max-w-56 py-2">
+                    <LogOut className="mr-2" /> Logout
+                </Button>
             </div>
             <div className="px-5 py-4 rounded-lg">
                 <div className="flex flex-col justify-center min-w-full">
-                <div className="flex flex-row items-center justify-between mt-4">
+                    <div className="flex flex-row items-center justify-between mt-4">
                         <div className="text-3xl font-semibold mr-2 px-4">Basic info</div>
-                        <button disabled={true} className="bg-dark-grey/80 text-lg px-4 py-2 text-white max-w-40  rounded-lg
-                        flex flex-row items-center justify-start  transition-colors duration-300">
-                            <Pencil className="mr-2"/> Edit
+                        <button
+                            disabled={true}
+                            className="bg-button-secondary text-lg px-4 py-2 text-white max-w-40 rounded-lg flex flex-row items-center justify-start transition-colors duration-300"
+                        >
+                            <Pencil className="mr-2" /> Edit
                         </button>
                     </div>
 
@@ -217,21 +266,21 @@ function Loading() {
                         <div id="labels" className="flex flex-col items-start gap-5">
                             <div className="flex flex-col w-full mt-6 space-y-4">
                                 {[
-                                    {label: "Email"},
-                                    {label: "Organization's Name"},
-                                    {label: "Phone Number"},
-                                    {label: "TIN"},
+                                    { label: "Email" },
+                                    { label: "Organization's Name" },
+                                    { label: "Phone Number" },
+                                    { label: "TIN" },
                                 ].map((item, index) => (
-                                    <div key={index}
-                                         className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]">
-                                        <div
-                                            className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
+                                    <div
+                                        key={index}
+                                        className="flex max-w-full min-w-full flex-row items-center justify-center h-[56px]"
+                                    >
+                                        <div className="w-1/3 text-xl bg-white font-semibold mr-2 px-4 rounded-lg h-full flex items-center">
                                             {item.label}
                                         </div>
                                         <div
-                                            className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex
-                                            animate-pulse justify-center bg-dark-grey/40 h-full">
-                                        </div>
+                                            className="w-2/3 text-xl rounded-lg px-4 py-2 text-center items-center flex animate-pulse justify-center bg-dark-grey/40 h-full"
+                                        ></div>
                                     </div>
                                 ))}
                             </div>
@@ -244,29 +293,37 @@ function Loading() {
 }
 
 export default function DataSection() {
-    const {user, userRole} = useAuth();
+    const { user, userRole } = useAuth();
 
-    useEffect(() => {
+    // Посмотрим, что реально приходит
+    console.log("DataSection -> user:", user);
+    console.log("DataSection -> userRole:", userRole);
 
-    }, [user])
+    const organizerResource = useMemo(() => {
+        console.log("useMemo called, user=", user, "userRole=", userRole);
 
-    // Пока `user` не определен, показываем загрузку
-    if (user === undefined) {
-        return <Loading/>;
+        // например, посмотрим, есть ли у user поле id
+        if (user && userRole === "ORGANIZER") {
+            console.log("Creating resource with user.id=", user);
+            return createResource(() => fetchOrganizerData(user));
+        }
+        console.log("Returning null resource");
+        return null;
+    }, [user, userRole]);
+
+    // Посмотрим, создался ли resource
+    console.log("DataSection -> organizerResource:", organizerResource);
+
+    if (!user || !organizerResource) {
+        console.log("DataSection -> Loading shown");
+        return <Loading />;
     }
 
-    if (user == null || userRole !== "ORGANIZER") {
-        return <div>You are not authorized as an organizer</div>
-    }
-
-    if (!organizerResource) {
-        organizerResource = createResource(() => fetchOrganizerData(user));
-    }
-
+    console.log("DataSection -> Rendering DataDisplay");
     return (
         <ErrorBoundary>
-            <Suspense fallback={<Loading/>}>
-                <DataDisplay resource={organizerResource} id={user}/>
+            <Suspense fallback={<Loading />}>
+                <DataDisplay resource={organizerResource} />
             </Suspense>
         </ErrorBoundary>
     );

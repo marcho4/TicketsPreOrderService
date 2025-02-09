@@ -1,7 +1,7 @@
-BASE_URL = "http://localhost:8082"
+BASE_URL = "http://localhost:8002"
 
 DATABASE_CONFIG = {
-    "dbname": "pending_organizers",
+    "dbname": "orchestrator",
     "host": "localhost",
     "port": 5432
 }
