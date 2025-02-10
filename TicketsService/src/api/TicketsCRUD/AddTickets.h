@@ -33,16 +33,24 @@ class AddTickets {
 
     static std::vector<Ticket> GetTicketsFromCSV(httplib::MultipartFormData& file, httplib::Response& res) {
         std::vector<Ticket> tickets;
-        std::string path = file.filename;
-        std::ifstream file_stream(path);
+        std::stringstream file_stream(file.content);
         std::string line;
+
         while (std::getline(file_stream, line)) {
             std::vector<std::string> ticket_data = Helper::split(line);
+
             if (!FileValidator::ValidateFileRow(ticket_data)) {
+                spdlog::warn("Некорректная строка в CSV: {}", line);
+                continue;
+            }
+
+            if (ticket_data.size() < 4) {
+                spdlog::error("Недостаточно данных в строке CSV: {}", line);
                 continue;
             }
             tickets.push_back(Ticket(ticket_data[0], ticket_data[1], ticket_data[2], ticket_data[3]));
         }
+        spdlog::info("Загружено {} билетов", tickets.size());
         return tickets;
     }
 

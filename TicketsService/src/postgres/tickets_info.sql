@@ -10,8 +10,8 @@ CREATE TYPE Sector AS ENUM ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
 
 CREATE TABLE Tickets.TicketsData (
      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-     match_id UUID NOT NULL,
-     user_id UUID,
+     match_id varchar(50) NOT NULL,
+     user_id varchar(50),
      price INT NOT NULL CHECK (price > 0),
      sector Sector NOT NULL,
      row INT NOT NULL CHECK (row > 0),

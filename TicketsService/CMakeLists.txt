@@ -17,25 +17,35 @@ set(SOURCE_FILES
         src/api/TicketsCRUD/GetTickets.h
 )
 
-# Добавьте каталоги для заголовочных файлов
-include_directories(
-        src
-        src/postgres
-        /usr/local/include
-        /usr/include
-)
-include_directories("libraries/Bcrypt.cpp/include")
+## Добавьте каталоги для заголовочных файлов
+#include_directories(
+#        src
+#        src/postgres
+#        /usr/local/include
+#        /usr/include
+#)
+#include_directories("libraries/Bcrypt.cpp/include")
+#
+## Подключение директорий с библиотеками
+#link_directories(
+#        /usr/local/lib
+#        /usr/lib
+#)
+include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
+link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
 
-# Подключение директорий с библиотеками
-link_directories(
-        /usr/local/lib
-        /usr/lib
-)
+include_directories("/opt/homebrew/opt/libpqxx/include")
+link_directories("/opt/homebrew/opt/libpqxx/lib")
+
+# Include directories
+include_directories("libraries/Bcrypt.cpp/include")
+include_directories("libraries/libpqxx/include")
+include_directories("/opt/homebrew/opt/openssl@3/include")
 
 # Ищем необходимые библиотеки
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(PostgreSQL REQUIRED)
+#find_package(PostgreSQL REQUIRED)
 include(FetchContent)
 FetchContent_Declare(
         spdlog
@@ -46,12 +56,18 @@ FetchContent_MakeAvailable(spdlog)
 # Создаем исполняемый файл
 add_executable(TicketsService ${SOURCE_FILES})
 
-target_link_libraries(TicketsService
-        PRIVATE
-        spdlog::spdlog
-        pqxx
-        pq
-        CURL::libcurl
-        OpenSSL::SSL
-        OpenSSL::Crypto
-)
+#target_link_libraries(TicketsService
+#        PRIVATE
+#        spdlog::spdlog
+#        pqxx
+#        pq
+#        CURL::libcurl
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#)
+
+target_link_libraries(TicketsService PRIVATE CURL::libcurl spdlog::spdlog
+        /opt/homebrew/opt/openssl@3/lib/libssl.dylib
+        /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
+        /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
+        pqxx)

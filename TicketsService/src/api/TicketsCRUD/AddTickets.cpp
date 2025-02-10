@@ -1,25 +1,32 @@
 #include "AddTickets.h"
 
 void AddTickets::AddingTicketsRequest(const httplib::Request &req, httplib::Response &res, Database &db) {
+    std::cout << "Прилетел запрос\n";
     std::string match_id;
     if (!req.path_params.at("match_id").empty()) {
         match_id = req.path_params.at("match_id");
     } else {
         spdlog::error("Не указан id матча, отказано в обновлении");
-        ErrorHandler::sendError(res, 400, "Missing id parameter");
+        ErrorHandler::sendError(res, 402, "Missing id parameter");
         return;
     }
 
-    if (!req.has_file("tickets.csv")) {
+    if (!req.has_file("tickets")) {
+        auto file = req.files;
+        std::cout << file.size() << '\n';
+        for (const auto& f : file) {
+            std::cout << f.second.content << '\n';
+        }
         spdlog::error("Не указан файл с билетами, отказано в добавлении");
-        ErrorHandler::sendError(res, 400, "Missing file with tickets");
+        ErrorHandler::sendError(res, 401, "Missing file with tickets");
         return;
     }
 
-    httplib::MultipartFormData file = req.get_file_value("tickets.csv");
+    httplib::MultipartFormData file = req.get_file_value("tickets");
+    std::cout << file.content << '\n';
 
     std::vector<Ticket> tickets = GetTicketsFromCSV(file, res);
-
+    std::cout << tickets.size() << '\n';
     for (const auto& ticket : tickets) {
         AddTicketToDatabase(match_id, ticket, db);
     }

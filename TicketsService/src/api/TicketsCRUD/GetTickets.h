@@ -17,16 +17,19 @@ class GetTickets {
 
         for (const auto& row : response) {
             json request;
-            request["id"] = row["id"].as<std::string>();
-            request["match_id"] = row["match_id"].as<std::string>();
-            request["user_id"] = row["user_id"].as<std::string>();
-            request["price"] = row["price"].as<std::string>();
-            request["sector"] = row["sector"].as<std::string>();
-            request["row"] = row["row"].as<std::string>();
-            request["seat"] = row["seat"].as<std::string>();
-            request["status"] = row["status"].as<std::string>();
+
+            request["id"]       = row["id"].is_null() ? "" : row["id"].as<std::string>();
+            request["match_id"] = row["match_id"].is_null() ? "" : row["match_id"].as<std::string>();
+            request["user_id"]  = row["user_id"].is_null() ? "" : row["user_id"].as<std::string>();
+            request["price"]    = row["price"].is_null() ? "" : row["price"].as<std::string>();
+            request["sector"]   = row["sector"].is_null() ? "" : row["sector"].as<std::string>();
+            request["row"]      = row["row"].is_null() ? "" : row["row"].as<std::string>();
+            request["seat"]     = row["seat"].is_null() ? "" : row["seat"].as<std::string>();
+            request["status"]   = row["status"].is_null() ? "" : row["status"].as<std::string>();
+
             json_body.push_back(request);
         }
+
         return json_body;
     }
 

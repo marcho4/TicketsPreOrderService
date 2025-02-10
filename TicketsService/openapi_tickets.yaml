@@ -9,7 +9,7 @@ servers:
     description: Локальный сервер разработки
 
 paths:
-  /tickets/{match_id}/add:
+  /ticket/{match_id}/add:
     post:
       summary: Добавление билета
       description: Принимает запрос на добавление билета на матч в формате CSV
@@ -37,7 +37,7 @@ paths:
           description: Билет добавлен
         '400':
           description: Неверный запрос
-  /tickets/{match_id}/get:
+  /ticket/{match_id}/get:
     get:
         summary: Получение билетов
         description: Получение списка билетов на матч

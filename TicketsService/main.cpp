@@ -8,7 +8,7 @@
 
 int main() {
 
-    auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/organizer_service.log", 1048576 * 5, 3);
+    auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/tickets_service.log", 1048576 * 5, 3);
     logger->flush_on(spdlog::level::info);
     spdlog::set_default_logger(logger);
     spdlog::info("Логгер успешно создан!");
@@ -33,9 +33,10 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
+//        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=tickets_info host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("src/postgres/organizer_personal_account.sql");
+        db.initDbFromFile("../src/postgres/tickets_info.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
