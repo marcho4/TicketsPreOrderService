@@ -1,10 +1,27 @@
 use actix_web::{put, web, HttpResponse};
 use actix_web::http::StatusCode;
+use crate::models::api_response::ApiResponse;
 use crate::models::message_resp::MessageResp;
 use crate::models::user_models::UserUpdateData;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::generic_response;
 
+
+#[utoipa::path(
+    put,
+    path = "/api/user/{id}/update",
+    tag = "User",
+    description = "Update user info",
+    summary = "Обновить данные пользователя",
+    params(
+        ("id" = String, Path, description = "Unique user ID")
+    ),
+    request_body = UserUpdateData,
+    responses(
+        (status = 200, description = "Successfully updated", body = ApiResponse<MessageResp>),
+        (status = 500, description = "Error", body = ApiResponse<String>)
+    )
+)]
 #[put("/{id}/update")]
 pub async fn update_user(id: web::Path<String>, data: web::Json<UserUpdateData>,
                          orchestrator: web::Data<Orchestrator>) -> HttpResponse {

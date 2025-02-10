@@ -5,7 +5,19 @@ use crate::utils::responses::generic_response;
 use actix_web::http::StatusCode;
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use log::error;
+use crate::models::api_response::ApiResponse;
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/register/organizer/",
+    description = "Register the organizer",
+    tag = "Auth",
+    summary = "Зарегистрироваться как организатор",
+    responses(
+        (status = 200, description = "Successful performing a registration operation", body = ApiResponse<RegistrationOrgResp>),
+        (status = 500, description = "Internal server error", body = ApiResponse<String>),
+    )
+)]
 #[post("/register/organizer")]
 pub async fn register_organizer(
     orchestrator: web::Data<Orchestrator>,

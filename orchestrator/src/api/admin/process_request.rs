@@ -1,14 +1,27 @@
-use crate::models::create_org_data::CreateOrgData;
-use crate::models::org_approve_body::OrgApproveBody;
-use crate::models::org_approve_response::OrgApproveResponse;
-use crate::models::request_process_info::{RequestProcessInfo, Status};
+use actix_web::{http::StatusCode, post, web, HttpResponse};
+use log::info;
+use crate::models::{
+    create_org_data::CreateOrgData,
+    org_approve_body::OrgApproveBody,
+    org_approve_response::OrgApproveResponse,
+    request_process_info::{RequestProcessInfo, Status},
+};
+use crate::models::api_response::ApiResponse;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::generic_response;
-use actix_web::{post, web, HttpResponse};
-use actix_web::http::StatusCode;
-use log::info;
 use crate::utils::errors::OrchestratorError;
 
+#[utoipa::path(
+    post,
+    path = "/api/admin/process",
+    summary = "Обработать заявку на регистрацию организатора",
+    responses(
+        (status = 200, description = "Successfully fetched requests", body = ApiResponse<OrgApproveResponse>),
+        (status = 404, description = "Admin request not found", body = ApiResponse<String>),
+        (status = 500, description = "Internal server error", body = ApiResponse<String>)
+    ),
+    tag = "Admin"
+)]
 #[post("/process")]
 pub async fn process_request(
     data: web::Json<RequestProcessInfo>,

@@ -1,3 +1,31 @@
+use crate::api::user::{
+    update_user::__path_update_user,
+    get_user_data::__path_get_user_data
+};
+use crate::api::auth::{
+    session::__path_session,
+    login::__path_login,
+    logout::__path_logout,
+    user_register::__path_register_user,
+    organizer_register::__path_register_organizer
+};
+use crate::api::admin::{
+    process_request::__path_process_request,
+    get_requests::__path_get_requests
+};
+use crate::api::organizer::{
+    get_organizer_data::__path_get_organizer,
+    update_organizer_data::__path_update
+};
+use crate::api::matches::{
+    create_match::__path_create_match,
+    delete_match::__path_delete_match,
+    get_match::__path_get_match,
+    get_all_matches::__path_get_all_matches,
+    get_matches_by_org::__path_get_by_org,
+    update_match::__path_update_match
+};
+
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_cors::Cors;
 use actix_web::{error, middleware, web, App, HttpResponse, HttpServer};
@@ -6,6 +34,9 @@ use env_logger::Env;
 use std::env;
 use std::time::Duration;
 use crate::models::api_response::ApiResponse;
+
+use utoipa::OpenApi;
+use utoipa_swagger_ui::SwaggerUi;
 
 mod orchestrator;
 mod models;
@@ -25,18 +56,33 @@ async fn main() -> std::io::Result<()> {
     let state = web::Data::new(orchestrator);
     let front_url = state.config.frontend_url.clone();
 
-    HttpServer::new(move || {
-        let json_cfg = web::JsonConfig::default()
-            .error_handler(|err, _req| {
-                let err_msg = err.to_string();
-                error::InternalError::from_response(err, HttpResponse::Conflict().json(
-                    ApiResponse::<String> {msg: Some(err_msg), data: None}
-                ).into()).into()
-            });
+    #[derive(OpenApi)]
+    #[openapi(
+        info(
+            title = "Orchestrator API",
+            description = "API for Tickets PreOrder Service",
+            version = "1.0.0"
+        ),
+        paths(get_requests, process_request, login, logout, session, register_user, register_organizer,
+            get_organizer, update_user, get_user_data, update, update_match, get_by_org, get_match,
+            get_all_matches, delete_match, create_match
+        )
+    )]
+    struct ApiDoc;
+    let openapi = ApiDoc::openapi();
 
+    let json_cfg = web::JsonConfig::default()
+        .error_handler(|err, _req| {
+            let err_msg = err.to_string();
+            error::InternalError::from_response(err, HttpResponse::Conflict().json(
+                ApiResponse::<String> {msg: Some(err_msg), data: None}
+            ).into()).into()
+        });
+
+    HttpServer::new(move || {
         App::new()
             .app_data(state.clone())
-            .app_data(json_cfg)
+            .app_data(json_cfg.clone())
             .wrap(middleware::Logger::default())
             .wrap(Cors::default()
                 .allowed_origin(&front_url)
@@ -51,6 +97,9 @@ async fn main() -> std::io::Result<()> {
                     .configure(api::organizer::config::organizer_config)
                     .configure(api::user::config::user_config)
                     .configure(api::matches::config::cfg)
+            )
+            .service(
+                SwaggerUi::new("/swagger-ui/{_:.*}").url("/api-docs/openapi.json", openapi.clone()),
             )
     })
         .keep_alive(Duration::from_secs(75))

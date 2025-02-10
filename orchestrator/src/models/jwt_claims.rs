@@ -1,6 +1,8 @@
 use crate::models::roles::Role;
 use serde::{Deserialize, Serialize};
-#[derive(Debug, Serialize, Deserialize, Clone)]
+use utoipa::ToSchema;
+
+#[derive(Debug, Serialize, Deserialize, Clone, ToSchema)]
 pub struct JwtClaims {
     pub user_id: String,
     pub auth_id: String,

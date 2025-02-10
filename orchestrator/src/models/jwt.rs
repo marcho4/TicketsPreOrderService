@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
-#[derive(Debug, Serialize, Deserialize, Clone)]
+use utoipa::ToSchema;
+
+#[derive(Debug, Serialize, Deserialize, Clone, ToSchema)]
 pub struct Jwt {
     pub jwt: String,
 }

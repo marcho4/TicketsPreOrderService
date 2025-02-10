@@ -1,8 +1,8 @@
 use serde::{ Serialize, Deserialize };
 use chrono::{DateTime, Utc};
+use utoipa::ToSchema;
 
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, ToSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct Match {
     pub id: String,
@@ -13,12 +13,10 @@ pub struct Match {
     pub stadium: String,
     pub match_status: u8,
     pub match_date_time: DateTime<Utc>,
-    // pub created_at: DateTime<Utc>,
-    // pub updated_at: DateTime<Utc>,
 }
 
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, ToSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateMatchData {
     pub team_home: String,
@@ -28,12 +26,12 @@ pub struct CreateMatchData {
     pub match_description: String
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, ToSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateMatchData {
     pub match_description: String,
     pub stadium: String,
     pub match_date_time: DateTime<Utc>,
 }
-#[derive(Deserialize)]
+#[derive(Deserialize, ToSchema)]
 pub struct Empty {}
