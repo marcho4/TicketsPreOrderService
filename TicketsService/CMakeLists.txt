@@ -15,6 +15,10 @@ set(SOURCE_FILES
         src/api/TicketsCRUD/AddTickets.h
         src/api/TicketsCRUD/GetTickets.cpp
         src/api/TicketsCRUD/GetTickets.h
+        src/api/TicketsStatus/CancelReservation.cpp
+        src/api/TicketsStatus/CancelReservation.h
+        src/api/TicketsStatus/TicketsReservation.cpp
+        src/api/TicketsStatus/TicketsReservation.h
 )
 
 ## Добавьте каталоги для заголовочных файлов

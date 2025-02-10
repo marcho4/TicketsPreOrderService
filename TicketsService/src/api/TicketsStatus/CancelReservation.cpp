@@ -27,7 +27,7 @@
 
 void CancelReservation::CancelTicketReservation(const std::string &ticket_id,
                                                 const std::string &match_id, Database &db) {
-    std::string query = "UPDATE Tickets.TicketsData SET user_id = $1, status = $2 WHERE ticket_id = $3 AND match_id = $4";
+    std::string query = "UPDATE Tickets.TicketsData SET user_id = $1, status = $2 WHERE id = $3 AND match_id = $4";
     std::vector<std::string> params = {"", "available", ticket_id, match_id};
 
     db.executeQueryWithParams(query, params);

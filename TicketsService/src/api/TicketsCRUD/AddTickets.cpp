@@ -1,7 +1,6 @@
 #include "AddTickets.h"
 
 void AddTickets::AddingTicketsRequest(const httplib::Request &req, httplib::Response &res, Database &db) {
-    std::cout << "Прилетел запрос\n";
     std::string match_id;
     if (!req.path_params.at("match_id").empty()) {
         match_id = req.path_params.at("match_id");
@@ -12,27 +11,25 @@ void AddTickets::AddingTicketsRequest(const httplib::Request &req, httplib::Resp
     }
 
     if (!req.has_file("tickets")) {
-        auto file = req.files;
-        std::cout << file.size() << '\n';
-        for (const auto& f : file) {
-            std::cout << f.second.content << '\n';
-        }
         spdlog::error("Не указан файл с билетами, отказано в добавлении");
         ErrorHandler::sendError(res, 401, "Missing file with tickets");
         return;
     }
 
     httplib::MultipartFormData file = req.get_file_value("tickets");
-    std::cout << file.content << '\n';
 
-    std::vector<Ticket> tickets = GetTicketsFromCSV(file, res);
-    std::cout << tickets.size() << '\n';
+    auto [invalid_rows, tickets] = GetTicketsFromCSV(file, res);
+
     for (const auto& ticket : tickets) {
         AddTicketToDatabase(match_id, ticket, db);
     }
 
     res.status = 201;
-    res.set_content(R"({"message": "Tickets added successfully"})", "application/json");
+    json response = {
+            {"message", "Tickets added successfully"},
+            {"invalid_rows", invalid_rows}
+    };
+    res.set_content(response.dump(), "application/json");
 }
 
 void AddTickets::AddTicketToDatabase(const std::string &match_id, const AddTickets::Ticket &ticket, Database &db) {

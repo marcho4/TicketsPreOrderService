@@ -5,6 +5,8 @@
 #include "src/postgres/PostgresProcessing.h"
 #include "src/api/TicketsCRUD/AddTickets.h"
 #include "src/api/TicketsCRUD/GetTickets.h"
+#include "src/api/TicketsStatus/CancelReservation.h"
+#include "src/api/TicketsStatus/TicketsReservation.h"
 
 int main() {
 
@@ -62,13 +64,13 @@ int main() {
         server.Post("/ticket/:id/reserve", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             spdlog::info("Получен запрос на бронирование билета");
-
+            TicketsReservation::ReserveTicketsRequest(request, res, db);
         });
 
         server.Put("/ticket/:id/cancel", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             spdlog::info("Получен запрос на отмену бронирования билета");
-
+            CancelReservation::CancelReservationRequest(request, res, db);
         });
 
         server.Delete("/ticket/:id/delete", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
