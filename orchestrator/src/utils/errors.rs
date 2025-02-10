@@ -17,4 +17,7 @@ pub enum OrchestratorError {
 
     #[error("Forbidden")]
     Forbidden,
+
+    #[error("Not found")]
+    NotFound,
 }

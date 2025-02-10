@@ -13,7 +13,7 @@ impl Orchestrator {
         let resp = self.client.get(url).send().await.map_err(|e| Request(e.into()))?;
         let serialized = resp.json::<UserResp>().await.map_err(|e| Request(e.into()))?;
         if serialized.data.is_none() {
-            return Err(OrchestratorError::Service(serialized.message));
+            return Err(Service(serialized.message));
         };
 
         Ok(serialized.data.unwrap())

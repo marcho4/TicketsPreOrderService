@@ -3,11 +3,24 @@ use crate::orchestrator::orchestrator::Orchestrator;
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use log::info;
+use crate::models::api_response::ApiResponse;
 use crate::models::message_resp::MessageResp;
 use crate::models::user_models::{UserCreateData, UserRegistration};
 use crate::utils::errors::OrchestratorError;
 use crate::utils::responses::generic_response;
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/register/user",
+    request_body = UserRegistration,
+    summary = "Зарегистрироваться как пользователь",
+    responses(
+        (status = 200, description = "Successfully registered", body = ApiResponse<MessageResp>),
+        (status = 400, description = "Bad request. Error in user creation.", body = ApiResponse<String>),
+        (status = 500, description = "Internal server error", body = ApiResponse<String>)
+    ),
+    tag = "Auth"
+)]
 #[post("/register/user")]
 pub async fn register_user(
     orchestrator: web::Data<Orchestrator>,

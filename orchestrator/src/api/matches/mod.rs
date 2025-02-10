@@ -1,7 +1,7 @@
 pub mod config;
-mod get_all_matches;
-mod create_match;
-mod update_match;
-mod delete_match;
-mod get_match;
-mod get_matches_by_org;
+pub mod get_all_matches;
+pub mod create_match;
+pub mod update_match;
+pub mod delete_match;
+pub mod get_match;
+pub mod get_matches_by_org;
