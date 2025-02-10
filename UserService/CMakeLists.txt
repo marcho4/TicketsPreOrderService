@@ -11,8 +11,8 @@ set(SOURCE_FILES
         src/postgres/PostgresProcessing.h
         src/utils/ValidDataChecker.h
         src/ErrorHandler.h
-        src/api/MatchHistory/GetMatchHistory.cpp
-        src/api/MatchHistory/GetMatchHistory.h
+        src/api/EventsHistory/GetMatchHistory.cpp
+        src/api/EventsHistory/GetMatchHistory.h
         src/api/UserAccountCRUD/UpdateAccount.cpp
         src/api/UserAccountCRUD/UpdateAccount.h
         src/api/UserAccountCRUD/GetAccountData.cpp

@@ -5,8 +5,8 @@
 #include "src/postgres/PostgresProcessing.h"
 #include "src/api/TicketsCRUD/AddTickets.h"
 #include "src/api/TicketsCRUD/GetTickets.h"
-#include "src/api/TicketsStatus/CancelReservation.h"
-#include "src/api/TicketsStatus/TicketsReservation.h"
+#include "src/api/TicketsStatus/Cancel/CancelReservation.h"
+#include "src/api/TicketsStatus/Reserve/TicketsReservation.h"
 
 int main() {
 
