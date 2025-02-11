@@ -17,6 +17,11 @@ set(SOURCE_FILES
         src/api/UserAccountCRUD/UpdateAccount.h
         src/api/UserAccountCRUD/GetAccountData.cpp
         src/api/UserAccountCRUD/GetAccountData.h
+        src/api/Preorders/GetPreorders.h
+        src/api/Preorders/AddPreorder/Preorder.cpp
+        src/api/Preorders/AddPreorder/Preorder.h
+        src/api/Preorders/CancelPreorder/PreorderCancel.cpp
+        src/api/Preorders/CancelPreorder/PreorderCancel.h
         libraries/Bcrypt.cpp/src/bcrypt.cpp
         libraries/Bcrypt.cpp/include/bcrypt.h
         libraries/Bcrypt.cpp/src/blowfish.cpp

@@ -8,6 +8,12 @@ void Preorder::AddPreorderRequest(const httplib::Request& req, httplib::Response
     }
     std::string user_id = req.path_params.at("id");
 
+    if (!CheckUserExistence(user_id, db)) {
+        spdlog::error("Пользователь с id {} не найден", user_id);
+        ErrorHandler::sendError(res, 404, "User not found");
+        return;
+    }
+
     json parsed;
     try {
         parsed = json::parse(req.body);
@@ -34,8 +40,17 @@ void Preorder::AddPreorderRequest(const httplib::Request& req, httplib::Response
 }
 
 void Preorder::AddPreorder(const std::string& user_id, PreorderData data, Database& db) {
-    std::string query = "INSERT INTO Users.Preorders (user_id, match_id, ticket_id, date) VALUES ($1, $2, $3, $4)";
+    std::string query = "INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4)";
     std::vector<std::string> params = {user_id, data.match_id, data.ticket_id, data.date};
 
     db.executeQueryWithParams(query, params);
+}
+
+bool Preorder::CheckUserExistence(const std::string& user_id, Database& db) {
+    std::string query = "SELECT * FROM Users.UsersData WHERE user_id = $1";
+    std::vector<std::string> params = {user_id};
+
+    pqxx::result response = db.executeQueryWithParams(query, params);
+
+    return !response.empty();
 }

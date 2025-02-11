@@ -153,33 +153,33 @@ CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/GetTickets.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/GetTickets.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsCRUD/GetTickets.cpp -o CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/GetTickets.cpp.s
 
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o: CMakeFiles/TicketsService.dir/flags.make
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/CancelReservation.cpp
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o: CMakeFiles/TicketsService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o -MF CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o.d -o CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/CancelReservation.cpp
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o: CMakeFiles/TicketsService.dir/flags.make
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Cancel/CancelReservation.cpp
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o: CMakeFiles/TicketsService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o -MF CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o.d -o CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Cancel/CancelReservation.cpp
 
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/CancelReservation.cpp > CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.i
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Cancel/CancelReservation.cpp > CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.i
 
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/CancelReservation.cpp -o CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.s
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Cancel/CancelReservation.cpp -o CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.s
 
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o: CMakeFiles/TicketsService.dir/flags.make
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/TicketsReservation.cpp
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o: CMakeFiles/TicketsService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o -MF CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o.d -o CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/TicketsReservation.cpp
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o: CMakeFiles/TicketsService.dir/flags.make
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Reserve/TicketsReservation.cpp
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o: CMakeFiles/TicketsService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o -MF CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o.d -o CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Reserve/TicketsReservation.cpp
 
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/TicketsReservation.cpp > CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.i
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Reserve/TicketsReservation.cpp > CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.i
 
-CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/TicketsReservation.cpp -o CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.s
+CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Reserve/TicketsReservation.cpp -o CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.s
 
 # Object files for target TicketsService
 TicketsService_OBJECTS = \
@@ -189,8 +189,8 @@ TicketsService_OBJECTS = \
 "CMakeFiles/TicketsService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o" \
 "CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/AddTickets.cpp.o" \
 "CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/GetTickets.cpp.o" \
-"CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o" \
-"CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o"
+"CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o" \
+"CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o"
 
 # External object files for target TicketsService
 TicketsService_EXTERNAL_OBJECTS =
@@ -201,8 +201,8 @@ TicketsService: CMakeFiles/TicketsService.dir/libraries/Bcrypt.cpp/src/bcrypt.cp
 TicketsService: CMakeFiles/TicketsService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o
 TicketsService: CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/AddTickets.cpp.o
 TicketsService: CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/GetTickets.cpp.o
-TicketsService: CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o
-TicketsService: CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o
+TicketsService: CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o
+TicketsService: CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o
 TicketsService: CMakeFiles/TicketsService.dir/build.make
 TicketsService: /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib
 TicketsService: _deps/spdlog-build/libspdlogd.a

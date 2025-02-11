@@ -13,8 +13,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/main.cpp" "CMakeFiles/TicketsService.dir/main.cpp.o" "gcc" "CMakeFiles/TicketsService.dir/main.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsCRUD/AddTickets.cpp" "CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/AddTickets.cpp.o" "gcc" "CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/AddTickets.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsCRUD/GetTickets.cpp" "CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/GetTickets.cpp.o" "gcc" "CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/GetTickets.cpp.o.d"
-  "/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/CancelReservation.cpp" "CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o" "gcc" "CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o.d"
-  "/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/TicketsReservation.cpp" "CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o" "gcc" "CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o.d"
+  "/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Cancel/CancelReservation.cpp" "CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o" "gcc" "CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o.d"
+  "/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/api/TicketsStatus/Reserve/TicketsReservation.cpp" "CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o" "gcc" "CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o.d"
   "/Users/nazarzakrevskij/TicketsPreOrderService/TicketsService/src/postgres/PostgresProcessing.cpp" "CMakeFiles/TicketsService.dir/src/postgres/PostgresProcessing.cpp.o" "gcc" "CMakeFiles/TicketsService.dir/src/postgres/PostgresProcessing.cpp.o.d"
   )
 

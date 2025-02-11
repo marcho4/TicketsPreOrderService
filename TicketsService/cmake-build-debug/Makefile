@@ -262,53 +262,53 @@ src/api/TicketsCRUD/GetTickets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsCRUD/GetTickets.cpp.s
 .PHONY : src/api/TicketsCRUD/GetTickets.cpp.s
 
-src/api/TicketsStatus/CancelReservation.o: src/api/TicketsStatus/CancelReservation.cpp.o
-.PHONY : src/api/TicketsStatus/CancelReservation.o
+src/api/TicketsStatus/Cancel/CancelReservation.o: src/api/TicketsStatus/Cancel/CancelReservation.cpp.o
+.PHONY : src/api/TicketsStatus/Cancel/CancelReservation.o
 
 # target to build an object file
-src/api/TicketsStatus/CancelReservation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.o
-.PHONY : src/api/TicketsStatus/CancelReservation.cpp.o
+src/api/TicketsStatus/Cancel/CancelReservation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.o
+.PHONY : src/api/TicketsStatus/Cancel/CancelReservation.cpp.o
 
-src/api/TicketsStatus/CancelReservation.i: src/api/TicketsStatus/CancelReservation.cpp.i
-.PHONY : src/api/TicketsStatus/CancelReservation.i
+src/api/TicketsStatus/Cancel/CancelReservation.i: src/api/TicketsStatus/Cancel/CancelReservation.cpp.i
+.PHONY : src/api/TicketsStatus/Cancel/CancelReservation.i
 
 # target to preprocess a source file
-src/api/TicketsStatus/CancelReservation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.i
-.PHONY : src/api/TicketsStatus/CancelReservation.cpp.i
+src/api/TicketsStatus/Cancel/CancelReservation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.i
+.PHONY : src/api/TicketsStatus/Cancel/CancelReservation.cpp.i
 
-src/api/TicketsStatus/CancelReservation.s: src/api/TicketsStatus/CancelReservation.cpp.s
-.PHONY : src/api/TicketsStatus/CancelReservation.s
+src/api/TicketsStatus/Cancel/CancelReservation.s: src/api/TicketsStatus/Cancel/CancelReservation.cpp.s
+.PHONY : src/api/TicketsStatus/Cancel/CancelReservation.s
 
 # target to generate assembly for a file
-src/api/TicketsStatus/CancelReservation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/CancelReservation.cpp.s
-.PHONY : src/api/TicketsStatus/CancelReservation.cpp.s
+src/api/TicketsStatus/Cancel/CancelReservation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Cancel/CancelReservation.cpp.s
+.PHONY : src/api/TicketsStatus/Cancel/CancelReservation.cpp.s
 
-src/api/TicketsStatus/TicketsReservation.o: src/api/TicketsStatus/TicketsReservation.cpp.o
-.PHONY : src/api/TicketsStatus/TicketsReservation.o
+src/api/TicketsStatus/Reserve/TicketsReservation.o: src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o
+.PHONY : src/api/TicketsStatus/Reserve/TicketsReservation.o
 
 # target to build an object file
-src/api/TicketsStatus/TicketsReservation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.o
-.PHONY : src/api/TicketsStatus/TicketsReservation.cpp.o
+src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o
+.PHONY : src/api/TicketsStatus/Reserve/TicketsReservation.cpp.o
 
-src/api/TicketsStatus/TicketsReservation.i: src/api/TicketsStatus/TicketsReservation.cpp.i
-.PHONY : src/api/TicketsStatus/TicketsReservation.i
+src/api/TicketsStatus/Reserve/TicketsReservation.i: src/api/TicketsStatus/Reserve/TicketsReservation.cpp.i
+.PHONY : src/api/TicketsStatus/Reserve/TicketsReservation.i
 
 # target to preprocess a source file
-src/api/TicketsStatus/TicketsReservation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.i
-.PHONY : src/api/TicketsStatus/TicketsReservation.cpp.i
+src/api/TicketsStatus/Reserve/TicketsReservation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.i
+.PHONY : src/api/TicketsStatus/Reserve/TicketsReservation.cpp.i
 
-src/api/TicketsStatus/TicketsReservation.s: src/api/TicketsStatus/TicketsReservation.cpp.s
-.PHONY : src/api/TicketsStatus/TicketsReservation.s
+src/api/TicketsStatus/Reserve/TicketsReservation.s: src/api/TicketsStatus/Reserve/TicketsReservation.cpp.s
+.PHONY : src/api/TicketsStatus/Reserve/TicketsReservation.s
 
 # target to generate assembly for a file
-src/api/TicketsStatus/TicketsReservation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/TicketsReservation.cpp.s
-.PHONY : src/api/TicketsStatus/TicketsReservation.cpp.s
+src/api/TicketsStatus/Reserve/TicketsReservation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicketsService.dir/build.make CMakeFiles/TicketsService.dir/src/api/TicketsStatus/Reserve/TicketsReservation.cpp.s
+.PHONY : src/api/TicketsStatus/Reserve/TicketsReservation.cpp.s
 
 src/postgres/PostgresProcessing.o: src/postgres/PostgresProcessing.cpp.o
 .PHONY : src/postgres/PostgresProcessing.o
@@ -359,12 +359,12 @@ help:
 	@echo "... src/api/TicketsCRUD/GetTickets.o"
 	@echo "... src/api/TicketsCRUD/GetTickets.i"
 	@echo "... src/api/TicketsCRUD/GetTickets.s"
-	@echo "... src/api/TicketsStatus/CancelReservation.o"
-	@echo "... src/api/TicketsStatus/CancelReservation.i"
-	@echo "... src/api/TicketsStatus/CancelReservation.s"
-	@echo "... src/api/TicketsStatus/TicketsReservation.o"
-	@echo "... src/api/TicketsStatus/TicketsReservation.i"
-	@echo "... src/api/TicketsStatus/TicketsReservation.s"
+	@echo "... src/api/TicketsStatus/Cancel/CancelReservation.o"
+	@echo "... src/api/TicketsStatus/Cancel/CancelReservation.i"
+	@echo "... src/api/TicketsStatus/Cancel/CancelReservation.s"
+	@echo "... src/api/TicketsStatus/Reserve/TicketsReservation.o"
+	@echo "... src/api/TicketsStatus/Reserve/TicketsReservation.i"
+	@echo "... src/api/TicketsStatus/Reserve/TicketsReservation.s"
 	@echo "... src/postgres/PostgresProcessing.o"
 	@echo "... src/postgres/PostgresProcessing.i"
 	@echo "... src/postgres/PostgresProcessing.s"

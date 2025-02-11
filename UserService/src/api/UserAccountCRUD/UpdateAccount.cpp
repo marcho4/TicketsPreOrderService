@@ -21,12 +21,7 @@ void AccountUpdator::UpdateUserAccountRequest(const httplib::Request& req, httpl
 
     pqxx::result response = UpdateUserAccountDB(user_data, user_id, db);
 
-    if (response.affected_rows() == 0) {
-        spdlog::error("Пользователь {} не найден или изменения не были проведены", user_id);
-        ErrorHandler::sendError(res, 404, "User not found or no changes made.");
-    } else {
-        res.status = 201;
-        res.set_content(R"({"message": "User info updated successfully."})", "application/json");
-        spdlog::info("Пользователь {} обновил данные аккаунта", user_id);
-    }
+    res.status = 200;
+    res.set_content(R"({"message": "User info updated successfully"})", "application/json");
+    spdlog::info("Пользователь {} обновил данные аккаунта", user_id);
 }

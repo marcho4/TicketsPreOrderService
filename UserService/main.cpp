@@ -76,7 +76,7 @@ int main() {
 
         server.Delete("/user/:id/cancel_preorder", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-//            PreorderCancel::CancelPreorderRequest(request, res, db);
+            PreorderCancellation::CancelPreorderRequest(request, res, db);
         });
 
         server.Get("/user/:id/get_preorders", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
@@ -89,8 +89,8 @@ int main() {
 
         });
 
-        std::cout << "Server is listening https://localhost:8001" << '\n';
-        server.listen("0.0.0.0", 8004);
+        std::cout << "Server is listening https://localhost:8007" << '\n';
+        server.listen("0.0.0.0", 8007);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }
