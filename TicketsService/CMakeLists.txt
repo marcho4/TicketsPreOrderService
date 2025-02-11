@@ -11,10 +11,10 @@ set(SOURCE_FILES
         libraries/Bcrypt.cpp/src/bcrypt.cpp
         libraries/Bcrypt.cpp/include/bcrypt.h
         libraries/Bcrypt.cpp/src/blowfish.cpp
-        src/api/TicketsCRUD/AddTickets.cpp
-        src/api/TicketsCRUD/AddTickets.h
-        src/api/TicketsCRUD/GetTickets.cpp
-        src/api/TicketsCRUD/GetTickets.h
+        src/api/TicketsCRUD/Add/AddTickets.cpp
+        src/api/TicketsCRUD/Add/AddTickets.h
+        src/api/TicketsCRUD/Get/GetTickets.cpp
+        src/api/TicketsCRUD/Get/GetTickets.h
         src/api/TicketsStatus/Cancel/CancelReservation.cpp
         src/api/TicketsStatus/Cancel/CancelReservation.h
         src/api/TicketsStatus/Reserve/TicketsReservation.cpp

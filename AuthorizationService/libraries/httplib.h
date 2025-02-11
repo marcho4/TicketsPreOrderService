@@ -2021,7 +2021,7 @@ inline const char *status_message(int status) {
   case StatusCode::PermanentRedirect_308: return "Permanent Redirect";
   case StatusCode::BadRequest_400: return "Bad Request";
   case StatusCode::Unauthorized_401: return "Unauthorized";
-  case StatusCode::PaymentRequired_402: return "Payment Required";
+  case StatusCode::PaymentRequired_402: return "CreatePayment Required";
   case StatusCode::Forbidden_403: return "Forbidden";
   case StatusCode::NotFound_404: return "Not Found";
   case StatusCode::MethodNotAllowed_405: return "Method Not Allowed";
