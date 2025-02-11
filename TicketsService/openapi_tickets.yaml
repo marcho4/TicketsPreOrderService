@@ -54,3 +54,96 @@ paths:
               description: Список билетов
             '400':
               description: Неверный запрос
+  /ticket/{match_id}/delete:
+    delete:
+        summary: Удаление билета
+        description: Удаление билета по его идентификатору
+        parameters:
+          - name: match_id
+            in: path
+            required: true
+            description: Уникальный идентификатор матча
+            schema:
+              type: string
+        requestBody:
+          required: true
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  tickets:
+                    type: string
+                    format: binary
+                    description: CSV-файл с билетами
+        operationId: deleteTicket
+        responses:
+            '200':
+              description: Билет удален
+            '400':
+              description: Неверный запрос
+  /ticket/{id}/reserve:
+    put:
+      summary: Бронирование билета
+      description: Бронирование билета по его идентификатору
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор матча
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                  type: string
+                  description: Уникальный идентификатор матча
+                  example: 1
+                user_id:
+                  type: string
+                  description: ID юзера бронирующего билет
+                  example: 1
+      operationId: reserveTicket
+      responses:
+          '200':
+            description: Билет забронирован
+          '400':
+            description: Неверный запрос
+
+  /ticket/{id}/cancel:
+    put:
+      summary: Отмена бронирования билета
+      description: Отмена бронирования по идентификатору билета
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор матча
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                  type: string
+                  description: Уникальный идентификатор матча
+                  example: 1
+                user_id:
+                  type: string
+                  description: ID юзера бронирующего билет
+                  example: 1
+      operationId: cancelReserveTicket
+      responses:
+        '200':
+          description: Бронь отменена
+        '400':
+          description: Неверный запрос

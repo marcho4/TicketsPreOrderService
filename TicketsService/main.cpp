@@ -7,6 +7,7 @@
 #include "src/api/TicketsCRUD/GetTickets.h"
 #include "src/api/TicketsStatus/Cancel/CancelReservation.h"
 #include "src/api/TicketsStatus/Reserve/TicketsReservation.h"
+#include "src/api/TicketsCRUD/DeleteTickets.h"
 
 int main() {
 
@@ -49,19 +50,13 @@ int main() {
             AddTickets::AddingTicketsRequest(request, res, db);
         });
 
-        server.Put("/ticket/:match_id/update", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            set_cors_headers(res);
-            spdlog::info("Получен запрос на обновление билетов на матч");
-
-        });
-
         server.Get("/ticket/:match_id/get", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             spdlog::info("Получен запрос на получение билетов на матч");
             GetTickets::GetTicketsRequest(request, res, db);
         });
 
-        server.Post("/ticket/:id/reserve", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/ticket/:id/reserve", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             spdlog::info("Получен запрос на бронирование билета");
             TicketsReservation::ReserveTicketsRequest(request, res, db);
@@ -73,10 +68,10 @@ int main() {
             CancelReservation::CancelReservationRequest(request, res, db);
         });
 
-        server.Delete("/ticket/:id/delete", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Delete("/ticket/:match_id/delete", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             spdlog::info("Получен запрос на удаление билета");
-
+            DeleteTickets::DeleteTicketsRequest(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8005" << '\n';
