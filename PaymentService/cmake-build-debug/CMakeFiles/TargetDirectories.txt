@@ -1,0 +1,6 @@
+/Users/nazarzakrevskij/TicketsPreOrderService/PaymentService/cmake-build-debug/CMakeFiles/PaymentService.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/PaymentService/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/PaymentService/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/PaymentService/cmake-build-debug/_deps/spdlog-build/CMakeFiles/spdlog.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/PaymentService/cmake-build-debug/_deps/spdlog-build/CMakeFiles/edit_cache.dir
+/Users/nazarzakrevskij/TicketsPreOrderService/PaymentService/cmake-build-debug/_deps/spdlog-build/CMakeFiles/rebuild_cache.dir
