@@ -1,64 +1,18 @@
 "use client"
 
 import {useParams} from "next/navigation";
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useMemo, useState} from "react";
 import Image from "next/image";
 import {Button} from "../../../../components/ui/button";
 import {X} from "lucide-react";
+import {createResource} from "../../../../lib/createResource";
+import {formatDate} from "date-fns";
 
-export default function Page(props) {
-    const {match_id} = useParams();
-
-    const [modal, setModal] = useState(false);
+function RenderedMatchInfo({ resource }) {
+    const data = resource.read();
     const [isEditing, setEditing] = useState(false);
-    const [matchData, setMatchData] = useState({
-        team_home: "Barcelona",
-        team_away: "Real Madrid",
-        match_date: "28/07/2025",
-        stadium: "Santiago Barnabeu",
-        description: "El Classico",
-        match_status: "Not started",
-    });
-    const [ticketsFile, setTicketsFile] = useState(null);
-    const [tickets, setTickets] = useState([
-        {seat: "12", row: "45", sector: "R404", price: 2000, status: "Paid"},
-        {seat: "32", row: "22", sector: "R204", price: 3000, status: "Pre-ordered"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Pre-ordered"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 5000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 10000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 4500, status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
+    const [matchData, setMatchData] = useState(data);
 
-    ]);
-
-    useEffect(() => {
-        if (modal) {
-            document.body.classList.add('overflow-hidden');
-        } else {
-            document.body.classList.remove('overflow-hidden');
-        }
-        return () => {
-            document.body.classList.remove('overflow-hidden');
-        };
-    }, [modal]);
-
-    // Function to change tickets file
-    const handleFileChange = (e) => {
-        setTicketsFile(e.target.files[0]);
-    }
-
-    // Function to submit tickets file to an API
-    const handleSubmitTickets = (e) => {
-        e.preventDefault();
-        let formData = new FormData();
-        formData.append('file', ticketsFile);
-
-    }
 
     // Editing function for match info
     const handleChange = (e) => {
@@ -69,34 +23,23 @@ export default function Page(props) {
         }));
     }
 
-    // Function to submit new stadium scheme
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const file = e.target.files[0];
-        let formData = new FormData();
-        formData.append('file', file);
-    }
-
-
     return (
         <div className={"flex flex-col items-center justify-center mx-6 gap-y-5"}>
             {/* Title section */}
             <header className="flex flex-col w-full  mx-10 py-10  rounded-lg items-center">
                 <div className="text-2xl font-semibold  text-my_black/80">
-                    {matchData.match_date}
+                    {formatDate(data.matchDateTime, "yyyy-MM-dd hh:mm")}
                 </div>
                 <div className="text-2xl font-semibold  text-my_black/80">
-                    {matchData.stadium}
+                    {data.stadium}
                 </div>
                 <h1 className="text-3xl sm:text-5xl font-bold  leading-tight text-center">
-                    {matchData.team_home} - {matchData.team_away}
+                    {data.teamHome} - {data.teamAway}
                 </h1>
                 <div className="text-2xl font-semibold mt-2 text-my_black/80">
-                    {matchData.description}
+                    {data.matchDescription}
                 </div>
             </header>
-
-            {/* Main section */}
             <main className="flex flex-col min-w-full mx-10 rounded-lg items-center">
                 {/* Match info + Scheme */}
                 <div className="flex flex-col lg:flex-row max-w-full w-full p-6 gap-10">
@@ -157,11 +100,11 @@ export default function Page(props) {
                         </h1>
                         <div className="flex flex-col w-full space-y-4">
                             {[
-                                { label: "Match date", value: matchData.match_date, name: "match_date" },
+                                { label: "Match date", value: formatDate(matchData.matchDateTime, "yyyy-MM-dd hh:mm"), name: "matchDateTime" },
                                 { label: "Stadium", value: matchData.stadium, name: "stadium" },
-                                { label: "Description", value: matchData.description, name: "description" },
-                                { label: "Team Home", value: matchData.team_home, name: "team_home" },
-                                { label: "Team Away", value: matchData.team_away, name: "team_away" },
+                                { label: "Description", value: matchData.matchDescription, name: "matchDescription" },
+                                { label: "Team Home", value: matchData.teamHome, name: "teamHome" },
+                                { label: "Team Away", value: matchData.teamAway, name: "teamAway" },
                             ].map((item, index) => (
                                 <div
                                     key={index}
@@ -191,11 +134,11 @@ export default function Page(props) {
                                 )}
                                 {!isEditing ? (<Button className="bg-button-darker hover:bg-accent text-lg lg:text-xl
                                 hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
-                                                        onClick={() => setEditing(!isEditing)}>
+                                                       onClick={() => setEditing(!isEditing)}>
                                     Edit
                                 </Button>) : (<Button className="bg-button-darker hover:bg-accent text-lg lg:text-xl
                                 hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
-                                                      onClick={() => {setMatchData()}}>
+                                                      onClick={() => {setEditing(!isEditing)}}>
                                     Cancel
                                 </Button>)}
 
@@ -205,142 +148,242 @@ export default function Page(props) {
                     </div>
                 </div>
 
-                {/* Tickets section */}
-                <div className="flex flex-col lg:flex-row max-w-full w-full  p-6 gap-10">
-                    <div className="flex flex-col max-w-full w-full bg-gray-50 shadow-lg rounded-lg p-6">
-                        <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6">
-                            Tickets
-                        </h1>
-                        <div className="flex flex-col items-center w-full justify-center rounded-lg gap-y-10">
-                            {/* Tickets */}
-                            <div className="relative max-h-96 min-w-[500px] overflow-x-auto w-full overflow-y-auto border border-gray-300 rounded-lg bg-white">
-                                <table className="table-fixed w-full">
-                                    <thead className="sticky top-0 bg-gray-100 z-10">
-                                    <tr className="text-left">
-                                        <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                                            Row
-                                        </th>
-                                        <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                                            Seat
-                                        </th>
-                                        <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                                            Price
-                                        </th>
-                                        <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                                            Sector
-                                        </th>
-                                        <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                                            Status
-                                        </th>
-                                        <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                                            Actions
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {tickets.map((item, index) => (
-                                        <tr key={index} className="hover:bg-gray-50">
-                                            <td className="px-4 py-2 border-b border-gray-200">
-                                                {item.row}
-                                            </td>
-                                            <td className="px-4 py-2 border-b border-gray-200">
-                                                {item.seat}
-                                            </td>
-                                            <td className="px-4 py-2 border-b border-gray-200">
-                                                {item.price}
-                                            </td>
-                                            <td className="px-4 py-2 border-b border-gray-200">
-                                                {item.sector}
-                                            </td>
-                                            <td className="px-4 py-2 border-b border-gray-200">
-                                                {item.status}
-                                            </td>
-                                            <td className="px-4 py-2 border-b border-gray-200 gap-x-2">
-                                                <Button
-                                                    disabled={item.status !== "Available"}
-                                                    className={"bg-button-darker hover:bg-accent hover:text-my_black" +
-                                                        " transition-colors duration-300 p-2 text-white  rounded-lg"}>
-                                                    Delete
-                                                </Button>
-                                            </td>
-
-                                        </tr>
-                                    ))}
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div className="flex flex-row items-center w-full justify-end rounded-lg">
-                                <Button
-                                    onClick={() => setModal(true)}
-                                    className="px-5 py-2 rounded-md bg-button-darker hover:bg-accent text-lg lg:text-xl
-                                     hover:text-my_black text-white font-medium transition-colors">
-                                    Add tickets
-                                </Button>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-
-                {/* Modal window to upload tickets */}
-                <div id="background"
-                     onClick={() => setModal(!modal)}
-                     className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
-                        z-[11] cursor-pointer`}>
-                    <div
-                        id="active-modal"
-                        className="relative max-w-[350px] w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
-                        onClick={(e) => e.stopPropagation()}>
-
-                        <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"
-                            onClick={() => setModal(!modal)}/>
-
-                        <div id="modal-content" className="p-6">
-                            <div className="text-2xl font-semibold text-gray-700 mb-3">
-                                Add Tickets
-                            </div>
-                            <div>
-                                Please upload file in .csv format<br/>
-                                Example:
-                                <br/>sector; row; seat; price;
-                                <br/>110; 5; 10; 45000;
-                                <br/>127; 10; 23; 2999;
-                                <form className="max-w-md w-full  rounded-lg p-6  items-center justify-center flex flex-col">
-                                    {/* Блок с загрузкой файла */}
-                                    <div className="mb-4 items-center justify-center flex flex-col">
-                                        <label htmlFor="uploadTicketsFile"
-                                            className="block text-sm text-center font-medium text-gray-700 mb-2"
-                                        >
-                                            Upload Tickets .csv file
-                                        </label>
-                                        <input
-                                            id="uploadTicketsFile"
-                                            className="block w-full text-sm text-gray-900 file:mr-4 file:py-1 file:px-2
-                                        file:rounded file:border-0 file:text-sm file:font-semibold file:bg-button-darker
-                                        file:text-white file:cursor-pointer hover:file:bg-button-darker/90 cursor-pointer
-                                         focus:outline-none"
-                                            type="file"
-                                            name="uploadTicketsFile"
-                                            accept="text/csv"
-                                            required
-                                            multiple={false}
-                                        />
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        className="px-3 py-1 mt-3 rounded-md bg-green_accent   font-medium transition-colors">
-                                        Submit Tickets
-                                    </button>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </main>
+        </div>
+    )
+}
+
+export default function Page() {
+    const {match_id} = useParams();
+    async function fetchMatchData() {
+        try {
+            const response = await fetch(`http://localhost:8000/api/matches/${match_id}`, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (!response.ok) {
+                console.error(`Failed to fetch match data: ${response.text()}`);
+            }
+
+            const result = await response.json();
+            return result.data;
+        } catch (error) {
+            console.error("Error fetching match data:", error);
+            throw error;
+        }
+    }
+    const resource = useMemo(()=> {return createResource(fetchMatchData)}, [match_id]);
+
+
+    const [matchData, setMatchData] = useState({
+        team_home: "Barcelona",
+        team_away: "Real Madrid",
+        match_date: "28/07/2025",
+        stadium: "Santiago Barnabeu",
+        description: "El Classico",
+        match_status: "Not started",
+    });
+    const [ticketsFile, setTicketsFile] = useState(null);
+    const [tickets, setTickets] = useState([
+        {seat: "12", row: "45", sector: "R404", price: 2000, status: "Paid"},
+        {seat: "32", row: "22", sector: "R204", price: 3000, status: "Pre-ordered"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Pre-ordered"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 5000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 10000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 4500, status: "Paid"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
+        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
+
+    ]);
+
+
+    // Function to change tickets file
+    const handleFileChange = (e) => {
+        setTicketsFile(e.target.files[0]);
+    }
+
+    // Function to submit tickets file to an API
+    const handleSubmitTickets = (e) => {
+        e.preventDefault();
+        let formData = new FormData();
+        formData.append('file', ticketsFile);
+
+    }
+
+
+
+    // Function to submit new stadium scheme
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        let formData = new FormData();
+        formData.append('file', file);
+    }
+
+
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <RenderedMatchInfo resource={resource} />
+        </Suspense>
+    )
+}
+
+function TicketsRendered({ resource }) {
+    const data = resource.read();
+    const [modal, setModal] = useState(false);
+
+    useEffect(() => {
+        if (modal) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+        return () => {
+            document.body.classList.remove('overflow-hidden');
+        };
+    }, [modal]);
+
+    return (
+        <div>
+            <div className="flex flex-col lg:flex-row max-w-full w-full  p-6 gap-10">
+                <div className="flex flex-col max-w-full w-full bg-gray-50 shadow-lg rounded-lg p-6">
+                    <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6">
+                        Tickets
+                    </h1>
+                    <div className="flex flex-col items-center w-full justify-center rounded-lg gap-y-10">
+                        {/* Tickets */}
+                        <div className="relative max-h-96 min-w-[500px] overflow-x-auto w-full overflow-y-auto border border-gray-300 rounded-lg bg-white">
+                            <table className="table-fixed w-full">
+                                <thead className="sticky top-0 bg-gray-100 z-10">
+                                <tr className="text-left">
+                                    <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                                        Row
+                                    </th>
+                                    <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                                        Seat
+                                    </th>
+                                    <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                                        Price
+                                    </th>
+                                    <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                                        Sector
+                                    </th>
+                                    <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                                        Status
+                                    </th>
+                                    <th className="w-1/6 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                                        Actions
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {data.map((item, index) => (
+                                    <tr key={index} className="hover:bg-gray-50">
+                                        <td className="px-4 py-2 border-b border-gray-200">
+                                            {item.row}
+                                        </td>
+                                        <td className="px-4 py-2 border-b border-gray-200">
+                                            {item.seat}
+                                        </td>
+                                        <td className="px-4 py-2 border-b border-gray-200">
+                                            {item.price}
+                                        </td>
+                                        <td className="px-4 py-2 border-b border-gray-200">
+                                            {item.sector}
+                                        </td>
+                                        <td className="px-4 py-2 border-b border-gray-200">
+                                            {item.status}
+                                        </td>
+                                        <td className="px-4 py-2 border-b border-gray-200 gap-x-2">
+                                            <Button
+                                                disabled={item.status !== "Available"}
+                                                className={"bg-button-darker hover:bg-accent hover:text-my_black" +
+                                                    " transition-colors duration-300 p-2 text-white  rounded-lg"}>
+                                                Delete
+                                            </Button>
+                                        </td>
+
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div className="flex flex-row items-center w-full justify-end rounded-lg">
+                            <Button
+                                onClick={() => setModal(true)}
+                                className="px-5 py-2 rounded-md bg-button-darker hover:bg-accent text-lg lg:text-xl
+                                 hover:text-my_black text-white font-medium transition-colors">
+                                Add tickets
+                            </Button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            {/* Modal window to upload tickets */}
+            <div id="background"
+                 onClick={() => setModal(!modal)}
+                 className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
+                    z-[11] cursor-pointer`}>
+                <div
+                    id="active-modal"
+                    className="relative max-w-[350px] w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
+                    onClick={(e) => e.stopPropagation()}>
+
+                    <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"
+                        onClick={() => setModal(!modal)}/>
+
+                    <div id="modal-content" className="p-6">
+                        <div className="text-2xl font-semibold text-gray-700 mb-3">
+                            Add Tickets
+                        </div>
+                        <div>
+                            Please upload file in .csv format<br/>
+                            Example:
+                            <br/>sector; row; seat; price;
+                            <br/>110; 5; 10; 45000;
+                            <br/>127; 10; 23; 2999;
+                            <form className="max-w-md w-full  rounded-lg p-6  items-center justify-center flex flex-col">
+                                {/* Блок с загрузкой файла */}
+                                <div className="mb-4 items-center justify-center flex flex-col">
+                                    <label htmlFor="uploadTicketsFile"
+                                        className="block text-sm text-center font-medium text-gray-700 mb-2"
+                                    >
+                                        Upload Tickets .csv file
+                                    </label>
+                                    <input
+                                        id="uploadTicketsFile"
+                                        className="block w-full text-sm text-gray-900 file:mr-4 file:py-1 file:px-2
+                                    file:rounded file:border-0 file:text-sm file:font-semibold file:bg-button-darker
+                                    file:text-white file:cursor-pointer hover:file:bg-button-darker/90 cursor-pointer
+                                     focus:outline-none"
+                                        type="file"
+                                        name="uploadTicketsFile"
+                                        accept="text/csv"
+                                        required
+                                        multiple={false}
+                                    />
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className="px-3 py-1 mt-3 rounded-md bg-green_accent   font-medium transition-colors">
+                                    Submit Tickets
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

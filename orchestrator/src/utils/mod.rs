@@ -6,3 +6,4 @@ pub mod errors;
 mod jwt_functional;
 mod user_functional;
 mod match_functional;
+mod tickets_functional;

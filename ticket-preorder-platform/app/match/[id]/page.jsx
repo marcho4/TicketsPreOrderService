@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { Suspense, useMemo } from "react";
 
 // Функция для форматирования даты в формат DD/MM/YYYY
-function formatDate(dateString) {
+export function formatDate(dateString) {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -25,9 +25,6 @@ export default function Page() {
                 credentials: "same-origin",
             });
             const result = await response.json();
-            if (!response.ok) {
-                throw new Error(result.msg || "Ошибка загрузки данных");
-            }
             return result.data;
         } catch (error) {
             console.error("Ошибка в fetchMatchData:", error);
