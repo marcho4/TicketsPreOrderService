@@ -485,7 +485,7 @@ tru64)
   set_base_from "$object"
 
   if test "$libtool" = yes; then
-    # Libtool generates 2 separate objects for the 2 libraries.  These
+    # Libtool generates 2 separate objects for the 2 third_party.  These
     # two compilations output dependencies in $dir.libs/$base.o.d and
     # in $dir$base.o.d.  We have to check for both files, because
     # one of the two compilations can be disabled.  We should prefer

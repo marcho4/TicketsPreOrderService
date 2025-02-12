@@ -6,29 +6,29 @@ set(CMAKE_CXX_STANDARD 17)
 # Исходные файлы остаются теми же
 set(SOURCE_FILES
         main.cpp
-        src/postgres/PostgresProcessing.h
-        src/postgres/PostgresProcessing.cpp
-        libraries/Bcrypt.cpp/src/bcrypt.cpp
-        libraries/Bcrypt.cpp/include/bcrypt.h
-        libraries/Bcrypt.cpp/src/blowfish.cpp
-        src/api/TicketsCRUD/Add/AddTickets.cpp
-        src/api/TicketsCRUD/Add/AddTickets.h
-        src/api/TicketsCRUD/Get/GetTickets.cpp
-        src/api/TicketsCRUD/Get/GetTickets.h
-        src/api/TicketsStatus/Cancel/CancelReservation.cpp
-        src/api/TicketsStatus/Cancel/CancelReservation.h
-        src/api/TicketsStatus/Reserve/TicketsReservation.cpp
-        src/api/TicketsStatus/Reserve/TicketsReservation.h
+        src/database/Database.h
+        src/database/Database.cpp
+        third_party/Bcrypt.cpp/src/bcrypt.cpp
+        third_party/Bcrypt.cpp/include/bcrypt.h
+        third_party/Bcrypt.cpp/src/blowfish.cpp
+        src/api/tickets_crud/AddTickets.cpp
+        src/api/tickets_crud/AddTickets.h
+        src/api/tickets_crud/GetTickets.cpp
+        src/api/tickets_crud/GetTickets.h
+        src/api/tickets_status/CancelReservation.cpp
+        src/api/tickets_status/CancelReservation.h
+        src/api/tickets_status/TicketsReservation.cpp
+        src/api/tickets_status/TicketsReservation.h
 )
 
 ## Добавьте каталоги для заголовочных файлов
 #include_directories(
 #        src
-#        src/postgres
+#        src/database
 #        /usr/local/include
 #        /usr/include
 #)
-#include_directories("libraries/Bcrypt.cpp/include")
+#include_directories("third_party/Bcrypt.cpp/include")
 #
 ## Подключение директорий с библиотеками
 #link_directories(
@@ -42,8 +42,8 @@ include_directories("/opt/homebrew/opt/libpqxx/include")
 link_directories("/opt/homebrew/opt/libpqxx/lib")
 
 # Include directories
-include_directories("libraries/Bcrypt.cpp/include")
-include_directories("libraries/libpqxx/include")
+include_directories("third_party/Bcrypt.cpp/include")
+include_directories("third_party/libpqxx/include")
 include_directories("/opt/homebrew/opt/openssl@3/include")
 
 # Ищем необходимые библиотеки

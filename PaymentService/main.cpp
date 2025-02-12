@@ -1,8 +1,8 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
-#include "../libraries/httplib.h"
-#include "src/postgres/PostgresProcessing.h"
+#include "third_party/httplib.h"
+#include "src/database/Database.h"
 
 int main() {
 
@@ -31,10 +31,10 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-//        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
+//        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
         std::string connect = "dbname=payment host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("../src/postgres/payment.sql");
+        db.initDbFromFile("../src/database/payment.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();

@@ -366,7 +366,7 @@ inline constexpr bool has_generic_bytes_char_traits =
 
 // C++20: Change this type.
 /// Type alias for a container containing bytes.
-/* Required to support standard libraries without a generic implementation for
+/* Required to support standard third_party without a generic implementation for
  * `std::char_traits<std::byte>`.
  * @warn Will change to `std::vector<std::byte>` in the next major release.
  */
@@ -376,7 +376,7 @@ using bytes = std::conditional<
 
 // C++20: Change this type.
 /// Type alias for a view of bytes.
-/* Required to support standard libraries without a generic implementation for
+/* Required to support standard third_party without a generic implementation for
  * `std::char_traits<std::byte>`.
  * @warn Will change to `std::span<std::byte>` in the next major release.
  */

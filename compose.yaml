@@ -33,13 +33,13 @@ services:
   auth_postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: database
+      POSTGRES_PASSWORD: database
       POSTGRES_DB: orchestrator
     networks:
       - main
     healthcheck:
-        test: [ "CMD", "pg_isready", "-U", "postgres" ]
+        test: [ "CMD", "pg_isready", "-U", "database" ]
         interval: 5s
         retries: 5
         timeout: 3s
@@ -47,8 +47,8 @@ services:
   admin_postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: database
+      POSTGRES_PASSWORD: database
       POSTGRES_DB: orchestrator
     networks:
       - main
@@ -78,8 +78,8 @@ services:
   org_postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: database
+      POSTGRES_PASSWORD: database
       POSTGRES_DB: orchestrator
     networks:
       - main
@@ -98,8 +98,8 @@ services:
   tickets_postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: database
+      POSTGRES_PASSWORD: database
       POSTGRES_DB: orchestrator
     networks:
       - main

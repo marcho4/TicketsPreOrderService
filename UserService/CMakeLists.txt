@@ -5,26 +5,26 @@ set(CMAKE_CXX_STANDARD 17)
 # Source files
 set(SOURCE_FILES
         main.cpp
-        src/api/UserAccountCRUD/CreateAccount.cpp
-        src/api/UserAccountCRUD/CreateAccount.h
-        src/postgres/PostgresProcessing.cpp
-        src/postgres/PostgresProcessing.h
+        src/api/user/CreateAccount.cpp
+        src/api/user/CreateAccount.h
+        src/database/Database.cpp
+        src/database/Database.h
         src/utils/ValidDataChecker.h
-        src/ErrorHandler.h
-        src/api/EventsHistory/GetMatchHistory.cpp
-        src/api/EventsHistory/GetMatchHistory.h
-        src/api/UserAccountCRUD/UpdateAccount.cpp
-        src/api/UserAccountCRUD/UpdateAccount.h
-        src/api/UserAccountCRUD/GetAccountData.cpp
-        src/api/UserAccountCRUD/GetAccountData.h
-        src/api/Preorders/GetPreorders.h
-        src/api/Preorders/AddPreorder/Preorder.cpp
-        src/api/Preorders/AddPreorder/Preorder.h
-        src/api/Preorders/CancelPreorder/PreorderCancel.cpp
-        src/api/Preorders/CancelPreorder/PreorderCancel.h
-        libraries/Bcrypt.cpp/src/bcrypt.cpp
-        libraries/Bcrypt.cpp/include/bcrypt.h
-        libraries/Bcrypt.cpp/src/blowfish.cpp
+        src/utils/ErrorHandler.h
+        src/api/events/GetMatchHistory.cpp
+        src/api/events/GetMatchHistory.h
+        src/api/user/UpdateAccount.cpp
+        src/api/user/UpdateAccount.h
+        src/api/user/GetAccountData.cpp
+        src/api/user/GetAccountData.h
+        src/api/preorders/GetPreorders.h
+        src/api/preorders/Preorder.cpp
+        src/api/preorders/Preorder.h
+        src/api/preorders/PreorderCancel.cpp
+        src/api/preorders/PreorderCancel.h
+        third_party/Bcrypt.cpp/src/bcrypt.cpp
+        third_party/Bcrypt.cpp/include/bcrypt.h
+        third_party/Bcrypt.cpp/src/blowfish.cpp
 )
 
 include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
@@ -34,17 +34,17 @@ include_directories("/opt/homebrew/opt/libpqxx/include")
 link_directories("/opt/homebrew/opt/libpqxx/lib")
 
 # Include directories
-include_directories("libraries/Bcrypt.cpp/include")
-include_directories("libraries/libpqxx/include")
+include_directories("third_party/Bcrypt.cpp/include")
+include_directories("third_party/libpqxx/include")
 include_directories("/opt/homebrew/opt/openssl@3/include")
 
-# Find the libraries
+# Find the third_party
 find_package(CURL REQUIRED)
 find_package(spdlog REQUIRED)
 # Create executable
 add_executable(UserService ${SOURCE_FILES})
 
-# Link the libraries
+# Link the third_party
 target_link_libraries(UserService PRIVATE CURL::libcurl spdlog::spdlog
         /opt/homebrew/opt/openssl@3/lib/libssl.dylib
         /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib

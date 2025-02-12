@@ -4,7 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = -DFMT_SHARED -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB
 
-CXX_INCLUDES = -I/opt/homebrew/Cellar/curl/8.12.0/include -I/opt/homebrew/opt/libpqxx/include -I/Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/include -I/Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/libpqxx/include -I/opt/homebrew/opt/openssl@3/include -isystem /opt/homebrew/Cellar/curl/8.11.1/include -isystem /opt/homebrew/include
+CXX_INCLUDES = -I/opt/homebrew/Cellar/curl/8.12.0/include -I/opt/homebrew/opt/libpqxx/include -I/Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/include -I/Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/libpqxx/include -I/opt/homebrew/opt/openssl@3/include -isystem /opt/homebrew/Cellar/curl/8.11.1/include -isystem /opt/homebrew/include
 
 CXX_FLAGSarm64 = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
 

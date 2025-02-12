@@ -79,7 +79,7 @@ func_file_conv ()
 }
 
 # func_cl_dashL linkdir
-# Make cl look for libraries in LINKDIR
+# Make cl look for third_party in LINKDIR
 func_cl_dashL ()
 {
   func_file_conv "$1"

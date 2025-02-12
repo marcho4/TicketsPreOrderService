@@ -11,7 +11,7 @@
 *.gch
 *.pch
 
-# Compiled Dynamic libraries
+# Compiled Dynamic third_party
 *.so
 *.dylib
 *.dll
@@ -20,7 +20,7 @@
 *.mod
 *.smod
 
-# Compiled Static libraries
+# Compiled Static third_party
 *.lai
 *.la
 *.a

@@ -921,7 +921,7 @@ CMakeFiles/UserService.dir/main.cpp.o: \
   /opt/homebrew/include/spdlog/sinks/sink.h \
   /opt/homebrew/include/spdlog/formatter.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/iostream \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/httplib.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/httplib.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/arpa/inet.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/netinet/in.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/socket.h \
@@ -1105,7 +1105,7 @@ CMakeFiles/UserService.dir/main.cpp.o: \
   /opt/homebrew/opt/openssl@3/include/openssl/quic.h \
   /opt/homebrew/opt/openssl@3/include/openssl/x509v3.h \
   /opt/homebrew/opt/openssl@3/include/openssl/x509v3err.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/postgres/PostgresProcessing.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/database/Database.h \
   /opt/homebrew/opt/libpqxx/include/pqxx/pqxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-pre.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/config-public-compiler.h \
@@ -1203,34 +1203,27 @@ CMakeFiles/UserService.dir/main.cpp.o: \
   /opt/homebrew/opt/libpqxx/include/pqxx/time.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/transactor.hxx \
   /opt/homebrew/opt/libpqxx/include/pqxx/internal/header-post.hxx \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/CreateAccount.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/../../../libraries/httplib.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/../../ErrorHandler.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/../../../libraries/nlohmann/json.hpp \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/CreateAccount.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/../../../third_party/httplib.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/../../utils/ErrorHandler.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/../../utils/../../third_party/httplib.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/../../../third_party/nlohmann/json.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/forward_list \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/valarray \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/any \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/../../postgres/PostgresProcessing.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/../../utils/ValidDataChecker.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/GetAccountData.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/GetMatchHistory.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/../../../../libraries/httplib.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/../../../../libraries/nlohmann/json.hpp \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/../../postgres/PostgresProcessing.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/../../ErrorHandler.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/Preorder.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/../../../../libraries/httplib.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/../../../../libraries/nlohmann/json.hpp \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/../../../postgres/PostgresProcessing.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/../../../ErrorHandler.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/PreorderCancel.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/../../../../libraries/httplib.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/../../../../libraries/nlohmann/json.hpp \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/../../../postgres/PostgresProcessing.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/../../../ErrorHandler.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/GetPreorders.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/../../../../TicketsService/libraries/httplib.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/../../ErrorHandler.h \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/../../../../TicketsService/libraries/nlohmann/json.hpp \
-  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/../../postgres/PostgresProcessing.h
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/../../database/Database.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/UpdateAccount.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/../../utils/ValidDataChecker.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/GetAccountData.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/GetMatchHistory.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/../../../third_party/httplib.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/../../../third_party/nlohmann/json.hpp \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/../../database/Database.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/../../utils/ErrorHandler.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/Preorder.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/../../../third_party/httplib.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/../../../third_party/nlohmann/json.hpp \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/../../database/Database.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/../../utils/ErrorHandler.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/PreorderCancel.h \
+  /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/GetPreorders.h

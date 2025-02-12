@@ -39,7 +39,7 @@ void test_002()
   // we could in this case even omit it altogether.
   tx.commit();
 
-  // Ah, this version of postgres will tell you which table a column in a
+  // Ah, this version of database will tell you which table a column in a
   // result came from.  Let's just test that functionality...
   oid const rtable{R.column_table(0)};
   PQXX_CHECK_EQUAL(

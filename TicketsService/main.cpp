@@ -1,13 +1,13 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
-#include "../libraries/httplib.h"
-#include "src/postgres/PostgresProcessing.h"
-#include "src/api/TicketsCRUD/Add/AddTickets.h"
-#include "src/api/TicketsCRUD/Get/GetTickets.h"
-#include "src/api/TicketsStatus/Cancel/CancelReservation.h"
-#include "src/api/TicketsStatus/Reserve/TicketsReservation.h"
-#include "src/api/TicketsCRUD/Delete/DeleteTickets.h"
+#include "third_party//httplib.h"
+#include "src/database/Database.h"
+#include "src/api/tickets_crud/AddTickets.h"
+#include "src/api/tickets_crud/GetTickets.h"
+#include "src/api/tickets_status/CancelReservation.h"
+#include "src/api/tickets_status/TicketsReservation.h"
+#include "src/api/tickets_crud/DeleteTickets.h"
 
 int main() {
 
@@ -36,10 +36,10 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-//        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
+//        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
         std::string connect = "dbname=tickets_info host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("../src/postgres/payment.sql");
+        db.initDbFromFile("../src/database/payment.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();

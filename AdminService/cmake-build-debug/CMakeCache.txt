@@ -144,7 +144,7 @@ CMAKE_OSX_ARCHITECTURES:STRING=
 // APIs weak linked. Set to empty string for default value.
 CMAKE_OSX_DEPLOYMENT_TARGET:STRING=
 
-//The product will be built against the headers and libraries located
+//The product will be built against the headers and third_party located
 // inside the indicated SDK.
 CMAKE_OSX_SYSROOT:PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
 
@@ -178,50 +178,50 @@ CMAKE_RANLIB:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ranlib
 //Path to a program.
 CMAKE_READELF:FILEPATH=CMAKE_READELF-NOTFOUND
 
-//Flags used by the linker during the creation of shared libraries
+//Flags used by the linker during the creation of shared third_party
 // during all build types.
 CMAKE_SHARED_LINKER_FLAGS:STRING=-L/usr/local/opt/libpqxx/lib
 
-//Flags used by the linker during the creation of shared libraries
+//Flags used by the linker during the creation of shared third_party
 // during DEBUG builds.
 CMAKE_SHARED_LINKER_FLAGS_DEBUG:STRING=
 
-//Flags used by the linker during the creation of shared libraries
+//Flags used by the linker during the creation of shared third_party
 // during MINSIZEREL builds.
 CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL:STRING=
 
-//Flags used by the linker during the creation of shared libraries
+//Flags used by the linker during the creation of shared third_party
 // during RELEASE builds.
 CMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=
 
-//Flags used by the linker during the creation of shared libraries
+//Flags used by the linker during the creation of shared third_party
 // during RELWITHDEBINFO builds.
 CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
-//If set, runtime paths are not added when installing shared libraries,
+//If set, runtime paths are not added when installing shared third_party,
 // but are added when building.
 CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
 
-//If set, runtime paths are not added when using shared libraries.
+//If set, runtime paths are not added when using shared third_party.
 CMAKE_SKIP_RPATH:BOOL=NO
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the linker during the creation of static third_party
 // during all build types.
 CMAKE_STATIC_LINKER_FLAGS:STRING=
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the linker during the creation of static third_party
 // during DEBUG builds.
 CMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the linker during the creation of static third_party
 // during MINSIZEREL builds.
 CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL:STRING=
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the linker during the creation of static third_party
 // during RELEASE builds.
 CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 
-//Flags used by the linker during the creation of static libraries
+//Flags used by the linker during the creation of static third_party
 // during RELWITHDEBINFO builds.
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 

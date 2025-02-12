@@ -119,10 +119,10 @@ class const_connection_largeobject;
 
 namespace pqxx
 {
-/// Flags for skipping initialisation of SSL-related libraries.
+/// Flags for skipping initialisation of SSL-related third_party.
 /** When a running process makes its first SSL connection to a database through
  * libpqxx, libpq automatically initialises the OpenSSL and libcrypto
- * libraries.  But there are scenarios in which you may want to suppress that.
+ * third_party.  But there are scenarios in which you may want to suppress that.
  *
  * This enum is a way to express this.  Pass values of this enum to
  * @ref pqxx::skip_init_ssl as template arguments.
@@ -140,15 +140,15 @@ enum skip_init : int
 };
 
 
-/// Control initialisation of OpenSSL and libcrypto libraries.
-/** By default, libpq initialises the openssl and libcrypto libraries when your
+/// Control initialisation of OpenSSL and libcrypto third_party.
+/** By default, libpq initialises the openssl and libcrypto third_party when your
  * process first opens an SSL connection to a database.  But this may not be
  * what you want: perhaps your application (or some other library it uses)
- * already initialises one or both of these libraries.
+ * already initialises one or both of these third_party.
  *
  * Call this function to stop libpq from initialising one or the other of
  * these. Pass as arguments each of the `skip_init` flags for which of the
- * libraries whose initialisation you want to prevent.
+ * third_party whose initialisation you want to prevent.
  *
  * @warning Each call to this function _overwrites_ the effects of any previous
  * call.  So if you make one call to skip OpenSSL initialisation, and then
@@ -199,7 +199,7 @@ enum class error_verbosity : int
  * you will not get a @ref connection object; the constructor will fail with a
  * @ref pqxx::broken_connection exception.
  *
- * When creating a connection, you can pass a connection URI or a postgres
+ * When creating a connection, you can pass a connection URI or a database
  * connection string, to specify the database server's address, a login
  * username, and so on.  If you don't, the connection will try to obtain them
  * from certain environment variables.  If those are not set either, the

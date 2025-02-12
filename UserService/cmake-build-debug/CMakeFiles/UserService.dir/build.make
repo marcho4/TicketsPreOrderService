@@ -83,158 +83,158 @@ CMakeFiles/UserService.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/main.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/main.cpp -o CMakeFiles/UserService.dir/main.cpp.s
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/CreateAccount.cpp
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o -MF CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o.d -o CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/CreateAccount.cpp
+CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/CreateAccount.cpp
+CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o -MF CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o.d -o CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/CreateAccount.cpp
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/CreateAccount.cpp > CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.i
+CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/CreateAccount.cpp > CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.i
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/CreateAccount.cpp -o CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.s
+CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/CreateAccount.cpp -o CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.s
 
-CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/postgres/PostgresProcessing.cpp
-CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o -MF CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o.d -o CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/postgres/PostgresProcessing.cpp
+CMakeFiles/UserService.dir/src/database/Database.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/src/database/Database.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/database/Database.cpp
+CMakeFiles/UserService.dir/src/database/Database.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/UserService.dir/src/database/Database.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/database/Database.cpp.o -MF CMakeFiles/UserService.dir/src/database/Database.cpp.o.d -o CMakeFiles/UserService.dir/src/database/Database.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/database/Database.cpp
 
-CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/postgres/PostgresProcessing.cpp > CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.i
+CMakeFiles/UserService.dir/src/database/Database.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/database/Database.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/database/Database.cpp > CMakeFiles/UserService.dir/src/database/Database.cpp.i
 
-CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/postgres/PostgresProcessing.cpp -o CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.s
+CMakeFiles/UserService.dir/src/database/Database.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/database/Database.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/database/Database.cpp -o CMakeFiles/UserService.dir/src/database/Database.cpp.s
 
-CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/GetMatchHistory.cpp
-CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o -MF CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o.d -o CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/GetMatchHistory.cpp
+CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/GetMatchHistory.cpp
+CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o -MF CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o.d -o CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/GetMatchHistory.cpp
 
-CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/GetMatchHistory.cpp > CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.i
+CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/GetMatchHistory.cpp > CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.i
 
-CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/EventsHistory/GetMatchHistory.cpp -o CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.s
+CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/events/GetMatchHistory.cpp -o CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.s
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.cpp
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o -MF CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o.d -o CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.cpp
+CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/UpdateAccount.cpp
+CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o -MF CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o.d -o CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/UpdateAccount.cpp
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.cpp > CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.i
+CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/UpdateAccount.cpp > CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.i
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/UpdateAccount.cpp -o CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.s
+CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/UpdateAccount.cpp -o CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.s
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/GetAccountData.cpp
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o -MF CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o.d -o CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/GetAccountData.cpp
+CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/GetAccountData.cpp
+CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o -MF CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o.d -o CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/GetAccountData.cpp
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/GetAccountData.cpp > CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.i
+CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/GetAccountData.cpp > CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.i
 
-CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/UserAccountCRUD/GetAccountData.cpp -o CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.s
+CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/user/GetAccountData.cpp -o CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.s
 
-CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/Preorder.cpp
-CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o -MF CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o.d -o CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/Preorder.cpp
+CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/Preorder.cpp
+CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o -MF CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o.d -o CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/Preorder.cpp
 
-CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/Preorder.cpp > CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.i
+CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/Preorder.cpp > CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.i
 
-CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/AddPreorder/Preorder.cpp -o CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.s
+CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/Preorder.cpp -o CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.s
 
-CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/PreorderCancel.cpp
-CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o -MF CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o.d -o CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/PreorderCancel.cpp
+CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/PreorderCancel.cpp
+CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o -MF CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o.d -o CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/PreorderCancel.cpp
 
-CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/PreorderCancel.cpp > CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.i
+CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/PreorderCancel.cpp > CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.i
 
-CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/Preorders/CancelPreorder/PreorderCancel.cpp -o CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.s
+CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/src/api/preorders/PreorderCancel.cpp -o CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.s
 
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/bcrypt.cpp
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o -MF CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o.d -o CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/bcrypt.cpp
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/src/bcrypt.cpp
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o -MF CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o.d -o CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/src/bcrypt.cpp
 
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/bcrypt.cpp > CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.i
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/src/bcrypt.cpp > CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.i
 
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/bcrypt.cpp -o CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.s
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/src/bcrypt.cpp -o CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.s
 
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o: CMakeFiles/UserService.dir/flags.make
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/blowfish.cpp
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o -MF CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o.d -o CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/blowfish.cpp
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o: CMakeFiles/UserService.dir/flags.make
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o: /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/src/blowfish.cpp
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o: CMakeFiles/UserService.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/nazarzakrevskij/TicketsPreOrderService/UserService/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o -MF CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o.d -o CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o -c /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/src/blowfish.cpp
 
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/blowfish.cpp > CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.i
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/src/blowfish.cpp > CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.i
 
-CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/libraries/Bcrypt.cpp/src/blowfish.cpp -o CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s
+CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/nazarzakrevskij/TicketsPreOrderService/UserService/third_party/Bcrypt.cpp/src/blowfish.cpp -o CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.s
 
 # Object files for target UserService
 UserService_OBJECTS = \
 "CMakeFiles/UserService.dir/main.cpp.o" \
-"CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o" \
-"CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o" \
-"CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o" \
-"CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o" \
-"CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o" \
-"CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o" \
-"CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o" \
-"CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o" \
-"CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o"
+"CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o" \
+"CMakeFiles/UserService.dir/src/database/Database.cpp.o" \
+"CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o" \
+"CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o" \
+"CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o" \
+"CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o" \
+"CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o" \
+"CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o" \
+"CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o"
 
 # External object files for target UserService
 UserService_EXTERNAL_OBJECTS =
 
 UserService: CMakeFiles/UserService.dir/main.cpp.o
-UserService: CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o
-UserService: CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o
-UserService: CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o
-UserService: CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o
-UserService: CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o
-UserService: CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o
-UserService: CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o
-UserService: CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o
-UserService: CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o
+UserService: CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o
+UserService: CMakeFiles/UserService.dir/src/database/Database.cpp.o
+UserService: CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o
+UserService: CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o
+UserService: CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o
+UserService: CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o
+UserService: CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o
+UserService: CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o
+UserService: CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o
 UserService: CMakeFiles/UserService.dir/build.make
 UserService: /opt/homebrew/Cellar/curl/8.11.1/lib/libcurl.dylib
 UserService: /opt/homebrew/lib/libspdlog.1.15.0.dylib

@@ -44,7 +44,7 @@ public:
   /// Pre-allocate room for at least `n` parameters.
   /** This is not needed, but it may improve efficiency.
    *
-   * TicketsStatus space if you're going to add parameters individually, and you've
+   * tickets_status space if you're going to add parameters individually, and you've
    * got some idea of how many there are going to be.  It may save some
    * memory re-allocations.
    */

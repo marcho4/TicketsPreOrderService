@@ -2,15 +2,15 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <iostream>
-#include "libraries/httplib.h"
-#include "src/postgres/PostgresProcessing.h"
-#include "src/api/UserAccountCRUD/CreateAccount.h"
-#include "src/api/UserAccountCRUD/UpdateAccount.h"
-#include "src/api/UserAccountCRUD/GetAccountData.h"
-#include "src/api/EventsHistory/GetMatchHistory.h"
-#include "src/api/Preorders/AddPreorder/Preorder.h"
-#include "src/api/Preorders/CancelPreorder/PreorderCancel.h"
-#include "src/api/Preorders/GetPreorders.h"
+#include "third_party/httplib.h"
+#include "src/database/Database.h"
+#include "src/api/user/CreateAccount.h"
+#include "src/api/user/UpdateAccount.h"
+#include "src/api/user/GetAccountData.h"
+#include "src/api/events/GetMatchHistory.h"
+#include "src/api/preorders/Preorder.h"
+#include "src/api/preorders/PreorderCancel.h"
+#include "src/api/preorders/GetPreorders.h"
 
 int main() {
 
@@ -41,7 +41,7 @@ int main() {
 
         std::string connect = "dbname=user_personal_account host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("../src/postgres/user_personal_account.sql");
+        db.initDbFromFile("../src/database/user_personal_account.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();

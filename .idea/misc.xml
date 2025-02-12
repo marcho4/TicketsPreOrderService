@@ -3,7 +3,7 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (TicketsPreOrderService)" />
   </component>
-  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$/TicketsService">
+  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$/OrganizerService">
     <contentRoot DIR="$PROJECT_DIR$" />
   </component>
 </project>

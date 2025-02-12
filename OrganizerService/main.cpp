@@ -2,12 +2,10 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
-#include "../libraries/httplib.h"
-#include "src/OrganizerAccountCRUD/CreateOrganizerAccount.h"
-#include "src/OrganizerAccountCRUD/UpdateOrganizerAccount.h"
-#include "src/MatchCreating/CreateMatch/MatchCreator.h"
-#include "src/MatchCreating/UpdateMatchInfo/Updator.h"
-#include "src/OrganizerAccountCRUD/GetAccountInfo.h"
+#include "third_party/httplib.h"
+#include "src/organizer_crud/CreateOrganizerAccount.h"
+#include "src/organizer_crud/UpdateOrganizerAccount.h"
+#include "src/organizer_crud/GetAccountInfo.h"
 
 int main() {
 
@@ -36,7 +34,7 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=orchestrator host=org_postgres user=postgres password=postgres port=5432";
+        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/organizer_personal_account.sql");
         pqxx::connection C(connect);
@@ -60,24 +58,6 @@ int main() {
             set_cors_headers(res);
             spdlog::info("Получен запрос на получение данных организатора");
             GetAccountInfo::GetAccountInfoRequest(request, res, db);
-        });
-
-        server.Post("/organizer/:id/create_match", [&db](const httplib::Request& request, httplib::Response &res) {
-            spdlog::info("Получен запрос на создание матча");
-            MatchCreator creator;
-            creator.CreateMatchRequest(request, res, db);
-        });
-        // TODO: написать логику
-        server.Put("/organizer/:id/update_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-
-        });
-        // TODO: написать логику
-        server.Post("/organizer/:id/delete_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-
-        });
-        // TODO: написать логику
-        server.Post("/organizer/:id/add_tickets/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-
         });
 
         std::cout << "Server is listening http://localhost:8004" << '\n';

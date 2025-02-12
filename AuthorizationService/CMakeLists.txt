@@ -35,7 +35,7 @@ link_directories(/usr/local/lib)
 # Include directories
 include_directories("libraries/Bcrypt.cpp/include")
 
-# Find the libraries
+# Find the third_party
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(PostgreSQL REQUIRED)
@@ -49,7 +49,7 @@ FetchContent_MakeAvailable(spdlog)
 # Create executable
 add_executable(AuthorizationService ${SOURCE_FILES})
 
-# Link the libraries
+# Link the third_party
 target_link_libraries(AuthorizationService PRIVATE
         spdlog::spdlog
         CURL::libcurl

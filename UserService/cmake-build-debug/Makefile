@@ -129,54 +129,6 @@ UserService/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/build
 .PHONY : UserService/fast
 
-libraries/Bcrypt.cpp/src/bcrypt.o: libraries/Bcrypt.cpp/src/bcrypt.cpp.o
-.PHONY : libraries/Bcrypt.cpp/src/bcrypt.o
-
-# target to build an object file
-libraries/Bcrypt.cpp/src/bcrypt.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.o
-.PHONY : libraries/Bcrypt.cpp/src/bcrypt.cpp.o
-
-libraries/Bcrypt.cpp/src/bcrypt.i: libraries/Bcrypt.cpp/src/bcrypt.cpp.i
-.PHONY : libraries/Bcrypt.cpp/src/bcrypt.i
-
-# target to preprocess a source file
-libraries/Bcrypt.cpp/src/bcrypt.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.i
-.PHONY : libraries/Bcrypt.cpp/src/bcrypt.cpp.i
-
-libraries/Bcrypt.cpp/src/bcrypt.s: libraries/Bcrypt.cpp/src/bcrypt.cpp.s
-.PHONY : libraries/Bcrypt.cpp/src/bcrypt.s
-
-# target to generate assembly for a file
-libraries/Bcrypt.cpp/src/bcrypt.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/bcrypt.cpp.s
-.PHONY : libraries/Bcrypt.cpp/src/bcrypt.cpp.s
-
-libraries/Bcrypt.cpp/src/blowfish.o: libraries/Bcrypt.cpp/src/blowfish.cpp.o
-.PHONY : libraries/Bcrypt.cpp/src/blowfish.o
-
-# target to build an object file
-libraries/Bcrypt.cpp/src/blowfish.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.o
-.PHONY : libraries/Bcrypt.cpp/src/blowfish.cpp.o
-
-libraries/Bcrypt.cpp/src/blowfish.i: libraries/Bcrypt.cpp/src/blowfish.cpp.i
-.PHONY : libraries/Bcrypt.cpp/src/blowfish.i
-
-# target to preprocess a source file
-libraries/Bcrypt.cpp/src/blowfish.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.i
-.PHONY : libraries/Bcrypt.cpp/src/blowfish.cpp.i
-
-libraries/Bcrypt.cpp/src/blowfish.s: libraries/Bcrypt.cpp/src/blowfish.cpp.s
-.PHONY : libraries/Bcrypt.cpp/src/blowfish.s
-
-# target to generate assembly for a file
-libraries/Bcrypt.cpp/src/blowfish.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/libraries/Bcrypt.cpp/src/blowfish.cpp.s
-.PHONY : libraries/Bcrypt.cpp/src/blowfish.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -201,173 +153,221 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/api/EventsHistory/GetMatchHistory.o: src/api/EventsHistory/GetMatchHistory.cpp.o
-.PHONY : src/api/EventsHistory/GetMatchHistory.o
+src/api/events/GetMatchHistory.o: src/api/events/GetMatchHistory.cpp.o
+.PHONY : src/api/events/GetMatchHistory.o
 
 # target to build an object file
-src/api/EventsHistory/GetMatchHistory.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.o
-.PHONY : src/api/EventsHistory/GetMatchHistory.cpp.o
+src/api/events/GetMatchHistory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.o
+.PHONY : src/api/events/GetMatchHistory.cpp.o
 
-src/api/EventsHistory/GetMatchHistory.i: src/api/EventsHistory/GetMatchHistory.cpp.i
-.PHONY : src/api/EventsHistory/GetMatchHistory.i
+src/api/events/GetMatchHistory.i: src/api/events/GetMatchHistory.cpp.i
+.PHONY : src/api/events/GetMatchHistory.i
 
 # target to preprocess a source file
-src/api/EventsHistory/GetMatchHistory.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.i
-.PHONY : src/api/EventsHistory/GetMatchHistory.cpp.i
+src/api/events/GetMatchHistory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.i
+.PHONY : src/api/events/GetMatchHistory.cpp.i
 
-src/api/EventsHistory/GetMatchHistory.s: src/api/EventsHistory/GetMatchHistory.cpp.s
-.PHONY : src/api/EventsHistory/GetMatchHistory.s
+src/api/events/GetMatchHistory.s: src/api/events/GetMatchHistory.cpp.s
+.PHONY : src/api/events/GetMatchHistory.s
 
 # target to generate assembly for a file
-src/api/EventsHistory/GetMatchHistory.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/EventsHistory/GetMatchHistory.cpp.s
-.PHONY : src/api/EventsHistory/GetMatchHistory.cpp.s
+src/api/events/GetMatchHistory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/events/GetMatchHistory.cpp.s
+.PHONY : src/api/events/GetMatchHistory.cpp.s
 
-src/api/Preorders/AddPreorder/Preorder.o: src/api/Preorders/AddPreorder/Preorder.cpp.o
-.PHONY : src/api/Preorders/AddPreorder/Preorder.o
+src/api/preorders/Preorder.o: src/api/preorders/Preorder.cpp.o
+.PHONY : src/api/preorders/Preorder.o
 
 # target to build an object file
-src/api/Preorders/AddPreorder/Preorder.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.o
-.PHONY : src/api/Preorders/AddPreorder/Preorder.cpp.o
+src/api/preorders/Preorder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.o
+.PHONY : src/api/preorders/Preorder.cpp.o
 
-src/api/Preorders/AddPreorder/Preorder.i: src/api/Preorders/AddPreorder/Preorder.cpp.i
-.PHONY : src/api/Preorders/AddPreorder/Preorder.i
+src/api/preorders/Preorder.i: src/api/preorders/Preorder.cpp.i
+.PHONY : src/api/preorders/Preorder.i
 
 # target to preprocess a source file
-src/api/Preorders/AddPreorder/Preorder.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.i
-.PHONY : src/api/Preorders/AddPreorder/Preorder.cpp.i
+src/api/preorders/Preorder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.i
+.PHONY : src/api/preorders/Preorder.cpp.i
 
-src/api/Preorders/AddPreorder/Preorder.s: src/api/Preorders/AddPreorder/Preorder.cpp.s
-.PHONY : src/api/Preorders/AddPreorder/Preorder.s
+src/api/preorders/Preorder.s: src/api/preorders/Preorder.cpp.s
+.PHONY : src/api/preorders/Preorder.s
 
 # target to generate assembly for a file
-src/api/Preorders/AddPreorder/Preorder.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/Preorders/AddPreorder/Preorder.cpp.s
-.PHONY : src/api/Preorders/AddPreorder/Preorder.cpp.s
+src/api/preorders/Preorder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/preorders/Preorder.cpp.s
+.PHONY : src/api/preorders/Preorder.cpp.s
 
-src/api/Preorders/CancelPreorder/PreorderCancel.o: src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o
-.PHONY : src/api/Preorders/CancelPreorder/PreorderCancel.o
+src/api/preorders/PreorderCancel.o: src/api/preorders/PreorderCancel.cpp.o
+.PHONY : src/api/preorders/PreorderCancel.o
 
 # target to build an object file
-src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o
-.PHONY : src/api/Preorders/CancelPreorder/PreorderCancel.cpp.o
+src/api/preorders/PreorderCancel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.o
+.PHONY : src/api/preorders/PreorderCancel.cpp.o
 
-src/api/Preorders/CancelPreorder/PreorderCancel.i: src/api/Preorders/CancelPreorder/PreorderCancel.cpp.i
-.PHONY : src/api/Preorders/CancelPreorder/PreorderCancel.i
+src/api/preorders/PreorderCancel.i: src/api/preorders/PreorderCancel.cpp.i
+.PHONY : src/api/preorders/PreorderCancel.i
 
 # target to preprocess a source file
-src/api/Preorders/CancelPreorder/PreorderCancel.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.i
-.PHONY : src/api/Preorders/CancelPreorder/PreorderCancel.cpp.i
+src/api/preorders/PreorderCancel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.i
+.PHONY : src/api/preorders/PreorderCancel.cpp.i
 
-src/api/Preorders/CancelPreorder/PreorderCancel.s: src/api/Preorders/CancelPreorder/PreorderCancel.cpp.s
-.PHONY : src/api/Preorders/CancelPreorder/PreorderCancel.s
+src/api/preorders/PreorderCancel.s: src/api/preorders/PreorderCancel.cpp.s
+.PHONY : src/api/preorders/PreorderCancel.s
 
 # target to generate assembly for a file
-src/api/Preorders/CancelPreorder/PreorderCancel.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/Preorders/CancelPreorder/PreorderCancel.cpp.s
-.PHONY : src/api/Preorders/CancelPreorder/PreorderCancel.cpp.s
+src/api/preorders/PreorderCancel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/preorders/PreorderCancel.cpp.s
+.PHONY : src/api/preorders/PreorderCancel.cpp.s
 
-src/api/UserAccountCRUD/CreateAccount.o: src/api/UserAccountCRUD/CreateAccount.cpp.o
-.PHONY : src/api/UserAccountCRUD/CreateAccount.o
+src/api/user/CreateAccount.o: src/api/user/CreateAccount.cpp.o
+.PHONY : src/api/user/CreateAccount.o
 
 # target to build an object file
-src/api/UserAccountCRUD/CreateAccount.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.o
-.PHONY : src/api/UserAccountCRUD/CreateAccount.cpp.o
+src/api/user/CreateAccount.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.o
+.PHONY : src/api/user/CreateAccount.cpp.o
 
-src/api/UserAccountCRUD/CreateAccount.i: src/api/UserAccountCRUD/CreateAccount.cpp.i
-.PHONY : src/api/UserAccountCRUD/CreateAccount.i
+src/api/user/CreateAccount.i: src/api/user/CreateAccount.cpp.i
+.PHONY : src/api/user/CreateAccount.i
 
 # target to preprocess a source file
-src/api/UserAccountCRUD/CreateAccount.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.i
-.PHONY : src/api/UserAccountCRUD/CreateAccount.cpp.i
+src/api/user/CreateAccount.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.i
+.PHONY : src/api/user/CreateAccount.cpp.i
 
-src/api/UserAccountCRUD/CreateAccount.s: src/api/UserAccountCRUD/CreateAccount.cpp.s
-.PHONY : src/api/UserAccountCRUD/CreateAccount.s
+src/api/user/CreateAccount.s: src/api/user/CreateAccount.cpp.s
+.PHONY : src/api/user/CreateAccount.s
 
 # target to generate assembly for a file
-src/api/UserAccountCRUD/CreateAccount.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/CreateAccount.cpp.s
-.PHONY : src/api/UserAccountCRUD/CreateAccount.cpp.s
+src/api/user/CreateAccount.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/CreateAccount.cpp.s
+.PHONY : src/api/user/CreateAccount.cpp.s
 
-src/api/UserAccountCRUD/GetAccountData.o: src/api/UserAccountCRUD/GetAccountData.cpp.o
-.PHONY : src/api/UserAccountCRUD/GetAccountData.o
+src/api/user/GetAccountData.o: src/api/user/GetAccountData.cpp.o
+.PHONY : src/api/user/GetAccountData.o
 
 # target to build an object file
-src/api/UserAccountCRUD/GetAccountData.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.o
-.PHONY : src/api/UserAccountCRUD/GetAccountData.cpp.o
+src/api/user/GetAccountData.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.o
+.PHONY : src/api/user/GetAccountData.cpp.o
 
-src/api/UserAccountCRUD/GetAccountData.i: src/api/UserAccountCRUD/GetAccountData.cpp.i
-.PHONY : src/api/UserAccountCRUD/GetAccountData.i
+src/api/user/GetAccountData.i: src/api/user/GetAccountData.cpp.i
+.PHONY : src/api/user/GetAccountData.i
 
 # target to preprocess a source file
-src/api/UserAccountCRUD/GetAccountData.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.i
-.PHONY : src/api/UserAccountCRUD/GetAccountData.cpp.i
+src/api/user/GetAccountData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.i
+.PHONY : src/api/user/GetAccountData.cpp.i
 
-src/api/UserAccountCRUD/GetAccountData.s: src/api/UserAccountCRUD/GetAccountData.cpp.s
-.PHONY : src/api/UserAccountCRUD/GetAccountData.s
+src/api/user/GetAccountData.s: src/api/user/GetAccountData.cpp.s
+.PHONY : src/api/user/GetAccountData.s
 
 # target to generate assembly for a file
-src/api/UserAccountCRUD/GetAccountData.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/GetAccountData.cpp.s
-.PHONY : src/api/UserAccountCRUD/GetAccountData.cpp.s
+src/api/user/GetAccountData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/GetAccountData.cpp.s
+.PHONY : src/api/user/GetAccountData.cpp.s
 
-src/api/UserAccountCRUD/UpdateAccount.o: src/api/UserAccountCRUD/UpdateAccount.cpp.o
-.PHONY : src/api/UserAccountCRUD/UpdateAccount.o
+src/api/user/UpdateAccount.o: src/api/user/UpdateAccount.cpp.o
+.PHONY : src/api/user/UpdateAccount.o
 
 # target to build an object file
-src/api/UserAccountCRUD/UpdateAccount.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.o
-.PHONY : src/api/UserAccountCRUD/UpdateAccount.cpp.o
+src/api/user/UpdateAccount.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.o
+.PHONY : src/api/user/UpdateAccount.cpp.o
 
-src/api/UserAccountCRUD/UpdateAccount.i: src/api/UserAccountCRUD/UpdateAccount.cpp.i
-.PHONY : src/api/UserAccountCRUD/UpdateAccount.i
+src/api/user/UpdateAccount.i: src/api/user/UpdateAccount.cpp.i
+.PHONY : src/api/user/UpdateAccount.i
 
 # target to preprocess a source file
-src/api/UserAccountCRUD/UpdateAccount.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.i
-.PHONY : src/api/UserAccountCRUD/UpdateAccount.cpp.i
+src/api/user/UpdateAccount.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.i
+.PHONY : src/api/user/UpdateAccount.cpp.i
 
-src/api/UserAccountCRUD/UpdateAccount.s: src/api/UserAccountCRUD/UpdateAccount.cpp.s
-.PHONY : src/api/UserAccountCRUD/UpdateAccount.s
+src/api/user/UpdateAccount.s: src/api/user/UpdateAccount.cpp.s
+.PHONY : src/api/user/UpdateAccount.s
 
 # target to generate assembly for a file
-src/api/UserAccountCRUD/UpdateAccount.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/UserAccountCRUD/UpdateAccount.cpp.s
-.PHONY : src/api/UserAccountCRUD/UpdateAccount.cpp.s
+src/api/user/UpdateAccount.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/api/user/UpdateAccount.cpp.s
+.PHONY : src/api/user/UpdateAccount.cpp.s
 
-src/postgres/PostgresProcessing.o: src/postgres/PostgresProcessing.cpp.o
-.PHONY : src/postgres/PostgresProcessing.o
+src/database/Database.o: src/database/Database.cpp.o
+.PHONY : src/database/Database.o
 
 # target to build an object file
-src/postgres/PostgresProcessing.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.o
-.PHONY : src/postgres/PostgresProcessing.cpp.o
+src/database/Database.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/database/Database.cpp.o
+.PHONY : src/database/Database.cpp.o
 
-src/postgres/PostgresProcessing.i: src/postgres/PostgresProcessing.cpp.i
-.PHONY : src/postgres/PostgresProcessing.i
+src/database/Database.i: src/database/Database.cpp.i
+.PHONY : src/database/Database.i
 
 # target to preprocess a source file
-src/postgres/PostgresProcessing.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.i
-.PHONY : src/postgres/PostgresProcessing.cpp.i
+src/database/Database.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/database/Database.cpp.i
+.PHONY : src/database/Database.cpp.i
 
-src/postgres/PostgresProcessing.s: src/postgres/PostgresProcessing.cpp.s
-.PHONY : src/postgres/PostgresProcessing.s
+src/database/Database.s: src/database/Database.cpp.s
+.PHONY : src/database/Database.s
 
 # target to generate assembly for a file
-src/postgres/PostgresProcessing.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/postgres/PostgresProcessing.cpp.s
-.PHONY : src/postgres/PostgresProcessing.cpp.s
+src/database/Database.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/src/database/Database.cpp.s
+.PHONY : src/database/Database.cpp.s
+
+third_party/Bcrypt.cpp/src/bcrypt.o: third_party/Bcrypt.cpp/src/bcrypt.cpp.o
+.PHONY : third_party/Bcrypt.cpp/src/bcrypt.o
+
+# target to build an object file
+third_party/Bcrypt.cpp/src/bcrypt.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.o
+.PHONY : third_party/Bcrypt.cpp/src/bcrypt.cpp.o
+
+third_party/Bcrypt.cpp/src/bcrypt.i: third_party/Bcrypt.cpp/src/bcrypt.cpp.i
+.PHONY : third_party/Bcrypt.cpp/src/bcrypt.i
+
+# target to preprocess a source file
+third_party/Bcrypt.cpp/src/bcrypt.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.i
+.PHONY : third_party/Bcrypt.cpp/src/bcrypt.cpp.i
+
+third_party/Bcrypt.cpp/src/bcrypt.s: third_party/Bcrypt.cpp/src/bcrypt.cpp.s
+.PHONY : third_party/Bcrypt.cpp/src/bcrypt.s
+
+# target to generate assembly for a file
+third_party/Bcrypt.cpp/src/bcrypt.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/bcrypt.cpp.s
+.PHONY : third_party/Bcrypt.cpp/src/bcrypt.cpp.s
+
+third_party/Bcrypt.cpp/src/blowfish.o: third_party/Bcrypt.cpp/src/blowfish.cpp.o
+.PHONY : third_party/Bcrypt.cpp/src/blowfish.o
+
+# target to build an object file
+third_party/Bcrypt.cpp/src/blowfish.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.o
+.PHONY : third_party/Bcrypt.cpp/src/blowfish.cpp.o
+
+third_party/Bcrypt.cpp/src/blowfish.i: third_party/Bcrypt.cpp/src/blowfish.cpp.i
+.PHONY : third_party/Bcrypt.cpp/src/blowfish.i
+
+# target to preprocess a source file
+third_party/Bcrypt.cpp/src/blowfish.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.i
+.PHONY : third_party/Bcrypt.cpp/src/blowfish.cpp.i
+
+third_party/Bcrypt.cpp/src/blowfish.s: third_party/Bcrypt.cpp/src/blowfish.cpp.s
+.PHONY : third_party/Bcrypt.cpp/src/blowfish.s
+
+# target to generate assembly for a file
+third_party/Bcrypt.cpp/src/blowfish.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/UserService.dir/build.make CMakeFiles/UserService.dir/third_party/Bcrypt.cpp/src/blowfish.cpp.s
+.PHONY : third_party/Bcrypt.cpp/src/blowfish.cpp.s
 
 # Help Target
 help:
@@ -378,36 +378,36 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... UserService"
-	@echo "... libraries/Bcrypt.cpp/src/bcrypt.o"
-	@echo "... libraries/Bcrypt.cpp/src/bcrypt.i"
-	@echo "... libraries/Bcrypt.cpp/src/bcrypt.s"
-	@echo "... libraries/Bcrypt.cpp/src/blowfish.o"
-	@echo "... libraries/Bcrypt.cpp/src/blowfish.i"
-	@echo "... libraries/Bcrypt.cpp/src/blowfish.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/api/EventsHistory/GetMatchHistory.o"
-	@echo "... src/api/EventsHistory/GetMatchHistory.i"
-	@echo "... src/api/EventsHistory/GetMatchHistory.s"
-	@echo "... src/api/Preorders/AddPreorder/Preorder.o"
-	@echo "... src/api/Preorders/AddPreorder/Preorder.i"
-	@echo "... src/api/Preorders/AddPreorder/Preorder.s"
-	@echo "... src/api/Preorders/CancelPreorder/PreorderCancel.o"
-	@echo "... src/api/Preorders/CancelPreorder/PreorderCancel.i"
-	@echo "... src/api/Preorders/CancelPreorder/PreorderCancel.s"
-	@echo "... src/api/UserAccountCRUD/CreateAccount.o"
-	@echo "... src/api/UserAccountCRUD/CreateAccount.i"
-	@echo "... src/api/UserAccountCRUD/CreateAccount.s"
-	@echo "... src/api/UserAccountCRUD/GetAccountData.o"
-	@echo "... src/api/UserAccountCRUD/GetAccountData.i"
-	@echo "... src/api/UserAccountCRUD/GetAccountData.s"
-	@echo "... src/api/UserAccountCRUD/UpdateAccount.o"
-	@echo "... src/api/UserAccountCRUD/UpdateAccount.i"
-	@echo "... src/api/UserAccountCRUD/UpdateAccount.s"
-	@echo "... src/postgres/PostgresProcessing.o"
-	@echo "... src/postgres/PostgresProcessing.i"
-	@echo "... src/postgres/PostgresProcessing.s"
+	@echo "... src/api/events/GetMatchHistory.o"
+	@echo "... src/api/events/GetMatchHistory.i"
+	@echo "... src/api/events/GetMatchHistory.s"
+	@echo "... src/api/preorders/Preorder.o"
+	@echo "... src/api/preorders/Preorder.i"
+	@echo "... src/api/preorders/Preorder.s"
+	@echo "... src/api/preorders/PreorderCancel.o"
+	@echo "... src/api/preorders/PreorderCancel.i"
+	@echo "... src/api/preorders/PreorderCancel.s"
+	@echo "... src/api/user/CreateAccount.o"
+	@echo "... src/api/user/CreateAccount.i"
+	@echo "... src/api/user/CreateAccount.s"
+	@echo "... src/api/user/GetAccountData.o"
+	@echo "... src/api/user/GetAccountData.i"
+	@echo "... src/api/user/GetAccountData.s"
+	@echo "... src/api/user/UpdateAccount.o"
+	@echo "... src/api/user/UpdateAccount.i"
+	@echo "... src/api/user/UpdateAccount.s"
+	@echo "... src/database/Database.o"
+	@echo "... src/database/Database.i"
+	@echo "... src/database/Database.s"
+	@echo "... third_party/Bcrypt.cpp/src/bcrypt.o"
+	@echo "... third_party/Bcrypt.cpp/src/bcrypt.i"
+	@echo "... third_party/Bcrypt.cpp/src/bcrypt.s"
+	@echo "... third_party/Bcrypt.cpp/src/blowfish.o"
+	@echo "... third_party/Bcrypt.cpp/src/blowfish.i"
+	@echo "... third_party/Bcrypt.cpp/src/blowfish.s"
 .PHONY : help
 
 

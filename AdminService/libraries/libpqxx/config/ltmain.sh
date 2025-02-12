@@ -57,11 +57,11 @@ package_revision=2.4.7
 
 
 ## -------------------------- ##
-## Source external libraries. ##
+## Source external third_party. ##
 ## -------------------------- ##
 
 # Much of our low-level functionality needs to be sourced from external
-# libraries, which are installed to $pkgauxdir.
+# third_party, which are installed to $pkgauxdir.
 
 # Set a version string for this script.
 scriptversion=2019-02-19.15; # UTC
@@ -3689,7 +3689,7 @@ func_mode_compile ()
       ;;
     esac
     if test no = "$pic_mode" && test pass_all != "$deplibs_check_method"; then
-      # non-PIC code in shared libraries is not supported
+      # non-PIC code in shared third_party is not supported
       pic_mode=default
     fi
 
@@ -3740,7 +3740,7 @@ compiler."
     func_quote_arg pretty "$srcfile"
     qsrcfile=$func_quote_arg_result
 
-    # Only build a PIC object if we are building libtool libraries.
+    # Only build a PIC object if we are building libtool third_party.
     if test yes = "$build_libtool_libs"; then
       # Without this assignment, base_compile gets emptied.
       fbsd_hideous_sh_bug=$base_compile
@@ -3794,7 +3794,7 @@ compiler."
       fi
     fi
 
-    # Only build a position-dependent object if we build old libraries.
+    # Only build a position-dependent object if we build old third_party.
     if test yes = "$build_old_libs"; then
       if test yes != "$pic_mode"; then
 	# Don't build PIC code
@@ -4487,7 +4487,7 @@ func_mode_install ()
       # Do each installation.
       case $file in
       *.$libext)
-	# Do the static libraries later.
+	# Do the static third_party later.
 	func_append staticlibs " $file"
 	;;
 
@@ -4527,7 +4527,7 @@ func_mode_install ()
 	  inst_prefix_dir=`$ECHO "$destdir" | $SED -e "s%$libdir\$%%"`
 
 	  # Don't allow the user to place us outside of our expected
-	  # location b/c this prevents finding dependent libraries that
+	  # location b/c this prevents finding dependent third_party that
 	  # are installed to the same prefix.
 	  # At present, this check doesn't affect windows .dll's that
 	  # are installed into $libdir/../bin (currently, that works fine)
@@ -5716,7 +5716,7 @@ func_exec_program ()
 	#
 	# Fix the DLL searchpath if we need to.  Do this before prepending
 	# to shlibpath, because on Windows, both are PATH and uninstalled
-	# libraries must come first.
+	# third_party must come first.
 	if test -n "$dllsearchpath"; then
 	  $ECHO "\
     # Add the dll search path components to the executable PATH
@@ -7280,7 +7280,7 @@ func_mode_link ()
 	    test X-lc = "X$arg" && continue
 	    ;;
 	  *-*-rhapsody* | *-*-darwin1.[012])
-	    # Rhapsody C and math libraries are in the System framework
+	    # Rhapsody C and math third_party are in the System framework
 	    func_append deplibs " System.ltframework"
 	    continue
 	    ;;
@@ -7549,7 +7549,7 @@ func_mode_link ()
       # -stdlib=*            select c++ std lib with clang
       # -fsanitize=*         Clang/GCC memory and address sanitizer
       # -fuse-ld=*           Linker select flags for GCC
-      # -static-*            direct GCC to link specific libraries statically
+      # -static-*            direct GCC to link specific third_party statically
       # -fcilkplus           Cilk Plus language extension features for C/C++
       # -Wa,*                Pass flags directly to the assembler
       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
@@ -7766,7 +7766,7 @@ func_mode_link ()
     specialdeplibs=
 
     libs=
-    # Find all interdependent deplibs by searching for libraries
+    # Find all interdependent deplibs by searching for third_party
     # that are linked more than once (e.g. -la -lb -la)
     for deplib in $deplibs; do
       if $opt_preserve_dup_deps; then
@@ -7780,7 +7780,7 @@ func_mode_link ()
     if test lib = "$linkmode"; then
       libs="$predeps $libs $compiler_lib_search_path $postdeps"
 
-      # Compute libraries that are listed more than once in $predeps
+      # Compute third_party that are listed more than once in $predeps
       # $postdeps and mark them as special (i.e., whose duplicates are
       # not to be eliminated).
       pre_post_deps=
@@ -7798,9 +7798,9 @@ func_mode_link ()
     deplibs=
     newdependency_libs=
     newlib_search_path=
-    need_relink=no # whether we're linking any uninstalled libtool libraries
-    notinst_deplibs= # not-installed libtool libraries
-    notinst_path= # paths that contain not-installed libtool libraries
+    need_relink=no # whether we're linking any uninstalled libtool third_party
+    notinst_deplibs= # not-installed libtool third_party
+    notinst_path= # paths that contain not-installed libtool third_party
 
     case $linkmode in
     lib)
@@ -7878,7 +7878,7 @@ func_mode_link ()
 	libs=$dlprefiles
       fi
       if test dlopen = "$pass"; then
-	# Collect dlpreopened libraries
+	# Collect dlpreopened third_party
 	save_deplibs=$deplibs
 	deplibs=
       fi
@@ -8045,8 +8045,8 @@ func_mode_link ()
 	  fi
 	  case $linkmode in
 	  lib)
-	    # Linking convenience modules into shared libraries is allowed,
-	    # but linking other static libraries is non-portable.
+	    # Linking convenience modules into shared third_party is allowed,
+	    # but linking other static third_party is non-portable.
 	    case " $dlpreconveniencelibs " in
 	    *" $deplib "*) ;;
 	    *)
@@ -8161,7 +8161,7 @@ func_mode_link ()
 	fi
 
 	if test conv = "$pass"; then
-	  # Only check for convenience libraries
+	  # Only check for convenience third_party
 	  deplibs="$lib $deplibs"
 	  if test -z "$libdir"; then
 	    if test -z "$old_library"; then
@@ -8212,7 +8212,7 @@ func_mode_link ()
 	  then
 	    # If there is no dlname, no dlopen support or we're linking
 	    # statically, we need to preload.  We also need to preload any
-	    # dependent libraries so libltdl's deplib preloader doesn't
+	    # dependent third_party so libltdl's deplib preloader doesn't
 	    # bomb out in the load deplibs phase.
 	    func_append dlprefiles " $lib $dependency_libs"
 	  else
@@ -8286,7 +8286,7 @@ func_mode_link ()
 	        func_append newdlprefiles " $dir/$linklib"
 	      else
 	        func_append newdlprefiles " $dir/$old_library"
-	        # Keep a list of preopened convenience libraries to check
+	        # Keep a list of preopened convenience third_party to check
 	        # that they are being used correctly in the link pass.
 	        test -z "$libdir" && \
 	          func_append dlpreconveniencelibs " $dir/$old_library"
@@ -8297,7 +8297,7 @@ func_mode_link ()
 	      # are required to link).
 	      if test -n "$old_library"; then
 	        func_append newdlprefiles " $dir/$old_library"
-	        # Keep a list of preopened convenience libraries to check
+	        # Keep a list of preopened convenience third_party to check
 	        # that they are being used correctly in the link pass.
 	        test -z "$libdir" && \
 	          func_append dlpreconveniencelibs " $dir/$old_library"
@@ -8348,7 +8348,7 @@ func_mode_link ()
 	      deplibs="$deplib $deplibs"
 	    else
 	      # Need to hardcode shared library paths
-	      # or/and link against static libraries
+	      # or/and link against static third_party
 	      newdependency_libs="$deplib $newdependency_libs"
 	    fi
 	    if $opt_preserve_dup_deps; then
@@ -8402,7 +8402,7 @@ func_mode_link ()
 	     { test pass_all = "$deplibs_check_method" ||
 	       { test yes = "$build_libtool_libs" &&
 		 test -n "$library_names"; }; }; then
-	    # We only need to search for static libraries
+	    # We only need to search for static third_party
 	    continue
 	  fi
 	fi
@@ -8756,7 +8756,7 @@ func_mode_link ()
 	  done
 
 	  if test no != "$link_all_deplibs"; then
-	    # Add the search paths of all dependency libraries
+	    # Add the search paths of all dependency third_party
 	    for deplib in $dependency_libs; do
 	      path=
 	      case $deplib in
@@ -8831,7 +8831,7 @@ func_mode_link ()
       fi
       dependency_libs=$newdependency_libs
       if test dlpreopen = "$pass"; then
-	# Link the dlpreopened libraries before other libraries
+	# Link the dlpreopened third_party before other third_party
 	for deplib in $save_deplibs; do
 	  deplibs="$deplib $deplibs"
 	done
@@ -8855,7 +8855,7 @@ func_mode_link ()
 	  vars=deplibs
 	fi
 	for var in $vars dependency_libs; do
-	  # Add libraries to $var in reverse order
+	  # Add third_party to $var in reverse order
 	  eval tmp_libs=\"\$$var\"
 	  new_libs=
 	  for deplib in $tmp_libs; do
@@ -8875,7 +8875,7 @@ func_mode_link ()
 	      # compiler, it is considered special, and multiple
 	      # occurrences thereof are not removed.  Compare this
 	      # with having the same library being listed as a
-	      # dependency of multiple other libraries: in this case,
+	      # dependency of multiple other third_party: in this case,
 	      # we know (pedantically, we assume) the library does not
 	      # need to be listed more than once, so we keep only the
 	      # last copy.  This is not always right, but it is rare
@@ -8989,14 +8989,14 @@ func_mode_link ()
       test -n "$export_symbols$export_symbols_regex" && \
 	func_warning "'-export-symbols' is ignored for archives"
 
-      # Now set the variables for building old libraries.
+      # Now set the variables for building old third_party.
       build_libtool_libs=no
       oldlibs=$output
       func_append objs "$old_deplibs"
       ;;
 
     lib)
-      # Make sure we only generate libraries of the form 'libNAME.la'.
+      # Make sure we only generate third_party of the form 'libNAME.la'.
       case $outputname in
       lib*)
 	func_stripname 'lib' '.la' "$outputname"
@@ -9047,7 +9047,7 @@ func_mode_link ()
 	if test yes = "$build_libtool_libs"; then
 	  # Building a libtool convenience library.
 	  # Some compilers have problems with a '.al' extension so
-	  # convenience libraries should have the same extension an
+	  # convenience third_party should have the same extension an
 	  # archive normally would.
 	  oldlibs="$output_objdir/$libname.$libext $oldlibs"
 	  build_libtool_libs=convenience
@@ -9344,7 +9344,7 @@ func_mode_link ()
 	  func_show_eval "${RM}r \$removelist"
       fi
 
-      # Now set the variables for building old libraries.
+      # Now set the variables for building old third_party.
       if test yes = "$build_old_libs" && test convenience != "$build_libtool_libs"; then
 	func_append oldlibs " $output_objdir/$libname.$libext"
 
@@ -9450,7 +9450,7 @@ func_mode_link ()
 	  newdeplibs=$deplibs
 	  ;;
 	test_compile)
-	  # This code stresses the "libraries are programs" paradigm to its
+	  # This code stresses the "third_party are programs" paradigm to its
 	  # limits. Maybe even breaks it.  We compile a program, linking it
 	  # against the deplibs as a proxy for the library.  Then we can check
 	  # whether they linked in statically or dynamically with ldd.
@@ -9780,7 +9780,7 @@ EOF
       esac
 
       # move library search paths that coincide with paths to not yet
-      # installed libraries to the beginning of the library search list
+      # installed third_party to the beginning of the library search list
       new_libs=
       for path in $notinst_path; do
 	case " $new_libs " in
@@ -10093,7 +10093,7 @@ EOF
 	  # whole_archive_flag_spec was expanded, because we can't
 	  # assume the linker understands whole_archive_flag_spec.
 	  # This may have to be revisited, in case too many
-	  # convenience libraries get linked in and end up exceeding
+	  # convenience third_party get linked in and end up exceeding
 	  # the spec.
 	  if test -z "$convenience" || test -z "$whole_archive_flag_spec"; then
 	    save_libobjs=$libobjs
@@ -10297,7 +10297,7 @@ EOF
 	  eval cmds=\"\$cmds~\$RM $delfiles\"
 	fi
 
-	# Add any objects from preloaded convenience libraries
+	# Add any objects from preloaded convenience third_party
 	if test -n "$dlprefiles"; then
 	  gentop=$output_objdir/${outputname}x
 	  func_append generated " $gentop"
@@ -10399,8 +10399,8 @@ EOF
       # Delete the old objects.
       $opt_dry_run || $RM $obj $libobj
 
-      # Objects from convenience libraries.  This assumes
-      # single-version convenience libraries.  Whenever we create
+      # Objects from convenience third_party.  This assumes
+      # single-version convenience third_party.  Whenever we create
       # different ones for PIC/non-PIC, this we'll have to duplicate
       # the extraction.
       reload_conv_objs=
@@ -10512,7 +10512,7 @@ EOF
 
 
       # move library search paths that coincide with paths to not yet
-      # installed libraries to the beginning of the library search list
+      # installed third_party to the beginning of the library search list
       new_libs=
       for path in $notinst_path; do
 	case " $new_libs " in
@@ -10895,7 +10895,7 @@ EOF
 	cmds=$old_archive_from_new_cmds
       else
 
-	# Add any objects from preloaded convenience libraries
+	# Add any objects from preloaded convenience third_party
 	if test -n "$dlprefiles"; then
 	  gentop=$output_objdir/${outputname}x
 	  func_append generated " $gentop"
@@ -11055,7 +11055,7 @@ EOF
 	      break
 	    fi
 	    output=$output_objdir/${outputname}i
-	    # Replace all uninstalled libtool libraries with the installed ones
+	    # Replace all uninstalled libtool third_party with the installed ones
 	    newdependency_libs=
 	    for deplib in $dependency_libs; do
 	      case $deplib in
@@ -11289,7 +11289,7 @@ func_mode_uninstall ()
 	if func_lalib_p "$file"; then
 	  func_source $dir/$name
 
-	  # Delete the libtool libraries and symlinks.
+	  # Delete the libtool third_party and symlinks.
 	  for n in $library_names; do
 	    func_append rmfiles " $odir/$n"
 	  done
@@ -11411,12 +11411,12 @@ exit $exit_status
 
 
 # The TAGs below are defined such that we never get into a situation
-# where we disable both kinds of libraries.  Given conflicting
+# where we disable both kinds of third_party.  Given conflicting
 # choices, we go for a static library, that is the most portable,
-# since we can't tell whether shared libraries were disabled because
+# since we can't tell whether shared third_party were disabled because
 # the user asked for that or because the platform doesn't support
 # them.  This is particularly important on AIX, because we don't
-# support having both static and shared libraries enabled at the same
+# support having both static and shared third_party enabled at the same
 # time on that platform, so we default to a shared-only configuration.
 # If a disable-shared tag is given, we'll fallback to a static-only
 # configuration.  But we'll never go from static-only to shared-only.
