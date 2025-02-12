@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { createResource } from "../../../lib/createResource";
 import { useParams } from "next/navigation";
-import { Suspense, useMemo } from "react";
+import {Suspense, useEffect, useMemo, useState} from "react";
+import {X} from "lucide-react";
 
 // Функция для форматирования даты в формат DD/MM/YYYY
 export function formatDate(dateString) {
@@ -52,6 +53,18 @@ function Loading() {
 
 function MatchRendered({ resource }) {
     const matchData = resource.read();
+    const [modal, setModal] = useState(false);
+    useEffect(() => {
+        if (modal) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+        return () => {
+            document.body.classList.remove('overflow-hidden');
+        };
+    }, [modal]);
+
     return (
         <div className="flex flex-col items-center justify-center mx-6">
             {/* Заголовок */}
@@ -80,10 +93,31 @@ function MatchRendered({ resource }) {
                         height={50}
                     />
                 </div>
-                <button className="bg-button-darker text-white py-3 px-5 rounded-lg hover:scale-105 transition-transform duration-300">
+                <button onClick={() => setModal(true)} className="bg-button-darker text-white py-3 px-5 rounded-lg hover:scale-105 transition-transform duration-300">
                     Забронировать билет
                 </button>
-                <div id="reservation-menu">{/* Модальное окно при клике */}</div>
+                <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
+                    z-[11] cursor-pointer`}>
+                    <div id="active-modal" className="relative max-w-2xl w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
+                         onClick={(e) => e.stopPropagation()}>
+
+                        <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"
+                           onClick={() => setModal(!modal)}/>
+
+                        <div id="modal-content" className="p-6">
+                            <div className="text-2xl font-semibold text-gray-700 mb-3">
+                                Choose tickets from the list below
+                            </div>
+                            {/* Container with fetched tickets */}
+                            {/*<div>*/}
+                            {/*    <Suspense fallback={<Loading />}>*/}
+                            {/*        <FetchedTickets resource={resource} />*/}
+                            {/*    </Suspense>*/}
+                            {/*</div>*/}
+
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     );

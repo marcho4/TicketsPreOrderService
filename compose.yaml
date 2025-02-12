@@ -38,6 +38,7 @@ services:
       interval: 5s
       retries: 5
       timeout: 3s
+    restart: always
 
   admin_postgres:
     image: postgres:latest
@@ -49,6 +50,12 @@ services:
       - main
     volumes:
       - admin_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    restart: always
 
   admin:
     build:
@@ -71,6 +78,12 @@ services:
       - main
     volumes:
       - org_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    restart: always
 
   organizer:
     build:
@@ -93,6 +106,12 @@ services:
       - main
     volumes:
       - user_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    restart: always
 
   user:
     build:
@@ -118,7 +137,6 @@ services:
     depends_on:
       - match_postgres
     
-
   match_postgres:
     image: postgres:latest
     environment:
@@ -129,9 +147,15 @@ services:
       - main
     volumes:
       - ./MatchesService/MatchesService/Database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - matches_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    restart: always
     
       
-
 networks:
   main:
     driver: bridge
@@ -141,3 +165,4 @@ volumes:
   admin_postgres_data:
   org_postgres_data:
   user_postgres_data:
+  matches_postgres_data:

@@ -13,6 +13,13 @@ function RenderedMatchInfo({ resource }) {
     const [isEditing, setEditing] = useState(false);
     const [matchData, setMatchData] = useState(data);
 
+    // Function to submit new stadium scheme
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        let formData = new FormData();
+        formData.append('file', file);
+    }
 
     // Editing function for match info
     const handleChange = (e) => {
@@ -56,7 +63,7 @@ function RenderedMatchInfo({ resource }) {
                             width={700}
                             height={100}
                         />
-                        <form className="max-w-md w-full  rounded-lg p-6  items-center justify-center flex flex-col">
+                        <form onSubmit={handleSubmit} className="max-w-md w-full  rounded-lg p-6  items-center justify-center flex flex-col">
                             <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
                                 Change scheme
                             </h2>
@@ -175,31 +182,17 @@ export default function Page() {
     }
     const resource = useMemo(()=> {return createResource(fetchMatchData)}, [match_id]);
 
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <RenderedMatchInfo resource={resource} />
+        </Suspense>
+    )
+}
 
-    const [matchData, setMatchData] = useState({
-        team_home: "Barcelona",
-        team_away: "Real Madrid",
-        match_date: "28/07/2025",
-        stadium: "Santiago Barnabeu",
-        description: "El Classico",
-        match_status: "Not started",
-    });
+function TicketsRendered({ resource }) {
+    const data = resource.read();
+    const [modal, setModal] = useState(false);
     const [ticketsFile, setTicketsFile] = useState(null);
-    const [tickets, setTickets] = useState([
-        {seat: "12", row: "45", sector: "R404", price: 2000, status: "Paid"},
-        {seat: "32", row: "22", sector: "R204", price: 3000, status: "Pre-ordered"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Pre-ordered"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 5000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 10000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 4500, status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Available"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
-        {seat: "16", row: "4", sector: "R104", price: 2000, status: "Paid"},
-
-    ]);
 
 
     // Function to change tickets file
@@ -214,28 +207,6 @@ export default function Page() {
         formData.append('file', ticketsFile);
 
     }
-
-
-
-    // Function to submit new stadium scheme
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const file = e.target.files[0];
-        let formData = new FormData();
-        formData.append('file', file);
-    }
-
-
-    return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <RenderedMatchInfo resource={resource} />
-        </Suspense>
-    )
-}
-
-function TicketsRendered({ resource }) {
-    const data = resource.read();
-    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         if (modal) {
@@ -329,13 +300,9 @@ function TicketsRendered({ resource }) {
             </div>
 
             {/* Modal window to upload tickets */}
-            <div id="background"
-                 onClick={() => setModal(!modal)}
-                 className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
+            <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
                     z-[11] cursor-pointer`}>
-                <div
-                    id="active-modal"
-                    className="relative max-w-[350px] w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
+                <div id="active-modal" className="relative max-w-[350px] w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
                     onClick={(e) => e.stopPropagation()}>
 
                     <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"

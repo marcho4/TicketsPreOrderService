@@ -27,13 +27,8 @@ RUN mkdir -p build && \
     cmake .. && \
     make
 
-<<<<<<< HEAD
 # Используем правильный исполняемый файл
 CMD ["./build/AdminService"]
 
 # Открытие порта
-=======
-CMD ["./build/AdminService"]
-
->>>>>>> 7a9638f (fix)
 EXPOSE 8003
