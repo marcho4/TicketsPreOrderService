@@ -21,7 +21,7 @@ class ErrorBoundary extends React.Component {
             return (
                 <div className="flex justify-center items-center h-full bg-white rounded-lg">
                     <p className="text-xl text-my_black text-center font-semibold">
-                        Something went wrong during organizer data load: {this.state.error.message}
+                        Something went wrong during data loading: {this.state.error.message}
                     </p>
                 </div>
             );

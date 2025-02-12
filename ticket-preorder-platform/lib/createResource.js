@@ -1,4 +1,3 @@
-// Функция для использования React Suspense
 export function createResource(asyncFunc) {
     let status = 'pending';
     let result;

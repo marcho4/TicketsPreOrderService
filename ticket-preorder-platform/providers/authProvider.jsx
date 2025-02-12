@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import {createContext, useContext, useState, useEffect, useMemo} from 'react';
 
 
 const AuthContext = createContext({
@@ -9,12 +9,13 @@ const AuthContext = createContext({
     userRole: undefined,
     setUserRole: () => {},
     setUser: () => {},
+    checkAuth: async () => {},
 });
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [userRole, setUserRole] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     // Проверяем юзера на каждой загрузке страницы
     useEffect(() => {
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
     // Функция для установки юзера и его роли по данным API
     const checkAuth = async () => {
         try {
+            setIsLoading(true);
             const response = await fetch('http://localhost:8000/api/auth/session',
                 {
                     method: 'GET',
@@ -41,15 +43,18 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const value = {
+    const value = useMemo(() => ({
         isLoading,
         userRole,
         setUserRole,
         user,
         setUser,
-    }
+        checkAuth,
+    }), [isLoading, userRole, user]);
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={value}>
+        {children}
+    </AuthContext.Provider>;
 }
 
 export const useAuth = () => {

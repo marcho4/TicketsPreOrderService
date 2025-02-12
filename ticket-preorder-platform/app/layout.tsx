@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={`${montserrat.className} bg-background text-text`}>
         <AuthProvider>
           <Navigation />
-          <main className="min-h-screen pt-8">
+          <main className="min-h-screen pt-5">
               {children}
               <Toaster/>
           </main>

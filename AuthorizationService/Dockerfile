@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     python3 \
     python3-pip \
+    libspdlog-dev \
     git \
     && rm -rf /var/lib/apt/lists/*
 

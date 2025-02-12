@@ -105,7 +105,7 @@ services:
     depends_on:
       - user_postgres
 
-  match:
+  matches:
     build:
       context: ./MatchesService/MatchesService
       dockerfile: Dockerfile

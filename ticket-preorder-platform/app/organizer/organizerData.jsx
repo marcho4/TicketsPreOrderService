@@ -3,10 +3,11 @@
 import React, { Suspense, useEffect, useState, useMemo } from "react";
 import { useAuth } from "../../providers/authProvider";
 import { createResource } from "../../lib/createResource";
-import ErrorBoundary from "./dataBoundary";
+import ErrorBoundary from "./ErrorBoundary";
 import { Pencil, LogOut } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { useRouter } from "next/navigation";
+import {logout} from "../../lib/logout";
 
 const fetchOrganizerData = async (id) => {
     const response = await fetch(`http://localhost:8000/api/organizer/get/${id}`, {
@@ -41,18 +42,6 @@ function DataDisplay({ resource }) {
         phone_number: data.phone_number,
     });
 
-    const logout = () => {
-        try {
-            fetch("http://localhost:8000/api/auth/logout", {
-                method: "POST",
-                credentials: "include",
-            });
-            router.push("/login");
-            window.location.reload();
-        } catch {
-            console.error("logout failed");
-        }
-    };
 
     const handleEdit = () => {
         setIsEditing(true);
@@ -75,7 +64,7 @@ function DataDisplay({ resource }) {
         try {
             formData.tin = data.tin;
             const resp = await fetch(
-                `http://localhost:8000/api/organizer/update/${user}`, // если user — объект, используйте user.id
+                `http://localhost:8000/api/organizer/update/${user}`,
                 {
                     method: "POST",
                     credentials: "include",
@@ -115,7 +104,7 @@ function DataDisplay({ resource }) {
                     </div>
                 </div>
                 <Button
-                    onClick={logout}
+                    onClick={() => logout(router)}
                     className="bg-button-secondary max-w-56 py-2 hover:bg-dark-grey"
                 >
                     <LogOut className="mr-2" /> Logout
@@ -295,14 +284,7 @@ function Loading() {
 export default function DataSection() {
     const { user, userRole } = useAuth();
 
-    // Посмотрим, что реально приходит
-    console.log("DataSection -> user:", user);
-    console.log("DataSection -> userRole:", userRole);
-
     const organizerResource = useMemo(() => {
-        console.log("useMemo called, user=", user, "userRole=", userRole);
-
-        // например, посмотрим, есть ли у user поле id
         if (user && userRole === "ORGANIZER") {
             console.log("Creating resource with user.id=", user);
             return createResource(() => fetchOrganizerData(user));
@@ -311,15 +293,11 @@ export default function DataSection() {
         return null;
     }, [user, userRole]);
 
-    // Посмотрим, создался ли resource
-    console.log("DataSection -> organizerResource:", organizerResource);
 
     if (!user || !organizerResource) {
-        console.log("DataSection -> Loading shown");
         return <Loading />;
     }
 
-    console.log("DataSection -> Rendering DataDisplay");
     return (
         <ErrorBoundary>
             <Suspense fallback={<Loading />}>

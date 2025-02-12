@@ -4,48 +4,35 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/providers/authProvider'
-import { UserRole } from '@/enums/user-role';
-import {useEffect} from "react";
+import { UserRole } from '@/enums/user-role'
+import { useState, useMemo } from 'react'
+import { Menu, X } from 'lucide-react'
 
 const getLinksForRole = (role: string) => {
     const commonLinks = [
         { href: '/', label: 'Home' },
         { href: '/matches', label: 'Matches' },
-    ];
+    ]
 
     switch (role) {
-        case "ADMIN":
-            return [
-                ...commonLinks,
-                { href: '/admin', label: 'Admin Panel' },
-            ];
-        case "ORGANIZER":
-            return [
-                ...commonLinks,
-                { href: '/organizer', label: 'Dashboard' },
-            ];
-        case "USER":
-            return [
-                ...commonLinks,
-                { href: '/dashboard', label: 'Dashboard' },
-            ];
+        case 'ADMIN':
+            return [...commonLinks, { href: '/admin', label: 'Admin Panel' }]
+        case 'ORGANIZER':
+            return [...commonLinks, { href: '/organizer', label: 'Dashboard' }]
+        case 'USER':
+            return [...commonLinks, { href: '/dashboard', label: 'Dashboard' }]
         case UserRole.NotAuthorized:
         default:
-            return [
-                ...commonLinks,
-                { href: '/login', label: 'Login' },
-            ];
+            return [...commonLinks, { href: '/login', label: 'Login' }]
     }
-};
+}
 
 export function Navigation() {
-    const pathname = usePathname();
-    const { userRole } = useAuth();
-    useEffect(() => {
-        links = getLinksForRole(userRole);
-    }, [userRole])
+    const pathname = usePathname()
+    const { userRole } = useAuth()
+    const [isOpen, setIsOpen] = useState(false)
 
-    let links = getLinksForRole(userRole);
+    const links = useMemo(() => getLinksForRole(userRole), [userRole])
 
     return (
         <nav className="bg-background/50 backdrop-blur-3xl py-2 border-b border-gray-200 sticky top-0 inset-x-0 z-40 w-full">
@@ -76,7 +63,46 @@ export function Navigation() {
                         </div>
                     </div>
                 </div>
+
+                <div className="absolute right-4 md:hidden z-30">
+                    <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+                        {isOpen ? (
+                            <X className="w-6 h-6 text-black" />
+                        ) : (
+                            <Menu className="w-6 h-6 text-black" />
+                        )}
+                    </button>
+                </div>
             </header>
+
+            <div
+                className={cn(
+                    'fixed top-0 left-0 w-full h-screen z-50 flex flex-col transition-transform duration-300 ease-in-out',
+                    isOpen ? 'translate-y-0' : '-translate-y-full'
+                )}
+            >
+                <div className="absolute inset-0"
+                    onClick={() => setIsOpen(false)}
+                />
+
+                <div className="relative w-full mx-auto bg-white p-4 rounded-lg shadow-lg flex flex-col items-center space-y-6">
+                    {links.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                                'text-xl font-medium transition-colors duration-300',
+                                pathname === link.href
+                                    ? 'font-semibold text-my_black hover:text-my_black/80 scale-105'
+                                    : 'text-my_black hover:text-gray-500'
+                            )}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                </div>
+            </div>
         </nav>
-    );
+    )
 }

@@ -1,37 +1,51 @@
 "use client"
 
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import {useAuth} from "@/providers/authProvider";
+import {useRouter} from "next/navigation";
+import DataCard from "@/components/DataCard";
+import {useEffect} from "react";
+
 
 export default function Dashboard() {
-  const logout = () => {
-    try {
-      fetch('http://localhost:8000/api/auth/logout', {method: 'POST', credentials: 'include'})
-      window.location.reload()
-    } catch  {
-      console.error('logout failed')
-    }
-  }
+    const router = useRouter()
+    const { user, userRole, isLoading } = useAuth();
+    let fetchUrl = `http://localhost:8000/api/user/${user}`;
+    let updateUrl = `http://localhost:8000/api/user/${user}/update`;
+    const const_fields = ["email"];
+    const mutableFields = ["birthday", "last_name", "name", "phone"];
+    useEffect(()=>{}, [user, isLoading]);
 
-  return (
+    if (isLoading) {
+        return <p>Загрузка...</p>;
+    }
+
+    // Если проверка окончена, но user по-прежнему null - значит, не залогинен
+    if (!user) {
+        return <p>Пользователь не залогинен</p>;
+    }
+    // If `user` is not yet loaded (null/undefined), show a loading state
+    if (!user) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <p className="text-xl">Loading user...</p>
+            </div>
+        );
+    }
+
+    return (
     <div className="flex flex-col min-h-screen">
-      <header className="shadow-lg">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 bg-accent lg:px-8">
+      <header>
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 bg-white lg:px-8 rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         </div>
       </header>
       <main className="flex-grow">
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 bg-accent">
-          <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 p-4 gap-10">
-              <h2 className="text-2xl font-semibold mb-4">Your Upcoming Events</h2>
-              <p className="text-gray-600">You have no upcoming events.</p>
-              <Link href="/" passHref>
-                <Button className="mt-4 bg-button-secondary">Browse Events</Button>
-              </Link>
-              <Button onClick={logout} className="bg-button-secondary">Logout</Button>
+        <div className="max-w-7xl mx-auto py-6">
+            <div>
+                <DataCard const_fields={const_fields} fetchLink={fetchUrl}
+                          updateLink={updateUrl} mutable_fields={mutableFields}>
+                </DataCard>
             </div>
-          </div>
         </div>
       </main>
     </div>

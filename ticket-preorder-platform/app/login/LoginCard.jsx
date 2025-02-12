@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import fetchData from "@/lib/fetchData";
+import {useAuth} from "@/providers/authProvider";
 
 export default function AuthCard() {
     // Состояние, которое отвечает за текущий «режим» компонента.
@@ -32,27 +33,31 @@ export default function AuthCard() {
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
+    const { checkAuth } = useAuth();
 
     // Функция логина
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             setError(false);
-            let response = await fetchData("http://localhost:8000/api/auth/login", "POST",
+            let response = await fetchData("http://localhost:8000/api/auth/login",
+                "POST",
                 { login, password }, setLoading)
             console.log(response.status)
             if (response.status === 200) {
                 let body = await response.json();
-                window.location.reload();
                 switch (body.data.role) {
                     case "ADMIN":
+                        await checkAuth();
                         router.push('/admin');
                         break;
                     case "USER":
-                        router.push('/user');
+                        await checkAuth();
+                        router.push('/dashboard');
                         break;
                     case "ORGANIZER":
-                        router.push('/organization');
+                        await checkAuth();
+                        router.push('/organizer');
                         break;
                     default:
                         break;
