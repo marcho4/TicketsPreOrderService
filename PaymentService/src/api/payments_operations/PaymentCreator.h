@@ -39,6 +39,8 @@ class PaymentCreator {
     static std::string CreatePayment(const PaymentData& payment_data, const std::string& provider_id, Database& db);
 
     static std::string SendPaymentRequest(const PaymentData& payment_data, const std::string& payment_id);
+
+    static bool CheckPaymentExistence(const PaymentData& payment_data, Database& db);
 public:
     static void CreatePaymentRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 };

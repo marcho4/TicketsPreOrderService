@@ -6,6 +6,10 @@ void PaymentCreator::CreatePaymentRequest(const httplib::Request &req, httplib::
     PaymentData payment_data = PaymentData::GetPaymentData(body);
     spdlog::info("Пользователь {} создает платеж на сумму {} {}", payment_data.user_id, payment_data.amount, payment_data.currency);
 
+    if (CheckPaymentExistence(payment_data, db)) {
+        ErrorHandler::sendError(res, 409, "Payment with this match_id and ticket_id already exists");
+        return;
+    }
 //    std::string provider_id = GetProviderID(payment_data.provider, db);
     std::string provider_id = "2145d8b2-5c19-47b3-b1b9-4b53dfe08738";
 
@@ -65,4 +69,11 @@ std::string PaymentCreator::SendPaymentRequest(const PaymentCreator::PaymentData
         return response_from_server["payment_url"];
     }
     return "SHIT HAPPENS";
+}
+
+bool PaymentCreator::CheckPaymentExistence(const PaymentCreator::PaymentData &payment_data, Database &db) {
+    std::string query = "SELECT * FROM PaymentsSchema.Payments WHERE match_id = $1 AND ticket_id = $2";
+    std::vector<std::string> params = {payment_data.match_id, payment_data.ticket_id};
+
+    return !db.executeQueryWithParams(query, params).empty();
 }
