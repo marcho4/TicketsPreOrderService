@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: PaymentsService API
   version: 1.0.0
-  description: Payments service API
+  description: API для работы с платежами
 
 servers:
   - url: http://localhost:8008
@@ -24,11 +24,11 @@ paths:
                 user_id:
                   type: string
                   description: Идентификатор пользователя в системе
-                  example: "312435-2453432-5554234"
+                  example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
                 amount:
-                  type: number
+                  type: string
                   description: Сумма платежа
-                  example: 1000
+                  example: "1000"
                 currency:
                   type: string
                   description: Валюта платежа
@@ -37,11 +37,21 @@ paths:
                   type: string
                   description: Провайдер платежа
                   example: "Stripe"
+                match_id:
+                  type: string
+                  description: Идентификатор матча
+                  example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
+                ticket_id:
+                  type: string
+                  description: Идентификатор билета
+                  example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
               required:
                 - user_id
                 - amount
                 - currency
                 - provider
+                - match_id
+                - ticket_id
       responses:
         '200':
           description: Платеж создан
@@ -79,7 +89,7 @@ paths:
                 payment_id:
                   type: string
                   description: Идентификатор платежа
-                  example: "312435-2453432-5554234"
+                  example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
                 status:
                   type: string
                   description: Статус платежа
@@ -121,3 +131,74 @@ paths:
           description: Статус платежа получен
         '404':
           description: Платеж не найден
+  /payments/provider/add:
+    post:
+      summary: Добавление провайдера
+      description: Добавление провайдера платежей
+      operationId: addProvider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider_name:
+                  type: string
+                  description: Название провайдера
+                  example: "Stripe"
+                provider_description:
+                  type: string
+                  description: Описание провайдера
+                  example: "Платежный провайдер Stripe"
+              required:
+                - provider_name
+                - provider_description
+      responses:
+        '200':
+          description: Провайдер добавлен
+
+  /payments/providers:
+    get:
+        summary: Получение списка провайдеров
+        description: Получение списка всех провайдеров платежей
+        operationId: getProviders
+        responses:
+            '200':
+              description: Список провайдеров получен
+
+  /user/{id}/payments:
+    get:
+        summary: Получение списка платежей пользователя
+        description: Получение списка всех платежей пользователя
+        operationId: getUserPayments
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: Идентификатор пользователя
+            schema:
+              type: string
+        responses:
+            '200':
+              description: Список платежей получен
+            '404':
+              description: Платежи не найдены
+
+  /user/{id}/refunds:
+    get:
+      summary: Получение списка возвратов пользователя
+      description: Получение списка всех возвратов пользователя
+      operationId: getUserRefunds
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор пользователя
+          schema:
+            type: string
+      responses:
+          '200':
+              description: Список возвратов получен
+          '404':
+              description: Возвраты не найдены

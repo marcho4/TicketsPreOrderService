@@ -35,9 +35,11 @@ std::string PaymentCreator::GetProviderID(const std::string &provider, Database 
 
 std::string PaymentCreator::CreatePayment(const PaymentCreator::PaymentData &payment_data, const std::string &provider_id,
                                    Database &db) {
-    std::string query = "INSERT INTO PaymentsSchema.Payments (user_id, amount, currency, provider_id, status) VALUES ($1, $2, $3, $4, $5) RETURNING payment_id";
+    std::string query = "INSERT INTO PaymentsSchema.Payments (user_id, amount, currency, provider_id, status, match_id, ticket_id) "
+                        "VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING payment_id";
     std::vector<std::string> params = {payment_data.user_id, payment_data.amount,
-                                       payment_data.currency,  "2145d8b2-5c19-47b3-b1b9-4b53dfe08738", "pending"};
+                                       payment_data.currency,  "2145d8b2-5c19-47b3-b1b9-4b53dfe08738",
+                                       "pending", payment_data.match_id, payment_data.ticket_id};
 
     pqxx::result id = db.executeQueryWithParams(query, params);
 

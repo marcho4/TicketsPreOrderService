@@ -6,6 +6,11 @@
 #include "src/api/payments_operations/PaymentCreator.h"
 #include "src/api/payments_operations/OperationState.h"
 #include "src/api/webhook/WebhookWorker.h"
+#include "src/api/providers/AddPaymentProvider.h"
+#include "src/api/providers/GetProviders.h"
+#include "src/api/user_payments/GetUserPayments.h"
+#include "src/api/user_payments/GetUserRefunds.h"
+#include "src/api/payments_operations/PaymentRefund.h"
 
 int main() {
 
@@ -34,10 +39,10 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
-//        std::string connect = "dbname=payment host=localhost port=5432";
+//        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
+        std::string connect = "dbname=payment host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("src/database/payment.sql");
+        db.initDbFromFile("../src/database/payment.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
@@ -59,22 +64,27 @@ int main() {
 
         server.Post("/payments/:id/refund", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-            WebhookWorker::ProcessWebhookRequest(request, res, db);
+            PaymentRefund::RefundRequest(request, res, db);
         });
 
         server.Get("/user/:id/payments", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-
+            UserPayments::GetUserPayments(request, res, db);
         });
 
         server.Get("/user/:id/refunds", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-
+            UserRefunds::GetUserRefunds(request, res, db);
         });
 
         server.Post("/payments/provider/add", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
+            AddPaymentProvider::AddProviderRequest(request, res, db);
+        });
 
+        server.Get("/payments/providers", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            Providers::GetProvidersRequest(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8008" << '\n';

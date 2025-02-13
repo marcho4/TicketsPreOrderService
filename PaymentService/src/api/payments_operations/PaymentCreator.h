@@ -15,6 +15,8 @@ class PaymentCreator {
         std::string amount;
         std::string currency;
         std::string provider;
+        std::string match_id;
+        std::string ticket_id;
 
         static PaymentData GetPaymentData(const json& json) {
             if (!json.contains("user_id") || !json.contains("amount") ||
@@ -25,7 +27,9 @@ class PaymentCreator {
                 json.at("user_id").get<std::string>(),
                 json.at("amount").get<std::string>(),
                 json.at("currency").get<std::string>(),
-                json.at("provider").get<std::string>()
+                json.at("provider").get<std::string>(),
+                json.at("match_id").get<std::string>(),
+                json.at("ticket_id").get<std::string>()
             };
         }
     };
