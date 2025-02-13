@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: PaymentsService API
+  version: 1.0.0
+  description: Payments service API
+
+servers:
+  - url: http://localhost:8008
+    description: Локальный сервис разработки
+
+paths:
+  /payments/create:
+    post:
+      summary: Создание платежа
+      description: Создание платежа и получение ссылки на оплату
+      operationId: createPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  description: Идентификатор пользователя в системе
+                  example: "312435-2453432-5554234"
+                amount:
+                  type: number
+                  description: Сумма платежа
+                  example: 1000
+                currency:
+                  type: string
+                  description: Валюта платежа
+                  example: "RUB"
+                provider:
+                  type: string
+                  description: Провайдер платежа
+                  example: "Stripe"
+              required:
+                - user_id
+                - amount
+                - currency
+                - provider
+      responses:
+        '200':
+          description: Платеж создан
+
+  /payments/{id}/refund:
+    post:
+      summary: Возврат средств
+      description: Возврат средств за платеж по его идентификатору
+      operationId: refundPayment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор платежа
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Средства возвращены
+        '404':
+          description: Платеж не найден
+
+  /payments/webhook:
+    post:
+      summary: Получение уведомления о платеже
+      description: Получение уведомления о платеже от провайдера
+      operationId: paymentWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment_id:
+                  type: string
+                  description: Идентификатор платежа
+                  example: "312435-2453432-5554234"
+                status:
+                  type: string
+                  description: Статус платежа
+                  example: "success"
+              required:
+                - payment_id
+                - status
+      responses:
+        '200':
+          description: Уведомление получено
+
+  /payments/{id}/status:
+    post:
+      summary: Получение статуса платежа
+      description: Получение статуса платежа по его идентификатору
+      operationId: getPaymentStatus
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор платежа
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                operation_type:
+                  type: string
+                  description: Тип операции (PAYMENT/REFUND)
+                  example: "PAYMENT"
+              required:
+                - operation_type
+      responses:
+        '200':
+          description: Статус платежа получен
+        '404':
+          description: Платеж не найден

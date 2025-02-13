@@ -93,7 +93,7 @@ services:
     networks:
       - main
     depends_on:
-      - org_postgres
+      - tickets_postgres
 
   tickets_postgres:
     image: postgres:latest
@@ -101,6 +101,35 @@ services:
       POSTGRES_USER: database
       POSTGRES_PASSWORD: database
       POSTGRES_DB: orchestrator
+    networks:
+      - main
+
+  payments:
+    build:
+      context: ./PaymentService
+      dockerfile: Dockerfile
+    ports:
+      - "8008:8008"
+    networks:
+      - main
+    depends_on:
+      - payments_postgres
+
+  payments_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: database
+      POSTGRES_PASSWORD: database
+      POSTGRES_DB: orchestrator
+    networks:
+      - main
+
+  webhook:
+    build:
+      context: ./WebhookMockService
+      dockerfile: Dockerfile
+    ports:
+      - "8009:8009"
     networks:
       - main
 

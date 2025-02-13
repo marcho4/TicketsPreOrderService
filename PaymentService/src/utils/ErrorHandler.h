@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../PaymentService//libraries/httplib.h"
+#include "../../third_party/httplib.h"
 
 class ErrorHandler {
 public:

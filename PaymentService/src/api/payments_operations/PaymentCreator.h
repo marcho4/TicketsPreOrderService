@@ -17,6 +17,10 @@ class PaymentCreator {
         std::string provider;
 
         static PaymentData GetPaymentData(const json& json) {
+            if (!json.contains("user_id") || !json.contains("amount") ||
+                !json.contains("currency") || !json.contains("provider")) {
+                throw std::runtime_error("Некорректный JSON: отсутствуют обязательные поля");
+            }
             return {
                 json.at("user_id").get<std::string>(),
                 json.at("amount").get<std::string>(),
@@ -26,13 +30,13 @@ class PaymentCreator {
         }
     };
 
-    std::string GetProviderID(const std::string& provider, Database& db);
+    static std::string GetProviderID(const std::string& provider, Database& db);
 
-    std::string CreatePayment(const PaymentData& payment_data, const std::string& provider_id, Database& db);
+    static std::string CreatePayment(const PaymentData& payment_data, const std::string& provider_id, Database& db);
 
-    std::string SendPaymentRequest(const PaymentData& payment_data, const std::string& payment_id);
+    static std::string SendPaymentRequest(const PaymentData& payment_data, const std::string& payment_id);
 public:
-    void CreatePaymentRequest(const httplib::Request& req, httplib::Response& res, Database& db);
+    static void CreatePaymentRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 };
 
 

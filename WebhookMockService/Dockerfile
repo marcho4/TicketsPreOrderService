@@ -27,6 +27,6 @@ RUN mkdir -p build && \
     cmake .. && \
     make VERBOSE=1
 
-CMD ["bash", "-c", "./build/TicketsService"]
+CMD ["bash", "-c", "./build/WebhookMockService"]
 
-EXPOSE 8005
+EXPOSE 8009

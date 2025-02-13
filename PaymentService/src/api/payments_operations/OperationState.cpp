@@ -5,11 +5,11 @@ std::string OperationState::GetOperationStatus(const std::string &payment_id,
     std::vector<std::string> params = {payment_id};
 
     if (operation_type == "PAYMENT") {
-        std::string query = "SELECT status FROM Payments WHERE payment_id = $1";
+        std::string query = "SELECT status FROM PaymentsSchema.Payments WHERE payment_id = $1";
         auto result = db.executeQueryWithParams(query, params);
         return result[0][0].as<std::string>();
     }
-    std::string query = "SELECT status FROM Refunds WHERE payment_id = $1";
+    std::string query = "SELECT status FROM PaymentsSchema.Refunds WHERE payment_id = $1";
     auto result = db.executeQueryWithParams(query, params);
     return result[0][0].as<std::string>();
 }
@@ -20,8 +20,15 @@ void OperationState::GetOperationStatusRequest(const httplib::Request &req, http
         return;
     }
     std::string payment_id = req.path_params.at("id");
+    spdlog::info("Запрошена информация о статусе операции {}", payment_id);
 
     auto parsed = json::parse(req.body);
+    if (!parsed.contains("operation_type") || !parsed["operation_type"].is_string()) {
+        spdlog::error("Ошибка: отсутствует operation_type или неверный формат");
+        ErrorHandler::sendError(res, 400, "operation_type is required and must be a string");
+        return;
+    }
+
     std::string operation_type = parsed["operation_type"];
 
     std::string status = GetOperationStatus(payment_id, operation_type, db);

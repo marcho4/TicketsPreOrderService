@@ -3,6 +3,9 @@
 #include <spdlog/sinks/rotating_file_sink.h>
 #include "third_party/httplib.h"
 #include "src/database/Database.h"
+#include "src/api/payments_operations/PaymentCreator.h"
+#include "src/api/payments_operations/OperationState.h"
+#include "src/api/webhook/WebhookWorker.h"
 
 int main() {
 
@@ -15,7 +18,7 @@ int main() {
         httplib::Server server;
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
-            res.set_header("Access-Control-Allow-Origin", "http://localhost:8002");
+            res.set_header("Access-Control-Allow-Origin", "http://localhost:8009");
             res.set_header("Access-Control-Allow-Credentials", "true");
             res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
             res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
@@ -24,37 +27,52 @@ int main() {
         });
 
         auto set_cors_headers = [&](httplib::Response& res) {
-            res.set_header("Access-Control-Allow-Origin", "http://localhost:8002");
+            res.set_header("Access-Control-Allow-Origin", "http://localhost:8009");
             res.set_header("Access-Control-Allow-Credentials", "true");
             res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
             res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
             res.set_header("Content-Type", "application/json");
         };
 
-//        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
-        std::string connect = "dbname=payment host=localhost port=5432";
+        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
+//        std::string connect = "dbname=payment host=localhost port=5432";
         Database db(connect);
-        db.initDbFromFile("../src/database/payment.sql");
+        db.initDbFromFile("src/database/payment.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
 
         server.Post("/payments/create", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-
+            PaymentCreator::CreatePaymentRequest(request, res, db);
         });
 
         server.Post("/payments/webhook", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-
+            WebhookWorker::ProcessWebhookRequest(request, res, db);
         });
 
-        server.Get("/payments/:id/status", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/payments/:id/status", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            OperationState::GetOperationStatusRequest(request, res, db);
+        });
+
+        server.Post("/payments/:id/refund", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            WebhookWorker::ProcessWebhookRequest(request, res, db);
+        });
+
+        server.Get("/user/:id/payments", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
 
         });
 
-        server.Post("/payment/:id/refund", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Get("/user/:id/refunds", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+
+        });
+
+        server.Post("/payments/provider/add", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
 
         });
