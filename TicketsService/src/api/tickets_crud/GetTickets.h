@@ -5,6 +5,8 @@
 #include "../../database/Database.h"
 #include "../../utils/ErrorHandler.h"
 #include "../../utils/Helper.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 
 class GetTickets {
     using json = nlohmann::json;

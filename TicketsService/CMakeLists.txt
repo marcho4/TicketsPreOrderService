@@ -28,15 +28,9 @@ set(SOURCE_FILES
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(PostgreSQL REQUIRED)  # Для pqxx / pq
+find_package(spdlog REQUIRED)
 
-# Подключаем spdlog из GitHub через FetchContent
-include(FetchContent)
-FetchContent_Declare(
-    spdlog
-    GIT_REPOSITORY https://github.com/gabime/spdlog.git
-    GIT_TAG        v1.12.0
-)
-FetchContent_MakeAvailable(spdlog)
+
 
 # Создаём исполняемый файл из исходников
 add_executable(TicketsService ${SOURCE_FILES})

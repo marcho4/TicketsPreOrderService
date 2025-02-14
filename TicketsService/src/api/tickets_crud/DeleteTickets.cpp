@@ -1,6 +1,4 @@
 #include "DeleteTickets.h"
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/rotating_file_sink.h>
 
 void DeleteTickets::DeleteTicketsRequest(const httplib::Request &req, httplib::Response &res, Database &db) {
     if (req.path_params.at("match_id").empty()) {

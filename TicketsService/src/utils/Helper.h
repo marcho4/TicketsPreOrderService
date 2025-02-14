@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "spdlog/spdlog-inl.h"
+#include <spdlog/spdlog.h>
 
 class Helper {
 public:

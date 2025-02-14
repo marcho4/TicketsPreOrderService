@@ -1,6 +1,5 @@
 #include "CancelReservation.h"
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/rotating_file_sink.h>
+
 
  void CancelReservation::CancelReservationRequest(const httplib::Request &req, httplib::Response &res,
                                                         Database &db) {

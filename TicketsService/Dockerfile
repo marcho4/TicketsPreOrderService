@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     g++ \
     wget \
     libssl-dev \
+    libspdlog-dev \
     git \
     && rm -rf /var/lib/apt/lists/*
 

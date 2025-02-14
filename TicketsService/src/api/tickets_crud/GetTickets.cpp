@@ -1,6 +1,4 @@
 #include "GetTickets.h"
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/rotating_file_sink.h>
 
 void GetTickets::GetTicketsRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
     std::string match_id;
