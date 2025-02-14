@@ -2,17 +2,17 @@ openapi: 3.0.0
 info:
   title: UserService API
   version: 1.0.0
-  description: User service API
+  description: API для управления пользователями
 
 servers:
-  - url: http://localhost:8004
-    description: Local development server
+  - url: http://localhost:8007
+    description: Локальный сервер для разработки
 
 paths:
   /user/create_account:
     post:
-      summary: Create user account
-      description: Create user account with name, last_name, email
+      summary: Создание аккаунта пользователя
+      description: Создаёт новый аккаунт пользователя с указанием email, имени и фамилии.
       operationId: addUserRequest
       requestBody:
         required: true
@@ -23,35 +23,35 @@ paths:
               properties:
                 email:
                   type: string
-                  description: User email
-                  example: "nvzakrevskii@gmai.com"
+                  description: Email пользователя
+                  example: "user_userov@gmail.com"
                 name:
                   type: string
-                  description: User`s name
-                  example: "Nazar"
+                  description: Имя пользователя
+                  example: "Иван"
                 last_name:
                   type: string
-                  description: User`s last name
-                  example: "Zakrevski"
+                  description: Фамилия пользователя
+                  example: "Иванов"
               required:
                 - email
                 - name
                 - last_name
       responses:
         '201':
-          description: User account created
+          description: Аккаунт пользователя успешно создан
         '409':
-          description: Bad request
+          description: Ошибка при создании аккаунта (например, email уже используется)
 
-  /user/:id/update_account:
+  /user/{id}/update_account:
     put:
-      summary: Request to update user info
-      description: Update user info with name, last_name, email
+      summary: Обновление информации о пользователе
+      description: Обновляет данные пользователя по его уникальному идентификатору.
       parameters:
         - name: id
           in: path
           required: true
-          description: The unique identifier of the user
+          description: Уникальный идентификатор пользователя
           schema:
             type: string
       requestBody:
@@ -63,23 +63,23 @@ paths:
               properties:
                 name:
                   type: string
-                  description: User`s name
-                  example: "Mark"
+                  description: Имя пользователя
+                  example: "Иван"
                 last_name:
                   type: string
-                  description: User`s last name
-                  example: "Dergilev"
+                  description: Фамилия пользователя
+                  example: "Иванов"
                 email:
                   type: string
-                  description: User email
-                  example: "madergilev@gmail.com"
+                  description: Email пользователя
+                  example: "user_userov@gmail.com"
                 birthday:
                   type: string
-                  description: User birthday
+                  description: Дата рождения пользователя (в формате ГГГГ-ММ-ДД)
                   example: "1999-12-12"
                 phone_number:
                   type: string
-                  description: User phone number
+                  description: Номер телефона пользователя
                   example: "+791623456789"
               required:
                 - name
@@ -89,26 +89,151 @@ paths:
                 - phone_number
       responses:
         '200':
-          description: User account updated
+          description: Аккаунт пользователя успешно обновлён
         '400':
-          description: Bad request
+          description: Ошибка в запросе (например, некорректные данные)
         '404':
-          description: User account not found
+          description: Пользователь не найден
 
-  /user/:id/get_account_info:
+  /user/{id}/get_account_info:
     get:
-      summary: Get user account info
-      description: Get user account info
+      summary: Получение информации о пользователе
+      description: Возвращает данные аккаунта пользователя по его уникальному идентификатору.
       parameters:
         - name: id
           in: path
           required: true
-          description: The unique identifier of the user
+          description: Уникальный идентификатор пользователя
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Информация об аккаунте пользователя успешно получена
+        '404':
+          description: Аккаунт пользователя не найден
+
+  /user/{id}/delete_account:
+    delete:
+      summary: Удаление аккаунта пользователя
+      description: Удаляет аккаунт пользователя по его уникальному идентификатору.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор пользователя
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Аккаунт пользователя успешно удалён
+        '404':
+          description: Пользователь не найден
+
+  /user/{id}/events_history:
+    get:
+      summary: Получение истории событий пользователя
+      description: Возвращает историю событий пользователя по его уникальному идентификатору.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор пользователя
+          schema:
+            type: string
+      responses:
+        '200':
+          description: История событий пользователя успешно получена
+        '404':
+          description: История событий пользователя не найдена
+
+  /user/{id}/add_preorder:
+    post:
+      summary: Обновление информации о пользователе
+      description: Обновляет данные пользователя по его уникальному идентификатору.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор пользователя
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                    type: string
+                    description: Идентификатор матча
+                    example: "1"
+                ticket_id:
+                    type: string
+                    description: Идентификатор билета
+                    example: "1"
+                match_datetime:
+                    type: string
+                    description: Дата и время матча
+                    example: "2021-12-12 12:00:00"
+      responses:
+        '201':
+          description: Предзаказ успешно создан
+        '400':
+          description: Ошибка в запросе (например, некорректные данные)
+        '500':
+          description: Ошибка сервера
+  /user/{id}/cancel_preorder:
+    delete:
+      summary: Отмена предзаказа
+      description: Удаляет предзаказ пользователя по его уникальному идентификатору.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор пользователя
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                    type: string
+                    description: Идентификатор предзаказа
+                    example: "1"
+                ticket_id:
+                    type: string
+                    description: Идентификатор предзаказа
+                    example: "1"
+      responses:
+        '200':
+          description: Предзаказ успешно отменён
+        '400':
+          description: Ошибка в запросе (например, некорректные данные)
+        '404':
+          description: Предзаказ не найден
+        '500':
+          description: Ошибка сервера
+
+  /user/{id}/get_preorders:
+    get:
+      summary: Получение предзаказов пользователя
+      description: Возвращает предзаказы пользователя по его уникальному идентификатору.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор пользователя
           schema:
             type: string
       responses:
           '200':
-            description: User account info
+            description: Предзаказы пользователя успешно получены
           '404':
-            description: User account not found
-
+            description: Предзаказы пользователя не найдены
+          '500':
+            description: Ошибка сервера

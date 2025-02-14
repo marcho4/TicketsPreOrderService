@@ -7,6 +7,10 @@
 #include "src/api/UserAccountCRUD/CreateAccount.h"
 #include "src/api/UserAccountCRUD/UpdateAccount.h"
 #include "src/api/UserAccountCRUD/GetAccountData.h"
+#include "src/api/EventsHistory/GetMatchHistory.h"
+#include "src/api/Preorders/AddPreorder/Preorder.h"
+#include "src/api/Preorders/CancelPreorder/PreorderCancel.h"
+#include "src/api/Preorders/GetPreorders.h"
 
 int main() {
 
@@ -35,7 +39,7 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=user_personal_account host=user_postgres port=5432 user=postgres password=postgres";
+        std::string connect = "dbname=user_personal_account host=user_postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/postgres/user_personal_account.sql");
         pqxx::connection C(connect);
@@ -60,9 +64,24 @@ int main() {
             DataProvider::GetUserAccountDataRequest(request, res, db);
         });
 
-        server.Get("/user/:id/get_match_history", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Get("/user/:id/events_history", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
+            MatchHistory::GetMatchHistoryRequest(request, res, db);
+        });
 
+        server.Post("/user/:id/add_preorder", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            Preorder::AddPreorderRequest(request, res, db);
+        });
+
+        server.Delete("/user/:id/cancel_preorder", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            PreorderCancellation::CancelPreorderRequest(request, res, db);
+        });
+
+        server.Get("/user/:id/get_preorders", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            Preorders::GetPreordersRequest(request, res, db);
         });
 
         server.Delete("/user/:id/delete_account", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {

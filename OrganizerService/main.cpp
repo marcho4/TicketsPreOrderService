@@ -10,6 +10,7 @@
 #include "src/OrganizerAccountCRUD/GetAccountInfo.h"
 
 int main() {
+
     auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/organizer_service.log", 1048576 * 5, 3);
     logger->flush_on(spdlog::level::info);
     spdlog::set_default_logger(logger);
