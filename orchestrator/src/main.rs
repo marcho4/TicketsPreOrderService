@@ -97,6 +97,7 @@ async fn main() -> std::io::Result<()> {
                     .configure(api::organizer::config::organizer_config)
                     .configure(api::user::config::user_config)
                     .configure(api::matches::config::cfg)
+                    .configure(api::tickets::config::config_services)
             )
             .service(
                 SwaggerUi::new("/swagger-ui/{_:.*}").url("/api-docs/openapi.json", openapi.clone()),

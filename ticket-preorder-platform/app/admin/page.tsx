@@ -34,8 +34,8 @@ const fetchRequests = async () => {
 let requestResource: { read: () => Request[] } | null = null;
 
 // Компонент для отображения данных
-function RequestList({ resource, onResponse }: { 
-    resource: { read: () => Request[] }, 
+function RequestList({ resource, onResponse }: {
+    resource: { read: () => Request[] },
     onResponse: (requestId: string, action: "APPROVED" | "REJECTED") => void
 }) {
     const requests = resource.read();
@@ -47,37 +47,37 @@ function RequestList({ resource, onResponse }: {
     return (
         <table className="w-full">
             <thead>
-                <tr>
-                    <th className="px-4 py-2 text-left">ID</th>
-                    <th className="px-4 py-2 text-left">Компания</th>
-                    <th className="px-4 py-2 text-left">Email</th>
-                    <th className="px-4 py-2 text-left">ИНН</th>
-                    <th className="px-4 py-2 text-left">Действия</th>
-                </tr>
+            <tr>
+                <th className="px-4 py-2 text-left">ID</th>
+                <th className="px-4 py-2 text-left">Компания</th>
+                <th className="px-4 py-2 text-left">Email</th>
+                <th className="px-4 py-2 text-left">ИНН</th>
+                <th className="px-4 py-2 text-left">Действия</th>
+            </tr>
             </thead>
             <tbody>
-                {requests.map((request) => (
-                    <tr key={request.request_id}>
-                        <td className="px-4 py-2">{request.request_id}</td>
-                        <td className="px-4 py-2">{request.company}</td>
-                        <td className="px-4 py-2">{request.email}</td>
-                        <td className="px-4 py-2">{request.tin}</td>
-                        <td className="px-4 py-2 flex gap-2">
-                            <Button
-                                onClick={() => onResponse(request.request_id, "APPROVED")}
-                                className="bg-green-500 hover:bg-green-600"
-                            >
-                                Принять
-                            </Button>
-                            <Button
-                                onClick={() => onResponse(request.request_id, "REJECTED")}
-                                className="bg-red-500 hover:bg-red-600"
-                            >
-                                Отклонить
-                            </Button>
-                        </td>
-                    </tr>
-                ))}
+            {requests.map((request) => (
+                <tr key={request.request_id}>
+                    <td className="px-4 py-2">{request.request_id}</td>
+                    <td className="px-4 py-2">{request.company}</td>
+                    <td className="px-4 py-2">{request.email}</td>
+                    <td className="px-4 py-2">{request.tin}</td>
+                    <td className="px-4 py-2 flex gap-2">
+                        <Button
+                            onClick={() => onResponse(request.request_id, "APPROVED")}
+                            className="bg-green-500 hover:bg-green-600"
+                        >
+                            Принять
+                        </Button>
+                        <Button
+                            onClick={() => onResponse(request.request_id, "REJECTED")}
+                            className="bg-red-500 hover:bg-red-600"
+                        >
+                            Отклонить
+                        </Button>
+                    </td>
+                </tr>
+            ))}
             </tbody>
         </table>
     );
@@ -159,7 +159,7 @@ const AdminHome = () => {
             {userRole == "ADMIN" && (
                 <Card className="w-full max-w-2xl py-5 flex flex-col mx-auto bg-white rounded-3xl items-center
                  shadow-2xl bg-opacity-90">
-                        <LogoutButton router={router} />
+                    <LogoutButton router={router} />
                 </Card>
             )}
         </div>

@@ -5,6 +5,8 @@ import { createResource } from "../../../lib/createResource";
 import { useParams } from "next/navigation";
 import {Suspense, useEffect, useMemo, useState} from "react";
 import {X} from "lucide-react";
+import ErrorBoundary from "../../../components/ErrorBoundary";
+import {Button} from "../../../components/ui/button";
 
 // Функция для форматирования даты в формат DD/MM/YYYY
 export function formatDate(dateString) {
@@ -33,12 +35,28 @@ export default function Page() {
         }
     };
 
+    // Функция для получения всех билетов на матч
+    const fetchAvailableTickets = async () => {
+        try {
+            const response = await fetch(`http://localhost:8000/api/tickets/${id}?available=true`, {
+                method: "GET",
+                credentials: "same-origin",
+            });
+
+            const result = await response.json();
+            return result.data;
+        } catch (error) {
+            console.error("Ошибка в fetchMatchData:", error);
+            throw error;
+        }
+    }
+
     // Создаем ресурс только при изменении id
     const resource = useMemo(() => createResource(fetchMatchData), [id]);
-
+    const ticketsResource = useMemo(() => createResource(fetchAvailableTickets), [id]);
     return (
         <Suspense fallback={<Loading />}>
-            <MatchRendered resource={resource} />
+            <MatchRendered resource={resource} ticketsResource={ticketsResource} />
         </Suspense>
     );
 }
@@ -51,7 +69,7 @@ function Loading() {
     );
 }
 
-function MatchRendered({ resource }) {
+function MatchRendered({ resource, ticketsResource }) {
     const matchData = resource.read();
     const [modal, setModal] = useState(false);
     useEffect(() => {
@@ -108,17 +126,86 @@ function MatchRendered({ resource }) {
                             <div className="text-2xl font-semibold text-gray-700 mb-3">
                                 Choose tickets from the list below
                             </div>
-                            {/* Container with fetched tickets */}
-                            {/*<div>*/}
-                            {/*    <Suspense fallback={<Loading />}>*/}
-                            {/*        <FetchedTickets resource={resource} />*/}
-                            {/*    </Suspense>*/}
-                            {/*</div>*/}
-
+                            <div>
+                                <ErrorBoundary>
+                                    <Suspense fallback={<Loading />}>
+                                        <FetchedTickets resource={ticketsResource} />
+                                    </Suspense>
+                                </ErrorBoundary>
+                            </div>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
     );
+}
+
+function FetchedTickets({resource}) {
+    const tickets = resource.read();
+
+    if (tickets.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center mx-auto h-full">
+                There is no tickets yet. :(
+                <button className="mt-10 bg-button-darker px-4 py-2 rounded-lg hover:scale-105 transition-transform
+                 duration-300 text-white">
+                    Take place in line
+                </button>
+            </div>
+        );
+    }
+
+    return (
+        <div className="relative max-h-[350px] min-w-[300px] overflow-x-auto w-full overflow-y-auto border border-gray-300 rounded-lg bg-white">
+            <table className="table-fixed w-full">
+                <thead className="sticky top-0 bg-gray-100 z-10 max-h-96 overflow-y-scroll">
+                <tr className="text-left">
+                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                        Row
+                    </th>
+                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                        Seat
+                    </th>
+                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                        Price
+                    </th>
+                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                        Sector
+                    </th>
+                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
+                        Preorder
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {tickets.map((item, index) => (
+                    <tr key={index} className="hover:bg-gray-50">
+                        <td className="px-4 py-2 border-b border-gray-200">
+                            {item.row}
+                        </td>
+                        <td className="px-4 py-2 border-b border-gray-200">
+                            {item.seat}
+                        </td>
+                        <td className="px-4 py-2 border-b border-gray-200">
+                            {item.price}
+                        </td>
+                        <td className="px-4 py-2 border-b border-gray-200">
+                            {item.sector}
+                        </td>
+                        <td className="px-4 py-2 border-b border-gray-200 gap-x-2">
+                            <Button
+                                className={"bg-button-darker hover:bg-accent hover:text-my_black" +
+                                    " transition-colors duration-300 p-2 text-white  rounded-lg"}>
+                                Preorder
+                            </Button>
+                        </td>
+
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
+    )
+
 }
