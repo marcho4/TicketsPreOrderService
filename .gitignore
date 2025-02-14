@@ -25,8 +25,3 @@
 .cache
 docker_compose.yml
 config
-<<<<<<< HEAD
-bin
-=======
-bin
->>>>>>> 160d16c (test update password added, some fix in auth)
