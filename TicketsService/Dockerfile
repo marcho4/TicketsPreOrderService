@@ -7,37 +7,26 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     g++ \
     wget \
-    python3 \
-    python3-pip \
-    pkg-config \
+    libssl-dev \
     git \
-    libspdlog-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/jtv/libpqxx/archive/refs/tags/7.9.1.tar.gz && \
-    tar -xvzf 7.9.1.tar.gz && \
-    cd libpqxx-7.9.1 && \
+RUN wget https://github.com/jtv/libpqxx/archive/refs/tags/7.7.5.tar.gz && \
+    tar -xvzf 7.7.5.tar.gz && \
+    cd libpqxx-7.7.5 && \
     cmake -B build . && \
     cmake --build build --target install && \
-    cd .. && rm -rf libpqxx-7.9.1 7.9.1.tar.gz
-
-RUN git clone https://github.com/rg3/bcrypt.git /tmp/bcrypt && \
-    cd /tmp/bcrypt && \
-    make && \
-    cp bcrypt.a /usr/local/lib && \
-    cp bcrypt.h /usr/local/include && \
-    rm -rf /tmp/bcrypt
+    cd .. && rm -rf libpqxx-7.7.5 7.7.5.tar.gz
 
 WORKDIR /app
 
 COPY . .
 
-RUN rm -rf build CMakeFiles CMakeCache.txt cmake_install.cmake
-
 RUN mkdir -p build && \
     cd build && \
     cmake .. && \
-    make
+    make VERBOSE=1
 
-EXPOSE 8001
-CMD ["./build/TicketsService"]
+CMD ["bash", "-c", "./build/TicketsService"]
+
+EXPOSE 8006

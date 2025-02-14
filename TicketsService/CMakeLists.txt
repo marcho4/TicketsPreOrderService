@@ -1,45 +1,61 @@
 cmake_minimum_required(VERSION 3.11)
-project(TicketsService VERSION 1.0.0)
+project(TicketsService VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Указываем, какие файлы входят в сборку
 set(SOURCE_FILES
     main.cpp
-    src/postgres/PostgresProcessing.h
-    src/postgres/PostgresProcessing.cpp
-    libraries/Bcrypt.cpp/src/bcrypt.cpp
-    libraries/Bcrypt.cpp/include/bcrypt.h
-    libraries/Bcrypt.cpp/src/blowfish.cpp
-    src/api/TicketsCRUD/Add/AddTickets.cpp
-    src/api/TicketsCRUD/Add/AddTickets.h
-    src/api/TicketsCRUD/Get/GetTickets.cpp
-    src/api/TicketsCRUD/Get/GetTickets.h
-    src/api/TicketsStatus/Cancel/CancelReservation.cpp
-    src/api/TicketsStatus/Cancel/CancelReservation.h
-    src/api/TicketsStatus/Reserve/TicketsReservation.cpp
-    src/api/TicketsStatus/Reserve/TicketsReservation.h
-    src/api/TicketsCRUD/Delete/DeleteTickets.cpp
-    src/api/TicketsCRUD/Delete/DeleteTickets.h
+    src/database/Database.cpp
+    src/database/Database.h
+    third_party/Bcrypt.cpp/src/bcrypt.cpp
+    third_party/Bcrypt.cpp/include/bcrypt.h
+    third_party/Bcrypt.cpp/src/blowfish.cpp
+    src/api/tickets_crud/AddTickets.cpp
+    src/api/tickets_crud/AddTickets.h
+    src/api/tickets_crud/GetTickets.cpp
+    src/api/tickets_crud/GetTickets.h
+    src/api/tickets_crud/DeleteTickets.cpp
+    src/api/tickets_crud/DeleteTickets.h
+    src/api/tickets_status/CancelReservation.cpp
+    src/api/tickets_status/CancelReservation.h
+    src/api/tickets_status/TicketsReservation.cpp
+    src/api/tickets_status/TicketsReservation.h
 )
-include_directories(libraries/Bcrypt.cpp/include)
 
+# Ищем необходимые системные библиотеки
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(spdlog CONFIG REQUIRED)
-find_package(PostgreSQL REQUIRED)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(LIBPQXX REQUIRED libpqxx)
+find_package(PostgreSQL REQUIRED)  # Для pqxx / pq
 
+# Подключаем spdlog из GitHub через FetchContent
+include(FetchContent)
+FetchContent_Declare(
+    spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog.git
+    GIT_TAG        v1.12.0
+)
+FetchContent_MakeAvailable(spdlog)
+
+# Создаём исполняемый файл из исходников
 add_executable(TicketsService ${SOURCE_FILES})
 
-target_link_libraries(TicketsService PRIVATE
-    CURL::libcurl
-    spdlog::spdlog
-    OpenSSL::SSL
-    OpenSSL::Crypto
-    pqxx
-    pq
-    ${LIBPQXX_LIBRARIES}
+# Если надо - добавляем include-пути для собственных заголовков
+target_include_directories(TicketsService
+    PRIVATE
+        src
+        src/database
+        third_party/Bcrypt.cpp/include
 )
 
-target_include_directories(TicketsService PRIVATE ${LIBPQXX_INCLUDE_DIRS})
+# Линкуем необходимые библиотеки
+target_link_libraries(TicketsService
+    PRIVATE
+        spdlog::spdlog      # spdlog, собранный FetchContent-ом
+        pqxx                # из find_package(PostgreSQL)
+        pq                  # из find_package(PostgreSQL)
+        CURL::libcurl       # из find_package(CURL)
+        OpenSSL::SSL        # из find_package(OpenSSL)
+        OpenSSL::Crypto     # из find_package(OpenSSL)
+)

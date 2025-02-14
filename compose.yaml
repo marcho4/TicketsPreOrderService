@@ -155,6 +155,34 @@ services:
       timeout: 3s
     restart: always
     
+  tickets:
+    build:
+      context: ./TicketsService
+      dockerfile: Dockerfile
+    ports:
+     - "8006:8006"
+    networks:
+      - main
+    restart: always
+    depends_on:
+      - tickets_postgres
+
+  tickets_postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: database
+      POSTGRES_PASSWORD: database
+      POSTGRES_DB: tickets
+    networks:
+      - main
+    volumes:
+      - tickets_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    restart: always
       
 networks:
   main:
@@ -166,3 +194,4 @@ volumes:
   org_postgres_data:
   user_postgres_data:
   matches_postgres_data:
+  tickets_postgres_data:
