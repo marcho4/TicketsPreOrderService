@@ -36,7 +36,7 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=tickets host=tickets_postgres user=database password=database port=5432";
+        std::string connect = "dbname=tickets host=tickets_postgres user=postgres password=postgres port=5432";
         Database db(connect);
         db.initDbFromFile("src/database/tickets_info.sql");
         pqxx::connection C(connect);

@@ -170,8 +170,8 @@ services:
   tickets_postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: database
-      POSTGRES_PASSWORD: database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: tickets
     networks:
       - main
