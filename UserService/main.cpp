@@ -11,6 +11,7 @@
 #include "src/api/preorders/Preorder.h"
 #include "src/api/preorders/PreorderCancel.h"
 #include "src/api/preorders/GetPreorders.h"
+#include "src/redis/RedisWaitingList.h"
 
 int main() {
 
@@ -21,6 +22,9 @@ int main() {
 
     try {
         httplib::Server server;
+
+        // TODO: Передавать в конструктор RedisWaitingList адрес и порт
+        RedisWaitingList redis("tcp://");
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -87,6 +91,16 @@ int main() {
         server.Delete("/user/:id/delete_account", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
 
+        });
+
+        server.Post("/redis/user/:id/waiting_list", [&db, &set_cors_headers, &redis](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            redis.AddToWaitingListRequest(request, res, db);
+        });
+
+        server.Post("/redis/next_user", [&db, &set_cors_headers, &redis](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            redis.ProcessNextUserRequest(request, res, db);
         });
 
         std::cout << "Server is listening https://localhost:8007" << '\n';

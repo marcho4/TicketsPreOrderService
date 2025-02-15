@@ -167,11 +167,11 @@ paths:
                 match_id:
                     type: string
                     description: Идентификатор матча
-                    example: "1"
+                    example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
                 ticket_id:
                     type: string
                     description: Идентификатор билета
-                    example: "1"
+                    example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
                 match_datetime:
                     type: string
                     description: Дата и время матча
@@ -204,11 +204,11 @@ paths:
                 match_id:
                     type: string
                     description: Идентификатор предзаказа
-                    example: "1"
+                    example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
                 ticket_id:
                     type: string
                     description: Идентификатор предзаказа
-                    example: "1"
+                    example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
       responses:
         '200':
           description: Предзаказ успешно отменён
@@ -237,3 +237,56 @@ paths:
             description: Предзаказы пользователя не найдены
           '500':
             description: Ошибка сервера
+
+  /redis/user/{id}/waiting_list:
+    post:
+      summary: Добавление пользователя в список ожидания
+      description: Добавляет пользователя в список ожидания на покупку билета
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Уникальный идентификатор пользователя
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                    type: string
+                    description: Идентификатор матча
+                    example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
+      responses:
+        '200':
+          description: Пользователь успешно добавлен в список ожидания
+        '400':
+          description: Ошибка в запросе (например, некорректные данные)
+        '500':
+          description: Ошибка сервера
+
+  /redis/next_user:
+    post:
+      summary: Получение следующего пользователя из списка ожидания
+      description: Возвращает следующего пользователя из списка ожидания на покупку билета
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                    type: string
+                    description: Идентификатор матча
+                    example: "03e40c24-1d2c-4480-90e7-ad58cd17192f"
+      responses:
+        '200':
+          description: Пользователь успешно получен
+        '404':
+          description: Список ожидания пуст
+        '500':
+          description: Ошибка сервера
