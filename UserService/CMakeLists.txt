@@ -1,6 +1,4 @@
-# Минимальная версия CMake
 cmake_minimum_required(VERSION 3.10)
-
 # Название проекта
 project(UserService VERSION 1.0.0)
 
@@ -27,48 +25,48 @@ set(SOURCE_FILES
         src/api/preorders/Preorder.h
         src/api/preorders/PreorderCancel.cpp
         src/api/preorders/PreorderCancel.h
-        third_party/Bcrypt.cpp/src/bcrypt.cpp
-        third_party/Bcrypt.cpp/include/bcrypt.h
-        third_party/Bcrypt.cpp/src/blowfish.cpp
         src/redis/RedisWaitingList.h
         src/redis/RedisWaitingList.cpp
 )
 
-# Добавляем исполняемый файл до линковки
-add_executable(UserService ${SOURCE_FILES})
-
-# Подключаем заголовочные файлы
+# Подключаем необходимые директории
 include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-include_directories("/opt/homebrew/opt/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3/include")
-include_directories("third_party/Bcrypt.cpp/include")
-include_directories("third_party/libpqxx/include")
-include_directories("third_party/redis-plus-plus/src")
-
-# Подключаем библиотеки
 link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
+include_directories("/opt/homebrew/Cellar/hiredis/1.2.0/include")
+
+include_directories("/opt/homebrew/opt/libpqxx/include")
 link_directories("/opt/homebrew/opt/libpqxx/lib")
 
-# Ищем зависимости
+# Include directories
+include_directories("third_party/Bcrypt.cpp/include")
+include_directories("third_party/libpqxx/include")
+include_directories("/opt/homebrew/opt/openssl@3/include")
+
+# Ищем необходимые библиотеки
 find_package(CURL REQUIRED)
-find_package(spdlog REQUIRED)
+find_package(OpenSSL REQUIRED)
 
-# Ищем hiredis вручную
-find_library(HIREDIS_LIBRARY NAMES hiredis PATHS /opt/homebrew/lib)
-find_path(HIREDIS_INCLUDE_DIR hiredis/hiredis.h PATHS /opt/homebrew/include)
+# Добавляем spdlog
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.12.0
+)
+FetchContent_MakeAvailable(spdlog)
 
-if (HIREDIS_LIBRARY AND HIREDIS_INCLUDE_DIR)
-    message(STATUS "Found hiredis: ${HIREDIS_LIBRARY}")
-    include_directories(${HIREDIS_INCLUDE_DIR})
-else()
-    message(FATAL_ERROR "hiredis not found")
-endif()
+# Указываем библиотеку hiredis
+link_directories("/opt/homebrew/include")
 
-# Линкуем библиотеки после объявления исполняемого файла
-target_link_libraries(UserService PRIVATE CURL::libcurl spdlog::spdlog
+# Создаем исполняемый файл
+add_executable(UserService ${SOURCE_FILES})
+
+# Линкуем библиотеки
+target_link_libraries(UserService PRIVATE
+        CURL::libcurl spdlog::spdlog
         /opt/homebrew/opt/openssl@3/lib/libssl.dylib
         /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
         /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
+        /opt/homebrew/Cellar/hiredis/1.2.0/lib/libhiredis.dylib
         pqxx
-        pthread
-        ${HIREDIS_LIBRARY}) # Используем найденную библиотеку
+)

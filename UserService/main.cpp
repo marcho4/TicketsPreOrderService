@@ -24,7 +24,7 @@ int main() {
         httplib::Server server;
 
         // TODO: Передавать в конструктор RedisWaitingList адрес и порт
-        RedisWaitingList redis("tcp://");
+        RedisWaitingList redis("localhost", 6379);
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");

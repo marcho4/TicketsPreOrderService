@@ -21,117 +21,143 @@ services:
 #    networks:
 #      - main
 
-  auth:
-    build:
-      context: ./AuthorizationService
-      dockerfile: Dockerfile
-    ports:
-      - "8002:8002"
-    networks:
-      - main
+#  auth:
+#    build:
+#      context: ./AuthorizationService
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8002:8002"
+#    networks:
+#      - main
+#
+#  auth_postgres:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_USER: database
+#      POSTGRES_PASSWORD: database
+#      POSTGRES_DB: orchestrator
+#    networks:
+#      - main
+#    healthcheck:
+#        test: [ "CMD", "pg_isready", "-U", "database" ]
+#        interval: 5s
+#        retries: 5
+#        timeout: 3s
+#
+#  admin_postgres:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_USER: database
+#      POSTGRES_PASSWORD: database
+#      POSTGRES_DB: orchestrator
+#    networks:
+#      - main
+#
+#  admin:
+#    build:
+#      context: ./AdminService
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8003:8003"
+#    networks:
+#      - main
+#    depends_on:
+#      - admin_postgres
+#
+#  organizer:
+#    build:
+#      context: ./OrganizerService
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8004:8004"
+#    networks:
+#      - main
+#    depends_on:
+#      - org_postgres
+#
+#  org_postgres:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_USER: database
+#      POSTGRES_PASSWORD: database
+#      POSTGRES_DB: orchestrator
+#    networks:
+#      - main
+#
+#  tickets:
+#    build:
+#      context: ./TicketsService
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8005:8005"
+#    networks:
+#      - main
+#    depends_on:
+#      - tickets_postgres
+#
+#  tickets_postgres:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_USER: database
+#      POSTGRES_PASSWORD: database
+#      POSTGRES_DB: orchestrator
+#    networks:
+#      - main
+#
+#  payments:
+#    build:
+#      context: ./PaymentService
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8008:8008"
+#    networks:
+#      - main
+#    depends_on:
+#      - payments_postgres
+#
+#  payments_postgres:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_USER: database
+#      POSTGRES_PASSWORD: database
+#      POSTGRES_DB: orchestrator
+#    networks:
+#      - main
+#
+#  webhook:
+#    build:
+#      context: ./WebhookMockService
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8009:8009"
+#    networks:
+#      - main
 
-  auth_postgres:
+  user_postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: database
-      POSTGRES_PASSWORD: database
-      POSTGRES_DB: orchestrator
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: user_personal_account
     networks:
       - main
     healthcheck:
-        test: [ "CMD", "pg_isready", "-U", "database" ]
-        interval: 5s
-        retries: 5
-        timeout: 3s
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    restart: always
 
-  admin_postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: database
-      POSTGRES_PASSWORD: database
-      POSTGRES_DB: orchestrator
-    networks:
-      - main
-
-  admin:
+  user:
     build:
-      context: ./AdminService
+      context: ./UserService
       dockerfile: Dockerfile
     ports:
-      - "8003:8003"
+      - "8007:8007"
     networks:
       - main
     depends_on:
-      - admin_postgres
-
-  organizer:
-    build:
-      context: ./OrganizerService
-      dockerfile: Dockerfile
-    ports:
-      - "8004:8004"
-    networks:
-      - main
-    depends_on:
-      - org_postgres
-
-  org_postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: database
-      POSTGRES_PASSWORD: database
-      POSTGRES_DB: orchestrator
-    networks:
-      - main
-
-  tickets:
-    build:
-      context: ./TicketsService
-      dockerfile: Dockerfile
-    ports:
-      - "8005:8005"
-    networks:
-      - main
-    depends_on:
-      - tickets_postgres
-
-  tickets_postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: database
-      POSTGRES_PASSWORD: database
-      POSTGRES_DB: orchestrator
-    networks:
-      - main
-
-  payments:
-    build:
-      context: ./PaymentService
-      dockerfile: Dockerfile
-    ports:
-      - "8008:8008"
-    networks:
-      - main
-    depends_on:
-      - payments_postgres
-
-  payments_postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: database
-      POSTGRES_PASSWORD: database
-      POSTGRES_DB: orchestrator
-    networks:
-      - main
-
-  webhook:
-    build:
-      context: ./WebhookMockService
-      dockerfile: Dockerfile
-    ports:
-      - "8009:8009"
-    networks:
-      - main
+      - user_postgres
 
 networks:
   main:

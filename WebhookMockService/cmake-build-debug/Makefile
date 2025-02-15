@@ -117,48 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MockPaymentService
+# Target rules for targets named WebhookMockService
 
 # Build rule for target.
-MockPaymentService: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MockPaymentService
-.PHONY : MockPaymentService
+WebhookMockService: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WebhookMockService
+.PHONY : WebhookMockService
 
 # fast build rule for target.
-MockPaymentService/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MockPaymentService.dir/build.make CMakeFiles/MockPaymentService.dir/build
-.PHONY : MockPaymentService/fast
-
-ProcessPayment/PaymentWorker.o: ProcessPayment/PaymentWorker.cpp.o
-.PHONY : ProcessPayment/PaymentWorker.o
-
-# target to build an object file
-ProcessPayment/PaymentWorker.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MockPaymentService.dir/build.make CMakeFiles/MockPaymentService.dir/ProcessPayment/PaymentWorker.cpp.o
-.PHONY : ProcessPayment/PaymentWorker.cpp.o
-
-ProcessPayment/PaymentWorker.i: ProcessPayment/PaymentWorker.cpp.i
-.PHONY : ProcessPayment/PaymentWorker.i
-
-# target to preprocess a source file
-ProcessPayment/PaymentWorker.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MockPaymentService.dir/build.make CMakeFiles/MockPaymentService.dir/ProcessPayment/PaymentWorker.cpp.i
-.PHONY : ProcessPayment/PaymentWorker.cpp.i
-
-ProcessPayment/PaymentWorker.s: ProcessPayment/PaymentWorker.cpp.s
-.PHONY : ProcessPayment/PaymentWorker.s
-
-# target to generate assembly for a file
-ProcessPayment/PaymentWorker.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MockPaymentService.dir/build.make CMakeFiles/MockPaymentService.dir/ProcessPayment/PaymentWorker.cpp.s
-.PHONY : ProcessPayment/PaymentWorker.cpp.s
+WebhookMockService/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WebhookMockService.dir/build.make CMakeFiles/WebhookMockService.dir/build
+.PHONY : WebhookMockService/fast
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MockPaymentService.dir/build.make CMakeFiles/MockPaymentService.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WebhookMockService.dir/build.make CMakeFiles/WebhookMockService.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -166,7 +142,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MockPaymentService.dir/build.make CMakeFiles/MockPaymentService.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WebhookMockService.dir/build.make CMakeFiles/WebhookMockService.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -174,8 +150,32 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MockPaymentService.dir/build.make CMakeFiles/MockPaymentService.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WebhookMockService.dir/build.make CMakeFiles/WebhookMockService.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+src/api/payments/PaymentWorker.o: src/api/payments/PaymentWorker.cpp.o
+.PHONY : src/api/payments/PaymentWorker.o
+
+# target to build an object file
+src/api/payments/PaymentWorker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WebhookMockService.dir/build.make CMakeFiles/WebhookMockService.dir/src/api/payments/PaymentWorker.cpp.o
+.PHONY : src/api/payments/PaymentWorker.cpp.o
+
+src/api/payments/PaymentWorker.i: src/api/payments/PaymentWorker.cpp.i
+.PHONY : src/api/payments/PaymentWorker.i
+
+# target to preprocess a source file
+src/api/payments/PaymentWorker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WebhookMockService.dir/build.make CMakeFiles/WebhookMockService.dir/src/api/payments/PaymentWorker.cpp.i
+.PHONY : src/api/payments/PaymentWorker.cpp.i
+
+src/api/payments/PaymentWorker.s: src/api/payments/PaymentWorker.cpp.s
+.PHONY : src/api/payments/PaymentWorker.s
+
+# target to generate assembly for a file
+src/api/payments/PaymentWorker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WebhookMockService.dir/build.make CMakeFiles/WebhookMockService.dir/src/api/payments/PaymentWorker.cpp.s
+.PHONY : src/api/payments/PaymentWorker.cpp.s
 
 # Help Target
 help:
@@ -185,13 +185,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... MockPaymentService"
-	@echo "... ProcessPayment/PaymentWorker.o"
-	@echo "... ProcessPayment/PaymentWorker.i"
-	@echo "... ProcessPayment/PaymentWorker.s"
+	@echo "... WebhookMockService"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/api/payments/PaymentWorker.o"
+	@echo "... src/api/payments/PaymentWorker.i"
+	@echo "... src/api/payments/PaymentWorker.s"
 .PHONY : help
 
 
