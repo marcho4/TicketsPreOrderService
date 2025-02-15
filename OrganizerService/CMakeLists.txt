@@ -6,18 +6,26 @@ set(CMAKE_CXX_STANDARD 17)
 # Исходные файлы остаются теми же
 set(SOURCE_FILES
         main.cpp
-        src/utils/ValidDataChecker.h
-        src/organizer_crud/CreateOrganizerAccount.cpp
-        src/organizer_crud/CreateOrganizerAccount.h
-        src/organizer_crud/UpdateOrganizerAccount.cpp
-        src/organizer_crud/UpdateOrganizerAccount.h
-        src/organizer_crud/GetAccountInfo.cpp
-        src/organizer_crud/GetAccountInfo.h
+        src/FormatRegexHelper/ValidDataChecker.h
+        src/OrganizerAccountCRUD/CreateOrganizerAccount.cpp
+        src/OrganizerAccountCRUD/CreateOrganizerAccount.h
+        src/OrganizerAccountCRUD/UpdateOrganizerAccount.cpp
+        src/OrganizerAccountCRUD/UpdateOrganizerAccount.h
+        src/OrganizerAccountCRUD/GetAccountInfo.cpp
+        src/OrganizerAccountCRUD/GetAccountInfo.h
         src/postgres/PostgresProcessing.h
         src/postgres/PostgresProcessing.cpp
-        third_party/Bcrypt.cpp/src/bcrypt.cpp
-        third_party/Bcrypt.cpp/include/bcrypt.h
-        third_party/Bcrypt.cpp/src/blowfish.cpp
+        src/MatchCreating/AddingTickets/AddingTickets.cpp
+        src/MatchCreating/AddingTickets/AddingTickets.h
+        src/MatchCreating/CreateMatch/MatchCreator.cpp
+        src/MatchCreating/CreateMatch/MatchCreator.h
+        src/MatchCreating/UpdateMatchInfo/Updator.cpp
+        src/MatchCreating/UpdateMatchInfo/Updator.h
+        libraries/Bcrypt.cpp/src/bcrypt.cpp
+        libraries/Bcrypt.cpp/include/bcrypt.h
+        libraries/Bcrypt.cpp/src/blowfish.cpp
+        src/MatchCreating/GetMatchInfo/GetMatchData.h
+        src/MatchCreating/GetMatchInfo/GetMatchData.cpp
 )
 
 # Добавьте каталоги для заголовочных файлов
@@ -27,7 +35,7 @@ include_directories(
         /usr/local/include
         /usr/include
 )
-include_directories("third_party/Bcrypt.cpp/include")
+include_directories("libraries/Bcrypt.cpp/include")
 
 # Подключение директорий с библиотеками
 link_directories(

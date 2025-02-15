@@ -17,7 +17,7 @@ int main() {
     spdlog::info("Логгер успешно создан!");
 
     try {
-        httplib::Server server;
+        httplib::SSLServer server("config/ssl/cert.pem", "config/ssl/key.pem");
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -36,9 +36,9 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
+        std::string connect = "dbname=orchestrator host=auth_postgres user=postgres password=postgres port=5432";
         Database db(connect);
-        db.initDbFromFile("src/database/db_org_registr.sql");
+        db.initDbFromFile("src/postgres/db_org_registr.sql");
         pqxx::connection connection_(connect);
         pqxx::work worker(connection_);
 
@@ -60,7 +60,7 @@ int main() {
             AuthorizationManager::AuthorizationRequest(request, res, db);
         });
 
-        server.Post("/organizer/approve", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/authorize_approved", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на подтверждение регистрации организатора");
             set_cors_headers(res);
             OrganizerRegistrationManager::OrganizerRegisterApproval(request, res, db);
@@ -83,16 +83,10 @@ int main() {
             AdminAuthorization::AuthorizeAdminRequest(request, res, db);
         });
 
-        server.Put("/user/:id/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Put("/renew_password", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на обновление пароля");
             set_cors_headers(res);
             PasswordUpdating::UpdatePasswordRequest(request, res, db);
-        });
-
-        server.Get("/password/recover", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
-            spdlog::info("Получен запрос на восстановление пароля");
-            set_cors_headers(res);
-//            PasswordUpdating::RecoverPasswordRequest(request, res, db);
         });
 
         std::cout << "Server is listening on 0.0.0.0:8002\n";

@@ -50,7 +50,7 @@ void OrganizerRegistrationManager::OrganizerRegisterApproval(const httplib::Requ
                 {"login", credentials[1]},
                 {"password", credentials[0]},
                 {"message", "Organizer approved"},
-                {"status", "success"}
+                {"status", "success"},
         };
         spdlog::info("Заявка на регистрацию организатора с email: {} одобрена, организатор зарегистрирован",
                      data_sent_by_admin.email);

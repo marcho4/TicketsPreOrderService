@@ -39,13 +39,13 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
 
     if (!result.empty() && !result[0]["organizer_id"].is_null()) {
         nlohmann::json json_response = {
-            {"message", "Organizer created successfully"},
-            {"status", "created"},
+                {"message", "Organizer created successfully"},
+                {"status", "created"},
                 {"data", {
-                    {"id", result[0]["organizer_id"].as<std::string>()},
-                    {"role", "ORGANIZER"}
+                            {"id", result[0]["organizer_id"].as<std::string>()},
+                            {"role", "ORGANIZER"}
+                    }
                 }
-            }
         };
 
         spdlog::info("Организатор с email: {} успешно создан, id организатора: {}", organizer_data.email,

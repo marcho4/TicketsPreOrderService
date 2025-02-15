@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <regex>
-#include <fstream>
 
 class AuxiliaryFunctions {
 public:

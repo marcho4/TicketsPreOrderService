@@ -1,0 +1,23 @@
+:root {
+  --text: #757575; /* Серый */
+  --background: #f4f4f4; /* Светло-серый */
+  --primary: #005bbb; /* Синий */
+  --secondary: #ffc107; /* Желтый */
+  --accent: #4caf50; /* Зеленый */
+  --foreground: 222.2 84% 4.9%;
+  --card: #ffffff; /* Белый */
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: #ffffff; /* Белый */
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary-foreground: #ffffff; /* Белый */
+  --secondary-foreground: #212121; /* Чёрный */
+  --muted: #f4f4f4; /* Светло-серый */
+  --muted-foreground: #757575; /* Серый */
+  --accent-foreground: #212121; /* Чёрный */
+  --destructive: #ff9800; /* Яркий оранжевый (подчеркнуть разрушительные действия) */
+  --destructive-foreground: #ffffff; /* Белый текст для кнопок разрушительного действия */
+  --border: #757575; /* Серый для границ */
+  --input: #f4f4f4; /* Светло-серый для полей ввода */
+  --ring: #4caf50; /* Зеленый обводки */
+  --radius: 0.5rem; /* Радиус остался прежним */
+}

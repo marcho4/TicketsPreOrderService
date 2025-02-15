@@ -17,7 +17,6 @@ set(SOURCE_FILES
         src/postgres/PostgresProcessing.h
         src/postgres/PostgresProcessing.cpp
         src/api/UserRegistration/PasswordGenerator/PasswordCreator.cpp
-        src/api/PasswordUpdating.h
         libraries/Bcrypt.cpp/src/bcrypt.cpp
         libraries/Bcrypt.cpp/include/bcrypt.h
         libraries/Bcrypt.cpp/src/blowfish.cpp
@@ -35,7 +34,7 @@ link_directories(/usr/local/lib)
 # Include directories
 include_directories("libraries/Bcrypt.cpp/include")
 
-# Find the third_party
+# Find the libraries
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(PostgreSQL REQUIRED)
@@ -49,7 +48,7 @@ FetchContent_MakeAvailable(spdlog)
 # Create executable
 add_executable(AuthorizationService ${SOURCE_FILES})
 
-# Link the third_party
+# Link the libraries
 target_link_libraries(AuthorizationService PRIVATE
         spdlog::spdlog
         CURL::libcurl
