@@ -8,6 +8,7 @@
 #include "src/api/tickets_status/CancelReservation.h"
 #include "src/api/tickets_status/TicketsReservation.h"
 #include "src/api/tickets_crud/DeleteTickets.h"
+#include "src/api/user/GetUsersTickets.h"
 
 int main() {
 
@@ -71,6 +72,12 @@ int main() {
             set_cors_headers(res);
             spdlog::info("Получен запрос на удаление билета");
             DeleteTickets::DeleteTicketsRequest(request, res, db);
+        });
+
+        server.Get("/user/:id/tickets", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            spdlog::info("Получен запрос на получение билетов пользователя");
+            GetTickets::GetUserTicketsRequest(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8006" << '\n';

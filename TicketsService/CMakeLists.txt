@@ -22,6 +22,8 @@ set(SOURCE_FILES
     src/api/tickets_status/CancelReservation.h
     src/api/tickets_status/TicketsReservation.cpp
     src/api/tickets_status/TicketsReservation.h
+    src/api/user/GetUsersTickets.cpp
+    src/api/user/GetUsersTickets.h
 )
 
 # Ищем необходимые системные библиотеки
