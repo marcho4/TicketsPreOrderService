@@ -26,10 +26,10 @@ pqxx::result MatchHistory::GetMatchHistory(const std::string &user_id, Database 
 nlohmann::json MatchHistory::SerializeResponse(const pqxx::result &response, httplib::Response &res) {
     json result = json::array();
 
-    for (int i = 0; i < response.size(); ++i) {
+    for (const auto& i : response) {
         json event;
-        event["match_id"] = response[i][1].c_str();
-        event["ticket_id"] = response[i][2].c_str();
+        event["match_id"] = i[1].c_str();
+        event["ticket_id"] = i[2].c_str();
 
         result.push_back(event);
     }

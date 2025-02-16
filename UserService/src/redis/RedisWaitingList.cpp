@@ -9,6 +9,7 @@ void RedisWaitingList::AddToWaitingListRequest(const httplib::Request& req, http
     std::string user_id = req.path_params.at("id");
 
     if (!CheckUserExistence(user_id, res, db)) {
+        spdlog::error("Пользователь с id {} не найден", user_id);
         ErrorHandler::sendError(res, 404, "user not found");
         return;
     }
@@ -19,17 +20,17 @@ void RedisWaitingList::AddToWaitingListRequest(const httplib::Request& req, http
 
     auto* reply = (redisReply*)redisCommand(reinterpret_cast<redisContext*>(redis),
                                                   "LPUSH %s %s", waiting_list_key.c_str(), user_id.c_str());
-
     if (reply == nullptr) {
-        spdlog::error("failed to add user to waiting list: {}", redis->errstr);
+        spdlog::error("Не удалось добавить пользователя в лист ожидания: {}", redis->errstr);
         ErrorHandler::sendError(res, 400, "failed to add user to waiting list");
         return;
     }
+    spdlog::info("Пользователь {} добавлен в очередь на матч {}", user_id, ticket_data.match_id);
     size_t queue_length = reply->integer;
 
     res.status = 200;
     json response = {
-            {"status", "user added to waiting list"},
+            {"message", "user added to waiting list"},
             {"match_id", ticket_data.match_id},
             {"queue_length", queue_length}
     };

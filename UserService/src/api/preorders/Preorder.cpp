@@ -46,9 +46,9 @@ void Preorder::AddPreorderRequest(const httplib::Request& req, httplib::Response
 std::string Preorder::AddPreorder(const std::string& user_id, const PreorderData& data, Database& db) {
     std::string query = "INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id";
     std::vector<std::string> params = {user_id, data.match_id, data.ticket_id, data.date};
-    spdlog::info("Executing query: {} with params: {}, {}, {}, {}", query, user_id, data.match_id, data.ticket_id, data.date);
+    spdlog::info("Выполняем запрос: {} с параметрами: {}, {}, {}, {}", query, user_id, data.match_id, data.ticket_id, data.date);
     pqxx::result response = db.executeQueryWithParams(query, params);
-    spdlog::info("Preorder added with id: {}", response[0][0].c_str());
+    spdlog::info("Предзаказ с id {} добавлен", response[0][0].c_str());
 
     if (response.empty()) {
         return "SHIT HAPPENS";
@@ -59,7 +59,6 @@ std::string Preorder::AddPreorder(const std::string& user_id, const PreorderData
 bool Preorder::CheckUserExistence(const std::string& user_id, Database& db) {
     std::string query = "SELECT * FROM Users.UsersData WHERE user_id = $1";
     std::vector<std::string> params = {user_id};
-
     pqxx::result response = db.executeQueryWithParams(query, params);
 
     return !response.empty();

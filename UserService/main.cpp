@@ -107,7 +107,6 @@ int main() {
             redis.ClearWaitingListRequest(request, res, db);
         });
 
-        std::cout << "Server is listening https://localhost:8007" << '\n';
         server.listen("0.0.0.0", 8007);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
