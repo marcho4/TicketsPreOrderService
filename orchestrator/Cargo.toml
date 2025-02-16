@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 actix-web = "4.9.0"
 env_logger = "0.11.6"
-reqwest = { version = "0.12.12", features = ["json"] }
+reqwest = { version = "0.12.12", features = ["json", "multipart", "stream"] }
 serde = { version = "1.0.217", features = ["derive"] }
 actix-cors = "0.7.0"
 dotenv = "0.15.0"
@@ -18,4 +18,8 @@ thiserror = "2.0.11"
 jsonwebtoken = "9.3.1"
 utoipa = { version = "5.3.1", features = ["actix_extras", "chrono"] }
 utoipa-swagger-ui = { version = "9.0.0", features = ["actix-web"] }
-utoipa-actix-web = "0.1.2"
+actix-multipart = "0.7.2"
+futures = "0.3.31"
+rand = "0.8.5"
+tokio = "1.43.0"
+tokio-util = "0.7.13"

@@ -21,7 +21,10 @@ use crate::utils::responses::generic_response;
     tag = "Auth"
 )]
 #[post("/login")]
-pub async fn login(orchestrator: web::Data<Orchestrator>, req_data: web::Json<LoginData>) -> HttpResponse {
+pub async fn login(
+    orchestrator: web::Data<Orchestrator>,
+    req_data: web::Json<LoginData>,
+) -> HttpResponse {
     let login_data = req_data.into_inner();
 
     let resp = match orchestrator.authorize(&login_data).await {

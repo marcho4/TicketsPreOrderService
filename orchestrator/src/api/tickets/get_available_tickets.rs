@@ -1,7 +1,7 @@
 use actix_web::{get, web, HttpResponse};
 use actix_web::http::StatusCode;
 use serde::Deserialize;
-
+use crate::models::api_response::ApiResponse;
 use crate::models::tickets::Ticket;
 use crate::models::tickets::TicketStatus::Available;
 use crate::orchestrator::orchestrator::Orchestrator;
@@ -12,6 +12,21 @@ pub struct TicketsQuery {
     available: Option<bool>,
 }
 
+
+#[utoipa::path(
+    get,
+    path = "/tickets/{match_id}",
+    tag = "Tickets",
+    description = "Get available tickets for a match",
+    summary = "Получить данные о билетах для конкретного матча",
+    params(
+        ("match_id" = String, Path, description = "Unique match ID"),
+    ),
+    responses(
+        (status = 200, description = "Successfully found", body = ApiResponse<Vec<Ticket>>),
+        (status = 500, description = "Error", body = ApiResponse<String>)
+    )
+)]
 #[get("/{match_id}")]
 pub async fn get_available_tickets(
     match_id: web::Path<String>,

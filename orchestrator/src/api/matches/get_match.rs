@@ -22,7 +22,7 @@ use crate::utils::responses::generic_response;
 )]
 #[get("/{match_id}")]
 pub async fn get_match(match_id: web::Path<String>, orchestrator: web::Data<Orchestrator>) -> impl Responder {
-    match orchestrator.get_match(match_id.into_inner()).await {
+    match orchestrator.get_match(&match_id.into_inner()).await {
         Ok(matches) => {
             generic_response::<Match>(StatusCode::OK, Some("Success".into()), Some(matches))
         },

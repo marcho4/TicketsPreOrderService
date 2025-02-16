@@ -22,3 +22,15 @@ pub enum TicketStatus {
     #[serde(rename = "sold")]
     Sold
 }
+
+#[derive(Serialize, Deserialize, Debug, Clone, ToSchema)]
+pub struct TicketsAddResponse {
+    pub message: String,
+    pub invalid_rows: i32
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, ToSchema)]
+pub struct CancelData {
+    pub user_id: String,
+    pub ticket_id: String
+}

@@ -1,9 +1,12 @@
-use actix_web::{get, web, HttpResponse};
+use actix_web::{get, web, HttpMessage, HttpRequest, HttpResponse};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::*;
 use actix_web::http::StatusCode;
 use crate::models::admin_request::AdminRequest;
 use crate::models::api_response::ApiResponse;
+use crate::models::jwt_claims::JwtClaims;
+use crate::models::roles::Role;
+use crate::utils::request_validator::RequestValidator;
 
 #[utoipa::path(
     get,
@@ -16,7 +19,34 @@ use crate::models::api_response::ApiResponse;
     tag = "Admin"
 )]
 #[get("/requests")]
-pub async fn get_requests(orchestrator: web::Data<Orchestrator>) -> HttpResponse {
+pub async fn get_requests(
+    orchestrator: web::Data<Orchestrator>,
+    req: HttpRequest
+) -> HttpResponse {
+
+    let validation = RequestValidator::validate_req(&req, Role::ADMIN, None);
+
+    if let Err(e) = validation {
+        return e;
+    }
+
+    let user_info = match req.extensions().get::<JwtClaims>() {
+        Some(info) => info.clone(), // если нужен тип UserInfo вместо ссылки
+        None => return generic_response::<String>(
+            StatusCode::FORBIDDEN,
+            Some("Access restricted. You have to login first.".to_string()),
+            None,
+        ),
+    };
+
+    if user_info.role != Role::ADMIN {
+        return generic_response::<String>(
+            StatusCode::FORBIDDEN,
+            Some("Access restricted. You have to be admin to access.".to_string()),
+            None,
+        )
+    }
+
     let requests = orchestrator.get_admin_requests().await;
     match requests {
         Ok(reqs) => generic_response::<Vec<AdminRequest>>(

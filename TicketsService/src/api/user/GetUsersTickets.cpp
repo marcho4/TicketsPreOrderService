@@ -1,6 +1,6 @@
 #include "GetUsersTickets.h"
 
-void GetTickets::GetUserTicketsRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
+void GetUserTickets::GetUserTicketsRequest(const httplib::Request& req, httplib::Response& res, Database& db) {
     std::string user_id;
     if (!req.path_params.at("id").empty()) {
         user_id = req.path_params.at("id");
@@ -18,9 +18,9 @@ void GetTickets::GetUserTicketsRequest(const httplib::Request& req, httplib::Res
     res.set_content(json_response.dump(), "application/json");
 }
 
-pqxx::result GetTickets::GetUsersTicketsFromDB(const std::string &user_id, Database &db) {
+pqxx::result GetUserTickets::GetUsersTicketsFromDB(const std::string &user_id, Database &db) {
     std::string query = "SELECT * FROM Tickets.TicketsData WHERE user_id = $1";
-    std::vector<std::string> params = {match_id};
+    std::vector<std::string> params = {user_id};
 
     pqxx::result tickets = db.executeQueryWithParams(query, params);
     return tickets;

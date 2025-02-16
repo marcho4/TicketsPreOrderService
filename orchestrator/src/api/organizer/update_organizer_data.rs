@@ -2,7 +2,9 @@ use crate::models::api_response::ApiResponse;
 use crate::models::message_resp::MessageResp;
 use crate::models::update_org_data::UpdateOrgData;
 use crate::orchestrator::orchestrator::Orchestrator;
-use actix_web::{post, web, HttpResponse};
+use actix_web::{post, web, HttpRequest, HttpResponse};
+use crate::models::roles::Role;
+use crate::utils::request_validator::RequestValidator;
 
 #[utoipa::path(
     post,
@@ -24,14 +26,22 @@ pub async fn update(
     id: web::Path<String>,
     data: web::Json<UpdateOrgData>,
     orchestrator: web::Data<Orchestrator>,
+    req: HttpRequest,
 ) -> HttpResponse {
     let org_data = data.into_inner();
-    let update_result = orchestrator
-        .update_organizer(org_data, id.into_inner())
-        .await;
-    match update_result {
+
+    let org_id = id.into_inner();
+
+    let validation = RequestValidator::validate_req(&req, Role::ORGANIZER,
+                                                    Some(org_id.as_str()));
+
+    if let Err(e) = validation {
+        return e;
+    }
+
+    match orchestrator.update_organizer(org_data, org_id).await {
         Ok(resp) => HttpResponse::Ok().json(ApiResponse::<MessageResp> {
-            msg: Some("success".to_string()),
+            msg: Some("Success".to_string()),
             data: Some(resp),
         }),
         Err(e) => HttpResponse::InternalServerError().json(ApiResponse::<String> {

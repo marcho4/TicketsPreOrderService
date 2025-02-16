@@ -1,4 +1,4 @@
-use actix_web::{http::StatusCode, post, web, HttpResponse};
+use actix_web::{http::StatusCode, post, web, HttpRequest, HttpResponse};
 use log::info;
 use crate::models::{
     create_org_data::CreateOrgData,
@@ -7,9 +7,11 @@ use crate::models::{
     request_process_info::{RequestProcessInfo, Status},
 };
 use crate::models::api_response::ApiResponse;
+use crate::models::roles::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::generic_response;
 use crate::utils::errors::OrchestratorError;
+use crate::utils::request_validator::RequestValidator;
 
 #[utoipa::path(
     post,
@@ -26,7 +28,14 @@ use crate::utils::errors::OrchestratorError;
 pub async fn process_request(
     data: web::Json<RequestProcessInfo>,
     orchestrator: web::Data<Orchestrator>,
+    req: HttpRequest,
 ) -> HttpResponse {
+    let validation = RequestValidator::validate_req(&req, Role::ADMIN, None);
+
+    if let Err(e) = validation {
+        return e;
+    }
+
     let json_body = data.into_inner();
     info!("Processing request {}", json_body.request_id);
 

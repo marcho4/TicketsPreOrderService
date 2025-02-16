@@ -7,3 +7,4 @@ mod jwt_functional;
 mod user_functional;
 mod match_functional;
 mod tickets_functional;
+pub mod request_validator;

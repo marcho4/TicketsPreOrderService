@@ -77,7 +77,7 @@ int main() {
         server.Get("/user/:id/tickets", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             spdlog::info("Получен запрос на получение билетов пользователя");
-            GetTickets::GetUserTicketsRequest(request, res, db);
+            GetUserTickets::GetUserTicketsRequest(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8006" << '\n';

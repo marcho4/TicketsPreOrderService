@@ -1,8 +1,10 @@
-use actix_web::{post, web, Responder};
+use actix_web::{post, web, HttpRequest, Responder};
 use actix_web::http::StatusCode;
 use crate::models::api_response::ApiResponse;
 use crate::models::matches::CreateMatchData;
+use crate::models::roles::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
+use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
 
 
@@ -41,8 +43,19 @@ pub async fn create_match(
     data: web::Json<CreateMatchData>,
     orchestrator: web::Data<Orchestrator>,
     org_id: web::Path<String>,
+    req: HttpRequest
 ) -> impl Responder {
-    match orchestrator.create_match(data.into_inner(), org_id.into_inner()).await {
+    let org_id =  org_id.into_inner();
+
+    let validation = RequestValidator::validate_req(&req, Role::ORGANIZER,
+                                                    Some(org_id.as_str()));
+
+    if let Err(e) = validation {
+        return e;
+    }
+
+
+    match orchestrator.create_match(data.into_inner(), org_id).await {
         Ok(match_data) => generic_response(
             StatusCode::CREATED,
             Some("Successfully created".to_string()),

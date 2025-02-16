@@ -8,7 +8,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
 
-class GetTickets {
+class GetUserTickets {
     using json = nlohmann::json;
 
     static json GetTicketsListJSON(pqxx::result& response) {
@@ -35,5 +35,5 @@ class GetTickets {
 public:
     static void GetUserTicketsRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
-    static pqxx::result GetUsersTicketsFromDB(const std::string& match_id, Database& db);
+    static pqxx::result GetUsersTicketsFromDB(const std::string&, Database&);
 };

@@ -25,6 +25,11 @@ use crate::api::matches::{
     get_matches_by_org::__path_get_by_org,
     update_match::__path_update_match
 };
+use crate::api::tickets::{
+    add_tickets::__path_add_tickets,
+    get_available_tickets::__path_get_available_tickets,
+    get_tickets_by_user::__path_get_tickets_by_user,
+};
 
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_cors::Cors;
@@ -32,11 +37,13 @@ use actix_web::{error, middleware, web, App, HttpResponse, HttpServer};
 use dotenv::dotenv;
 use env_logger::Env;
 use std::env;
+use std::sync::Arc;
 use std::time::Duration;
 use crate::models::api_response::ApiResponse;
 
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
+use crate::api::middleware::AuthMiddleware;
 
 mod orchestrator;
 mod models;
@@ -53,8 +60,12 @@ async fn main() -> std::io::Result<()> {
 
     let orchestrator = Orchestrator::new(config_path);
 
+    let auth_middleware = AuthMiddleware {
+        jwt_secret: Arc::new(orchestrator.jwt_key.clone())
+    };
+
     let state = web::Data::new(orchestrator);
-    let front_url = state.config.frontend_url.clone();
+    let front_url = web::Data::new(state.config.frontend_url.clone());
 
     #[derive(OpenApi)]
     #[openapi(
@@ -65,25 +76,27 @@ async fn main() -> std::io::Result<()> {
         ),
         paths(get_requests, process_request, login, logout, session, register_user, register_organizer,
             get_organizer, update_user, get_user_data, update, update_match, get_by_org, get_match,
-            get_all_matches, delete_match, create_match
+            get_all_matches, delete_match, create_match, get_tickets_by_user, get_available_tickets,
+            add_tickets
         )
     )]
     struct ApiDoc;
     let openapi = ApiDoc::openapi();
 
-    let json_cfg = web::JsonConfig::default()
+    let json_cfg = web::Data::new(web::JsonConfig::default()
         .error_handler(|err, _req| {
             let err_msg = err.to_string();
             error::InternalError::from_response(err, HttpResponse::Conflict().json(
                 ApiResponse::<String> {msg: Some(err_msg), data: None}
             ).into()).into()
-        });
+        }));
 
     HttpServer::new(move || {
         App::new()
             .app_data(state.clone())
             .app_data(json_cfg.clone())
             .wrap(middleware::Logger::default())
+            .wrap(auth_middleware.clone())
             .wrap(Cors::default()
                 .allowed_origin(&front_url)
                 .allow_any_header()

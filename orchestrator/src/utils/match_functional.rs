@@ -12,7 +12,7 @@ impl Orchestrator {
         let url = format!("{}/api/match/create_match/{}", self.config.matches_url, org_id);
         self.send_request::<Match, CreateMatchData>(url, Some(data), Method::POST).await
     }
-    pub async fn update_match(&self, id: String, data: UpdateMatchData) -> Result<Match, OrchestratorError> {
+    pub async fn update_match(&self, id: &String, data: UpdateMatchData) -> Result<Match, OrchestratorError> {
         let url = format!("{}/api/match/update_match/{}", self.config.matches_url, id);
         self.send_request::<Match, UpdateMatchData>(url, Some(data), Method::PUT).await
     }
@@ -20,7 +20,7 @@ impl Orchestrator {
         let url = format!("{}/api/match/delete_match/{}/{}", self.config.matches_url, id, org_id);
         self.send_request::<Empty, UpdateMatchData>(url, None, Method::DELETE).await
     }
-    pub async fn get_match(&self, id: String) -> Result<Match, OrchestratorError> {
+    pub async fn get_match(&self, id: &String) -> Result<Match, OrchestratorError> {
         let url = format!("{}/api/match/get_match/{}", self.config.matches_url, id);
         self.send_request::<Match, UpdateMatchData>(url, None, Method::GET).await
     }
