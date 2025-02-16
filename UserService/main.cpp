@@ -23,7 +23,6 @@ int main() {
     try {
         httplib::Server server;
 
-        // TODO: Передавать в конструктор RedisWaitingList адрес и порт
         RedisWaitingList redis("localhost", 6379);
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
@@ -62,7 +61,7 @@ int main() {
             AccountUpdator::UpdateUserAccountRequest(request, res, db);
         });
 
-        server.Get("/user/:id/get_account_info", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Get("/user/:id/account_info", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             spdlog::info("Получен запрос на получение данных пользователя:");
             DataProvider::GetUserAccountDataRequest(request, res, db);
@@ -83,7 +82,7 @@ int main() {
             PreorderCancellation::CancelPreorderRequest(request, res, db);
         });
 
-        server.Get("/user/:id/get_preorders", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Get("/user/:id/preorders", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             Preorders::GetPreordersRequest(request, res, db);
         });
@@ -101,6 +100,11 @@ int main() {
         server.Post("/redis/next_user", [&db, &set_cors_headers, &redis](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
             redis.ProcessNextUserRequest(request, res, db);
+        });
+
+        server.Delete("/redis/match_queue/:id/clear", [&db, &set_cors_headers, &redis](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            redis.ClearWaitingListRequest(request, res, db);
         });
 
         std::cout << "Server is listening https://localhost:8007" << '\n';

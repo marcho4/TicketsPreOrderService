@@ -28,6 +28,8 @@ class RedisWaitingList {
         return "waiting_list:" + match_id;
     }
 
+    static bool CheckUserExistence(const std::string& user_id, httplib::Response& res, Database& db);
+
 public:
     RedisWaitingList(const std::string& host, int port) {
         redis = redisConnect(host.c_str(), port);
@@ -48,9 +50,11 @@ public:
         }
     }
 
+    void ProcessNextUserRequest(const httplib::Request& req, httplib::Response& res, Database& db);
+
     void AddToWaitingListRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
-    void ProcessNextUserRequest(const httplib::Request& req, httplib::Response& res, Database& db);
+    void ClearWaitingListRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 };
 
 

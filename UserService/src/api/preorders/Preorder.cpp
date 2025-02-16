@@ -30,20 +30,30 @@ void Preorder::AddPreorderRequest(const httplib::Request& req, httplib::Response
 
     try {
         PreorderData data = PreorderData::GetDataFromRequest(parsed);
-        AddPreorder(user_id, data, db);
+        std::string preorder_id = AddPreorder(user_id, data, db);
         res.status = 201;
-        res.set_content(R"({"message": "Preorder added successfully"})", "application/json");
+        json response = {
+                {"message", "Preorder added successfully"},
+                {"preorder_id", preorder_id}
+        };
+        res.set_content(response.dump(), "application/json");
     } catch (const std::exception& e) {
         spdlog::error("Error processing preorder request: {}", e.what());
         ErrorHandler::sendError(res, 500, "Internal server error");
     }
 }
 
-void Preorder::AddPreorder(const std::string& user_id, PreorderData data, Database& db) {
-    std::string query = "INSERT INTO Users.preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4)";
+std::string Preorder::AddPreorder(const std::string& user_id, const PreorderData& data, Database& db) {
+    std::string query = "INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id";
     std::vector<std::string> params = {user_id, data.match_id, data.ticket_id, data.date};
+    spdlog::info("Executing query: {} with params: {}, {}, {}, {}", query, user_id, data.match_id, data.ticket_id, data.date);
+    pqxx::result response = db.executeQueryWithParams(query, params);
+    spdlog::info("Preorder added with id: {}", response[0][0].c_str());
 
-    db.executeQueryWithParams(query, params);
+    if (response.empty()) {
+        return "SHIT HAPPENS";
+    }
+    return response[0][0].as<std::string>();
 }
 
 bool Preorder::CheckUserExistence(const std::string& user_id, Database& db) {

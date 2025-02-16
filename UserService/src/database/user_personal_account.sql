@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Users.UsersData (
 );
 
 CREATE TABLE IF NOT EXISTS Users.AttendedEvents (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID REFERENCES Users.UsersData(user_id),
     match_id UUID NOT NULL,
     ticket_id UUID NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Users.AttendedEvents (
 );
 
 CREATE TABLE IF NOT EXISTS Users.Preorders (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL,
     match_id UUID NOT NULL,
     ticket_id UUID NOT NULL,

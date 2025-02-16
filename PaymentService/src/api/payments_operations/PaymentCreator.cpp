@@ -52,7 +52,7 @@ std::string PaymentCreator::CreatePayment(const PaymentCreator::PaymentData &pay
 
 std::string PaymentCreator::SendPaymentRequest(const PaymentCreator::PaymentData &payment_data,
                                                const std::string &payment_id) {
-    httplib::Client payment_service("http://localhost:8009");
+    httplib::Client payment_service("http://0.0.0.0:8009");
     payment_service.set_default_headers({
             {"Content-Type", "application/json"},
             {"Accept", "application/json"}
@@ -60,7 +60,7 @@ std::string PaymentCreator::SendPaymentRequest(const PaymentCreator::PaymentData
 
     json mock_payment_data = {
             {"payment_id", payment_id},
-            {"callback_url", "http://localhost:8008"}
+            {"callback_url", "http://0.0.0.0:8008"}
     };
     auto response = payment_service.Post("/payments/create", mock_payment_data.dump(), "application/json");
 

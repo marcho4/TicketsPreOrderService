@@ -116,7 +116,7 @@ def test_get_account_info():
     assert response.status_code == 201
     user_id = response.json()["data"]["id"]
 
-    response = requests.get(f"{BASE_URL}/user/{user_id}/get_account_info")
+    response = requests.get(f"{BASE_URL}/user/{user_id}/account_info")
     assert response.status_code == 200
     assert response.json()["data"]["name"] == data["name"]
     assert response.json()["data"]["last_name"] == data["last_name"]
@@ -142,7 +142,7 @@ def test_updated_account_info():
     response = requests.put(f"{BASE_URL}/user/{user_id}/update_account", json=update_data)
     assert response.status_code == 200
 
-    response = requests.get(f"{BASE_URL}/user/{user_id}/get_account_info")
+    response = requests.get(f"{BASE_URL}/user/{user_id}/account_info")
     assert response.status_code == 200
     assert response.json()["data"]["name"] == update_data["name"]
     assert response.json()["data"]["last_name"] == update_data["last_name"]
@@ -152,6 +152,6 @@ def test_updated_account_info():
 
 
 def test_get_unregistered_user():
-    response = requests.get(f"{BASE_URL}/user/123/get_account_info")
+    response = requests.get(f"{BASE_URL}/user/123/account_info")
     assert response.status_code == 404
     assert response.json()["message"] == "User not found"

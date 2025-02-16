@@ -17,13 +17,15 @@ class PreorderCancellation {
         }
     };
 
+    static bool CheckUserExistence(const std::string& user_id, Database& db);
+
+    static bool CheckPreorderExistence(const std::string& user_id, const std::string& match_id,
+                                       const std::string& ticket_id, Database& db);
+
 public:
     static void CancelPreorderRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
     static void CancelPreorder(const std::string& user_id, const std::string& match_id, const std::string& ticket_id, Database& db);
-
-    static bool CheckPreorderExistence(const std::string& user_id, const std::string& match_id,
-                                       const std::string& ticket_id, Database& db);
 };
 
 

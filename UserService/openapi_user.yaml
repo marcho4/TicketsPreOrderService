@@ -219,7 +219,7 @@ paths:
         '500':
           description: Ошибка сервера
 
-  /user/{id}/get_preorders:
+  /user/{id}/preorders:
     get:
       summary: Получение предзаказов пользователя
       description: Возвращает предзаказы пользователя по его уникальному идентификатору.
@@ -290,3 +290,22 @@ paths:
           description: Список ожидания пуст
         '500':
           description: Ошибка сервера
+  /redis/match_queue/{id}/clear:
+    delete:
+      summary: Очистка очереди на покупку билетов
+      description: Удаляет всех пользователей из очереди на покупку билетов на матч
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор матча
+          schema:
+              type: string
+      responses:
+        '200':
+          description: Очередь успешно очищена
+        '400':
+          description: Ошибка при обработке данных
+        '500':
+          description: Ошибка сервера
+

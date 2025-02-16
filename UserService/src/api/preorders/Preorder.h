@@ -26,7 +26,7 @@ class Preorder {
 public:
     static void AddPreorderRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
-    static void AddPreorder(const std::string& user_id, PreorderData data, Database& db);
+    static std::string AddPreorder(const std::string& user_id, const PreorderData& data, Database& db);
 
     static bool CheckUserExistence(const std::string& user_id, Database& db);
 };

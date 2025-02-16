@@ -7,6 +7,12 @@ void PreorderCancellation::CancelPreorderRequest(const httplib::Request& req, ht
         return;
     }
     std::string user_id = req.path_params.at("id");
+    if (!CheckUserExistence(user_id, db)) {
+        spdlog::error("Пользователь с id {} не найден", user_id);
+        ErrorHandler::sendError(res, 404, "User not found");
+        return;
+    }
+
     auto parsed = json::parse(req.body);
 
     PreorderData data = PreorderData::GetDataFromRequest(parsed);
@@ -28,7 +34,7 @@ void PreorderCancellation::CancelPreorderRequest(const httplib::Request& req, ht
 }
 
 void PreorderCancellation::CancelPreorder(const std::string& user_id, const std::string& match_id, const std::string& ticket_id, Database& db) {
-    std::string query = "DELETE FROM Users.preorders WHERE user_id = $1 AND match_id = $2 AND ticket_id = $3";
+    std::string query = "DELETE FROM Users.Preorders WHERE user_id = $1 AND match_id = $2 AND ticket_id = $3";
     std::vector<std::string> params = {user_id, match_id, ticket_id};
 
     pqxx::result response = db.executeQueryWithParams(query, params);
@@ -36,8 +42,17 @@ void PreorderCancellation::CancelPreorder(const std::string& user_id, const std:
 
 bool PreorderCancellation::CheckPreorderExistence(const std::string& user_id, const std::string& match_id,
                                                   const std::string& ticket_id, Database& db) {
-    std::string query = "SELECT * FROM Users.preorders WHERE user_id = $1 AND match_id = $2 AND ticket_id = $3";
+    std::string query = "SELECT * FROM Users.Preorders WHERE user_id = $1 AND match_id = $2 AND ticket_id = $3";
     std::vector<std::string> params = {user_id, match_id, ticket_id};
+
+    pqxx::result response = db.executeQueryWithParams(query, params);
+
+    return !response.empty();
+}
+
+bool PreorderCancellation::CheckUserExistence(const std::string &user_id, Database &db) {
+    std::string query = "SELECT * FROM Users.UsersData WHERE user_id = $1";
+    std::vector<std::string> params = {user_id};
 
     pqxx::result response = db.executeQueryWithParams(query, params);
 

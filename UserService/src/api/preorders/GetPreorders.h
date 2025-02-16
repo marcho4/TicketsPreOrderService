@@ -42,7 +42,7 @@ public:
     }
 
     static pqxx::result GetPreorders(const std::string& user_id, Database& db) {
-        std::string query = "SELECT * FROM Users.preorders WHERE user_id = $1";
+        std::string query = "SELECT * FROM Users.Preorders WHERE user_id = $1";
         std::vector<std::string> params = {user_id};
         pqxx::result response = db.executeQueryWithParams(query, params);
 
