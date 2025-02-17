@@ -1,5 +1,6 @@
 use actix_web::{put, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
+use crate::models::api_response::ApiResponse;
 use crate::models::message_resp::MessageResp;
 use crate::models::roles::Role;
 use crate::models::tickets::CancelData;
@@ -7,7 +8,24 @@ use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
 
-#[put("/cancel")]
+
+#[utoipa::path(
+    put,
+    path = "/tickets/cancel/{ticket_id}",
+    tag = "Tickets",
+    summary = "Cancels preorder of the concrete ticket",
+    description = "Cancels preorder of the concrete ticket",
+    request_body = CancelData,
+    params(
+        ("ticket_id" = String, Path, description = "ID of the ticket to cancel preorder")
+    ),
+    responses(
+        (status = 200, description = "Successfully cancelled preorder", body = ApiResponse<MessageResp>),
+        (status = 403, description = "Forbidden: Access restricted due to missing or invalid credentials, wrong role, or mismatched user id"),
+        (status = 500, description = "Internal Server Error", body=ApiResponse<String>)
+    )
+)]
+#[put("/cancel/{ticket_id}")]
 pub async fn cancel_preorder(
     req: HttpRequest,
     ticket_id: web::Path<String>,

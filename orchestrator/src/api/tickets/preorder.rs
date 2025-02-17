@@ -1,11 +1,27 @@
 use actix_web::{put, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
+use crate::models::api_response::ApiResponse;
 use crate::models::message_resp::MessageResp;
 use crate::models::roles::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
 
+#[utoipa::path(
+    put,
+    path = "/tickets/preorder/{ticket_id}",
+    tag = "Tickets",
+    summary = "Preorder concrete ticket",
+    description = "Preorder concrete ticket",
+    params(
+        ("ticket_id" = String, Path, description = "ID of the ticket to preorder")
+    ),
+    responses(
+        (status = 200, description = "Successfully cancelled preorder", body = ApiResponse<MessageResp>),
+        (status = 403, description = "Forbidden: Access restricted due to missing or invalid credentials, wrong role, or mismatched user id"),
+        (status = 500, description = "Internal Server Error", body=ApiResponse<String>)
+    )
+)]
 #[put("/preorder/{ticket_id}")]
 pub async fn preorder_ticket(
     req: HttpRequest,

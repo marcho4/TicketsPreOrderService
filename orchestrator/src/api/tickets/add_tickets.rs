@@ -24,7 +24,7 @@ pub struct TicketsMultipart {
 
 #[utoipa::path(
     post,
-    path = "/{match_id}",
+    path = "/tickets/{match_id}",
     operation_id = "addTickets",
     tag = "Tickets",
     params(
