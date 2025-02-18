@@ -124,6 +124,7 @@ services:
     depends_on:
       - user_postgres
 
+ 
   matches:
     build:
       context: ./MatchesService/MatchesService
@@ -136,7 +137,7 @@ services:
       - main
     depends_on:
       - match_postgres
-    
+
   match_postgres:
     image: postgres:latest
     environment:
@@ -149,7 +150,7 @@ services:
       - ./MatchesService/MatchesService/Database/init.sql:/docker-entrypoint-initdb.d/init.sql
       - matches_postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      test: [ "CMD", "pg_isready", "-U", "matches_user", "-d", "matches_db" ]
       interval: 5s
       retries: 5
       timeout: 3s

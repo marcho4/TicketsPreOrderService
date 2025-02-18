@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import fetchData from "@/lib/fetchData";
-import {useAuth} from "@/providers/authProvider";
 
 export default function AuthCard() {
     // Состояние, которое отвечает за текущий «режим» компонента.
@@ -26,6 +25,7 @@ export default function AuthCard() {
     const [last_name, setlast_name] = useState("");
     const [email, setEmail] = useState("");
 
+
     // Поля для организатора (например)
     const [company, setCompany] = useState("");
     const [tin, settin] = useState("");
@@ -33,31 +33,27 @@ export default function AuthCard() {
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
-    const { checkAuth } = useAuth();
 
     // Функция логина
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             setError(false);
-            let response = await fetchData("http://localhost:8000/api/auth/login",
-                "POST",
+            let response = await fetchData("http://localhost:8000/api/auth/login", "POST",
                 { login, password }, setLoading)
             console.log(response.status)
             if (response.status === 200) {
                 let body = await response.json();
+                window.location.reload();
                 switch (body.data.role) {
                     case "ADMIN":
-                        await checkAuth();
                         router.push('/admin');
                         break;
                     case "USER":
-                        await checkAuth();
-                        router.push('/dashboard');
+                        router.push('/user');
                         break;
                     case "ORGANIZER":
-                        await checkAuth();
-                        router.push('/organizer');
+                        router.push('/organization');
                         break;
                     default:
                         break;
@@ -77,13 +73,34 @@ export default function AuthCard() {
     // Функция регистрации обычного пользователя
     const handleSignupUser = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8000/api/auth/register/user", "POST",
-            { name, last_name, email }, setLoading)
-
-        if (response.status === 200) {
-            router.push("/dashboard");
-        } else {
-            console.log("Wrong credentials");
+        try {
+            setError(false);
+            let response = await fetchData("http://localhost:8000/api/auth/register/user", "POST",
+                { name, last_name, email, login, password}, setLoading);
+                
+            if (response.status === 200) {
+                let body = await response.json();
+                // Выводим для отладки
+                console.log("Registration successful, response body:", body);
+                
+                // Проверка, содержит ли ответ данные пользователя с ролью
+                if (body.data && body.data.role) {
+                    await checkAuth();
+                    console.log("Auth checked after registration, redirecting...");
+                    router.push('/dashboard');
+                } else {
+                    console.log("Registration successful but no role data found");
+                    // Возможно, требуется отдельный вход после регистрации
+                    setMode("login");
+                    setError(false);
+                }
+            } else {
+                setError(true);
+                console.log("Registration failed with status:", response.status);
+            }
+        } catch (error) {
+            setError(true);
+            console.log("Registration error:", error);
         }
     };
 
@@ -239,12 +256,39 @@ export default function AuthCard() {
                                     className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
-
+                            <div className="space-y-2">
+                                <Label htmlFor="name" className="text-text">
+                                    login
+                                </Label>
+                                <Input
+                                    id="login"
+                                    type="text"
+                                    placeholder="Ваш login"
+                                    value={login}
+                                    onChange={(e) => setLogin(e.target.value)}
+                                    required
+                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="password" className="text-text">
+                                    password
+                                </Label>
+                                <Input
+                                    id="name"
+                                    type="password"
+                                    placeholder="Ваш пароль"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
+                                />
+                            </div>
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl bg-my_black hover:bg-accent hover:text-my_black
+                                className="w-full rounded-xl hover:bg-accent hover:text-my_black
                                  transition-colors duration-300"
                             >
                                 Зарегистрироваться
@@ -346,7 +390,7 @@ export default function AuthCard() {
                         ? "Войти"
                         : mode === "signupUser"
                             ? "Регистрация"
-                            : "Регистрация для организаторов"}
+                            : "Регистрация (Организатор)"}
                 </CardTitle>
             </CardHeader>
             {renderFormContent()}
