@@ -6,12 +6,15 @@ import Image from "next/image";
 import {Button} from "../../../../components/ui/button";
 import {X} from "lucide-react";
 import {createResource} from "../../../../lib/createResource";
-import {formatDate} from "date-fns";
+import {formatDate, parseISO} from "date-fns";
 
 function RenderedMatchInfo({ resource }) {
     const data = resource.read();
     const [isEditing, setEditing] = useState(false);
     const [matchData, setMatchData] = useState(data);
+    const {match_id} = useParams();
+    const [updateSuccess, setUpdateSuccess] = useState(false);
+    const [updateError, setUpdateError] = useState(null);
 
     // Function to submit new stadium scheme
     const handleSubmit = (e) => {
@@ -28,6 +31,52 @@ function RenderedMatchInfo({ resource }) {
             ...prevData,
             [name]: value,
         }));
+    }
+
+    // Function to save match data changes
+    const saveChanges = async () => {
+        try {
+            // Create payload with only the fields that can be updated
+            const payload = {
+                matchDateTime: new Date(matchData.matchDateTime).toISOString(),
+                matchDescription: matchData.matchDescription,
+                stadium: matchData.stadium
+            };
+
+            const response = await fetch(`http://localhost:8000/api/matches/${match_id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Failed to update match data: ${errorText}`);
+            }
+
+            setUpdateSuccess(true);
+            setUpdateError(null);
+            setEditing(false);
+
+            // Show success message for 3 seconds
+            setTimeout(() => {
+                setUpdateSuccess(false);
+            }, 3000);
+        } catch (error) {
+            console.error("Error updating match data:", error);
+            setUpdateError(error.message);
+            setUpdateSuccess(false);
+        }
+    }
+
+    // Function to cancel editing and reset data
+    const cancelEditing = () => {
+        setMatchData(data);
+        setEditing(false);
+        setUpdateError(null);
     }
 
     return (
@@ -105,13 +154,27 @@ function RenderedMatchInfo({ resource }) {
                         <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
                             Match Info
                         </h1>
+                        
+                        {/* Success/Error messages */}
+                        {updateSuccess && (
+                            <div className="w-full bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                                <span className="block sm:inline">Match data updated successfully!</span>
+                            </div>
+                        )}
+                        
+                        {updateError && (
+                            <div className="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+                                <span className="block sm:inline">{updateError}</span>
+                            </div>
+                        )}
+                        
                         <div className="flex flex-col w-full space-y-4">
                             {[
-                                { label: "Match date", value: formatDate(matchData.matchDateTime, "yyyy-MM-dd hh:mm"), name: "matchDateTime" },
-                                { label: "Stadium", value: matchData.stadium, name: "stadium" },
-                                { label: "Description", value: matchData.matchDescription, name: "matchDescription" },
-                                { label: "Team Home", value: matchData.teamHome, name: "teamHome" },
-                                { label: "Team Away", value: matchData.teamAway, name: "teamAway" },
+                                { label: "Match date", value: matchData.matchDateTime, name: "matchDateTime", type: "datetime-local" },
+                                { label: "Stadium", value: matchData.stadium, name: "stadium", type: "text" },
+                                { label: "Description", value: matchData.matchDescription, name: "matchDescription", type: "text" },
+                                { label: "Team Home", value: matchData.teamHome, name: "teamHome", type: "text", disabled: true },
+                                { label: "Team Away", value: matchData.teamAway, name: "teamAway", type: "text", disabled: true },
                             ].map((item, index) => (
                                 <div
                                     key={index}
@@ -121,40 +184,54 @@ function RenderedMatchInfo({ resource }) {
                                     overflow-hidden text-ellipsis whitespace-nowrap">
                                         {item.label}
                                     </div>
-                                    <input
-                                        className="w-2/3 md:w-2/3 py-2 px-3 disabled:bg-gray-50 rounded-lg text-base
-                                         md:text-lg text-gray-700"
-                                        disabled={!isEditing}
-                                        value={matchData[item.name]}
-                                        name={item.name}
-                                        onChange={handleChange}>
-                                    </input>
+                                    {item.type === "datetime-local" ? (
+                                        <input
+                                            className="w-2/3 md:w-2/3 py-2 px-3 disabled:bg-gray-50 rounded-lg text-base
+                                            md:text-lg text-gray-700"
+                                            disabled={!isEditing || item.disabled}
+                                            type="datetime-local"
+                                            value={isEditing ? new Date(matchData[item.name]).toISOString().slice(0, 16) : formatDate(matchData[item.name], "yyyy-MM-dd HH:mm")}
+                                            name={item.name}
+                                            onChange={handleChange}>
+                                        </input>
+                                    ) : (
+                                        <input
+                                            className="w-2/3 md:w-2/3 py-2 px-3 disabled:bg-gray-50 rounded-lg text-base
+                                            md:text-lg text-gray-700"
+                                            disabled={!isEditing || item.disabled}
+                                            type={item.type}
+                                            value={matchData[item.name]}
+                                            name={item.name}
+                                            onChange={handleChange}>
+                                        </input>
+                                    )}
                                 </div>
                             ))}
                             <div className="items-center w-full flex flex-row justify-center gap-x-5">
                                 {isEditing && (
                                     <Button className="bg-green_accent hover:bg-green_accent hover:text-my_black text-lg lg:text-xl
                                      text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
-                                            onClick={() => setEditing(!isEditing)}>
+                                            onClick={saveChanges}>
                                         Save changes
                                     </Button>
                                 )}
-                                {!isEditing ? (<Button className="bg-button-darker hover:bg-accent text-lg lg:text-xl
-                                hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
-                                                       onClick={() => setEditing(!isEditing)}>
-                                    Edit
-                                </Button>) : (<Button className="bg-button-darker hover:bg-accent text-lg lg:text-xl
-                                hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
-                                                      onClick={() => {setEditing(!isEditing)}}>
-                                    Cancel
-                                </Button>)}
-
+                                {!isEditing ? (
+                                    <Button className="bg-button-darker hover:bg-accent text-lg lg:text-xl
+                                    hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
+                                            onClick={() => setEditing(!isEditing)}>
+                                        Edit
+                                    </Button>
+                                ) : (
+                                    <Button className="bg-button-darker hover:bg-accent text-lg lg:text-xl
+                                    hover:text-my_black lg:py-7 lg:px-10 max-w-64 w-full"
+                                            onClick={cancelEditing}>
+                                        Cancel
+                                    </Button>
+                                )}
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </main>
         </div>
     )
@@ -337,12 +414,14 @@ function TicketsRendered({ resource }) {
                                         accept="text/csv"
                                         required
                                         multiple={false}
+                                        onChange={handleFileChange}
                                     />
                                 </div>
 
                                 <button
                                     type="submit"
-                                    className="px-3 py-1 mt-3 rounded-md bg-green_accent   font-medium transition-colors">
+                                    className="px-3 py-1 mt-3 rounded-md bg-green_accent   font-medium transition-colors"
+                                    onClick={handleSubmitTickets}>
                                     Submit Tickets
                                 </button>
                             </form>

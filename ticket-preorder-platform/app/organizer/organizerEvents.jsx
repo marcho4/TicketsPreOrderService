@@ -262,6 +262,7 @@ export default function MatchesSection() {
         const response = await fetch(`http://localhost:8000/api/matches/${user}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: "include",
           body: JSON.stringify({
             matchDescription: data.matchDescription,
             teamHome: data.teamHome,

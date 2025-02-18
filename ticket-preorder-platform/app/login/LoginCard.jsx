@@ -31,7 +31,7 @@ export default function AuthCard() {
     const [tin, settin] = useState("");
 
     const [loading, setLoading] = useState(false);
-
+    
     const router = useRouter();
 
     // Функция логина
@@ -44,16 +44,17 @@ export default function AuthCard() {
             console.log(response.status)
             if (response.status === 200) {
                 let body = await response.json();
-                window.location.reload();
                 switch (body.data.role) {
                     case "ADMIN":
                         router.push('/admin');
                         break;
                     case "USER":
-                        router.push('/user');
+                        router.push('/dashboard');
+                        setTimeout(() => window.location.reload(), 500);
                         break;
                     case "ORGANIZER":
-                        router.push('/organization');
+                        router.push('/organizer');
+                        setTimeout(() => window.location.reload(), 500);
                         break;
                     default:
                         break;
@@ -288,8 +289,8 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-accent hover:text-my_black
-                                 transition-colors duration-300"
+                                className="w-full rounded-xl bg-gray-400 text-white hover:bg-accent hover:text-my_black
+         transition-colors duration-300"
                             >
                                 Зарегистрироваться
                             </Button>
