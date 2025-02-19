@@ -56,7 +56,7 @@ class DeleteTickets {
 public:
     static void DeleteTicketsRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
-    static bool DeleteTicket(const std::string& match_id, const std::string& sector,
+    static std::pair<bool, std::string> DeleteTicket(const std::string& match_id, const std::string& sector,
                              const std::string& row, const std::string& seat, Database& db);
 };
 

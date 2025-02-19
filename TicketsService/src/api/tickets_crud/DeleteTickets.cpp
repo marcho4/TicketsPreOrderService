@@ -8,49 +8,51 @@ void DeleteTickets::DeleteTicketsRequest(const httplib::Request &req, httplib::R
 
     std::string match_id = req.path_params.at("match_id");
 
-    if (!req.has_file("tickets_crud")) {
+    if (!req.has_file("tickets")) {
         spdlog::error("Не указан файл с билетами, отказано в добавлении");
         ErrorHandler::sendError(res, 401, "Missing file with tickets_crud");
         return;
     }
 
-    httplib::MultipartFormData file = req.get_file_value("tickets_crud");
+    httplib::MultipartFormData file = req.get_file_value("tickets");
 
     auto [invalid_rows, tickets] = GetTicketsFromCSV(file, res);
 
-    int deleted_tickets = 0;
-    int all_tickets = invalid_rows + tickets.size();
+    std::vector<std::string> deleted_ticket_ids;
 
     for (const auto& ticket : tickets) {
-        if (DeleteTicket(match_id, ticket.sector, ticket.row, ticket.seat, db)) {
-            deleted_tickets++;
+        auto [deleted, ticket_id] = DeleteTicket(match_id, ticket.sector, ticket.row, ticket.seat, db);
+        if (deleted) {
+            deleted_ticket_ids.push_back(ticket_id);
         }
     }
 
     res.status = 201;
     json response = {
-            {"message", "May be some tickets_crud was not removed because they are reserved"},
+            {"message", "Some tickets may not have been removed because they are reserved"},
             {"invalid_rows", invalid_rows},
-            {"deleted_tickets", deleted_tickets},
-            {"all_tickets", all_tickets}
+            {"match_id", match_id},
+            {"deleted_ticket_ids", deleted_ticket_ids}
     };
     res.set_content(response.dump(), "application/json");
 }
+}
 
-bool DeleteTickets::DeleteTicket(const std::string& match_id, const std::string& sector,
+std::pair<bool, std::string> DeleteTickets::DeleteTicket(const std::string& match_id, const std::string& sector,
                                  const std::string& row, const std::string& seat, Database& db) {
-    std::string query = "SELECT status FROM Tickets.TicketsData WHERE match_id = $1 "
+    std::string query = "SELECT status, id FROM Tickets.TicketsData WHERE match_id = $1 "
                         "AND sector = $2 AND row = $3 AND seat = $4";
     std::vector<std::string> params = {match_id, sector, row, seat};
     pqxx::result result = db.executeQueryWithParams(query, params);
 
     std::string status = result[0][0].c_str();
+    std::string ticket_id = result[0][1].c_str();
 
     if (status == "available") {
         query = "DELETE FROM Tickets.TicketsData  WHERE match_id = $1 "
                 "AND sector = $2 AND row = $3 AND seat = $4";
         db.executeQueryWithParams(query, params);
-        return true;
+        return {true, ticket_id};
     }
-    return false;
+    return {false, ticket_id};
 }
