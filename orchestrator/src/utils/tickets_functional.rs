@@ -1,6 +1,6 @@
 use reqwest::Method;
 use crate::models::message_resp::MessageResp;
-use crate::models::tickets::{Ticket, TicketsAddResponse};
+use crate::models::tickets::{Ticket, TicketReservation, TicketsAddResponse};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
 use reqwest::multipart;
@@ -14,9 +14,9 @@ impl Orchestrator {
         Ok(self.send_request::<Vec<Ticket>, Vec<Ticket>>(url, None, Method::GET).await?)
     }
 
-    pub async fn reserve_ticket(&self, ticket_id: &String) -> Result<MessageResp, OrchestratorError> {
+    pub async fn reserve_ticket(&self, ticket_id: &String, data: TicketReservation) -> Result<MessageResp, OrchestratorError> {
         let url = format!("{}/ticket/{}/reserve", self.config.tickets_url, ticket_id);
-        Ok(self.send_request::<MessageResp, String>(url, None, Method::PUT).await?)
+        Ok(self.send_request::<MessageResp, TicketReservation>(url, Some(data), Method::PUT).await?)
     }
     pub async fn get_users_tickets(&self, user_id: String) -> Result<Vec<Ticket>, OrchestratorError> {
         let url = format!("{}/user/{}/tickets", self.config.tickets_url, user_id);

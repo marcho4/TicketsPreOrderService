@@ -15,7 +15,7 @@ pub struct TicketsQuery {
 
 #[utoipa::path(
     get,
-    path = "/tickets/{match_id}",
+    path = "/api/tickets/{match_id}",
     tag = "Tickets",
     description = "Get available tickets for a match",
     summary = "Получить данные о билетах для конкретного матча",

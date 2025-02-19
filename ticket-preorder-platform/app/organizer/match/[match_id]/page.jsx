@@ -237,36 +237,7 @@ function RenderedMatchInfo({ resource }) {
     )
 }
 
-export default function Page() {
-    const {match_id} = useParams();
-    async function fetchMatchData() {
-        try {
-            const response = await fetch(`http://localhost:8000/api/matches/${match_id}`, {
-                method: "GET",
-                credentials: "include",
-            });
-
-            if (!response.ok) {
-                console.error(`Failed to fetch match data: ${response.text()}`);
-            }
-
-            const result = await response.json();
-            return result.data;
-        } catch (error) {
-            console.error("Error fetching match data:", error);
-            throw error;
-        }
-    }
-    const resource = useMemo(()=> {return createResource(fetchMatchData)}, [match_id]);
-
-    return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <RenderedMatchInfo resource={resource} />
-        </Suspense>
-    )
-}
-
-function TicketsRendered({ resource }) {
+function TicketsRendered({ resource, match_id }) {
     const data = resource.read();
     const [modal, setModal] = useState(false);
     const [ticketsFile, setTicketsFile] = useState(null);
@@ -278,11 +249,23 @@ function TicketsRendered({ resource }) {
     }
 
     // Function to submit tickets file to an API
-    const handleSubmitTickets = (e) => {
+    const handleSubmitTickets = async (e) => {
         e.preventDefault();
         let formData = new FormData();
-        formData.append('file', ticketsFile);
+        formData.append('tickets', ticketsFile);
 
+        try {
+            let response = await fetch(`http://localhost:8000/api/tickets/${match_id}`, {
+                method: 'POST',
+                credentials: 'include',
+                body: formData,
+            });
+            const data = await response.json();
+            console.log(data.data);
+            console.log(data.msg);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     useEffect(() => {
@@ -349,7 +332,7 @@ function TicketsRendered({ resource }) {
                                         </td>
                                         <td className="px-4 py-2 border-b border-gray-200 gap-x-2">
                                             <Button
-                                                disabled={item.status !== "Available"}
+                                                disabled={item.status !== "available"}
                                                 className={"bg-button-darker hover:bg-accent hover:text-my_black" +
                                                     " transition-colors duration-300 p-2 text-white  rounded-lg"}>
                                                 Delete
@@ -380,10 +363,10 @@ function TicketsRendered({ resource }) {
             <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
                     z-[11] cursor-pointer`}>
                 <div id="active-modal" className="relative max-w-[350px] w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
-                    onClick={(e) => e.stopPropagation()}>
+                     onClick={(e) => e.stopPropagation()}>
 
                     <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"
-                        onClick={() => setModal(!modal)}/>
+                       onClick={() => setModal(!modal)}/>
 
                     <div id="modal-content" className="p-6">
                         <div className="text-2xl font-semibold text-gray-700 mb-3">
@@ -399,7 +382,7 @@ function TicketsRendered({ resource }) {
                                 {/* Блок с загрузкой файла */}
                                 <div className="mb-4 items-center justify-center flex flex-col">
                                     <label htmlFor="uploadTicketsFile"
-                                        className="block text-sm text-center font-medium text-gray-700 mb-2"
+                                           className="block text-sm text-center font-medium text-gray-700 mb-2"
                                     >
                                         Upload Tickets .csv file
                                     </label>
@@ -433,3 +416,65 @@ function TicketsRendered({ resource }) {
         </div>
     )
 }
+
+export default function Page() {
+    const {match_id} = useParams();
+
+    async function fetchMatchData() {
+        try {
+            const response = await fetch(`http://localhost:8000/api/matches/${match_id}`, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (!response.ok) {
+                console.error(`Failed to fetch match data: ${response.text()}`);
+            }
+
+            const result = await response.json();
+            return result.data;
+        } catch (error) {
+            console.error("Error fetching match data:", error);
+            throw error;
+        }
+    }
+    async function fetchTickets() {
+        try {
+            const response = await fetch(`http://localhost:8000/api/tickets/${match_id}`, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (!response.ok) {
+                console.error(`Failed to fetch match data: ${response.text()}`);
+            }
+
+            const result = await response.json();
+            return result.data;
+        } catch (error) {
+            console.error("Error fetching match data:", error);
+            throw error;
+        }
+    }
+
+    const resource = useMemo(()=> {
+        return createResource(fetchMatchData)
+    }, [match_id]);
+
+    const ticketResource = useMemo(() => {
+        return createResource(fetchTickets)
+    }, [match_id]);
+
+
+    return (
+        <div>
+            <Suspense fallback={<div>Loading...</div>}>
+                <RenderedMatchInfo resource={resource} />
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+                <TicketsRendered resource={ticketResource} match_id={match_id} />
+            </Suspense>
+        </div>
+    )
+}
+

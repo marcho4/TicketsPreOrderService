@@ -17,7 +17,7 @@ const TicketsList = ({userId}) => {
       setIsLoading(true);
       try {
         // For GET requests, we shouldn't pass a body
-        const response = await fetch(`http://localhost:8000/tickets/user/${userId}`, {
+        const response = await fetch(`http://localhost:8000/api/tickets/user/${userId}`, {
           method: 'GET',
           credentials: "include",
           headers: {'Content-Type': 'application/json'}

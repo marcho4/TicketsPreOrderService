@@ -11,7 +11,7 @@ use crate::utils::responses::generic_response;
 
 #[utoipa::path(
     put,
-    path = "/tickets/cancel/{ticket_id}",
+    path = "/api/tickets/cancel/{ticket_id}",
     tag = "Tickets",
     summary = "Cancels preorder of the concrete ticket",
     description = "Cancels preorder of the concrete ticket",

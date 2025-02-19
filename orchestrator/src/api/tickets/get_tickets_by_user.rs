@@ -9,7 +9,7 @@ use crate::utils::responses::generic_response;
 
 #[utoipa::path(
     get,
-    path = "/tickets/user/{user_id}",
+    path = "/api/tickets/user/{user_id}",
     tag = "Tickets",
     description = "Get available tickets for a concrete user",
     summary = "Получить данные о билетах для конкретного пользователя",

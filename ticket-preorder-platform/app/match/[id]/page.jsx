@@ -7,6 +7,7 @@ import {Suspense, useEffect, useMemo, useState} from "react";
 import {X} from "lucide-react";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import {Button} from "../../../components/ui/button";
+import {useAuth} from "../../../providers/authProvider";
 
 // Функция для форматирования даты в формат DD/MM/YYYY
 export function formatDate(dateString) {
@@ -143,6 +144,7 @@ function MatchRendered({ resource, ticketsResource }) {
 
 function FetchedTickets({resource}) {
     const tickets = resource.read();
+    const {user_id} = useAuth();
 
     if (tickets.length === 0) {
         return (
@@ -194,7 +196,26 @@ function FetchedTickets({resource}) {
                             {item.sector}
                         </td>
                         <td className="px-4 py-2 border-b border-gray-200 gap-x-2">
-                            <Button
+                            <Button onClick={async () => {
+                                    try {
+                                        let resp = await fetch(`http://localhost:8000/api/tickets/preorder/${item.id}`,
+                                            {
+                                                method: 'PUT',
+                                                credentials: 'include',
+                                                body: JSON.stringify({
+                                                    user_id: "sdsd",
+                                                    match_id: item.match_id
+                                                }),
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                }
+                                            })
+                                        const data = await resp.json();
+                                        console.log(data);
+                                    } catch (e) {
+                                        console.error(e)
+                                    }
+                                }}
                                 className={"bg-button-darker hover:bg-accent hover:text-my_black" +
                                     " transition-colors duration-300 p-2 text-white  rounded-lg"}>
                                 Preorder

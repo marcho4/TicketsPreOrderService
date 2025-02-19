@@ -259,12 +259,12 @@ export default function AuthCard() {
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="name" className="text-text">
-                                    login
+                                    Логин
                                 </Label>
                                 <Input
                                     id="login"
                                     type="text"
-                                    placeholder="Ваш login"
+                                    placeholder="Ваш логин"
                                     value={login}
                                     onChange={(e) => setLogin(e.target.value)}
                                     required
@@ -273,7 +273,7 @@ export default function AuthCard() {
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="password" className="text-text">
-                                    password
+                                    Пароль
                                 </Label>
                                 <Input
                                     id="name"
@@ -289,7 +289,7 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl bg-gray-400 text-white hover:bg-accent hover:text-my_black
+                                className="w-full rounded-xl bg-my_black text-white hover:bg-accent hover:text-my_black
          transition-colors duration-300"
                             >
                                 Зарегистрироваться

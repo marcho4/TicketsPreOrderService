@@ -1,8 +1,7 @@
-DROP SCHEMA IF EXISTS Tickets CASCADE;
 DROP TYPE IF EXISTS Status;
 DROP TYPE IF EXISTS Sector;
 
-CREATE SCHEMA Tickets;
+CREATE SCHEMA IF NOT EXISTS Tickets;
 
 CREATE TYPE Status AS ENUM ('sold', 'reserved', 'available');
 

@@ -2,12 +2,12 @@ use crate::models::api_response::ApiResponse;
 use crate::models::message_resp::MessageResp;
 use crate::models::update_org_data::UpdateOrgData;
 use crate::orchestrator::orchestrator::Orchestrator;
-use actix_web::{post, web, HttpRequest, HttpResponse};
+use actix_web::{put, web, HttpRequest, HttpResponse};
 use crate::models::roles::Role;
 use crate::utils::request_validator::RequestValidator;
 
 #[utoipa::path(
-    post,
+    put,
     path = "/api/organizer/update/{id}",
     tag = "Organizer",
     description = "Update organizer info",
@@ -21,7 +21,7 @@ use crate::utils::request_validator::RequestValidator;
         (status = 500, description = "Error", body = ApiResponse<String>)
     )
 )]
-#[post("/update/{id}")]
+#[put("/update/{id}")]
 pub async fn update(
     id: web::Path<String>,
     data: web::Json<UpdateOrgData>,
