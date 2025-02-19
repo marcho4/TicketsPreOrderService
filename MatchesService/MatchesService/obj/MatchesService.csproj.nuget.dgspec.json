@@ -1,25 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "/Users/marcho/TicketsPreOrderService/MatchesService/MatchesService/MatchesService.csproj": {}
+    "C:\\Users\\dip00\\Documents\\GitHub\\TicketsPreOrderService\\MatchesService\\MatchesService\\MatchesService.csproj": {}
   },
   "projects": {
-    "/Users/marcho/TicketsPreOrderService/MatchesService/MatchesService/MatchesService.csproj": {
+    "C:\\Users\\dip00\\Documents\\GitHub\\TicketsPreOrderService\\MatchesService\\MatchesService\\MatchesService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/marcho/TicketsPreOrderService/MatchesService/MatchesService/MatchesService.csproj",
+        "projectUniqueName": "C:\\Users\\dip00\\Documents\\GitHub\\TicketsPreOrderService\\MatchesService\\MatchesService\\MatchesService.csproj",
         "projectName": "MatchesService",
-        "projectPath": "/Users/marcho/TicketsPreOrderService/MatchesService/MatchesService/MatchesService.csproj",
-        "packagesPath": "/Users/marcho/.nuget/packages/",
-        "outputPath": "/Users/marcho/TicketsPreOrderService/MatchesService/MatchesService/obj/",
+        "projectPath": "C:\\Users\\dip00\\Documents\\GitHub\\TicketsPreOrderService\\MatchesService\\MatchesService\\MatchesService.csproj",
+        "packagesPath": "C:\\Users\\dip00\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dip00\\Documents\\GitHub\\TicketsPreOrderService\\MatchesService\\MatchesService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/marcho/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\dip00\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,6 +35,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -120,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
