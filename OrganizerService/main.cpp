@@ -6,6 +6,7 @@
 #include "src/organizer_crud/CreateOrganizerAccount.h"
 #include "src/organizer_crud/UpdateOrganizerAccount.h"
 #include "src/organizer_crud/GetAccountInfo.h"
+#include "config/config.h"
 
 int main() {
 
@@ -13,6 +14,8 @@ int main() {
     logger->flush_on(spdlog::level::info);
     spdlog::set_default_logger(logger);
     spdlog::info("Логгер успешно создан!");
+
+    Config cfg = Config::MustLoadConfig("../config/config.yaml");
 
     try {
         httplib::Server server;
@@ -34,9 +37,13 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
+        std::string connect = "dbname=" + cfg.database_.db_name +
+                              " host=" + cfg.database_.host +
+                              " port=" + std::to_string(cfg.database_.port) +
+                              " user=" + cfg.database_.user +
+                              " password=" + cfg.database_.password;
         Database db(connect);
-        db.initDbFromFile("src/postgres/organizer_personal_account.sql");
+        db.initDbFromFile(cfg.database_.init_db_path);
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
@@ -61,7 +68,7 @@ int main() {
         });
 
         std::cout << "Server is listening http://localhost:8004" << '\n';
-        server.listen("0.0.0.0", 8004);
+        server.listen(cfg.server_.host, cfg.server_.port);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }

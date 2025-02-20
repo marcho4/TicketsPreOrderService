@@ -18,6 +18,8 @@ set(SOURCE_FILES
         src/api/providers/GetProviders.h
         src/api/payments_operations/PaymentRefund.cpp
         src/api/payments_operations/PaymentRefund.h
+        config/config.h
+        config/config.cpp
 )
 
 #include_directories(
@@ -54,6 +56,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
+FetchContent_Declare(
+        yaml-cpp
+        GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
+        GIT_TAG yaml-cpp-0.7.0
+)
+FetchContent_MakeAvailable(yaml-cpp)
+
 add_executable(PaymentService ${SOURCE_FILES})
 
 #target_link_libraries(PaymentService
@@ -67,6 +76,7 @@ add_executable(PaymentService ${SOURCE_FILES})
 #)
 
 target_link_libraries(PaymentService PRIVATE CURL::libcurl spdlog::spdlog
+        yaml-cpp
         /opt/homebrew/opt/openssl@3/lib/libssl.dylib
         /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
         /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib

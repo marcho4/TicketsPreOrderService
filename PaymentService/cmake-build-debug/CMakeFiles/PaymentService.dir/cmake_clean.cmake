@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/PaymentService.dir/config/config.cpp.o"
+  "CMakeFiles/PaymentService.dir/config/config.cpp.o.d"
   "CMakeFiles/PaymentService.dir/main.cpp.o"
   "CMakeFiles/PaymentService.dir/main.cpp.o.d"
   "CMakeFiles/PaymentService.dir/src/api/payments_operations/OperationState.cpp.o"

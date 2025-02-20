@@ -11,6 +11,7 @@
 #include "src/api/user_payments/GetUserPayments.h"
 #include "src/api/user_payments/GetUserRefunds.h"
 #include "src/api/payments_operations/PaymentRefund.h"
+#include "config/config.h"
 
 int main() {
 
@@ -19,6 +20,7 @@ int main() {
     spdlog::set_default_logger(logger);
     spdlog::info("Логгер успешно создан!");
 
+    Config cfg = Config::MustLoadConfig("../config/config.yaml");
     try {
         httplib::Server server;
 
@@ -40,9 +42,18 @@ int main() {
         };
 
 //        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
-        std::string connect = "dbname=payment host=localhost port=5432";
+        // это вариация для docker контейнера
+//         std::string connect = "dbname=" + cfg.database_.db_name +
+//                               " host=" + cfg.database_.host +
+//                               " port=" + std::to_string(cfg.database_.port) +
+//                               " user=" + cfg.database_.user +
+//                               " password=" + cfg.database_.password;
+
+        std::string connect = "dbname=" + cfg.database_.db_name +
+                              " host=" + cfg.database_.host +
+                              " port=" + std::to_string(cfg.database_.port);
         Database db(connect);
-        db.initDbFromFile("../src/database/payment.sql");
+        db.initDbFromFile(cfg.database_.init_db_path);
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
@@ -88,7 +99,7 @@ int main() {
         });
 
         std::cout << "Server is listening http://localhost:8008" << '\n';
-        server.listen("0.0.0.0", 8008);
+        server.listen(cfg.server_.host, cfg.server_.port);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }

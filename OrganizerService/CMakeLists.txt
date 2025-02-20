@@ -18,6 +18,8 @@ set(SOURCE_FILES
         third_party/Bcrypt.cpp/src/bcrypt.cpp
         third_party/Bcrypt.cpp/include/bcrypt.h
         third_party/Bcrypt.cpp/src/blowfish.cpp
+        config/config.h
+        config/config.cpp
 )
 
 # Добавьте каталоги для заголовочных файлов
@@ -46,12 +48,20 @@ FetchContent_Declare(
         GIT_TAG v1.12.0
 )
 FetchContent_MakeAvailable(spdlog)
+
+FetchContent_Declare(
+        yaml-cpp
+        GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
+        GIT_TAG yaml-cpp-0.7.0
+)
+FetchContent_MakeAvailable(yaml-cpp)
 # Создаем исполняемый файл
 add_executable(OrganizerService ${SOURCE_FILES})
 
 target_link_libraries(OrganizerService
         PRIVATE
         spdlog::spdlog
+        yaml-cpp
         pqxx
         pq
         CURL::libcurl
