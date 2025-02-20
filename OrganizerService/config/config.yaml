@@ -1,0 +1,11 @@
+database:
+    db_name: "orchestrator"
+    db_host: "org_postgres"
+    db_port: 5432
+    db_user: "database"
+    db_password: "database"
+    init_sql: "src/postgres/organizer_personal_account.sql"
+
+server:
+    host: "0.0.0.0"
+    port: 8004
