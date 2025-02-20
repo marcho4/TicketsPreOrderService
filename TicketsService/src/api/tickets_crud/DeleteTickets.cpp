@@ -36,7 +36,6 @@ void DeleteTickets::DeleteTicketsRequest(const httplib::Request &req, httplib::R
     };
     res.set_content(response.dump(), "application/json");
 }
-}
 
 std::pair<bool, std::string> DeleteTickets::DeleteTicket(const std::string& match_id, const std::string& sector,
                                  const std::string& row, const std::string& seat, Database& db) {

@@ -8,9 +8,6 @@ set(SOURCE_FILES
         main.cpp
         src/database/Database.h
         src/database/Database.cpp
-        third_party/Bcrypt.cpp/src/bcrypt.cpp
-        third_party/Bcrypt.cpp/include/bcrypt.h
-        third_party/Bcrypt.cpp/src/blowfish.cpp
         src/api/tickets_crud/AddTickets.cpp
         src/api/tickets_crud/AddTickets.h
         src/api/tickets_crud/GetTickets.cpp
@@ -19,6 +16,8 @@ set(SOURCE_FILES
         src/api/tickets_status/CancelReservation.h
         src/api/tickets_status/TicketsReservation.cpp
         src/api/tickets_status/TicketsReservation.h
+        src/api/tickets_crud/DeleteTickets.cpp
+        src/api/tickets_crud/DeleteTickets.h
 )
 
 ## Добавьте каталоги для заголовочных файлов
@@ -50,15 +49,6 @@ include_directories("/opt/homebrew/opt/openssl@3/include")
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 #find_package(PostgreSQL REQUIRED)
-include(FetchContent)
-FetchContent_Declare(
-        spdlog
-        GIT_REPOSITORY https://github.com/gabime/spdlog.git
-        GIT_TAG v1.12.0
-)
-FetchContent_MakeAvailable(spdlog)
-# Создаем исполняемый файл
-add_executable(TicketsService ${SOURCE_FILES})
 
 #target_link_libraries(TicketsService
 #        PRIVATE
@@ -70,7 +60,17 @@ add_executable(TicketsService ${SOURCE_FILES})
 #        OpenSSL::Crypto
 #)
 
-target_link_libraries(TicketsService PRIVATE CURL::libcurl spdlog::spdlog
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.12.0
+)
+FetchContent_MakeAvailable(spdlog)
+
+add_executable(TicketsService ${SOURCE_FILES})
+
+target_link_libraries(TicketsService PRIVATE spdlog::spdlog CURL::libcurl
         /opt/homebrew/opt/openssl@3/lib/libssl.dylib
         /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
         /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib

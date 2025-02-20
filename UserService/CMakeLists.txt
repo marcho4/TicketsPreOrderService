@@ -27,9 +27,10 @@ set(SOURCE_FILES
         src/api/preorders/PreorderCancel.h
         src/redis/RedisWaitingList.h
         src/redis/RedisWaitingList.cpp
+        config/config.h
+        config/config.cpp
 )
 
-# Подключаем необходимые директории
 include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
 link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
 include_directories("/opt/homebrew/Cellar/hiredis/1.2.0/include")
@@ -37,12 +38,10 @@ include_directories("/opt/homebrew/Cellar/hiredis/1.2.0/include")
 include_directories("/opt/homebrew/opt/libpqxx/include")
 link_directories("/opt/homebrew/opt/libpqxx/lib")
 
-# Include directories
 include_directories("third_party/Bcrypt.cpp/include")
 include_directories("third_party/libpqxx/include")
 include_directories("/opt/homebrew/opt/openssl@3/include")
 
-# Ищем необходимые библиотеки
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 
@@ -55,15 +54,19 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
-# Указываем библиотеку hiredis
-link_directories("/opt/homebrew/include")
+FetchContent_Declare(
+        yaml-cpp
+        GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
+        GIT_TAG yaml-cpp-0.7.0
+)
+FetchContent_MakeAvailable(yaml-cpp)
 
-# Создаем исполняемый файл
+link_directories("/opt/homebrew/include") # hiredis
+
 add_executable(UserService ${SOURCE_FILES})
 
-# Линкуем библиотеки
 target_link_libraries(UserService PRIVATE
-        CURL::libcurl spdlog::spdlog
+        CURL::libcurl spdlog::spdlog yaml-cpp
         /opt/homebrew/opt/openssl@3/lib/libssl.dylib
         /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
         /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib

@@ -4,7 +4,6 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OrganizerService/cmake-build-debug/_deps/spdlog-src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/PaymentService/cmake-build-debug/_deps/spdlog-src" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/TicketsService/_deps/spdlog-src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/UserService/third_party/hiredis" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/WebhookMockService/cmake-build-debug/_deps/spdlog-src" vcs="Git" />
   </component>

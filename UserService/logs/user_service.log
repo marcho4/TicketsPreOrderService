@@ -3576,3 +3576,117 @@
 [2025-02-17 00:08:30.132] [file_logger] [info] Получен запрос на создание аккаунта пользователя
 [2025-02-17 00:08:30.132] [file_logger] [info] Пользователь с email: cvhhhrfrfl@gmail.com успешно создан, id пользователя - 07fcd8af-825e-48d4-a3e4-b26e275c5235
 [2025-02-17 00:08:30.135] [file_logger] [info] Пользователь 07fcd8af-825e-48d4-a3e4-b26e275c5235 добавлен в очередь на матч df5f7d67-8ada-8203-8cbc-3914b21206dc
+[2025-02-20 10:42:34.765] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:42:59.857] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:43:05.092] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:43:24.310] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:43:44.033] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:44:08.871] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:44:45.582] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:49:19.105] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:49:29.457] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:50:01.595] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:51:55.927] [file_logger] [info] Логгер успешно создан!
+[2025-02-20 10:52:22.122] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.136] [file_logger] [info] Пользователь с email: pmbtskqxgg@gmail.com успешно создан, id пользователя - 11c4e4dd-b33d-44ce-b369-b9395419820b
+[2025-02-20 10:52:22.139] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 11c4e4dd-b33d-44ce-b369-b9395419820b, df5f7d67-8ada-4840-8cbc-3914b21206dc, df5f7d67-8ada-4840-8cbc-3914b21206dc, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.141] [file_logger] [info] Предзаказ с id e1ca53c7-0a68-4b22-839b-bb7114153089 добавлен
+[2025-02-20 10:52:22.145] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.147] [file_logger] [info] Пользователь с email: apufedfian@gmail.com успешно создан, id пользователя - 50f6fd2c-440a-4588-b762-319d7ea4a315
+[2025-02-20 10:52:22.148] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 50f6fd2c-440a-4588-b762-319d7ea4a315, df5f7d67-8ada-4840-8cbc-3914b21206dc, df5f7d67-8ada-4840-8cbc-3914b21206dc, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.149] [file_logger] [info] Предзаказ с id d7414d1e-6ae7-4f1d-815e-64d66043a5a9 добавлен
+[2025-02-20 10:52:22.151] [file_logger] [error] Пользователь с id df5f7d67-8ada-4840-8cbc-3914b21206dc не найден
+[2025-02-20 10:52:22.152] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.153] [file_logger] [info] Пользователь с email: sdjdmfjamf@gmail.com успешно создан, id пользователя - c17bb78f-1c11-49c8-bf4e-090adfad2216
+[2025-02-20 10:52:22.155] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: c17bb78f-1c11-49c8-bf4e-090adfad2216, df5f7d67-8ada-4840-8cbc-3914b21206dc, df5f7d67-8ada-4840-8cbc-3914b21206dc, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.155] [file_logger] [info] Предзаказ с id 82d87711-ac28-4266-8fca-d4a98066764d добавлен
+[2025-02-20 10:52:22.158] [file_logger] [info] Предзаказ c билетом df5f7d67-8ada-4840-8cbc-3914b21206dc успешно отменен, пользователь: c17bb78f-1c11-49c8-bf4e-090adfad2216
+[2025-02-20 10:52:22.160] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.161] [file_logger] [info] Пользователь с email: cbfobwotaw@gmail.com успешно создан, id пользователя - 2095a6f5-7615-4f46-b00d-86fdc358b511
+[2025-02-20 10:52:22.163] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 2095a6f5-7615-4f46-b00d-86fdc358b511, df5f7d67-8ada-4840-8cbc-3914b21206dc, df5f7d67-8ada-4840-8cbc-3914b21206dc, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.163] [file_logger] [info] Предзаказ с id 892dddfe-b539-4fe8-9b62-a4fe9614cb80 добавлен
+[2025-02-20 10:52:22.167] [file_logger] [info] Предзаказ c билетом df5f7d67-8ada-4840-8cbc-3914b21206dc успешно отменен, пользователь: 2095a6f5-7615-4f46-b00d-86fdc358b511
+[2025-02-20 10:52:22.169] [file_logger] [error] Пользователь с id df5f7d67-8ada-4840-8cbc-3914b21206dc не найден
+[2025-02-20 10:52:22.170] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.171] [file_logger] [info] Пользователь с email: oznxziqscs@gmail.com успешно создан, id пользователя - 278edfca-7be6-4f88-9349-e3f6d1c3b5bf
+[2025-02-20 10:52:22.173] [file_logger] [warning] Попытка отменить несуществующий предзаказ
+[2025-02-20 10:52:22.174] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.175] [file_logger] [info] Пользователь с email: txgurybppc@gmail.com успешно создан, id пользователя - b9ac1840-04e7-4fef-a050-191e296463c5
+[2025-02-20 10:52:22.177] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: b9ac1840-04e7-4fef-a050-191e296463c5, 696d8fd7-4091-434e-97f2-08d31f9763d3, 8609192a-226c-43a3-b90b-19bdabd1b7e9, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.178] [file_logger] [info] Предзаказ с id 38671b32-aa50-4852-9102-f4e427f2c3aa добавлен
+[2025-02-20 10:52:22.180] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: b9ac1840-04e7-4fef-a050-191e296463c5, cc3c87dc-f758-42a6-b4fd-7183f044bec8, 5dfedde8-9042-45ae-a854-7970b63e829e, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.181] [file_logger] [info] Предзаказ с id 79f1732d-0bf1-48a1-882f-7b493c2ad2ed добавлен
+[2025-02-20 10:52:22.182] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: b9ac1840-04e7-4fef-a050-191e296463c5, 8b064d4f-4f98-41c6-97ae-fa97054d7c3a, 7d5a542a-6428-4e4e-a5df-6577cbd240c0, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.182] [file_logger] [info] Предзаказ с id 28bd1a70-2604-4420-a276-14e85f0b2d85 добавлен
+[2025-02-20 10:52:22.184] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: b9ac1840-04e7-4fef-a050-191e296463c5, 0bb3f0dd-47f4-4c89-8d06-32b2307a8f3d, ece25169-e96d-42f3-b818-e056d926f11b, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.184] [file_logger] [info] Предзаказ с id 367396a4-859e-4465-a51b-b4628e4276eb добавлен
+[2025-02-20 10:52:22.186] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: b9ac1840-04e7-4fef-a050-191e296463c5, e76a9591-1c5e-4916-84ff-3f3fa0b08a36, 799f21a1-9b07-4e0d-aedf-38cf69433c94, 2026-10-10 10:00:00
+[2025-02-20 10:52:22.187] [file_logger] [info] Предзаказ с id 156accfc-3c4e-40d5-9901-3a8eecb60161 добавлен
+[2025-02-20 10:52:22.190] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.191] [file_logger] [info] Пользователь с email: sqexmzxnwo@gmail.com успешно создан, id пользователя - 25a7e3bb-5e4f-48a9-ab0f-cf18eb5e1999
+[2025-02-20 10:52:22.192] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 25a7e3bb-5e4f-48a9-ab0f-cf18eb5e1999, b0070266-523f-42ad-9530-def1cce50fc7, faf12be4-ce23-4c1e-98df-68ea987f7573, 2021-10-10 10:00:00
+[2025-02-20 10:52:22.195] [file_logger] [info] Предзаказ с id 109eebab-23d6-4eb7-8e50-b6b7732f7356 добавлен
+[2025-02-20 10:52:22.198] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.199] [file_logger] [info] Пользователь с email: uvgsqvvapv@gmail.com успешно создан, id пользователя - 06cc3c3e-899b-4080-beb0-b504ca9ba9cf
+[2025-02-20 10:52:22.201] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 06cc3c3e-899b-4080-beb0-b504ca9ba9cf, 26b5ac3e-6759-43b5-8f46-6f876b467b2a, ad4eb619-bb77-49e7-bec7-88b1c0963651, 2021-10-10 10:00:00
+[2025-02-20 10:52:22.202] [file_logger] [info] Предзаказ с id 05637870-8fc4-4287-9ced-6801a26b4f0f добавлен
+[2025-02-20 10:52:22.203] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 06cc3c3e-899b-4080-beb0-b504ca9ba9cf, f89b25bc-c00d-4911-b182-2e850da031d4, 7624d8de-29c9-4a7a-b7fe-21d416851b0d, 2021-10-10 10:00:00
+[2025-02-20 10:52:22.204] [file_logger] [info] Предзаказ с id 55839fb9-bbf0-4020-b7de-5af3bf6a7f88 добавлен
+[2025-02-20 10:52:22.206] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 06cc3c3e-899b-4080-beb0-b504ca9ba9cf, d9ecdccf-dab8-4177-a6cc-a5b65538b709, 7e0948b0-fa43-434a-b94d-123f42e54e0c, 2021-10-10 10:00:00
+[2025-02-20 10:52:22.206] [file_logger] [info] Предзаказ с id eacf5435-b200-489f-a116-762ccc97457f добавлен
+[2025-02-20 10:52:22.208] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 06cc3c3e-899b-4080-beb0-b504ca9ba9cf, 14df57f0-3359-4cf3-aeb2-acfe3cd6d841, ce220caf-6c23-46ec-ae97-9df5e82ca1e0, 2021-10-10 10:00:00
+[2025-02-20 10:52:22.209] [file_logger] [info] Предзаказ с id b09ff289-80ee-4fbb-91a3-6eefb5d5e69b добавлен
+[2025-02-20 10:52:22.211] [file_logger] [info] Выполняем запрос: INSERT INTO Users.Preorders (user_id, match_id, ticket_id, match_date) VALUES ($1, $2, $3, $4) RETURNING id с параметрами: 06cc3c3e-899b-4080-beb0-b504ca9ba9cf, 30060aed-eee6-488b-9ab2-2dc1233616a3, 7c6d7cc6-ca4e-47f5-be91-1c974d31023b, 2021-10-10 10:00:00
+[2025-02-20 10:52:22.212] [file_logger] [info] Предзаказ с id 265288f1-47ee-49b5-aa2d-b17ba540a768 добавлен
+[2025-02-20 10:52:22.215] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.216] [file_logger] [info] Пользователь с email: lzfmpalzfc@gmail.com успешно создан, id пользователя - e3bc6eb2-90a3-4281-a4e2-a73bc5515be8
+[2025-02-20 10:52:22.217] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.219] [file_logger] [info] Пользователь с email: qaarelyvca@gmail.com успешно создан, id пользователя - d315df09-aa7b-487a-aac1-2f73073941cf
+[2025-02-20 10:52:22.220] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.220] [file_logger] [error] Пользователь с email: qaarelyvca@gmail.com уже существует, отказано в создании
+[2025-02-20 10:52:22.221] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.222] [file_logger] [info] Пользователь с email: xjnyzdyyus@gmail.com успешно создан, id пользователя - 7b84147f-cf61-4e0e-8b9d-63fedc0ee974
+[2025-02-20 10:52:22.223] [file_logger] [info] Получен запрос на обновление аккаунта пользователя:
+[2025-02-20 10:52:22.225] [file_logger] [info] Пользователь 7b84147f-cf61-4e0e-8b9d-63fedc0ee974 обновил данные аккаунта
+[2025-02-20 10:52:22.226] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.227] [file_logger] [info] Пользователь с email: invalid_email успешно создан, id пользователя - 209d1207-742b-4259-a62b-7f289ac0582e
+[2025-02-20 10:52:22.228] [file_logger] [info] Получен запрос на обновление аккаунта пользователя:
+[2025-02-20 10:52:22.228] [file_logger] [error] Пользователь 209d1207-742b-4259-a62b-7f289ac0582e ввел неверный формат email, отказано в обновлении профиля
+[2025-02-20 10:52:22.229] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.230] [file_logger] [info] Пользователь с email: xswwsbktqk@gmail.com успешно создан, id пользователя - ad11b414-2148-4dea-9aee-c6ad19ab129b
+[2025-02-20 10:52:22.232] [file_logger] [info] Получен запрос на обновление аккаунта пользователя:
+[2025-02-20 10:52:22.232] [file_logger] [error] Пользователь ad11b414-2148-4dea-9aee-c6ad19ab129b ввел неверный формат номера телефона, отказано в обновлении профиля
+[2025-02-20 10:52:22.233] [file_logger] [info] Получен запрос на обновление аккаунта пользователя:
+[2025-02-20 10:52:22.235] [file_logger] [error] Пользователь 123 не найден, отказано в обновлении профиля
+[2025-02-20 10:52:22.236] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.238] [file_logger] [info] Пользователь с email: eiukvleylt@gmail.com успешно создан, id пользователя - 916de97d-9477-438f-95b4-caf13b8f3c04
+[2025-02-20 10:52:22.238] [file_logger] [info] Получен запрос на получение данных пользователя:
+[2025-02-20 10:52:22.239] [file_logger] [info] Данные пользователя с id: 916de97d-9477-438f-95b4-caf13b8f3c04 получены
+[2025-02-20 10:52:22.239] [file_logger] [info] Данные пользователя с id: 916de97d-9477-438f-95b4-caf13b8f3c04 отправлены
+[2025-02-20 10:52:22.241] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.242] [file_logger] [info] Пользователь с email: tqxftwodtq@gmail.com успешно создан, id пользователя - a9512ae3-000c-412d-9e2c-f30dba9a497a
+[2025-02-20 10:52:22.243] [file_logger] [info] Получен запрос на обновление аккаунта пользователя:
+[2025-02-20 10:52:22.244] [file_logger] [info] Пользователь a9512ae3-000c-412d-9e2c-f30dba9a497a обновил данные аккаунта
+[2025-02-20 10:52:22.245] [file_logger] [info] Получен запрос на получение данных пользователя:
+[2025-02-20 10:52:22.246] [file_logger] [info] Данные пользователя с id: a9512ae3-000c-412d-9e2c-f30dba9a497a получены
+[2025-02-20 10:52:22.246] [file_logger] [info] Данные пользователя с id: a9512ae3-000c-412d-9e2c-f30dba9a497a отправлены
+[2025-02-20 10:52:22.247] [file_logger] [info] Получен запрос на получение данных пользователя:
+[2025-02-20 10:52:22.247] [file_logger] [error] Пользователь с id: 123 не найден
+[2025-02-20 10:52:22.249] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.250] [file_logger] [info] Пользователь с email: iinfdtnrpi@gmail.com успешно создан, id пользователя - 90e99e7c-59ac-4aac-ac83-891efe2eac43
+[2025-02-20 10:52:22.259] [file_logger] [info] Пользователь 90e99e7c-59ac-4aac-ac83-891efe2eac43 добавлен в очередь на матч df5f7d67-8ada-1234-8cbc-3914b21206dc
+[2025-02-20 10:52:22.261] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.262] [file_logger] [info] Пользователь с email: uvrswqgiql@gmail.com успешно создан, id пользователя - a61c8600-5810-46e4-a4f5-58cbc518b289
+[2025-02-20 10:52:22.264] [file_logger] [info] Пользователь a61c8600-5810-46e4-a4f5-58cbc518b289 добавлен в очередь на матч df5f7d67-8ada-1234-8cbc-3914b21206dc
+[2025-02-20 10:52:22.265] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.266] [file_logger] [info] Пользователь с email: egifxvayui@gmail.com успешно создан, id пользователя - 4c17bed1-f056-48b3-88e4-e56112d9ed62
+[2025-02-20 10:52:22.268] [file_logger] [info] Пользователь 4c17bed1-f056-48b3-88e4-e56112d9ed62 добавлен в очередь на матч df5f7d67-8ada-1234-8cbc-3914b21206dc
+[2025-02-20 10:52:22.269] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.270] [file_logger] [info] Пользователь с email: ppuieowrpj@gmail.com успешно создан, id пользователя - 100f7e19-179c-493e-8fa0-ce6237f67f35
+[2025-02-20 10:52:22.273] [file_logger] [info] Пользователь 100f7e19-179c-493e-8fa0-ce6237f67f35 добавлен в очередь на матч df5f7d67-8ada-4292-8cbc-3914b21206dc
+[2025-02-20 10:52:22.274] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.276] [file_logger] [info] Пользователь с email: ffkrtobdhr@gmail.com успешно создан, id пользователя - dcdaa55b-3f0c-41f1-8160-9c5a8e87daab
+[2025-02-20 10:52:22.278] [file_logger] [info] Пользователь dcdaa55b-3f0c-41f1-8160-9c5a8e87daab добавлен в очередь на матч df5f7d67-8ada-4229-8cbc-3914b21206dc
+[2025-02-20 10:52:22.280] [file_logger] [info] Получен запрос на создание аккаунта пользователя
+[2025-02-20 10:52:22.281] [file_logger] [info] Пользователь с email: pyszkdtdri@gmail.com успешно создан, id пользователя - 7811217d-3f16-423b-8747-96c240d988dd
+[2025-02-20 10:52:22.284] [file_logger] [info] Пользователь 7811217d-3f16-423b-8747-96c240d988dd добавлен в очередь на матч df5f7d67-8ada-8203-8cbc-3914b21206dc

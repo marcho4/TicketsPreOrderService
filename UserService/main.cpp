@@ -12,18 +12,20 @@
 #include "src/api/preorders/PreorderCancel.h"
 #include "src/api/preorders/GetPreorders.h"
 #include "src/redis/RedisWaitingList.h"
+#include "config/config.h"
 
 int main() {
-
     auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/user_service.log", 1048576 * 5, 3);
     logger->flush_on(spdlog::level::info);
     spdlog::set_default_logger(logger);
     spdlog::info("Логгер успешно создан!");
 
+    Config cfg = Config::MustLoadConfig("../config/config.yaml");
+
     try {
         httplib::Server server;
 
-        RedisWaitingList redis("localhost", 6379);
+        RedisWaitingList redis(cfg.redis_.host, cfg.redis_.port);
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -42,9 +44,18 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        std::string connect = "dbname=user_personal_account host=localhost port=5432";
+        // это вариация для docker контейнера
+        // std::string connect = "dbname=" + cfg.database_.db_name +
+        //                       " host=" + cfg.database_.host +
+        //                       " port=" + std::to_string(cfg.database_.port) +
+        //                       " user=" + cfg.database_.user +
+        //                       " password=" + cfg.database_.password;
+
+        std::string connect = "dbname=" + cfg.database_.db_name +
+                              " host=" + cfg.database_.host +
+                              " port=" + std::to_string(cfg.database_.port);
         Database db(connect);
-        db.initDbFromFile("../src/database/user_personal_account.sql");
+        db.initDbFromFile(cfg.database_.init_db_path);
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
@@ -107,7 +118,7 @@ int main() {
             redis.ClearWaitingListRequest(request, res, db);
         });
 
-        server.listen("0.0.0.0", 8007);
+        server.listen(cfg.server_.host, cfg.server_.port);
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << '\n';
     }
