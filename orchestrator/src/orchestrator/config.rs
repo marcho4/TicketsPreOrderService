@@ -13,4 +13,5 @@ pub struct Config {
     pub user_url: String,
     pub matches_url: String,
     pub tickets_url: String,
+    pub email_url: String,
 }

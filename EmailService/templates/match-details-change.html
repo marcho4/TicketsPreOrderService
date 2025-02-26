@@ -1,0 +1,116 @@
+<template id="match-details-change">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменение деталей матча</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+        .content {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            background-color: #9C27B0;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .change-details {
+            background-color: #f3e5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #9C27B0;
+        }
+        .old-details {
+            text-decoration: line-through;
+            color: #777;
+        }
+        .new-details {
+            font-weight: bold;
+            color: #9C27B0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{logo_url}}" alt="Логотип" class="logo">
+        <h1>Важное изменение информации о матче</h1>
+    </div>
+    <div class="content">
+        <p>Здравствуйте, {{user_name}}!</p>
+        <p>Сообщаем вам об изменении информации о матче, на который вы оформили предзаказ билетов.</p>
+
+        <div class="change-details">
+            <p><strong>Матч:</strong> {{match_title}}</p>
+            <p><strong>Номер предзаказа:</strong> {{order_id}}</p>
+            <p><strong>Измененные детали:</strong></p>
+
+            {{#date_changed}}
+            <p>
+                <strong>Дата проведения:</strong><br>
+                <span class="old-details">{{old_date}}</span><br>
+                <span class="new-details">{{new_date}}</span>
+            </p>
+            {{/date_changed}}
+
+            {{#time_changed}}
+            <p>
+                <strong>Время проведения:</strong><br>
+                <span class="old-details">{{old_time}}</span><br>
+                <span class="new-details">{{new_time}}</span>
+            </p>
+            {{/time_changed}}
+
+            {{#venue_changed}}
+            <p>
+                <strong>Место проведения:</strong><br>
+                <span class="old-details">{{old_venue}}</span><br>
+                <span class="new-details">{{new_venue}}</span>
+            </p>
+            {{/venue_changed}}
+        </div>
+
+        <p><strong>Важно:</strong> Если новые дата и время вам не подходят, вы можете отменить предзаказ в своем личном кабинете.</p>
+
+        <div style="text-align: center;">
+            <a href="{{order_details_url}}" class="button">Перейти к предзаказу</a>
+        </div>
+
+        <p>Приносим извинения за возможные неудобства и благодарим за понимание.</p>
+    </div>
+    <div class="footer">
+        <p>С уважением, команда {{service_name}}</p>
+        <p>Данное письмо сформировано автоматически, пожалуйста, не отвечайте на него.</p>
+        <p>© {{current_year}} {{company_name}}. Все права защищены.</p>
+    </div>
+</body>
+</html>
+</template>

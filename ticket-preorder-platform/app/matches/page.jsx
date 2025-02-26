@@ -36,6 +36,7 @@ export default function Page() {
 
 function MatchesContainer({ resourse }) {
     const data = resourse.read();
+    console.log("match data ", data);
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-y-10 gap-x-5 w-full items-center justify-items-center">
             {data.map((item, index) => (

@@ -185,6 +185,21 @@ services:
       timeout: 3s
     restart: always
       
+
+  email:
+    build:
+      context: ./EmailService
+      dockerfile: Dockerfile
+    env_file:
+      - ./EmailService/.env
+    networks:
+      - main
+    ports:
+      - "8010:8010"
+    restart:
+      always
+
+
 networks:
   main:
     driver: bridge

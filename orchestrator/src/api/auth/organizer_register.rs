@@ -1,11 +1,15 @@
+use std::collections::HashMap;
 use crate::models::organizer_registration_data::OrganizerRegistrationData;
 use crate::models::registration_org_resp::RegistrationOrgResp;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::generic_response;
 use actix_web::http::StatusCode;
 use actix_web::{post, web, HttpRequest, HttpResponse};
+use chrono::{Datelike, Utc};
 use log::error;
+use serde_json::json;
 use crate::models::api_response::ApiResponse;
+use crate::models::email::{EmailTemplates, Recipient};
 
 #[utoipa::path(
     post,
@@ -50,6 +54,30 @@ pub async fn register_organizer(
             Some(err.to_string()),
             None,
         );
+    };
+
+    let recipient = Recipient {
+        email: data.email,
+        name: data.company.clone()
+    };
+
+    let mut variables: HashMap<String, serde_json::Value> = HashMap::new();
+    variables.insert("logo_url".to_string(), json!("https://example.com/logo.png"));
+    variables.insert("user_name".to_string(), json!(data.company.clone()));
+    variables.insert("service_name".to_string(), json!("Tickets PreOrder Platform"));
+    variables.insert("current_year".to_string(), json!(Utc::now().year()));
+    variables.insert("company_name".to_string(), json!("Tickets PreOrder Platform"));
+
+
+    let email_resp = orchestrator.send_email(
+        EmailTemplates::OrgRegistration,
+        recipient,
+        variables,
+        None
+    );
+
+    if email_resp.await.is_err() {
+        error!("Error while sending email");
     };
 
     generic_response::<RegistrationOrgResp>(

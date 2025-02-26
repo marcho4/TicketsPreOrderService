@@ -1,5 +1,8 @@
+use std::collections::HashMap;
 use actix_web::{http::StatusCode, post, web, HttpRequest, HttpResponse};
-use log::info;
+use chrono::{Datelike, Utc};
+use log::{error, info};
+use serde_json::json;
 use crate::models::{
     create_org_data::CreateOrgData,
     org_approve_body::OrgApproveBody,
@@ -7,6 +10,7 @@ use crate::models::{
     request_process_info::{RequestProcessInfo, Status},
 };
 use crate::models::api_response::ApiResponse;
+use crate::models::email::{EmailTemplates, Recipient};
 use crate::models::roles::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::generic_response;
@@ -91,7 +95,7 @@ pub async fn process_request(
     };
 
     let org_id = match orchestrator.create_organizer(org_data).await {
-        Ok(org) => org.data.id,
+        Ok(org) => org,
         Err(e) => {
             return generic_response::<String>(
                 StatusCode::INTERNAL_SERVER_ERROR,
@@ -106,7 +110,7 @@ pub async fn process_request(
         company: request_info.company.clone(),
         tin: request_info.tin.clone(),
         status: "APPROVED".to_string(),
-        user_id: org_id,
+        user_id: org_id.data.id,
     };
 
     let org_approve_response = match orchestrator.org_approve(&approve_payload).await {
@@ -119,6 +123,34 @@ pub async fn process_request(
             );
         }
     };
+
+
+    let mut variables: HashMap<String, serde_json::Value> = HashMap::new();
+    variables.insert("logo_url".to_string(), json!("https://example.com/logo.png"));
+    variables.insert("company_name".to_string(), json!(request_info.company.clone()));
+    variables.insert("service_name".to_string(), json!("Tickets PreOrder Platform"));
+    variables.insert("current_year".to_string(), json!(Utc::now().year()));
+    variables.insert("login".to_string(), json!(org_approve_response.login.clone()));
+    variables.insert("password".to_string(), json!(org_approve_response.password.clone()));
+    variables.insert("registration_date".to_string(), json!(Utc::now().to_string()));
+    variables.insert("admin_panel_url".to_string(), json!("http://localhost:3000/organizer"));
+
+
+
+    let email_res = orchestrator.send_email(
+        EmailTemplates::OrganizerApproval,
+        Recipient {
+            name: request_info.company.clone(),
+            email: request_info.email.clone(),
+        },
+        variables,
+        None
+    ).await;
+
+    if let Err(e) = email_res {
+        error!("{:?}", e.to_string());
+    };
+
 
     generic_response::<OrgApproveResponse>(
         StatusCode::OK,

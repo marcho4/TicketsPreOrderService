@@ -375,9 +375,9 @@ function TicketsRendered({ resource, match_id }) {
                         <div>
                             Please upload file in .csv format<br/>
                             Example:
-                            <br/>sector; row; seat; price;
-                            <br/>110; 5; 10; 45000;
-                            <br/>127; 10; 23; 2999;
+                            <br/>price, sector, row, seat
+                            <br/>110, D, 10, 5
+                            <br/>400, A, 1, 10
                             <form className="max-w-md w-full  rounded-lg p-6  items-center justify-center flex flex-col">
                                 {/* Блок с загрузкой файла */}
                                 <div className="mb-4 items-center justify-center flex flex-col">

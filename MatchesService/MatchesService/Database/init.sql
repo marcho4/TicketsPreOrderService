@@ -4,13 +4,6 @@ DROP TYPE IF EXISTS matchstatus CASCADE;
 
 CREATE TYPE matchstatus AS ENUM ('pending', 'in_progress', 'finished');
 
-CREATE EXTENSION IF NOT EXISTS pg_cron;
-
-SELECT cron.schedule(
-    'update_match_statuses',  -- имя задачи
-    '*/5 * * * *',            -- расписание (каждую минуту)
-    $$ UPDATE Matches SET match_id = match_id WHERE match_status IN ('pending', 'in_progress') $$  -- фиктивное обновление
-);
 
 
 CREATE TABLE Matches (

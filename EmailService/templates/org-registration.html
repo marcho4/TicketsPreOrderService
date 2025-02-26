@@ -1,0 +1,64 @@
+<template id="org-registration">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Успешная регистрация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+        .content {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{logo_url}}" alt="Логотип" class="logo">
+        <h1>Добро пожаловать, {{user_name}}!</h1>
+    </div>
+    <div class="content">
+        <p>Благодарим вас за регистрацию на нашем сервисе. Заявка на регистрацию успешно получена.</p>
+        <p>После подтверждения регистрации вам придет письмо на почту. Ожидайте!</p>
+        <p>Если у вас возникнут вопросы, не стесняйтесь обращаться в нашу службу поддержки.</p>
+    </div>
+    <div class="footer">
+        <p>С уважением, команда {{service_name}}</p>
+        <p>Данное письмо сформировано автоматически, пожалуйста, не отвечайте на него.</p>
+        <p>© {{current_year}} {{company_name}}. Все права защищены.</p>
+    </div>
+</body>
+</html>
+</template>

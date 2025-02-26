@@ -40,6 +40,8 @@ impl Orchestrator {
             None
         }
     }
+    /// U - Request Body Type <br/>
+    /// T - Response Body Type
     pub async fn send_request<T, U>(&self, url: String, data: Option<U>, method: Method) -> Result<T, OrchestratorError>
     where T: DeserializeOwned, U: Serialize {
         let mut req = self.client.request(method.clone(), &url);
