@@ -10,6 +10,9 @@ RUN cargo chef prepare --recipe-path recipe.json
 # Этап 3: Сборка зависимостей и приложения
 FROM chef AS builder
 COPY --from=planner /app/recipe.json recipe.json
+RUN apt-get update && \
+    apt-get install -y cmake pkg-config librdkafka-dev libssl-dev && \
+    rm -rf /var/lib/apt/lists/*
 RUN cargo chef cook --release --recipe-path recipe.json
 COPY . .
 RUN cargo build --release --bin orchestrator
@@ -19,14 +22,14 @@ FROM debian:bookworm-slim AS runtime
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y libssl3 ca-certificates && \
+    apt-get install -y libssl3 ca-certificates librdkafka-dev && \
     rm -rf /var/lib/apt/lists/*
-    
+
 # Копирование бинарника из этапа сборки
 COPY src/orchestrator/docker.toml /app/docker.toml
 COPY src/orchestrator/dev.toml /app/dev.toml
+RUN mkdir tmp
 COPY --from=builder /app/target/release/orchestrator /app/orchestrator
-
 
 EXPOSE 8000
 CMD ["./orchestrator"]

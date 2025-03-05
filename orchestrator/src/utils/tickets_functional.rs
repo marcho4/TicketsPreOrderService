@@ -27,6 +27,11 @@ impl Orchestrator {
         Ok(self.send_request::<MessageResp, String>(url, None, Method::PUT).await?)
     }
 
+    pub async fn get_ticket(&self, ticket_id: String) -> Result<Ticket, OrchestratorError> {
+        let url = format!("{}/ticket/{}", self.config.tickets_url, ticket_id);
+        Ok(self.send_request::<Ticket, String>(url, None, Method::GET).await?)
+    }
+
     // TODO - переделать логику
     // pub async fn delete_tickets(&self, match_id: String) -> Result<(), OrchestratorError> {
     //     let url = format!("{}/ticket/{}/delete", self.config.tickets_url, match_id);

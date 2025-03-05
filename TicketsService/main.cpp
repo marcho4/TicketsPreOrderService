@@ -9,9 +9,9 @@
 #include "src/api/tickets_status/TicketsReservation.h"
 #include "src/api/tickets_crud/DeleteTickets.h"
 #include "src/api/user/GetUsersTickets.h"
+#include "src/api/tickets_crud/GetTicket.h"
 
 int main() {
-
     auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/tickets_service.log", 1048576 * 5, 3);
     logger->flush_on(spdlog::level::info);
     spdlog::set_default_logger(logger);
@@ -48,6 +48,12 @@ int main() {
             set_cors_headers(res);
             spdlog::info("Получен запрос на создание выгрузку билетов");
             AddTickets::AddingTicketsRequest(request, res, db);
+        });
+
+        server.Get("/ticket/:ticket_id", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            spdlog::info("Получен запрос на получение информации о билете");
+            GetTicket::GetTicketByIdRequest(request, res, db);
         });
 
         server.Get("/ticket/:match_id/get", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {

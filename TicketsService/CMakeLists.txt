@@ -24,6 +24,8 @@ set(SOURCE_FILES
     src/api/tickets_status/TicketsReservation.h
     src/api/user/GetUsersTickets.cpp
     src/api/user/GetUsersTickets.h
+    src/api/tickets_crud/GetTicket.cpp
+    src/api/tickets_crud/GetTicket.h
 )
 
 # Ищем необходимые системные библиотеки

@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use rdkafka::producer::{BaseRecord, FutureRecord};
 use reqwest::Method;
 use crate::models::email::{EmailMetadata, EmailTemplates, Recipient, SendEmailRequest, SendEmailResponse};
 use crate::orchestrator::orchestrator::Orchestrator;
@@ -30,7 +31,12 @@ impl Orchestrator {
             metadata,
         };
 
+        // self.producer.send(
+        //     BaseRecord::to("email-tasks")
+        // );
+
         let url = format!("{}/api/v1/send-email", self.config.email_url);
         self.send_request::<SendEmailResponse, SendEmailRequest>(url, Some(send_data), Method::POST).await
+
     }
 }

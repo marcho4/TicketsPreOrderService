@@ -60,7 +60,7 @@ async fn main() -> std::io::Result<()> {
 
     let config_path = if is_docker { "/app/docker.toml" } else { "src/orchestrator/dev.toml" };
 
-    let orchestrator = Orchestrator::new(config_path);
+    let orchestrator = Orchestrator::new(config_path).await;
 
     let auth_middleware = AuthMiddleware {
         jwt_secret: Arc::new(orchestrator.jwt_key.clone())

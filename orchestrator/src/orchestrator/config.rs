@@ -14,4 +14,5 @@ pub struct Config {
     pub matches_url: String,
     pub tickets_url: String,
     pub email_url: String,
+    pub kafka_url: String,
 }
