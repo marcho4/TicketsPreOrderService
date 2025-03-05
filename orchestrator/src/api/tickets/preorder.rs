@@ -4,7 +4,6 @@ use actix_web::http::StatusCode;
 use chrono::{Datelike, Utc};
 use log::{error, info};
 use serde_json::json;
-use tokio::task;
 use crate::models::api_response::ApiResponse;
 use crate::models::email::{EmailTemplates, Recipient};
 use crate::models::jwt_claims::JwtClaims;
@@ -115,31 +114,20 @@ pub async fn preorder_ticket(
             variables.insert("current_year".to_string(), json!(Utc::now().year()));
             variables.insert("company_name".to_string(), json!("Tickets PreOrder Platform"));
 
-            match task::spawn(async move {
-                match orchestrator.send_email(
-                    EmailTemplates::TicketPreOrder,
-                    Recipient{
-                        name: user_info.name.clone(),
-                        email: user_info.email.clone()
-                    },
-                    variables,
-                    None
-                ).await {
-                    Ok(_) => {
-                        info!("Email sent successfully for ticket preorder: {}", ticket_id);
-                    },
-                    Err(e) => {
-                        error!(
-                "Failed to send email for ticket preorder (ticket_id: {}): {}",
-                ticket_id,
-                e
-            );
-                    }
-                }
-            }).await {
-                Ok(_) => {},
-                Err(join_err) => {
-                    error!("Task spawning error: {}", join_err);
+            match orchestrator.send_email(EmailTemplates::TicketPreOrder,
+                Recipient{
+                    name: user_info.name.clone(),
+                    email: user_info.email.clone()
+                },
+                variables,
+                None
+            ).await {
+                Ok(_) => {
+                    info!("Email sent successfully for ticket preorder: {}", ticket_id);
+                },
+                Err(e) => {
+                    error!(
+                "Failed to send email for ticket preorder (ticket_id: {}): {}", ticket_id, e);
                 }
             }
 

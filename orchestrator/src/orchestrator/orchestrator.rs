@@ -4,17 +4,19 @@ use config::File;
 use log::info;
 use reqwest::Client;
 use std::path::Path;
+use std::sync::Arc;
+use std::sync::atomic::AtomicI64;
 use rdkafka::admin::{AdminClient, AdminOptions, NewTopic, TopicReplication};
 use rdkafka::client::DefaultClientContext;
 use rdkafka::config::ClientConfig;
-use rdkafka::producer::{FutureProducer, FutureRecord};
-use rdkafka::util::Timeout;
+use rdkafka::producer::{FutureProducer};
 
 pub struct Orchestrator {
     pub client: Client, // Клиент reqwest для обращения к другим микросервисам
     pub config: Config, // Конфиг для удобной работы с оркестратором
     pub jwt_key: String,
     pub producer: FutureProducer,
+    pub email_counter: Arc<AtomicI64>
 }
 
 impl Orchestrator {
@@ -79,6 +81,7 @@ impl Orchestrator {
             config,
             jwt_key,
             producer: kafka_producer,
+            email_counter: Arc::new(AtomicI64::new(0))
         }
     }
 }

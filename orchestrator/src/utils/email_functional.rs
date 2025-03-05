@@ -1,7 +1,5 @@
 use std::collections::HashMap;
-use rdkafka::producer::{BaseRecord, FutureRecord};
-use reqwest::Method;
-use crate::models::email::{EmailMetadata, EmailTemplates, Recipient, SendEmailRequest, SendEmailResponse};
+use crate::models::email::{EmailMetadata, EmailTemplates, Recipient, SendEmailRequest};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
 
@@ -12,7 +10,7 @@ impl Orchestrator {
         recipient: Recipient,
         variables: HashMap<String, serde_json::Value>,
         metadata: Option<EmailMetadata>
-    ) -> Result<SendEmailResponse, OrchestratorError> {
+    ) -> Result<String, OrchestratorError> {
 
         let subject = match template_id {
             EmailTemplates::RegistrationSuccess => "Успешная регистрация в сервисе",
@@ -31,12 +29,9 @@ impl Orchestrator {
             metadata,
         };
 
-        // self.producer.send(
-        //     BaseRecord::to("email-tasks")
-        // );
-
-        let url = format!("{}/api/v1/send-email", self.config.email_url);
-        self.send_request::<SendEmailResponse, SendEmailRequest>(url, Some(send_data), Method::POST).await
-
+        match self.safe_send_email_task(&send_data).await {
+            Ok(_) => Ok(String::from("Successfully sent email")),
+            Err(e) => Err(OrchestratorError::Service(e.to_string()))
+        }
     }
 }

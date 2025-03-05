@@ -190,10 +190,10 @@ services:
       dockerfile: Dockerfile
     env_file:
       - ./EmailService/.env
+    environment:
+      - DOCKER=true
     networks:
       - main
-    ports:
-      - "8010:8010"
     restart:
       always
 
@@ -209,16 +209,22 @@ services:
       # Основные роли
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: controller,broker
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
       # Контроллеру нужен listener с именем CONTROLLER
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka-1:9093"
+
       # Определяем все listener’ы, включая CONTROLLER
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:29092,CONTROLLER://0.0.0.0:9093
+
       # Рекламируемые адреса: для внешних клиентов PLAINTEXT – localhost,
       # для внутренних контейнеров INTERNAL и CONTROLLER – имя контейнера
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,INTERNAL://kafka-1:29092
+
       # Назначаем security protocol для каждого listener
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+
       # Указываем, какой listener использовать для межброкерской коммуникации
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
 

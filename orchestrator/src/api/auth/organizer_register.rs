@@ -74,10 +74,11 @@ pub async fn register_organizer(
         recipient,
         variables,
         None
-    );
+    ).await;
 
-    if email_resp.await.is_err() {
+    if email_resp.is_err() {
         error!("Error while sending email");
+        // Мейби добавить логику оповещения разработчиков
     };
 
     generic_response::<RegistrationOrgResp>(

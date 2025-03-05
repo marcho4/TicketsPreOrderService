@@ -98,6 +98,13 @@ pub async fn register_user(
         None
     ).await;
 
+    if let Err(e) = email_res {
+        return generic_response::<String>(StatusCode::INTERNAL_SERVER_ERROR,
+                                        Some("Error while creating task to send an email".to_string()),
+                                        Some(e.to_string())
+        );
+    };
+
     info!("Email sent: {:?}", email_res);
 
     generic_response::<MessageResp>(StatusCode::OK,

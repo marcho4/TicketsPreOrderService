@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use actix_web::{put, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use chrono::{Datelike, Utc};
+use log::{error, info};
 use serde_json::json;
 use crate::models::api_response::ApiResponse;
 use crate::models::email::{EmailTemplates, Recipient};
@@ -88,15 +89,22 @@ pub async fn cancel_preorder(
                 variables.insert("service_name".to_string(), json!("Tickets PreOrder Platform"));
                 variables.insert("current_year".to_string(), json!(Utc::now().year()));
                 variables.insert("company_name".to_string(), json!("Tickets PreOrder Platform"));
-                let email_res = orchestrator.send_email(
-                    EmailTemplates::TicketPreOrderCancel,
-                    Recipient {
-                        email: user_info.email.clone(),
-                        name: user_info.name.clone()
+                match orchestrator.send_email(EmailTemplates::TicketPreOrderCancel,
+                                              Recipient{
+                                                  name: user_info.name.clone(),
+                                                  email: user_info.email.clone()
+                                              },
+                                              variables,
+                                              None
+                ).await {
+                    Ok(_) => {
+                        info!("Email sent successfully for ticket preorder cancel: {}", ticket_id);
                     },
-                    variables,
-                    None
-                );
+                    Err(e) => {
+                        error!(
+                        "Failed to send email for ticket preorder (ticket_id: {}): {}", ticket_id, e);
+                    }
+                }
             }
 
 

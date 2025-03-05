@@ -9,3 +9,4 @@ mod match_functional;
 mod tickets_functional;
 pub mod request_validator;
 pub mod email_functional;
+mod kafka_functional;
