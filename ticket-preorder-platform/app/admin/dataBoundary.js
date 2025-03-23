@@ -21,7 +21,7 @@ class ErrorBoundary extends React.Component {
             return (
                 <div className="flex justify-center items-center h-full bg-silver rounded-lg">
                     <p className="text-xl text-red-500">
-                        Something went wrong: {this.state.error.message}
+                        Что-то пошло не так: {this.state.error.message}
                     </p>
                 </div>
             );

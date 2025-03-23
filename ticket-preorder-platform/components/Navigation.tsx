@@ -10,26 +10,26 @@ import { Menu, X } from 'lucide-react'
 
 const getLinksForRole = (role: string) => {
     const commonLinks = [
-        { href: '/', label: 'Home' },
-        { href: '/matches', label: 'Matches' },
+        { href: '/', label: 'Меню' },
+        { href: '/matches', label: 'Матчи' },
     ]
 
     switch (role) {
         case 'ADMIN':
-            return [...commonLinks, { href: '/admin', label: 'Admin Panel' }]
+            return [...commonLinks, { href: '/admin', label: 'Админ' }]
         case 'ORGANIZER':
-            return [...commonLinks, { href: '/organizer', label: 'Dashboard' }]
+            return [...commonLinks, { href: '/organizer', label: 'Личный кабинет' }]
         case 'USER':
-            return [...commonLinks, { href: '/dashboard', label: 'Dashboard' }]
+            return [...commonLinks, { href: '/dashboard', label: 'Личный кабинет' }]
         case UserRole.NotAuthorized:
         default:
-            return [...commonLinks, { href: '/login', label: 'Login' }]
+            return [...commonLinks, { href: '/login', label: 'Войти' }]
     }
 }
 
 export function Navigation() {
     const pathname = usePathname()
-    const { userRole } = useAuth()
+    const { userRole  } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
 
     const links = useMemo(() => getLinksForRole(userRole), [userRole])

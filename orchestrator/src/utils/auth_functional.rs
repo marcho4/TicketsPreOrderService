@@ -5,9 +5,11 @@ use crate::models::registration_err_org::RegistrationErrorOrg;
 use crate::models::registration_org_resp::RegistrationOrgResp;
 use crate::orchestrator::orchestrator::Orchestrator;
 use log::{error, info};
+use reqwest::Method;
 use crate::models::api_response::ApiResponse;
 use crate::models::login_data::LoginData;
 use crate::models::message_resp::MessageResp;
+use crate::models::password_update::PasswordUpdate;
 use crate::models::user_info::UserInfo;
 use crate::models::user_registration_data::UserRegistrationData;
 use crate::utils::errors::OrchestratorError;
@@ -103,4 +105,9 @@ impl Orchestrator {
     }
 
     // pub async fn create_admin() {}
+
+    pub async fn change_password(&self, data: &PasswordUpdate, user_id: String) -> Result<MessageResp, OrchestratorError> {
+        let req_url = format!("{}/user/{}/password/change", self.config.auth_url, user_id);
+        self.send_request::<MessageResp, &PasswordUpdate>(req_url, Some(data), Method::PUT).await
+    }
 }

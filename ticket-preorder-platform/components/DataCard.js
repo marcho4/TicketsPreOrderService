@@ -8,6 +8,7 @@ import { LogOut, Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import LogoutButton from "./LogoutButton";
 import { useAuth } from "@/providers/authProvider";
+import {Card, CardHeader, CardTitle} from "@/components/ui/card";
 
 /*
   A skeleton fallback displayed while data is being fetched.
@@ -127,19 +128,20 @@ function DataCardContent({
     };
 
     return (
-        <article className="flex flex-col max-w-xl bg-white rounded-lg p-4 gap-5 shadow-lg border border-gray-200">
+        <Card className="flex flex-col max-w-xl bg-white rounded-lg p-4 gap-5 shadow-lg border border-gray-200">
             {/* Header with logout button */}
-            <header className="flex flex-row px-5 py-5 rounded-lg justify-between">
+
+            <CardHeader className="flex flex-row px-5 py-5 rounded-lg justify-between">
                 <div className="flex flex-col">
                     <h1 className="text-3xl font-bold text-gray-900 leading-tight px-4">
-                        My profile
+                        Мой профиль
                     </h1>
                     <p className="text-black/80 text-lg px-4">
-                        Manage your profile settings
+                        Управлять своими данными
                     </p>
                 </div>
                 <LogoutButton router={router} />
-            </header>
+            </CardHeader>
 
             {/* Main section (read-only or edit mode) */}
             <section className="px-5 py-4 rounded-lg">
@@ -240,7 +242,7 @@ function DataCardContent({
                     </div>
                 )}
             </section>
-        </article>
+        </Card>
     );
 }
 

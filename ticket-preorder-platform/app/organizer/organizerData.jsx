@@ -97,7 +97,7 @@ function DataDisplay({ resource }) {
             <div className="flex flex-row px-5 py-5 rounded-lg justify-between">
                 <div className="flex flex-col">
                     <h1 className="text-3xl font-bold text-gray-900 leading-tight text-left px-4">
-                        My profile
+                        Мой профиль
                     </h1>
                     <div className="text-black/80 text-lg px-4">
                         Manage your profile settings

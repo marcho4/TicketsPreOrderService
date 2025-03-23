@@ -2,11 +2,22 @@
 
 import React, { Suspense, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import ErrorBoundary from "./dataBoundary";
 import { useAuth } from "@/providers/authProvider";
 import { useRouter } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
+
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 interface Request {
   request_id: string;
@@ -104,43 +115,50 @@ const AdminHome = () => {
 
     return (
       <div className="overflow-x-auto">
-        <table className="w-full min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Компания</th>
-              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ИНН</th>
-              <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Действия</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+        <Table>
+          <TableCaption className="relative">
+            Список заявок на регистрацию
+          </TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>ID</TableHead>
+              <TableHead>Компания</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>ИНН</TableHead>
+              <TableHead>Действие</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {requests.map((request) => (
-              <tr key={request.request_id}>
-                <td className="px-4 py-2 whitespace-nowrap text-sm">{request.request_id}</td>
-                <td className="px-4 py-2 text-sm">{request.company}</td>
-                <td className="px-4 py-2 text-sm">{request.email}</td>
-                <td className="px-4 py-2 text-sm">{request.tin}</td>
-                <td className="px-4 py-2">
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Button
-                      onClick={() => handleResponse(request.request_id, "APPROVED")}
-                      className="bg-green-500 hover:bg-green-600 text-xs px-2 py-1 h-auto"
-                    >
-                      Принять
-                    </Button>
-                    <Button
-                      onClick={() => handleResponse(request.request_id, "REJECTED")}
-                      className="bg-red-500 hover:bg-red-600 text-xs px-2 py-1 h-auto"
-                    >
-                      Отклонить
-                    </Button>
-                  </div>
-                </td>
-              </tr>
+                <TableRow key={request.request_id}>
+                  <TableCell className="px-4 py-2 whitespace-nowrap text-sm">{request.request_id}</TableCell>
+                  <TableCell className="px-4 py-2 text-sm">{request.company}</TableCell>
+                  <TableCell className="px-4 py-2 text-sm">{request.email}</TableCell>
+                  <TableCell className="px-4 py-2 text-sm">{request.tin}</TableCell>
+                  <TableCell className="px-4 py-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Button
+                          onClick={() => handleResponse(request.request_id, "APPROVED")}
+                          className="bg-green-500 hover:bg-green-600 text-xs px-2 py-1 h-auto">
+                        Принять
+                      </Button>
+                      <Button
+                          onClick={() => handleResponse(request.request_id, "REJECTED")}
+                          className="bg-red-500 hover:bg-red-600 text-xs px-2 py-1 h-auto">
+                        Отклонить
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={4}>Total</TableCell>
+              <TableCell className="text-right">{requests.length}</TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
       </div>
     );
   };
@@ -148,8 +166,10 @@ const AdminHome = () => {
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-6 md:py-10 gap-10">
       <Card className="w-full mx-auto bg-white rounded-xl md:rounded-3xl shadow-xl bg-opacity-90 mb-6 md:mb-10 overflow-hidden">
-        <CardHeader className="space-y-1 pt-6 md:pt-8">
-          <CardTitle className="text-xl md:text-3xl font-bold text-center">Список заявок на регистрацию</CardTitle>
+        <CardHeader className="relative space-y-1 pt-6 md:pt-8">
+          <CardTitle className="text-xl md:text-3xl font-bold text-center">
+            Список заявок на регистрацию
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -158,13 +178,12 @@ const AdminHome = () => {
             </ErrorBoundary>
           </div>
         </CardContent>
+        <CardFooter className="items-end justify-end flex w-full flex-col">
+           <LogoutButton router={router} />
+        </CardFooter>
       </Card>
 
-      {userRole == "ADMIN" && (
-        <Card className="w-full max-w-2xl py-4 md:py-5 flex flex-col mx-auto bg-white rounded-xl md:rounded-3xl items-center shadow-xl bg-opacity-90">
-          <LogoutButton router={router} />
-        </Card>
-      )}
+
     </div>
   );
 };

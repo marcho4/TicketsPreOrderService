@@ -22,3 +22,4 @@ pub mod user_models;
 pub mod matches;
 pub mod tickets;
 pub mod email;
+pub mod password_update;

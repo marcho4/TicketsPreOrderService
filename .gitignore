@@ -25,3 +25,4 @@
 .cache
 docker_compose.yml
 config
+.qodo

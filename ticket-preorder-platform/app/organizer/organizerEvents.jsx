@@ -4,6 +4,7 @@ import { createResource } from "../../lib/createResource";
 import { useAuth } from "../../providers/authProvider";
 import ErrorBoundary from "./ErrorBoundary";
 import MatchCard from "./eventCard";
+import {Button} from "../../components/ui/button";
 
 /**
  * Компонент модального окна
@@ -283,13 +284,11 @@ export default function MatchesSection() {
                 <h1 className="text-3xl font-semibold text-gray-900 leading-tight">
                     Мои матчи
                 </h1>
-                <button
+                <Button
                     onClick={() => setIsModalOpen(true)}
-                    className="px-4 py-2 bg-button-secondary text-white rounded-md hover:bg-button-darker flex
-                     transition-colors duration-300 items-center"
                 >
                     <Plus className="mr-2 h-4 w-4" /> Добавить матч
-                </button>
+                </Button>
             </div>
 
             {/* Список матчей с обработкой загрузки и ошибок */}

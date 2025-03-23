@@ -112,9 +112,11 @@ function MatchRendered({ resource, ticketsResource }) {
                         height={50}
                     />
                 </div>
-                <button onClick={() => setModal(true)} className="bg-button-darker text-white py-3 px-5 rounded-lg hover:scale-105 transition-transform duration-300">
+                <Button
+                    onClick={() => setModal(true)}
+                    className="">
                     Забронировать билет
-                </button>
+                </Button>
                 <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
                     z-[11] cursor-pointer`}>
                     <div id="active-modal" className="relative max-w-2xl w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
@@ -125,7 +127,7 @@ function MatchRendered({ resource, ticketsResource }) {
 
                         <div id="modal-content" className="p-6">
                             <div className="text-2xl font-semibold text-gray-700 mb-3">
-                                Choose tickets from the list below
+                                Выберите билеты из списка снизу
                             </div>
                             <div>
                                 <ErrorBoundary>
@@ -149,11 +151,10 @@ function FetchedTickets({resource}) {
     if (tickets.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center mx-auto h-full">
-                There is no tickets yet. :(
-                <button className="mt-10 bg-button-darker px-4 py-2 rounded-lg hover:scale-105 transition-transform
-                 duration-300 text-white">
-                    Take place in line
-                </button>
+                На данный момент нет доступных для предзаказа билетов
+                <Button className="mt-10">
+                    Встать в очередь за билетами
+                </Button>
             </div>
         );
     }
@@ -164,19 +165,19 @@ function FetchedTickets({resource}) {
                 <thead className="sticky top-0 bg-gray-100 z-10 max-h-96 overflow-y-scroll">
                 <tr className="text-left">
                     <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Row
+                        Ряд
                     </th>
                     <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Seat
+                        Место
                     </th>
                     <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Price
+                        Цена
                     </th>
                     <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Sector
+                        Сектор
                     </th>
                     <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Preorder
+                        Предзаказ
                     </th>
                 </tr>
                 </thead>
@@ -215,10 +216,8 @@ function FetchedTickets({resource}) {
                                     } catch (e) {
                                         console.error(e)
                                     }
-                                }}
-                                className={"bg-button-darker hover:bg-accent hover:text-my_black" +
-                                    " transition-colors duration-300 p-2 text-white  rounded-lg"}>
-                                Preorder
+                                }}>
+                                Предзаказать
                             </Button>
                         </td>
 

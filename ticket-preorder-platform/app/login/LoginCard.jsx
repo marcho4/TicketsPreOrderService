@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import fetchData from "@/lib/fetchData";
+import {useToast} from "@/hooks/use-toast";
+import {ToastAction} from "@/components/ui/toast";
 
 export default function AuthCard() {
     // Состояние, которое отвечает за текущий «режим» компонента.
@@ -61,6 +63,10 @@ export default function AuthCard() {
                 }
             } else {
                 setError(true);
+                toaster.toast({
+                    title: "Вы ввели неправильный пароль",
+                    description: "Попробуйте использовать другие данные для входа и войдите еще раз",
+                })
             }
         } catch (error) {
             setError(true);
@@ -135,7 +141,7 @@ export default function AuthCard() {
                                     value={login}
                                     onChange={(e) => setLogin(e.target.value)}
                                     required
-                                    className={"rounded-xl bg-secondary text-text placeholder:text-text/50" + (error && "border-4 border-red-500")}
+                                    className={(error && "border border-red-500")}
                                 />
                             </div>
                             <div className="space-y-2">
@@ -149,14 +155,15 @@ export default function AuthCard() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className={"rounded-xl bg-secondary text-text placeholder:text-text/50" + (error && "border-4 border-red-500")}
+                                    className={(error && "border border-red-500")}
                                 />
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
+                                variant="default"
                                 type="submit"
-                                className="w-full rounded-xl hover:bg-accent bg-my_black hover:text-my_black transition-colors duration-300"
+                                className="w-full"
                             >
                                 {loading ? (
                                     <div className="flex items-center gap-2">
@@ -216,7 +223,7 @@ export default function AuthCard() {
                     <form onSubmit={handleSignupUser}>
                         <CardContent className="space-y-6 pt-6 pb-8">
                             <div className="space-y-2">
-                                <Label htmlFor="name" className="text-text">
+                                <Label htmlFor="name">
                                     Имя
                                 </Label>
                                 <Input
@@ -226,25 +233,23 @@ export default function AuthCard() {
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="name" className="text-text">
+                                <Label htmlFor="surname">
                                     Фамилия
                                 </Label>
                                 <Input
-                                    id="name"
+                                    id="surname"
                                     type="text"
                                     placeholder="Ваша фамилия"
                                     value={last_name}
                                     onChange={(e) => setlast_name(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="email" className="text-text">
+                                <Label htmlFor="email" >
                                     Email
                                 </Label>
                                 <Input
@@ -254,7 +259,6 @@ export default function AuthCard() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -268,7 +272,6 @@ export default function AuthCard() {
                                     value={login}
                                     onChange={(e) => setLogin(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -276,21 +279,20 @@ export default function AuthCard() {
                                     Пароль
                                 </Label>
                                 <Input
-                                    id="name"
+                                    id="password"
                                     type="password"
                                     placeholder="Ваш пароль"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl bg-my_black text-white hover:bg-accent hover:text-my_black
-         transition-colors duration-300"
+                                variant="default"
+                                className="w-full"
                             >
                                 Зарегистрироваться
                             </Button>
@@ -312,7 +314,7 @@ export default function AuthCard() {
                     <form onSubmit={handleSignupOrganizer}>
                         <CardContent className="space-y-6 pt-6 pb-8">
                             <div className="space-y-2">
-                                <Label htmlFor="company" className="text-text">
+                                <Label htmlFor="company" className="">
                                     Название вашей организации
                                 </Label>
                                 <Input
@@ -322,27 +324,25 @@ export default function AuthCard() {
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="email" className="text-text">
+                                <Label htmlFor="email">
                                     Email
                                 </Label>
                                 <Input
                                     id="email"
                                     type="email"
-                                    placeholder="Введите email"
+                                    placeholder="Введите email для связи"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="tin" className="text-text">
+                                <Label htmlFor="tin">
                                     ИНН
                                 </Label>
                                 <Input
@@ -352,7 +352,6 @@ export default function AuthCard() {
                                     value={tin}
                                     onChange={(e) => settin(e.target.value)}
                                     required
-                                    className="rounded-xl bg-secondary text-text placeholder:text-text/50"
                                 />
                             </div>
 
@@ -360,20 +359,20 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full rounded-xl bg-my_black hover:bg-accent hover:text-my_black
+                                className="w-full
                                  transition-colors duration-300"
                             >
                                 Зарегистрироваться
                             </Button>
-                            <p className="text-sm text-center text-text transition-colors">
+                            <p className="text-sm text-center transition-colors">
                                 Уже есть аккаунт?{" "}
-                                <button
-                                    type="button"
-                                    className="text-primary hover:underline"
+                                <Button
+                                    className=""
+                                    variant="link"
                                     onClick={() => setMode("login")}
                                 >
                                     Войти
-                                </button>
+                                </Button>
                             </p>
                         </CardFooter>
                     </form>
@@ -383,8 +382,10 @@ export default function AuthCard() {
         }
     };
 
+    const toaster = useToast();
+
     return (
-        <Card className="w-full max-w-md bg-white rounded-3xl shadow-2xl bg-opacity-90">
+        <Card className="w-full max-w-md shadow-2xl">
             <CardHeader className="space-y-1 pt-8">
                 <CardTitle className="text-3xl font-bold text-center text-text">
                     {mode === "login"

@@ -1,11 +1,6 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
-const events = [
-  { id: 1, title: 'Summer Music Festival', date: '2023-07-15', image: '/placeholder.svg' },
-  { id: 2, title: 'Comedy Night', date: '2023-07-22', image: '/placeholder.svg' },
-  { id: 3, title: 'Tech Conference 2023', date: '2023-08-05', image: '/placeholder.svg' },
-]
 
 export default function Home() {
   return (

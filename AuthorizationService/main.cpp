@@ -86,6 +86,7 @@ int main() {
         server.Put("/user/:id/password/change", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             spdlog::info("Получен запрос на обновление пароля");
             set_cors_headers(res);
+            std::cout << "Получен запрос на обновление пароля" << std::endl;
             PasswordUpdating::UpdatePasswordRequest(request, res, db);
         });
 

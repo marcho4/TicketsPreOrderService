@@ -1,10 +1,10 @@
 "use client"
 import MatchesSection from "./organizerEvents";
-import DataSection from "./organizerData";
 import {useAuth} from "../../providers/authProvider";
 
 import React from "react";
 import DataCard from "../../components/DataCard";
+import ChangePasswordSection from "../../components/ChangePasswordSection";
 
 
 export default function Page() {
@@ -31,13 +31,15 @@ export default function Page() {
     return (
         <div className="flex flex-col justify-center items-center p-10">
             <h1 className="text-3xl font-bold text-left mb-10 w-full px-20">
-                Welcome Back!
+                С возвращением!
             </h1>
             <div className="grid grid-cols-1 mt-10 lg:grid-cols-2 gap-4 w-full px-20 items-start">
                 <DataCard const_fields={const_fields} fetchLink={fetchUrl}
-                          updateLink={updateUrl} mutable_fields={mutableFields}>
-                </DataCard>
-                <MatchesSection/>
+                          updateLink={updateUrl} mutable_fields={mutableFields}/>
+                <div className="flex flex-col gap-y-8">
+                    <MatchesSection/>
+                    <ChangePasswordSection/>
+                </div>
             </div>
         </div>
     )

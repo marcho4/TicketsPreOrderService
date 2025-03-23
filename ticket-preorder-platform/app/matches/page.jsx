@@ -22,10 +22,10 @@ export default function Page() {
     return (
         <div className="flex flex-col items-center justify-center min-w-full h-full gap-5">
             <header className="text-3xl md:text-4xl lg:text-5xl font-semibold">
-                Football matches
+                Футбольные матчи
             </header>
             <div>
-                On this page you can see all the available matches for tickets preordering.
+                На этой странице собраны все предстоящие футбольные матчи. Оформить предзаказ можно при наличии билетов.
             </div>
             <Suspense fallback={<div>Loading...</div>}>
                 <MatchesContainer resourse={resource} />

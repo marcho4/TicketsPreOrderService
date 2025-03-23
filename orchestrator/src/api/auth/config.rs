@@ -1,4 +1,5 @@
 use actix_web::web;
+use crate::api::auth::change_password::change_password;
 use crate::api::auth::login::login;
 use crate::api::auth::logout::logout;
 use crate::api::auth::organizer_register::register_organizer;
@@ -13,5 +14,6 @@ pub fn auth_config(cfg: &mut web::ServiceConfig) {
             .service(session)
             .service(register_organizer)
             .service(register_user)
+            .service(change_password)
     );
 }
