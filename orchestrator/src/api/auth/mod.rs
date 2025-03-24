@@ -4,4 +4,4 @@ pub(crate) mod logout;
 pub(crate) mod user_register;
 pub(crate) mod organizer_register;
 pub mod config;
-mod change_password;
+pub(crate) mod change_password;

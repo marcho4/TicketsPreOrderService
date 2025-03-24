@@ -3,12 +3,13 @@ import MatchesSection from "./organizerEvents";
 import {useAuth} from "../../providers/authProvider";
 
 import React from "react";
-import DataCard from "../../components/DataCard";
 import ChangePasswordSection from "../../components/ChangePasswordSection";
+import OrgDataCard from "./organizerData";
+import {Card, CardHeader, CardTitle} from "../../components/ui/card";
 
 
 export default function Page() {
-    const {userRole, user, isLoading} = useAuth();
+    const {user} = useAuth();
 
     if (!user) {
         return (
@@ -20,27 +21,33 @@ export default function Page() {
 
     let fetchUrl = `http://localhost:8000/api/organizer/get/${user}`;
     let updateUrl = `http://localhost:8000/api/organizer/update/${user}`;
-    const const_fields = ["tin"];
-    const mutableFields = ["organization_name", "phone_number", "email"];
-
-
-    // if (userRole !== "admin") {
-    //     return (<div>You are not an organizer</div>)
-    // }
 
     return (
-        <div className="flex flex-col justify-center items-center p-10">
-            <h1 className="text-3xl font-bold text-left mb-10 w-full px-20">
-                С возвращением!
-            </h1>
-            <div className="grid grid-cols-1 mt-10 lg:grid-cols-2 gap-4 w-full px-20 items-start">
-                <DataCard const_fields={const_fields} fetchLink={fetchUrl}
-                          updateLink={updateUrl} mutable_fields={mutableFields}/>
-                <div className="flex flex-col gap-y-8">
-                    <MatchesSection/>
-                    <ChangePasswordSection/>
+        <div className="flex flex-col min-h-screen pt-10">
+            <Card className="max-w-7xl mx-auto w-full text-xl sm:text-3xl">
+                <CardHeader>
+                    <CardTitle>
+                        Личный кабинет
+                    </CardTitle>
+                </CardHeader>
+            </Card>
+            <main className="flex-grow">
+                <div className="max-w-7xl mx-auto py-6">
+                    <div className="flex flex-col md:flex-row gap-6">
+                        {/* Left side - User profile */}
+                        <div className="md:w-1/2">
+                            <OrgDataCard fetchLink={fetchUrl} updateLink={updateUrl}/>
+                        </div>
+
+                        {/* Right side - Tickets list */}
+                        <div className="md:w-1/2 flex flex-col gap-6">
+                            <MatchesSection/>
+                            <ChangePasswordSection/>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </main>
         </div>
+
     )
 }

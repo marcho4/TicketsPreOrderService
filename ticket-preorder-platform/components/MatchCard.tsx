@@ -38,7 +38,7 @@ interface MatchCardProps {
     id: string;
 }
 
-function formatDate(dateString: string): string {
+export function formatDate(dateString: string): string {
     const [year, month, day] = dateString.split('-');
 
     const monthNames = [
@@ -83,11 +83,6 @@ export default function MatchCard({ id }: MatchCardProps) {
     );
 }
 
-/**
- * The actual card content that displays once data has loaded.
- * We use resource.read() to get the data; if it's not yet available,
- * it will throw a Promise, which Suspense will catch.
- */
 function MatchCardContent({resource, id}: {
     resource: ReturnType<typeof createResource<MatchData>>;
     id: string;
@@ -133,10 +128,6 @@ function MatchCardContent({resource, id}: {
     );
 }
 
-/**
- * A skeleton/loading state to display while data is being fetched.
- * We use aria-busy to aid assistive technologies.
- */
 function MatchCardLoading() {
     return (
         <section
@@ -155,7 +146,7 @@ function MatchCardLoading() {
             </div>
             <div className="relative flex items-center justify-center w-full text-center">
                 <div className="bg-gray-50 bg-opacity-60 rounded-lg px-4 py-2">
-                    <h2 className="text-xl font-semibold text-gray-500">Loading...</h2>
+                    <h2 className="text-xl font-semibold text-gray-500">Загрузка...</h2>
                 </div>
             </div>
         </section>

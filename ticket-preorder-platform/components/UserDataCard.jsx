@@ -2,15 +2,15 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import ErrorBoundary from "./ErrorBoundary";
+import { Button } from "./ui/button";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
-import {Skeleton} from "../../components/ui/skeleton";
-import {Label } from "../../components/ui/label";
-import { Input } from "../../components/ui/input";import {Button} from "../../components/ui/button";
-import LogoutButton from "../../components/LogoutButton";
-import {toast} from "../../hooks/use-toast";
-
+import LogoutButton from "./LogoutButton";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "@/hooks/use-toast";
 
 function DataCardSkeleton() {
     return (
@@ -28,6 +28,8 @@ function DataCardSkeleton() {
                     <Skeleton className="h-8 w-24" />
                 </div>
                 <div className="space-y-4">
+                    <Skeleton className="h-8 w-full" />
+                    <Skeleton className="h-8 w-full" />
                     <Skeleton className="h-8 w-full" />
                     <Skeleton className="h-8 w-full" />
                     <Skeleton className="h-8 w-full" />
@@ -105,9 +107,11 @@ function DataCardContent({ data, updateFunc, refreshData }) {
                         <Pencil className="mr-2" /> {!isEditing ? "Редактировать" : "Отменить"}
                     </Button>
                 </div>
-                <DataRow formData={formData} label={"Организация"} apiName={"organization_name"} isEditing={isEditing} handleChange={handleChange} />
-                <DataRow formData={formData} label={"ИНН"} apiName={"tin"} isEditing={isEditing} handleChange={handleChange} />
+                <DataRow formData={formData} label={"Имя"} apiName={"name"} isEditing={isEditing} handleChange={handleChange} />
+                <DataRow formData={formData} label={"Фамилия"} apiName={"last_name"} isEditing={isEditing} handleChange={handleChange} />
+                <DataRow formData={formData} label={"Телефон"} apiName={"phone"} isEditing={isEditing} handleChange={handleChange} />
                 <DataRow formData={formData} label={"Email"} apiName={"email"} isEditing={isEditing} handleChange={handleChange} type="email" />
+                <DataRow formData={formData} label={"Дата рождения"} apiName={"birthday"} isEditing={isEditing} handleChange={handleChange} />
             </CardContent>
             {isEditing && (
                 <CardFooter className="flex space-x-4 px-4 justify-end">
@@ -123,7 +127,7 @@ function DataCardContent({ data, updateFunc, refreshData }) {
     );
 }
 
-export default function OrgDataCard({ updateLink, fetchLink }) {
+export default function UserDataCard({ updateLink, fetchLink }) {
     const router = useRouter();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);

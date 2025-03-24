@@ -31,6 +31,7 @@ pub struct UserUpdateData {
     pub name: String,
     pub last_name: String,
     pub birthday: String,
+    #[serde(rename(deserialize = "phone"))]
     pub phone_number: String,
 }
 

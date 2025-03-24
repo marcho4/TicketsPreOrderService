@@ -1,28 +1,34 @@
 import React, { Suspense, useMemo, useState } from 'react';
 import { Plus, X} from "lucide-react";
-import { createResource } from "../../lib/createResource";
-import { useAuth } from "../../providers/authProvider";
+import { createResource } from "@/lib/createResource";
+import { useAuth } from "@/providers/authProvider";
 import ErrorBoundary from "./ErrorBoundary";
-import MatchCard from "./eventCard";
-import {Button} from "../../components/ui/button";
+import MatchCard from "./MatchCard";
+import {Button} from "@/components/ui/button";
+import {Label} from "@/components/ui/label";
+import {Input} from "@/components/ui/input";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 
 /**
  * Компонент модального окна
  */
-function Modal({ isOpen, onClose, children }) {
+export function Modal({ isOpen, onClose, children }) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-            <div className="bg-white rounded-lg p-6 w-full max-w-2xl relative">
-                <button
+        <div
+            onClick={onClose}
+            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+            <Card className="bg-white rounded-lg p-6 w-full max-w-2xl relative">
+                <Button
+                    variant="primary"
                     onClick={onClose}
                     className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
                 >
                     <X className="h-6 w-6" />
-                </button>
+                </Button>
                 {children}
-            </div>
+            </Card>
         </div>
     );
 }
@@ -36,140 +42,65 @@ function MatchForm({ onSubmit, onClose }) {
         teamHome: '',
         teamAway: '',
         stadium: '',
-        matchDateTime: new Date() // пока храню только дату (и время), если нужно отдельно – расширьте
+        matchDateTime: new Date()
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         formData.matchDateTime = new Date(formData.matchDateTime).toISOString();
-        console.log(formData);
         onSubmit(formData);
         onClose();
     };
+
+    function handleChange(e) {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+
+    const DataRow = ({label, apiName, onChange, required=true, type="text"}) => {
+        return (
+            <div>
+                <Label className="block text-sm font-medium text-gray-700 mb-1">
+                    {label}
+                </Label>
+                <Input
+                    type={type}
+                    required={required}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    value={formData[apiName]}
+                    name={apiName}
+                    onChange={onChange}
+                />
+            </div>
+        )
+    }
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             <h2 className="text-2xl font-bold mb-6">Создать новый матч</h2>
 
-            {/* Описание матча */}
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Описание матча
-                </label>
-                <input
-                    type="text"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={formData.matchDescription}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            matchDescription: e.target.value,
-                        }))
-                    }
-                />
-            </div>
+            <DataRow label={"Домашняя команда"} apiName={"teamHome"} onChange={handleChange}/>
+            <DataRow label={"Гостевая команда"} apiName={"teamAway"} onChange={handleChange}/>
+            <DataRow label={"Описание"} apiName={"description"} onChange={handleChange} required={false}/>
+            <DataRow label={"Стадион"} apiName={"stadium"} onChange={handleChange}/>
+            <DataRow label={"Дата проведения"} apiName={"matchDateTime"} onChange={handleChange} type={"datetime-local"}/>
 
-            {/* Домашняя команда */}
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Домашняя команда
-                </label>
-                <input
-                    type="text"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={formData.teamHome}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            teamHome: e.target.value,
-                        }))
-                    }
-                />
-            </div>
-
-            {/* Гостевая команда */}
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Гостевая команда
-                </label>
-                <input
-                    type="text"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={formData.teamAway}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            teamAway: e.target.value,
-                        }))
-                    }
-                />
-            </div>
-
-            {/* Стадион */}
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Стадион
-                </label>
-                <input
-                    type="text"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={formData.stadium}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            stadium: e.target.value,
-                        }))
-                    }
-                />
-            </div>
-
-            {/* Дата и время матча (пока только через календарь) */}
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Дата
-                </label>
-                <input
-                    type="datetime-local"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={formData.matchDateTime} // Убираем секунды и Z для корректного отображения
-                    onChange={(e) => {
-                        setFormData((prev) => ({
-                            ...prev,
-                            matchDateTime: e.target.value,
-                        }));
-                    }}
-                />
-            </div>
-
-            {/* Кнопки формы */}
             <div className="flex justify-end space-x-4 pt-4">
-                <button
+                <Button
                     type="button"
+                    variant="primary"
                     onClick={onClose}
-                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500"
                 >
                     Отмена
-                </button>
-                <button
-                    type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
-                >
+                </Button>
+                <Button type="submit">
                     Создать
-                </button>
+                </Button>
             </div>
         </form>
     );
 }
 
 
-/**
- * Список матчей
- */
 function MatchesList({ resource }) {
     const matches = resource.read();
 
@@ -196,7 +127,7 @@ function MatchesList({ resource }) {
 function LoadingSkeleton() {
     return (
         <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
+            {[1, 2].map((i) => (
                 <div key={i} className="h-24 rounded-lg bg-gray-200 animate-pulse" />
             ))}
         </div>
@@ -278,21 +209,19 @@ export default function MatchesSection() {
     };
 
     return (
-        <div className="flex flex-col min-w-full min-h-96 rounded-lg bg-white shadow-lg border-gray-200 border">
+        <Card className="flex flex-col min-w-full min-h-96 rounded-lg bg-white shadow-lg border-gray-200 border">
             {/* Заголовок и кнопка добавления */}
-            <div className="flex justify-between items-center p-4 sticky top-0 z-10">
-                <h1 className="text-3xl font-semibold text-gray-900 leading-tight">
+            <CardHeader className="flex flex-row justify-between items-center p-4 sticky top-0 z-10">
+                <CardTitle className="text-3xl font-semibold text-gray-900 leading-tight">
                     Мои матчи
-                </h1>
-                <Button
-                    onClick={() => setIsModalOpen(true)}
-                >
+                </CardTitle>
+                <Button onClick={() => setIsModalOpen(true)}>
                     <Plus className="mr-2 h-4 w-4" /> Добавить матч
                 </Button>
-            </div>
+            </CardHeader>
 
             {/* Список матчей с обработкой загрузки и ошибок */}
-            <div className="flex-1 p-4 overflow-y-auto">
+            <CardContent className="flex-1 p-4 overflow-y-auto">
                 <ErrorBoundary>
                     <Suspense fallback={<LoadingSkeleton />}>
                         <MatchesList resource={matchesResource} />
@@ -304,12 +233,12 @@ export default function MatchesSection() {
                         <p className="text-gray-600">Загрузка матчей...</p>
                     </div>
                 )}
-            </div>
+            </CardContent>
 
             {/* Модальное окно создания матча */}
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <MatchForm onSubmit={handleCreateMatch} onClose={() => setIsModalOpen(false)} />
             </Modal>
-        </div>
+        </Card>
     );
 }

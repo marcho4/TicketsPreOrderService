@@ -182,8 +182,6 @@ const AdminHome = () => {
            <LogoutButton router={router} />
         </CardFooter>
       </Card>
-
-
     </div>
   );
 };

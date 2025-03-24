@@ -22,10 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} bg-background text-text`}>
+      <body className={`${montserrat.className}`}>
         <AuthProvider>
           <Navigation />
-          <main className="min-h-screen pt-5">
+          <main className="min-h-screen">
               {children}
               <Toaster/>
           </main>

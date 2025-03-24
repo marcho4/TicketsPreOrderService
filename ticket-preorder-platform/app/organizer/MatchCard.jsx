@@ -26,7 +26,7 @@ export default function MatchCard({ match }) {
     return (
         <Link href={`/organizer/match/${match.id}`} className="block">
             <div
-                className="relative h-48 rounded-lg overflow-hidden shadow-lg mb-4
+                className="relative h-36 rounded-lg overflow-hidden shadow-lg mb-4
                    cursor-pointer transform transition-all duration-300
                    hover:shadow-xl hover:scale-[1.02]"
             >
@@ -40,7 +40,7 @@ export default function MatchCard({ match }) {
                     }}
                 >
                     {/* Градиентный оверлей для лучшей читаемости текста */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-gray-400 to-black/70"></div>
                 </div>
 
                 {/* Контент карточки */}
