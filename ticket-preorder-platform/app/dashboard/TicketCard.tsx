@@ -1,21 +1,18 @@
 "use client";
 
 import React, { Suspense, useMemo } from "react";
-import Image from "next/image";
-import ErrorBoundary from "../../components/ErrorBoundary";
 import { createResource } from "@/lib/createResource";
-import {toast} from "@/hooks/use-toast";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {Dot} from "lucide-react";
+import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Skeleton} from "@/components/ui/skeleton";
 import {Modal} from "@/components/Modal";
 import TicketModal from "@/app/dashboard/TicketModal";
-import {formatDate} from "@/components/MatchCard";
+import {formatDate} from "@/app/matches/MatchCard";
+import TicketErrorBoundary from "@/app/dashboard/TicketErrorBoundary";
 
 export interface TicketCardProps {
     id: string,
     match_id: string,
-    price: string,
+    price: number,
     row: string,
     seat: string,
     sector: string,
@@ -40,29 +37,18 @@ export interface TicketCardData {
     matchId: string;
 }
 
-async function fetchTicketData(id: string): Promise<TicketCardProps> {
-    try {
-        const response = await fetch(`http://localhost:8000/api/tickets/ticket/${id}`, {
-            method: "GET",
-            credentials: "include",
-        });
+async function fetchTicketData(id: string, signal?: AbortSignal): Promise<TicketCardProps> {
+    const response = await fetch(`http://localhost:8000/api/tickets/ticket/${id}`, {
+        method: "GET",
+        credentials: "include",
+        signal,
+    });
 
-        if (!response.ok) {
-            toast({
-                title:"Ошибка при получении данных о билетах",
-                description: "Разработчики уже работают",
-            })
-            throw new Error(`Не удалось получить данные о билете ${response.statusText}`);
-        }
-
-        const result = await response.json();
-        return result.data as TicketCardProps;
-    } catch (error) {
-        console.error("Ошибка обработки данных билета: ", error);
-        throw error;
-    }
+    if (!response.ok) throw new Error(`Не удалось получить данные о билете ${response.statusText}`);
+    const result = await response.json();
+    return result.data as TicketCardProps;
 }
-async function fetchMatchData(id: string): Promise<TicketCardProps> {
+async function fetchMatchData(id: string): Promise<MatchInfoProps> {
     try {
         const response = await fetch(`http://localhost:8000/api/matches/${id}`, {
             method: "GET",
@@ -70,11 +56,7 @@ async function fetchMatchData(id: string): Promise<TicketCardProps> {
         });
 
         if (!response.ok) {
-            toast({
-                title:"Ошибка при получении данных о матче",
-                description: "Разработчики уже работают",
-            })
-            throw new Error(`Не удалось получить данные о билете ${response.statusText}`);
+            throw new Error(`Не удалось получить данные о матче ${response.statusText}`);
         }
 
         const result = await response.json();
@@ -93,11 +75,11 @@ export default function TicketDynamicCard({ id, matchId }: TicketCardData) {
     const matchResource = useMemo(() => createResource(() => fetchMatchData(matchId)), [matchId]);
 
     return (
-        <ErrorBoundary>
+        <TicketErrorBoundary>
             <Suspense fallback={<TicketCardSkeleton />}>
                 <TicketCard resource={resource} matchResource={matchResource}/>
             </Suspense>
-        </ErrorBoundary>
+        </TicketErrorBoundary>
     );
 }
 

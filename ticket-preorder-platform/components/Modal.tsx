@@ -20,11 +20,11 @@ export function Modal({ isOpen, onClose, children }) {
     return (
         <div
             onClick={onClose}
-            className="fixed inset-0 bg-black bg-opacity-50 z-0 flex justify-center items-center"
+            className="fixed inset-0 bg-black bg-opacity-50 z-30 flex justify-center items-center"
         >
             <Card
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-lg z-20 w-full max-w-2xl relative"
+                className="bg-white rounded-lg z-[100] w-full max-w-2xl relative"
             >
                 <Button
                     variant="ghost"

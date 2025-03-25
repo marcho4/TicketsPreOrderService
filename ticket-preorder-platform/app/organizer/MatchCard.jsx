@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import {Card, CardDescription, CardHeader, CardTitle} from "../../components/ui/card";
+import {formatDate} from "../matches/MatchCard";
 
 /**
  * Карточка матча
@@ -9,7 +11,6 @@ import Link from 'next/link';
  * @param {string} match.teamAway - Название гостевой команды
  * @param {string} match.matchDescription - Короткое описание матча
  * @param {string} match.matchDateTime - Дата/время матча (ISO-строка)
- * @param {string} [match.image_url] - (Опционально) URL изображения матча, если есть
  */
 export default function MatchCard({ match }) {
     const isMatchPassed = new Date(match.matchDateTime) < new Date();
@@ -25,41 +26,20 @@ export default function MatchCard({ match }) {
 
     return (
         <Link href={`/organizer/match/${match.id}`} className="block">
-            <div
-                className="relative h-36 rounded-lg overflow-hidden shadow-lg mb-4
-                   cursor-pointer transform transition-all duration-300
-                   hover:shadow-xl hover:scale-[1.02]"
-            >
-                {/* Фоновое изображение (если есть) или fallback */}
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{
-                        backgroundImage: match.image_url
-                            ? `url(${match.image_url})`
-                            : "url('/api/placeholder/400/320')"
-                    }}
-                >
-                    {/* Градиентный оверлей для лучшей читаемости текста */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-gray-400 to-black/70"></div>
-                </div>
-
-                {/* Контент карточки */}
-                <div className="relative h-full p-6 flex flex-col justify-center">
-                    <h3 className="text-2xl font-bold text-white mb-3 transform transition-transform group-hover:translate-x-2">
+            <Card className="cursor-pointer min-h-24">
+                <CardHeader>
+                    <CardTitle>
                         {matchTitle}
-                    </h3>
-                    <p className={`text-md font-medium ${isMatchPassed ? 'text-red-400' : 'text-gray-200'}`}>
-                        {formattedDate}
-                    </p>
+                    </CardTitle>
+                    <CardDescription className="text-gray-800">{formattedDate}</CardDescription>
 
-                    {/* Доп. описание, если хотите вывести */}
                     {match.matchDescription && (
-                        <p className="text-sm text-gray-300 mt-2">
+                        <CardDescription className="flex flex-row w-full justify-between">
                             {match.matchDescription}
-                        </p>
+                        </CardDescription>
                     )}
-                </div>
-            </div>
+                </CardHeader>
+            </Card>
         </Link>
     );
 }

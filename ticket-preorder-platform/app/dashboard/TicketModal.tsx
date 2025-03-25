@@ -1,8 +1,24 @@
 import {CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
+import { useState } from "react";
 
+interface TicketData {
+    sector: string;
+    row: string;
+    seat: string;
+    price: number;
+    status: string;
+}
 
-export default function TicketModal({ticketData, matchName, stadium}) {
+interface TicketModalProps {
+    ticketData: TicketData;
+    matchName: string;
+    stadium: string;
+}
+
+export default function TicketModal({ ticketData, matchName, stadium }: TicketModalProps) {
+    const [isPaid, setIsPaid] = useState<boolean>(ticketData.status == "paid")
+
     return (
         <div>
             <CardHeader>
@@ -21,11 +37,12 @@ export default function TicketModal({ticketData, matchName, stadium}) {
                 </div>
             </CardContent>
             <CardFooter className="flex flex-row justify-between w-full">
-                <Button
-                 variant="destructive">
+                <Button variant="destructive">
                     Вернуть билет
                 </Button>
-                <Button>Оплатить билет</Button>
+                <Button disabled={isPaid}>
+                    Оплатить билет
+                </Button>
             </CardFooter>
         </div>
     )

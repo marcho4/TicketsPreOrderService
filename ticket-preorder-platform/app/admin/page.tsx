@@ -7,6 +7,7 @@ import ErrorBoundary from "./dataBoundary";
 import { useAuth } from "@/providers/authProvider";
 import { useRouter } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
+import {fetchRequests} from "@/lib/dataFetchers";
 
 import {
   Table,
@@ -26,20 +27,6 @@ interface Request {
   tin: string;
 }
 
-// Функция для fetch запросов на регистрацию
-const fetchRequests = async () => {
-  const response = await fetch("http://localhost:8000/api/admin/requests", {
-    method: "GET",
-    credentials: "include",
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch requests");
-  }
-
-  let body = await response.json();
-  return body.data;
-};
 
 // Компонент загрузки
 function Loading() {

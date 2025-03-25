@@ -7,9 +7,12 @@ import {Suspense, useEffect, useMemo, useState} from "react";
 import {X} from "lucide-react";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import {Button} from "../../../components/ui/button";
-import {useAuth} from "../../../providers/authProvider";
+import {Table, TableHead, TableHeader, TableRow} from "../../../components/ui/table";
+import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "../../../components/ui/card";
+import {toast} from "../../../hooks/use-toast";
+import FetchedTickets from "./FetchedTickets";
+import {Skeleton} from "../../../components/ui/skeleton";
 
-// Функция для форматирования даты в формат DD/MM/YYYY
 export function formatDate(dateString) {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
@@ -20,6 +23,7 @@ export function formatDate(dateString) {
 
 export default function Page() {
     const { id } = useParams();
+    const [refreshResourceKey, setRefreshResourceKey] = useState(1);
 
     // Функция для получения данных матча
     const fetchMatchData = async () => {
@@ -54,25 +58,25 @@ export default function Page() {
 
     // Создаем ресурс только при изменении id
     const resource = useMemo(() => createResource(fetchMatchData), [id]);
-    const ticketsResource = useMemo(() => createResource(fetchAvailableTickets), [id]);
+    const ticketsResource = useMemo(() => createResource(fetchAvailableTickets), [id, refreshResourceKey]);
     return (
         <Suspense fallback={<Loading />}>
-            <MatchRendered resource={resource} ticketsResource={ticketsResource} />
+            <MatchRendered resource={resource} ticketsResource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey} />
         </Suspense>
     );
 }
 
 function Loading() {
     return (
-        <div className="flex flex-col items-center justify-center mx-auto">
-            Загрузка...
-        </div>
+        <Skeleton className="h-[350px] w-full"/>
     );
 }
 
-function MatchRendered({ resource, ticketsResource }) {
+
+function MatchRendered({ resource, ticketsResource, setRefreshResourceKey}) {
     const matchData = resource.read();
     const [modal, setModal] = useState(false);
+
     useEffect(() => {
         if (modal) {
             document.body.classList.add('overflow-hidden');
@@ -112,120 +116,37 @@ function MatchRendered({ resource, ticketsResource }) {
                         height={50}
                     />
                 </div>
-                <Button
-                    onClick={() => setModal(true)}
-                    className="">
+                <Button size="lg" onClick={() => setModal(true)}>
                     Забронировать билет
                 </Button>
                 <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
                     z-[11] cursor-pointer`}>
-                    <div id="active-modal" className="relative max-w-2xl w-full h-[450px] rounded-lg bg-gray-50 cursor-default"
+                    <Card id="active-modal" className="relative max-w-2xl w-full h-[550px] rounded-lg bg-gray-50 cursor-default"
                          onClick={(e) => e.stopPropagation()}>
 
                         <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"
                            onClick={() => setModal(!modal)}/>
 
-                        <div id="modal-content" className="p-6">
-                            <div className="text-2xl font-semibold text-gray-700 mb-3">
-                                Выберите билеты из списка снизу
-                            </div>
-                            <div>
+                        <div id="modal-content" className="">
+                            <CardHeader className="text-2xl font-semibold">
+                                <CardTitle>Выберите билет из списка снизу</CardTitle>
+                            </CardHeader>
+                            <CardContent>
                                 <ErrorBoundary>
                                     <Suspense fallback={<Loading />}>
-                                        <FetchedTickets resource={ticketsResource} />
+                                        <FetchedTickets resource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey}/>
                                     </Suspense>
                                 </ErrorBoundary>
-                            </div>
+                            </CardContent>
+                            <CardFooter className="text-gray-500">
+                                После успешного предзаказа вам придет письмо на почту.<br/>
+                                Спасибо за выбор нашего сервиса!
+                            </CardFooter>
                         </div>
-                    </div>
+                    </Card>
                 </div>
             </main>
         </div>
     );
 }
 
-function FetchedTickets({resource}) {
-    const tickets = resource.read();
-    const {user_id} = useAuth();
-
-    if (tickets.length === 0) {
-        return (
-            <div className="flex flex-col items-center justify-center mx-auto h-full">
-                На данный момент нет доступных для предзаказа билетов
-                <Button className="mt-10">
-                    Встать в очередь за билетами
-                </Button>
-            </div>
-        );
-    }
-
-    return (
-        <div className="relative max-h-[350px] min-w-[300px] overflow-x-auto w-full overflow-y-auto border border-gray-300 rounded-lg bg-white">
-            <table className="table-fixed w-full">
-                <thead className="sticky top-0 bg-gray-100 z-10 max-h-96 overflow-y-scroll">
-                <tr className="text-left">
-                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Ряд
-                    </th>
-                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Место
-                    </th>
-                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Цена
-                    </th>
-                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Сектор
-                    </th>
-                    <th className="w-1/5 px-4 py-2 border-b border-gray-300 font-semibold text-gray-700">
-                        Предзаказ
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {tickets.map((item, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
-                        <td className="px-4 py-2 border-b border-gray-200">
-                            {item.row}
-                        </td>
-                        <td className="px-4 py-2 border-b border-gray-200">
-                            {item.seat}
-                        </td>
-                        <td className="px-4 py-2 border-b border-gray-200">
-                            {item.price}
-                        </td>
-                        <td className="px-4 py-2 border-b border-gray-200">
-                            {item.sector}
-                        </td>
-                        <td className="px-4 py-2 border-b border-gray-200 gap-x-2">
-                            <Button onClick={async () => {
-                                    try {
-                                        let resp = await fetch(`http://localhost:8000/api/tickets/preorder/${item.id}`,
-                                            {
-                                                method: 'PUT',
-                                                credentials: 'include',
-                                                body: JSON.stringify({
-                                                    user_id: "sdsd",
-                                                    match_id: item.match_id
-                                                }),
-                                                headers: {
-                                                    'Content-Type': 'application/json',
-                                                }
-                                            })
-                                        const data = await resp.json();
-                                        console.log(data);
-                                    } catch (e) {
-                                        console.error(e)
-                                    }
-                                }}>
-                                Предзаказать
-                            </Button>
-                        </td>
-
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </div>
-    )
-
-}

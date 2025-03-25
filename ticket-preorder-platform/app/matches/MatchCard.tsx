@@ -3,35 +3,21 @@
 import { useRouter } from "next/navigation";
 import { Suspense, useMemo } from "react";
 import Image from "next/image";
-import ErrorBoundary from "./ErrorBoundary";
+import ErrorBoundary from "../../components/ErrorBoundary";
 import { createResource } from "@/lib/createResource";
 import {Dot} from "lucide-react"
+import {fetchMatchData} from "@/lib/dataFetchers";
 
 
-interface MatchData {
+export interface MatchData {
     teamHome: string;
     teamAway: string;
     matchDateTime: string;
     stadium: string;
-}
-
-async function fetchMatchData(id: string): Promise<MatchData> {
-    try {
-        const response = await fetch(`http://localhost:8000/api/matches/${id}`, {
-            method: "GET",
-            credentials: "include",
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch match data: ${response.statusText}`);
-        }
-
-        const result = await response.json();
-        return result.data as MatchData;
-    } catch (error) {
-        console.error("Error fetching match data:", error);
-        throw error;
-    }
+    id: string;
+    organizerId: string;
+    matchStatus: string;
+    description: string;
 }
 
 interface MatchCardProps {
@@ -71,7 +57,6 @@ export function formatDate(dateString: string): string {
 }
 
 export default function MatchCard({ id }: MatchCardProps) {
-    // Create a Suspense resource for the specific match
     const resource = useMemo(() => createResource(() => fetchMatchData(id)), [id]);
 
     return (
@@ -130,25 +115,12 @@ function MatchCardContent({resource, id}: {
 
 function MatchCardLoading() {
     return (
-        <section
-            className="group relative flex max-w-96 h-52 w-full overflow-hidden rounded-lg animate-pulse"
-            aria-busy="true"
-            aria-label="Loading match card"
-        >
-            <div className="absolute inset-0 transition-transform duration-300 ease-in-out group-hover:scale-110">
-                <Image
-                    src="/match_preview.jpg"
-                    alt="Placeholder background while loading"
-                    fill
-                    className="object-cover opacity-70"
-                    priority={true}
-                />
+        <div className="group w-full max-w-96 cursor-pointer">
+            <div className="relative flex h-52 w-full overflow-hidden rounded-lg bg-gray-200 animate-pulse" />
+            <div className="mt-3 space-y-2">
+                <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse" />
+                <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse" />
             </div>
-            <div className="relative flex items-center justify-center w-full text-center">
-                <div className="bg-gray-50 bg-opacity-60 rounded-lg px-4 py-2">
-                    <h2 className="text-xl font-semibold text-gray-500">Загрузка...</h2>
-                </div>
-            </div>
-        </section>
+        </div>
     );
 }

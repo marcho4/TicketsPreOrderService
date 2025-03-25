@@ -1,5 +1,5 @@
 "use client"
-import MatchesSection from "./organizerEvents";
+import MatchesSection from "./MatchesSection";
 import {useAuth} from "../../providers/authProvider";
 
 import React from "react";
