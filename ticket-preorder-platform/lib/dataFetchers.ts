@@ -11,6 +11,24 @@ export async function fetchMatchData(id: string): Promise<MatchData> {
             throw new Error(`Не удалось получить данные матча: ${response.statusText}`);
         }
         const result = await response.json();
+        const checkImageExists = async (url: string): Promise<boolean> => {
+            try {
+                const response = await fetch(url, { method: "HEAD" });
+                return response.ok;
+            } catch (error) {
+                return false;
+            }
+        };
+
+        const imageUrl = `https://match-photos.s3.us-east-1.amazonaws.com/matches/${id}`;
+        await checkImageExists(imageUrl).then((exists) => {
+            if (exists) {
+                result.data.logoUrl = imageUrl;
+            } else {
+                result.data.logoUrl = "/match_preview.jpg";
+            }
+        });
+
         return result.data as MatchData;
     } catch (error) {
         throw error;

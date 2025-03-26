@@ -18,6 +18,7 @@ export interface MatchData {
     organizerId: string;
     matchStatus: string;
     description: string;
+    logoUrl: string;
 }
 
 interface MatchCardProps {
@@ -73,6 +74,7 @@ function MatchCardContent({resource, id}: {
     id: string;
 }) {
     const data = resource.read();
+    console.log(data);
     const router = useRouter();
 
     const handleClick = () => {
@@ -91,7 +93,7 @@ function MatchCardContent({resource, id}: {
                 {/* We use next/image for the background, but let's wrap it in a container. */}
                 <div className="absolute inset-0 transition-transform duration-300 ease-in-out group-hover:scale-110">
                     <Image
-                        src="/match_preview.jpg"
+                        src={data.logoUrl}
                         alt="Match preview background"
                         fill
                         className="object-cover"

@@ -1,4 +1,3 @@
-import MatchCard from "@/app/organizer/MatchCard";
 import React from "react";
 import TicketDynamicCard from "@/app/dashboard/TicketCard";
 

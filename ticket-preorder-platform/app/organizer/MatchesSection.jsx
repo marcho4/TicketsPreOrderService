@@ -1,70 +1,15 @@
 import React, { Suspense, useMemo, useState } from 'react';
-import { Plus, X} from "lucide-react";
+import { Plus} from "lucide-react";
 import { createResource } from "@/lib/createResource";
 import { useAuth } from "@/providers/authProvider";
 import ErrorBoundary from "./ErrorBoundary";
 import MatchCard from "./MatchCard";
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {Modal} from "../../components/Modal";
-import {toast} from "../../hooks/use-toast";
-import {Skeleton} from "../../components/ui/skeleton";
-import {MatchFormDataRow} from "./MatchFormDataRow";
-
-
-
-function MatchForm({ onSubmit, onClose }) {
-    const [formData, setFormData] = useState({
-        matchDescription: '',
-        teamHome: '',
-        teamAway: '',
-        stadium: '',
-        matchDateTime: new Date()
-    });
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        formData.matchDateTime = new Date(formData.matchDateTime).toISOString();
-        onSubmit(formData);
-        onClose();
-    };
-
-    function handleChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
-
-
-    return (
-        <div className="z-10">
-            <CardHeader>
-                <CardTitle className="text-2xl font-bold">Создать новый матч</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <MatchFormDataRow label={"Домашняя команда"} apiName={"teamHome"} onChange={handleChange} formData={formData} />
-                    <MatchFormDataRow label={"Гостевая команда"} apiName={"teamAway"} onChange={handleChange} formData={formData}/>
-                    <MatchFormDataRow label={"Описание"} apiName={"matchDescription"} onChange={handleChange}  formData={formData} required={false}/>
-                    <MatchFormDataRow label={"Стадион"} apiName={"stadium"} onChange={handleChange}  formData={formData}/>
-                    <MatchFormDataRow label={"Дата проведения"} apiName={"matchDateTime"} onChange={handleChange} formData={formData} type={"datetime-local"}/>
-
-                    <div className="flex justify-end space-x-4 pt-4">
-                        <Button
-                            type="button"
-                            variant="primary"
-                            onClick={onClose}
-                        >
-                            Отмена
-                        </Button>
-                        <Button type="submit">
-                            Создать
-                        </Button>
-                    </div>
-                </form>
-            </CardContent>
-        </div>
-    );
-}
-
+import {Modal} from "@/components/Modal";
+import {toast} from "@/hooks/use-toast";
+import {Skeleton} from "@/components/ui/skeleton";
+import MatchForm from "@/app/organizer/MatchForm";
 
 function MatchesList({ resource }) {
     const matches = resource.read();
@@ -101,9 +46,9 @@ export function LoadingSkeleton() {
 
 export default function MatchesSection() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
     const { user, userRole } = useAuth();
     const [refreshKey, setRefreshKey] = useState(0);
+    const [matchLogo, setMatchLogo] = useState();
 
     // Создаём ресурс с помощью Suspense (createResource).
     // Предполагается, что "user" — это ID организатора.
@@ -136,6 +81,7 @@ export default function MatchesSection() {
     }
 
     const handleCreateMatch = async (data) => {
+
         const response = await fetch(`http://localhost:8000/api/matches/${user}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -148,11 +94,46 @@ export default function MatchesSection() {
             matchDateTime: data.matchDateTime
           }),
         });
+
         setRefreshKey(refreshKey + 1);
+
         if (response.status == 201) {
             toast({
                 title: "Матч успешно создан",
             })
+
+            const body = await response.json();
+            const uploadForm = new FormData();
+            uploadForm.set('type', 'match-photos');
+            uploadForm.append('image', matchLogo);
+            uploadForm.set('match_id', body.data.id);
+
+            const uploadFormFunc = async (formData) => {
+                try {
+                    const response = await fetch(`/api/upload`, {
+                        method: 'PUT',
+                        credentials: 'include',
+                        body: formData,
+                    })
+                    const body = await response.json();
+                    if (response.status === 200) {
+                        toast({
+                            title: 'Вы успешно загрузили схему',
+                            description: body.msg
+                        })
+                    } else {
+                        toast({
+                            title: 'Произошла ошибка при загрузке схемы',
+                            description: body.msg
+                        })
+                    }
+
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            uploadFormFunc(uploadForm);
+
         } else {
             const result = await response.json();
             toast({
@@ -181,17 +162,15 @@ export default function MatchesSection() {
                         <MatchesList resource={matchesResource} />
                     </Suspense>
                 </ErrorBoundary>
-
-                {loading && (
-                    <div className="text-center py-4">
-                        <p className="text-gray-600">Загрузка матчей...</p>
-                    </div>
-                )}
             </CardContent>
 
             {/* Модальное окно создания матча */}
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <MatchForm onSubmit={handleCreateMatch} onClose={() => setIsModalOpen(false)} />
+                <MatchForm
+                    onSubmit={handleCreateMatch}
+                    matchLogo={matchLogo}
+                    matchLogoSetter={setMatchLogo}
+                    onClose={() => setIsModalOpen(false)} />
             </Modal>
         </Card>
     );

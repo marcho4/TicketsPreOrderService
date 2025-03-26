@@ -31,6 +31,7 @@ function DataCardSkeleton() {
                     <Skeleton className="h-8 w-full" />
                     <Skeleton className="h-8 w-full" />
                     <Skeleton className="h-8 w-full" />
+                    <Skeleton className="h-8 w-full" />
                 </div>
             </CardContent>
             <CardFooter className="flex justify-end space-x-4">
@@ -108,6 +109,7 @@ function DataCardContent({ data, updateFunc, refreshData }) {
                 <DataRow formData={formData} label={"Организация"} apiName={"organization_name"} isEditing={isEditing} handleChange={handleChange} />
                 <DataRow formData={formData} label={"ИНН"} apiName={"tin"} isEditing={isEditing} handleChange={handleChange} />
                 <DataRow formData={formData} label={"Email"} apiName={"email"} isEditing={isEditing} handleChange={handleChange} type="email" />
+                <DataRow formData={formData} label={"Телефон"} apiName={"phone_number"} isEditing={isEditing} handleChange={handleChange} type="tel" />
             </CardContent>
             {isEditing && (
                 <CardFooter className="flex space-x-4 px-4 justify-end">

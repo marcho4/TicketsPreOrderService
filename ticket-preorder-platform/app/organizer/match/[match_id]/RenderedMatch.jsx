@@ -3,9 +3,9 @@ import {useParams} from "next/navigation";
 import {formatDate} from "date-fns";
 import {Card, CardContent, CardHeader, CardTitle} from "../../../../components/ui/card";
 import Image from "next/image";
-import {Label} from "recharts";
 import {Input} from "../../../../components/ui/input";
 import {Button} from "../../../../components/ui/button";
+import {toast} from "../../../../hooks/use-toast";
 
 
 export function RenderedMatchInfo({ resource }) {
@@ -15,13 +15,63 @@ export function RenderedMatchInfo({ resource }) {
     const {match_id} = useParams();
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [updateError, setUpdateError] = useState(null);
+    const [scheme, setScheme] = useState();
 
-    // Function to submit new stadium scheme
+    const checkImageExists = async (url) => {
+        try {
+            const response = await fetch(url, { method: "HEAD" });
+            return response.ok;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    const imageUrl = `https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${match_id}`;
+    checkImageExists(imageUrl).then((exists) => {
+        if (exists) {
+            // Изображение существует, можно его отобразить
+        } else {
+            // Изображения нет — показываем альтернативный контент или сообщение
+        }
+    });
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const file = e.target.files[0];
+        const file = scheme;
         let formData = new FormData();
-        formData.append('file', file);
+        formData.append('image', file);
+        formData.set('type', 'stadium-schemes');
+        formData.set('match_id', match_id);
+
+        const uploadForm = async () => {
+            try {
+                const response = await fetch(`/api/upload`, {
+                    method: 'PUT',
+                    credentials: 'include',
+                    body: formData,
+                })
+                const body = await response.json();
+                if (response.status === 200) {
+                    toast({
+                        title: 'Вы успешно загрузили схему',
+                        description: body.msg
+                    })
+                } else {
+                    toast({
+                        title: 'Произошла ошибка при загрузке схемы',
+                        description: body.msg
+                    })
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        uploadForm();
+    }
+
+    const handleSchemeChange = (e) => {
+        setScheme(e.target.files[0]);
     }
 
     // Editing function for match info
@@ -108,7 +158,7 @@ export function RenderedMatchInfo({ resource }) {
                         </CardHeader>
                         <CardContent>
                             <Image
-                                src={`/stadion_shema.jpg`}
+                                src={`https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${match_id}`}
                                 alt={"Stadium schema"}
                                 className="mb-5 sm:mb-10 rounded-[2em]"
                                 width={700}
@@ -121,16 +171,12 @@ export function RenderedMatchInfo({ resource }) {
 
                                 {/* Блок с загрузкой файла */}
                                 <div className="mb-4 items-center justify-center w-full flex flex-col sm:flex-row">
-                                    <Label
-                                        htmlFor="uploadFile"
-                                    >
-                                        Загрузить схему
-                                    </Label>
                                     <Input
                                         id="uploadFile"
                                         className="max-w-80"
                                         type="file"
                                         name="uploadFile"
+                                        onChange={handleSchemeChange}
                                         accept="image/webp, image/jpeg, image/png"
                                         required
                                         multiple={false}

@@ -7,12 +7,10 @@ class ErrorBoundary extends React.Component {
     }
 
     static getDerivedStateFromError(error) {
-        // Update state so next render shows fallback UI
         return { hasError: true, error };
     }
 
     componentDidCatch(error, errorInfo) {
-        // You can log the error to an error reporting service here
         console.error("ErrorBoundary caught an error", error, errorInfo);
     }
 
@@ -21,7 +19,7 @@ class ErrorBoundary extends React.Component {
             return (
                 <div className="flex justify-center items-center h-full bg-white rounded-lg">
                     <p className="text-xl text-my_black text-center font-semibold">
-                        Something went wrong during data loading: {this.state.error.message}
+                        Ошибка при загрузке: {this.state.error.message}
                     </p>
                 </div>
             );

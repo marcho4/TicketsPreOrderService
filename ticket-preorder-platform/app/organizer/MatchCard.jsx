@@ -31,8 +31,9 @@ export default function MatchCard({ match }) {
                     <CardTitle>
                         {matchTitle}
                     </CardTitle>
-                    <CardDescription className="text-gray-800">{formattedDate}</CardDescription>
-
+                    <CardDescription className={"text-gray-800" + (isMatchPassed && "text-red-500")} >{
+                        formattedDate
+                    }</CardDescription>
                     {match.matchDescription && (
                         <CardDescription className="flex flex-row w-full justify-between">
                             {match.matchDescription}

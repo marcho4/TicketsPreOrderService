@@ -34,12 +34,10 @@ export default function Page() {
             <main className="flex-grow">
                 <div className="max-w-7xl mx-auto py-6">
                     <div className="flex flex-col md:flex-row gap-6">
-                        {/* Left side - User profile */}
                         <div className="md:w-1/2">
                             <OrgDataCard fetchLink={fetchUrl} updateLink={updateUrl}/>
                         </div>
 
-                        {/* Right side - Tickets list */}
                         <div className="md:w-1/2 flex flex-col gap-6">
                             <MatchesSection/>
                             <ChangePasswordSection/>

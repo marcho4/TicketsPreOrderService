@@ -12,6 +12,7 @@ import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "../../../com
 import {toast} from "../../../hooks/use-toast";
 import FetchedTickets from "./FetchedTickets";
 import {Skeleton} from "../../../components/ui/skeleton";
+import {Label} from "../../../components/ui/label";
 
 export function formatDate(dateString) {
     const date = new Date(dateString);
@@ -55,13 +56,15 @@ export default function Page() {
             throw error;
         }
     }
+    const imageUrl = `https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${id}`;
+
 
     // Создаем ресурс только при изменении id
     const resource = useMemo(() => createResource(fetchMatchData), [id]);
     const ticketsResource = useMemo(() => createResource(fetchAvailableTickets), [id, refreshResourceKey]);
     return (
         <Suspense fallback={<Loading />}>
-            <MatchRendered resource={resource} ticketsResource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey} />
+            <MatchRendered schemeUrl={imageUrl} resource={resource} ticketsResource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey} />
         </Suspense>
     );
 }
@@ -73,7 +76,7 @@ function Loading() {
 }
 
 
-function MatchRendered({ resource, ticketsResource, setRefreshResourceKey}) {
+function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, schemeUrl}) {
     const matchData = resource.read();
     const [modal, setModal] = useState(false);
 
@@ -107,13 +110,18 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey}) {
             </header>
 
             {/* Основной контент */}
-            <main className="flex flex-col w-full mx-10 py-10 rounded-lg items-center gap-y-5">
+            <main className="flex flex-col w-full mx-10 rounded-lg items-center gap-y-5 mb-10">
                 <div className="flex flex-col items-center justify-center mx-auto">
+                    <Label htmlFor={"stadium-scheme"} className="text-xl mb-5">
+                        Схема стадиона
+                    </Label>
                     <Image
-                        src="/stadion_shema.jpg"
-                        alt="Схема стадиона"
-                        width={500}
+                        id={"stadium-scheme"}
+                        src={schemeUrl}
+                        alt="Организатор не загрузил схему :("
+                        width={700}
                         height={50}
+                        className={"rounded-lg"}
                     />
                 </div>
                 <Button size="lg" onClick={() => setModal(true)}>

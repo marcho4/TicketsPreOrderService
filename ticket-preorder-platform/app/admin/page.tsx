@@ -1,13 +1,13 @@
 "use client";
 
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import ErrorBoundary from "./dataBoundary";
 import { useAuth } from "@/providers/authProvider";
 import { useRouter } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
-import {fetchRequests} from "@/lib/dataFetchers";
+import { fetchRequests } from "@/lib/dataFetchers";
 
 import {
   Table,
@@ -42,7 +42,7 @@ const AdminHome = () => {
   const [requests, setRequests] = useState<Request[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const { user, userRole } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
 
   // Функция загрузки заявок
