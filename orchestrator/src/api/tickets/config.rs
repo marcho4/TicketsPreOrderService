@@ -1,6 +1,7 @@
 use actix_web::web;
 use crate::api::tickets::add_tickets::add_tickets;
 use crate::api::tickets::cancel_preorder::cancel_preorder;
+use crate::api::tickets::delete_tickets::delete_tickets;
 use crate::api::tickets::get_available_tickets::get_available_tickets;
 use crate::api::tickets::get_ticket::get_ticket;
 use crate::api::tickets::get_tickets_by_user::get_tickets_by_user;
@@ -15,5 +16,6 @@ pub fn config_services(cfg: &mut web::ServiceConfig) {
             .service(preorder_ticket)
             .service(cancel_preorder)
             .service(get_ticket)
+            .service(delete_tickets)
     );
 }

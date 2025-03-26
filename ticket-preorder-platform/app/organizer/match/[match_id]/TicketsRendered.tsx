@@ -3,11 +3,11 @@
 import {useEffect, useState} from "react";
 import {Button} from "@/components/ui/button";
 import {Modal} from "@/components/Modal";
-import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import TicketsDropZone from "./FileUpload";
 import { columns, Ticket } from "./columns"
 import { DataTable } from "./data-table"
-
+import {toast} from "@/hooks/use-toast";
 
 
 export function TicketsRendered({ resource, match_id }) {
@@ -15,12 +15,16 @@ export function TicketsRendered({ resource, match_id }) {
     const [modal, setModal] = useState(false);
     const [ticketsFile, setTicketsFile] = useState(null);
 
-    // Function to change tickets file
-    const handleFileChange = (e) => {
-        setTicketsFile(e.target.files[0]);
-    }
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.[0]) {
+            setTicketsFile(e.target.files[0]);
+        }
+    };
 
-    // Function to submit tickets file to an API
+    const resetTicketsFile = () => {
+        setTicketsFile(null);
+    };
+
     const handleSubmitTickets = async (e) => {
         e.preventDefault();
         let formData = new FormData();
@@ -33,8 +37,17 @@ export function TicketsRendered({ resource, match_id }) {
                 body: formData,
             });
             const data = await response.json();
-            console.log(data.data);
-            console.log(data.msg);
+            if (response.status == 200) {
+                toast({
+                    title: "Успешно добавлены билеты",
+                    description: "Неправильных рядов: " + data.data.invalid_rows,
+                })
+                setModal(false);
+            } else {
+                toast({
+                    title: "Не удалось добавить билеты"
+                })
+            }
         } catch (e) {
             console.error(e);
         }
@@ -62,19 +75,19 @@ export function TicketsRendered({ resource, match_id }) {
                     </CardHeader>
                     <CardContent className="flex flex-col items-center w-full justify-center rounded-lg gap-y-10">
                         <div className="container mx-auto">
-                            <DataTable columns={columns} data={data} />
+                            <DataTable columns={columns} data={data} match_id={match_id} />
+                            <div className="flex justify-end w-full">
+                                <Button
+                                    onClick={() => setModal(true)}
+                                    size="lg">
+                                    Загрузить новые билеты
+                                </Button>
+                            </div>
+
                         </div>
                     </CardContent>
-                    <CardFooter className="flex flex-row items-center w-full justify-end rounded-lg">
-                        <Button
-                            onClick={() => setModal(true)}
-                            size="lg">
-                            Загрузить новые билеты
-                        </Button>
-                    </CardFooter>
                 </Card>
             </div>
-
 
             <Modal onClose={() => setModal(false)} isOpen={modal}>
                 <CardHeader>
@@ -84,17 +97,21 @@ export function TicketsRendered({ resource, match_id }) {
                 </CardHeader>
                 <CardContent className="flex flex-col items-center justify-center">
                     <div className="text-sm text-gray-600 mb-4">
-                        <p>Please upload file in <strong>.csv</strong> format</p>
-                        <p className="mt-2">Example:</p>
+                        <p>Загрузите файл в <strong>.csv</strong> формате</p>
+                        <p className="mt-2">Пример:</p>
                         <pre className="bg-gray-100 p-4 text-sm font-mono rounded mt-2">
                             price, sector, row, seat<br/>
                             110, D, 10, 5<br/>
                             400, A, 1, 10
                         </pre>
                     </div>
-                    <form className="max-w-md w-full rounded-lg p-6 items-center justify-center flex flex-col gap-y-8">
-                        <TicketsDropZone/>
+                    <form className="max-w-md w-full rounded-lg p-6 items-center justify-center flex flex-col">
+                        <TicketsDropZone file={ticketsFile}
+                                         setFile={setTicketsFile}
+                                         handleFileChange={handleFileChange}
+                                         resetTicketsFile={resetTicketsFile} />
                         <Button
+                            disabled={!ticketsFile}
                             variant="outline"
                             type="submit"
                             className="min-w-64"

@@ -32,7 +32,8 @@ use crate::api::tickets::{
     get_tickets_by_user::__path_get_tickets_by_user,
     cancel_preorder::__path_cancel_preorder,
     preorder::__path_preorder_ticket,
-    get_ticket::__path_get_ticket
+    get_ticket::__path_get_ticket,
+    delete_tickets::__path_delete_tickets,
 };
 
 use crate::orchestrator::orchestrator::Orchestrator;
@@ -81,7 +82,7 @@ async fn main() -> std::io::Result<()> {
         paths(get_requests, process_request, login, logout, session, register_user, register_organizer,
             get_organizer, update_user, get_user_data, update, update_match, get_by_org, get_match,
             get_all_matches, delete_match, create_match, get_tickets_by_user, get_available_tickets,
-            add_tickets, preorder_ticket, cancel_preorder, get_ticket, change_password
+            add_tickets, preorder_ticket, cancel_preorder, get_ticket, change_password, delete_tickets
         )
     )]
     struct ApiDoc;

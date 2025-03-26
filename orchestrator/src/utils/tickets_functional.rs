@@ -6,6 +6,7 @@ use crate::utils::errors::OrchestratorError;
 use reqwest::multipart;
 use tokio::fs::File;
 use tokio_util::codec::{BytesCodec, FramedRead};
+use crate::models::delete_tickets::{DeleteTickets, DeleteTicketsResp};
 use crate::utils::errors::OrchestratorError::{Deserialize, Service};
 
 impl Orchestrator {
@@ -32,10 +33,10 @@ impl Orchestrator {
         Ok(self.send_request::<Ticket, String>(url, None, Method::GET).await?)
     }
 
-    // TODO - переделать логику
-    // pub async fn delete_tickets(&self, match_id: String) -> Result<(), OrchestratorError> {
-    //     let url = format!("{}/ticket/{}/delete", self.config.tickets_url, match_id);
-    // }
+    pub async fn delete_tickets(&self, match_id: String, tickets: DeleteTickets) -> Result<DeleteTicketsResp, OrchestratorError> {
+        let url = format!("{}/ticket/{}/delete", self.config.tickets_url, match_id);
+        Ok(self.send_request::<DeleteTicketsResp, DeleteTickets>(url, Some(tickets), Method::DELETE).await?)
+    }
 
     pub async fn add_match_tickets(&self, match_id: &String, file_path: &String) -> Result<TicketsAddResponse, OrchestratorError> {
         let url = format!("{}/ticket/{}/add", self.config.tickets_url, match_id);

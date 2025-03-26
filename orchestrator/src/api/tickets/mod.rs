@@ -5,3 +5,4 @@ pub mod add_tickets;
 pub mod preorder;
 pub(crate) mod cancel_preorder;
 pub(crate) mod get_ticket;
+pub mod delete_tickets;

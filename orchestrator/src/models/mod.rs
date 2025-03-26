@@ -23,3 +23,4 @@ pub mod matches;
 pub mod tickets;
 pub mod email;
 pub mod password_update;
+pub mod delete_tickets;
