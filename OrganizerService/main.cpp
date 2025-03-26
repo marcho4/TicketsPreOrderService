@@ -67,19 +67,7 @@ int main() {
             MatchCreator creator;
             creator.CreateMatchRequest(request, res, db);
         });
-        // TODO: написать логику
-        server.Put("/organizer/:id/update_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-
-        });
-        // TODO: написать логику
-        server.Post("/organizer/:id/delete_match/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-
-        });
-        // TODO: написать логику
-        server.Post("/organizer/:id/add_tickets/:match_id", [&db](const httplib::Request& request, httplib::Response &res) {
-
-        });
-
+      
         std::cout << "Server is listening http://localhost:8004" << '\n';
         server.listen("0.0.0.0", 8004);
     } catch (const std::exception& e) {

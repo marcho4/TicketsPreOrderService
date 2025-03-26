@@ -13,15 +13,17 @@ class CreateOrganizerInfo {
         std::string tin;
         std::string organization_name;
         std::string email;
+        std::string phone_number;
 
         static OrganizerData parseFromJson(json& parsed) {
             return {parsed["tin"],
                     parsed["organization_name"],
-                    parsed["email"]};
+                    parsed["email"], 
+                    parsed["phone_number"]};
         }
 
         bool Validate(httplib::Response& res) const {
-            if (email.empty() || organization_name.empty() || tin.empty()) {
+            if (email.empty() || organization_name.empty() || tin.empty() || phone_number.empty()) {
                 spdlog::error("Пропущены обязательные поля");
                 sendError(res, 400, "Empty fields");
                 return false;

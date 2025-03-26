@@ -6,4 +6,5 @@ pub struct OrganizerRegistrationData {
     pub company: String,
     pub email: String,
     pub tin: String,
+    pub phone_number: String,
 }

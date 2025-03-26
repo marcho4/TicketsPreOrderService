@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -10,27 +10,33 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import fetchData from "@/lib/fetchData";
 import {useToast} from "@/hooks/use-toast";
-import {ToastAction} from "@/components/ui/toast";
+import {CircleCheck} from "lucide-react";
+import {useAuth} from "@/providers/authProvider";
 
 export default function AuthCard() {
     // Состояние, которое отвечает за текущий «режим» компонента.
     // Варианты: "login", "signupUser", "signupOrganizer"
     const [mode, setMode] = useState("login");
+    const { checkAuth } = useAuth();
 
     // Поля для логина
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
+    const lengthCriteria = password.length > 7;
+    const charCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const numberCriteria = /[^A-Za-z]/.test(password);
 
     // Поля для регистрации (общие)
     const [name, setName] = useState("");
-    const [last_name, setlast_name] = useState("");
+    const [last_name, setLastName] = useState("");
     const [email, setEmail] = useState("");
 
 
     // Поля для организатора (например)
     const [company, setCompany] = useState("");
     const [tin, settin] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
 
     const [loading, setLoading] = useState(false);
     
@@ -45,6 +51,7 @@ export default function AuthCard() {
                 { login, password }, setLoading)
             console.log(response.status)
             if (response.status === 200) {
+                await checkAuth();
                 let body = await response.json();
                 switch (body.data.role) {
                     case "ADMIN":
@@ -52,11 +59,9 @@ export default function AuthCard() {
                         break;
                     case "USER":
                         router.push('/dashboard');
-                        setTimeout(() => window.location.reload(), 500);
                         break;
                     case "ORGANIZER":
                         router.push('/organizer');
-                        setTimeout(() => window.location.reload(), 500);
                         break;
                     default:
                         break;
@@ -72,9 +77,6 @@ export default function AuthCard() {
             setError(true);
             console.log("here");
         }
-
-
-
     };
 
     // Функция регистрации обычного пользователя
@@ -84,26 +86,26 @@ export default function AuthCard() {
             setError(false);
             let response = await fetchData("http://localhost:8000/api/auth/register/user", "POST",
                 { name, last_name, email, login, password}, setLoading);
-                
+            let body = await response.json();
+
             if (response.status === 200) {
-                let body = await response.json();
-                // Выводим для отладки
-                console.log("Registration successful, response body:", body);
-                
+                toaster.toast({
+                    title: "Вы успешно зарегистрировались",
+                })
                 // Проверка, содержит ли ответ данные пользователя с ролью
                 if (body.data && body.data.role) {
                     await checkAuth();
-                    console.log("Auth checked after registration, redirecting...");
                     router.push('/dashboard');
                 } else {
-                    console.log("Registration successful but no role data found");
-                    // Возможно, требуется отдельный вход после регистрации
                     setMode("login");
                     setError(false);
                 }
             } else {
                 setError(true);
-                console.log("Registration failed with status:", response.status);
+                toaster.toast({
+                    title: "Ошибка при регистрации",
+                    description: body.msg
+                })
             }
         } catch (error) {
             setError(true);
@@ -115,12 +117,19 @@ export default function AuthCard() {
     const handleSignupOrganizer = async (e) => {
         e.preventDefault();
         let response = await fetchData("http://localhost:8000/api/auth/register/organizer", "POST",
-            { company, email, tin }, setLoading)
+            { company, email, tin, phone_number: phoneNumber }, setLoading)
 
         if (response.status === 200) {
-            router.push("/");
+            router.push("/matches");
+            toaster.toast({
+                title: "Успешно отправилась заявка на регистрацию",
+            })
         } else {
-            console.log("Wrong credentials");
+            const body = await response.json();
+            toaster.toast({
+                title: "Регистрация не прошла",
+                description: body.msg
+            })
         }
     };
 
@@ -244,7 +253,7 @@ export default function AuthCard() {
                                     type="text"
                                     placeholder="Ваша фамилия"
                                     value={last_name}
-                                    onChange={(e) => setlast_name(e.target.value)}
+                                    onChange={(e) => setLastName(e.target.value)}
                                     required
                                 />
                             </div>
@@ -287,12 +296,27 @@ export default function AuthCard() {
                                     required
                                 />
                             </div>
+                            <div id="criteria" className="flex flex-col gap-y-1">
+                                <div className={"text-xs flex flex-row items-center " + (lengthCriteria ? "text-green-600" : "text-red-400")}>
+                                    <CircleCheck width={20} strokeWidth={1} className="mr-1"/>
+                                    8 символов+
+                                </div>
+                                <div className={"text-xs flex flex-row items-center " + (numberCriteria ? "text-green-600" : "text-red-400")}>
+                                    <CircleCheck width={20} strokeWidth={1} className="mr-1"/>
+                                    Есть 1 цифра
+                                </div>
+                                <div className={"text-xs flex flex-row items-center " + (charCriteria ? "text-green-600" : "text-red-400")}>
+                                    <CircleCheck width={20} strokeWidth={1} className="mr-1"/>
+                                    Есть 1 специальный символ
+                                </div>
+                            </div>
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
                                 variant="default"
                                 className="w-full"
+                                disabled={!charCriteria | !numberCriteria || !lengthCriteria}
                             >
                                 Зарегистрироваться
                             </Button>
@@ -351,6 +375,19 @@ export default function AuthCard() {
                                     placeholder="Введите ИНН вашей организации"
                                     value={tin}
                                     onChange={(e) => settin(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="tin">
+                                    Телефон
+                                </Label>
+                                <Input
+                                    id="phone_number"
+                                    type="tel"
+                                    placeholder="Введите телефон для связи"
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
                                     required
                                 />
                             </div>

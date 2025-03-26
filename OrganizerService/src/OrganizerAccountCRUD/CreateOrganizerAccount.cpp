@@ -12,7 +12,7 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
         return;
     }
 
-    const std::vector<std::string> required_fields = {"email", "organization_name", "tin"};
+    const std::vector<std::string> required_fields = {"email", "organization_name", "tin", "phone_number"};
     if (!validateRequiredFields(parsed, required_fields, res)) {
         spdlog::error("Пропущены обязательные поля, отказано в создании");
         return;
@@ -34,7 +34,7 @@ void CreateOrganizerInfo::OrganizerPersonalInfoCreateRequest(const httplib::Requ
                               "VALUES ($1, $2, $3, $4) RETURNING organizer_id";
 
     std::vector<std::string> params = {organizer_data.organization_name, organizer_data.tin,
-                                       organizer_data.email, "XXXXXXXXXX"};
+                                       organizer_data.email, organizer_data.phone_number};
     pqxx::result result = db.executeQueryWithParams(insert_data, params);
 
     if (!result.empty() && !result[0]["organizer_id"].is_null()) {

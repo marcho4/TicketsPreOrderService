@@ -5,3 +5,4 @@ pub mod middleware;
 pub mod user;
 pub mod matches;
 pub(crate) mod tickets;
+mod payment;
