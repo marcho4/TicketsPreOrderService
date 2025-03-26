@@ -13,6 +13,7 @@ import {toast} from "../../../hooks/use-toast";
 import FetchedTickets from "./FetchedTickets";
 import {Skeleton} from "../../../components/ui/skeleton";
 import {Label} from "../../../components/ui/label";
+import {checkImageExists} from "../../../lib/dataFetchers";
 
 export function formatDate(dateString) {
     const date = new Date(dateString);
@@ -25,6 +26,8 @@ export function formatDate(dateString) {
 export default function Page() {
     const { id } = useParams();
     const [refreshResourceKey, setRefreshResourceKey] = useState(1);
+    const imageUrl = `https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${id}`;
+
 
     // Функция для получения данных матча
     const fetchMatchData = async () => {
@@ -34,6 +37,12 @@ export default function Page() {
                 credentials: "same-origin",
             });
             const result = await response.json();
+            if (await checkImageExists(imageUrl)) {
+                result.data.scheme = imageUrl;
+            } else {
+                result.data.scheme = "/stadion_shema.jpg";
+            }
+
             return result.data;
         } catch (error) {
             console.error("Ошибка в fetchMatchData:", error);
@@ -56,7 +65,6 @@ export default function Page() {
             throw error;
         }
     }
-    const imageUrl = `https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${id}`;
 
 
     // Создаем ресурс только при изменении id
@@ -64,7 +72,7 @@ export default function Page() {
     const ticketsResource = useMemo(() => createResource(fetchAvailableTickets), [id, refreshResourceKey]);
     return (
         <Suspense fallback={<Loading />}>
-            <MatchRendered schemeUrl={imageUrl} resource={resource} ticketsResource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey} />
+            <MatchRendered resource={resource} ticketsResource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey} />
         </Suspense>
     );
 }
@@ -117,7 +125,7 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, schem
                     </Label>
                     <Image
                         id={"stadium-scheme"}
-                        src={schemeUrl}
+                        src={matchData.scheme}
                         alt="Организатор не загрузил схему :("
                         width={700}
                         height={50}

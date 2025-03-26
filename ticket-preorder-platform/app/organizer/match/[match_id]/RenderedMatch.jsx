@@ -17,23 +17,6 @@ export function RenderedMatchInfo({ resource }) {
     const [updateError, setUpdateError] = useState(null);
     const [scheme, setScheme] = useState();
 
-    const checkImageExists = async (url) => {
-        try {
-            const response = await fetch(url, { method: "HEAD" });
-            return response.ok;
-        } catch (error) {
-            return false;
-        }
-    }
-
-    const imageUrl = `https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${match_id}`;
-    checkImageExists(imageUrl).then((exists) => {
-        if (exists) {
-            // Изображение существует, можно его отобразить
-        } else {
-            // Изображения нет — показываем альтернативный контент или сообщение
-        }
-    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -158,7 +141,7 @@ export function RenderedMatchInfo({ resource }) {
                         </CardHeader>
                         <CardContent>
                             <Image
-                                src={`https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${match_id}`}
+                                src={data.scheme}
                                 alt={"Stadium schema"}
                                 className="mb-5 sm:mb-10 rounded-[2em]"
                                 width={700}

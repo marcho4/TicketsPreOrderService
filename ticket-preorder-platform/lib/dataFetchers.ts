@@ -1,5 +1,14 @@
 import {MatchData} from "@/app/matches/MatchCard";
 
+export const checkImageExists = async (url: string): Promise<boolean> => {
+    try {
+        const response = await fetch(url, { method: "HEAD" });
+        return response.ok;
+    } catch (error) {
+        return false;
+    }
+};
+
 
 export async function fetchMatchData(id: string): Promise<MatchData> {
     try {
@@ -11,14 +20,7 @@ export async function fetchMatchData(id: string): Promise<MatchData> {
             throw new Error(`Не удалось получить данные матча: ${response.statusText}`);
         }
         const result = await response.json();
-        const checkImageExists = async (url: string): Promise<boolean> => {
-            try {
-                const response = await fetch(url, { method: "HEAD" });
-                return response.ok;
-            } catch (error) {
-                return false;
-            }
-        };
+
 
         const imageUrl = `https://match-photos.s3.us-east-1.amazonaws.com/matches/${id}`;
         await checkImageExists(imageUrl).then((exists) => {

@@ -5,9 +5,11 @@ import {Suspense, useMemo} from "react";
 import {createResource} from "../../../../lib/createResource";
 import {RenderedMatchInfo} from "./RenderedMatch";
 import {TicketsRendered} from "./TicketsRendered";
+import {checkImageExists} from "../../../../lib/dataFetchers";
 
 export default function Page() {
     const {match_id} = useParams();
+    const imageUrl = `https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${match_id}`;
 
     async function fetchMatchData() {
         try {
@@ -19,8 +21,14 @@ export default function Page() {
             if (!response.ok) {
                 console.error(`Failed to fetch match data: ${response.text()}`);
             }
-
             const result = await response.json();
+
+            if (await checkImageExists(imageUrl)) {
+                result.data.scheme = imageUrl;
+            } else {
+                result.data.scheme = "/stadion_shema.jpg";
+            }
+
             return result.data;
         } catch (error) {
             console.error("Error fetching match data:", error);
