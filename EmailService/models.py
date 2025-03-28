@@ -14,6 +14,7 @@ class TemplateId(str, enum.Enum):
     TICKET_PREORDER_CANCEL = "ticket-preorder-cancel"
     MATCH_DETAILS_CHANGE = "match-details-change"
     ORG_REGISTRATION = "org-registration"
+    AUTO_PREORDER_SUCCESS = "auto-preorder-success"
 
 
 class Recipient(BaseModel):
