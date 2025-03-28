@@ -1,5 +1,6 @@
 #include "CancelReservation.h"
 
+httplib::Client CancelReservation::client("http://queue-service:8020");
 
  void CancelReservation::CancelReservationRequest(const httplib::Request &req, httplib::Response &res,
                                                         Database &db) {
@@ -32,4 +33,47 @@ void CancelReservation::CancelTicketReservation(const std::string &ticket_id,
     std::vector<std::string> params = {"", "available", ticket_id, match_id};
 
     db.executeQueryWithParams(query, params);
+    
+
+    try{
+        int price = CancelReservation::GetTicketPrice(ticket_id, match_id, db);
+        if (price == -1) {
+            spdlog::error("Не удалось получить цену билета");
+            throw std::runtime_error("Failed to get ticket price");
+        }
+
+        // Отправляем запрос на добавление билета в очередь
+        json ticket_json = {
+                {"match_id", match_id},
+                {"price", price},
+                {"ticket_id", ticket_id}
+        };
+        auto res = CancelReservation::client.Post("/event", ticket_json.dump(), "application/json");
+        if (res && res->status == 200) {
+            spdlog::info("Билет успешно добавлен в очередь");
+        } else {
+            spdlog::error("Не удалось добавить билет в очередь");
+            throw std::runtime_error("Failed to add ticket to queue");
+        }
+    } catch (const std::exception& e) {
+        spdlog::error("Ошибка при добавлении билета в очередь: {}", e.what());
+    }
+}
+
+int CancelReservation::GetTicketPrice(const std::string &ticket_id, const std::string &match_id, Database &db) {
+    std::string query = "SELECT price FROM Tickets.TicketsData WHERE id = $1 AND match_id = $2";
+    std::vector<std::string> params = {ticket_id, match_id};
+
+    try {
+        auto result = db.executeQueryWithParams(query, params);
+        if (result.empty()) {
+            spdlog::error("Не удалось получить цену билета");
+            throw std::runtime_error("Failed to get ticket price");
+        }
+        int price = result[0][0].as<int>();
+        return price;
+    } catch (const std::exception& e) {
+        spdlog::error("Ошибка при получении цены билета: {}", e.what());
+        return -1;
+    }
 }

@@ -11,6 +11,8 @@
 class AddTickets {
     using json = nlohmann::json;
 
+    static httplib::Client client;
+
     struct Ticket {
         std::string price;
         std::string sector;
@@ -57,6 +59,17 @@ public:
     static void AddingTicketsRequest(const httplib::Request& req, httplib::Response& res, Database& db);
 
     static void AddTicketToDatabase(const std::string& match_id, const Ticket& ticket, Database& db);
+
+private:
+    static void GetTicketID(
+        const std::string& match_id,
+        const std::string& price,
+        const std::string& sector,
+        const std::string& row,
+        const std::string& seat,
+        Database& db,
+        std::string& ticket_id
+    );
 };
 
 
