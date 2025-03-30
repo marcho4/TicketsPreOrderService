@@ -1,0 +1,6 @@
+tickets_url = "http://localhost:8006"
+kafka_url = "localhost:9092"
+redis_url = "redis://:stefa_lyubit_redis@localhost:6379"
+topic_name = "new_tickets"
+matches_url = "http://localhost:8005"
+user_url = "http://localhost:8001"
