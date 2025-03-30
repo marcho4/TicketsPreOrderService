@@ -3,7 +3,7 @@ import {CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {MatchFormDataRow} from "@/app/organizer/MatchFormDataRow";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
-
+import { Label } from "@/components/ui/label";
 export default function MatchForm({ onSubmit, onClose, matchLogoSetter, matchLogo }) {
     const [formData, setFormData] = useState({
         matchDescription: '',
@@ -38,11 +38,14 @@ export default function MatchForm({ onSubmit, onClose, matchLogoSetter, matchLog
                     <MatchFormDataRow label={"Стадион"} apiName={"stadium"} onChange={handleChange}  formData={formData}/>
                     <MatchFormDataRow label={"Дата проведения"} apiName={"matchDateTime"} onChange={handleChange} formData={formData} type={"datetime-local"}/>
 
-                    <Input
-                        onChange={(e) => matchLogoSetter(e.target.files[0])}
-                        type="file"
-                        required={true}
-                    />
+                    <div className="flex flex-col">
+                        <Label className="block text-sm font-medium text-gray-700 mb-1">Баннер матча</Label>
+                        <Input
+                            onChange={(e) => matchLogoSetter(e.target.files[0])}
+                            type="file"
+                            required={true}
+                        />
+                    </div>
 
                     <div className="flex justify-end space-x-4 pt-4">
                         <Button

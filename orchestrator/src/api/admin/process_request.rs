@@ -81,6 +81,8 @@ pub async fn process_request(
     }
 
     if json_body.status == Status::REJECTED {
+        info!("Admin requests rejected");
+
         return generic_response::<String>(
             StatusCode::OK,
             Some("Successfully rejected the request".to_string()),
@@ -88,15 +90,19 @@ pub async fn process_request(
         );
     }
 
+
     let org_data = CreateOrgData {
         email: request_info.email.clone(),
         tin: request_info.tin.clone(),
         organization_name: request_info.company.clone(),
+        phone_number: request_info.phone_number.clone()
     };
 
+    info!("Admin requests created: {:?}", org_data);
     let org_id = match orchestrator.create_organizer(org_data).await {
         Ok(org) => org,
         Err(e) => {
+            info!("Failed to create organizer: {:?}", e);
             return generic_response::<String>(
                 StatusCode::INTERNAL_SERVER_ERROR,
                 Some(e.to_string()),
@@ -116,6 +122,7 @@ pub async fn process_request(
     let org_approve_response = match orchestrator.org_approve(&approve_payload).await {
         Ok(resp) => resp,
         Err(e) => {
+            info!("Failed to org approve: {:?}", e);
             return generic_response::<String>(
                 StatusCode::INTERNAL_SERVER_ERROR,
                 Some(e.to_string()),

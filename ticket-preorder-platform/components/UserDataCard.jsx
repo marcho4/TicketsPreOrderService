@@ -92,7 +92,7 @@ function DataCardContent({ data, updateFunc, refreshData }) {
     };
 
     return (
-        <Card className="flex flex-col max-w-xl p-4 gap-5">
+        <Card className="flex flex-col p-4 gap-5">
             <CardHeader className="flex flex-row py-5 rounded-lg justify-between gap-5">
                 <div className="flex flex-col">
                     <CardTitle className="text-xl sm:text-2xl">Мой профиль</CardTitle>

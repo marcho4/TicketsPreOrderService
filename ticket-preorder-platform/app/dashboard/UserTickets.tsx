@@ -35,8 +35,8 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
                 method: 'GET',
                 credentials: 'same-origin',
             });
-            response = await response.json();
-            return response.data || [];
+            const data = await response.json();
+            return data.data || [];
         } catch (error) {
             console.error(error);
             return [];

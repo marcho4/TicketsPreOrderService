@@ -6,5 +6,6 @@ pub struct AdminRequest {
     pub email: String,
     pub company: String,
     pub tin: String,
+    pub phone_number: String,
     pub request_id: String,
 }

@@ -1,24 +1,81 @@
 import {Button} from "@/components/ui/button";
 import {toast} from "@/hooks/use-toast";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {Input} from "@/components/ui/input";
+import {useState} from "react";
+import { Label } from "@/components/ui/label";
 
 interface TicketItem {
     id: string,
     match_id: string,
 }
 
-export default function FetchedTickets({resource, setRefreshResourceKey} : any) {
+export default function FetchedTickets({resource, setRefreshResourceKey, matchId} : any) {
     const tickets = resource.read();
+    const [minPrice, setMinPrice] = useState<number>();
+    const [maxPrice, setMaxPrice] = useState<number>();
+
+    const getInQueue = async (min_price, max_price) => {
+        const url = `http://localhost:8000/api/matches/queue/${matchId}`;
+        const response = await fetch(url, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                min_price: Number(min_price),
+                max_price: Number(max_price),
+            })
+        })
+        if (!response.ok) {
+            toast({
+                title: "Не удалось встать в очередь",
+                description: "Попробуйте позже",
+                variant: "destructive",
+            })
+        } else {
+            toast({
+                title:"Вы успешно встали в очередь",
+                description: "Вам придет оповещение, как только билеты станут доступными"
+            })
+        }
+    }
 
     if (tickets.length === 0) {
         return (
-            <div className="flex flex-col items-center justify-center mx-auto h-full">
-                На данный момент нет доступных для предзаказа билетов
-                <Button className="mt-10" onClick={() => {
-                    toast({
-                        title:"Вы успешно встали в очередь",
-                        description: "Вам придет оповещение, как только билеты станут доступными"})
-                }}>
+            <div className="flex flex-col text-sm sm:text-lg items-center justify-center mx-auto h-full">
+                На данный момент нет доступных для предзаказа билетов<br/>
+                Введите минимальную и максимальную цену, по которой вы хотите купить билет:
+                <div className="flex flex-col items-center gap-4 mt-4 w-[400px]">
+                    <div className="flex flex-col">
+                        <Label htmlFor="min_price">Минимальная цена</Label>
+                        <Input
+                            type="number"
+                            id="min_price"
+                            name="min_price"
+                            placeholder="Минимальная цена"
+                            className="mt-2 w-[200px]"
+                            value={minPrice}
+                            onChange={(e) => {setMinPrice(Number(e.target.value))}}
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <Label htmlFor="max_price">Максимальная цена</Label>
+                        <Input
+                            type="number"
+                            id="max_price"
+                            name="max_price"
+                            placeholder="Максимальная цена"
+                            className="mt-2 w-[200px]"
+                            value={maxPrice}
+                            onChange={(e) => setMaxPrice(Number(e.target.value))}
+                        />
+                    </div>
+                </div>
+                <Button
+                    disabled={!minPrice || !maxPrice || Number(minPrice) > Number(maxPrice)}
+                    className="mt-10" onClick={async () => {await getInQueue(minPrice, maxPrice)}}>
                     Встать в очередь за билетами
                 </Button>
             </div>
@@ -49,7 +106,9 @@ export default function FetchedTickets({resource, setRefreshResourceKey} : any) 
                 setRefreshResourceKey((prev) => prev + 1);
             } else {
                 toast({
-                    title: "Произошла ошибка при предзаказе"
+                    title: "Произошла ошибка при предзаказе",
+                    description: "Попробуйте войти в систему и попробовать снова",
+                    variant: "destructive",
                 })
             }
         } catch (e) {

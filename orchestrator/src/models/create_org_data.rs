@@ -6,4 +6,5 @@ pub struct CreateOrgData {
     pub tin: String,
     pub email: String,
     pub organization_name: String,
+    pub phone_number: String,
 }

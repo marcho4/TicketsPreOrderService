@@ -37,8 +37,10 @@ pub async fn cancel_preorder(
     orchestrator: web::Data<Orchestrator>,
     cancel_data: web::Json<CancelData>
 ) -> HttpResponse {
+    info!("Ticket id: {}", ticket_id);
     let ticket_id = ticket_id.into_inner();
     let cancel_data = cancel_data.into_inner();
+    let cloned = cancel_data.clone();
 
     let validation = RequestValidator::validate_req(&req, Role::USER,
                                                     Some(cancel_data.user_id.as_str()));
@@ -46,8 +48,8 @@ pub async fn cancel_preorder(
     if let Err(e) = validation {
         return e;
     }
-    let user_id = cancel_data.user_id.clone();
 
+    let user_id = cancel_data.user_id.clone();
     let users_tickets = match orchestrator
         .get_users_tickets(cancel_data.user_id).await {
         Ok(v) => v,
@@ -59,6 +61,7 @@ pub async fn cancel_preorder(
             )
         }
     };
+    info!("Успешно запарсил билеты пользователя");
 
     // Если нет билета с id, которое
     if !users_tickets.iter().find(|ticket|
@@ -70,10 +73,11 @@ pub async fn cancel_preorder(
             None
         )
     };
+    info!("Успешно нашел предзаказ для отмены");
 
-    match orchestrator.cancel_preorder(ticket_id.clone()).await {
+    match orchestrator.cancel_preorder(ticket_id.clone(), cloned).await {
         Ok(resp) => {
-
+            info!("Успешно отменил предзаказ билета");
             let user_info = orchestrator.get_user(user_id.clone()).await;
             if let Ok(user_info) = user_info {
 

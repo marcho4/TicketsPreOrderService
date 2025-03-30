@@ -87,10 +87,9 @@ function MatchCardContent({resource, id}: {
     return (
         <div className="group w-full max-w-96 cursor-pointer" onClick={handleClick}>
             <section
-                className="group relative flex max-w-96 h-52 w-full overflow-hidden rounded-lg cursor-pointer"
+                className="group relative flex max-w-96 aspect-[16/9] w-full overflow-hidden rounded-lg cursor-pointer"
                 aria-label={`Match between ${data.teamHome} and ${data.teamAway}`}
             >
-                {/* We use next/image for the background, but let's wrap it in a container. */}
                 <div className="absolute inset-0 transition-transform duration-300 ease-in-out group-hover:scale-110">
                     <Image
                         src={data.logoUrl}
@@ -101,13 +100,13 @@ function MatchCardContent({resource, id}: {
                     />
                 </div>
             </section>
-            <div className="flex flex-col items-center justify-center w-full ">
-                <div className="bg-opacity-90 rounded-lg  py-2  min-w-full ">
-                    <h2 className="text-xl font-semibold text-gray-800 min-w-full leading-tight text-left">
+            <div className="flex flex-col items-center justify-center w-full mt-2">
+                <div className="bg-opacity-90 rounded-lg py-2 w-full">
+                    <h2 className="text-xl font-semibold text-gray-800 w-full leading-tight text-left">
                         {data.teamHome} - {data.teamAway}
                     </h2>
                 </div>
-                <div className="flex items-center  text-left min-w-full text-gray-600 ">
+                <div className="flex items-center text-left w-full text-gray-600">
                     {data.stadium} <Dot/> {formatDate(curr_date)}, {time}
                 </div>
             </div>

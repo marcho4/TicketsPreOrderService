@@ -31,8 +31,8 @@ pub struct TicketsAddResponse {
 
 #[derive(Serialize, Deserialize, Debug, Clone, ToSchema)]
 pub struct CancelData {
+    pub match_id: String,
     pub user_id: String,
-    pub ticket_id: String
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, ToSchema)]

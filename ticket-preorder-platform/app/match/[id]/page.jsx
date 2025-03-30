@@ -7,9 +7,7 @@ import {Suspense, useEffect, useMemo, useState} from "react";
 import {X} from "lucide-react";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import {Button} from "../../../components/ui/button";
-import {Table, TableHead, TableHeader, TableRow} from "../../../components/ui/table";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "../../../components/ui/card";
-import {toast} from "../../../hooks/use-toast";
 import FetchedTickets from "./FetchedTickets";
 import {Skeleton} from "../../../components/ui/skeleton";
 import {Label} from "../../../components/ui/label";
@@ -72,19 +70,34 @@ export default function Page() {
     const ticketsResource = useMemo(() => createResource(fetchAvailableTickets), [id, refreshResourceKey]);
     return (
         <Suspense fallback={<Loading />}>
-            <MatchRendered resource={resource} ticketsResource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey} />
+            <MatchRendered id={id} resource={resource} ticketsResource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey} />
         </Suspense>
     );
 }
 
 function Loading() {
     return (
-        <Skeleton className="h-[350px] w-full"/>
+        <div className="flex flex-col items-center justify-center mx-2 sm:mx-6">
+            <header className="flex flex-col w-full mx-4 sm:mx-10 py-6 sm:py-10 rounded-lg items-center gap-y-3 sm:gap-y-4">
+                <Skeleton className="h-6 sm:h-8 w-32 sm:w-40" /> {/* Date */}
+                <Skeleton className="h-6 sm:h-8 w-48 sm:w-60" /> {/* Stadium */}
+                <Skeleton className="h-8 sm:h-12 w-full max-w-2xl sm:max-w-3xl" /> {/* Teams */}
+                <Skeleton className="h-6 sm:h-8 w-64 sm:w-80" /> {/* Description */}
+            </header>
+
+            <main className="flex flex-col w-full mx-4 sm:mx-10 rounded-lg items-center gap-y-4 sm:gap-y-5 mb-6 sm:mb-10">
+                <div className="flex flex-col items-center justify-center mx-auto">
+                    <Skeleton className="h-6 sm:h-8 w-36 sm:w-48 mb-3 sm:mb-5" /> {/* "Схема стадиона" label */}
+                    <Skeleton className="rounded-lg w-full sm:w-[700px] h-[200px] sm:h-[400px]" /> {/* Stadium scheme image */}
+                </div>
+                <Skeleton className="h-10 sm:h-12 w-40 sm:w-48" /> {/* Button */}
+            </main>
+        </div>
     );
 }
 
 
-function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, schemeUrl}) {
+function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) {
     const matchData = resource.read();
     const [modal, setModal] = useState(false);
 
@@ -150,11 +163,15 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, schem
                             <CardContent>
                                 <ErrorBoundary>
                                     <Suspense fallback={<Loading />}>
-                                        <FetchedTickets resource={ticketsResource} setRefreshResourceKey={setRefreshResourceKey}/>
+                                        <FetchedTickets
+                                            resource={ticketsResource}
+                                            setRefreshResourceKey={setRefreshResourceKey}
+                                            matchId={id}
+                                        />
                                     </Suspense>
                                 </ErrorBoundary>
                             </CardContent>
-                            <CardFooter className="text-gray-500">
+                            <CardFooter className="text-gray-500 text-sm sm:text-lg">
                                 После успешного предзаказа вам придет письмо на почту.<br/>
                                 Спасибо за выбор нашего сервиса!
                             </CardFooter>

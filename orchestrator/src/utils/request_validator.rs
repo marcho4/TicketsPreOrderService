@@ -26,7 +26,6 @@ impl RequestValidator {
     }
 
     pub fn check_auth(req: &HttpRequest) -> Result<JwtClaims, HttpResponse> {
-
         let binding = req.extensions();
         let res = binding.get::<JwtClaims>().ok_or_else(|| {
             generic_response::<String>(
@@ -37,6 +36,12 @@ impl RequestValidator {
         })?;
 
         Ok(res.clone())
+    }
+
+    pub fn get_user_id(req: &HttpRequest) -> Option<String> {
+        req.extensions()
+            .get::<JwtClaims>()
+            .map(|claim| claim.user_id.clone())
     }
 
     pub fn check_user(req: &HttpRequest, expected_user_id: String) -> Result<(), HttpResponse> {

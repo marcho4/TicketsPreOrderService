@@ -48,6 +48,7 @@ async function fetchTicketData(id: string, signal?: AbortSignal): Promise<Ticket
     const result = await response.json();
     return result.data as TicketCardProps;
 }
+
 async function fetchMatchData(id: string): Promise<MatchInfoProps> {
     try {
         const response = await fetch(`http://localhost:8000/api/matches/${id}`, {
@@ -68,10 +69,7 @@ async function fetchMatchData(id: string): Promise<MatchInfoProps> {
 }
 
 export default function TicketDynamicCard({ id, matchId }: TicketCardData) {
-    const resource = useMemo(
-        () => createResource(() => fetchTicketData(id)),
-        [id]
-    );
+    const resource = useMemo(() => createResource(() => fetchTicketData(id)),[id]);
     const matchResource = useMemo(() => createResource(() => fetchMatchData(matchId)), [matchId]);
 
     return (

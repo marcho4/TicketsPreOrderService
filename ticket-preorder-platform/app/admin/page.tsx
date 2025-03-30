@@ -83,7 +83,7 @@ const AdminHome = () => {
     } catch (error) {
       console.error("Error handling response:", error);
     }
-    setTimeout(() => window.location.reload(), 500);
+    // setTimeout(() => window.location.reload(), 500);
   };
 
   // Отрисовка таблицы с заявками

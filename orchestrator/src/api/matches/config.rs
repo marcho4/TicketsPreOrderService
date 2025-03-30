@@ -1,5 +1,7 @@
 use actix_web::web;
+use crate::api::matches::add_user_to_the_queue::add_user_to_queue;
 use crate::api::matches::create_match::create_match;
+use crate::api::matches::delete_from_queue::delete_from_queue;
 use crate::api::matches::delete_match::delete_match;
 use crate::api::matches::get_all_matches::get_all_matches;
 use crate::api::matches::get_match::get_match;
@@ -15,5 +17,7 @@ pub fn cfg(cfg: &mut web::ServiceConfig) {
             .service(update_match)
             .service(get_match)
             .service(get_by_org)
+            .service(add_user_to_queue)
+            .service(delete_from_queue)
     );
 }

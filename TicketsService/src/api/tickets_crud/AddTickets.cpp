@@ -1,6 +1,6 @@
 #include "AddTickets.h"
 
-httplib::Client AddTickets::client("http://queue-service:8020");
+httplib::Client AddTickets::client("http://queue-processor:8020");
 
 void AddTickets::AddingTicketsRequest(const httplib::Request &req, httplib::Response &res, Database &db) {
     std::string match_id;
@@ -44,7 +44,7 @@ void AddTickets::AddTicketToDatabase(const std::string &match_id, const AddTicke
         throw std::runtime_error("Failed to add tickets_crud to DB");
     }
 
-    try{
+    try {
         std::string ticket_id;
         GetTicketID(match_id, ticket.price, ticket.sector, ticket.row, ticket.seat, db, ticket_id);
         if (ticket_id.empty()) {
@@ -52,21 +52,32 @@ void AddTickets::AddTicketToDatabase(const std::string &match_id, const AddTicke
             throw std::runtime_error("Failed to get ticket ID");
         }
         spdlog::info("Получен id билета: {}", ticket_id);
-        // Отправляем запрос на добавление билета в очередь
         json ticket_json = {
                 {"match_id", match_id},
-                {"price", ticket.price},
+                {"price", std::stoi(ticket.price)},
                 {"ticket_id", ticket_id}
         };
+        
+        spdlog::info("Sending request to queue service with payload: {}", ticket_json.dump());
+        
         auto res = client.Post("/event", ticket_json.dump(), "application/json");
-        if (res && res->status == 200) {
+        
+        if (!res) {
+            spdlog::error("HTTP request failed - no response received");
+            throw std::runtime_error("Failed to connect to queue service");
+        }
+        
+        spdlog::info("Received response with status: {}", res->status);
+        
+        if (res->status == 200) {
             spdlog::info("Билет успешно добавлен в очередь");
         } else {
-            spdlog::error("Не удалось добавить билет в очередь");
-            throw std::runtime_error("Failed to add ticket to queue");
+            spdlog::error("Queue service returned error status: {} with body: {}", res->status, res->body);
+            throw std::runtime_error("Failed to add ticket to queue: " + res->body);
         }
     } catch (const std::exception& e) {
         spdlog::error("Ошибка при добавлении билета в очередь: {}", e.what());
+        throw; // Re-throw to propagate the error
     }
 }
 

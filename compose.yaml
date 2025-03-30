@@ -260,6 +260,36 @@ services:
     networks:
       - main
 
+  redis-queue:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - main
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  queue-processor:
+    build:
+      context: ./queue_processor
+      dockerfile: Dockerfile
+    environment:
+      - DOCKER=true
+    ports:
+      - "8020:8020"
+    networks:
+      - main
+    depends_on:
+      - redis-queue
+      - kafka-1
+
 networks:
   main:
     driver: bridge
@@ -272,4 +302,8 @@ volumes:
   matches_postgres_data:
   tickets_postgres_data:
   kafka_data:
+  redis-data:
+    driver:
+      local
+
 

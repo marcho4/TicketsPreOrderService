@@ -1,6 +1,6 @@
 use reqwest::Method;
 use crate::models::message_resp::MessageResp;
-use crate::models::tickets::{Ticket, TicketReservation, TicketsAddResponse};
+use crate::models::tickets::{CancelData, Ticket, TicketReservation, TicketsAddResponse};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
 use reqwest::multipart;
@@ -23,9 +23,9 @@ impl Orchestrator {
         let url = format!("{}/user/{}/tickets", self.config.tickets_url, user_id);
         Ok(self.send_request::<Vec<Ticket>, Vec<Ticket>>(url, None, Method::GET).await?)
     }
-    pub async fn cancel_preorder(&self, ticket_id: String) -> Result<MessageResp, OrchestratorError> {
+    pub async fn cancel_preorder(&self, ticket_id: String, data: CancelData) -> Result<MessageResp, OrchestratorError> {
         let url = format!("{}/ticket/{}/cancel", self.config.tickets_url, ticket_id);
-        Ok(self.send_request::<MessageResp, String>(url, None, Method::PUT).await?)
+        Ok(self.send_request::<MessageResp, CancelData>(url, Some(data), Method::PUT).await?)
     }
 
     pub async fn get_ticket(&self, ticket_id: String) -> Result<Ticket, OrchestratorError> {

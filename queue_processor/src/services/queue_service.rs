@@ -6,7 +6,7 @@ use futures_util::StreamExt;
 
 use log::LevelFilter;
 use env_logger;
-use rdkafka::consumer::{Consumer, StreamConsumer};
+use rdkafka::consumer::{CommitMode, Consumer, StreamConsumer};
 use rdkafka::message::BorrowedMessage;
 use reqwest::Method;
 use serde_json::json;
@@ -56,7 +56,7 @@ impl QueueService {
         }
     }
 
-    pub async fn process_msg(&self, msg: BorrowedMessage<'_>) {
+    pub async fn process_msg(&self, msg: &BorrowedMessage<'_>) {
         let payload = String::from_utf8_lossy(msg.payload().unwrap()).to_string();
         info!("Обрабатываю сообщение: {} ...", payload);
         let ticket_info: Result<TicketInfo, serde_json::Error> =
@@ -177,7 +177,11 @@ impl QueueService {
         while let Some(msg) = stream.next().await {
             match msg {
                 Ok(m) => {
-                    self.process_msg(m).await;
+                    self.process_msg(&m).await;
+                    match self.consumer.commit_message(&m, CommitMode::Async) {
+                        Ok(_) => info!("Successfully committed message offset"),
+                        Err(e) => error!("Error committing message offset: {}", e),
+                    }
                 },
                 Err(e) => {
                     error!("Ошибка при чтении сообщения: {}", e);
@@ -229,25 +233,78 @@ impl QueueService {
 
     pub async fn get_user(&self, id: &String) -> Result<User, OrchestratorError> {
         let url = format!("{}/user/{}/get_account_info", self.user_url, id);
-
-        let resp = self.http_client.get(url).send().await.map_err(|e| Request(e.into()))?;
-        let serialized = resp.json::<UserResp>().await.map_err(|e| Request(e.into()))?;
-        if serialized.data.is_none() {
-            return Err(Service(serialized.message));
+        info!("Getting user from {}", url);
+        
+        let resp = match self.http_client.get(&url).send().await {
+            Ok(r) => r,
+            Err(e) => {
+                error!("Error while sending request to {}: {:?}", url, e);
+                error!("Network error details: {:?}", e);
+                return Err(Request(e));
+            }
         };
 
-        Ok(serialized.data.unwrap())
+        let status = resp.status();
+        info!("Response status: {}", status);
+        
+        let text = match resp.text().await {
+            Ok(t) => {
+                info!("Response text: {}", t);
+                t
+            },
+            Err(e) => {
+                error!("Failed to get response text: {:?}", e);
+                return Err(Service(format!("Failed to get response text: {}", e)));
+            }
+        };
+        
+        if text.is_empty() {
+            error!("Empty response from user service");
+            return Err(Service("Empty response from user service".to_string()));
+        }
+        
+        let serialized = serde_json::from_str::<UserResp>(&text).map_err(|e| {
+            error!("Error while deserializing response: {:?}", e);
+            error!("Error response body: {:?}", &text);
+            Deserialize(e)
+        })?;
+        serialized.data.ok_or_else(|| Service(serialized.message))
     }
 
     pub async fn get_match(&self, match_id: &String) -> Result<Match, OrchestratorError> {
-        let url = format!("{}/match/{}", self.matches_url, match_id);
-        let resp = self.http_client.get(&url).send().await.map_err(|e| {
-            error!("Error while sending request to {}: {:?}", url, e);
-            Request(e)
-        })?;
-        let text = resp.text().await.unwrap_or("{}".to_string());
+        let url = format!("{}/api/match/get_match/{}", self.matches_url, match_id);
+        info!("Getting match from {}", url);
+        
+        let resp = match self.http_client.get(&url).send().await {
+            Ok(r) => r,
+            Err(e) => {
+                error!("Error while sending request to {}: {:?}", url, e);
+                error!("Network error details: {:?}", e);
+                return Err(Request(e));
+            }
+        };
+
+        let status = resp.status();
+        info!("Match response status: {}", status);
+        
+        let text = match resp.text().await {
+            Ok(t) => {
+                info!("Match response text: {}", t);
+                t
+            },
+            Err(e) => {
+                error!("Failed to get match response text: {:?}", e);
+                return Err(Service(format!("Failed to get match response text: {}", e)));
+            }
+        };
+        
+        if text.is_empty() {
+            error!("Empty response from matches service");
+            return Err(Service("Empty response from matches service".to_string()));
+        }
+        
         Ok(serde_json::from_str::<Match>(&text).map_err(|e| {
-            error!("Error while deserializing: {:?}", e);
+            error!("Error while deserializing match: {:?}", e);
             error!("Error response body: {:?}", &text);
             Deserialize(e)
         })?)

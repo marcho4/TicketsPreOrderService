@@ -29,7 +29,6 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
     const { user } = useAuth();
 
     const handleCancelTicket = async () => {
-        // Используем ID пользователя из хука или из данных билета в качестве запасного варианта
         const userId = user || ticketData.user_id;
         
         if (!ticketData.id || !userId || !ticketData.match_id) {
@@ -43,16 +42,16 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
 
         setIsLoading(true);
         try {
-            // Используем API маршрут Next.js вместо прямого обращения к микросервису
-            const response = await fetch(`/api/tickets/cancel/${ticketData.id}`, {
+            const response = await fetch(`http://localhost:8000/api/tickets/cancel/${ticketData.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify({
-                    ticket_id: ticketData.id,
+                    match_id: ticketData.match_id,
                     user_id: userId,
-                    match_id: ticketData.match_id
+                    ticket_id: ticketData.id
                 })
             });
 

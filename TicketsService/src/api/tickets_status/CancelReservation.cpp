@@ -1,6 +1,6 @@
 #include "CancelReservation.h"
 
-httplib::Client CancelReservation::client("http://queue-service:8020");
+httplib::Client CancelReservation::client("http://queue-processor:8020");
 
  void CancelReservation::CancelReservationRequest(const httplib::Request &req, httplib::Response &res,
                                                         Database &db) {

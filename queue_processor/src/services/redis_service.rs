@@ -31,7 +31,7 @@ impl RedisService {
     pub async fn add_to_queue(&self, match_id: String, data: QueueModel) -> RedisResult<()> {
         let mut conn = self.conn.lock().await;
         let timestamp = chrono::Utc::now().timestamp();
-        conn.zadd(
+        conn.zadd::<_, _, _, ()>(
             match_id,
             serde_json::to_string(&data).unwrap(),
             timestamp
@@ -55,7 +55,7 @@ impl RedisService {
             )))?;
 
         let mut conn = self.conn.lock().await;
-        conn.zrem(queue, serialized).await?;
+        conn.zrem::<_, _, ()>(queue, serialized).await?;
 
         Ok(())
     }

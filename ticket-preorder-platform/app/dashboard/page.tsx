@@ -21,7 +21,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen pt-10">
+    <div className="flex flex-col min-h-screen pt-10 p-2">
       <Card className="max-w-7xl mx-auto w-full text-xl sm:text-3xl">
         <CardHeader>
           <CardTitle>
@@ -33,7 +33,7 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto py-6">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Left side - User profile */}
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 flex flex-col gap-6 items-center sm:items-stretch">
               <UserDataCard fetchLink={fetchUrl} updateLink={updateUrl}/>
             </div>
             
