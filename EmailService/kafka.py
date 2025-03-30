@@ -9,12 +9,9 @@ from confluent_kafka.admin import AdminClient, NewTopic
 from datetime import datetime
 from models import *
 
-
 class KafkaEmailSender:
     def __init__(self, topic_name="email-tasks"):
         load_dotenv()
-
-
         logging.basicConfig(
             level=logging.INFO,
             format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
@@ -82,6 +79,24 @@ class KafkaEmailSender:
 
     def start_polling(self):
         try:
+            self.logger.info("Начинаю обработку существующих сообщений...")
+            while True:
+                msg = self.consumer.poll(timeout=0.1)  # Короткий таймаут для проверки наличия сообщений
+                if msg is None:
+                    self.logger.info("Больше необработанных сообщений не найдено.")
+                    break
+                if msg.error():
+                    if msg.error().code() == KafkaError._PARTITION_EOF:
+                        continue
+                    else:
+                        print(f"Ошибка при первоначальном чтении: {msg.error()}")
+                        break
+
+                self.logger.info(f"Обрабатываю существующее сообщение: {msg}")
+                if self.process_msg(msg) is False:
+                    self.logger.error("Ошибка при отправке email для существующего сообщения")
+
+            self.logger.info("Перехожу к ожиданию новых сообщений...")
             while True:
                 msg = self.consumer.poll(timeout=1.0)
                 if msg is None:
@@ -90,13 +105,12 @@ class KafkaEmailSender:
                     if msg.error().code() == KafkaError._PARTITION_EOF:
                         continue
                     else:
-                        print(f"Ошибка: {msg.error()}")
+                        print(f"Ошибка при получении нового сообщения: {msg.error()}")
                         break
 
-                self.logger.info(f"Получил сообщение: {msg}. Начинаю обработку")
+                self.logger.info(f"Получил новое сообщение: {msg}. Начинаю обработку")
                 if self.process_msg(msg) is False:
-                    self.logger.error("Ошибка при отправке email")
-
+                    self.logger.error("Ошибка при отправке email для нового сообщения")
 
         except KeyboardInterrupt:
             self.logger.info("Завершение работы...")
