@@ -33,7 +33,7 @@ void ProcessRequest::ProcessOrganizerRequest(const httplib::Request& req, httpli
 }
 
 pqxx::result ProcessRequest::GetPersonalData(const std::string& request_id, Database& db) {
-    std::string query = "SELECT company, email, tin FROM Organizers.OrganizerRequests WHERE request_id = $1";
+    std::string query = "SELECT company, email, tin, phone_number FROM Organizers.OrganizerRequests WHERE request_id = $1";
     std::vector<std::string> params = {request_id};
     return db.executeQueryWithParams(query, params);
 }

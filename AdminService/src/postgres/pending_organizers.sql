@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS Organizers.OrganizerRequests (
     request_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     company TEXT NOT NULL,
     email TEXT NOT NULL,
+    phone_number TEXT NOT NULL,
     tin TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'PENDING' CHECK (status IN ('PENDING', 'APPROVED', 'REJECTED')),
     created_at timestamp DEFAULT CURRENT_TIMESTAMP,

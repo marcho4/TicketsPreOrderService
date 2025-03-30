@@ -7,7 +7,7 @@ class GetRequests {
     using json = nlohmann::json;
 
     static pqxx::result GetListSQL(Database& db) {
-        std::string query = "SELECT request_id, company, email, tin FROM Organizers.OrganizerRequests WHERE status = $1";
+        std::string query = "SELECT request_id, company, email, tin, phone_number FROM Organizers.OrganizerRequests WHERE status = $1";
         std::string type = "PENDING";
         std::vector<std::string> params = {type};
         pqxx::result response = db.executeQueryWithParams(query, params);
@@ -23,6 +23,7 @@ class GetRequests {
             request["company"] = row["company"].as<std::string>();
             request["email"] = row["email"].as<std::string>();
             request["tin"] = row["tin"].as<std::string>();
+            request["phone_number"] = row["phone_number"].as<std::string>();
             json_body.push_back(request);
         }
         return json_body;
@@ -39,11 +40,12 @@ class AddRequest {
         std::string company;
         std::string email;
         std::string tin;
+        std::string phone_number;
 
         static AdminData GetAdminDataFromRequest(const httplib::Request& req) {
             auto parsed = json::parse(req.body);
 
-            return {parsed["company"], parsed["email"], parsed["tin"]};
+            return {parsed["company"], parsed["email"], parsed["tin"], parsed["phone_number"]};
         }
     };
 
@@ -57,8 +59,8 @@ class AddRequest {
     }
 
     static void AddOrganizerRequestToDB(AdminData& admin_data, Database& db) {
-        std::string query = "INSERT INTO Organizers.OrganizerRequests (company, email, tin, status) VALUES ($1, $2, $3, $4)";
-        std::vector<std::string> params = {admin_data.company, admin_data.email, admin_data.tin, "PENDING"};
+        std::string query = "INSERT INTO Organizers.OrganizerRequests (company, email, tin, status, phone_number) VALUES ($1, $2, $3, $4, $5)";
+        std::vector<std::string> params = {admin_data.company, admin_data.email, admin_data.tin, "PENDING", admin_data.phone_number};
 
         db.executeQueryWithParams(query, params);
     }
@@ -74,11 +76,16 @@ class ProcessRequest {
         std::string company;
         std::string email;
         std::string tin;
+        std::string phone_number;
+
 
         static OrganizerData getRegistrationData(pqxx::result& data) {
-            return {data[0]["company"].as<std::string>(),
-                    data[0]["email"].as<std::string>(),
-                    data[0]["tin"].as<std::string>()};
+            return {
+                data[0]["company"].as<std::string>(),
+                data[0]["email"].as<std::string>(),
+                data[0]["tin"].as<std::string>(),
+                data[0]["phone_number"].as<std::string>()
+            };
         }
     };
 
