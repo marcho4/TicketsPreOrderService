@@ -12,35 +12,7 @@ interface TicketItem {
 
 export default function FetchedTickets({resource, setRefreshResourceKey, matchId} : any) {
     const tickets = resource.read();
-    const [minPrice, setMinPrice] = useState<number>();
-    const [maxPrice, setMaxPrice] = useState<number>();
-
-    const getInQueue = async (min_price, max_price) => {
-        const url = `http://localhost:8000/api/matches/queue/${matchId}`;
-        const response = await fetch(url, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                min_price: Number(min_price),
-                max_price: Number(max_price),
-            })
-        })
-        if (!response.ok) {
-            toast({
-                title: "Не удалось встать в очередь",
-                description: "Попробуйте позже",
-                variant: "destructive",
-            })
-        } else {
-            toast({
-                title:"Вы успешно встали в очередь",
-                description: "Вам придет оповещение, как только билеты станут доступными"
-            })
-        }
-    }
+    
 
     if (tickets.length === 0) {
         return (

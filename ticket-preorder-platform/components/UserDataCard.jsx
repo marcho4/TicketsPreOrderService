@@ -193,7 +193,7 @@ export default function UserDataCard({ updateLink, fetchLink }) {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <ErrorBoundary router={router}>
+        <ErrorBoundary router={router} >
             <DataCardContent data={data} updateFunc={updateData} refreshData={fetchData} />
         </ErrorBoundary>
     );

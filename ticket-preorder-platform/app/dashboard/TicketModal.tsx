@@ -112,8 +112,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
                 >
                     {isLoading ? "Подождите..." : "Вернуть билет"}
                 </Button>
-                <Button 
-                    disabled={true}
+                <Button
                 >
                     Оплатить билет
                 </Button>

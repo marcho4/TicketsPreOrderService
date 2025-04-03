@@ -4,9 +4,8 @@ import {TicketCardProps} from "./TicketCard";
 import TicketDynamicCard from "./TicketCard";
 import {useAuth} from "@/providers/authProvider";
 import {createResource} from "@/lib/createResource";
-import ErrorBoundary from "@/app/organizer/ErrorBoundary";
-import {LoadingSkeleton} from "@/app/organizer/MatchesSection";
-import TicketsList from "@/app/dashboard/TicketsList";
+import { Skeleton } from "@/components/ui/skeleton";
+import TicketsList from "./TicketsList";
 
 interface UserTickets {
     data: TicketCardProps[]
@@ -22,57 +21,11 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
         data: [],
         msg: "",
     };
-    const [tickets, setTickets] = useState<UserTickets>(struct);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
 
-    const [loading, setLoading] = useState(false);
     const { user, userRole } = useAuth();
-
-    const fetchTickets = async () => {
-        try {
-            let response = await fetch(`http://localhost:8000/api/tickets/user/${userId}`, {
-                method: 'GET',
-                credentials: 'same-origin',
-            });
-            const data = await response.json();
-            return data.data || [];
-        } catch (error) {
-            console.error(error);
-            return [];
-        }
-    };
-    const ticketsResource = useMemo(() => {
-        if (user && userRole === "USER") {
-            return createResource(fetchTickets);
-        }
-        return null;
-    }, [user, userRole]);
-
-    if (!user) {
-        return <Card>
-            <CardHeader>
-                <CardTitle>
-                    Идёт загрузка...
-                </CardTitle>
-            </CardHeader>
-        </Card>;
-    }
-
-    if (!ticketsResource) {
-        return <Card>
-            <CardHeader>
-                <CardTitle>
-                    Вы не являетесь пользователем, чтобы видеть этот раздел
-                </CardTitle>
-            </CardHeader>
-        </Card>
-    }
 
     const getTickets = async () => {
         if (!userId) return;
-
-        setIsLoading(true);
         try {
             const response = await fetch(`http://localhost:8000/api/tickets/user/${userId}`, {
                 method: 'GET',
@@ -80,70 +33,61 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
             });
 
             if (!response || !response.ok) {
-                throw new Error('Failed to fetch tickets');
+                throw new Error('Ошибка при загрузке билетов');
             }
 
             const result = await response.json();
-            setTickets(result as UserTickets);
-        } catch (err) {
-            setError(err.message || 'An error occurred while fetching tickets');
-            console.error('Error fetching tickets:', err);
-        } finally {
-            setIsLoading(false);
+            return result;
+        } catch (err: any) {
+            console.error(err);
         }
     };
 
-    useEffect(() => {
-        getTickets();
-    }, [userId]);
+    const ticketsResource = useMemo(() => {
+        if (user && userRole === "USER") {
+            return createResource(getTickets);
+        }
+        return null;
+    }, [user, userRole]);
 
-    if (isLoading) {
-        return (
-            <Card>
-                <CardHeader>
-                    <CardTitle>
-                        Идёт загрузка...
-                    </CardTitle>
-                </CardHeader>
-            </Card>
-        );
+    if (!ticketsResource) {
+        return <Card>
+            <CardHeader>
+                <CardTitle>
+                    Вы не являетесь авторизованным пользователем, чтобы видеть этот раздел
+                </CardTitle>
+            </CardHeader>
+        </Card>
     }
-
-    if (error) {
-        return (
-            <Card>
-                <CardHeader>
-                    <CardTitle className="text-destructive">
-                        Ошибка: {error}
-                    </CardTitle>
-                </CardHeader>
-            </Card>
-        );
-    }
-
-    if (tickets.data.length === 0) {
-        return (
-            <Card>
-                <CardHeader>
-                    <CardTitle>
-                        У вас нет билетов в данный момент
-                    </CardTitle>
-                </CardHeader>
-            </Card>
-        );
-    }
-
 
     return (
         <Card>
             <CardHeader>
                 <CardTitle className="text-2xl font-semibold mb-4">Ваши билеты</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 max-h-72 overflow-y-auto">
-                {tickets.data.map((ticket) => (
-                    <TicketDynamicCard id={ticket.id} key={ticket.id} matchId={ticket.match_id} />
-                ))}
+            <Suspense fallback={<TicketCardSkeleton />}>
+                <CardContent className="space-y-4 max-h-72 overflow-y-auto">
+                    <TicketsList resource={ticketsResource} />
+                </CardContent>
+            </Suspense>
+        </Card>
+    );
+};
+
+
+const TicketCardSkeleton = () => {
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle>
+                    <Skeleton className="h-4 w-32" />
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <Skeleton className="h-4 w-32" />
             </CardContent>
         </Card>
     );
 };
+
+

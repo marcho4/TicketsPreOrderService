@@ -33,21 +33,9 @@ export interface MatchInfoProps {
 
 
 export interface TicketCardData {
-    id: string;
-    matchId: string;
+    props: TicketCardProps;
 }
 
-async function fetchTicketData(id: string, signal?: AbortSignal): Promise<TicketCardProps> {
-    const response = await fetch(`http://localhost:8000/api/tickets/ticket/${id}`, {
-        method: "GET",
-        credentials: "include",
-        signal,
-    });
-
-    if (!response.ok) throw new Error(`Не удалось получить данные о билете ${response.statusText}`);
-    const result = await response.json();
-    return result.data as TicketCardProps;
-}
 
 async function fetchMatchData(id: string): Promise<MatchInfoProps> {
     try {
@@ -61,32 +49,31 @@ async function fetchMatchData(id: string): Promise<MatchInfoProps> {
         }
 
         const result = await response.json();
-        return result.data as TicketCardProps;
+        return result.data as MatchInfoProps;
     } catch (error) {
         console.error("Ошибка обработки данных билета: ", error);
         throw error;
     }
 }
 
-export default function TicketDynamicCard({ id, matchId }: TicketCardData) {
-    const resource = useMemo(() => createResource(() => fetchTicketData(id)),[id]);
-    const matchResource = useMemo(() => createResource(() => fetchMatchData(matchId)), [matchId]);
+export default function TicketDynamicCard({ props }: TicketCardData) {
+    const matchResource = useMemo(() => createResource(() => fetchMatchData(props.match_id)), [props.match_id]);
 
     return (
         <TicketErrorBoundary>
             <Suspense fallback={<TicketCardSkeleton />}>
-                <TicketCard resource={resource} matchResource={matchResource}/>
+                <TicketCard props={props} matchResource={matchResource}/>
             </Suspense>
         </TicketErrorBoundary>
     );
 }
 
-function TicketCard({resource, matchResource}: {
-    resource: ReturnType<typeof createResource<TicketCardProps>>;
-    matchResource: ReturnType<typeof createResource<MatchInfoProps>>;
+function TicketCard({ props , matchResource}: {
+    props: TicketCardProps;
+    matchResource: { read: () => MatchInfoProps };
 }) {
-    const data = resource.read() as TicketCardProps;
-    const matchData = matchResource.read() as MatchInfoProps;
+    const data = props;
+    const matchData = matchResource.read();
     const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     const handleClick = () => {

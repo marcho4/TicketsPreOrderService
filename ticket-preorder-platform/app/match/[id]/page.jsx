@@ -12,6 +12,9 @@ import FetchedTickets from "./FetchedTickets";
 import {Skeleton} from "../../../components/ui/skeleton";
 import {Label} from "../../../components/ui/label";
 import {checkImageExists} from "../../../lib/dataFetchers";
+import {Input} from "../../../components/ui/input";
+import {toast} from "@/hooks/use-toast";
+
 
 export function formatDate(dateString) {
     const date = new Date(dateString);
@@ -100,6 +103,54 @@ function Loading() {
 function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) {
     const matchData = resource.read();
     const [modal, setModal] = useState(false);
+    const [minPrice, setMinPrice] = useState(undefined);
+    const [maxPrice, setMaxPrice] = useState(undefined);
+
+    const getInQueue = async (min_price, max_price) => {
+        const url = `http://localhost:8000/api/matches/queue/${id}`;
+        const response = await fetch(url, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                min_price: Number(min_price),
+                max_price: Number(max_price),
+            })
+        })
+        if (!response.ok) {
+            toast({
+                title: "Не удалось встать в очередь",
+                description: "Попробуйте позже",
+                variant: "destructive",
+            })
+        } else {
+            toast({
+                title:"Вы успешно встали в очередь",
+                description: "Вам придет оповещение, как только билеты станут доступными"
+            })
+        }
+    }
+
+    const getOutQueue = async () => {
+        const url = `http://localhost:8000/api/matches/queue/delete/${id}`;
+        const response = await fetch(url, {
+            method: "DELETE",
+            credentials: "include",
+        })
+        if (!response.ok) {
+            toast({
+                title: "Не удалось выйти из очереди",
+                description: "Попробуйте позже",
+                variant: "destructive",
+            })
+        } else {
+            toast({
+                title:"Вы успешно вышли из очереди",
+            })
+        }
+    }
 
     useEffect(() => {
         if (modal) {
@@ -150,7 +201,7 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
                 </Button>
                 <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
                     z-[11] cursor-pointer`}>
-                    <Card id="active-modal" className="relative max-w-2xl w-full h-[550px] rounded-lg bg-gray-50 cursor-default"
+                    <Card id="active-modal" className="relative max-w-2xl w-full h-[700px] rounded-lg bg-gray-50 cursor-default"
                          onClick={(e) => e.stopPropagation()}>
 
                         <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"
@@ -170,8 +221,50 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
                                         />
                                     </Suspense>
                                 </ErrorBoundary>
+                                <div className="flex flex-col text-sm sm:text-lg items-center justify-center mx-auto h-full">
+                                    <span className="text-sm">Если нет желаемых вами билетов,   вы можете встать в очередь за билетами по желаемой вами цене:</span>
+                                    <div className="flex flex-row items-center gap-4 mt-4 w-[400px]">
+                                        <div className="flex flex-col">
+                                            <Label htmlFor="min_price">Минимальная цена</Label>
+                                            <Input
+                                                type="number"
+                                                id="min_price"
+                                                name="min_price"
+                                                placeholder="Минимальная цена"
+                                                className="mt-2 w-[200px]"
+                                                value={minPrice}
+                                                onChange={(e) => {setMinPrice(Number(e.target.value))}}
+                                            />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <Label htmlFor="max_price">Максимальная цена</Label>
+                                            <Input
+                                                type="number"
+                                                id="max_price"
+                                                name="max_price"
+                                                placeholder="Максимальная цена"
+                                                className="mt-2 w-[200px]"
+                                                value={maxPrice}
+                                                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                                            />
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div className="flex flex-row gap-y-2 justify-between pt-3">
+                                    <Button 
+                                        variant="destructive"
+                                        onClick={async () => {await getOutQueue()}}>
+                                            Выйти из очереди
+                                    </Button>
+                                    <Button
+                                        disabled={!minPrice || !maxPrice || Number(minPrice) > Number(maxPrice)}
+                                        className="" onClick={async () => {await getInQueue(minPrice, maxPrice)}}>
+                                        Встать в очередь за билетами
+                                    </Button>
+                                </div>
                             </CardContent>
-                            <CardFooter className="text-gray-500 text-sm sm:text-lg">
+                            <CardFooter className="text-gray-500 text-sm sm:text-md">
                                 После успешного предзаказа вам придет письмо на почту.<br/>
                                 Спасибо за выбор нашего сервиса!
                             </CardFooter>

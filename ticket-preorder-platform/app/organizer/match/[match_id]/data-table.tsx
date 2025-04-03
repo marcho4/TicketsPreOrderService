@@ -41,13 +41,15 @@ import {toast} from "@/hooks/use-toast";
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[],
-    match_id: string
+    match_id: string,
+    refreshFunc: any
 }
 
 export function DataTable<TData, TValue>({
                                              columns,
                                              data,
                                              match_id,
+                                             refreshFunc
                                          }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [rowSelection, setRowSelection] = React.useState({})
@@ -115,6 +117,7 @@ export function DataTable<TData, TValue>({
                     title: "Успешно!",
                     description: body.msg || "",
                 });
+                refreshFunc((prev: number) => prev + 1);
             } else {
                 toast({
                     title: "Произошла ошибка при удалении",

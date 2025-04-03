@@ -122,7 +122,6 @@ services:
     depends_on:
       - user_postgres
 
- 
   matches:
     build:
       context: ./MatchesService/MatchesService
@@ -183,7 +182,6 @@ services:
       timeout: 3s
     restart: always
       
-
   email:
     build:
       context: ./EmailService
@@ -290,6 +288,23 @@ services:
       - redis-queue
       - kafka-1
 
+  frontend:
+    build:
+      context: ./ticket-preorder-platform
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./ticket-preorder-platform:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - main
+    environment:
+      - NODE_ENV=development
+    restart: always
+    command: npm run dev
+
 networks:
   main:
     driver: bridge
@@ -305,5 +320,3 @@ volumes:
   redis-data:
     driver:
       local
-
-

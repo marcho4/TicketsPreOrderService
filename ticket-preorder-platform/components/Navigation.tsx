@@ -10,7 +10,7 @@ import { Menu, X } from 'lucide-react'
 
 const getLinksForRole = (role: string) => {
     const commonLinks = [
-        { href: '/', label: 'Меню' },
+        { href: '/', label: 'Главная' },
         { href: '/matches', label: 'Матчи' },
     ]
 
@@ -35,7 +35,7 @@ export function Navigation() {
     const links = useMemo(() => getLinksForRole(userRole), [userRole])
 
     return (
-        <nav className="bg-background/50 backdrop-blur-3xl py-2 border-b border-gray-200 sticky top-0 inset-x-0 z-40 w-full">
+        <nav className="bg-background/50 backdrop-blur-xl py-2 border-b border-gray-200 sticky top-0 inset-x-0 z-40 w-full">
             <header className="relative w-full mx-auto h-10 flex items-center z-20">
                 <div className="absolute px-2 md:px-10 z-30">
                     <Link href="/" className="text-xl font-semibold text-black">

@@ -2,10 +2,12 @@ import React from "react";
 import TicketDynamicCard from "@/app/dashboard/TicketCard";
 
 
-export default function TicketsList({ resource }) {
+import { TicketCardProps } from "./TicketCard";
+
+export default function TicketsList({ resource }: { resource: { read: () => {data: TicketCardProps[] } } }) {
     const tickets = resource.read();
 
-    if (!tickets || tickets.length === 0) {
+    if (!tickets || tickets.data.length === 0) {
         return (
             <div className="text-center py-8">
                 <p className="text-xl text-gray-600">Нет доступных матчей</p>
@@ -15,8 +17,8 @@ export default function TicketsList({ resource }) {
 
     return (
         <div className="space-y-4">
-            {tickets.map((ticket) => (
-                <TicketDynamicCard key={ticket.id} id={ticket.id} matchId={ticket.match_id}  />
+            {tickets.data.map((ticket) => (
+                <TicketDynamicCard key={ticket.id} props={ticket} />
             ))}
         </div>
     );
