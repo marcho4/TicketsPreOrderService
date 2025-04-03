@@ -4,6 +4,7 @@ import ChangePasswordSection from "@/components/ChangePasswordSection";
 import {Card, CardHeader, CardTitle} from "@/components/ui/card";
 import UserDataCard from "@/components/UserDataCard";
 import UserTicketsCard from "@/app/dashboard/UserTickets";
+import UserPaymentsCard from "@/app/dashboard/UserPayments";
 
 
 export default function Dashboard() {
@@ -35,6 +36,7 @@ export default function Dashboard() {
             {/* Left side - User profile */}
             <div className="md:w-1/2 flex flex-col gap-6 items-center sm:items-stretch">
               <UserDataCard fetchLink={fetchUrl} updateLink={updateUrl}/>
+              <UserPaymentsCard />
             </div>
             
             {/* Right side - Tickets list */}

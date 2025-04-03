@@ -1,6 +1,6 @@
 import {CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/providers/authProvider";
 
@@ -15,6 +15,13 @@ interface TicketData {
     match_id?: string;
 }
 
+interface Payment {
+    payment_id: string;
+    ticket_id: string;
+    match_id: string;
+    status: string;
+}
+
 interface TicketModalProps {
     ticketData: TicketData;
     matchName: string;
@@ -24,11 +31,48 @@ interface TicketModalProps {
 }
 
 export default function TicketModal({ ticketData, matchName, stadium, onTicketUpdate, onClose }: TicketModalProps) {
-    const [isPaid, setIsPaid] = useState<boolean>(ticketData.status === "paid");
+    const [isPaid, setIsPaid] = useState<boolean>(ticketData.status === "sold");
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isPaymentLoading, setIsPaymentLoading] = useState<boolean>(false);
+    const [isRefundLoading, setIsRefundLoading] = useState<boolean>(false);
+    const [paymentId, setPaymentId] = useState<string | null>(null);
     const { toast } = useToast();
     const { user } = useAuth();
+
+    // Получение payment_id для текущего билета
+    useEffect(() => {
+        if (isPaid && ticketData.id) {
+            fetchPaymentId();
+        }
+    }, [isPaid, ticketData.id]);
+
+    const fetchPaymentId = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/api/payments', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const payments = data.data;
+                const payment = payments.find((p: Payment) => 
+                    p.ticket_id === ticketData.id && 
+                    p.match_id === ticketData.match_id && 
+                    p.status === 'paid'
+                );
+                
+                if (payment) {
+                    setPaymentId(payment.payment_id);
+                }
+            }
+        } catch (error) {
+            console.error("Ошибка при получении платежей:", error);
+        }
+    };
 
     const handleCancelTicket = async () => {
         const userId = user || ticketData.user_id;
@@ -151,6 +195,57 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
         }
     };
 
+    const handleRefundPayment = async () => {
+        if (!paymentId) {
+            toast({
+                title: "Ошибка",
+                description: "Не удалось найти ID платежа",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        setIsRefundLoading(true);
+        try {
+            const response = await fetch(`http://localhost:8000/api/payments/refund/${paymentId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.msg || "Не удалось вернуть средства");
+            }
+
+            toast({
+                title: "Успех",
+                description: "Средства успешно возвращены"
+            });
+            
+            setIsPaid(false);
+            
+            if (onTicketUpdate) {
+                onTicketUpdate();
+            }
+            
+            if (onClose) {
+                onClose();
+            }
+        } catch (error) {
+            console.error("Ошибка при возврате средств:", error);
+            toast({
+                title: "Ошибка",
+                description: error instanceof Error ? error.message : "Не удалось вернуть средства. Пожалуйста, попробуйте позже.",
+                variant: "destructive"
+            });
+        } finally {
+            setIsRefundLoading(false);
+        }
+    };
+
     return (
         <div>
             <CardHeader>
@@ -170,20 +265,31 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
                 </div>
             </CardContent>
             <CardFooter className="flex flex-row justify-between w-full">
-                <Button 
-                    variant="destructive" 
-                    onClick={handleCancelTicket} 
-                    disabled={isLoading || isPaymentLoading}
-                >
-                    {isLoading ? "Подождите..." : "Вернуть билет"}
-                </Button>
-                {!isPaid && (
-                    <Button
-                        onClick={handlePayTicket}
-                        disabled={isLoading || isPaymentLoading}
+                {isPaid ? (
+                    <Button 
+                        variant="destructive" 
+                        onClick={handleRefundPayment} 
+                        disabled={isRefundLoading}
+                        className="w-full"
                     >
-                        {isPaymentLoading ? "Обработка..." : "Оплатить билет"}
+                        {isRefundLoading ? "Подождите..." : "Вернуть средства"}
                     </Button>
+                ) : (
+                    <>
+                        <Button 
+                            variant="destructive" 
+                            onClick={handleCancelTicket} 
+                            disabled={isLoading || isPaymentLoading}
+                        >
+                            {isLoading ? "Подождите..." : "Вернуть билет"}
+                        </Button>
+                        <Button
+                            onClick={handlePayTicket}
+                            disabled={isLoading || isPaymentLoading}
+                        >
+                            {isPaymentLoading ? "Обработка..." : "Оплатить билет"}
+                        </Button>
+                    </>
                 )}
             </CardFooter>
         </div>
