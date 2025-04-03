@@ -1,4 +1,3 @@
-use reqwest::Method;
 use crate::models::queue_models::QueueModel;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;

@@ -59,7 +59,7 @@ where
     type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>>>>;
 
     actix_web::dev::forward_ready!(service);
-    fn call(&self, mut req: ServiceRequest) -> Self::Future {
+    fn call(&self, req: ServiceRequest) -> Self::Future {
         let jwt = req.request().cookie("token");
 
         if let Some(jwt) = jwt {

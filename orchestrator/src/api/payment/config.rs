@@ -7,7 +7,7 @@ use crate::api::payment::payment_status::get_payment_status;
 
 pub fn payment_config(cfg: &mut web::ServiceConfig) {
     cfg.service(
-        web::scope("/payment")
+        web::scope("/payments")
             .service(pay)
             .service(get_user_payments)
             .service(get_user_refunds)

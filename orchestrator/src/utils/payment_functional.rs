@@ -1,6 +1,6 @@
 use reqwest::Method;
 
-use crate::{models::payments::{Payment, PaymentRequest, PaymentResponse, Refund, RefundResponse}, orchestrator::orchestrator::Orchestrator};
+use crate::{models::payments::{Payment, PaymentRequest, PaymentResponse, PaymentStatus, Refund, RefundResponse}, orchestrator::orchestrator::Orchestrator};
 use crate::models::api_response::ApiResponse;
 use crate::models::payments::PaymentStatusRequest;
 use super::errors::OrchestratorError;
@@ -27,7 +27,7 @@ impl Orchestrator {
     }
 
 
-    pub async fn get_payment_status(&self, payment_id: String, is_refund: bool) -> Result<PaymentResponse, OrchestratorError> {
+    pub async fn get_payment_status(&self, payment_id: String, is_refund: bool) -> Result<PaymentStatus, OrchestratorError> {
         let data = PaymentStatusRequest {
             operation_type: match is_refund {
                 true => {"REFUND".to_string()},
@@ -35,6 +35,6 @@ impl Orchestrator {
             } ,
         };
         let url = format!("{}/payments/{}/status", self.config.payment_url, payment_id);
-        self.send_request::<PaymentResponse, PaymentStatusRequest>(url, Some(data), Method::POST).await
+        self.send_request::<PaymentStatus, PaymentStatusRequest>(url, Some(data), Method::POST).await
     }
 }

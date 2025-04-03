@@ -8,7 +8,7 @@ use rdkafka::consumer::StreamConsumer;
 use rdkafka::error::{KafkaError, KafkaResult};
 use rdkafka::message::OwnedHeaders;
 use rdkafka::producer::{FutureProducer, FutureRecord};
-use serde::{Serialize};
+use serde::Serialize;
 use tokio::time::sleep;
 
 pub struct KafkaService {

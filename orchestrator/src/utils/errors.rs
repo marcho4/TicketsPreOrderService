@@ -13,11 +13,5 @@ pub enum OrchestratorError {
     Other(String),
 
     #[error("Unauthorized")]
-    Unauthorized,
-
-    #[error("Forbidden")]
-    Forbidden,
-
-    #[error("Not found")]
-    NotFound,
+    Unauthorized
 }

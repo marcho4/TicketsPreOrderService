@@ -10,6 +10,14 @@ use crate::api::auth::{
     organizer_register::__path_register_organizer,
     change_password::__path_change_password
 };
+use crate::api::payment::{
+    pay::__path_pay,
+    get_user_payments::__path_get_user_payments,
+    get_user_refunds::__path_get_user_refunds,
+    payment_status::__path_get_payment_status,
+    refund::__path_refund
+};
+
 use crate::api::admin::{
     process_request::__path_process_request,
     get_requests::__path_get_requests
@@ -82,7 +90,8 @@ async fn main() -> std::io::Result<()> {
         paths(get_requests, process_request, login, logout, session, register_user, register_organizer,
             get_organizer, update_user, get_user_data, update, update_match, get_by_org, get_match,
             get_all_matches, delete_match, create_match, get_tickets_by_user, get_available_tickets,
-            add_tickets, preorder_ticket, cancel_preorder, get_ticket, change_password, delete_tickets
+            add_tickets, preorder_ticket, cancel_preorder, get_ticket, change_password, delete_tickets,
+            pay, get_user_payments, get_user_refunds, get_payment_status, refund
         )
     )]
     struct ApiDoc;
@@ -116,6 +125,7 @@ async fn main() -> std::io::Result<()> {
                     .configure(api::user::config::user_config)
                     .configure(api::matches::config::cfg)
                     .configure(api::tickets::config::config_services)
+                    .configure(api::payment::config::payment_config)
             )
             .service(
                 SwaggerUi::new("/swagger-ui/{_:.*}").url("/api-docs/openapi.json", openapi.clone()),
