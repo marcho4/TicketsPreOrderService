@@ -288,6 +288,34 @@ services:
       - redis-queue
       - kafka-1
 
+  payment:
+    build:
+      context: ./PaymentService
+      dockerfile: Dockerfile
+    ports:
+      - "8008:8008"
+    networks:
+      - main
+    depends_on:
+      - payment-postgres
+
+  payment-postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: payment
+    networks:
+      - main
+    volumes:
+      - payment_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    restart: always
+    
   webhook-mock:
     build:
       context: ./WebhookMockService
@@ -325,6 +353,7 @@ volumes:
   user_postgres_data:
   matches_postgres_data:
   tickets_postgres_data:
+  payment_postgres_data:
   kafka_data:
   redis-data:
     driver:
