@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect, useCallback } from "react";
 import { 
     Card, 
     CardContent, 
@@ -11,6 +11,7 @@ import { Modal } from "@/components/Modal";
 import { useAuth } from "@/providers/authProvider";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/app/matches/MatchCard";
+import { RefreshCw } from "lucide-react";
 
 interface Payment {
     payment_id: string;
@@ -206,18 +207,37 @@ const RefundsList = ({ refunds, payments, onRefundClick }:
     );
 };
 
+// Глобальная шина событий для обновления списка платежей
+export const PaymentEvents = {
+    subscribers: new Set<() => void>(),
+    
+    subscribe(callback: () => void) {
+        this.subscribers.add(callback);
+        return () => {
+            this.subscribers.delete(callback);
+        };
+    },
+    
+    notify() {
+        this.subscribers.forEach(callback => callback());
+    }
+};
+
 export default function UserPaymentsCard() {
     const [payments, setPayments] = useState<Payment[]>([]);
     const [refunds, setRefunds] = useState<Refund[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isRefreshing, setIsRefreshing] = useState(false);
     const [activeTab, setActiveTab] = useState("payments");
     const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
     const [selectedRefund, setSelectedRefund] = useState<Refund | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { user } = useAuth();
 
-    const fetchPayments = async () => {
-        setLoading(true);
+    const fetchPayments = useCallback(async () => {
+        if (!user) return;
+        
+        setIsRefreshing(true);
         try {
             const response = await fetch('http://localhost:8000/api/payments', {
                 method: 'GET',
@@ -234,9 +254,11 @@ export default function UserPaymentsCard() {
         } catch (error) {
             console.error('Ошибка при получении платежей:', error);
         }
-    };
+    }, [user]);
 
-    const fetchRefunds = async () => {
+    const fetchRefunds = useCallback(async () => {
+        if (!user) return;
+        
         try {
             const response = await fetch('http://localhost:8000/api/payments/refunds', {
                 method: 'GET',
@@ -254,15 +276,26 @@ export default function UserPaymentsCard() {
             console.error('Ошибка при получении возвратов:', error);
         } finally {
             setLoading(false);
+            setIsRefreshing(false);
         }
-    };
+    }, [user]);
+
+    const refreshData = useCallback(() => {
+        fetchPayments();
+        fetchRefunds();
+    }, [fetchPayments, fetchRefunds]);
 
     useEffect(() => {
         if (user) {
-            fetchPayments();
-            fetchRefunds();
+            refreshData();
         }
-    }, [user]);
+    }, [user, refreshData]);
+
+    // Подписка на событие обновления платежей
+    useEffect(() => {
+        const unsubscribe = PaymentEvents.subscribe(refreshData);
+        return () => unsubscribe();
+    }, [refreshData]);
 
     const handlePaymentClick = (payment: Payment) => {
         setSelectedPayment(payment);
@@ -284,8 +317,18 @@ export default function UserPaymentsCard() {
 
     return (
         <Card>
-            <CardHeader>
-                <CardTitle className="text-2xl font-semibold mb-2">Ваши финансы</CardTitle>
+            <CardHeader className="flex flex-row justify-between items-center">
+                <CardTitle className="text-2xl font-semibold">Ваши финансы</CardTitle>
+                <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={refreshData}
+                    disabled={isRefreshing}
+                    className="p-2"
+                    aria-label="Обновить"
+                >
+                    <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                </Button>
             </CardHeader>
             <CardContent>
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">

@@ -12,8 +12,46 @@ interface TicketItem {
 
 export default function FetchedTickets({resource, setRefreshResourceKey, matchId} : any) {
     const tickets = resource.read();
+    const [minPrice, setMinPrice] = useState<number | ''>('');
+    const [maxPrice, setMaxPrice] = useState<number | ''>('');
     
-
+    const getInQueue = async (minPrice: number, maxPrice: number) => {
+        try {
+            const response = await fetch('http://localhost:8000/api/queue', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    match_id: matchId,
+                    min_price: minPrice,
+                    max_price: maxPrice
+                }),
+            });
+            
+            if (response.ok) {
+                toast({
+                    title: "Успех",
+                    description: "Вы успешно встали в очередь за билетами"
+                });
+            } else {
+                toast({
+                    title: "Ошибка",
+                    description: "Не удалось встать в очередь",
+                    variant: "destructive"
+                });
+            }
+        } catch (error) {
+            console.error('Ошибка при постановке в очередь:', error);
+            toast({
+                title: "Ошибка",
+                description: "Не удалось встать в очередь. Попробуйте позже.",
+                variant: "destructive"
+            });
+        }
+    };
+    
     if (tickets.length === 0) {
         return (
             <div className="flex flex-col text-sm sm:text-lg items-center justify-center mx-auto h-full">
@@ -47,7 +85,7 @@ export default function FetchedTickets({resource, setRefreshResourceKey, matchId
                 </div>
                 <Button
                     disabled={!minPrice || !maxPrice || Number(minPrice) > Number(maxPrice)}
-                    className="mt-10" onClick={async () => {await getInQueue(minPrice, maxPrice)}}>
+                    className="mt-10" onClick={async () => {await getInQueue(Number(minPrice), Number(maxPrice))}}>
                     Встать в очередь за билетами
                 </Button>
             </div>
@@ -75,7 +113,7 @@ export default function FetchedTickets({resource, setRefreshResourceKey, matchId
                     title: "Вы успешно предзаказали билет",
                     description: "Ожидайте уведомления на почту",
                 })
-                setRefreshResourceKey((prev) => prev + 1);
+                setRefreshResourceKey((prev: number) => prev + 1);
             } else {
                 toast({
                     title: "Произошла ошибка при предзаказе",
@@ -115,7 +153,7 @@ export default function FetchedTickets({resource, setRefreshResourceKey, matchId
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {tickets.map((item, index) => (
+                        {tickets.map((item: any, index: number) => (
                             <TableRow key={index} className="hover:bg-gray-50">
                                 <TableCell className="px-4 py-2 border-b border-gray-200">
                                     {item.row}

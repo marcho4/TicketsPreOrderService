@@ -3,6 +3,7 @@ import {Button} from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/providers/authProvider";
+import { PaymentEvents } from "./UserPayments";
 
 interface TicketData {
     id?: string;
@@ -36,6 +37,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
     const [isPaymentLoading, setIsPaymentLoading] = useState<boolean>(false);
     const [isRefundLoading, setIsRefundLoading] = useState<boolean>(false);
     const [paymentId, setPaymentId] = useState<string | null>(null);
+    const [isFetchingPaymentId, setIsFetchingPaymentId] = useState<boolean>(false);
     const { toast } = useToast();
     const { user } = useAuth();
 
@@ -47,6 +49,9 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
     }, [isPaid, ticketData.id]);
 
     const fetchPaymentId = async () => {
+        if (isFetchingPaymentId) return;
+        
+        setIsFetchingPaymentId(true);
         try {
             const response = await fetch('http://localhost:8000/api/payments', {
                 method: 'GET',
@@ -58,7 +63,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
 
             if (response.ok) {
                 const data = await response.json();
-                const payments = data.data;
+                const payments = data.data || [];
                 const payment = payments.find((p: Payment) => 
                     p.ticket_id === ticketData.id && 
                     p.match_id === ticketData.match_id && 
@@ -67,10 +72,15 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
                 
                 if (payment) {
                     setPaymentId(payment.payment_id);
+                    return payment.payment_id;
                 }
             }
+            return null;
         } catch (error) {
             console.error("Ошибка при получении платежей:", error);
+            return null;
+        } finally {
+            setIsFetchingPaymentId(false);
         }
     };
 
@@ -169,7 +179,13 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
 
             if (!paymentResponse.ok) {
                 const errorData = await paymentResponse.json();
-                throw new Error(errorData.msg || "Не удалось создать платеж");
+                // Не выбрасываем исключение для некритичных ошибок оплаты
+                toast({
+                    title: "Платеж не прошел",
+                    description: errorData.msg || "Не удалось создать платеж",
+                    variant: "destructive"
+                });
+                return;
             }
 
             // Платеж успешно создан, статус билета обновляется внутри оркестратора
@@ -180,14 +196,26 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
             
             setIsPaid(true);
             
-            if (onTicketUpdate) {
-                onTicketUpdate();
-            }
+            // Уведомляем о новом платеже через шину событий
+            PaymentEvents.notify();
+            
+            // Ждем небольшой промежуток времени для обновления на сервере
+            setTimeout(async () => {
+                // Получаем ID платежа для возможного возврата средств
+                const newPaymentId = await fetchPaymentId();
+                if (newPaymentId) {
+                    setPaymentId(newPaymentId);
+                }
+                
+                if (onTicketUpdate) {
+                    onTicketUpdate();
+                }
+            }, 500);
         } catch (error) {
             console.error("Ошибка при оплате билета:", error);
             toast({
                 title: "Ошибка",
-                description: error instanceof Error ? error.message : "Не удалось оплатить билет. Пожалуйста, попробуйте позже.",
+                description: "Не удалось оплатить билет. Пожалуйста, попробуйте позже.",
                 variant: "destructive"
             });
         } finally {
@@ -196,18 +224,32 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
     };
 
     const handleRefundPayment = async () => {
-        if (!paymentId) {
+        // Если у нас еще нет paymentId, пытаемся его получить снова
+        let currentPaymentId = paymentId;
+        if (!currentPaymentId) {
+            setIsRefundLoading(true);
+            
             toast({
-                title: "Ошибка",
-                description: "Не удалось найти ID платежа",
-                variant: "destructive"
+                title: "Получение данных",
+                description: "Получаем информацию о платеже..."
             });
-            return;
+            
+            currentPaymentId = await fetchPaymentId();
+            
+            if (!currentPaymentId) {
+                toast({
+                    title: "Ошибка",
+                    description: "Не удалось найти ID платежа. Пожалуйста, подождите несколько секунд и попробуйте снова.",
+                    variant: "destructive"
+                });
+                setIsRefundLoading(false);
+                return;
+            }
         }
 
         setIsRefundLoading(true);
         try {
-            const response = await fetch(`http://localhost:8000/api/payments/refund/${paymentId}`, {
+            const response = await fetch(`http://localhost:8000/api/payments/refund/${currentPaymentId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -226,6 +268,10 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
             });
             
             setIsPaid(false);
+            setPaymentId(null);
+            
+            // Уведомляем о новом возврате через шину событий
+            PaymentEvents.notify();
             
             if (onTicketUpdate) {
                 onTicketUpdate();
@@ -269,10 +315,10 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
                     <Button 
                         variant="destructive" 
                         onClick={handleRefundPayment} 
-                        disabled={isRefundLoading}
+                        disabled={isRefundLoading || isFetchingPaymentId}
                         className="w-full"
                     >
-                        {isRefundLoading ? "Подождите..." : "Вернуть средства"}
+                        {isRefundLoading || isFetchingPaymentId ? "Подождите..." : "Вернуть средства"}
                     </Button>
                 ) : (
                     <>
