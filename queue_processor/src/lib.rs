@@ -8,3 +8,4 @@ pub mod configs;
 pub use services::queue_service::{QueueService, init_logging};
 pub use services::kafka_service::KafkaService;
 pub use services::redis_service::RedisService; 
+pub use utils::config::Config;
