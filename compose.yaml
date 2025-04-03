@@ -288,6 +288,15 @@ services:
       - redis-queue
       - kafka-1
 
+  webhook-mock:
+    build:
+      context: ./WebhookMockService
+      dockerfile: Dockerfile
+    ports:
+      - "8009:8009"
+    networks:
+      - main
+    
   frontend:
     build:
       context: ./ticket-preorder-platform
