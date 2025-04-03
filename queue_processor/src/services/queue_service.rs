@@ -40,7 +40,10 @@ impl QueueService {
         let redis = RedisService::new(app_config.redis_url.clone()).await;
 
         info!("Перехожу к созданию топика...");
-        kafka.create_topic(app_config.topic_name.clone()).await;
+        let res = kafka.create_topic(app_config.topic_name.clone()).await;
+        if res.is_err() {
+            error!("Не удалось создать топик: {}", res.err().unwrap());
+        }
 
         consumer.subscribe(&[app_config.topic_name.as_str()])
             .expect("Не удалось подписаться на топик");

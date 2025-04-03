@@ -12,3 +12,4 @@ pub mod email_functional;
 pub mod kafka_functional;
 pub mod queue_functions;
 pub mod payment_functional;
+pub mod openapi;

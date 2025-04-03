@@ -31,7 +31,7 @@ impl KafkaService {
             consumer,
         }
     }
-    pub async fn create_topic(&self, topic_name: String) {
+    pub async fn create_topic(&self, topic_name: String) -> KafkaResult<()> {
         let admin_options = &AdminOptions::default();
         let topic: NewTopic = NewTopic {
             name: topic_name.as_str(),
@@ -41,8 +41,14 @@ impl KafkaService {
         };
 
         match self.admin.create_topics(vec![&topic], admin_options).await {
-            Ok(ok) => info!("Топик успешно создан: {:?}", ok),
-            Err(e) => error!("Не удалось создать топик: {}", e.to_string())
+            Ok(ok) => {
+                info!("Топик успешно создан: {:?}", ok);
+                Ok(())
+            }
+            Err(e) => {
+                error!("Не удалось создать топик: {}", e.to_string());
+                Err(e)
+            }
         }
     }
     pub fn create_admin(bootstrap_url: String) -> AdminClient<DefaultClientContext> {
@@ -102,7 +108,7 @@ impl KafkaService {
                     .payload(&msg)
                     .key(key)
                     .headers(OwnedHeaders::new()),
-                None,
+                Duration::from_secs(2),
             ).await {
                 Ok(_) => {
                     info!("Message successfully sent!");
