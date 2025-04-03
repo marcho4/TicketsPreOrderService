@@ -25,7 +25,7 @@ class UserPayments {
                     {"amount", payment[2].as<std::string>()},
                     {"currency", payment[3].as<std::string>()},
                     {"status", payment[4].as<std::string>()},
-                    {"payment_id", payment[5].as<std::string>()},
+                    {"payment_id", payment[0].as<std::string>()},
                     {"match_id", payment[6].as<std::string>()},
                     {"ticket_id", payment[7].as<std::string>()},
                     {"created_at", payment[8].as<std::string>()}

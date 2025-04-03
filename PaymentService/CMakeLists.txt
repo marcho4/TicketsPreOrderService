@@ -20,32 +20,12 @@ set(SOURCE_FILES
         src/api/payments_operations/PaymentRefund.h
 )
 
-#include_directories(
-#        src
-#        src/database
-#        /usr/local/include
-#        /usr/include
-#)
-#include_directories("third_party/Bcrypt.cpp/include")
-#
-#link_directories(
-#        /usr/local/lib
-#        /usr/lib
-#)
 
-include_directories("/opt/homebrew/Cellar/curl/8.12.0/include")
-link_directories("/opt/homebrew/Cellar/curl/8.12.0/lib")
-
-include_directories("/opt/homebrew/opt/libpqxx/include")
-link_directories("/opt/homebrew/opt/libpqxx/lib")
-
-include_directories("third_party/Bcrypt.cpp/include")
-include_directories("third_party/libpqxx/include")
-include_directories("/opt/homebrew/opt/openssl@3/include")
 
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
-#find_package(PostgreSQL REQUIRED)
+find_package(PostgreSQL REQUIRED)
+
 include(FetchContent)
 FetchContent_Declare(
         spdlog
@@ -56,18 +36,19 @@ FetchContent_MakeAvailable(spdlog)
 
 add_executable(PaymentService ${SOURCE_FILES})
 
-#target_link_libraries(PaymentService
-#        PRIVATE
-#        spdlog::spdlog
-#        pqxx
-#        pq
-#        CURL::libcurl
-#        OpenSSL::SSL
-#        OpenSSL::Crypto
-#)
+target_include_directories(PaymentService
+    PRIVATE
+        src
+        src/database
+        third_party/Bcrypt.cpp/include
+)
 
-target_link_libraries(PaymentService PRIVATE CURL::libcurl spdlog::spdlog
-        /opt/homebrew/opt/openssl@3/lib/libssl.dylib
-        /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
-        /opt/homebrew/opt/libpqxx/lib/libpqxx.dylib
-        pqxx)
+target_link_libraries(PaymentService
+    PRIVATE
+        spdlog::spdlog      # spdlog, собранный FetchContent-ом
+        pqxx                # из find_package(PostgreSQL)
+        pq                  # из find_package(PostgreSQL)
+        CURL::libcurl       # из find_package(CURL)
+        OpenSSL::SSL        # из find_package(OpenSSL)
+        OpenSSL::Crypto     # из find_package(OpenSSL)
+)

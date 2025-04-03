@@ -38,10 +38,9 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-//        std::string connect = "dbname=orchestrator host=org_postgres user=database password=database port=5432";
-        std::string connect = "dbname=payment host=localhost port=5432";
+        std::string connect = "dbname=payment host=payment-postgres port=5432 user=postgres password=postgres";
         Database db(connect);
-        db.initDbFromFile("../src/database/payment.sql");
+        db.initDbFromFile("src/database/payment.sql");
         pqxx::connection C(connect);
         pqxx::work W(C);
         W.commit();
