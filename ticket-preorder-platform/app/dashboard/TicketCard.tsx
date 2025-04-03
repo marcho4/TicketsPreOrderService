@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useMemo } from "react";
+import React, { Suspense, useMemo, useState } from "react";
 import { createResource } from "@/lib/createResource";
 import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Skeleton} from "@/components/ui/skeleton";
@@ -57,20 +57,38 @@ async function fetchMatchData(id: string): Promise<MatchInfoProps> {
 }
 
 export default function TicketDynamicCard({ props }: TicketCardData) {
-    const matchResource = useMemo(() => createResource(() => fetchMatchData(props.match_id)), [props.match_id]);
+    const [refreshTrigger, setRefreshTrigger] = useState<number>(0);
+    const [isVisible, setIsVisible] = useState<boolean>(true);
+    const matchResource = useMemo(() => createResource(() => fetchMatchData(props.match_id)), [props.match_id, refreshTrigger]);
+
+    const handleTicketUpdate = () => {
+        setRefreshTrigger(prev => prev + 1);
+    };
+
+    // Если билет был возвращен, скрываем карточку
+    if (!isVisible) {
+        return null;
+    }
 
     return (
         <TicketErrorBoundary>
             <Suspense fallback={<TicketCardSkeleton />}>
-                <TicketCard props={props} matchResource={matchResource}/>
+                <TicketCard 
+                    props={props} 
+                    matchResource={matchResource} 
+                    onTicketUpdate={handleTicketUpdate}
+                    onHide={() => setIsVisible(false)}
+                />
             </Suspense>
         </TicketErrorBoundary>
     );
 }
 
-function TicketCard({ props , matchResource}: {
+function TicketCard({ props, matchResource, onTicketUpdate, onHide }: {
     props: TicketCardProps;
     matchResource: { read: () => MatchInfoProps };
+    onTicketUpdate: () => void;
+    onHide: () => void;
 }) {
     const data = props;
     const matchData = matchResource.read();
@@ -78,6 +96,11 @@ function TicketCard({ props , matchResource}: {
 
     const handleClick = () => {
         setIsModalOpen((prevState) => !prevState);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        onTicketUpdate();
     };
 
     const date = new Date(matchData.matchDateTime).toISOString();
@@ -96,11 +119,17 @@ function TicketCard({ props , matchResource}: {
                     </CardDescription>
                 </CardHeader>
             </Card>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
                 <TicketModal
                     ticketData={data}
                     matchName={`${matchData.teamHome} - ${matchData.teamAway}`}
-                    stadium={matchData.stadium}/>
+                    stadium={matchData.stadium}
+                    onTicketUpdate={onTicketUpdate}
+                    onClose={() => {
+                        setIsModalOpen(false);
+                        onHide(); // Скрываем карточку после возврата билета
+                    }}
+                />
             </Modal>
         </div>
     )

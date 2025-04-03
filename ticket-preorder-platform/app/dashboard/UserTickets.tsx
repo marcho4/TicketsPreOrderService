@@ -22,10 +22,11 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
         msg: "",
     };
 
+    const [refreshTrigger, setRefreshTrigger] = useState<number>(0);
     const { user, userRole } = useAuth();
 
     const getTickets = async () => {
-        if (!userId) return;
+        if (!userId) return struct;
         try {
             const response = await fetch(`http://localhost:8000/api/tickets/user/${userId}`, {
                 method: 'GET',
@@ -40,6 +41,7 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
             return result;
         } catch (err: any) {
             console.error(err);
+            return struct;
         }
     };
 
@@ -48,7 +50,13 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
             return createResource(getTickets);
         }
         return null;
-    }, [user, userRole]);
+    }, [user, userRole, refreshTrigger]);
+
+    // Функция для обновления списка билетов
+    const handleTicketUpdate = () => {
+        console.log("Обновление списка билетов...");
+        setRefreshTrigger(prev => prev + 1);
+    };
 
     if (!ticketsResource) {
         return <Card>
@@ -67,7 +75,7 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
             </CardHeader>
             <Suspense fallback={<TicketCardSkeleton />}>
                 <CardContent className="space-y-4 max-h-72 overflow-y-auto">
-                    <TicketsList resource={ticketsResource} />
+                    <TicketsList resource={ticketsResource} onTicketUpdate={handleTicketUpdate} />
                 </CardContent>
             </Suspense>
         </Card>

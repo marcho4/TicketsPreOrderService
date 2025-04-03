@@ -20,11 +20,13 @@ interface TicketModalProps {
     matchName: string;
     stadium: string;
     onTicketUpdate?: () => void;
+    onClose?: () => void;
 }
 
-export default function TicketModal({ ticketData, matchName, stadium, onTicketUpdate }: TicketModalProps) {
+export default function TicketModal({ ticketData, matchName, stadium, onTicketUpdate, onClose }: TicketModalProps) {
     const [isPaid, setIsPaid] = useState<boolean>(ticketData.status === "paid");
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isPaymentLoading, setIsPaymentLoading] = useState<boolean>(false);
     const { toast } = useToast();
     const { user } = useAuth();
 
@@ -64,6 +66,10 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
                 if (onTicketUpdate) {
                     onTicketUpdate();
                 }
+                
+                if (onClose) {
+                    onClose();
+                }
             } else {
                 let errorMessage = "Ошибка при возврате билета";
                 try {
@@ -83,6 +89,65 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
             });
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const handlePayTicket = async () => {
+        const userId = user || ticketData.user_id;
+        
+        if (!ticketData.id || !userId || !ticketData.match_id) {
+            toast({
+                title: "Ошибка",
+                description: "Не удалось найти ID билета, пользователя или матча",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        setIsPaymentLoading(true);
+        try {
+            // Создаем платеж через оркестратор
+            const paymentResponse = await fetch(`http://localhost:8000/api/payments/pay`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    user_id: userId,
+                    amount: ticketData.price.toString(),
+                    currency: "RUB",
+                    provider: "Stripe", // Используем Stripe как провайдер по умолчанию
+                    match_id: ticketData.match_id,
+                    ticket_id: ticketData.id
+                })
+            });
+
+            if (!paymentResponse.ok) {
+                const errorData = await paymentResponse.json();
+                throw new Error(errorData.msg || "Не удалось создать платеж");
+            }
+
+            // Платеж успешно создан, статус билета обновляется внутри оркестратора
+            toast({
+                title: "Успех",
+                description: "Билет успешно оплачен"
+            });
+            
+            setIsPaid(true);
+            
+            if (onTicketUpdate) {
+                onTicketUpdate();
+            }
+        } catch (error) {
+            console.error("Ошибка при оплате билета:", error);
+            toast({
+                title: "Ошибка",
+                description: error instanceof Error ? error.message : "Не удалось оплатить билет. Пожалуйста, попробуйте позже.",
+                variant: "destructive"
+            });
+        } finally {
+            setIsPaymentLoading(false);
         }
     };
 
@@ -108,14 +173,18 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
                 <Button 
                     variant="destructive" 
                     onClick={handleCancelTicket} 
-                    disabled={isLoading}
+                    disabled={isLoading || isPaymentLoading}
                 >
                     {isLoading ? "Подождите..." : "Вернуть билет"}
                 </Button>
-                <Button
-                >
-                    Оплатить билет
-                </Button>
+                {!isPaid && (
+                    <Button
+                        onClick={handlePayTicket}
+                        disabled={isLoading || isPaymentLoading}
+                    >
+                        {isPaymentLoading ? "Обработка..." : "Оплатить билет"}
+                    </Button>
+                )}
             </CardFooter>
         </div>
     )
