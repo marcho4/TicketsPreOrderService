@@ -10,6 +10,7 @@ use crate::utils::responses::generic_response;
     put,
     path = "/api/auth/password/change",
     description = "Позволяет поменять пароль на новый уже аутентифицированному пользователю",
+    summary = "Поменять пароль",
     responses(
         (status = 200, description = "Successfully changed password", body = ApiResponse<String>),
         (status = 401, description = "Not authorized", body = ApiResponse<String>),

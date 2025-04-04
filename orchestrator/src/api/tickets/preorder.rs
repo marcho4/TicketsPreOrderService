@@ -18,13 +18,13 @@ use crate::utils::responses::generic_response;
     put,
     path = "/api/tickets/preorder/{ticket_id}",
     tag = "Tickets",
-    summary = "Preorder concrete ticket",
-    description = "Preorder concrete ticket",
+    summary = "Предзаказать билет",
+    description = "Предзаказать билет",
     params(
-        ("ticket_id" = String, Path, description = "ID of the ticket to preorder")
+        ("ticket_id" = String, Path, description = "ID билета на предзаказ")
     ),
     responses(
-        (status = 200, description = "Successfully cancelled preorder", body = ApiResponse<MessageResp>),
+        (status = 200, description = "Успешно предзаказано", body = ApiResponse<MessageResp>),
         (status = 403, description = "Forbidden: Access restricted due to missing or invalid credentials, wrong role, or mismatched user id"),
         (status = 500, description = "Internal Server Error", body=ApiResponse<String>)
     )

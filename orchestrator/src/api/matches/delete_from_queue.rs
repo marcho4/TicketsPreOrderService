@@ -5,6 +5,20 @@ use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
 
+
+#[utoipa::path(
+    delete,
+    path = "/api/matches/queue/{match_id}",
+    tag = "Matches",
+    summary = "Выйти из очередь",
+    params(
+        ("match_id" = String, Path, description = "Уникальный идентификатор матча.")
+    ),
+    responses(
+        (status = 200, description = "Вы вышли из очереди"),
+        (status = 500, description = "Внутренняя ошибка сервера")
+    )
+)]
 #[delete("/queue/delete/{match_id}")]
 pub async fn delete_from_queue(
     req: HttpRequest,

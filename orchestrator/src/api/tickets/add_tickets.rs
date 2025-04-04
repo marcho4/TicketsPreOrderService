@@ -27,6 +27,7 @@ pub struct TicketsMultipart {
     path = "/api/tickets/{match_id}",
     operation_id = "addTickets",
     tag = "Tickets",
+    summary="Добавить билеты на матч",
     params(
         ("match_id" = String, Path, description = "ID матча, для которого добавляются билеты")
     ),

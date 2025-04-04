@@ -12,7 +12,7 @@ use crate::utils::responses::generic_response;
     path = "/api/tickets/{match_id}",
     description = "Delete tickets by Ticket's IDs list",
     tag = "Tickets",
-
+    summary="Удалить билеты на матч",
 )]
 #[delete("/{match_id}")]
 pub async fn delete_tickets(

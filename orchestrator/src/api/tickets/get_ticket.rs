@@ -11,8 +11,8 @@ use crate::utils::responses::generic_response;
     get,
     path = "/api/tickets/ticket/{id}",
     tag = "Tickets",
-    summary = "Cancels preorder of the concrete ticket",
-    description = "Cancels preorder of the concrete ticket",
+    summary = "Получить данные о билете",
+    description = "Получить данные о билете по ID",
     params(
         ("id" = String, Path, description = "ID of the ticket")
     ),

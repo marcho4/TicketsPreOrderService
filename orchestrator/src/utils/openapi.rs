@@ -34,7 +34,9 @@ use crate::api::matches::{
     get_match::__path_get_match,
     get_all_matches::__path_get_all_matches,
     get_matches_by_org::__path_get_by_org,
-    update_match::__path_update_match
+    update_match::__path_update_match,
+    delete_from_queue::__path_delete_from_queue,
+    add_user_to_the_queue::__path_add_user_to_queue
 };
 use crate::api::tickets::{
     add_tickets::__path_add_tickets,
@@ -52,13 +54,13 @@ use crate::api::tickets::{
     info(
         title = "Orchestrator API",
         description = "API for Tickets PreOrder Service",
-        version = "1.0.0"
+        version = "1.0.0",
     ),
     paths(get_requests, process_request, login, logout, session, register_user, register_organizer,
         get_organizer, update_user, get_user_data, update, update_match, get_by_org, get_match,
         get_all_matches, delete_match, create_match, get_tickets_by_user, get_available_tickets,
         add_tickets, preorder_ticket, cancel_preorder, get_ticket, change_password, delete_tickets,
-        pay, get_user_payments, get_user_refunds, get_payment_status, refund
+        pay, get_user_payments, get_user_refunds, get_payment_status, refund, add_user_to_queue, delete_from_queue
     )
 )]
 pub struct ApiDoc;

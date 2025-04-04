@@ -18,8 +18,8 @@ use crate::utils::responses::generic_response;
     put,
     path = "/api/tickets/cancel/{ticket_id}",
     tag = "Tickets",
-    summary = "Cancels preorder of the concrete ticket",
-    description = "Cancels preorder of the concrete ticket",
+    summary = "Отменить предзаказ на билет",
+    description = "Отменить предзаказ на билет",
     request_body = CancelData,
     params(
         ("ticket_id" = String, Path, description = "ID of the ticket to cancel preorder")
