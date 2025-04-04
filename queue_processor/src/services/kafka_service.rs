@@ -10,11 +10,11 @@ use rdkafka::message::OwnedHeaders;
 use rdkafka::producer::{FutureProducer, FutureRecord};
 use serde::Serialize;
 use tokio::time::sleep;
-
+use std::sync::Arc;
 pub struct KafkaService {
     producer: FutureProducer,
     admin: AdminClient<DefaultClientContext>,
-    consumer: StreamConsumer,
+    consumer: Arc<StreamConsumer>,
 }
 
 impl KafkaService {
@@ -28,7 +28,7 @@ impl KafkaService {
         Self {
             admin,
             producer,
-            consumer,
+            consumer: Arc::new(consumer),
         }
     }
     pub async fn create_topic(&self, topic_name: String) -> KafkaResult<()> {
@@ -75,6 +75,11 @@ impl KafkaService {
         info!("Создал ConsumerClient");
         consumer
     }
+
+    pub fn get_consumer(&self) -> Arc<StreamConsumer> {
+        self.consumer.clone()
+    }
+
     pub fn create_producer(bootstrap_url: String) -> FutureProducer {
         let kafka_producer: FutureProducer = ClientConfig::new()
             .set("bootstrap.servers", bootstrap_url)

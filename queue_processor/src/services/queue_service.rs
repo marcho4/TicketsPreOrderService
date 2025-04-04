@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::sync::Arc;
 use crate::models::models::{EmailTemplates, Match, MessageResp, Recipient, SendEmailRequest, Ticket, User, UserResp};
 use rdkafka::Message;
 use log::{error, info};
@@ -18,7 +19,7 @@ use crate::services::kafka_service::KafkaService;
 use crate::services::redis_service::RedisService;
 
 pub struct QueueService {
-    consumer: StreamConsumer,
+    consumer: Arc<StreamConsumer>,
     tickets_url: String,
     http_client: reqwest::Client,
     redis_client: RedisService,
@@ -36,7 +37,7 @@ pub fn init_logging() {
 impl QueueService {
     pub async fn new(app_config: &Config) -> Self {
         let kafka = KafkaService::new(&app_config.kafka_url).await;
-        let consumer = KafkaService::create_stream_consumer(app_config.kafka_url.clone());
+        let consumer = kafka.get_consumer();
         let redis = RedisService::new(app_config.redis_url.clone()).await;
 
         info!("Перехожу к созданию топика...");
