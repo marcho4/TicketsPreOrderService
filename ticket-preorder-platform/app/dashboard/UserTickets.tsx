@@ -85,16 +85,9 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
 
 const TicketCardSkeleton = () => {
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>
-                    <Skeleton className="h-4 w-32" />
-                </CardTitle>
-            </CardHeader>
-            <CardContent>
-                <Skeleton className="h-4 w-32" />
-            </CardContent>
-        </Card>
+        <CardContent>
+            <Skeleton className="h-32" />
+        </CardContent>
     );
 };
 

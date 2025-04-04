@@ -54,41 +54,7 @@ export default function FetchedTickets({resource, setRefreshResourceKey, matchId
     
     if (tickets.length === 0) {
         return (
-            <div className="flex flex-col text-sm sm:text-lg items-center justify-center mx-auto h-full">
-                На данный момент нет доступных для предзаказа билетов<br/>
-                Введите минимальную и максимальную цену, по которой вы хотите купить билет:
-                <div className="flex flex-col items-center gap-4 mt-4 w-[400px]">
-                    <div className="flex flex-col">
-                        <Label htmlFor="min_price">Минимальная цена</Label>
-                        <Input
-                            type="number"
-                            id="min_price"
-                            name="min_price"
-                            placeholder="Минимальная цена"
-                            className="mt-2 w-[200px]"
-                            value={minPrice}
-                            onChange={(e) => {setMinPrice(Number(e.target.value))}}
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <Label htmlFor="max_price">Максимальная цена</Label>
-                        <Input
-                            type="number"
-                            id="max_price"
-                            name="max_price"
-                            placeholder="Максимальная цена"
-                            className="mt-2 w-[200px]"
-                            value={maxPrice}
-                            onChange={(e) => setMaxPrice(Number(e.target.value))}
-                        />
-                    </div>
-                </div>
-                <Button
-                    disabled={!minPrice || !maxPrice || Number(minPrice) > Number(maxPrice)}
-                    className="mt-10" onClick={async () => {await getInQueue(Number(minPrice), Number(maxPrice))}}>
-                    Встать в очередь за билетами
-                </Button>
-            </div>
+            null
         );
     }
 

@@ -6,6 +6,7 @@ use crate::models::roles::Role::USER;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
 use crate::models::api_response::ApiResponse;
+use crate::models::tickets::TicketReservation;
 
 #[utoipa::path(
     post,
@@ -32,16 +33,32 @@ pub async fn pay(
         Ok(tickets) => {
             let found = tickets.iter().find(|t| t.user_id == data.user_id);
             if found.is_some() {
-                let payment = orchestrator.create_payment(data.into_inner()).await;
+                let data = data.into_inner();
+                let payment = orchestrator.create_payment(&data).await;
                 match payment {
-                    Ok(payment) => return generic_response::<PaymentResponse>(
-                        StatusCode::OK,
-                        Some("Created payment".to_string()),
-                        Some(payment),
-                    ),
+                    Ok(payment) => {
+                        let ticket_status_change = orchestrator.pay_for_ticket(data.ticket_id, TicketReservation {
+                            user_id: data.user_id,
+                            match_id: data.match_id,
+                        }).await;
+                        if ticket_status_change.is_ok() {
+                             generic_response::<PaymentResponse>(
+                                StatusCode::OK,
+                                Some("Created payment".to_string()),
+                                Some(payment),
+                            )
+                        } else {
+                             generic_response::<PaymentResponse>(
+                                StatusCode::OK,
+                                Some("Created payment but ticket status wasn't modified".to_string()),
+                                Some(payment),
+                            )
+                        }
+
+                    },
                     Err(e) => generic_response::<String>(
                         StatusCode::INTERNAL_SERVER_ERROR,
-                        Some(format!("Ошибка при возврате билета пользователя: {}", e.to_string())),
+                        Some(format!("Ошибка платеже: {}", e.to_string())),
                         None,
                     ),
                 }

@@ -199,9 +199,9 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
                 <Button size="lg" onClick={() => setModal(true)}>
                     Забронировать билет
                 </Button>
-                <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center justify-center bg-black/80' : 'hidden'}
-                    z-[11] cursor-pointer`}>
-                    <Card id="active-modal" className="relative max-w-2xl w-full h-[700px] rounded-lg bg-gray-50 cursor-default"
+                <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center overflow-y-auto justify-center bg-black/80' : 'hidden'}
+                    z-[99] cursor-pointer`}>
+                    <Card id="active-modal" className="relative z-[110] max-w-2xl w-full h-[700px] rounded-lg bg-gray-50 cursor-default overflow-y-auto"
                          onClick={(e) => e.stopPropagation()}>
 
                         <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"

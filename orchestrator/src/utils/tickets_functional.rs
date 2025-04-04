@@ -78,5 +78,16 @@ impl Orchestrator {
         }
 
 
+
+    }
+
+    pub async fn pay_for_ticket(&self, ticket_id: String, data: TicketReservation) -> Result<MessageResp,OrchestratorError> {
+        let url = format!("{}/ticket/{}/pay", self.config.tickets_url, ticket_id);
+        self.send_request::<MessageResp, TicketReservation>(url, Some(data), Method::PUT).await
+    }
+
+    pub async fn refund_ticket(&self, ticket_id: String, data: TicketReservation) -> Result<MessageResp, OrchestratorError> {
+        let url = format!("{}/ticket/{}/refund", self.config.tickets_url, ticket_id);
+        self.send_request::<MessageResp, TicketReservation>(url, Some(data), Method::PUT).await
     }
 }

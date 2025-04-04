@@ -6,9 +6,9 @@ use crate::models::payments::PaymentStatusRequest;
 use super::errors::OrchestratorError;
 
 impl Orchestrator {
-    pub async fn create_payment(&self, payment_request: PaymentRequest) -> Result<PaymentResponse, OrchestratorError> {
+    pub async fn create_payment(&self, payment_request: &PaymentRequest) -> Result<PaymentResponse, OrchestratorError> {
         let url = format!("{}/payments/create", self.config.payment_url);
-        self.send_request::<PaymentResponse, PaymentRequest>(url, Some(payment_request), Method::POST).await
+        self.send_request::<PaymentResponse, &PaymentRequest>(url, Some(payment_request), Method::POST).await
     }
 
     pub async fn get_user_payments(&self, user_id: String) -> Result<Vec<Payment>, OrchestratorError> {
