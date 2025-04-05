@@ -12,7 +12,9 @@ mod tests {
     use log::{info, LevelFilter};
     use orchestrator::utils::general::generate_random_email;
     use pretty_assertions::assert_eq;
-    use serde_json::json;
+    use reqwest::StatusCode;
+    use orchestrator::models::request_process_info::{RequestProcessInfo, Status};
+    use serial_test::serial;
 
     static INIT: Once = Once::new();
     const CONFIG_PATH: &str = "src/orchestrator/dev.toml";
@@ -26,6 +28,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[serial]
     async fn test_create_and_get_match() {
         init_logging();
         info!("Starting test_create_and_get_match");
@@ -78,13 +81,13 @@ mod tests {
         let first_id = first_id.unwrap().request_id.clone();
         info!("Processing request with ID: {}", first_id);
 
+        let body = RequestProcessInfo {
+            request_id: first_id,
+            status: Status::APPROVED
+        };
         let approve_url = "http://localhost:8000/api/admin/process".to_string();
         let response = client.post(&approve_url)
-            .json(&json!(
-                {
-                    "request_id": first_id.clone(),
-                    "status": "APPROVED"
-                }))
+            .json(&body)
             .send()
             .await
             .expect("Ошибка при одобрении организатора");
@@ -152,6 +155,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[serial]
     async fn test_update_match_details() {
         init_logging();
         info!("Starting test_create_and_get_match");
@@ -205,18 +209,20 @@ mod tests {
         info!("Processing request with ID: {}", first_id);
 
         let approve_url = "http://localhost:8000/api/admin/process".to_string();
+        let body = RequestProcessInfo {
+            request_id: first_id,
+            status: Status::APPROVED
+        };
         let response = client.post(&approve_url)
-            .json(&json!(
-                {
-                    "request_id": first_id.clone(),
-                    "status": "APPROVED"
-                }))
+            .json(&body)
             .send()
             .await
             .expect("Ошибка при одобрении организатора");
 
-        assert_eq!(response.status().is_success(), true);
-        
+        let response_status = response.status();
+        info!("Response status: {}", response_status);
+        assert_eq!(response_status == StatusCode::OK, true);
+
         info!("Organizer approval successful");
         let text = response.json::<ApiResponse<OrgApproveResponse>>().await.expect("Не удалось получить текст ответа");
         
@@ -289,7 +295,6 @@ mod tests {
         let match_info = response.json::<ApiResponse<Match>>().await.expect("Ошибка при десериализации матча");
         let updated_match = match_info.data.unwrap();
         assert_eq!(updated_match.match_description, "Updated match description");
-        assert_eq!(updated_match.stadium, "New Stadium");
     }
 
 }

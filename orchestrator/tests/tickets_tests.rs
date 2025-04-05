@@ -2,7 +2,6 @@
 mod tests {
     use orchestrator::models::admin_request::AdminRequest;
     use orchestrator::models::api_response::ApiResponse;
-    use orchestrator::models::message_resp::MessageResp;
     use orchestrator::models::request_process_info::{RequestProcessInfo, Status};
     use orchestrator::models::tickets::{CancelData, Ticket, TicketReservation, TicketsAddResponse};
     use orchestrator::models::login_data::LoginData;
@@ -11,7 +10,6 @@ mod tests {
     use orchestrator::models::organizer_registration_data::OrganizerRegistrationData;
     use orchestrator::models::org_approve_response::OrgApproveResponse;
     use orchestrator::models::matches::{CreateMatchData, Match};
-    use rdkafka::Message;
     use std::sync::Once;
     use log::{LevelFilter, info};
     use orchestrator::utils::general::generate_random_email;

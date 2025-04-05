@@ -3,6 +3,8 @@
 Database::Database(const std::string& con) : conn_(con) { }
 
 void Database::initDbFromFile(const std::string &filename) {
+    std::lock_guard<std::mutex> lock(conn_mutex_); 
+    
     std::ifstream file(filename);
     if (!file.is_open()) {
         throw std::runtime_error("Could not open file");
@@ -19,4 +21,3 @@ void Database::initDbFromFile(const std::string &filename) {
         std::cerr << "Error: " << e.what() << '\n';
     }
 }
-

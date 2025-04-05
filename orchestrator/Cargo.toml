@@ -27,3 +27,4 @@ rdkafka = { version = "0.37.0", features = ["cmake-build"] }
 
 [dev-dependencies]
 pretty_assertions = "1"
+serial_test = "2.0.0"
