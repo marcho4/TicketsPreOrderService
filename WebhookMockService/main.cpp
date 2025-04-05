@@ -3,8 +3,10 @@
 #include "src/api/payments/PaymentWorker.h"
 
 int main() {
+    
     try {
         httplib::Server server;
+        PaymentWorker worker;
 
         server.Options(".*", [&](const httplib::Request& req, httplib::Response& res) {
             res.set_header("Access-Control-Allow-Origin", "http://localhost:8008");
@@ -23,9 +25,8 @@ int main() {
             res.set_header("Content-Type", "application/json");
         };
 
-        server.Post("/payments/create", [&set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+        server.Post("/payments/create", [&worker, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
             set_cors_headers(res);
-            PaymentWorker worker;
             worker.PaymentRequest(request, res);
         });
 

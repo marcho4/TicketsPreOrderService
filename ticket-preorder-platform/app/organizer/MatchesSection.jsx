@@ -144,13 +144,13 @@ export default function MatchesSection() {
     };
 
     return (
-        <Card className="flex flex-col min-w-full min-h-96 rounded-lg bg-white shadow-lg border-gray-200 border">
+        <Card className="flex flex-col min-w-full min-h-96">
             {/* Заголовок и кнопка добавления */}
             <CardHeader className="flex flex-row justify-between items-center p-4 sticky top-0">
-                <CardTitle className="text-3xl font-semibold text-gray-900 leading-tight">
+                <CardTitle className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight">
                     Мои матчи
                 </CardTitle>
-                <Button onClick={() => setIsModalOpen(true)}>
+                <Button onClick={() => setIsModalOpen(true)} size={window.innerWidth > 768 ? "default" : "sm"}>
                     <Plus className="mr-2 h-4 w-4" /> Добавить матч
                 </Button>
             </CardHeader>

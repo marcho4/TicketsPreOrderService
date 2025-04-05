@@ -5,7 +5,7 @@
 
 class PaymentWorker {
     using json = nlohmann::json;
-    std::unordered_map<std::string, std::string> payments;
+    static std::unordered_map<std::string, std::string> payments;
 
 public:
     void PaymentRequest(const httplib::Request& request, httplib::Response& response);

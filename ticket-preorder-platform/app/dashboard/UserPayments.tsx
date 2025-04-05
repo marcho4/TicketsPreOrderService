@@ -142,7 +142,7 @@ const PaymentsList = ({ payments, onPaymentClick }: { payments: Payment[], onPay
                                 <div className="text-sm text-gray-500">{formatDate(payment.created_at)}</div>
                             </div>
                             <div className={`px-2 py-1 rounded-full text-xs ${
-                                payment.status === 'paid' 
+                                payment.status === 'success' 
                                     ? 'bg-green-100 text-green-800' 
                                     : 'bg-yellow-100 text-yellow-800'
                             }`}>
@@ -316,7 +316,7 @@ export default function UserPaymentsCard() {
     };
 
     return (
-        <Card>
+        <Card className="w-full">
             <CardHeader className="flex flex-row justify-between items-center">
                 <CardTitle className="text-2xl font-semibold">Ваши финансы</CardTitle>
                 <Button 

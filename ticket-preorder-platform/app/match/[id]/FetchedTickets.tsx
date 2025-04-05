@@ -73,7 +73,6 @@ export default function FetchedTickets({resource, setRefreshResourceKey, matchId
                     }
                 })
             const data = await resp.json();
-            console.log(data);
             if (resp.status == 200) {
                 toast({
                     title: "Вы успешно предзаказали билет",

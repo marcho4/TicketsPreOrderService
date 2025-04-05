@@ -148,7 +148,7 @@ export function DataTable<TData, TValue>({
                                 <SelectLabel>Статус</SelectLabel>
                                 <SelectItem value="available">Свободен</SelectItem>
                                 <SelectItem value="reserved">Зарезервирован</SelectItem>
-                                <SelectItem value="paid">Оплачен</SelectItem>
+                                <SelectItem value="sold">Продан</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>

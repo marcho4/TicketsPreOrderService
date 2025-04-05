@@ -70,11 +70,10 @@ export default function MatchCard({ id }: MatchCardProps) {
 }
 
 function MatchCardContent({resource, id}: {
-    resource: ReturnType<typeof createResource<MatchData>>;
+    resource: {read: () => MatchData};
     id: string;
 }) {
     const data = resource.read();
-    console.log(data);
     const router = useRouter();
 
     const handleClick = () => {

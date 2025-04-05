@@ -61,13 +61,16 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
                 credentials: 'include',
             });
 
+            console.log(response);
+
             if (response.ok) {
                 const data = await response.json();
+                console.log(data);
                 const payments = data.data || [];
+                console.log(payments);
+                console.log(ticketData.id);
                 const payment = payments.find((p: Payment) => 
-                    p.ticket_id === ticketData.id && 
-                    p.match_id === ticketData.match_id && 
-                    p.status === 'paid'
+                    p.ticket_id === ticketData.id
                 );
                 
                 if (payment) {
@@ -75,6 +78,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
                     return payment.payment_id;
                 }
             }
+            console.log("No payment found");
             return null;
         } catch (error) {
             console.error("Ошибка при получении платежей:", error);
@@ -235,6 +239,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
             });
             
             currentPaymentId = await fetchPaymentId();
+            console.log(currentPaymentId);
             
             if (!currentPaymentId) {
                 toast({
@@ -295,19 +300,17 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
     return (
         <div>
             <CardHeader>
-                <CardTitle className="text-2xl">
+                <CardTitle className="text-2xl font-semibold">
                     Данные билета
                 </CardTitle>
             </CardHeader>
             <CardContent>
                 <div>
-                    <div>Матч: {matchName}</div>
-                    <div>Стадион: {stadium}</div>
-                    <div>Сектор: {ticketData.sector}</div>
-                    <div>Ряд: {ticketData.row}</div>
-                    <div>Место: {ticketData.seat}</div>
-                    <div>Стоимость: {ticketData.price} {ticketData.price % 10 > 4 ? "рублей" : (ticketData.price == 1 ? "рубль" : "рубля")}</div>
-                    <div>Статус: {isPaid ? "Оплачен" : "Не оплачен"}</div>
+                    <div className="text-lg font-semibold">{matchName}</div>
+                    <div className="text-gray-600 mb-2">{stadium}</div>
+                    <div className="mb-2">Сектор {ticketData.sector} <br/> Ряд {ticketData.row} <br/> Место {ticketData.seat}</div>
+                    <div className="mb-2">{ticketData.price} {ticketData.price % 10 > 4 ? "рублей" : (ticketData.price == 1 ? "рубль" : "рубля")}</div>
+                    <div className={`font-semibold ${isPaid ? "text-green-600" : "text-red-600"}`}>{isPaid ? "Оплачен" : "Не оплачен"}</div>
                 </div>
             </CardContent>
             <CardFooter className="flex flex-row justify-between w-full">

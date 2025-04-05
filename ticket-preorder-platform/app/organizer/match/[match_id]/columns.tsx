@@ -148,9 +148,6 @@ export const columns : ColumnDef<Ticket>[] = [
                             >
                                 Скопировать ID билета
                             </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Посмотреть покупателя</DropdownMenuItem>
-                            <DropdownMenuItem>Посмотреть детали платежа</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>

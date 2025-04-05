@@ -52,7 +52,9 @@ std::string PaymentCreator::CreatePayment(const PaymentCreator::PaymentData &pay
 
 std::string PaymentCreator::SendPaymentRequest(const PaymentCreator::PaymentData &payment_data,
                                                const std::string &payment_id) {
-    httplib::Client payment_service("http://localhost:8009");
+    httplib::Client payment_service("http://webhook-mock:8009");
+    payment_service.set_connection_timeout(10);
+    payment_service.set_read_timeout(10);
     payment_service.set_default_headers({
             {"Content-Type", "application/json"},
             {"Accept", "application/json"}
@@ -62,12 +64,22 @@ std::string PaymentCreator::SendPaymentRequest(const PaymentCreator::PaymentData
             {"payment_id", payment_id},
             {"callback_url", "http://localhost:8008"}
     };
+    
+    spdlog::info("Отправляем запрос на webhook-mock сервис: {}", mock_payment_data.dump());
     auto response = payment_service.Post("/payments/create", mock_payment_data.dump(), "application/json");
 
     if (response && response->status == 200) {
         json response_from_server = json::parse(response->body);
+        spdlog::info("Получен успешный ответ от webhook-mock: {}", response->body);
         return response_from_server["payment_url"];
     }
+    
+    if (response) {
+        spdlog::error("Ошибка от webhook-mock. Статус: {}, Тело: {}", response->status, response->body);
+    } else {
+        spdlog::error("Ошибка соединения с webhook-mock: не удалось установить соединение");
+    }
+    
     return "SHIT HAPPENS";
 }
 
