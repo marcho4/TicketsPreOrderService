@@ -11,6 +11,21 @@ services:
       - "8000:8000"
     networks:
       - main
+    restart: always
+    depends_on:
+      - auth
+      - admin
+      - organizer
+      - user
+      - matches
+      - tickets
+      - kafka-1
+      - kafka-ui
+      - redis-queue
+      - queue-processor
+      - payment
+      - webhook-mock
+      - frontend
 
   auth:
     build:
@@ -20,6 +35,9 @@ services:
       - "8002:8002"
     networks:
       - main
+    restart: always
+    depends_on:
+      - auth_postgres
 
   auth_postgres:
     image: postgres:latest
@@ -65,6 +83,7 @@ services:
       - main
     depends_on:
       - admin_postgres
+    restart: always
 
   org_postgres:
     image: postgres:latest
@@ -93,6 +112,7 @@ services:
       - main
     depends_on:
       - org_postgres
+    restart: always
 
   user_postgres:
     image: postgres:latest
@@ -121,7 +141,7 @@ services:
       - main
     depends_on:
       - user_postgres
-
+    restart: always
   matches:
     build:
       context: ./MatchesService/MatchesService
@@ -134,7 +154,7 @@ services:
       - main
     depends_on:
       - match_postgres
-
+    restart: always
   match_postgres:
     image: postgres:latest
     environment:
@@ -259,7 +279,7 @@ services:
       - main
 
   redis-queue:
-    image: redis:latest
+    image: redis:7.4.0
     restart: always
     ports:
       - "6379:6379"
@@ -287,7 +307,7 @@ services:
     depends_on:
       - redis-queue
       - kafka-1
-
+    restart: always
   payment:
     build:
       context: ./PaymentService
@@ -298,6 +318,7 @@ services:
       - main
     depends_on:
       - payment-postgres
+    restart: always
 
   payment-postgres:
     image: postgres:latest
@@ -324,23 +345,23 @@ services:
       - "8009:8009"
     networks:
       - main
-    
-  # frontend:
-  #   build:
-  #     context: ./ticket-preorder-platform
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./ticket-preorder-platform:/app
-  #     - /app/node_modules
-  #     - /app/.next
-  #   networks:
-  #     - main
-  #   environment:
-  #     - NODE_ENV=development
-  #   restart: always
-  #   command: npm run dev
+    restart: always
+  frontend:
+    build:
+      context: ./ticket-preorder-platform
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./ticket-preorder-platform:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - main
+    environment:
+      - NODE_ENV=development
+    restart: always
+    command: npm run dev
 
 networks:
   main:
