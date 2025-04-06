@@ -71,9 +71,9 @@ paths:
                 - email
                 - company
                 - tin
-    responses:
+      responses:
         '200':
-            description: Организатор добавлен успешно
+          description: Организатор добавлен успешно
 
   /admin/pending_requests:
     get:
