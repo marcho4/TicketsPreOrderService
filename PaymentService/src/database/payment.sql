@@ -62,7 +62,7 @@ $$ LANGUAGE plpgsql;
 
 -- триггер отработает каждый раз после вставки нового значения в refunds
 CREATE TRIGGER update_payment_status
-AFTER INSERT OR UPDATE ON PaymentsSchema.Refunds
+AFTER INSERT ON PaymentsSchema.Refunds
 FOR EACH ROW
 EXECUTE FUNCTION update_payment_and_refund_status();
 
