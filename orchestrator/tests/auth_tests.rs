@@ -33,6 +33,8 @@ mod tests {
             email: login.clone(),
             password: "test_password123".to_string(),
             login: login.clone(),
+            birthday: "01.01.2000".to_string(),
+            phone: "1234567890".to_string(),
         };
 
         let register_url = format!("http://localhost:8000/api/auth/register/user");
@@ -74,7 +76,9 @@ mod tests {
             password: "old_password".to_string(),
             login: login.clone(),
             name: "Test".to_string(),
-            last_name: "User".to_string(),
+            last_name: "User".to_string(),  
+            birthday: "01.01.2000".to_string(),
+            phone: "1234567890".to_string(),
         };
 
         let register_url = format!("http://localhost:8000/api/auth/register/user");
@@ -153,6 +157,8 @@ mod tests {
             login: login.clone(),
             name: "Test".to_string(),
             last_name: "User".to_string(),
+            birthday: "01.01.2000".to_string(),
+            phone: "1234567890".to_string(),
         };
 
         let register_url = format!("http://localhost:8000/api/auth/register/user");

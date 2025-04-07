@@ -142,9 +142,7 @@ const PaymentsList = ({ payments, onPaymentClick }: { payments: Payment[], onPay
                                 <div className="text-sm text-gray-500">{formatDate(payment.created_at)}</div>
                             </div>
                             <div className={`px-2 py-1 rounded-full text-xs ${
-                                payment.status === 'success' 
-                                    ? 'bg-green-100 text-green-800' 
-                                    : 'bg-yellow-100 text-yellow-800'
+                                payment.status === 'success' ? 'bg-green-100 text-green-800' : (payment.status === 'cancelled' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800')
                             }`}>
                                 {payment.status}
                             </div>
@@ -192,10 +190,7 @@ const RefundsList = ({ refunds, payments, onRefundClick }:
                                     <div className="text-sm text-gray-500">{formatDate(refund.created_at)}</div>
                                 </div>
                                 <div className={`px-2 py-1 rounded-full text-xs ${
-                                    refund.status === 'completed' 
-                                        ? 'bg-green-100 text-green-800' 
-                                        : 'bg-yellow-100 text-yellow-800'
-                                }`}>
+                                    refund.status === 'success' ? 'bg-green-100 text-green-800' : (refund.status === 'canceled' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800')}`}>
                                     {refund.status}
                                 </div>
                             </div>

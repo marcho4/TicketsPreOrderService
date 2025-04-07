@@ -99,6 +99,14 @@ function Loading() {
     );
 }
 
+function TableLoading() {
+    return (
+        <div className="flex flex-col items-center justify-center mx-auto">
+            <Skeleton className="h-[300px] w-full" /> 
+        </div>
+    );
+}
+
 
 function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) {
     const matchData = resource.read();
@@ -213,7 +221,7 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
                             </CardHeader>
                             <CardContent>
                                 <ErrorBoundary>
-                                    <Suspense fallback={<Loading />}>
+                                    <Suspense fallback={<TableLoading />}>
                                         <FetchedTickets
                                             resource={ticketsResource}
                                             setRefreshResourceKey={setRefreshResourceKey}

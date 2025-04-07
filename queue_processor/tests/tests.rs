@@ -88,7 +88,10 @@ mod tests {
 
         let config = Config::from_toml();
         let kafka_service = KafkaService::new(config.kafka_url.as_str()).await;
-        
+
+        let res = kafka_service.create_topic("test_topic".to_string()).await;
+        assert!(res.is_ok());
+
         info!("Sending message 1");
         let res = kafka_service.safe_send_msg::<TicketInfo>(TicketInfo {
             ticket_id: "test_ticket_id".to_string(),
@@ -97,8 +100,7 @@ mod tests {
         }, "test_topic", "test_message").await;
         assert!(res.is_ok());
 
-        let res = kafka_service.create_topic("test_topic".to_string()).await;
-        assert!(res.is_ok());
+
 
     }
 

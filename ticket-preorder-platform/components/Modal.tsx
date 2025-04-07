@@ -20,7 +20,7 @@ export function Modal({ isOpen, onClose, children }) {
     return (
         <div
             onClick={onClose}
-            className="fixed inset-0 bg-black bg-opacity-50 z-30 flex justify-center items-center"
+            className="fixed inset-0 bg-black bg-opacity-50 z-100 flex justify-center items-center"
         >
             <Card
                 onClick={(e) => e.stopPropagation()}

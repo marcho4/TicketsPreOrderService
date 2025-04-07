@@ -23,6 +23,8 @@ pub struct UserCreateData {
     pub email: String,
     pub name: String,
     pub last_name: String,
+    pub phone: String,
+    pub birthday: String,
 }
 
 #[derive(Deserialize, Debug, Clone, Serialize, ToSchema)]
@@ -42,4 +44,6 @@ pub struct UserRegistration {
     pub login: String,
     pub name: String,
     pub last_name: String,
+    pub birthday: String,
+    pub phone: String,
 }

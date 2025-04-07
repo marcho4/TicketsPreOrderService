@@ -28,6 +28,8 @@ mod tests {
             email: login.clone(),
             password: "test_password123".to_string(),
             login: login.clone(),
+            birthday: "01.01.2000".to_string(),
+            phone: "1234567890".to_string(),
         };
 
         let register_url = "http://localhost:8000/api/auth/register/user".to_string();

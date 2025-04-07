@@ -49,7 +49,7 @@ export default function MatchesSection() {
     const { user, userRole } = useAuth();
     const [refreshKey, setRefreshKey] = useState(0);
     const [matchLogo, setMatchLogo] = useState();
-
+    const [isLoading, setIsLoading] = useState(false);
     // Создаём ресурс с помощью Suspense (createResource).
     // Предполагается, что "user" — это ID организатора.
     const matchesResource = useMemo(() => {
@@ -110,6 +110,7 @@ export default function MatchesSection() {
 
             const uploadFormFunc = async (formData) => {
                 try {
+                    setIsLoading(true);
                     const response = await fetch(`/api/upload`, {
                         method: 'PUT',
                         credentials: 'include',
@@ -130,6 +131,8 @@ export default function MatchesSection() {
 
                 } catch (error) {
                     console.log(error);
+                } finally {
+                    setIsLoading(false);
                 }
             }
             uploadFormFunc(uploadForm);
@@ -170,7 +173,8 @@ export default function MatchesSection() {
                     onSubmit={handleCreateMatch}
                     matchLogo={matchLogo}
                     matchLogoSetter={setMatchLogo}
-                    onClose={() => setIsModalOpen(false)} />
+                    onClose={() => setIsModalOpen(false)}
+                    isLoading={isLoading} />
             </Modal>
         </Card>
     );

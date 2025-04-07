@@ -7,7 +7,7 @@ import {Input} from "../../../../components/ui/input";
 import {Button} from "../../../../components/ui/button";
 import {toast} from "../../../../hooks/use-toast";
 import React from "react";
-import {Pencil, X, Save} from "lucide-react";
+import {Pencil, X, Save, LoaderCircle} from "lucide-react";
 
 
 export function RenderedMatchInfo({ resource }) {
@@ -18,6 +18,7 @@ export function RenderedMatchInfo({ resource }) {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [updateError, setUpdateError] = useState(null);
     const [scheme, setScheme] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const handleSubmit = (e) => {
@@ -30,6 +31,7 @@ export function RenderedMatchInfo({ resource }) {
 
         const uploadForm = async () => {
             try {
+                setIsLoading(true);
                 const response = await fetch(`/api/upload`, {
                     method: 'PUT',
                     credentials: 'include',
@@ -50,6 +52,8 @@ export function RenderedMatchInfo({ resource }) {
 
             } catch (error) {
                 console.log(error);
+            } finally {
+                setIsLoading(false);
             }
         }
         uploadForm();
@@ -141,12 +145,12 @@ export function RenderedMatchInfo({ resource }) {
                                 Схема стадиона
                             </CardTitle>
                         </CardHeader>
-                        <CardContent>   
+                        <CardContent className="flex flex-col items-center justify-center">   
                             <Image
                                 src={data.scheme}
                                 alt={"Stadium schema"}
                                 className="mb-5 sm:mb-10 rounded-[2em]"
-                                width={700}
+                                width={500}
                                 height={100}
                             />
                             <form onSubmit={handleSubmit} className="w-full rounded-lg p-6  items-center justify-center flex flex-col">
@@ -170,8 +174,9 @@ export function RenderedMatchInfo({ resource }) {
 
                                 <Button
                                     type="submit"
+                                    disabled={isLoading}
                                     className="px-5 py-2 rounded-md text-lg lg:text-xl font-medium transition-colors">
-                                    Сохранить
+                                    {isLoading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : "Сохранить"}
                                 </Button>
                             </form>
                         </CardContent>
@@ -242,14 +247,12 @@ export function RenderedMatchInfo({ resource }) {
                                 ].map((item, index) => (
                                     <div
                                         key={index}
-                                        className={`group relative rounded-lg p-4 transition-all ${
+                                        className={`group relative rounded-lg p-1.5 transition-all ${
                                             isEditing ? 'bg-card/50 hover:bg-card/80' : 'hover:bg-muted/50'
                                         } ${index < 4 ? 'border-b' : ''} border-muted`}
                                     >
-                                        <div className="flex items-center gap-4">
-                                        
-                                            
-                                            <div className="flex-1 space-y-1">
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex-1">
                                                 <label 
                                                     htmlFor={item.name}
                                                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground"

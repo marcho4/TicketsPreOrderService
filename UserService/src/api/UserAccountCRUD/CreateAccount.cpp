@@ -42,7 +42,7 @@ bool AccountCreator::CheckUserExistence(const AccountCreator::UserData &user_dat
 pqxx::result AccountCreator::UserCreatingResponseToDB(const UserData& user_data, Database& db) {
     std::string create_user = "INSERT INTO Users.UsersData (name, last_name, email, phone, birthday) "
                               "VALUES ($1, $2, $3, $4, $5) RETURNING user_id";
-    std::vector<std::string> params = {user_data.name, user_data.last_name, user_data.email, "XXXXXXXXXX", "01.01.2000"};
+    std::vector<std::string> params = {user_data.name, user_data.last_name, user_data.email, user_data.phone, user_data.birthday};
 
     pqxx::result result;
 

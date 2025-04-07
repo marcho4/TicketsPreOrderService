@@ -31,6 +31,7 @@ export default function AuthCard() {
     const [name, setName] = useState("");
     const [last_name, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [birthday, setBirthday] = useState("");
 
 
     // Поля для организатора (например)
@@ -85,7 +86,7 @@ export default function AuthCard() {
         try {
             setError(false);
             let response = await fetchData("http://localhost:8000/api/auth/register/user", "POST",
-                { name, last_name, email, login, password}, setLoading);
+                { name, last_name, email, login: email, password, birthday, phone: phoneNumber}, setLoading);
             let body = await response.json();
 
             if (response.status === 200) {
@@ -230,34 +231,37 @@ export default function AuthCard() {
             case "signupUser":
                 return (
                     <form onSubmit={handleSignupUser}>
-                        <CardContent className="space-y-6 pt-6 pb-8">
-                            <div className="space-y-2">
-                                <Label htmlFor="name">
-                                    Имя
-                                </Label>
-                                <Input
-                                    id="name"
-                                    type="text"
-                                    placeholder="Ваше имя"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    required
-                                />
+                        <CardContent className="space-y-3 pb-8">
+                            <div className="flex flex-row gap-x-2 justify-between">
+                                <div className="space-y-1 w-1/2">
+                                    <Label htmlFor="name">
+                                        Имя
+                                    </Label>
+                                    <Input
+                                        id="name"
+                                        type="text"
+                                        placeholder="Ваше имя"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-1 w-1/2">
+                                    <Label htmlFor="surname">
+                                        Фамилия
+                                    </Label>
+                                    <Input
+                                        id="surname"
+                                        type="text"
+                                        placeholder="Ваша фамилия"
+                                        value={last_name}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        required
+                                    />
+                                </div>
                             </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="surname">
-                                    Фамилия
-                                </Label>
-                                <Input
-                                    id="surname"
-                                    type="text"
-                                    placeholder="Ваша фамилия"
-                                    value={last_name}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
+                            
+                            <div className="space-y-1">
                                 <Label htmlFor="email" >
                                     Email
                                 </Label>
@@ -270,20 +274,36 @@ export default function AuthCard() {
                                     required
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="name" className="text-text">
-                                    Логин
-                                </Label>
-                                <Input
-                                    id="login"
-                                    type="text"
-                                    placeholder="Ваш логин"
-                                    value={login}
-                                    onChange={(e) => setLogin(e.target.value)}
-                                    required
-                                />
+                            <div className="flex flex-row gap-x-2 justify-between">
+                                <div className="space-y-1 w-1/2">
+                                    <Label htmlFor="tin">
+                                        Телефон
+                                    </Label>
+                                    <Input
+                                        id="phone_number"
+                                        type="tel"
+                                        placeholder="Введите телефон"
+                                        value={phoneNumber}
+                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-1 w-1/2">
+                                    <Label htmlFor="birthday" className="text-text">
+                                        Дата рождения
+                                    </Label>
+                                    <Input
+                                        id="birthday"
+                                        type="date"
+                                        placeholder="Ваша дата рождения"
+                                        value={birthday}
+                                        onChange={(e) => setBirthday(e.target.value)}
+                                        required
+                                    />
+                                </div>
                             </div>
-                            <div className="space-y-2">
+                            
+                            <div className="space-y-1">
                                 <Label htmlFor="password" className="text-text">
                                     Пароль
                                 </Label>
@@ -336,8 +356,8 @@ export default function AuthCard() {
             case "signupOrganizer":
                 return (
                     <form onSubmit={handleSignupOrganizer}>
-                        <CardContent className="space-y-6 pt-6 pb-8">
-                            <div className="space-y-2">
+                        <CardContent className="space-y-3 pt-6 pb-8">
+                            <div className="space-y-1">
                                 <Label htmlFor="company" className="">
                                     Название вашей организации
                                 </Label>
@@ -350,8 +370,35 @@ export default function AuthCard() {
                                     required
                                 />
                             </div>
-
-                            <div className="space-y-2">
+                            <div className="flex flex-row gap-x-2 justify-between">
+                                <div className="space-y-1 w-1/2">
+                                    <Label htmlFor="tin">
+                                        ИНН
+                                    </Label>
+                                    <Input
+                                        id="tin"
+                                        type="number"
+                                        placeholder="Введите ИНН "
+                                        value={tin}
+                                        onChange={(e) => settin(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-1 w-1/2">
+                                    <Label htmlFor="tin">
+                                        Телефон
+                                    </Label>
+                                    <Input
+                                        id="phone_number"
+                                        type="tel"
+                                        placeholder="Введите телефон"
+                                        value={phoneNumber}
+                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-1">
                                 <Label htmlFor="email">
                                     Email
                                 </Label>
@@ -364,34 +411,6 @@ export default function AuthCard() {
                                     required
                                 />
                             </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="tin">
-                                    ИНН
-                                </Label>
-                                <Input
-                                    id="tin"
-                                    type="tin"
-                                    placeholder="Введите ИНН вашей организации"
-                                    value={tin}
-                                    onChange={(e) => settin(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="tin">
-                                    Телефон
-                                </Label>
-                                <Input
-                                    id="phone_number"
-                                    type="tel"
-                                    placeholder="Введите телефон для связи"
-                                    value={phoneNumber}
-                                    onChange={(e) => setPhoneNumber(e.target.value)}
-                                    required
-                                />
-                            </div>
-
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button

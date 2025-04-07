@@ -77,6 +77,30 @@ function DataCardContent({ data, updateFunc, refreshData }) {
 
     const handleSave = async () => {
         try {
+            if (formData.tin.length !== 12) {
+                toast({
+                    title: "Ошибка при обновлении данных.",
+                    description: "ИНН должен содержать 12 цифр",
+                    variant: "destructive",
+                });
+                return;
+            }
+            if (!/^(\+7|8)[0-9]{10}$/.test(formData.phone_number)) {
+                toast({
+                    title: "Ошибка при обновлении данных.",
+                    description: "Введите корректный номер телефона",
+                    variant: "destructive",
+                });
+                return;
+            }
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
+                toast({
+                    title: "Ошибка при обновлении данных.",
+                    description: "Введите корректный email",
+                    variant: "destructive",
+                });
+                return;
+            }
             await updateFunc(formData);
             setIsEditing(false);
             refreshData();
@@ -91,7 +115,7 @@ function DataCardContent({ data, updateFunc, refreshData }) {
     };
 
     return (
-        <Card className="flex flex-col max-w-xl gap-5">
+        <Card className="flex flex-col gap-5">
             <CardHeader className="flex flex-row py-5 rounded-lg justify-between gap-5">
                 <div className="flex flex-col">
                     <CardTitle className="text-xl sm:text-2xl">Мой профиль</CardTitle>

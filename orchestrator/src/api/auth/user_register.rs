@@ -40,6 +40,8 @@ pub async fn register_user(
         email: data.email.clone(),
         name: data.name.clone(),
         last_name: data.last_name.clone(),
+        phone: data.phone.clone(),
+        birthday: data.birthday.clone(),
     };
 
     let creation_result = match orchestrator.create_user(user_create_data).await {

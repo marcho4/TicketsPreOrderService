@@ -34,7 +34,7 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto py-6">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Left side - User profile */}
-            <div className="md:w-1/2 flex flex-col gap-6 items-center sm:items-stretch">
+            <div className="md:w-1/2 flex flex-col gap-6">
               <UserDataCard fetchLink={fetchUrl} updateLink={updateUrl}/>
               <UserPaymentsCard />
             </div>

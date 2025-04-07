@@ -1,9 +1,7 @@
 import {Button} from "@/components/ui/button";
 import {toast} from "@/hooks/use-toast";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Input} from "@/components/ui/input";
 import {useState} from "react";
-import { Label } from "@/components/ui/label";
 
 interface TicketItem {
     id: string,
