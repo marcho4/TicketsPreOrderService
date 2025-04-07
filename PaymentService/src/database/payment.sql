@@ -65,7 +65,6 @@ CREATE TRIGGER update_payment_status
 AFTER INSERT ON PaymentsSchema.Refunds
 FOR EACH ROW
 EXECUTE FUNCTION update_payment_and_refund_status();
-
 ------------------------------------------------indices-----------------------------------------------------------
 
 CREATE INDEX idx_providers_provider_name ON PaymentsSchema.Providers (provider_name);
