@@ -1,22 +1,23 @@
-use crate::models::org_approve_body::OrgApproveBody;
-use crate::models::org_approve_response::OrgApproveResponse;
-use crate::models::organizer_registration_data::OrganizerRegistrationData;
-use crate::models::registration_err_org::RegistrationErrorOrg;
-use crate::models::registration_org_resp::RegistrationOrgResp;
+use crate::models::organizer::{OrgApproveData,
+                               OrgApproveResponse,
+                               OrganizerRegistrationData,
+                               RegistrationErrorOrg,
+                               RegistrationOrgResp
+};
 use crate::orchestrator::orchestrator::Orchestrator;
 use log::{error, info};
 use reqwest::Method;
-use crate::models::api_response::ApiResponse;
-use crate::models::login_data::LoginData;
-use crate::models::message_resp::MessageResp;
-use crate::models::password_update::PasswordUpdate;
-use crate::models::user_info::UserInfo;
-use crate::models::user_registration_data::UserRegistrationData;
+use crate::models::general::ApiResponse;
+use crate::models::auth::AuthRequest;
+use crate::models::general::MessageResp;
+use crate::models::auth::PasswordUpdateRequest;
+use crate::models::user::UserInfo;
+use crate::models::user::UserRegistrationData;
 use crate::utils::errors::OrchestratorError;
 use crate::utils::errors::OrchestratorError::{Deserialize, Request, Service};
 
 impl Orchestrator {
-    pub async fn org_approve(&self, json_body: &OrgApproveBody) -> Result<OrgApproveResponse, OrchestratorError>{
+    pub async fn org_approve(&self, json_body: &OrgApproveData) -> Result<OrgApproveResponse, OrchestratorError>{
         let approve_url = format!("{}/organizer/approve", self.config.auth_url);
         let res = self.client.post(approve_url).json(&json_body).send().await
             .map_err(|e| {
@@ -79,7 +80,7 @@ impl Orchestrator {
             Err(Deserialize(success_res.unwrap_err().into()))
         }
     }
-    pub async fn authorize(&self, data: &LoginData) -> Result<UserInfo, OrchestratorError> {
+    pub async fn authorize(&self, data: &AuthRequest) -> Result<UserInfo, OrchestratorError> {
         let req_url = format!("{}/authorize", self.config.auth_url);
 
         let auth_response = self.client.post(&req_url).json(&data).send().await
@@ -106,8 +107,8 @@ impl Orchestrator {
 
     // pub async fn create_admin() {}
 
-    pub async fn change_password(&self, data: &PasswordUpdate, user_id: String) -> Result<MessageResp, OrchestratorError> {
+    pub async fn change_password(&self, data: &PasswordUpdateRequest, user_id: String) -> Result<MessageResp, OrchestratorError> {
         let req_url = format!("{}/user/{}/password/change", self.config.auth_url, user_id);
-        self.send_request::<MessageResp, &PasswordUpdate>(req_url, Some(data), Method::PUT).await
+        self.send_request::<MessageResp, &PasswordUpdateRequest>(req_url, Some(data), Method::PUT).await
     }
 }

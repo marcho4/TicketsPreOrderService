@@ -1,7 +1,7 @@
 use actix_web::{get, web, HttpRequest, HttpResponse, Responder};
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::models::payments::Refund;
-use crate::models::roles::Role::USER;
+use crate::models::general::Role::USER;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 

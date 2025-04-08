@@ -1,12 +1,12 @@
 #[cfg(test)]
 mod tests {
-    use orchestrator::models::login_data::LoginData;
-    use orchestrator::models::message_resp::MessageResp;
-    use orchestrator::models::org_approve_response::OrgApproveResponse;
-    use orchestrator::models::organizer_registration_data::OrganizerRegistrationData;
+    use orchestrator::models::auth::AuthRequest;
+    use orchestrator::models::general::MessageResp;
+    use orchestrator::models::organizer::OrgApproveResponse;
+    use orchestrator::models::organizer::OrganizerRegistrationData;
     use orchestrator::models::update_org_data::UpdateOrgData;
-    use orchestrator::{models::api_response::ApiResponse, orchestrator::orchestrator::Orchestrator};
-    use orchestrator::models::user_info::UserInfo;
+    use orchestrator::{models::general::ApiResponse, orchestrator::orchestrator::Orchestrator};
+    use orchestrator::models::user::UserInfo;
     use serde_json::json;
     use std::sync::Once;
     use log::{LevelFilter, info};
@@ -29,7 +29,7 @@ mod tests {
     async fn test_create_and_update_organizer() {
         init_logging();
         info!("Starting test_create_and_get_match");
-        let admin_login_data = LoginData {
+        let admin_login_data = AuthRequest {
             login: String::from("admin1"),
             password: String::from("admin1"),
         };
@@ -96,7 +96,7 @@ mod tests {
         
         info!("Organizer registration successful");
         let login = text.data.clone().unwrap();
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: login.login.clone(),
             password: login.password.clone(),
         };

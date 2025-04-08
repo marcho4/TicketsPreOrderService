@@ -1,7 +1,7 @@
 use reqwest::Method;
 
 use crate::{models::payments::{Payment, PaymentRequest, PaymentResponse, PaymentStatus, Refund, RefundResponse}, orchestrator::orchestrator::Orchestrator};
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::models::payments::PaymentStatusRequest;
 use super::errors::OrchestratorError;
 

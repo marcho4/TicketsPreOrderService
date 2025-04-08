@@ -1,8 +1,8 @@
 use actix_web::{put, web, HttpRequest, Responder};
 use actix_web::http::StatusCode;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::models::matches::{Match, UpdateMatchData};
-use crate::models::roles::Role;
+use crate::models::general::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;

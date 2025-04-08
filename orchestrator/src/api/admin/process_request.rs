@@ -1,21 +1,20 @@
+use crate::models::organizer::CreateOrgData;
+use crate::models::organizer::{OrgApproveData, OrgApproveResponse};
 use std::collections::HashMap;
 use actix_web::{http::StatusCode, post, web, HttpRequest, HttpResponse};
 use chrono::{Datelike, Utc};
 use log::{error, info};
 use serde_json::json;
-use crate::models::{
-    create_org_data::CreateOrgData,
-    org_approve_body::OrgApproveBody,
-    org_approve_response::OrgApproveResponse,
-    request_process_info::{RequestProcessInfo, Status},
-};
-use crate::models::api_response::ApiResponse;
+use crate::models::admin::{RequestProcessInfo, Status};
 use crate::models::email::{EmailTemplates, Recipient};
-use crate::models::roles::Role;
+use crate::models::general::ApiResponse;
+use crate::models::general::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
-use crate::utils::responses::generic_response;
-use crate::utils::errors::OrchestratorError;
-use crate::utils::request_validator::RequestValidator;
+use crate::utils::{
+    errors::OrchestratorError,
+    responses::generic_response,
+    request_validator::RequestValidator
+};
 
 #[utoipa::path(
     post,
@@ -111,7 +110,7 @@ pub async fn process_request(
         }
     };
 
-    let approve_payload = OrgApproveBody {
+    let approve_payload = OrgApproveData {
         email: request_info.email.clone(),
         company: request_info.company.clone(),
         tin: request_info.tin.clone(),

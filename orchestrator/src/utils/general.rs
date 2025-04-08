@@ -6,6 +6,6 @@ pub fn generate_random_email() -> String {
     let username: String = (0..10)
         .map(|_| rng.sample(Alphanumeric) as char)
         .collect();
-    let domain = "example.com"; // Можно заменить на любой другой домен
+    let domain = "example.com";
     format!("{}@{}", username, domain)
 }

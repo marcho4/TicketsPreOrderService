@@ -1,7 +1,7 @@
 use actix_web::{HttpMessage, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
-use crate::models::jwt_claims::JwtClaims;
-use crate::models::roles::Role;
+use crate::models::general::Role;
+use crate::models::general::JwtClaims;
 use crate::utils::responses::generic_response;
 
 pub struct RequestValidator;

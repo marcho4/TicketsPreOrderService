@@ -1,9 +1,9 @@
 use actix_web::{post, web, HttpRequest, Responder};
 use actix_web::http::StatusCode;
-use crate::models::api_response::ApiResponse;
-use crate::models::message_resp::MessageResp;
+use crate::models::general::ApiResponse;
+use crate::models::general::MessageResp;
 use crate::models::payments::Payment;
-use crate::models::roles::Role::USER;
+use crate::models::general::Role::USER;
 use crate::models::tickets::TicketReservation;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;

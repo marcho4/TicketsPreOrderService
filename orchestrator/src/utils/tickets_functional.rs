@@ -1,12 +1,11 @@
 use reqwest::Method;
-use crate::models::message_resp::MessageResp;
-use crate::models::tickets::{CancelData, Ticket, TicketReservation, TicketsAddResponse};
+use crate::models::tickets::{CancelData, Ticket, TicketReservation, TicketsAddResponse, DeleteTickets, DeleteTicketsResp};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
 use reqwest::multipart;
 use tokio::fs::File;
 use tokio_util::codec::{BytesCodec, FramedRead};
-use crate::models::delete_tickets::{DeleteTickets, DeleteTicketsResp};
+use crate::models::general::MessageResp;
 use crate::utils::errors::OrchestratorError::{Deserialize, Service};
 
 impl Orchestrator {

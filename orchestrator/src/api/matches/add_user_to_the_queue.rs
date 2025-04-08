@@ -1,8 +1,8 @@
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use log::info;
+use crate::models::general::Role;
 use crate::models::queue_models::{QueueAdd, QueueModel};
-use crate::models::roles::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;

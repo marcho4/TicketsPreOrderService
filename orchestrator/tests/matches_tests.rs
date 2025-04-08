@@ -1,11 +1,11 @@
 #[cfg(test)]
 mod tests {
-    use orchestrator::models::api_response::ApiResponse;
+    use orchestrator::models::general::ApiResponse;
     use orchestrator::models::matches::{Match, CreateMatchData, UpdateMatchData};
-    use orchestrator::models::login_data::LoginData;
-    use orchestrator::models::org_approve_response::OrgApproveResponse;
-    use orchestrator::models::organizer_registration_data::OrganizerRegistrationData;
-    use orchestrator::models::user_info::UserInfo;
+    use orchestrator::models::auth::AuthRequest;
+    use orchestrator::models::organizer::OrgApproveResponse;
+    use orchestrator::models::organizer::OrganizerRegistrationData;
+    use orchestrator::models::user::UserInfo;
     use chrono::Utc;
     use orchestrator::orchestrator::orchestrator::Orchestrator;
     use std::sync::Once;
@@ -13,7 +13,7 @@ mod tests {
     use orchestrator::utils::general::generate_random_email;
     use pretty_assertions::assert_eq;
     use reqwest::StatusCode;
-    use orchestrator::models::request_process_info::{RequestProcessInfo, Status};
+    use orchestrator::models::admin::{RequestProcessInfo, Status};
     use serial_test::serial;
 
     static INIT: Once = Once::new();
@@ -32,7 +32,7 @@ mod tests {
     async fn test_create_and_get_match() {
         init_logging();
         info!("Starting test_create_and_get_match");
-        let admin_login_data = LoginData {
+        let admin_login_data = AuthRequest {
             login: String::from("admin1"),
             password: String::from("admin1"),
         };
@@ -99,7 +99,7 @@ mod tests {
         
         info!("Organizer registration successful");
         let login = text.data.clone().unwrap();
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: login.login.clone(),
             password: login.password.clone(),
         };
@@ -159,7 +159,7 @@ mod tests {
     async fn test_update_match_details() {
         init_logging();
         info!("Starting test_create_and_get_match");
-        let admin_login_data = LoginData {
+        let admin_login_data = AuthRequest {
             login: String::from("admin1"),
             password: String::from("admin1"),
         };
@@ -228,7 +228,7 @@ mod tests {
         
         info!("Organizer registration successful");
         let login = text.data.clone().unwrap();
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: login.login.clone(),
             password: login.password.clone(),
         };

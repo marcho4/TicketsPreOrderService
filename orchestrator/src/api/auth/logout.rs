@@ -1,4 +1,4 @@
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use actix_web::cookie::{Cookie, Expiration, SameSite, time::OffsetDateTime};
 use actix_web::{post, HttpResponse, Responder};
 

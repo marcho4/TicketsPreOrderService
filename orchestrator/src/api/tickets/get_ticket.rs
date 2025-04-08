@@ -1,6 +1,6 @@
 use actix_web::{get, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::models::tickets::Ticket;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;

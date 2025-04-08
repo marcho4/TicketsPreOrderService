@@ -1,7 +1,7 @@
 use actix_web::{delete, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use serde_json::json;
-use crate::models::delete_tickets::{DeleteTickets, DeleteTicketsResp};
+use crate::models::tickets::{DeleteTickets, DeleteTicketsResp};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;

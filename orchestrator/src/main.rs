@@ -6,7 +6,7 @@ use env_logger::Env;
 use std::env;
 use std::sync::Arc;
 use std::time::Duration;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;

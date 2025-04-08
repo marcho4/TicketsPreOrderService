@@ -1,9 +1,9 @@
 #[cfg(test)]
 mod tests {
-    use orchestrator::models::api_response::ApiResponse;
-    use orchestrator::models::user_info::UserInfo;
-    use orchestrator::models::user_models::{User, UserRegistration};
-    use orchestrator::models::login_data::LoginData;
+    use orchestrator::models::general::ApiResponse;
+    use orchestrator::models::user::UserInfo;
+    use orchestrator::models::user::{User, UserRegistration};
+    use orchestrator::models::auth::AuthRequest;
     use std::sync::Once;
     use log::LevelFilter;
     use orchestrator::utils::general::generate_random_email;
@@ -42,7 +42,7 @@ mod tests {
         assert_eq!(response.status().is_success(), true);
 
 
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: login.clone(),
             password: "test_password123".to_string(),
         };
@@ -119,24 +119,4 @@ mod tests {
         assert_eq!(user_info.phone, "+79150692787");
         assert_eq!(user_info.birthday, "2025-01-01");
     }
-
-    // #[tokio::test]
-    // async fn test_get_user_tickets() {
-    //     init_logging();
-    //     let client = reqwest::Client::builder().cookie_store(true).build().expect("Ошибка при создании клиента");
-
-    //     let (_, auth_id) = register_and_approve_organizer(&client).await;
-
-    //     // Получение списка билетов пользователя
-    //     let get_tickets_url = "http://localhost:8000/api/user/tickets".to_string();
-    //     let response = client.get(&get_tickets_url)
-    //         .header("Authorization", format!("Bearer {}", auth_id))
-    //         .send()
-    //         .await
-    //         .expect("Ошибка при получении списка билетов");
-        
-    //     assert_eq!(response.status().is_success(), true);
-    //     let tickets_response = response.json::<ApiResponse<Vec<Ticket>>>().await.expect("Ошибка при десериализации списка билетов");
-    //     assert!(tickets_response.data.unwrap().len() >= 0);
-    // }
 }

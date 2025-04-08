@@ -1,11 +1,11 @@
 use actix_web::{get, web, HttpRequest, Responder};
 use actix_web::http::StatusCode;
 use crate::models::payments::PaymentStatus;
-use crate::models::roles::Role::USER;
+use crate::models::general::Role::USER;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 #[utoipa::path(
     post,
     path="/api/payments/{payment_id}/{payment_type}",

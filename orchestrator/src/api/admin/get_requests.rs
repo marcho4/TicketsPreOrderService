@@ -2,10 +2,8 @@ use actix_web::{get, web, HttpMessage, HttpRequest, HttpResponse};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::*;
 use actix_web::http::StatusCode;
-use crate::models::admin_request::AdminRequest;
-use crate::models::api_response::ApiResponse;
-use crate::models::jwt_claims::JwtClaims;
-use crate::models::roles::Role;
+use crate::models::admin::AdminRequest;
+use crate::models::general::{ApiResponse, JwtClaims, Role};
 use crate::utils::request_validator::RequestValidator;
 
 #[utoipa::path(
@@ -19,7 +17,7 @@ use crate::utils::request_validator::RequestValidator;
     tag = "Admin"
 )]
 #[get("/requests")]
-pub async fn get_requests(
+pub(crate) async fn get_requests(
     orchestrator: web::Data<Orchestrator>,
     req: HttpRequest
 ) -> HttpResponse {

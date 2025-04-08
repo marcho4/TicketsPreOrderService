@@ -1,7 +1,7 @@
 use actix_web::{get, http::StatusCode, web, HttpRequest, Responder};
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::{models::payments::Payment, orchestrator::orchestrator::Orchestrator, utils::responses::generic_response};
-use crate::models::roles::Role::USER;
+use crate::models::general::Role::USER;
 use crate::utils::request_validator::RequestValidator;
 
 #[utoipa::path(

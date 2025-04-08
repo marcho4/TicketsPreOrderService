@@ -2,10 +2,10 @@ use actix_web::{post, web, HttpRequest, Responder};
 use actix_web::http::StatusCode;
 use crate::{models::payments::PaymentRequest, orchestrator::orchestrator::Orchestrator};
 use crate::models::payments::{Payment, PaymentResponse};
-use crate::models::roles::Role::USER;
+use crate::models::general::Role::USER;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::models::tickets::TicketReservation;
 
 #[utoipa::path(

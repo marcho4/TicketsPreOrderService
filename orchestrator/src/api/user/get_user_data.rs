@@ -1,10 +1,10 @@
-use crate::models::user_models::User;
+use crate::models::user::User;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::generic_response;
 use actix_web::http::StatusCode;
 use actix_web::{get, web, HttpRequest, HttpResponse};
-use crate::models::api_response::ApiResponse;
-use crate::models::roles::Role;
+use crate::models::general::ApiResponse;
+use crate::models::general::Role;
 use crate::utils::request_validator::RequestValidator;
 
 #[utoipa::path(

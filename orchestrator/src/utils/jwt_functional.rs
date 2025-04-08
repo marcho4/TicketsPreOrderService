@@ -1,9 +1,9 @@
 use std::env;
-use crate::models::jwt_claims::JwtClaims;
+use crate::models::general::JwtClaims;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
 use jsonwebtoken::{DecodingKey, EncodingKey, Header};
-use crate::models::user_info::UserInfo;
+use crate::models::user::UserInfo;
 
 const HOUR: u64 = 3600;
 impl Orchestrator {

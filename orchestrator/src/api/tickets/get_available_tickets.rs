@@ -1,7 +1,7 @@
 use actix_web::{get, web, HttpResponse};
 use actix_web::http::StatusCode;
 use serde::Deserialize;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::models::tickets::Ticket;
 use crate::models::tickets::TicketStatus::Available;
 use crate::orchestrator::orchestrator::Orchestrator;

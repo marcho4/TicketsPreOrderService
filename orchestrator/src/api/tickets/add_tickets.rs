@@ -9,8 +9,8 @@ use rand::distributions::Alphanumeric;
 use rand::{thread_rng, Rng};
 use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
-use crate::models::api_response::ApiResponse;
-use crate::models::roles::Role;
+use crate::models::general::ApiResponse;
+use crate::models::general::Role;
 use crate::models::tickets::TicketsAddResponse;
 use crate::utils::request_validator::RequestValidator;
 

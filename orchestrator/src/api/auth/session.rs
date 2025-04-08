@@ -1,9 +1,8 @@
-use crate::models::jwt_claims::JwtClaims;
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_web::{get, web, HttpRequest, Responder};
 use actix_web::http::StatusCode;
 use chrono::Utc;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::{ApiResponse, JwtClaims};
 use crate::utils::responses::generic_response;
 
 

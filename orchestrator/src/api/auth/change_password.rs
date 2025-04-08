@@ -1,7 +1,7 @@
 use actix_web::{web, HttpResponse, put, HttpRequest};
 use actix_web::http::StatusCode;
-use crate::models::api_response::ApiResponse;
-use crate::models::password_update::PasswordUpdate;
+use crate::models::auth::PasswordUpdateRequest;
+use crate::models::general::ApiResponse;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
@@ -21,7 +21,7 @@ use crate::utils::responses::generic_response;
 #[put("/password/change")]
 pub async fn change_password(
     req: HttpRequest,
-    data: web::Json<PasswordUpdate>,
+    data: web::Json<PasswordUpdateRequest>,
     orchestrator: web::Data<Orchestrator>
 ) -> HttpResponse {
 

@@ -40,3 +40,15 @@ pub struct TicketReservation {
     pub user_id: String,
     pub match_id: String,
 }
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, ToSchema)]
+pub struct DeleteTickets {
+    pub ticket_ids: Vec<String>
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, ToSchema)]
+pub struct DeleteTicketsResp {
+    pub message: String,
+    pub deleted_tickets: i32,
+    pub all_tickets: i32,
+}

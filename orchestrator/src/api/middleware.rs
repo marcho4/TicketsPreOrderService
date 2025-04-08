@@ -6,7 +6,7 @@ use actix_web::{Error, HttpMessage};
 use chrono::Utc;
 use jsonwebtoken::DecodingKey;
 use log::info;
-use crate::models::jwt_claims::JwtClaims;
+use crate::models::general::JwtClaims;
 
 #[derive(Clone)]
 pub struct AuthMiddleware {

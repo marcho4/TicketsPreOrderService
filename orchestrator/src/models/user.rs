@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
+use crate::models::general::Role;
 
 #[derive(Deserialize, Debug, Clone, Serialize, ToSchema)]
 pub struct UserResp {
@@ -47,3 +48,31 @@ pub struct UserRegistration {
     pub birthday: String,
     pub phone: String,
 }
+
+
+#[derive(Serialize, Deserialize, ToSchema)]
+pub struct UserRegistrationData {
+    pub name: String,
+    pub last_name: String,
+    pub email: String,
+    pub login: String,
+    pub password: String,
+    pub user_id: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, ToSchema)]
+pub struct UserInfo {
+    pub user_id: String,
+    pub auth_id: String,
+    pub role: Role
+}
+
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, ToSchema)]
+pub struct RegistrationUserResp {
+    pub email: String,
+    pub last_name: String,
+    pub name: String,
+    pub password: String,
+    pub status: String,
+}
+

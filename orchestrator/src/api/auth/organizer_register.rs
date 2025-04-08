@@ -1,6 +1,4 @@
 use std::collections::HashMap;
-use crate::models::organizer_registration_data::OrganizerRegistrationData;
-use crate::models::registration_org_resp::RegistrationOrgResp;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::responses::generic_response;
 use actix_web::http::StatusCode;
@@ -8,8 +6,9 @@ use actix_web::{post, web, HttpRequest, HttpResponse};
 use chrono::{Datelike, Utc};
 use log::error;
 use serde_json::json;
-use crate::models::api_response::ApiResponse;
 use crate::models::email::{EmailTemplates, Recipient};
+use crate::models::general::ApiResponse;
+use crate::models::organizer::{OrganizerRegistrationData, RegistrationOrgResp};
 
 #[utoipa::path(
     post,

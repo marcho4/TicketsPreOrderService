@@ -1,15 +1,15 @@
 #[cfg(test)]
 mod tests {
-    use orchestrator::models::api_response::ApiResponse;
-    use orchestrator::models::user_info::UserInfo;
-    use orchestrator::models::login_data::LoginData;
-    use orchestrator::models::roles::Role;
+    use orchestrator::models::general::ApiResponse;
+    use orchestrator::models::user::UserInfo;
+    use orchestrator::models::auth::AuthRequest;
+    use orchestrator::models::general::Role;
     use pretty_assertions::assert_eq;
     use std::sync::Once;
     use log::{LevelFilter, info};
     use orchestrator::utils::general::generate_random_email;
-    use orchestrator::models::user_models::UserRegistration;
-    use orchestrator::models::password_update::PasswordUpdate;
+    use orchestrator::models::user::UserRegistration;
+    use orchestrator::models::auth::PasswordUpdateRequest;
 
     static INIT: Once = Once::new();
     
@@ -46,7 +46,7 @@ mod tests {
         
         assert_eq!(response.status().is_success(), true);
         
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: user_data.email.clone(),
             password: user_data.password.clone(),
         };
@@ -91,7 +91,7 @@ mod tests {
         assert!(response.status().is_success());
 
         // Логин пользователя
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: user_data.login.clone(),
             password: user_data.password.clone(),
         };
@@ -108,7 +108,7 @@ mod tests {
             .expect("Ошибка при десериализации JWT");
 
         // Смена пароля
-        let new_password = PasswordUpdate {
+        let new_password = PasswordUpdateRequest {
             password: "new_password".to_string(),
         };
 
@@ -131,7 +131,7 @@ mod tests {
         assert!(!response.status().is_success());
 
         // Логин с новым паролем
-        let new_login_data = LoginData {
+        let new_login_data = AuthRequest {
             login: user_data.login,
             password: new_password.password,
         };
@@ -171,7 +171,7 @@ mod tests {
         info!("response: {:?}", response.text().await.unwrap());
 
         // Попытка логина с неправильным паролем
-        let wrong_password_data = LoginData {
+        let wrong_password_data = AuthRequest {
             login: user_data.login.clone(),
             password: "wrong_password".to_string(),
         };
@@ -186,7 +186,7 @@ mod tests {
         assert_eq!(response.status().is_success(), false);
 
         // Попытка логина с неправильным логином
-        let wrong_login_data = LoginData {
+        let wrong_login_data = AuthRequest {
             login: generate_random_email(),
             password: user_data.password.clone(),
         };
@@ -200,7 +200,7 @@ mod tests {
         assert_eq!(response.status().is_success(), false);
 
         // Попытка логина с правильными данными
-        let correct_login_data = LoginData {
+        let correct_login_data = AuthRequest {
             login: user_data.login,
             password: user_data.password,
         };

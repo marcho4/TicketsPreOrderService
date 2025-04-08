@@ -1,14 +1,14 @@
 #[cfg(test)]
 mod tests {
-    use orchestrator::models::admin_request::AdminRequest;
-    use orchestrator::models::api_response::ApiResponse;
-    use orchestrator::models::request_process_info::{RequestProcessInfo, Status};
+    use orchestrator::models::admin::AdminRequest;
+    use orchestrator::models::general::ApiResponse;
+    use orchestrator::models::admin::{RequestProcessInfo, Status};
     use orchestrator::models::tickets::{CancelData, Ticket, TicketReservation, TicketsAddResponse};
-    use orchestrator::models::login_data::LoginData;
-    use orchestrator::models::user_info::UserInfo;
-    use orchestrator::models::user_models::UserRegistration;
-    use orchestrator::models::organizer_registration_data::OrganizerRegistrationData;
-    use orchestrator::models::org_approve_response::OrgApproveResponse;
+    use orchestrator::models::auth::AuthRequest;
+    use orchestrator::models::user::UserInfo;
+    use orchestrator::models::user::UserRegistration;
+    use orchestrator::models::organizer::OrganizerRegistrationData;
+    use orchestrator::models::organizer::OrgApproveResponse;
     use orchestrator::models::matches::{CreateMatchData, Match};
     use std::sync::Once;
     use log::{LevelFilter, info};
@@ -48,7 +48,7 @@ mod tests {
         assert_eq!(response.status().is_success(), true);
 
         // Логин админа
-        let admin_login_data = LoginData {
+        let admin_login_data = AuthRequest {
             login: "admin1".to_string(),
             password: "admin1".to_string(),
         };
@@ -91,7 +91,7 @@ mod tests {
         let org_credentials = approve_response.data.unwrap();
 
         // Логин организатора
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: org_credentials.login.clone(),
             password: org_credentials.password.clone(),
         };
@@ -129,7 +129,7 @@ mod tests {
         
         assert_eq!(response.status().is_success(), true);
 
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: user_data.email.clone(),
             password: user_data.password.clone(),
         };
@@ -168,7 +168,7 @@ mod tests {
             match_description: "Test Description".to_string(),
         };
 
-        let login_data = LoginData {
+        let login_data = AuthRequest {
             login: org_login.clone(),
             password: org_password.clone(),
         };

@@ -1,15 +1,15 @@
 #[cfg(test)]
 mod tests {
-    use orchestrator::models::api_response::ApiResponse;
+    use orchestrator::models::general::ApiResponse;
     use serde_json::json;
-    use orchestrator::models::{login_data::LoginData, org_approve_response::OrgApproveResponse};
-    use orchestrator::models::roles::Role::ADMIN;
+    use orchestrator::models::{auth::AuthRequest, organizer::OrgApproveResponse};
+    use orchestrator::models::general::Role::ADMIN;
     use orchestrator::orchestrator::orchestrator::Orchestrator;
     use pretty_assertions::assert_eq;
-    use orchestrator::models::organizer_registration_data::OrganizerRegistrationData;
+    use orchestrator::models::organizer::OrganizerRegistrationData;
     use std::sync::Once;
     use log::LevelFilter;
-    use orchestrator::models::request_process_info::{RequestProcessInfo, Status};
+    use orchestrator::models::admin::{RequestProcessInfo, Status};
     use orchestrator::utils::general::generate_random_email;
 
     const CONFIG_PATH: &str = "src/orchestrator/dev.toml";
@@ -44,7 +44,7 @@ mod tests {
         let response = response.unwrap();
         assert!(response.status().is_success());
 
-        let body = LoginData {
+        let body = AuthRequest {
             login: "admin1".to_string(),
             password: "admin1".to_string(),
         };

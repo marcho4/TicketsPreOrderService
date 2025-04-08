@@ -1,7 +1,7 @@
 use log::info;
-use crate::models::message_resp::MessageResp;
-use crate::models::org_creation_response::OrgCreationResponse;
-use crate::models::user_models::{User, UserCreateData, UserResp, UserUpdateData};
+use crate::models::general::MessageResp;
+use crate::models::organizer::OrgCreationResponse;
+use crate::models::user::{User, UserCreateData, UserResp, UserUpdateData};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
 use crate::utils::errors::OrchestratorError::{Request, Service};
