@@ -32,7 +32,7 @@ export function Navigation() {
     const { userRole  } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
 
-    const links = useMemo(() => getLinksForRole(userRole), [userRole])
+    const links = useMemo(() => getLinksForRole(userRole || ''), [userRole])
 
     return (
         <nav className="bg-background/50 backdrop-blur-xl py-2 border-b border-gray-200 sticky top-0 inset-x-0 z-40 w-full">

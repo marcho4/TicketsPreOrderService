@@ -173,7 +173,7 @@ export default function AuthCard() {
                             <Button
                                 variant="default"
                                 type="submit"
-                                className="w-full"
+                                className="w-full hover:bg-lime-400 font-medium text-md hover:text-black transition-all duration-300"
                             >
                                 {loading ? (
                                     <div className="flex items-center gap-2">
@@ -335,7 +335,7 @@ export default function AuthCard() {
                             <Button
                                 type="submit"
                                 variant="default"
-                                className="w-full"
+                                className="w-full hover:bg-lime-400 font-medium text-md hover:text-black transition-all duration-300"
                                 disabled={!charCriteria | !numberCriteria || !lengthCriteria}
                             >
                                 Зарегистрироваться
@@ -415,8 +415,7 @@ export default function AuthCard() {
                         <CardFooter className="flex flex-col space-y-4 pb-8">
                             <Button
                                 type="submit"
-                                className="w-full
-                                 transition-colors duration-300"
+                                className="w-full hover:bg-lime-400 font-medium text-md hover:text-black transition-all duration-300"
                             >
                                 Зарегистрироваться
                             </Button>

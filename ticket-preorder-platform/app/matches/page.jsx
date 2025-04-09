@@ -4,6 +4,7 @@ import MatchCard from "./MatchCard";
 import {createResource} from "../../lib/createResource";
 import {Suspense, useMemo} from "react";
 import {fetchMatches} from "../../lib/dataFetchers";
+import { LoaderIcon } from "lucide-react";
 
 export default function Page() {
     const resource = useMemo(() => createResource(fetchMatches), []);
@@ -15,7 +16,11 @@ export default function Page() {
             <div className="text-sm text-center sm:text-lg p-3">
                 На этой странице собраны все предстоящие футбольные матчи. Оформить предзаказ можно при наличии билетов.
             </div>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={
+                <div className="flex flex-col items-center justify-center min-h-[50vh] w-full">
+                    <LoaderIcon className="w-12 h-12 animate-spin text-primary mb-4" />
+                    <p className="text-lg text-stone-600">Загрузка матчей...</p>
+                </div>}>
                 <MatchesContainer resourse={resource} />
             </Suspense>        
         </div>

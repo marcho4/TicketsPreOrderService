@@ -209,13 +209,13 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
                 </Button>
                 <div id="background" onClick={() => setModal(!modal)} className={`${modal ? 'fixed inset-0 flex items-center overflow-y-auto justify-center bg-black/80' : 'hidden'}
                     z-[99] cursor-pointer`}>
-                    <Card id="active-modal" className="relative z-[110] max-w-2xl w-full h-[700px] rounded-lg bg-gray-50 cursor-default overflow-y-auto"
+                    <Card id="active-modal" className="relative z-[110] max-w-2xl w-full h-[700px] rounded-lg bg-gray-50 cursor-default"
                          onClick={(e) => e.stopPropagation()}>
 
-                        <X className="absolute top-3 right-3 h-6 w-6 text-gray-700 cursor-pointer"
+                        <X className="absolute top-3 right-3 h-6 w-6 text-gray-500 hover:text-black cursor-pointer"
                            onClick={() => setModal(!modal)}/>
 
-                        <div id="modal-content" className="">
+                        <div id="modal-content" className="overflow-hidden">
                             <CardHeader className="text-2xl font-semibold">
                                 <CardTitle>Выберите билет из списка снизу</CardTitle>
                             </CardHeader>
@@ -230,7 +230,7 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
                                     </Suspense>
                                 </ErrorBoundary>
                                 <div className="flex flex-col text-sm sm:text-lg items-center justify-center mx-auto h-full">
-                                    <span className="text-sm">Если нет желаемых вами билетов,   вы можете встать в очередь за билетами по желаемой вами цене:</span>
+                                    <span className="text-sm mt-5">Если нет желаемых вами билетов,   вы можете встать в очередь за билетами по желаемой вами цене:</span>
                                     <div className="flex flex-row items-center gap-4 mt-4 w-[400px]">
                                         <div className="flex flex-col">
                                             <Label htmlFor="min_price">Минимальная цена</Label>

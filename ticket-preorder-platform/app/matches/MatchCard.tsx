@@ -84,7 +84,7 @@ function MatchCardContent({resource, id}: {
     const time = date.split("T")[1].slice(0, 5);
 
     return (
-        <div className="group w-full max-w-96 cursor-pointer" onClick={handleClick}>
+        <div className="group w-full max-w-96 cursor-pointer " onClick={handleClick}>
             <section
                 className="group relative flex max-w-96 aspect-[16/9] w-full overflow-hidden rounded-lg cursor-pointer"
                 aria-label={`Match between ${data.teamHome} and ${data.teamAway}`}
@@ -94,7 +94,7 @@ function MatchCardContent({resource, id}: {
                         src={data.logoUrl}
                         alt="Match preview background"
                         fill
-                        className="object-cover"
+                        className="object-cover shadow-lg"
                         priority={false}
                     />
                 </div>
