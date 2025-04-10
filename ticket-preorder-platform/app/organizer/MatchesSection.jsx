@@ -31,9 +31,7 @@ function MatchesList({ resource }) {
     );
 }
 
-/**
- * Компонент для отображения состояния загрузки (скелетон)
- */
+
 export function LoadingSkeleton() {
     return (
         <div className="space-y-4">
@@ -50,8 +48,7 @@ export default function MatchesSection() {
     const [refreshKey, setRefreshKey] = useState(0);
     const [matchLogo, setMatchLogo] = useState();
     const [isLoading, setIsLoading] = useState(false);
-    // Создаём ресурс с помощью Suspense (createResource).
-    // Предполагается, что "user" — это ID организатора.
+
     const matchesResource = useMemo(() => {
         const fetchMatches = async () => {
             try {
@@ -147,7 +144,7 @@ export default function MatchesSection() {
     };
 
     return (
-        <Card className="flex flex-col min-w-full min-h-96">
+        <Card className="flex flex-col min-w-full min-h-96 z-[101]">
             {/* Заголовок и кнопка добавления */}
             <CardHeader className="flex flex-row justify-between items-center p-4 sticky top-0">
                 <CardTitle className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight">
@@ -168,7 +165,7 @@ export default function MatchesSection() {
             </CardContent>
 
             {/* Модальное окно создания матча */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal className="z-[1000]" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <MatchForm
                     onSubmit={handleCreateMatch}
                     matchLogo={matchLogo}

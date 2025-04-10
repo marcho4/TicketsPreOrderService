@@ -2,7 +2,6 @@ let userConfig = undefined
 try {
   userConfig = await import('./user-next.config')
 } catch (e) {
-  // ignore error
 }
 
 /** @type {import('next').NextConfig} */
@@ -30,7 +29,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        // Применить эти заголовки ко всем маршрутам
         source: '/:path*',
         headers: [
           {

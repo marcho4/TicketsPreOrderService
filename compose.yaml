@@ -40,7 +40,7 @@ services:
       - auth_postgres
 
   auth_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -57,7 +57,7 @@ services:
     restart: always
 
   admin_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -86,7 +86,7 @@ services:
     restart: always
 
   org_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -115,7 +115,7 @@ services:
     restart: always
 
   user_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -156,7 +156,7 @@ services:
       - match_postgres
     restart: always
   match_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_DB: matches_db
       POSTGRES_USER: matches_user
@@ -186,7 +186,7 @@ services:
       - tickets_postgres
 
   tickets_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -222,7 +222,7 @@ services:
     ports:
       - "9092:9092"     # PLAINTEXT – для доступа с хоста
       - "29092:29092"   # INTERNAL – для связи между контейнерами
-      - "9093:9093"     # CONTROLLER – используется для KRaft, можно пробросить для диагностики
+      - "9093:9093"     
     environment:
       # Основные роли
       KAFKA_NODE_ID: 1
@@ -321,7 +321,7 @@ services:
     restart: always
 
   payment-postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -358,10 +358,9 @@ services:
       - /app/.next
     networks:
       - main
-    environment:
-      - NODE_ENV=development
+    env_file:
+      - ./ticket-preorder-platform/.env
     restart: always
-    command: npm run dev
 
 networks:
   main:

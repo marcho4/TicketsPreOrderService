@@ -291,6 +291,28 @@ mod tests {
         assert_eq!(user_tickets.data.unwrap().len(), 0);
         info!("User has no tickets after cancellation");
 
+        let login_data = AuthRequest {
+            login: org_login.clone(),
+            password: org_password.clone(),
+        };
+
+        let login_url = "http://localhost:8000/api/auth/login".to_string();
+        info!("Logging in as organizer at: {}", login_url);
+        let response = client.post(&login_url)
+            .json(&login_data)
+            .send()
+            .await
+            .expect("Ошибка при логине организатора");
+
+        info!("Response status: {}", response.text().await.unwrap());
+
+        let delete_match_url = format!("http://localhost:8000/api/matches/{}/{}", match_id, org_auth_id);
+        let response = client.delete(&delete_match_url)
+            .send()
+            .await
+            .expect("Ошибка при удалении матча");
+
+        info!("Response status: {}", response.status());
     }
 }
 

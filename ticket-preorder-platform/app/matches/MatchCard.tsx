@@ -1,12 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Suspense, useMemo } from "react";
+import { Suspense, useCallback, useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import { createResource } from "@/lib/createResource";
 import {Dot} from "lucide-react"
-import {fetchMatchData} from "@/lib/dataFetchers";
+import { checkImageExists } from "@/lib/dataFetchers";
 
 
 export interface MatchData {
@@ -21,9 +21,6 @@ export interface MatchData {
     logoUrl: string;
 }
 
-interface MatchCardProps {
-    id: string;
-}
 
 export function formatDate(dateString: string): string {
     const [year, month, day] = dateString.split('-');
@@ -57,56 +54,85 @@ export function formatDate(dateString: string): string {
     return `${dayNumber} ${monthNames[monthIndex]}`;
 }
 
-export default function MatchCard({ id }: MatchCardProps) {
-    const resource = useMemo(() => createResource(() => fetchMatchData(id)), [id]);
+
+
+
+export async function fetchMatchData(id: string): Promise<boolean> {
+    try {
+        const imageUrl = `https://match-photos.s3.us-east-1.amazonaws.com/matches/${id}`;
+        const imageExists = await checkImageExists(imageUrl);
+        return imageExists;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export default function MatchCard({ id, teamHome, teamAway, matchDateTime, stadium, organizerId, matchStatus, description }: MatchData) {
+    const router = useRouter();
+
+
+    const checkImageExistsCallback = useCallback(async () => {
+        try {
+            const imageUrl = `https://match-photos.s3.us-east-1.amazonaws.com/matches/${id}`;
+            const imageExists = await checkImageExists(imageUrl);
+            return imageExists;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }, [id]);
+
+    const resource = useMemo(() => createResource(checkImageExistsCallback), [checkImageExistsCallback]);
 
     return (
-        <ErrorBoundary>
-            <Suspense fallback={<MatchCardLoading />}>
-                <MatchCardContent resource={resource} id={id} />
-            </Suspense>
-        </ErrorBoundary>
+        <MatchCardContent id={id} teamHome={teamHome} teamAway={teamAway} matchDateTime={matchDateTime} stadium={stadium} />
     );
 }
 
-function MatchCardContent({resource, id}: {
-    resource: {read: () => MatchData};
+function MatchCardContent({ id, teamHome, teamAway, matchDateTime, stadium}: {
     id: string;
+    teamHome: string;
+    teamAway: string;
+    matchDateTime: string;
+    stadium: string;
 }) {
-    const data = resource.read();
     const router = useRouter();
 
     const handleClick = () => {
         router.push(`/match/${id}`);
     };
-    const date = new Date(data.matchDateTime).toISOString();
-    const curr_date = date.split("T")[0];
-    const time = date.split("T")[1].slice(0, 5);
+    const curr_date = matchDateTime.split("T")[0];
+    const time = matchDateTime.split("T")[1].slice(0, 5);
+
+    const logo = `https://match-photos.s3.us-east-1.amazonaws.com/matches/${id}`;
 
     return (
         <div className="group w-full max-w-96 cursor-pointer " onClick={handleClick}>
             <section
                 className="group relative flex max-w-96 aspect-[16/9] w-full overflow-hidden rounded-lg cursor-pointer"
-                aria-label={`Match between ${data.teamHome} and ${data.teamAway}`}
+                aria-label={`Match between ${teamHome} and ${teamAway}`}
             >
                 <div className="absolute inset-0 transition-transform duration-300 ease-in-out group-hover:scale-110">
-                    <Image
-                        src={data.logoUrl}
+                <Image
+                        src={logo}
                         alt="Match preview background"
                         fill
                         className="object-cover shadow-lg"
                         priority={false}
+                        onError={(e) => {
+                            (e.target as HTMLImageElement).src = "/match_preview.jpg";
+                        }}
                     />
                 </div>
             </section>
             <div className="flex flex-col items-center justify-center w-full mt-2">
                 <div className="bg-opacity-90 rounded-lg py-2 w-full">
                     <h2 className="text-xl font-semibold text-gray-800 w-full leading-tight text-left">
-                        {data.teamHome} - {data.teamAway}
+                        {teamHome} - {teamAway}
                     </h2>
                 </div>
                 <div className="flex items-center text-left w-full text-gray-600">
-                    {data.stadium} <Dot/> {formatDate(curr_date)}, {time}
+                    {stadium} <Dot/> {formatDate(curr_date)}, {time}
                 </div>
             </div>
         </div>

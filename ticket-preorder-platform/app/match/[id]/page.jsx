@@ -11,7 +11,6 @@ import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "../../../com
 import FetchedTickets from "./FetchedTickets";
 import {Skeleton} from "../../../components/ui/skeleton";
 import {Label} from "../../../components/ui/label";
-import {checkImageExists} from "../../../lib/dataFetchers";
 import {Input} from "../../../components/ui/input";
 import {toast} from "@/hooks/use-toast";
 
@@ -38,12 +37,7 @@ export default function Page() {
                 credentials: "same-origin",
             });
             const result = await response.json();
-            if (await checkImageExists(imageUrl)) {
-                result.data.scheme = imageUrl;
-            } else {
-                result.data.scheme = "/stadion_shema.jpg";
-            }
-
+            result.data.scheme = imageUrl;
             return result.data;
         } catch (error) {
             console.error("Ошибка в fetchMatchData:", error);
@@ -199,9 +193,12 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
                         id={"stadium-scheme"}
                         src={matchData.scheme}
                         alt="Организатор не загрузил схему :("
-                        width={700}
-                        height={50}
+                        width={600}
+                        height={400}
                         className={"rounded-lg"}
+                        onError={(e) => {
+                            e.target.src = "/stadion_shema.jpg";
+                        }}
                     />
                 </div>
                 <Button size="lg" onClick={() => setModal(true)}>

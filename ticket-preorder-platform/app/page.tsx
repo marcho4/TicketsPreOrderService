@@ -2,7 +2,6 @@ import HeroSection from '@/components/HeroSection'
 import SocialProof from '@/components/SocialProof'
 import CallToAction from '@/components/CallToAction'
 import Features from '@/components/Features'
-import Autoplay from 'embla-carousel-autoplay'
 
 export default function Home() {
   return (

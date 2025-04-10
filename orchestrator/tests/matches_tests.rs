@@ -116,7 +116,7 @@ mod tests {
         assert_eq!(response.status().is_success(), true);
         let jwt_response = response.json::<ApiResponse<UserInfo>>().await.expect("Ошибка при десериализации JWT");
         info!("Organizer login successful");
-        
+        let org_id = jwt_response.data.unwrap().user_id;
         // Создание матча
         let match_data = CreateMatchData {
             team_home: "Team A".to_string(),
@@ -127,7 +127,7 @@ mod tests {
         };
         info!("Creating match: {} vs {}", match_data.team_home, match_data.team_away);
 
-        let create_match_url = format!("http://localhost:8000/api/matches/{}", jwt_response.data.unwrap().user_id);
+        let create_match_url = format!("http://localhost:8000/api/matches/{}", org_id.clone());
         let response = client.post(&create_match_url)
             .json(&match_data)
             .send()
@@ -152,6 +152,14 @@ mod tests {
         assert_eq!(match_info.data.unwrap().team_home, "Team A");
         info!("Match details retrieved successfully");
         info!("Test completed successfully");
+
+        let delete_match_url = format!("http://localhost:8000/api/matches/{}/{}", match_id, org_id);
+        let response = client.delete(&delete_match_url)
+            .send()
+            .await
+            .expect("Ошибка при удалении матча");
+
+        assert_eq!(response.status().is_success(), true);   
     }
 
     #[tokio::test]
@@ -245,7 +253,7 @@ mod tests {
         assert_eq!(response.status().is_success(), true);
         let jwt_response = response.json::<ApiResponse<UserInfo>>().await.expect("Ошибка при десериализации JWT");
         info!("Organizer login successful");
-
+        let org_id = jwt_response.data.unwrap().user_id;
         // Создание матча   
         let match_data = CreateMatchData {
             team_home: "Team A".to_string(),
@@ -256,7 +264,7 @@ mod tests {
         };
         info!("Creating match: {} vs {}", match_data.team_home, match_data.team_away);
 
-        let create_match_url = format!("http://localhost:8000/api/matches/{}", jwt_response.data.unwrap().user_id);
+        let create_match_url = format!("http://localhost:8000/api/matches/{}", org_id.clone());
         let response = client.post(&create_match_url)
             .json(&match_data)
             .send()
@@ -275,7 +283,7 @@ mod tests {
             match_date_time: Utc::now() + chrono::Duration::days(14),
         };
 
-        let update_match_url = format!("http://localhost:8000/api/matches/{}", match_id);
+        let update_match_url = format!("http://localhost:8000/api/matches/{}", match_id.clone());
         let response = client.put(&update_match_url)
             .json(&update_data)
             .send()
@@ -295,6 +303,15 @@ mod tests {
         let match_info = response.json::<ApiResponse<Match>>().await.expect("Ошибка при десериализации матча");
         let updated_match = match_info.data.unwrap();
         assert_eq!(updated_match.match_description, "Updated match description");
+
+        let delete_match_url = format!("http://localhost:8000/api/matches/{}/{}", match_id, org_id);
+        let response = client.delete(&delete_match_url)
+            .send()
+            .await
+            .expect("Ошибка при удалении матча");
+
+        assert_eq!(response.status().is_success(), true);
+        
     }
 
 }

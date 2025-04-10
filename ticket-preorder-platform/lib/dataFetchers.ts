@@ -1,10 +1,17 @@
 import {MatchData} from "@/app/matches/MatchCard";
+import { useCallback } from "react";
 
 export const checkImageExists = async (url: string): Promise<boolean> => {
     try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 1000); // 1 second timeout
+        
         const response = await fetch(url, { 
             method: "HEAD",
+            signal: controller.signal
          });
+        
+        clearTimeout(timeoutId);
         return response.ok;
     } catch (error) {
         return false;
@@ -12,22 +19,12 @@ export const checkImageExists = async (url: string): Promise<boolean> => {
 };
 
 
-export async function fetchMatchData(id: string): Promise<MatchData> {
+export async function fetchMatchData(id: string): Promise<boolean> {
     try {
-        const response = await fetch(`http://localhost:8000/api/matches/${id}`, {
-            method: "GET",
-            credentials: "include",
-        });
-        if (!response.ok) {
-            throw new Error(`Не удалось получить данные матча: ${response.statusText}`);
-        }
-        const result = await response.json();
-
         const imageUrl = `https://match-photos.s3.us-east-1.amazonaws.com/matches/${id}`;
         const imageExists = await checkImageExists(imageUrl);
-        result.data.logoUrl = imageExists ? imageUrl : "/match_preview.jpg";
+        return imageExists;
 
-        return result.data as MatchData;
     } catch (error) {
         throw error;
     }
@@ -62,17 +59,3 @@ export const fetchTickets = async (userId: string) => {
     }
 };
 
-
-export const fetchMatches = async () => {
-    try {
-        const response = await fetch(`http://localhost:8000/api/matches/all`, {
-            method: "GET",
-            credentials: "include",
-        });
-        const data = await response.json();
-        return data.data;
-    } catch (e) {
-        console.error(e);
-        return [];
-    }
-}
