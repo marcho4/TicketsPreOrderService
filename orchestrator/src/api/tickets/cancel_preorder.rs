@@ -87,6 +87,7 @@ pub async fn cancel_preorder(
                         variables.insert("match_title".to_string(), json!(format!("{} - {}", match_info.team_home, match_info.team_away)));
                         variables.insert("match_date".to_string(), json!(format!("{}", match_info.match_date_time.format("%Y-%m-%d"))));
                         variables.insert("match_time".to_string(), json!(format!("{}", match_info.match_date_time.format("%H:%M"))));
+                        variables.insert("venue_name".to_string(), json!(match_info.stadium.clone()));
                         variables.insert("order_id".to_string(), json!(ticket_id));
                         variables.insert("cancel_date".to_string(), json!(Utc::now().format("%Y-%m-%d %H:%M:%S").to_string()));
                         variables.insert("service_name".to_string(), json!("Tickets PreOrder Platform"));
