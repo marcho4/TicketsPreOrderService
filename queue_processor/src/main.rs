@@ -10,13 +10,13 @@ use crate::api::remove_user_from_the_queue::remove_user_from_the_queue;
 use crate::services::kafka_service::KafkaService;
 use crate::services::redis_service::RedisService;
 
-mod services;
-mod utils;
-mod models;
-mod api;
+pub mod services;
+pub mod utils;
+pub mod models;
+pub mod api;
 
 #[tokio::main]
-async fn main() -> std::io::Result<()> {
+pub async fn main() -> std::io::Result<()> {
     init_logging();
 
     let config = MainConfig::from_toml();

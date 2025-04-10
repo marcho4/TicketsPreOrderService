@@ -8,13 +8,13 @@ use rdkafka::consumer::StreamConsumer;
 use rdkafka::error::{KafkaError, KafkaResult};
 use rdkafka::message::OwnedHeaders;
 use rdkafka::producer::{FutureProducer, FutureRecord};
-use serde::{Serialize};
+use serde::Serialize;
 use tokio::time::sleep;
-
+use std::sync::Arc;
 pub struct KafkaService {
     producer: FutureProducer,
     admin: AdminClient<DefaultClientContext>,
-    consumer: StreamConsumer,
+    consumer: Arc<StreamConsumer>,
 }
 
 impl KafkaService {
@@ -28,10 +28,10 @@ impl KafkaService {
         Self {
             admin,
             producer,
-            consumer,
+            consumer: Arc::new(consumer),
         }
     }
-    pub async fn create_topic(&self, topic_name: String) {
+    pub async fn create_topic(&self, topic_name: String) -> KafkaResult<()> {
         let admin_options = &AdminOptions::default();
         let topic: NewTopic = NewTopic {
             name: topic_name.as_str(),
@@ -41,8 +41,14 @@ impl KafkaService {
         };
 
         match self.admin.create_topics(vec![&topic], admin_options).await {
-            Ok(ok) => info!("Топик успешно создан: {:?}", ok),
-            Err(e) => error!("Не удалось создать топик: {}", e.to_string())
+            Ok(ok) => {
+                info!("Топик успешно создан: {:?}", ok);
+                Ok(())
+            }
+            Err(e) => {
+                error!("Не удалось создать топик: {}", e.to_string());
+                Err(e)
+            }
         }
     }
     pub fn create_admin(bootstrap_url: String) -> AdminClient<DefaultClientContext> {
@@ -69,6 +75,11 @@ impl KafkaService {
         info!("Создал ConsumerClient");
         consumer
     }
+
+    pub fn get_consumer(&self) -> Arc<StreamConsumer> {
+        self.consumer.clone()
+    }
+
     pub fn create_producer(bootstrap_url: String) -> FutureProducer {
         let kafka_producer: FutureProducer = ClientConfig::new()
             .set("bootstrap.servers", bootstrap_url)
@@ -102,7 +113,7 @@ impl KafkaService {
                     .payload(&msg)
                     .key(key)
                     .headers(OwnedHeaders::new()),
-                None,
+                Duration::from_secs(2),
             ).await {
                 Ok(_) => {
                     info!("Message successfully sent!");

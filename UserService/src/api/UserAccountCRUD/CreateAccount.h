@@ -13,11 +13,15 @@ class AccountCreator {
         std::string name;
         std::string last_name;
         std::string email;
+        std::string birthday;
+        std::string phone;
 
         static UserData GetUserDataFromJSON(const json& parsed) {
             return {parsed.at("name").get<std::string>(),
                     parsed.at("last_name").get<std::string>(),
-                    parsed.at("email").get<std::string>()};
+                    parsed.at("email").get<std::string>(),
+                    parsed.at("birthday").get<std::string>(),
+                    parsed.at("phone").get<std::string>()};
         }
     };
 

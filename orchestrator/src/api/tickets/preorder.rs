@@ -4,11 +4,11 @@ use actix_web::http::StatusCode;
 use chrono::{Datelike, Utc};
 use log::{error, info};
 use serde_json::json;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::models::email::{EmailTemplates, Recipient};
-use crate::models::jwt_claims::JwtClaims;
-use crate::models::message_resp::MessageResp;
-use crate::models::roles::Role;
+use crate::models::general::JwtClaims;
+use crate::models::general::MessageResp;
+use crate::models::general::Role;
 use crate::models::tickets::TicketReservation;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
@@ -18,13 +18,13 @@ use crate::utils::responses::generic_response;
     put,
     path = "/api/tickets/preorder/{ticket_id}",
     tag = "Tickets",
-    summary = "Preorder concrete ticket",
-    description = "Preorder concrete ticket",
+    summary = "Предзаказать билет",
+    description = "Предзаказать билет",
     params(
-        ("ticket_id" = String, Path, description = "ID of the ticket to preorder")
+        ("ticket_id" = String, Path, description = "ID билета на предзаказ")
     ),
     responses(
-        (status = 200, description = "Successfully cancelled preorder", body = ApiResponse<MessageResp>),
+        (status = 200, description = "Успешно предзаказано", body = ApiResponse<MessageResp>),
         (status = 403, description = "Forbidden: Access restricted due to missing or invalid credentials, wrong role, or mismatched user id"),
         (status = 500, description = "Internal Server Error", body=ApiResponse<String>)
     )

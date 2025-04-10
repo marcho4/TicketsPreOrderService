@@ -1,5 +1,3 @@
-DROP SCHEMA IF EXISTS Users CASCADE;
-
 CREATE SCHEMA IF NOT EXISTS Users;
 
 
@@ -9,7 +7,7 @@ CREATE TABLE IF NOT EXISTS Users.UsersData (
     name VARCHAR(50),
     last_name VARCHAR(50),
     phone VARCHAR(20),
-    birthday varchar(20),
+    birthday VARCHAR(20),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

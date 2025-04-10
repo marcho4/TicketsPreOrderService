@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { useEffect } from "react";
 
-export function Modal({ isOpen, onClose, children }) {
+export function Modal({ isOpen, onClose, children }: { isOpen: boolean, onClose: () => void, children: React.ReactNode }) {
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -20,7 +20,7 @@ export function Modal({ isOpen, onClose, children }) {
     return (
         <div
             onClick={onClose}
-            className="fixed inset-0 bg-black bg-opacity-50 z-30 flex justify-center items-center"
+            className="fixed inset-0 bg-black bg-opacity-50 z-100 flex justify-center items-center"
         >
             <Card
                 onClick={(e) => e.stopPropagation()}
@@ -31,7 +31,7 @@ export function Modal({ isOpen, onClose, children }) {
                     onClick={onClose}
                     className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
                 >
-                    <X className="h-6 w-6" />
+                    <X className="h-6 w-6 text-gray-500 hover:text-black" />
                 </Button>
                 {children}
             </Card>

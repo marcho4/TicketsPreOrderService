@@ -4,7 +4,9 @@ import {MatchFormDataRow} from "@/app/organizer/MatchFormDataRow";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-export default function MatchForm({ onSubmit, onClose, matchLogoSetter, matchLogo }) {
+import { LoaderCircle } from "lucide-react";
+
+export default function MatchForm({ onSubmit, onClose, matchLogoSetter, isLoading }) {
     const [formData, setFormData] = useState({
         matchDescription: '',
         teamHome: '',
@@ -26,7 +28,7 @@ export default function MatchForm({ onSubmit, onClose, matchLogoSetter, matchLog
 
 
     return (
-        <div className="z-10">
+        <div className="z-100">
             <CardHeader>
                 <CardTitle className="text-2xl font-bold">Создать новый матч</CardTitle>
             </CardHeader>
@@ -54,8 +56,8 @@ export default function MatchForm({ onSubmit, onClose, matchLogoSetter, matchLog
                         >
                             Отмена
                         </Button>
-                        <Button type="submit">
-                            Создать
+                        <Button type="submit" disabled={isLoading}>
+                            {isLoading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : "Создать"}
                         </Button>
                     </div>
                 </form>

@@ -1,6 +1,6 @@
-use crate::models::admin_request::AdminRequest;
-use crate::models::organizer_registration_data::OrganizerRegistrationData;
-use crate::models::request_process_info::RequestProcessInfo;
+use crate::models::admin::AdminRequest;
+use crate::models::organizer::OrganizerRegistrationData;
+use crate::models::admin::RequestProcessInfo;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::errors::OrchestratorError;
 use log::{error, info};

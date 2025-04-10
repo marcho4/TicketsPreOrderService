@@ -1,9 +1,9 @@
-use crate::models::api_response::ApiResponse;
-use crate::models::message_resp::MessageResp;
+use crate::models::general::ApiResponse;
+use crate::models::general::MessageResp;
 use crate::models::update_org_data::UpdateOrgData;
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_web::{put, web, HttpRequest, HttpResponse};
-use crate::models::roles::Role;
+use crate::models::general::Role;
 use crate::utils::request_validator::RequestValidator;
 
 #[utoipa::path(

@@ -1,15 +1,12 @@
 use std::collections::HashMap;
-use crate::models::user_registration_data::UserRegistrationData;
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use chrono::{Datelike, Utc};
-use log::info;
 use serde_json::json;
-use crate::models::api_response::ApiResponse;
 use crate::models::email::{EmailTemplates, Recipient};
-use crate::models::message_resp::MessageResp;
-use crate::models::user_models::{UserCreateData, UserRegistration};
+use crate::models::general::{ApiResponse, MessageResp};
+use crate::models::user::{UserCreateData, UserRegistration, UserRegistrationData};
 use crate::utils::errors::OrchestratorError;
 use crate::utils::responses::generic_response;
 
@@ -40,6 +37,8 @@ pub async fn register_user(
         email: data.email.clone(),
         name: data.name.clone(),
         last_name: data.last_name.clone(),
+        phone: data.phone.clone(),
+        birthday: data.birthday.clone(),
     };
 
     let creation_result = match orchestrator.create_user(user_create_data).await {
@@ -53,7 +52,6 @@ pub async fn register_user(
             }
         }
     };
-    info!("Created user: {:?}", creation_result);
 
     let register_data = UserRegistrationData {
         name: data.name.clone(),
@@ -104,8 +102,6 @@ pub async fn register_user(
                                         Some(e.to_string())
         );
     };
-
-    info!("Email sent: {:?}", email_res);
 
     generic_response::<MessageResp>(StatusCode::OK,
         Some("Successfully registered user!".to_string()),

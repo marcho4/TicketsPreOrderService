@@ -1,14 +1,15 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-
+import HeroSection from '@/components/HeroSection'
+import SocialProof from '@/components/SocialProof'
+import CallToAction from '@/components/CallToAction'
+import Features from '@/components/Features'
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-8 md:px-12 lg:px-16">
-      <h1 className="text-4xl font-bold mb-6 text-center text-text">Welcome to Ticket Preorder Platform</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      </div>
+    <div className="@container mx-auto px-8 md:px-12 lg:px-16">
+      <HeroSection />
+      <SocialProof />
+      <Features />
+      <CallToAction />
     </div>
   )
 }

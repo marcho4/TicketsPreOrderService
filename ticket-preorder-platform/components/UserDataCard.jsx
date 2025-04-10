@@ -60,6 +60,7 @@ function DataRow({ label, apiName, isEditing, handleChange, type = "text", formD
 }
 
 function DataCardContent({ data, updateFunc, refreshData }) {
+    data.birthday = data.birthday.split('.').reverse().join('-');
     const router = useRouter();
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState(data);
@@ -111,7 +112,7 @@ function DataCardContent({ data, updateFunc, refreshData }) {
                 <DataRow formData={formData} label={"Фамилия"} apiName={"last_name"} isEditing={isEditing} handleChange={handleChange} />
                 <DataRow formData={formData} label={"Телефон"} apiName={"phone"} isEditing={isEditing} handleChange={handleChange} />
                 <DataRow formData={formData} label={"Email"} apiName={"email"} isEditing={isEditing} handleChange={handleChange} type="email" />
-                <DataRow formData={formData} label={"Дата рождения"} apiName={"birthday"} isEditing={isEditing} handleChange={handleChange} />
+                <DataRow formData={formData} label={"Дата рождения"} apiName={"birthday"} isEditing={isEditing} handleChange={handleChange} type="date" />
             </CardContent>
             {isEditing && (
                 <CardFooter className="flex space-x-4 px-4 justify-end">
@@ -132,6 +133,7 @@ export default function UserDataCard({ updateLink, fetchLink }) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
 
     const fetchData = useCallback(async () => {
         setLoading(true);
@@ -164,6 +166,23 @@ export default function UserDataCard({ updateLink, fetchLink }) {
     }, [fetchLink]);
 
     const updateData = async (updData) => {
+        if (!/^(\+7|8)[0-9]{10}$/.test(updData.phone)) {
+            toast({
+                title: "Ошибка при обновлении данных.",
+                description: "Введите корректный номер телефона, начиная с +7",
+                variant: "destructive",
+            });
+            return;
+        }
+        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(updData.email)) {
+            toast({
+                title: "Ошибка при обновлении данных.",
+                description: "Введите корректный email",
+                variant: "destructive",
+            });
+            return;
+        }
+
         const response = await fetch(updateLink, {
             method: "PUT",
             credentials: "include",
@@ -193,7 +212,7 @@ export default function UserDataCard({ updateLink, fetchLink }) {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <ErrorBoundary router={router}>
+        <ErrorBoundary router={router} >
             <DataCardContent data={data} updateFunc={updateData} refreshData={fetchData} />
         </ErrorBoundary>
     );

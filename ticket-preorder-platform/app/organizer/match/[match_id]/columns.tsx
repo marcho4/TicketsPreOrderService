@@ -18,7 +18,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 export type Ticket = {
     id: string;
     match_id: string;
-    status: "reserved" | "available" | "paid";
+    status: "reserved" | "available" | "sold";
     sector: string;
     row: number;
     seat: number;
@@ -96,8 +96,8 @@ export const columns : ColumnDef<Ticket>[] = [
             const original = row.getValue("status");
             if (original === "available") {
                 return "Свободен"
-            } else if (original === "paid") {
-                return "Оплачен"
+            } else if (original === "sold") {
+                return "Продан"
             } else if (original === "reserved") {
                 return "Зарезервирован"
             }
@@ -148,9 +148,6 @@ export const columns : ColumnDef<Ticket>[] = [
                             >
                                 Скопировать ID билета
                             </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Посмотреть покупателя</DropdownMenuItem>
-                            <DropdownMenuItem>Посмотреть детали платежа</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>

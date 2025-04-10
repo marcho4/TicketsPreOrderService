@@ -31,9 +31,7 @@ function MatchesList({ resource }) {
     );
 }
 
-/**
- * Компонент для отображения состояния загрузки (скелетон)
- */
+
 export function LoadingSkeleton() {
     return (
         <div className="space-y-4">
@@ -49,9 +47,8 @@ export default function MatchesSection() {
     const { user, userRole } = useAuth();
     const [refreshKey, setRefreshKey] = useState(0);
     const [matchLogo, setMatchLogo] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Создаём ресурс с помощью Suspense (createResource).
-    // Предполагается, что "user" — это ID организатора.
     const matchesResource = useMemo(() => {
         const fetchMatches = async () => {
             try {
@@ -110,6 +107,7 @@ export default function MatchesSection() {
 
             const uploadFormFunc = async (formData) => {
                 try {
+                    setIsLoading(true);
                     const response = await fetch(`/api/upload`, {
                         method: 'PUT',
                         credentials: 'include',
@@ -130,6 +128,8 @@ export default function MatchesSection() {
 
                 } catch (error) {
                     console.log(error);
+                } finally {
+                    setIsLoading(false);
                 }
             }
             uploadFormFunc(uploadForm);
@@ -144,13 +144,13 @@ export default function MatchesSection() {
     };
 
     return (
-        <Card className="flex flex-col min-w-full min-h-96 rounded-lg bg-white shadow-lg border-gray-200 border">
+        <Card className="flex flex-col min-w-full min-h-96 z-[101]">
             {/* Заголовок и кнопка добавления */}
             <CardHeader className="flex flex-row justify-between items-center p-4 sticky top-0">
-                <CardTitle className="text-3xl font-semibold text-gray-900 leading-tight">
+                <CardTitle className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight">
                     Мои матчи
                 </CardTitle>
-                <Button onClick={() => setIsModalOpen(true)}>
+                <Button onClick={() => setIsModalOpen(true)} size={window.innerWidth > 768 ? "default" : "sm"}>
                     <Plus className="mr-2 h-4 w-4" /> Добавить матч
                 </Button>
             </CardHeader>
@@ -165,12 +165,13 @@ export default function MatchesSection() {
             </CardContent>
 
             {/* Модальное окно создания матча */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal className="z-[1000]" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <MatchForm
                     onSubmit={handleCreateMatch}
                     matchLogo={matchLogo}
                     matchLogoSetter={setMatchLogo}
-                    onClose={() => setIsModalOpen(false)} />
+                    onClose={() => setIsModalOpen(false)}
+                    isLoading={isLoading} />
             </Modal>
         </Card>
     );

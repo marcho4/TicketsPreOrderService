@@ -1,12 +1,26 @@
 use actix_web::{post, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use log::info;
+use crate::models::general::Role;
 use crate::models::queue_models::{QueueAdd, QueueModel};
-use crate::models::roles::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
 
+#[utoipa::path(
+    post,
+    path = "/api/matches/queue/{match_id}",
+    tag = "Matches",
+    summary = "Встать в очередь",
+    request_body = QueueAdd,
+    params(
+        ("match_id" = String, Path, description = "Уникальный идентификатор матча.")
+    ),
+    responses(
+        (status = 200, description = "Вы встали в очередь"),
+        (status = 500, description = "Внутренняя ошибка сервера")
+    )
+)]
 #[post("/queue/{match_id}")]
 pub async fn add_user_to_queue(
     req: HttpRequest,

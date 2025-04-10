@@ -9,7 +9,7 @@ pub struct TicketInfo {
 }
 
 // Модель для хранения данных в редисе в очереди
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub struct QueueModel {
     pub user_id: String,
     pub min_price: i64,

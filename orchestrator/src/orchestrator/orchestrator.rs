@@ -9,7 +9,7 @@ use std::sync::atomic::AtomicI64;
 use rdkafka::admin::{AdminClient, AdminOptions, NewTopic, TopicReplication};
 use rdkafka::client::DefaultClientContext;
 use rdkafka::config::ClientConfig;
-use rdkafka::producer::{FutureProducer};
+use rdkafka::producer::FutureProducer;
 
 pub struct Orchestrator {
     pub client: Client, // Клиент reqwest для обращения к другим микросервисам

@@ -1,11 +1,11 @@
-use crate::models::api_response::ApiResponse;
-use crate::models::login_data::LoginData;
-use crate::models::user_info::UserInfo;
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_web::cookie::time::Duration;
 use actix_web::cookie::{Cookie, SameSite};
 use actix_web::{post, web, HttpResponse};
 use actix_web::http::StatusCode;
+use crate::models::auth::AuthRequest;
+use crate::models::general::ApiResponse;
+use crate::models::user::UserInfo;
 use crate::utils::responses::generic_response;
 
 
@@ -23,7 +23,7 @@ use crate::utils::responses::generic_response;
 #[post("/login")]
 pub async fn login(
     orchestrator: web::Data<Orchestrator>,
-    req_data: web::Json<LoginData>,
+    req_data: web::Json<AuthRequest>,
 ) -> HttpResponse {
     let login_data = req_data.into_inner();
 

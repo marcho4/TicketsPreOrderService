@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import ErrorBoundary from "./dataBoundary";
@@ -19,6 +19,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { createResource } from "@/lib/createResource";
+import { toast } from "@/hooks/use-toast";
 
 interface Request {
   request_id: string;
@@ -39,32 +41,13 @@ function Loading() {
 
 // Основной компонент
 const AdminHome = () => {
-  const [requests, setRequests] = useState<Request[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-  const { user } = useAuth();
   const router = useRouter();
+  const [trigger, setTrigger] = useState(0);
 
-  // Функция загрузки заявок
-  const loadRequests = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchRequests();
-      setRequests(data);
-      setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err : new Error('Unknown error'));
-    } finally {
-      setLoading(false);
-    }
-  };
+  const requestResource = useMemo(() => {
+    return createResource(fetchRequests);
+  }, [trigger]);
 
-  // Загрузка данных при монтировании и изменении user
-  useEffect(() => {
-    loadRequests();
-  }, [user]);
-
-  // Обработчик принятия/отклонения заявки
   const handleResponse = async (requestId: string, action: "APPROVED" | "REJECTED") => {
     try {
       const res = await fetch(`http://localhost:8000/api/admin/process`, {
@@ -73,28 +56,27 @@ const AdminHome = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ request_id: requestId, status: action })
       });
-      const response = await res.json();
-      if (response.status === 200) {
-        // Перезагрузить список после успешного действия
-        await loadRequests();
+      if (res.status === 200) {
+        setTrigger(prev => prev + 1);
+        toast({
+          title: "Успешно!",
+          description: "Заявка успешно обработана",
+        });
       } else {
-        console.log(`Error ${action}ing request`);
+        toast({
+          title: "Ошибка!",
+          description: "Не удалось обработать заявку",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error("Error handling response:", error);
     }
-    // setTimeout(() => window.location.reload(), 500);
   };
 
-  // Отрисовка таблицы с заявками
-  const renderRequestList = () => {
-    if (loading) {
-      return <Loading />;
-    }
+  const RenderRequestList = ({resource}: {resource: {read: () => Request[]}}) => {
+    const requests = resource.read();
 
-    if (error) {
-      return <p className="text-center text-red-500">Ошибка загрузки: {error.message}</p>;
-    }
 
     if (!requests.length) {
       return <p className="text-center">Заявок нет.</p>;
@@ -161,7 +143,9 @@ const AdminHome = () => {
         <CardContent>
           <div className="space-y-4">
             <ErrorBoundary>
-              {renderRequestList()}
+              <Suspense fallback={<Loading />}>
+                <RenderRequestList resource={requestResource} />
+              </Suspense>
             </ErrorBoundary>
           </div>
         </CardContent>

@@ -1,7 +1,7 @@
 use actix_web::{delete, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use serde_json::json;
-use crate::models::delete_tickets::{DeleteTickets, DeleteTicketsResp};
+use crate::models::tickets::{DeleteTickets, DeleteTicketsResp};
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
@@ -12,7 +12,7 @@ use crate::utils::responses::generic_response;
     path = "/api/tickets/{match_id}",
     description = "Delete tickets by Ticket's IDs list",
     tag = "Tickets",
-
+    summary="Удалить билеты на матч",
 )]
 #[delete("/{match_id}")]
 pub async fn delete_tickets(

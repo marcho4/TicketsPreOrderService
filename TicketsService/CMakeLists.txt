@@ -26,6 +26,10 @@ set(SOURCE_FILES
     src/api/user/GetUsersTickets.h
     src/api/tickets_crud/GetTicket.cpp
     src/api/tickets_crud/GetTicket.h
+    src/api/tickets_status/CancelPayment.cpp
+    src/api/tickets_status/CancelPayment.h
+    src/api/tickets_status/TicketsPaid.cpp
+    src/api/tickets_status/TicketsPaid.h
 )
 
 # Ищем необходимые системные библиотеки

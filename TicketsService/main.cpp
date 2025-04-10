@@ -10,6 +10,8 @@
 #include "src/api/tickets_crud/DeleteTickets.h"
 #include "src/api/user/GetUsersTickets.h"
 #include "src/api/tickets_crud/GetTicket.h"
+#include "src/api/tickets_status/CancelPayment.h"
+#include "src/api/tickets_status/TicketsPaid.h"
 
 int main() {
     auto logger = spdlog::rotating_logger_mt("file_logger", "../logs/tickets_service.log", 1048576 * 5, 3);
@@ -84,6 +86,18 @@ int main() {
             set_cors_headers(res);
             spdlog::info("Получен запрос на получение билетов пользователя");
             GetUserTickets::GetUserTicketsRequest(request, res, db);
+        });
+
+        server.Put("/ticket/:id/pay", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            spdlog::info("Получен запрос на покупку билета");
+            TicketsPaid::PayTicketsRequest(request, res, db);
+        });
+
+        server.Put("/ticket/:id/refund", [&db, &set_cors_headers](const httplib::Request& request, httplib::Response &res) {
+            set_cors_headers(res);
+            spdlog::info("Получен запрос на возврат средств за билет");
+            CancelPayment::CancelPaymentRequest(request, res, db);
         });
 
         std::cout << "Server is listening http://localhost:8006" << '\n';

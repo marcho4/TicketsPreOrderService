@@ -1,8 +1,7 @@
 let userConfig = undefined
 try {
-  userConfig = await import('./v0-user-next.config')
+  userConfig = await import('./user-next.config')
 } catch (e) {
-  // ignore error
 }
 
 /** @type {import('next').NextConfig} */
@@ -15,6 +14,30 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: [
+      'match-photos.s3.us-east-1.amazonaws.com',
+      'stadium-schemes.s3.us-east-1.amazonaws.com'
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.s3.us-east-1.amazonaws.com',
+        pathname: '/**',
+      },
+    ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+        ],
+      },
+    ]
   },
   experimental: {
     webpackBuildWorker: true,

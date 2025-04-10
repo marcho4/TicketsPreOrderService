@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import { Inter, Montserrat } from 'next/font/google'
 import { Metadata } from 'next'
 import { Navigation } from '@/components/Navigation'
+import Footer from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           <main className="min-h-screen">
               {children}
               <Toaster/>
+              <Footer />
           </main>
         </AuthProvider>
       </body>

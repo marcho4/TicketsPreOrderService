@@ -1,6 +1,6 @@
 use actix_web::{get, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
-use crate::models::api_response::ApiResponse;
+use crate::models::general::ApiResponse;
 use crate::models::tickets::Ticket;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
@@ -11,8 +11,8 @@ use crate::utils::responses::generic_response;
     get,
     path = "/api/tickets/ticket/{id}",
     tag = "Tickets",
-    summary = "Cancels preorder of the concrete ticket",
-    description = "Cancels preorder of the concrete ticket",
+    summary = "Получить данные о билете",
+    description = "Получить данные о билете по ID",
     params(
         ("id" = String, Path, description = "ID of the ticket")
     ),

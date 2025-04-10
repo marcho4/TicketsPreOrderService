@@ -6,5 +6,3 @@ pub mod preorder;
 pub(crate) mod cancel_preorder;
 pub(crate) mod get_ticket;
 pub mod delete_tickets;
-pub mod get_in_line;
-pub mod get_out_the_line;

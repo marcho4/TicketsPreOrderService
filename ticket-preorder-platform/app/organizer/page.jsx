@@ -23,8 +23,8 @@ export default function Page() {
     let updateUrl = `http://localhost:8000/api/organizer/update/${user}`;
 
     return (
-        <div className="flex flex-col min-h-screen pt-10">
-            <Card className="max-w-7xl mx-auto w-full text-xl sm:text-3xl">
+        <div className="flex flex-col min-h-screen pt-10 p-2">
+            <Card className="max-w-7xl mx-auto w-full text-2xl sm:text-3xl">
                 <CardHeader>
                     <CardTitle>
                         Личный кабинет

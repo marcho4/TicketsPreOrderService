@@ -1,11 +1,24 @@
 use actix_web::{delete, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
-use crate::models::roles::Role;
-use crate::models::user_models::User;
+use crate::models::general::Role;
 use crate::orchestrator::orchestrator::Orchestrator;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
 
+
+#[utoipa::path(
+    delete,
+    path = "/api/matches/queue/{match_id}",
+    tag = "Matches",
+    summary = "Выйти из очередь",
+    params(
+        ("match_id" = String, Path, description = "Уникальный идентификатор матча.")
+    ),
+    responses(
+        (status = 200, description = "Вы вышли из очереди"),
+        (status = 500, description = "Внутренняя ошибка сервера")
+    )
+)]
 #[delete("/queue/delete/{match_id}")]
 pub async fn delete_from_queue(
     req: HttpRequest,

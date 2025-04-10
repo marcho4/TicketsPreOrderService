@@ -1,10 +1,8 @@
-use crate::models::create_org_data::CreateOrgData;
-use crate::models::message_resp::MessageResp;
-use crate::models::org_creation_response::OrgCreationResponse;
-use crate::models::organizer_info::OrganizerInfo;
 use crate::models::update_org_data::UpdateOrgData;
 use crate::orchestrator::orchestrator::Orchestrator;
 use log::info;
+use crate::models::general::MessageResp;
+use crate::models::organizer::{CreateOrgData, OrgCreationResponse, OrganizerInfo};
 use crate::utils::errors::OrchestratorError;
 use crate::utils::errors::OrchestratorError::*;
 

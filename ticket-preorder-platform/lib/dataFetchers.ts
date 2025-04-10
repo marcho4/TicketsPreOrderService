@@ -1,8 +1,17 @@
 import {MatchData} from "@/app/matches/MatchCard";
+import { useCallback } from "react";
 
 export const checkImageExists = async (url: string): Promise<boolean> => {
     try {
-        const response = await fetch(url, { method: "HEAD" });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 1000); // 1 second timeout
+        
+        const response = await fetch(url, { 
+            method: "HEAD",
+            signal: controller.signal
+         });
+        
+        clearTimeout(timeoutId);
         return response.ok;
     } catch (error) {
         return false;
@@ -10,28 +19,12 @@ export const checkImageExists = async (url: string): Promise<boolean> => {
 };
 
 
-export async function fetchMatchData(id: string): Promise<MatchData> {
+export async function fetchMatchData(id: string): Promise<boolean> {
     try {
-        const response = await fetch(`http://localhost:8000/api/matches/${id}`, {
-            method: "GET",
-            credentials: "include",
-        });
-        if (!response.ok) {
-            throw new Error(`Не удалось получить данные матча: ${response.statusText}`);
-        }
-        const result = await response.json();
-
-
         const imageUrl = `https://match-photos.s3.us-east-1.amazonaws.com/matches/${id}`;
-        await checkImageExists(imageUrl).then((exists) => {
-            if (exists) {
-                result.data.logoUrl = imageUrl;
-            } else {
-                result.data.logoUrl = "/match_preview.jpg";
-            }
-        });
+        const imageExists = await checkImageExists(imageUrl);
+        return imageExists;
 
-        return result.data as MatchData;
     } catch (error) {
         throw error;
     }
@@ -54,28 +47,15 @@ export const fetchRequests = async () => {
 
 export const fetchTickets = async (userId: string) => {
     try {
-        let response = await fetch(`http://localhost:8000/api/tickets/user/${userId}`, {
+        const response = await fetch(`http://localhost:8000/api/tickets/user/${userId}`, {
             method: 'GET',
             credentials: 'same-origin',
         });
-        response = await response.json();
-        return response.data || [];
+        const data = await response.json();
+        return data.data || [];
     } catch (error) {
         console.error(error);
         return [];
     }
 };
 
-
-export const fetchMatches = async () => {
-    try {
-        let response = await fetch(`http://localhost:8000/api/matches/all`, {
-            method: "GET",
-            credentials: "include",
-        })
-        response = await response.json();
-        return response.data;
-    } catch (e) {
-        console.error(e)
-    }
-}

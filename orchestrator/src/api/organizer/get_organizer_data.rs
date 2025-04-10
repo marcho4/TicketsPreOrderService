@@ -1,10 +1,10 @@
-use crate::models::organizer_info::OrganizerInfo;
+use crate::models::organizer::OrganizerInfo;
 use crate::orchestrator::orchestrator::Orchestrator;
 use actix_web::{get, web, HttpRequest, HttpResponse};
 use actix_web::http::StatusCode;
 use log::error;
-use crate::models::api_response::ApiResponse;
-use crate::models::roles::Role;
+use crate::models::general::ApiResponse;
+use crate::models::general::Role;
 use crate::utils::request_validator::RequestValidator;
 use crate::utils::responses::generic_response;
 

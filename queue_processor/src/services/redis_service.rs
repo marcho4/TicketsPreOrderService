@@ -28,6 +28,8 @@ impl RedisService {
             conn: Arc::new(Mutex::new(redis_connection_manager)),
         }
     }
+
+
     pub async fn add_to_queue(&self, match_id: String, data: QueueModel) -> RedisResult<()> {
         let mut conn = self.conn.lock().await;
         let timestamp = chrono::Utc::now().timestamp();
@@ -37,6 +39,11 @@ impl RedisService {
             timestamp
         ).await
     }
+
+    pub async fn get_client(&self) -> MultiplexedConnection {
+        self.conn.lock().await.clone()
+    }
+
     pub async fn delete_from_queue(&self, queue: &str, user_id: String) -> RedisResult<()> {
         let users = self.get_users_from_queue(&queue.to_string()).await?;
 

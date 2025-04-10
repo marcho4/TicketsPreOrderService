@@ -6,6 +6,8 @@ import Image from "next/image";
 import {Input} from "../../../../components/ui/input";
 import {Button} from "../../../../components/ui/button";
 import {toast} from "../../../../hooks/use-toast";
+import React from "react";
+import {Pencil, X, Save, LoaderCircle} from "lucide-react";
 
 
 export function RenderedMatchInfo({ resource }) {
@@ -16,6 +18,7 @@ export function RenderedMatchInfo({ resource }) {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [updateError, setUpdateError] = useState(null);
     const [scheme, setScheme] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const handleSubmit = (e) => {
@@ -28,6 +31,7 @@ export function RenderedMatchInfo({ resource }) {
 
         const uploadForm = async () => {
             try {
+                setIsLoading(true);
                 const response = await fetch(`/api/upload`, {
                     method: 'PUT',
                     credentials: 'include',
@@ -48,6 +52,8 @@ export function RenderedMatchInfo({ resource }) {
 
             } catch (error) {
                 console.log(error);
+            } finally {
+                setIsLoading(false);
             }
         }
         uploadForm();
@@ -135,20 +141,20 @@ export function RenderedMatchInfo({ resource }) {
                     {/* Scheme section */}
                     <Card className="w-full lg:w-3/5 mx-auto flex flex-col shadow-lg rounded-lg p-8">
                         <CardHeader>
-                            <CardTitle className="text-3xl">
+                            <CardTitle className="text-2xl md:text-3xl">
                                 Схема стадиона
                             </CardTitle>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="flex flex-col items-center justify-center">   
                             <Image
                                 src={data.scheme}
                                 alt={"Stadium schema"}
                                 className="mb-5 sm:mb-10 rounded-[2em]"
-                                width={700}
+                                width={500}
                                 height={100}
                             />
                             <form onSubmit={handleSubmit} className="w-full rounded-lg p-6  items-center justify-center flex flex-col">
-                                <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+                                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 text-center mb-4">
                                     Поменять схему
                                 </h2>
 
@@ -168,8 +174,9 @@ export function RenderedMatchInfo({ resource }) {
 
                                 <Button
                                     type="submit"
+                                    disabled={isLoading}
                                     className="px-5 py-2 rounded-md text-lg lg:text-xl font-medium transition-colors">
-                                    Сохранить
+                                    {isLoading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : "Сохранить"}
                                 </Button>
                             </form>
                         </CardContent>
@@ -178,8 +185,8 @@ export function RenderedMatchInfo({ resource }) {
                     {/* Match info */}
                     <Card
                         className="w-full lg:w-2/5 mx-auto flex flex-col items-center shadow-lg rounded-lg p-8">
-                        <CardHeader>
-                            <CardTitle className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
+                        <CardHeader className="w-full">
+                            <CardTitle className="text-2xl w-full text-left md:text-3xl font-semibold text-gray-800 mb-6">
                                 Информация о матче
                             </CardTitle>
                         </CardHeader>
@@ -197,68 +204,132 @@ export function RenderedMatchInfo({ resource }) {
                             </div>
                         )}
 
-                        <div className="flex flex-col w-full space-y-4">
-                            {[
-                                { label: "Дата матча", value: matchData.matchDateTime, name: "matchDateTime", type: "datetime-local" },
-                                { label: "Стадион", value: matchData.stadium, name: "stadium", type: "text" },
-                                { label: "Описание", value: matchData.matchDescription, name: "matchDescription", type: "text" },
-                                { label: "Домашняя команда", value: matchData.teamHome, name: "teamHome", type: "text", disabled: true },
-                                { label: "Гостевая команда", value: matchData.teamAway, name: "teamAway", type: "text", disabled: true },
-                            ].map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="flex flex-row w-full items-center border-b last:border-b-0 border-gray-200 py-4"
-                                >
-                                    <div className="w-1/3 md:w-1/3 text-lg md:text-xl font-semibold text-gray-700
-                                        overflow-hidden text-ellipsis whitespace-nowrap">
-                                        {item.label}
+                        <div className="flex flex-col w-full space-y-6">
+                            <div className="grid gap-5 md:grid-cols-1">
+                                {[
+                                    { 
+                                        label: "Дата матча", 
+                                        value: matchData.matchDateTime, 
+                                        name: "matchDateTime", 
+                                        type: "datetime-local",
+                                        icon: "Calendar"
+                                    },
+                                    { 
+                                        label: "Стадион", 
+                                        value: matchData.stadium, 
+                                        name: "stadium", 
+                                        type: "text",
+                                        icon: "LandPlot"
+                                    },
+                                    { 
+                                        label: "Описание", 
+                                        value: matchData.matchDescription, 
+                                        name: "matchDescription", 
+                                        type: "text",
+                                        icon: "FileText"
+                                    },
+                                    { 
+                                        label: "Домашняя команда", 
+                                        value: matchData.teamHome, 
+                                        name: "teamHome", 
+                                        type: "text", 
+                                        disabled: true,
+                                        icon: "Home"
+                                    },
+                                    { 
+                                        label: "Гостевая команда", 
+                                        value: matchData.teamAway, 
+                                        name: "teamAway", 
+                                        type: "text", 
+                                        disabled: true,
+                                        icon: "Plane"
+                                    },
+                                ].map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className={`group relative rounded-lg p-1.5 transition-all ${
+                                            isEditing ? 'bg-card/50 hover:bg-card/80' : 'hover:bg-muted/50'
+                                        } ${index < 4 ? 'border-b' : ''} border-muted`}
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex-1">
+                                                <label 
+                                                    htmlFor={item.name}
+                                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground"
+                                                >
+                                                    {item.label}
+                                                </label>
+                                                
+                                                {item.type === "datetime-local" ? (
+                                                    <Input
+                                                        id={item.name}
+                                                        className={`mt-2 w-full border-0 bg-transparent p-0 text-base ${
+                                                            isEditing ? 'border border-input bg-background shadow-sm py-2 px-3 rounded-md' : ''
+                                                        } font-medium text-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50`}
+                                                        disabled={!isEditing || item.disabled}
+                                                        type="datetime-local"
+                                                        value={isEditing ? new Date(matchData[item.name]).toISOString().slice(0, 16) : formatDate(matchData[item.name], "yyyy-MM-dd HH:mm")}
+                                                        name={item.name}
+                                                        onChange={handleChange}
+                                                    />
+                                                ) : (
+                                                    <Input
+                                                        id={item.name}
+                                                        className={`mt-2 w-full border-0 bg-transparent p-0 text-base ${
+                                                            isEditing ? 'border border-input bg-background shadow-sm py-2 px-3 rounded-md' : ''
+                                                        } font-medium text-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50`}
+                                                        disabled={!isEditing || item.disabled}
+                                                        type={item.type}
+                                                        value={matchData[item.name]}
+                                                        name={item.name}
+                                                        onChange={handleChange}
+                                                    />
+                                                )}
+                                            </div>
+                                            
+                                            {item.disabled && (
+                                                <span className="inline-flex items-center rounded-md bg-muted px-2 py-1 text-xs font-medium text-muted-foreground">
+                                                    Неизменяемо
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
-                                    {item.type === "datetime-local" ? (
-                                        <input
-                                            className="w-2/3 md:w-2/3 py-2 px-3 disabled:bg-gray-50 rounded-lg text-base
-                                            md:text-lg text-gray-700"
-                                            disabled={!isEditing || item.disabled}
-                                            type="datetime-local"
-                                            value={isEditing ? new Date(matchData[item.name]).toISOString().slice(0, 16) : formatDate(matchData[item.name], "yyyy-MM-dd HH:mm")}
-                                            name={item.name}
-                                            onChange={handleChange}>
-                                        </input>
-                                    ) : (
-                                        <input
-                                            className="w-2/3 md:w-2/3 py-2 px-3 disabled:bg-gray-50 rounded-lg text-base
-                                            md:text-lg text-gray-700"
-                                            disabled={!isEditing || item.disabled}
-                                            type={item.type}
-                                            value={matchData[item.name]}
-                                            name={item.name}
-                                            onChange={handleChange}>
-                                        </input>
-                                    )}
-                                </div>
-                            ))}
-                            <div className="items-center w-full flex flex-row justify-center gap-x-5">
-
+                                ))}
+                            </div>
+                            
+                            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
                                 {!isEditing ? (
                                     <Button
-                                        variant={'outline'}
-                                        className="text-lg lg:text-xl lg:py-7 lg:px-10 max-w-64 w-full"
-                                        onClick={() => setEditing(!isEditing)}>
+                                        variant="outline"
+                                        size="lg"
+                                        className="flex items-center gap-2 w-full sm:w-auto justify-center"
+                                        onClick={() => setEditing(!isEditing)}
+                                    >
+                                        <Pencil className="h-4 w-4" />
                                         Редактировать
                                     </Button>
                                 ) : (
-                                    <Button
-                                        variant='secondary'
-                                        className="text-lg lg:text-xl lg:py-7 lg:px-10 max-w-64 w-full"
-                                        onClick={cancelEditing}>
-                                        Отменить
-                                    </Button>
-                                )}
-                                {isEditing && (
-                                    <Button className="text-lg lg:text-xl
-                                      lg:py-7 lg:px-10 max-w-64 w-full"
-                                            onClick={saveChanges}>
-                                        Сохранить
-                                    </Button>
+                                    <>
+                                        <Button
+                                            variant="secondary"
+                                            size="lg"
+                                            className="flex items-center gap-2 w-full sm:w-auto justify-center"
+                                            onClick={cancelEditing}
+                                        >
+                                            <X className="h-4 w-4" />
+                                            Отменить
+                                        </Button>
+                                        
+                                        <Button 
+                                            variant="default"
+                                            size="lg"
+                                            className="flex items-center gap-2 w-full sm:w-auto justify-center"
+                                            onClick={saveChanges}
+                                        >
+                                            <Save className="h-4 w-4" />
+                                            Сохранить
+                                        </Button>
+                                    </>
                                 )}
                             </div>
                         </div>

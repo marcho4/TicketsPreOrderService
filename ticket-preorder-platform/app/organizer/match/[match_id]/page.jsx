@@ -1,15 +1,19 @@
 "use client"
 
 import {useParams} from "next/navigation";
-import {Suspense, useMemo} from "react";
+import {Suspense, useMemo, useState} from "react";
 import {createResource} from "../../../../lib/createResource";
 import {RenderedMatchInfo} from "./RenderedMatch";
 import {TicketsRendered} from "./TicketsRendered";
 import {checkImageExists} from "../../../../lib/dataFetchers";
+import {MatchInfoSkeleton} from "./MatchInfoSkeleton";
+import {TicketsSkeleton} from "./TicketsSkeleton";
 
 export default function Page() {
     const {match_id} = useParams();
     const imageUrl = `https://stadium-schemes.s3.us-east-1.amazonaws.com/matches/${match_id}`;
+
+    const [refresh, setRefresh] = useState(1);
 
     async function fetchMatchData() {
         try {
@@ -60,16 +64,16 @@ export default function Page() {
 
     const ticketResource = useMemo(() => {
         return createResource(fetchTickets)
-    }, [match_id]);
+    }, [match_id, refresh]);
 
 
     return (
         <div>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<MatchInfoSkeleton />}>
                 <RenderedMatchInfo resource={resource} />
             </Suspense>
-            <Suspense fallback={<div>Loading...</div>}>
-                <TicketsRendered resource={ticketResource} match_id={match_id} />
+            <Suspense fallback={<TicketsSkeleton />}>
+                <TicketsRendered resource={ticketResource} match_id={match_id} refreshFunc={setRefresh}/>
             </Suspense>
         </div>
     )

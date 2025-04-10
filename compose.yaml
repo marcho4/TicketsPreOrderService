@@ -11,6 +11,21 @@ services:
       - "8000:8000"
     networks:
       - main
+    restart: always
+    depends_on:
+      - auth
+      - admin
+      - organizer
+      - user
+      - matches
+      - tickets
+      - kafka-1
+      - kafka-ui
+      - redis-queue
+      - queue-processor
+      - payment
+      - webhook-mock
+      - frontend
 
   auth:
     build:
@@ -20,9 +35,12 @@ services:
       - "8002:8002"
     networks:
       - main
+    restart: always
+    depends_on:
+      - auth_postgres
 
   auth_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -39,7 +57,7 @@ services:
     restart: always
 
   admin_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -65,9 +83,10 @@ services:
       - main
     depends_on:
       - admin_postgres
+    restart: always
 
   org_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -93,9 +112,10 @@ services:
       - main
     depends_on:
       - org_postgres
+    restart: always
 
   user_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -121,8 +141,7 @@ services:
       - main
     depends_on:
       - user_postgres
-
- 
+    restart: always
   matches:
     build:
       context: ./MatchesService/MatchesService
@@ -135,9 +154,9 @@ services:
       - main
     depends_on:
       - match_postgres
-
+    restart: always
   match_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_DB: matches_db
       POSTGRES_USER: matches_user
@@ -167,7 +186,7 @@ services:
       - tickets_postgres
 
   tickets_postgres:
-    image: postgres:latest
+    image: postgres:17
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -183,7 +202,6 @@ services:
       timeout: 3s
     restart: always
       
-
   email:
     build:
       context: ./EmailService
@@ -204,7 +222,7 @@ services:
     ports:
       - "9092:9092"     # PLAINTEXT – для доступа с хоста
       - "29092:29092"   # INTERNAL – для связи между контейнерами
-      - "9093:9093"     # CONTROLLER – используется для KRaft, можно пробросить для диагностики
+      - "9093:9093"     
     environment:
       # Основные роли
       KAFKA_NODE_ID: 1
@@ -261,7 +279,7 @@ services:
       - main
 
   redis-queue:
-    image: redis:latest
+    image: redis:7.4.0
     restart: always
     ports:
       - "6379:6379"
@@ -289,6 +307,60 @@ services:
     depends_on:
       - redis-queue
       - kafka-1
+    restart: always
+  payment:
+    build:
+      context: ./PaymentService
+      dockerfile: Dockerfile
+    ports:
+      - "8008:8008"
+    networks:
+      - main
+    depends_on:
+      - payment-postgres
+    restart: always
+
+  payment-postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: payment
+    networks:
+      - main
+    volumes:
+      - payment_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+    restart: always
+    
+  webhook-mock:
+    build:
+      context: ./WebhookMockService
+      dockerfile: Dockerfile
+    ports:
+      - "8009:8009"
+    networks:
+      - main
+    restart: always
+  frontend:
+    build:
+      context: ./ticket-preorder-platform
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./ticket-preorder-platform:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - main
+    env_file:
+      - ./ticket-preorder-platform/.env
+    restart: always
 
 networks:
   main:
@@ -301,9 +373,8 @@ volumes:
   user_postgres_data:
   matches_postgres_data:
   tickets_postgres_data:
+  payment_postgres_data:
   kafka_data:
   redis-data:
     driver:
       local
-
-

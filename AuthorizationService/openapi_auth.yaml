@@ -22,38 +22,18 @@ paths:
               type: object
               properties:
                 email:
-<<<<<<< HEAD
-                    type: string
-                    format: email
-                    description: Электронная почта организатора
-                    example: "organizer_email@gmail.com"
-                company:
-                    type: string
-                    description: Название компании организатора
-                    example: "ООО 'Рога и копыта'"
-                TIN:
-                    type: string
-                    description: Идентификационный номер налогоплательщика (ИНН)
-                    example: "123456789012"
-=======
                   type: string
                   format: email
                   description: Электронная почта организатора
-                    type: string
-                    format: email
-                    description: Электронная почта организатора
-                    example: "organizer_email@gmail.com"
+                  example: "organizer_email@gmail.com"
                 company:
-                    type: string
-                    description: Название компании организатора
-                    example: "ООО 'Рога и копыта'"
+                  type: string
+                  description: Название компании организатора
+                  example: "ООО 'Рога и копыта'"
                 TIN:
                   type: string
                   description: Идентификационный номер налогоплательщика (ИНН)
->>>>>>> 23a005e (documentation added)
-                    type: string
-                    description: Идентификационный номер налогоплательщика (ИНН)
-                    example: "123456789012"
+                  example: "123456789012"
               required:
                 - email
                 - company
@@ -79,69 +59,36 @@ paths:
               type: object
               properties:
                 name:
-<<<<<<< HEAD
-                    type: string
-                    description: Имя пользователя
-                    example: "Иван"
-                last_name:
-                    type: string
-                    description: Фамилия пользователя
-                    example: "Иванов"
-                email:
-                    type: string
-                    format: email
-                    description: Электронная почта пользователя
-                    example: "ivan_ivanov@gmail.com"
-                login:
-                    type: string
-                    description: Логин пользователя
-                    example: "ivan_ivanov"
-                password:
-                    type: string
-                    description: Пароль пользователя
-                    example: "1234567890"
-                user_id:
-                    type: string
-                    description: ID пользователя из сервиса пользователя
-                    example: "1234567890"
-=======
                   type: string
                   description: Имя пользователя
-                    type: string
-                    description: Имя пользователя
-                    example: "Иван"
+                  example: "Иван"
                 last_name:
-                    type: string
-                    description: Фамилия пользователя
-                    example: "Иванов"
+                  type: string
+                  description: Фамилия пользователя
+                  example: "Иванов"
                 email:
-                    type: string
-                    format: email
-                    description: Электронная почта пользователя
-                    example: "ivan_ivanov@gmail.com"
+                  type: string
+                  format: email
+                  description: Электронная почта пользователя
+                  example: "ivan_ivanov@gmail.com"
                 login:
-                    type: string
-                    description: Логин пользователя
-                    example: "ivan_ivanov"
+                  type: string
+                  description: Логин пользователя
+                  example: "ivan_ivanov"
                 password:
-                    type: string
-                    description: Пароль пользователя
->>>>>>> 23a005e (documentation added)
-                    example: "1234567890"
+                  type: string
+                  description: Пароль пользователя
+                  example: "1234567890"
                 user_id:
-                    type: string
-                    description: ID пользователя из сервиса пользователя
-                    example: "1234567890"
+                  type: string
+                  description: ID пользователя из сервиса пользователя
+                  example: "1234567890"
               required:
                 - name
                 - last_name
                 - email
                 - login
                 - password
-<<<<<<< HEAD
-                - user_id
-=======
->>>>>>> 23a005e (documentation added)
                 - user_id
       responses:
         '200':
@@ -164,29 +111,13 @@ paths:
               type: object
               properties:
                 login:
-<<<<<<< HEAD
-                    type: string
-                    format: login
-                    description: Логин пользователя
-                password:
-                    type: string
-                    format: password
-                    description: Пароль пользователя
-=======
                   type: string
                   format: login
                   description: Логин пользователя
-                    type: string
-                    format: login
-                    description: Логин пользователя
                 password:
                   type: string
                   format: password
                   description: Пароль пользователя
->>>>>>> 23a005e (documentation added)
-                    type: string
-                    format: password
-                    description: Пароль пользователя
               required:
                 - login
                 - password
@@ -211,48 +142,26 @@ paths:
               type: object
               properties:
                 api_key:
-<<<<<<< HEAD
-                    type: string
-                    description: Имя администратора
-                    example: "VERY_SECRET_KEY"
-                login:
-                    type: string
-                    description: Фамилия администратора
-                    example: "admin"
-                password:
-                    type: string
-                    description: Электронная почта администратора
-                    example: "admin228"
-                email:
-                    type: string
-                    description: Логин администратора
-                    example: "admin_email@gmail.com"
-=======
                   type: string
                   description: Имя администратора
-                    type: string
-                    description: Имя администратора
-                    example: "VERY_SECRET_KEY"
+                  example: "VERY_SECRET_KEY"
                 login:
-                    type: string
-                    description: Фамилия администратора
-                    example: "admin"
+                  type: string
+                  description: Фамилия администратора
+                  example: "admin"
                 password:
-                    type: string
-                    description: Электронная почта администратора
-                    example: "admin228"
+                  type: string
+                  description: Электронная почта администратора
+                  example: "admin228"
                 email:
                   type: string
                   description: Логин администратора
->>>>>>> 23a005e (documentation added)
-                    type: string
-                    description: Логин администратора
-                    example: "admin_email@gmail.com"
+                  example: "admin_email@gmail.com"
               required:
-               - api_key
-               - login
-               - password
-               - email
+                - api_key
+                - login
+                - password
+                - email
       responses:
         '200':
           description: Успешное создание администратора
@@ -276,50 +185,24 @@ paths:
               type: object
               properties:
                 api_key:
-<<<<<<< HEAD
-                    type: string
-                    description: Ключ апи
-                    example: "VERY_SECRET_KEY"
-                email:
-                    type: string
-                    format: email
-                    description: Электронная почта администратора
-                    example: "admin_email@gmail.com"
-                login:
-                    type: string
-                    format: login
-                    description: Логин администратора
-                    example: "admin"
-                password:
-                    type: string
-                    format: password
-                    description: Пароль администратора
-                    example: "admin228"
-=======
                   type: string
                   description: Ключ апи
-                    type: string
-                    description: Ключ апи
-                    example: "VERY_SECRET_KEY"
+                  example: "VERY_SECRET_KEY"
                 email:
-                    type: string
-                    format: email
-                    description: Электронная почта администратора
-                    example: "admin_email@gmail.com"
+                  type: string
+                  format: email
+                  description: Электронная почта администратора
+                  example: "admin_email@gmail.com"
                 login:
-                    type: string
-                    format: login
-                    description: Логин администратора
-                    example: "admin"
+                  type: string
+                  format: login
+                  description: Логин администратора
+                  example: "admin"
                 password:
                   type: string
                   format: password
                   description: Пароль администратора
->>>>>>> 23a005e (documentation added)
-                    type: string
-                    format: password
-                    description: Пароль администратора
-                    example: "admin228"
+                  example: "admin228"
               required:
                 - api_key
                 - email
@@ -346,66 +229,31 @@ paths:
               type: object
               properties:
                 email:
-<<<<<<< HEAD
-                    type: string
-                    format: email
-                    description: Электронная почта организатора
-                    example: "organizer_email@gmail.com"
-                company:
-                    type: string
-                    description: Название организации
-                    example: "ООО 'Рога и копыта'"
-                tin:
-                    type: string
-                    description: ИНН организации
-                    example: "123456789012"
-                status:
-                    type: string
-                    description: Статус подтверждения
-                    example: "APPROVED"
-                user_id:
-                    type: string
-                    description: ID организатора из сервиса пользователя
-                    example: "1234567890"
-              required:
-                - email
-                - company
-                - tin
-                - status
-                - user_id
-=======
                   type: string
                   format: email
                   description: Электронная почта организатора
-                organization_name:
+                  example: "organizer_email@gmail.com"
+                company:
                   type: string
                   description: Название организации
-                    type: string
-                    format: email
-                    description: Электронная почта организатора
-                    example: "organizer_email@gmail.com"
-                company:
-                    type: string
-                    description: Название организации
-                    example: "ООО 'Рога и копыта'"
+                  example: "ООО 'Рога и копыта'"
                 tin:
-                    type: string
-                    description: ИНН организации
-                    example: "123456789012"
+                  type: string
+                  description: ИНН организации
+                  example: "123456789012"
                 status:
-                    type: string
-                    description: Статус подтверждения
-                    example: "APPROVED"
+                  type: string
+                  description: Статус подтверждения
+                  example: "APPROVED"
                 user_id:
-                    type: string
-                    description: ID организатора из сервиса пользователя
-                    example: "1234567890"
+                  type: string
+                  description: ID организатора из сервиса пользователя
+                  example: "1234567890"
               required:
                 - email
                 - company
                 - tin
                 - status
->>>>>>> 23a005e (documentation added)
                 - user_id
       responses:
         '200':
