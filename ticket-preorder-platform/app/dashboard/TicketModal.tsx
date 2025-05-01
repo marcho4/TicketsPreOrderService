@@ -53,7 +53,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
         
         setIsFetchingPaymentId(true);
         try {
-            const response = await fetch('http://localhost:8000/api/payments', {
+            const response = await fetch('http://84.201.129.122:8000/api/payments', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
 
         setIsLoading(true);
         try {
-            const response = await fetch(`http://localhost:8000/api/tickets/cancel/${ticketData.id}`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/tickets/cancel/${ticketData.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -165,7 +165,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
         setIsPaymentLoading(true);
         try {
             // Создаем платеж через оркестратор
-            const paymentResponse = await fetch(`http://localhost:8000/api/payments/pay`, {
+            const paymentResponse = await fetch(`http://84.201.129.122:8000/api/payments/pay`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -254,7 +254,7 @@ export default function TicketModal({ ticketData, matchName, stadium, onTicketUp
 
         setIsRefundLoading(true);
         try {
-            const response = await fetch(`http://localhost:8000/api/payments/refund/${currentPaymentId}`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/payments/refund/${currentPaymentId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

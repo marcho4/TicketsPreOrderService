@@ -39,7 +39,7 @@ export interface TicketCardData {
 
 async function fetchMatchData(id: string): Promise<MatchInfoProps> {
     try {
-        const response = await fetch(`http://localhost:8000/api/matches/${id}`, {
+        const response = await fetch(`http://84.201.129.122:8000/api/matches/${id}`, {
             method: "GET",
             credentials: "include",
         });

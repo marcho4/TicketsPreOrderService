@@ -28,7 +28,7 @@ export default function UserTicketsCard ({userId}: UserTicketsProps ) {
     const getTickets = async () => {
         if (!userId) return struct;
         try {
-            const response = await fetch(`http://localhost:8000/api/tickets/user/${userId}`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/tickets/user/${userId}`, {
                 method: 'GET',
                 credentials: "include",
             });

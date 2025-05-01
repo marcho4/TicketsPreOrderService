@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ваш предзаказ билетов успешно оформлен!</title>
+    <title>Ваш предзаказ билетов по заявке из очередиуспешно оформлен!</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -84,7 +84,7 @@
     <div class="container">
         <div class="header">
             <img src="{{logo_url}}" alt="Логотип компании" class="logo">
-            <h1>Ваш предзаказ успешно оформлен!</h1>
+            <h1>Ваш предзаказ по заявке из очереди успешно оформлен!</h1>
         </div>
         <div class="content">
             <p>Здравствуйте, <strong>{{user_name}}</strong>!</p>
@@ -101,10 +101,7 @@
                 <p>Номер предзаказа: <strong>{{order_id}}</strong></p>
             </div>
 
-            <p><strong>Что дальше?</strong></p>
-            <p>Это предварительный заказ. Как только билеты поступят в продажу, мы автоматически попытаемся приобрести их для вас и уведомим вас о результате.</p>
-            <p>Вы можете отслеживать статус вашего предзаказа или отменить его в любое время до момента выпуска билетов в продажу.</p>
-
+            
             <div style="text-align: center;">
                 <a href="{{order_details_url}}" class="button">Просмотреть детали заказа</a>
                 <br>

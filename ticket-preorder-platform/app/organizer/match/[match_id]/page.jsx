@@ -8,6 +8,7 @@ import {TicketsRendered} from "./TicketsRendered";
 import {checkImageExists} from "../../../../lib/dataFetchers";
 import {MatchInfoSkeleton} from "./MatchInfoSkeleton";
 import {TicketsSkeleton} from "./TicketsSkeleton";
+export const dynamic = 'force-dynamic'
 
 export default function Page() {
     const {match_id} = useParams();
@@ -17,7 +18,7 @@ export default function Page() {
 
     async function fetchMatchData() {
         try {
-            const response = await fetch(`http://localhost:8000/api/matches/${match_id}`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/matches/${match_id}`, {
                 method: "GET",
                 credentials: "include",
             });
@@ -41,7 +42,7 @@ export default function Page() {
     }
     async function fetchTickets() {
         try {
-            const response = await fetch(`http://localhost:8000/api/tickets/${match_id}`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/tickets/${match_id}`, {
                 method: "GET",
                 credentials: "include",
             });

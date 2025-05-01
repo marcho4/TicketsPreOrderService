@@ -34,7 +34,6 @@ export function RenderedMatchInfo({ resource }) {
                 setIsLoading(true);
                 const response = await fetch(`/api/upload`, {
                     method: 'PUT',
-                    credentials: 'include',
                     body: formData,
                 })
                 const body = await response.json();
@@ -82,7 +81,7 @@ export function RenderedMatchInfo({ resource }) {
                 stadium: matchData.stadium
             };
 
-            const response = await fetch(`http://localhost:8000/api/matches/${match_id}`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/matches/${match_id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

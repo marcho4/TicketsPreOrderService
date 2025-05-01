@@ -13,6 +13,7 @@ import {Skeleton} from "../../../components/ui/skeleton";
 import {Label} from "../../../components/ui/label";
 import {Input} from "../../../components/ui/input";
 import {toast} from "@/hooks/use-toast";
+export const dynamic = 'force-dynamic'
 
 
 export function formatDate(dateString) {
@@ -32,7 +33,7 @@ export default function Page() {
     // Функция для получения данных матча
     const fetchMatchData = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/matches/${id}`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/matches/${id}`, {
                 method: "GET",
                 credentials: "same-origin",
             });
@@ -48,7 +49,7 @@ export default function Page() {
     // Функция для получения всех билетов на матч
     const fetchAvailableTickets = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/tickets/${id}?available=true`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/tickets/${id}?available=true`, {
                 method: "GET",
                 credentials: "same-origin",
             });
@@ -109,7 +110,7 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
     const [maxPrice, setMaxPrice] = useState(undefined);
 
     const getInQueue = async (min_price, max_price) => {
-        const url = `http://localhost:8000/api/matches/queue/${id}`;
+        const url = `http://84.201.129.122:8000/api/matches/queue/${id}`;
         const response = await fetch(url, {
             method: "POST",
             credentials: "include",
@@ -136,7 +137,7 @@ function MatchRendered({ resource, ticketsResource, setRefreshResourceKey, id}) 
     }
 
     const getOutQueue = async () => {
-        const url = `http://localhost:8000/api/matches/queue/delete/${id}`;
+        const url = `http://84.201.129.122:8000/api/matches/queue/delete/${id}`;
         const response = await fetch(url, {
             method: "DELETE",
             credentials: "include",

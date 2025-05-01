@@ -31,7 +31,7 @@ export async function fetchMatchData(id: string): Promise<boolean> {
 }
 
 export const fetchRequests = async () => {
-    const response = await fetch("http://localhost:8000/api/admin/requests", {
+    const response = await fetch("http://84.201.129.122:8000/api/admin/requests", {
         method: "GET",
         credentials: "include",
     });
@@ -47,7 +47,7 @@ export const fetchRequests = async () => {
 
 export const fetchTickets = async (userId: string) => {
     try {
-        const response = await fetch(`http://localhost:8000/api/tickets/user/${userId}`, {
+        const response = await fetch(`http://84.201.129.122:8000/api/tickets/user/${userId}`, {
             method: 'GET',
             credentials: 'same-origin',
         });

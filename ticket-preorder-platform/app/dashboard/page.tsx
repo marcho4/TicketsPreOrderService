@@ -5,12 +5,13 @@ import {Card, CardHeader, CardTitle} from "@/components/ui/card";
 import UserDataCard from "@/components/UserDataCard";
 import UserTicketsCard from "@/app/dashboard/UserTickets";
 import UserPaymentsCard from "@/app/dashboard/UserPayments";
+export const dynamic = 'force-dynamic'
 
 
 export default function Dashboard() {
   const {user, isLoading} = useAuth();
-  let fetchUrl = `http://localhost:8000/api/user/${user}`;
-  let updateUrl = `http://localhost:8000/api/user/${user}/update`;
+  let fetchUrl = `http://84.201.129.122:8000/api/user/${user}`;
+  let updateUrl = `http://84.201.129.122:8000/api/user/${user}/update`;
 
   if (isLoading) {
     return <p>Загрузка...</p>;

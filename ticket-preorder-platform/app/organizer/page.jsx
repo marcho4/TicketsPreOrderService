@@ -6,6 +6,7 @@ import React from "react";
 import ChangePasswordSection from "../../components/ChangePasswordSection";
 import OrgDataCard from "./organizerData";
 import {Card, CardHeader, CardTitle} from "../../components/ui/card";
+export const dynamic = 'force-dynamic'
 
 
 export default function Page() {
@@ -19,8 +20,8 @@ export default function Page() {
         );
     }
 
-    let fetchUrl = `http://localhost:8000/api/organizer/get/${user}`;
-    let updateUrl = `http://localhost:8000/api/organizer/update/${user}`;
+    let fetchUrl = `http://84.201.129.122:8000/api/organizer/get/${user}`;
+    let updateUrl = `http://84.201.129.122:8000/api/organizer/update/${user}`;
 
     return (
         <div className="flex flex-col min-h-screen pt-10 p-2">

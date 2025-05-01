@@ -29,7 +29,7 @@ export default function RootLayout({
           <main className="min-h-screen">
               {children}
               <Toaster/>
-              <Footer />
+              {/* <Footer /> */}
           </main>
         </AuthProvider>
       </body>

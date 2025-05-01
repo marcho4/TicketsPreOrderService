@@ -12,7 +12,7 @@ export default function FetchedTickets({resource, setRefreshResourceKey, matchId
 
     const preorderTicket = async (item: TicketItem) => {
         try {
-            let resp = await fetch(`http://localhost:8000/api/tickets/preorder/${item.id}`,
+            let resp = await fetch(`http://84.201.129.122:8000/api/tickets/preorder/${item.id}`,
                 {
                     method: 'PUT',
                     credentials: 'include',
@@ -31,6 +31,11 @@ export default function FetchedTickets({resource, setRefreshResourceKey, matchId
                     description: "Ожидайте уведомления на почту",
                 })
                 setRefreshResourceKey((prev: number) => prev + 1);
+            } else if (resp.status == 400) {
+                toast({
+                    title: "Вы достигли лимита в два билета на один",
+                    description: "К сожалению, вы не можете предзаказать больше двух билетов на один матч",
+                })
             } else {
                 toast({
                     title: "Произошла ошибка при предзаказе",

@@ -1,5 +1,7 @@
 "use client"
 
+export const dynamic = 'force-dynamic'
+
 import {createContext, useContext, useState, useEffect, useMemo} from 'react';
 
 
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch('http://localhost:8000/api/auth/session',
+            const response = await fetch('http://84.201.129.122:8000/api/auth/session',
                 {
                     method: 'GET',
                     credentials: 'include',

@@ -48,7 +48,7 @@ export default function AuthCard() {
         e.preventDefault();
         try {
             setError(false);
-            let response = await fetchData("http://localhost:8000/api/auth/login", "POST",
+            let response = await fetchData("http://84.201.129.122:8000/api/auth/login", "POST",
                 { login, password }, setLoading)
             console.log(response.status)
             if (response.status === 200) {
@@ -85,7 +85,7 @@ export default function AuthCard() {
         e.preventDefault();
         try {
             setError(false);
-            let response = await fetchData("http://localhost:8000/api/auth/register/user", "POST",
+            let response = await fetchData("http://84.201.129.122:8000/api/auth/register/user", "POST",
                 { name, last_name, email, login: email, password, birthday, phone: phoneNumber}, setLoading);
             let body = await response.json();
 
@@ -117,7 +117,7 @@ export default function AuthCard() {
     // Функция регистрации организатора
     const handleSignupOrganizer = async (e) => {
         e.preventDefault();
-        let response = await fetchData("http://localhost:8000/api/auth/register/organizer", "POST",
+        let response = await fetchData("http://84.201.129.122:8000/api/auth/register/organizer", "POST",
             { company, email, tin, phone_number: phoneNumber }, setLoading)
 
         if (response.status === 200) {

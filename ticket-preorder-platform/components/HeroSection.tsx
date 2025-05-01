@@ -16,8 +16,11 @@ export default function HeroSection() {
               <h2 className='text-4xl sm:text-5xl md:text-7xl text-black font-semibold text-center md:text-left leading-tight'>Покупайте билеты в один клик</h2>
               <div className='w-full flex justify-center md:justify-start'>
                 <Link href='/matches'>
-                <Button size='lg' className='mt-6 hover:bg-lime-400 hover:text-black transition-all duration-300'>
-                  <span className='text-2xl italic'>Перейти к матчам <ArrowRight strokeWidth={3} className='ml-2 w-4 h-4 inline-block' /></span>
+                <Button size={{
+                  default: 'md',
+                  sm: 'lg'
+                }} className='mt-6 hover:bg-lime-400 hover:text-black transition-all duration-300 px-4 py-1'>
+                  <span className='text-xl sm:text-2xl italic'>Перейти к матчам <ArrowRight strokeWidth={3} className='ml-2 w-4 h-4 inline-block' /></span>
                 </Button>
                 </Link>
               </div>

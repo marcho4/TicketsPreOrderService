@@ -1,6 +1,8 @@
 use crate::models::general::ApiResponse;
 use actix_web::cookie::{Cookie, Expiration, SameSite, time::OffsetDateTime};
 use actix_web::{post, HttpResponse, Responder};
+use actix_web::cookie::time::Duration;
+
 
 #[utoipa::path(
     post,
@@ -15,8 +17,9 @@ use actix_web::{post, HttpResponse, Responder};
 pub async fn logout() -> impl Responder {
     let expired_cookie = Cookie::build("token", "")
         .path("/")
-        .same_site(SameSite::None)
-        .expires(Expiration::from(OffsetDateTime::UNIX_EPOCH))
+        .same_site(SameSite::Strict)
+        .max_age(Duration::seconds(0))
+        .http_only(true)
         .finish();
 
 

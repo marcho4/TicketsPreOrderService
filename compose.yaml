@@ -1,4 +1,16 @@
 services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+    # depends_on:
+    #   - orchestrator
+    networks:
+      - main
+    restart: always
+
   orchestrator:
     build:
       context: ./orchestrator
@@ -9,23 +21,24 @@ services:
       - orchestrator/.env
     ports:
       - "8000:8000"
+    expose:
+      - "8000"
     networks:
       - main
     restart: always
-    depends_on:
-      - auth
-      - admin
-      - organizer
-      - user
-      - matches
-      - tickets
-      - kafka-1
-      - kafka-ui
-      - redis-queue
-      - queue-processor
-      - payment
-      - webhook-mock
-      - frontend
+    # depends_on:
+    #   - auth
+    #   - admin
+    #   - organizer
+    #   - user
+    #   - matches
+    #   - tickets
+    #   - kafka-1
+    #   - kafka-ui
+    #   - redis-queue
+    #   - queue-processor
+    #   - payment
+    #   - webhook-mock
 
   auth:
     build:
@@ -233,7 +246,7 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka-1:9093"
 
-      # Определяем все listener’ы, включая CONTROLLER
+      # Определяем все listener'ы, включая CONTROLLER
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:29092,CONTROLLER://0.0.0.0:9093
 
       # Рекламируемые адреса: для внешних клиентов PLAINTEXT – localhost,
@@ -350,17 +363,17 @@ services:
     build:
       context: ./ticket-preorder-platform
       dockerfile: Dockerfile
+    expose:
+      - "3000"
     ports:
       - "3000:3000"
-    volumes:
-      - ./ticket-preorder-platform:/app
-      - /app/node_modules
-      - /app/.next
     networks:
       - main
     env_file:
       - ./ticket-preorder-platform/.env
     restart: always
+    # depends_on:
+    #   - orchestrator
 
 networks:
   main:

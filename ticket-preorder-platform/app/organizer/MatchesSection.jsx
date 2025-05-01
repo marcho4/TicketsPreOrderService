@@ -52,7 +52,7 @@ export default function MatchesSection() {
     const matchesResource = useMemo(() => {
         const fetchMatches = async () => {
             try {
-                let response = await fetch(`http://localhost:8000/api/matches/org/${user}`, {
+                let response = await fetch(`http://84.201.129.122:8000/api/matches/org/${user}`, {
                     method: 'GET',
                     credentials: 'same-origin',
                 });
@@ -79,7 +79,7 @@ export default function MatchesSection() {
 
     const handleCreateMatch = async (data) => {
 
-        const response = await fetch(`http://localhost:8000/api/matches/${user}`, {
+        const response = await fetch(`http://84.201.129.122:8000/api/matches/${user}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: "include",
@@ -110,7 +110,6 @@ export default function MatchesSection() {
                     setIsLoading(true);
                     const response = await fetch(`/api/upload`, {
                         method: 'PUT',
-                        credentials: 'include',
                         body: formData,
                     })
                     const body = await response.json();

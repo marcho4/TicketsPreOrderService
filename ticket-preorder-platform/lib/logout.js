@@ -1,6 +1,6 @@
 export const logout = async (router) => {
     try {
-        let resp = await fetch("http://localhost:8000/api/auth/logout", {
+        let resp = await fetch("http://84.201.129.122:8000/api/auth/logout", {
             method: "POST",
             credentials: "include",
         });

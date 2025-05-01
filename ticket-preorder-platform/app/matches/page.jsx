@@ -5,13 +5,13 @@ import {createResource} from "../../lib/createResource";
 import {Suspense, useMemo, useCallback} from "react";
 import { LoaderIcon } from "lucide-react";
 
-
+export const dynamic = 'force-dynamic'
 
 export default function Page() {
 
     const fetchMatches = useCallback(async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/matches/all`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/matches/all`, {
                 method: "GET",
                 credentials: "include",
             });

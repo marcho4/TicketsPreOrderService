@@ -2,10 +2,12 @@ let userConfig = undefined
 try {
   userConfig = await import('./user-next.config')
 } catch (e) {
+
 }
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   eslint: {
     ignoreDuringBuilds: true,
   },

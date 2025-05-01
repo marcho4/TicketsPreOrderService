@@ -1,6 +1,7 @@
 'use client'
 
 import LoginCard from "@/app/login/LoginCard";
+export const dynamic = 'force-dynamic'
 
 export default function Login() {
   return (

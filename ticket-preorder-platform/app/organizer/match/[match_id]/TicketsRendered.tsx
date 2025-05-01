@@ -33,7 +33,7 @@ export function TicketsRendered({ resource, match_id, refreshFunc }: { resource:
         formData.append('tickets', ticketsFile);
 
         try {
-            let response = await fetch(`http://localhost:8000/api/tickets/${match_id}`, {
+            let response = await fetch(`http://84.201.129.122:8000/api/tickets/${match_id}`, {
                 method: 'POST',
                 credentials: 'include',
                 body: formData,

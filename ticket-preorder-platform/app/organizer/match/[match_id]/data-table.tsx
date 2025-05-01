@@ -102,7 +102,7 @@ export function DataTable<TData, TValue>({
         console.log(idsToDelete);
 
         try {
-            const response = await fetch(`http://localhost:8000/api/tickets/${match_id}`, {
+            const response = await fetch(`http://84.201.129.122:8000/api/tickets/${match_id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

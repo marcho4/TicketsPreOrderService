@@ -3,6 +3,8 @@ import SocialProof from '@/components/SocialProof'
 import CallToAction from '@/components/CallToAction'
 import Features from '@/components/Features'
 
+export const dynamic = 'force-dynamic'
+
 export default function Home() {
   return (
     <div className="@container mx-auto px-8 md:px-12 lg:px-16">

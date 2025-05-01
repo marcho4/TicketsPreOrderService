@@ -234,7 +234,7 @@ export default function UserPaymentsCard() {
         
         setIsRefreshing(true);
         try {
-            const response = await fetch('http://localhost:8000/api/payments', {
+            const response = await fetch('http://84.201.129.122:8000/api/payments', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -255,7 +255,7 @@ export default function UserPaymentsCard() {
         if (!user) return;
         
         try {
-            const response = await fetch('http://localhost:8000/api/payments/refunds', {
+            const response = await fetch('http://84.201.129.122:8000/api/payments/refunds', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

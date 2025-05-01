@@ -94,6 +94,20 @@ pub async fn preorder_ticket(
     }
     let match_info = match_info.unwrap();
 
+    let users_ticket = orchestrator
+        .get_users_tickets(user_id.clone()).await;
+
+    match users_ticket {
+        Ok(users_ticket) => {
+            let count = users_ticket.iter().filter(|ticket| ticket.match_id == match_info.id).count();
+            if count >= 2 {
+                return generic_response::<String>(StatusCode::BAD_REQUEST, Some("You have reached the maximum number of tickets for this match.".to_string()), None);
+            }
+        },
+        Err(e) => {
+            return generic_response::<String>(StatusCode::INTERNAL_SERVER_ERROR, Some(format!("Error getting user info: {}", e.to_string())), None)
+        }
+    }
 
     match orchestrator.reserve_ticket(&ticket_id, data).await {
         Ok(ticket) => {

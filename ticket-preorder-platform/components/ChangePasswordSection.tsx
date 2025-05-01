@@ -21,7 +21,7 @@ function ChangePasswordSection(): React.JSX.Element {
 
     const updatePassword = async (newPassword: string) => {
         try {
-            const response = await fetch("http://localhost:8000/api/auth/password/change", {
+            const response = await fetch("http://84.201.129.122:8000/api/auth/password/change", {
                 method: "PUT",
                 body: JSON.stringify({"password": newPassword}),
                 credentials: "include",

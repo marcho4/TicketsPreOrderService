@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import React, { Suspense, useEffect, useMemo, useState } from "react";
+export const dynamic = 'force-dynamic'
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import ErrorBoundary from "./dataBoundary";
-import { useAuth } from "@/providers/authProvider";
-import { useRouter } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
 import { fetchRequests } from "@/lib/dataFetchers";
-
+import { useRouter } from 'next/navigation'
 import {
   Table,
   TableBody,
@@ -19,7 +18,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { createResource } from "@/lib/createResource";
 import { toast } from "@/hooks/use-toast";
 
 interface Request {
@@ -29,8 +27,6 @@ interface Request {
   tin: string;
 }
 
-
-// Компонент загрузки
 function Loading() {
   return (
     <div className="flex items-center justify-center p-4">
@@ -39,45 +35,54 @@ function Loading() {
   );
 }
 
-// Основной компонент
 const AdminHome = () => {
   const router = useRouter();
   const [trigger, setTrigger] = useState(0);
+  const [requests, setRequests] = useState<Request[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const requestResource = useMemo(() => {
-    return createResource(fetchRequests);
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await fetchRequests();
+        setRequests(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load requests");
+        setLoading(false);
+      }
+    };
+    loadData();
   }, [trigger]);
 
   const handleResponse = async (requestId: string, action: "APPROVED" | "REJECTED") => {
     try {
-      const res = await fetch(`http://localhost:8000/api/admin/process`, {
+      const res = await fetch(`http://84.201.129.122:8000/api/admin/process`, {
         method: "POST",
         credentials: "include",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ request_id: requestId, status: action })
       });
-      if (res.status === 200) {
+      if (res.ok) {
         setTrigger(prev => prev + 1);
         toast({
           title: "Успешно!",
           description: "Заявка успешно обработана",
         });
       } else {
-        toast({
-          title: "Ошибка!",
-          description: "Не удалось обработать заявку",
-          variant: "destructive",
-        });
+        throw new Error('Request failed');
       }
     } catch (error) {
-      console.error("Error handling response:", error);
+      toast({
+        title: "Ошибка!",
+        description: "Не удалось обработать заявку",
+        variant: "destructive",
+      });
     }
   };
 
-  const RenderRequestList = ({resource}: {resource: {read: () => Request[]}}) => {
-    const requests = resource.read();
-
-
+  const RenderRequestList = ({ requests }: { requests: Request[] }) => {
     if (!requests.length) {
       return <p className="text-center">Заявок нет.</p>;
     }
@@ -99,26 +104,26 @@ const AdminHome = () => {
           </TableHeader>
           <TableBody>
             {requests.map((request) => (
-                <TableRow key={request.request_id}>
-                  <TableCell className="px-4 py-2 whitespace-nowrap text-sm">{request.request_id}</TableCell>
-                  <TableCell className="px-4 py-2 text-sm">{request.company}</TableCell>
-                  <TableCell className="px-4 py-2 text-sm">{request.email}</TableCell>
-                  <TableCell className="px-4 py-2 text-sm">{request.tin}</TableCell>
-                  <TableCell className="px-4 py-2">
-                    <div className="flex flex-col sm:flex-row gap-2">
-                      <Button
-                          onClick={() => handleResponse(request.request_id, "APPROVED")}
-                          className="bg-green-500 hover:bg-green-600 text-xs px-2 py-1 h-auto">
-                        Принять
-                      </Button>
-                      <Button
-                          onClick={() => handleResponse(request.request_id, "REJECTED")}
-                          className="bg-red-500 hover:bg-red-600 text-xs px-2 py-1 h-auto">
-                        Отклонить
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
+              <TableRow key={request.request_id}>
+                <TableCell className="px-4 py-2 whitespace-nowrap text-sm">{request.request_id}</TableCell>
+                <TableCell className="px-4 py-2 text-sm">{request.company}</TableCell>
+                <TableCell className="px-4 py-2 text-sm">{request.email}</TableCell>
+                <TableCell className="px-4 py-2 text-sm">{request.tin}</TableCell>
+                <TableCell className="px-4 py-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button
+                      onClick={() => handleResponse(request.request_id, "APPROVED")}
+                      className="bg-green-500 hover:bg-green-600 text-xs px-2 py-1 h-auto">
+                      Принять
+                    </Button>
+                    <Button
+                      onClick={() => handleResponse(request.request_id, "REJECTED")}
+                      className="bg-red-500 hover:bg-red-600 text-xs px-2 py-1 h-auto">
+                      Отклонить
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
           <TableFooter>
@@ -132,6 +137,18 @@ const AdminHome = () => {
     );
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center p-4 text-red-500">
+        Error: {error}
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-6 md:py-10 gap-10">
       <Card className="w-full mx-auto bg-white rounded-xl md:rounded-3xl shadow-xl bg-opacity-90 mb-6 md:mb-10 overflow-hidden">
@@ -143,14 +160,12 @@ const AdminHome = () => {
         <CardContent>
           <div className="space-y-4">
             <ErrorBoundary>
-              <Suspense fallback={<Loading />}>
-                <RenderRequestList resource={requestResource} />
-              </Suspense>
+              <RenderRequestList requests={requests} />
             </ErrorBoundary>
           </div>
         </CardContent>
         <CardFooter className="items-end justify-end flex w-full flex-col">
-           <LogoutButton router={router} />
+          <LogoutButton router={router} />
         </CardFooter>
       </Card>
     </div>
